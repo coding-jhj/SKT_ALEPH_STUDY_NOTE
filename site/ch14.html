@@ -113,621 +113,837 @@ th{background:var(--accent-soft); font-weight:700}
 <main><div class="chapter-no">CHAPTER 14</div><h1>핵심키워드 · 윈도우 서버</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>070~091강 6편</strong>입니다.
 원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.</p>
 <blockquote>
-<p>PDF에서 뽑은 텍스트라 원문의 <strong>표는 칸 구분이 풀려</strong> 항목이 줄마다 나열됩니다.
-내용은 빠지지 않았으나 표 모양은 복원하지 못했습니다.</p>
+<p>원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어
+(188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.</p>
 </blockquote>
 <h3 id="070-iis-웹ftp-사이트-구성-주요-설정-항목-에러-코드-및-보안-설정">070. IIS 웹·FTP 사이트 구성, 주요 설정 항목, 에러 코드 및 보안 설정</h3>
 <p>목, 에러 코드 및 보안 설정</p>
 <h4 id="1-iis-웹-사이트-추가">1. IIS 웹 사이트 추가</h4>
-<ul>
-<li>IIS 관리자에서 Sites → 우클릭 → Add Website로 웹 사이트를 추가한다.</li>
-<li>설정 항목</li>
-<li>설명</li>
-<li>사이트 이름</li>
-<li>관리자가 임의로 지정</li>
-<li>물리적 경로(Physical Path)</li>
-<li>웹에서 보여질 파일들이 위치할 디렉토리 경</li>
-<li>로</li>
-<li>IP 주소</li>
-<li>서버에 할당된 IP 주소 선택</li>
-<li>포트 번호</li>
-<li>기본값 80 (HTTP). 변경 시 클라이언트 접속</li>
-<li>URL에 포트 번호를 반드시 포함해야 함</li>
-<li>호스트 이름</li>
-<li>도메인이 없는 경우 비워둠</li>
-<li>웹에서 보여지는 파일의 기본 저장 경로는 C:\inetpub\wwwroot 이다. 리눅스 웹 서버의</li>
-<li>문서 루트( /var/www/html )와 동일한 역할을 한다.</li>
-<li>⚠️ HTTP만 사용 가능하다. HTTPS(암호화 통신)를 사용하려면 SSL 서버 인증서가 필</li>
-<li>요하다.</li>
-</ul>
+<p>IIS 관리자에서 Sites → 우클릭 → Add Website로 웹 사이트를 추가한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사이트 이름</td>
+<td>관리자가 임의로 지정</td>
+</tr>
+<tr>
+<td>물리적 경로(Physical Path)</td>
+<td>웹에서 보여질 파일들이 위치할 디렉토리 경<br>로</td>
+</tr>
+<tr>
+<td>IP 주소</td>
+<td>서버에 할당된 IP 주소 선택</td>
+</tr>
+<tr>
+<td>포트 번호</td>
+<td>기본값 80 (HTTP). 변경 시 클라이언트 접속<br>URL에 포트 번호를 반드시 포함해야 함</td>
+</tr>
+<tr>
+<td>호스트 이름</td>
+<td>도메인이 없는 경우 비워둠</td>
+</tr>
+</tbody>
+</table></div>
+<p>웹에서 보여지는 파일의 기본 저장 경로는 C:\inetpub\wwwroot 이다. 리눅스 웹 서버의 문서 루트( /var/www/html )와 동일한 역할을 한다.</p>
+<p>⚠️ HTTP만 사용 가능하다. HTTPS(암호화 통신)를 사용하려면 SSL 서버 인증서가 필 요하다.</p>
 <h4 id="2-iis-웹-서버-기본-테스트-페이지">2. IIS 웹 서버 기본 테스트 페이지</h4>
-<p>웹 사이트 구성 후 브라우저에서 서버 IP 주소로 접속하면 IIS 기본 테스트 페이지가 표시된
-다.
-리눅스(Apache) 설치 후 표시되는 Apache 테스트 페이지와 동일한 역할
-테스트 페이지 파일명: iisstart.htm</p>
+<p>웹 사이트 구성 후 브라우저에서 서버 IP 주소로 접속하면 IIS 기본 테스트 페이지가 표시된 다.</p>
+<p>리눅스(Apache) 설치 후 표시되는 Apache 테스트 페이지와 동일한 역할 테스트 페이지 파일명: iisstart.htm</p>
 <h4 id="3-default-document-시작-페이지-우선순위">3. Default Document (시작 페이지 우선순위)</h4>
-<p>클라이언트가 특정 파일명 없이 도메인 또는 IP만으로 접속했을 때 서버가 순서대로 찾아 응
-답하는 파일 목록이다.
-기본 등록 파일 예시: default.htm , default.asp , index.htm , index.html , iisstart.htm  등
-목록 위쪽 파일이 우선순위가 높다.
-해당 파일이 존재하면 그 파일을 시작 페이지로 로드한다.
-관리자가 새 파일을 추가하거나 우선순위를 위/아래로 변경할 수 있다.
-웹 서버에 접속 시 등록된 파일이 존재해야 해당 파일이 시작 페이지로 로드된다. 목록에
-없는 파일명은 시작 페이지로 동작하지 않는다.</p>
+<p>클라이언트가 특정 파일명 없이 도메인 또는 IP만으로 접속했을 때 서버가 순서대로 찾아 응 답하는 파일 목록이다.</p>
+<p>기본 등록 파일 예시: default.htm , default.asp , index.htm , index.html , iisstart.htm  등 목록 위쪽 파일이 우선순위가 높다.</p>
+<p>해당 파일이 존재하면 그 파일을 시작 페이지로 로드한다.</p>
+<p>관리자가 새 파일을 추가하거나 우선순위를 위/아래로 변경할 수 있다.</p>
+<p>웹 서버에 접속 시 등록된 파일이 존재해야 해당 파일이 시작 페이지로 로드된다. 목록에 없는 파일명은 시작 페이지로 동작하지 않는다.</p>
 <h4 id="4-iis-주요-설정-항목">4. IIS 주요 설정 항목</h4>
-<ul>
-<li>항목</li>
-<li>설명</li>
-<li>Authentication (인증)</li>
-<li>익명 인증(Anonymous Authentication)이</li>
-<li>기본 활성화. 인증 없이 웹 사이트에 접근 가</li>
-<li>능</li>
-<li>Directory Browsing</li>
-<li>기본 비활성화(Disabled). 활성화 시 웹 서버</li>
-<li>내 디렉토리 및 파일 목록이 클라이언트에 노</li>
-<li>출됨</li>
-<li>Error Pages (에러 페이지)</li>
-<li>HTTP 상태 코드별 에러 응답 페이지 설정</li>
-<li>Logging</li>
-<li>웹 서버 로그 파일 설정 (포맷, 저장 경로, 갱</li>
-<li>신 주기)</li>
-<li>MIME Types</li>
-<li>파일 확장자와 미디어 타입 간 매핑 정보</li>
-<li>Handler Mappings</li>
-<li>웹 서비스 구동에 필요한 모듈(DLL 등) 처리</li>
-<li>설정</li>
-<li>Request Filtering</li>
-<li>URL 스캔·헤더 값 기반의 요청 필터링 규칙</li>
-<li>설정</li>
-<li>HTTP Response Headers</li>
-<li>서버 응답 헤더 값 사전 설정</li>
-<li>Compression</li>
-<li>응답 데이터 압축 여부 설정</li>
-<li>SSL Settings</li>
-<li>HTTPS 인증서 설정 (인증서 필요)</li>
-<li>Modules</li>
-<li>웹 서비스 내부에서 동작하는 모듈 목록 확인</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentication (인증)</td>
+<td>익명 인증(Anonymous Authentication)이<br>기본 활성화. 인증 없이 웹 사이트에 접근 가<br>능</td>
+</tr>
+<tr>
+<td>Directory Browsing</td>
+<td>기본 비활성화(Disabled). 활성화 시 웹 서버<br>내 디렉토리 및 파일 목록이 클라이언트에 노<br>출됨</td>
+</tr>
+<tr>
+<td>Error Pages (에러 페이지)</td>
+<td>HTTP 상태 코드별 에러 응답 페이지 설정</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td>웹 서버 로그 파일 설정 (포맷, 저장 경로, 갱<br>신 주기)</td>
+</tr>
+<tr>
+<td>MIME Types</td>
+<td>파일 확장자와 미디어 타입 간 매핑 정보</td>
+</tr>
+<tr>
+<td>Handler Mappings</td>
+<td>웹 서비스 구동에 필요한 모듈(DLL 등) 처리<br>설정</td>
+</tr>
+<tr>
+<td>Request Filtering</td>
+<td>URL 스캔·헤더 값 기반의 요청 필터링 규칙<br>설정</td>
+</tr>
+<tr>
+<td>HTTP Response Headers</td>
+<td>서버 응답 헤더 값 사전 설정</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>응답 데이터 압축 여부 설정</td>
+</tr>
+<tr>
+<td>SSL Settings</td>
+<td>HTTPS 인증서 설정 (인증서 필요)</td>
+</tr>
+<tr>
+<td>Modules</td>
+<td>웹 서비스 내부에서 동작하는 모듈 목록 확인</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-1-directory-browsing">4-1. Directory Browsing (디렉토리 리스팅) 보안</h5>
-<p>활성화 시 클라이언트가 웹 서버 내 디렉토리 구조와 파일 전체를 브라우저에서 볼 수 있
-다.</p>
+<p>활성화 시 클라이언트가 웹 서버 내 디렉토리 구조와 파일 전체를 브라우저에서 볼 수 있 다.</p>
 <p>웹 서버의 내부 구조가 외부에 노출되므로 보안상 기본 비활성화 상태로 유지해야 한다.</p>
 <h5 id="4-2-http">4-2. HTTP 상태 코드</h5>
-<ul>
-<li>상태 코드 범위</li>
-<li>의미</li>
-<li>100번대</li>
-<li>정보 응답</li>
-<li>200번대</li>
-<li>성공 응답</li>
-<li>300번대</li>
-<li>리다이렉션</li>
-<li>400번대</li>
-<li>클라이언트 오류 (예: 404 - 요청한 페이지</li>
-<li>없음)</li>
-<li>500번대</li>
-<li>서버 오류</li>
-<li>404 오류: 클라이언트가 URL을 잘못 입력하거나 존재하지 않는 페이지를 요청할 때 서</li>
-<li>버가 전송한다. 실제 404.html  파일이 웹 서버에 존재하며 해당 파일이 브라우저에 렌더</li>
-<li>링된다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상태 코드 범위</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100번대</td>
+<td>정보 응답</td>
+</tr>
+<tr>
+<td>200번대</td>
+<td>성공 응답</td>
+</tr>
+<tr>
+<td>300번대</td>
+<td>리다이렉션</td>
+</tr>
+<tr>
+<td>400번대</td>
+<td>클라이언트 오류 (예: 404 - 요청한 페이지<br>없음)</td>
+</tr>
+<tr>
+<td>500번대</td>
+<td>서버 오류</td>
+</tr>
+</tbody>
+</table></div>
+<p>404 오류: 클라이언트가 URL을 잘못 입력하거나 존재하지 않는 페이지를 요청할 때 서 버가 전송한다. 실제 404.html  파일이 웹 서버에 존재하며 해당 파일이 브라우저에 렌더 링된다.</p>
 <h5 id="4-3-logging">4-3. 로그(Logging) 설정</h5>
-<p>기본 로그 포맷: W3C (웹 표준 로그 형식)
-로그 파일 저장 경로: C:\inetpub\logs\LogFiles\
-로그 파일 갱신 주기: 일별, 주별, 월별, 용량 기준 등 설정 가능</p>
+<p>기본 로그 포맷: W3C (웹 표준 로그 형식)</p>
+<p>로그 파일 저장 경로: C:\inetpub\logs\LogFiles\ 로그 파일 갱신 주기: 일별, 주별, 월별, 용량 기준 등 설정 가능</p>
 <h5 id="4-4-mime-types">4-4. MIME Types</h5>
-<p>MIME 타입은 파일 확장자와 미디어 타입을 매핑하여 웹 브라우저가 해당 파일을 올바
-르게 처리하도록 한다.
-대부분의 확장자가 자동으로 등록되어 있으며, 새로운 확장자가 있을 경우 수동으로 추
-가할 수 있다.</p>
+<p>MIME 타입은 파일 확장자와 미디어 타입을 매핑하여 웹 브라우저가 해당 파일을 올바 르게 처리하도록 한다.</p>
+<p>대부분의 확장자가 자동으로 등록되어 있으며, 새로운 확장자가 있을 경우 수동으로 추 가할 수 있다.</p>
 <h4 id="5-iis-ftp-사이트-추가">5. IIS FTP 사이트 추가</h4>
-<ul>
-<li>Sites → 우클릭 → Add FTP Site로 FTP 사이트를 추가한다.</li>
-<li>설정 항목</li>
-<li>설명</li>
-<li>사이트 이름</li>
-<li>관리자가 임의로 지정</li>
-<li>물리적 경로</li>
-<li>FTP 파일이 저장될 디렉토리 경로 (기본:</li>
-<li>C:\inetpub\ftproot )</li>
-<li>IP 주소·포트</li>
-<li>
-<p>IP 선택, 기본 포트 21</p>
-</li>
-<li>
-<p>설정 항목</p>
-</li>
-<li>설명</li>
-<li>SSL</li>
-<li>인증서 없으므로 No SSL 선택 → 평문 전송</li>
-<li>FTP</li>
-</ul>
+<p>Sites → 우클릭 → Add FTP Site로 FTP 사이트를 추가한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사이트 이름</td>
+<td>관리자가 임의로 지정</td>
+</tr>
+<tr>
+<td>물리적 경로</td>
+<td>FTP 파일이 저장될 디렉토리 경로 (기본:<br>C:\inetpub\ftproot )</td>
+</tr>
+<tr>
+<td>IP 주소·포트</td>
+<td>IP 선택, 기본 포트 21</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSL</td>
+<td>인증서 없으므로 No SSL 선택 → 평문 전송<br>FTP</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="5-1-ftp">5-1. FTP 접속 허용 사용자 설정</h5>
-<ul>
-<li>옵션</li>
-<li>설명</li>
-<li>All Users</li>
-<li>모든 사용자 접속 허용</li>
-<li>Anonymous</li>
-<li>익명 사용자만 접속 허용</li>
-<li>Specified Roles or User Groups</li>
-<li>특정 역할 또는 그룹에 속한 사용자만 접속 허</li>
-<li>용</li>
-<li>Specified Users</li>
-<li>특정 사용자만 접속 허용</li>
-<li>접속 권한은 Read(다운로드만 가능)와 Write(업로드 포함)로 구분된다. 업로드까지 허용</li>
-<li>하려면 Write 권한을 함께 부여해야 한다.</li>
-<li>⚠️ FTP 사이트에서 지정한 사용자 계정은 컴퓨터 관리(Computer Management) →</li>
-<li>로컬 사용자에서 별도로 생성해야 한다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All Users</td>
+<td>모든 사용자 접속 허용</td>
+</tr>
+<tr>
+<td>Anonymous</td>
+<td>익명 사용자만 접속 허용</td>
+</tr>
+<tr>
+<td>Specified Roles or User Groups</td>
+<td>특정 역할 또는 그룹에 속한 사용자만 접속 허<br>용</td>
+</tr>
+<tr>
+<td>Specified Users</td>
+<td>특정 사용자만 접속 허용</td>
+</tr>
+</tbody>
+</table></div>
+<p>접속 권한은 Read(다운로드만 가능)와 Write(업로드 포함)로 구분된다. 업로드까지 허용 하려면 Write 권한을 함께 부여해야 한다.</p>
+<p>⚠️ FTP 사이트에서 지정한 사용자 계정은 컴퓨터 관리(Computer Management) → 로컬 사용자에서 별도로 생성해야 한다.</p>
 <h4 id="6-웹-보안-계층-구조">6. 웹 보안 계층 구조</h4>
-<ul>
-<li>웹 서버 보안은 단일 솔루션이 아닌 여러 계층의 보안 장비와 설정으로 구성된다.</li>
-<li>계층</li>
-<li>보안 수단</li>
-<li>네트워크 계층 (L3)</li>
-<li>ACL(접근 제어 목록), 방화벽(Firewall)</li>
-<li>응용 프로그램 계층</li>
-<li>WAF(Web Application Firewall) — 웹 서</li>
-<li>비스 앞 단에서 HTTP 요청을 필터링</li>
-<li>웹 서버 자체</li>
-<li>IIS Request Filtering 규칙</li>
-<li>보안 솔루션은 하나만 운영하지 않고, 네트워크 상황과 시스템 및 데이터의 중요도에 따</li>
-<li>라 여러 장비를 혼합하여 운영한다.</li>
-</ul>
+<p>웹 서버 보안은 단일 솔루션이 아닌 여러 계층의 보안 장비와 설정으로 구성된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>계층</th>
+<th>보안 수단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>네트워크 계층 (L3)</td>
+<td>ACL(접근 제어 목록), 방화벽(Firewall)</td>
+</tr>
+<tr>
+<td>응용 프로그램 계층</td>
+<td>WAF(Web Application Firewall) — 웹 서<br>비스 앞 단에서 HTTP 요청을 필터링</td>
+</tr>
+<tr>
+<td>웹 서버 자체</td>
+<td>IIS Request Filtering 규칙</td>
+</tr>
+</tbody>
+</table></div>
+<p>보안 솔루션은 하나만 운영하지 않고, 네트워크 상황과 시스템 및 데이터의 중요도에 따 라 여러 장비를 혼합하여 운영한다.</p>
 <hr />
 <h3 id="071-windows-ftp-방화벽-허용-및-접속-테스트">071. Windows FTP 방화벽 허용 및 접속 테스트</h3>
 <p>테스트</p>
 <h4 id="1-로컬-사용자-계정-옵션">1. 로컬 사용자 계정 옵션</h4>
-<p>컴퓨터 관리(Computer Management) → 로컬 사용자 및 그룹(Local Users and
-Groups) → Users에서 사용자 계정을 생성하거나 더블 클릭하여 속성을 편집할 수 있다.</p>
+<p>컴퓨터 관리(Computer Management) → 로컬 사용자 및 그룹(Local Users and Groups) → Users에서 사용자 계정을 생성하거나 더블 클릭하여 속성을 편집할 수 있다.</p>
 <h5 id="1-1">1-1. 계정 생성 시 주요 옵션</h5>
-<p>옵션
-설명
-User must change
-password at next logon
-사용자가 다음 로그인 시 반드시 패스워드를 변경하도록 요구한다. 기
-본적으로 체크되어 있으며, 관리자가 지정한 패스워드를 사용자 스스
-로 변경하게 된다.
-User cannot change
-password
-사용자가 패스워드를 변경할 수 없도록 제한한다. 위 항목을 체크 해제
-시 활성화된다.
-Password never expires
-패스워드 만료 기간을 적용하지 않는다. 위 항목을 체크 해제 시 활성
-화된다.
-Account is disabled
-해당 계정을 비활성화한다.
-<strong>첫 번째 항목(User must change password)</strong>을 체크 해제하면 두 번째·세 번째 옵
-션이 활성화된다. 관리자가 패스워드를 지정하고 사용자에게 변경을 요구하지 않을 경우,
-이 항목을 해제한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User must change<br>password at next logon</td>
+<td>사용자가 다음 로그인 시 반드시 패스워드를 변경하도록 요구한다. 기<br>본적으로 체크되어 있으며, 관리자가 지정한 패스워드를 사용자 스스<br>로 변경하게 된다.</td>
+</tr>
+<tr>
+<td>User cannot change<br>password</td>
+<td>사용자가 패스워드를 변경할 수 없도록 제한한다. 위 항목을 체크 해제<br>시 활성화된다.</td>
+</tr>
+<tr>
+<td>Password never expires</td>
+<td>패스워드 만료 기간을 적용하지 않는다. 위 항목을 체크 해제 시 활성<br>화된다.</td>
+</tr>
+<tr>
+<td>Account is disabled</td>
+<td>해당 계정을 비활성화한다.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>첫 번째 항목(User must change password)</strong>을 체크 해제하면 두 번째·세 번째 옵 션이 활성화된다. 관리자가 패스워드를 지정하고 사용자에게 변경을 요구하지 않을 경우, 이 항목을 해제한다.</p>
 <h5 id="1-2-account-is-disabled">1-2. 계정 비활성화(Account is disabled)</h5>
-<p>계정을 완전히 삭제하지 않고 일시적으로 비활성화할 수 있다. 비활성화된 계정은 로그인이
-불가능하며, 비활성화 해제만으로 즉시 복구된다.
-활용 사례: 육아휴직 중인 직원의 계정을 삭제하면 복직 시 권한 설정을 처음부터 다시 구
-성해야 한다. 비활성화로 처리하면 복직 후 체크만 해제하면 이전 설정 그대로 사용할 수
-있다.</p>
+<p>계정을 완전히 삭제하지 않고 일시적으로 비활성화할 수 있다. 비활성화된 계정은 로그인이 불가능하며, 비활성화 해제만으로 즉시 복구된다.</p>
+<p>활용 사례: 육아휴직 중인 직원의 계정을 삭제하면 복직 시 권한 설정을 처음부터 다시 구 성해야 한다. 비활성화로 처리하면 복직 후 체크만 해제하면 이전 설정 그대로 사용할 수 있다.</p>
 <h4 id="2-그룹-멤버십과-권한-상속">2. 그룹 멤버십과 권한 상속</h4>
 <h5 id="2-1">2-1. 사용자 기본 그룹</h5>
-<p>로컬 사용자를 생성하면 기본적으로 Users  그룹에 소속된다. 사용자 속성 → Member Of
-탭에서 소속 그룹을 확인하고 추가·제거할 수 있다.
-그룹 추가 경로: Member Of 탭 → Add → Advanced → Find Now → 그룹 선택 → OK</p>
+<p>로컬 사용자를 생성하면 기본적으로 Users  그룹에 소속된다. 사용자 속성 → Member Of 탭에서 소속 그룹을 확인하고 추가·제거할 수 있다.</p>
+<p>그룹 추가 경로: Member Of 탭 → Add → Advanced → Find Now → 그룹 선택 → OK</p>
 <h5 id="2-2">2-2. 복수 그룹 소속 시 권한 결정</h5>
-<ul>
-<li>한 사용자가 두 개 이상의 그룹에 속할 경우, 권한이 높은 그룹의 권한을 상속받는다.</li>
-<li>소속 그룹</li>
-<li>적용 권한</li>
-<li>Users + Administrators</li>
-<li>Administrators 그룹 권한 적용</li>
-<li>Users만</li>
-<li>Users 그룹 권한 적용</li>
-<li>실제 운영 환경에서는 부서별로 별도의 그룹(회계부, 관리부, 마케팅부 등)을 생성하고 각</li>
-<li>그룹에 적절한 권한을 부여하여 운영한다. 한 사용자가 두 개 이상의 그룹에 속하는 경우</li>
-<li>는 일반적으로 드물다.</li>
-</ul>
+<p>한 사용자가 두 개 이상의 그룹에 속할 경우, 권한이 높은 그룹의 권한을 상속받는다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>소속 그룹</th>
+<th>적용 권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users + Administrators</td>
+<td>Administrators 그룹 권한 적용</td>
+</tr>
+<tr>
+<td>Users만</td>
+<td>Users 그룹 권한 적용</td>
+</tr>
+</tbody>
+</table></div>
+<p>실제 운영 환경에서는 부서별로 별도의 그룹(회계부, 관리부, 마케팅부 등)을 생성하고 각 그룹에 적절한 권한을 부여하여 운영한다. 한 사용자가 두 개 이상의 그룹에 속하는 경우 는 일반적으로 드물다.</p>
 <h5 id="2-3">2-3. 그룹 생성</h5>
-<p>컴퓨터 관리 → Local Users and Groups → Groups → 우클릭 → New Group에서 그
-룹을 생성하고 멤버를 추가하거나 제거할 수 있다.</p>
+<p>컴퓨터 관리 → Local Users and Groups → Groups → 우클릭 → New Group에서 그 룹을 생성하고 멤버를 추가하거나 제거할 수 있다.</p>
 <h4 id="3-ftp-서버-접속-테스트-준비">3. FTP 서버 접속 테스트 준비</h4>
-<p>FTP 접속 시 클라이언트에서 확인할 수 있는 파일과 폴더를 FTP 루트 경로에 미리 생성한
-다.
-FTP 루트 기본 경로: C:\inetpub\ftproot
-Windows 탐색기에서 해당 경로에 폴더 및 파일을 생성하면 FTP 클라이언트 접속 시
-목록에 표시된다.</p>
+<p>FTP 접속 시 클라이언트에서 확인할 수 있는 파일과 폴더를 FTP 루트 경로에 미리 생성한 다.</p>
+<p>FTP 루트 기본 경로: C:\inetpub\ftproot Windows 탐색기에서 해당 경로에 폴더 및 파일을 생성하면 FTP 클라이언트 접속 시 목록에 표시된다.</p>
 <h4 id="4-windows-defender-firewall--ftp-트래픽-허용">4. Windows Defender Firewall — FTP 트래픽 허용</h4>
 <h5 id="4-1-ftp">4-1. 웹 서버와 FTP 서버의 방화벽 처리 차이</h5>
-<ul>
-<li>서비스</li>
-<li>방화벽 허용 방식</li>
-<li>웹 서버 (HTTP, 포트 80)</li>
-<li>IIS 역할 설치 시 자동으로 방화벽 허용 처리</li>
-<li>FTP 서버 (포트 21)</li>
-<li>수동으로 방화벽에서 FTP 트래픽을 허용해야</li>
-<li>함</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>서비스</th>
+<th>방화벽 허용 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>웹 서버 (HTTP, 포트 80)</td>
+<td>IIS 역할 설치 시 자동으로 방화벽 허용 처리</td>
+</tr>
+<tr>
+<td>FTP 서버 (포트 21)</td>
+<td>수동으로 방화벽에서 FTP 트래픽을 허용해야<br>함</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-2-windows-defender-firewall">4-2. Windows Defender Firewall 비활성화 방법</h5>
-<p>검색 창에 Windows Defender Firewall  입력 → Turn Windows Defender Firewall on or
-off 클릭 → 방화벽 비활성화(Turn off) 선택 → OK
-⚠️ 방화벽을 전체 비활성화하는 것은 보안상 권장되지 않는다. 운영 환경에서는 방화벽
-규칙에서 FTP 트래픽(포트 21)을 명시적으로 허용하는 방식을 사용해야 한다.</p>
+<p>검색 창에 Windows Defender Firewall  입력 → Turn Windows Defender Firewall on or off 클릭 → 방화벽 비활성화(Turn off) 선택 → OK ⚠️ 방화벽을 전체 비활성화하는 것은 보안상 권장되지 않는다. 운영 환경에서는 방화벽 규칙에서 FTP 트래픽(포트 21)을 명시적으로 허용하는 방식을 사용해야 한다.</p>
 <h4 id="5-ftp-접속-테스트-filezilla">5. FTP 접속 테스트 (FileZilla)</h4>
-<ul>
-<li>호스트 컴퓨터에서 FileZilla를 실행하여 Windows Server의 FTP 서버에 접속한다.</li>
-<li>접속 항목</li>
-<li>값</li>
-<li>호스트(서버 IP)</li>
-<li>Windows Server IP 주소 입력</li>
-<li>사용자 이름</li>
-<li>생성한 FTP 사용자 계정명</li>
-<li>패스워드</li>
-<li>해당 계정의 패스워드</li>
-<li>포트</li>
-<li>21 (기본값이므로 입력하지 않아도 무방)</li>
-<li>FTP는 SSL 없이 평문으로 전송되므로, 접속 시 "안전하지 않은 연결"이라는 경고 메시</li>
-<li>지가 표시된다. 이는 No SSL 설정에 의한 것으로, 확인을 눌러 계속 진행한다.</li>
-<li>접속 성공 시 FTP 루트 경로의 파일과 폴더 목록이 FileZilla 우측 패널에 표시된다. 다운로</li>
-<li>드 또는 업로드 작업을 수행할 수 있다.</li>
-</ul>
+<p>호스트 컴퓨터에서 FileZilla를 실행하여 Windows Server의 FTP 서버에 접속한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>접속 항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>호스트(서버 IP)</td>
+<td>Windows Server IP 주소 입력</td>
+</tr>
+<tr>
+<td>사용자 이름</td>
+<td>생성한 FTP 사용자 계정명</td>
+</tr>
+<tr>
+<td>패스워드</td>
+<td>해당 계정의 패스워드</td>
+</tr>
+<tr>
+<td>포트</td>
+<td>21 (기본값이므로 입력하지 않아도 무방)</td>
+</tr>
+</tbody>
+</table></div>
+<p>FTP는 SSL 없이 평문으로 전송되므로, 접속 시 "안전하지 않은 연결"이라는 경고 메시 지가 표시된다. 이는 No SSL 설정에 의한 것으로, 확인을 눌러 계속 진행한다.</p>
+<p>접속 성공 시 FTP 루트 경로의 파일과 폴더 목록이 FileZilla 우측 패널에 표시된다. 다운로 드 또는 업로드 작업을 수행할 수 있다.</p>
 <h4 id="6-iis-ftp-인증-및-인가-설정-확인">6. IIS FTP 인증 및 인가 설정 확인</h4>
 <p>FTP 접속이 되지 않을 경우 IIS 관리자에서 다음 항목을 확인한다.</p>
 <h5 id="6-1-ftp-authentication">6-1. FTP Authentication (인증)</h5>
-<ul>
-<li>IIS 관리자 → FTP 사이트 선택 → FTP Authentication 더블 클릭</li>
-<li>항목</li>
-<li>상태</li>
-<li>Anonymous Authentication</li>
-<li>Enabled</li>
-<li>Basic Authentication</li>
-<li>Enabled</li>
-</ul>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Authentication 더블 클릭</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anonymous Authentication</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Basic Authentication</td>
+<td>Enabled</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="6-2-ftp-authorization-rules">6-2. FTP Authorization Rules (인가)</h5>
-<p>IIS 관리자 → FTP 사이트 선택 → FTP Authorization Rules 더블 클릭
-허용된 사용자(예: ftp user )가 Allow 상태로 등록되어 있어야 접속이 가능하다.</p>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Authorization Rules 더블 클릭 허용된 사용자(예: ftp user )가 Allow 상태로 등록되어 있어야 접속이 가능하다.</p>
 <h4 id="7-ftp-현재-세션-확인">7. FTP 현재 세션 확인</h4>
-<p>IIS 관리자 → FTP 사이트 선택 → FTP Current Sessions에서 현재 접속 중인 세션 정보
-를 확인할 수 있다.
-접속한 클라이언트의 IP 주소, 접속 시각 등 세션 정보가 표시된다.
-여러 사용자가 동시에 접속 중이면 해당 수만큼 세션 목록이 나타난다.</p>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Current Sessions에서 현재 접속 중인 세션 정보 를 확인할 수 있다.</p>
+<p>접속한 클라이언트의 IP 주소, 접속 시각 등 세션 정보가 표시된다.</p>
+<p>여러 사용자가 동시에 접속 중이면 해당 수만큼 세션 목록이 나타난다.</p>
 <hr />
 <h3 id="072-windows-server-소개-설치-버전-구분-administrator-계정">072. Windows Server 소개, 설치 버전 구분, Administrator 계정</h3>
 <p>구분, Administrator 계정</p>
 <h4 id="1-windows-server-활용-목적">1. Windows Server 활용 목적</h4>
-<p>Windows Server를 설치하는 목적은 Rocky Linux에서 구축했던 것과 동일한 서버 환경
-을 Windows 환경에서도 경험하는 것이다. 구체적으로 다음 항목들을 다룬다.
-웹(Web), FTP, 네임(Name) 서버 구축 및 테스트
-로컬 보안 정책(Local Security Policy) 설정 및 확인
-사용자 계정 정책 관리
-Windows 로그 확인 방법
-Windows Server는 일상적으로 사용하는 Windows 운영체제와 동일한 기반이므로, 리눅
-스에서 구축한 경험과 결합하면 더 쉽게 이해할 수 있다.</p>
+<p>Windows Server를 설치하는 목적은 Rocky Linux에서 구축했던 것과 동일한 서버 환경 을 Windows 환경에서도 경험하는 것이다. 구체적으로 다음 항목들을 다룬다.</p>
+<p>웹(Web), FTP, 네임(Name) 서버 구축 및 테스트 로컬 보안 정책(Local Security Policy) 설정 및 확인 사용자 계정 정책 관리 Windows 로그 확인 방법 Windows Server는 일상적으로 사용하는 Windows 운영체제와 동일한 기반이므로, 리눅 스에서 구축한 경험과 결합하면 더 쉽게 이해할 수 있다.</p>
 <h4 id="2-windows-server-2022-설치-버전-유형">2. Windows Server 2022 설치 버전 유형</h4>
-<p>Windows Server 2022 설치 시 다음 네 가지 버전 중 하나를 선택하게 된다.
-버전
-설명
-Windows Server 2022 Standard Evaluation
-평가판 표준 에디션. GUI 없이 터미널 명령어
-로만 운영
-Windows Server 2022 Standard Evaluation
-(Desktop Experience)
-평가판 표준 에디션 + 그래픽 UI 포함. 수업에
-서 선택
-Windows Server 2022 Datacenter Evaluation
-데이터센터 전용 에디션. Standard보다 기능
-이 많음. GUI 없음
-Windows Server 2022 Datacenter Evaluation
-(Desktop Experience)
-데이터센터 에디션 + 그래픽 UI 포함
-⚠️ 반드시 <strong>"Desktop Experience"가 포함된 두 번째 항목(Standard Evaluation
-Desktop Experience)</strong>을 선택해야 한다. 이를 선택하지 않으면 Rocky Linux처럼 터
-미널 명령어로만 조작해야 하며, 그래픽 화면이 표시되지 않는다.</p>
-<p>Standard 에디션은 일반 서버 운영 목적에 적합하다.
-Datacenter 에디션은 대규모 데이터센터 환경을 위한 추가 기능을 포함한다.</p>
+<p>Windows Server 2022 설치 시 다음 네 가지 버전 중 하나를 선택하게 된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>버전</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows Server 2022 Standard Evaluation</td>
+<td>평가판 표준 에디션. GUI 없이 터미널 명령어<br>로만 운영</td>
+</tr>
+<tr>
+<td>Windows Server 2022 Standard Evaluation<br>(Desktop Experience)</td>
+<td>평가판 표준 에디션 + 그래픽 UI 포함. 수업에<br>서 선택</td>
+</tr>
+<tr>
+<td>Windows Server 2022 Datacenter Evaluation</td>
+<td>데이터센터 전용 에디션. Standard보다 기능<br>이 많음. GUI 없음</td>
+</tr>
+<tr>
+<td>Windows Server 2022 Datacenter Evaluation<br>(Desktop Experience)</td>
+<td>데이터센터 에디션 + 그래픽 UI 포함</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ 반드시 <strong>"Desktop Experience"가 포함된 두 번째 항목(Standard Evaluation Desktop Experience)</strong>을 선택해야 한다. 이를 선택하지 않으면 Rocky Linux처럼 터 미널 명령어로만 조작해야 하며, 그래픽 화면이 표시되지 않는다.</p>
+<p>Standard 에디션은 일반 서버 운영 목적에 적합하다.</p>
+<p>Datacenter 에디션은 대규모 데이터센터 환경을 위한 추가 기능을 포함한다.</p>
 <h4 id="3-virtualbox-가상-머신-주요-설정-항목">3. VirtualBox 가상 머신 주요 설정 항목</h4>
-<ul>
-<li>Windows Server 2022 가상 머신 생성 시 다음 설정이 적용된다.</li>
-<li>설정 항목</li>
-<li>권장 값</li>
-<li>비고</li>
-<li>OS 유형</li>
-<li>Windows Server 2022</li>
-<li>목록에서 선택</li>
-<li>디스크 용량</li>
-<li>30GB</li>
-<li>실제 운영 환경에서는 TB 단위 이상 필요</li>
-<li>메모리</li>
-<li>4096MB (4GB)</li>
-<li>여유가 된다면 이 값으로 설정</li>
-<li>부팅 순서</li>
-<li>하드 디스크 1순위, 광디스크 2</li>
-<li>순위</li>
-<li>설치 완료 후 재부팅 시 설치 과정이 반복되는</li>
-<li>것을 방지</li>
-<li>CPU 가상화 기능</li>
-<li>체크 가능한 항목 전부 활성화</li>
-<li>프로세서 탭에서 설정</li>
-<li>저장소</li>
-<li>ISO 파일을 CD-ROM에 마운</li>
-<li>트</li>
-<li>설치 이미지 파일 선택</li>
-<li>오디오</li>
-<li>비활성화</li>
-<li>리소스 절감</li>
-<li>네트워크</li>
-<li>브리지 어댑터</li>
-<li>IP 자동 할당 또는 수동 지정</li>
-<li>USB</li>
-<li>비활성화</li>
-<li>리소스 절감</li>
-<li>실제 하드웨어에서 지정한 디스크 용량만큼의 여유 공간이 필요하다. 가상 머신 설정에서</li>
-<li>지정하는 크기는 호스트 컴퓨터의 실제 저장공간을 사용한다.</li>
-</ul>
+<p>Windows Server 2022 가상 머신 생성 시 다음 설정이 적용된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>권장 값</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS 유형</td>
+<td>Windows Server 2022</td>
+<td>목록에서 선택</td>
+</tr>
+<tr>
+<td>디스크 용량</td>
+<td>30GB</td>
+<td>실제 운영 환경에서는 TB 단위 이상 필요</td>
+</tr>
+<tr>
+<td>메모리</td>
+<td>4096MB (4GB)</td>
+<td>여유가 된다면 이 값으로 설정</td>
+</tr>
+<tr>
+<td>부팅 순서</td>
+<td>하드 디스크 1순위, 광디스크 2<br>순위</td>
+<td>설치 완료 후 재부팅 시 설치 과정이 반복되는<br>것을 방지</td>
+</tr>
+<tr>
+<td>CPU 가상화 기능</td>
+<td>체크 가능한 항목 전부 활성화</td>
+<td>프로세서 탭에서 설정</td>
+</tr>
+<tr>
+<td>저장소</td>
+<td>ISO 파일을 CD-ROM에 마운<br>트</td>
+<td>설치 이미지 파일 선택</td>
+</tr>
+<tr>
+<td>오디오</td>
+<td>비활성화</td>
+<td>리소스 절감</td>
+</tr>
+<tr>
+<td>네트워크</td>
+<td>브리지 어댑터</td>
+<td>IP 자동 할당 또는 수동 지정</td>
+</tr>
+<tr>
+<td>USB</td>
+<td>비활성화</td>
+<td>리소스 절감</td>
+</tr>
+</tbody>
+</table></div>
+<p>실제 하드웨어에서 지정한 디스크 용량만큼의 여유 공간이 필요하다. 가상 머신 설정에서 지정하는 크기는 호스트 컴퓨터의 실제 저장공간을 사용한다.</p>
 <h4 id="4-virtualbox에서-ctrlaltdel-입력-방법">4. VirtualBox에서 Ctrl+Alt+Del 입력 방법</h4>
-<p>Windows Server 로그인 화면에서는 Ctrl+Alt+Del 키를 눌러야 언락(unlock)이 된다. 그
-러나 VirtualBox에서 해당 키를 직접 누르면 호스트 컴퓨터의 작업 관리자가 열린다. 이를
-해결하는 방법은 다음과 같다.
-VirtualBox 메뉴 → 입력 → 키보드 → Ctrl+Alt+Del 입력 클릭</p>
+<p>Windows Server 로그인 화면에서는 Ctrl+Alt+Del 키를 눌러야 언락(unlock)이 된다. 그 러나 VirtualBox에서 해당 키를 직접 누르면 호스트 컴퓨터의 작업 관리자가 열린다. 이를 해결하는 방법은 다음과 같다.</p>
+<p>VirtualBox 메뉴 → 입력 → 키보드 → Ctrl+Alt+Del 입력 클릭</p>
 <h4 id="5-administrator-계정">5. Administrator 계정</h4>
-<p>Windows Server에서 기본으로 제공되는 관리자 계정이다.
-계정명: Administrator
-역할: 리눅스의 root 와 동일하게 시스템 전체 권한을 보유한 관리자 계정</p>
-<p>소속 그룹: Administrators
-패스워드 설정 시 Windows Server의 기본 복잡성 요구사항을 충족해야 한다. 요구사항을
-충족하지 못하면 설정이 거부된다. 패스워드 복잡성 정책은 이후 로컬 보안 정책 수업에서
-상세히 다룬다.
-관리자 패스워드는 10자 이상, 영문 대문자·소문자·숫자·특수문자를 혼합하여 설정한다.
-분실 시 관리자 계정으로 로그인할 수 없다.</p>
+<p>Windows Server에서 기본으로 제공되는 관리자 계정이다.</p>
+<p>계정명: Administrator 역할: 리눅스의 root 와 동일하게 시스템 전체 권한을 보유한 관리자 계정 소속 그룹: Administrators 패스워드 설정 시 Windows Server의 기본 복잡성 요구사항을 충족해야 한다. 요구사항을 충족하지 못하면 설정이 거부된다. 패스워드 복잡성 정책은 이후 로컬 보안 정책 수업에서 상세히 다룬다.</p>
+<p>관리자 패스워드는 10자 이상, 영문 대문자·소문자·숫자·특수문자를 혼합하여 설정한다. 분실 시 관리자 계정으로 로그인할 수 없다.</p>
 <hr />
 <h3 id="073-windows-server-초기-네트워크-설정-서버-관리자-iisdns-역할-추가">073. Windows Server 초기 네트워크 설정, 서버 관리자, IIS·DNS 역할 추가</h3>
 <p>정, 서버 관리자, IIS·DNS 역할 추가</p>
 <h4 id="1-windows-server-로그인-후-네트워크-설정">1. Windows Server 로그인 후 네트워크 설정</h4>
-<ul>
-<li>로그인 직후 네트워크 상태에 따라 두 가지 상황이 발생한다.</li>
-<li>상황</li>
-<li>처리 방법</li>
-<li>화면에 파란색 "네트워크에 참여하시겠습니까?" 팝</li>
-<li>업이 뜨는 경우</li>
-<li>Yes 선택 → IP 자동 할당(브리지 방식), 추가</li>
-<li>설정 불필요</li>
-<li>팝업이 뜨지 않고 지구본 아이콘(인터넷 없음) 표시</li>
-<li>되는 경우</li>
-<li>수동으로 IP 주소 설정 필요</li>
-</ul>
+<p>로그인 직후 네트워크 상태에 따라 두 가지 상황이 발생한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>처리 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면에 파란색 "네트워크에 참여하시겠습니까?" 팝<br>업이 뜨는 경우</td>
+<td>Yes 선택 → IP 자동 할당(브리지 방식), 추가<br>설정 불필요</td>
+</tr>
+<tr>
+<td>팝업이 뜨지 않고 지구본 아이콘(인터넷 없음) 표시<br>되는 경우</td>
+<td>수동으로 IP 주소 설정 필요</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="1-1-ip">1-1. 수동 IP 설정 방법</h5>
-<p>작업표시줄 지구본 아이콘 우클릭 → Open Network and Internet Settings → 이더넷
-→ Change Adapter Options → 어댑터 우클릭 → Properties → TCP/IPv4
-Properties
-설정 값:
-항목
-설정 방법
-IP 주소
-호스트 컴퓨터와 동일 대역에서 사용 중이지 않은 주소 입력
-서브넷
-호스트 컴퓨터와 동일하게 입력
-기본 게이트웨이
-호스트 컴퓨터와 동일하게 입력
-DNS 서버
-호스트 컴퓨터와 동일하게 입력
-⚠️ IP 주소만 달라야 하며, 이미 사용 중인 IP인지 확인하려면 호스트 컴퓨터에서 해당 IP
-로 ping을 보내 응답 여부를 확인한다. 응답이 없으면 사용 가능한 IP이다.
-⚠️ 윈도우 서버에서 인터넷이 되지 않으면 IIS, DNS 등의 역할을 추가할 때 필요한 구성
-요소를 저장소(인터넷)에서 가져올 수 없어 설치가 실패한다. 리눅스에서 DNF 명령으로
-패키지 설치 시 인터넷 연결이 필요한 것과 동일하다.</p>
+<p>작업표시줄 지구본 아이콘 우클릭 → Open Network and Internet Settings → 이더넷 → Change Adapter Options → 어댑터 우클릭 → Properties → TCP/IPv4 Properties 설정 값:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설정 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP 주소</td>
+<td>호스트 컴퓨터와 동일 대역에서 사용 중이지 않은 주소 입력</td>
+</tr>
+<tr>
+<td>서브넷</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+<tr>
+<td>기본 게이트웨이</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+<tr>
+<td>DNS 서버</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ IP 주소만 달라야 하며, 이미 사용 중인 IP인지 확인하려면 호스트 컴퓨터에서 해당 IP 로 ping을 보내 응답 여부를 확인한다. 응답이 없으면 사용 가능한 IP이다.</p>
+<p>⚠️ 윈도우 서버에서 인터넷이 되지 않으면 IIS, DNS 등의 역할을 추가할 때 필요한 구성 요소를 저장소(인터넷)에서 가져올 수 없어 설치가 실패한다. 리눅스에서 DNF 명령으로 패키지 설치 시 인터넷 연결이 필요한 것과 동일하다.</p>
 <h4 id="2-서버-관리자server-manager">2. 서버 관리자(Server Manager)</h4>
-<p>서버 관리자는 Windows Server의 중앙 관리 도구이다. 로그인 시 자동으로 실행된다.
-실행 방법: 시작 메뉴 → 서버 관리자(Server Manager)
-서버 관리자 우측 상단 메뉴 구성:
-메뉴
-설명
-Manage
-역할(Role) 및 기능(Feature) 추가·제거, 서버 관리
-Tools
-DNS, IIS 관리자, 이벤트 뷰어, 컴퓨터 관리 등 각종 관리 도구 접근</p>
+<p>서버 관리자는 Windows Server의 중앙 관리 도구이다. 로그인 시 자동으로 실행된다.</p>
+<p>실행 방법: 시작 메뉴 → 서버 관리자(Server Manager)</p>
+<p>서버 관리자 우측 상단 메뉴 구성:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>메뉴</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manage</td>
+<td>역할(Role) 및 기능(Feature) 추가·제거, 서버 관리</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>DNS, IIS 관리자, 이벤트 뷰어, 컴퓨터 관리 등 각종 관리 도구 접근</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="3-역할role-및-기능feature-추가">3. 역할(Role) 및 기능(Feature) 추가</h4>
-<p>Windows Server에서 서버 기능을 사용하려면 역할을 추가해야 한다.
-진입 경로: 서버 관리자 → Manage → Add Roles and Features
-추가 역할 항목:
-역할
-설명
-DNS Server
-네임 서버 구축용
-Web Server (IIS)
-웹 서버 및 FTP 서버 구축용 도구
-IIS(Internet Information Services)는 웹 서버와 FTP 서버를 하나의 도구에서 함께 구
-축할 수 있는 Windows Server 전용 도구이다.
-역할 추가 시 주의 사항:
-서버 이름과 IP 주소가 올바르게 표시되는지 확인 후 Next를 진행한다.
-"정적 IP 주소가 발견되지 않았다"는 메시지는 오류가 아닌 <strong>경고(Warning)</strong>이므로
-Continue하면 된다.
-IIS 역할 추가 시, 하위 항목에서 FTP Server 항목을 함께 체크하면 FTP 서비스도 동
-시에 구성된다.
-설치가 완료되면 서버 관리자 메뉴와 Tools 목록에 DNS, IIS 관리자가 새로 추가된다.</p>
+<p>Windows Server에서 서버 기능을 사용하려면 역할을 추가해야 한다.</p>
+<p>진입 경로: 서버 관리자 → Manage → Add Roles and Features 추가 역할 항목:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>역할</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DNS Server</td>
+<td>네임 서버 구축용</td>
+</tr>
+<tr>
+<td>Web Server (IIS)</td>
+<td>웹 서버 및 FTP 서버 구축용 도구</td>
+</tr>
+</tbody>
+</table></div>
+<p>IIS(Internet Information Services)는 웹 서버와 FTP 서버를 하나의 도구에서 함께 구 축할 수 있는 Windows Server 전용 도구이다.</p>
+<p>역할 추가 시 주의 사항:</p>
+<p>서버 이름과 IP 주소가 올바르게 표시되는지 확인 후 Next를 진행한다.</p>
+<p>"정적 IP 주소가 발견되지 않았다"는 메시지는 오류가 아닌 <strong>경고(Warning)</strong>이므로 Continue하면 된다.</p>
+<p>IIS 역할 추가 시, 하위 항목에서 FTP Server 항목을 함께 체크하면 FTP 서비스도 동 시에 구성된다.</p>
+<p>설치가 완료되면 서버 관리자 메뉴와 Tools 목록에 DNS, IIS 관리자가 새로 추가된다.</p>
 <h4 id="4-iisinternet-information-services-개요">4. IIS(Internet Information Services) 개요</h4>
-<p>IIS는 Windows Server에서 웹 및 FTP 서비스를 구축하는 전용 도구이다.
-리눅스의 APM(Apache+PHP+MySQL) 환경과 대응하는 Windows Server의 웹 서
-비스 도구</p>
-<p>웹 서비스 기반 언어: IIS는 ASP(Active Server Pages) 언어 기반으로 동작
-리눅스 웹 서버는 PHP 언어 기반으로 동작
-설치 완료 후 Tools → <strong>IIS 관리자(Internet Information Services Manager)</strong>에
-서 실행</p>
+<p>IIS는 Windows Server에서 웹 및 FTP 서비스를 구축하는 전용 도구이다.</p>
+<p>리눅스의 APM(Apache+PHP+MySQL) 환경과 대응하는 Windows Server의 웹 서 비스 도구 웹 서비스 기반 언어: IIS는 ASP(Active Server Pages) 언어 기반으로 동작 리눅스 웹 서버는 PHP 언어 기반으로 동작 설치 완료 후 Tools → <strong>IIS 관리자(Internet Information Services Manager)</strong>에 서 실행</p>
 <hr />
 <h3 id="076-이벤트-뷰어-보안-로그-컴퓨터-관리-로컬-보안-정책">076. 이벤트 뷰어 보안 로그, 컴퓨터 관리, 로컬 보안 정책</h3>
 <p>로컬 보안 정책</p>
 <h4 id="1-이벤트-뷰어event-viewer--보안-로그">1. 이벤트 뷰어(Event Viewer) — 보안 로그</h4>
-<p>이벤트 뷰어는 서버 관리자 → Tools → Event Viewer, 또는 컴퓨터 관리 내에서도 접근할
-수 있다.</p>
+<p>이벤트 뷰어는 서버 관리자 → Tools → Event Viewer, 또는 컴퓨터 관리 내에서도 접근할 수 있다.</p>
 <h5 id="1-1_1">1-1. 보안 로그 위치</h5>
 <p>이벤트 뷰어 → Windows Logs → Security</p>
 <h5 id="1-2">1-2. 보안 로그에 기록되는 이벤트 유형</h5>
-<ul>
-<li>이벤트 유형</li>
-<li>설명</li>
-<li>로그온(Logon)</li>
-<li>시스템에 로그인한 이벤트 (누가, 언제, 어떤 방식으로 로</li>
-<li>그인했는지)</li>
-<li>특별 로그온(Special Logon)</li>
-<li>특수 권한을 가진 로그인 이벤트</li>
-<li>로그오프(Logoff)</li>
-<li>시스템 로그아웃 이벤트</li>
-<li>사용자 계정 관리(User Account</li>
-<li>Management)</li>
-<li>사용자 계정 생성, 변경, 그룹 멤버십 변경 등의 이벤트</li>
-<li>로그인과 관련된 이벤트, 사용자 계정 관련 이벤트, 인증 관련 이벤트 등이 모두 보안 로그</li>
-<li>에 기록된다. 예를 들어, FTP 사용자 계정 생성이나 Administrators 그룹 추가 이력이</li>
-<li>여기서 확인된다.</li>
-<li>보안 로그는 필터링(Filter Current Log) 또는 검색 기능을 사용하여 원하는 이벤트를 찾</li>
-<li>을 수 있으며, 파일로 저장할 수도 있다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>이벤트 유형</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>로그온(Logon)</td>
+<td>시스템에 로그인한 이벤트 (누가, 언제, 어떤 방식으로 로<br>그인했는지)</td>
+</tr>
+<tr>
+<td>특별 로그온(Special Logon)</td>
+<td>특수 권한을 가진 로그인 이벤트</td>
+</tr>
+<tr>
+<td>로그오프(Logoff)</td>
+<td>시스템 로그아웃 이벤트</td>
+</tr>
+<tr>
+<td>사용자 계정 관리(User Account<br>Management)</td>
+<td>사용자 계정 생성, 변경, 그룹 멤버십 변경 등의 이벤트</td>
+</tr>
+</tbody>
+</table></div>
+<p>로그인과 관련된 이벤트, 사용자 계정 관련 이벤트, 인증 관련 이벤트 등이 모두 보안 로그 에 기록된다. 예를 들어, FTP 사용자 계정 생성이나 Administrators 그룹 추가 이력이 여기서 확인된다.</p>
+<p>보안 로그는 필터링(Filter Current Log) 또는 검색 기능을 사용하여 원하는 이벤트를 찾 을 수 있으며, 파일로 저장할 수도 있다.</p>
 <h4 id="2-컴퓨터-관리computer-management-구성">2. 컴퓨터 관리(Computer Management) 구성</h4>
-<p>서버 관리자 → Tools → Computer Management
-컴퓨터 관리는 이 시스템의 주요 관리 기능 대부분을 한 곳에서 수행할 수 있는 도구이다.</p>
-<ul>
-<li>항목</li>
-<li>설명</li>
-<li>이벤트 뷰어(Event Viewer)</li>
-<li>이벤트 뷰어와 동일한 기능</li>
-<li>공유 폴더(Shared Folders)</li>
-<li>공유된 폴더 목록과 세션 정보 확인</li>
-<li>성능(Performance)</li>
-<li>성능 모니터 — 메모리, 네트워크, 물리적 디스크, CPU 사용량 실</li>
-<li>시간 확인</li>
-<li>장치 관리자(Device</li>
-<li>Manager)</li>
-<li>시스템에 설치된 모든 장치 목록 확인 및 관리</li>
-<li>디스크 관리(Disk</li>
-<li>Management)</li>
-<li>파티션 생성·분할·통합 등 디스크 관련 작업 수행</li>
-<li>서비스(Services)</li>
-<li>현재 시스템에서 동작 중인 서비스 목록 및 상태 확인·변경</li>
-<li>WMI Control</li>
-<li>Windows 관리 명령어(WMI) 관련 설정</li>
-</ul>
+<p>서버 관리자 → Tools → Computer Management 컴퓨터 관리는 이 시스템의 주요 관리 기능 대부분을 한 곳에서 수행할 수 있는 도구이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이벤트 뷰어(Event Viewer)</td>
+<td>이벤트 뷰어와 동일한 기능</td>
+</tr>
+<tr>
+<td>공유 폴더(Shared Folders)</td>
+<td>공유된 폴더 목록과 세션 정보 확인</td>
+</tr>
+<tr>
+<td>성능(Performance)</td>
+<td>성능 모니터 — 메모리, 네트워크, 물리적 디스크, CPU 사용량 실<br>시간 확인</td>
+</tr>
+<tr>
+<td>장치 관리자(Device<br>Manager)</td>
+<td>시스템에 설치된 모든 장치 목록 확인 및 관리</td>
+</tr>
+<tr>
+<td>디스크 관리(Disk<br>Management)</td>
+<td>파티션 생성·분할·통합 등 디스크 관련 작업 수행</td>
+</tr>
+<tr>
+<td>서비스(Services)</td>
+<td>현재 시스템에서 동작 중인 서비스 목록 및 상태 확인·변경</td>
+</tr>
+<tr>
+<td>WMI Control</td>
+<td>Windows 관리 명령어(WMI) 관련 설정</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="2-1-services">2-1. 서비스(Services) 최적화</h5>
-<p>서비스 목록에서 실제로 사용하지 않는 서비스가 자동(Automatic) 상태로 실행 중인 경우,
-이를 중지하고 시작 유형을 수동(Manual) 또는 사용 안 함(Disabled)으로 변경해야 한다.
-⚠️ 사용하지 않는 서비스는 반드시 재부팅 후에도 시작되지 않도록 완전히 중지해야 한
-다. 미사용 서비스가 실행 중이면 시스템 성능이 저하되고 보안 취약점이 발생할 수 있다.
-리눅스도 동일하게 적용된다.</p>
+<p>서비스 목록에서 실제로 사용하지 않는 서비스가 자동(Automatic) 상태로 실행 중인 경우, 이를 중지하고 시작 유형을 수동(Manual) 또는 사용 안 함(Disabled)으로 변경해야 한다.</p>
+<p>⚠️ 사용하지 않는 서비스는 반드시 재부팅 후에도 시작되지 않도록 완전히 중지해야 한 다. 미사용 서비스가 실행 중이면 시스템 성능이 저하되고 보안 취약점이 발생할 수 있다. 리눅스도 동일하게 적용된다.</p>
 <h4 id="3-리소스-모니터resource-monitor">3. 리소스 모니터(Resource Monitor)</h4>
-<p>서버 관리자 → Tools → Resource Monitor
-현재 시스템에서 각 프로세스별 CPU, 디스크, 메모리, 네트워크 사용량을 실시간 그래픽으
-로 확인할 수 있다.
-상단 탭(CPU, 메모리, 디스크, 네트워크)별로 상세 보기 가능
-IIS, DNS 등 서버 서비스의 동작 상태와 발생 이벤트 확인 가능</p>
+<p>서버 관리자 → Tools → Resource Monitor 현재 시스템에서 각 프로세스별 CPU, 디스크, 메모리, 네트워크 사용량을 실시간 그래픽으 로 확인할 수 있다.</p>
+<p>상단 탭(CPU, 메모리, 디스크, 네트워크)별로 상세 보기 가능 IIS, DNS 등 서버 서비스의 동작 상태와 발생 이벤트 확인 가능</p>
 <h4 id="4-로컬-보안-정책local-security-policy">4. 로컬 보안 정책(Local Security Policy)</h4>
-<p>서버 관리자 → Tools → Local Security Policy
-Windows Server 계열에서 보안 정책을 설정하는 도구이다. 각 항목을 더블 클릭하여
-Enable/Disable 또는 값을 변경할 수 있으며, Explain 탭에서 해당 정책의 상세 설명을 확
-인할 수 있다.</p>
+<p>서버 관리자 → Tools → Local Security Policy Windows Server 계열에서 보안 정책을 설정하는 도구이다. 각 항목을 더블 클릭하여 Enable/Disable 또는 값을 변경할 수 있으며, Explain 탭에서 해당 정책의 상세 설명을 확 인할 수 있다.</p>
 <h4 id="5-로컬-정책--보안-옵션security-options">5. 로컬 정책 — 보안 옵션(Security Options)</h4>
 <p>경로: Local Security Policy → Local Policies → Security Options</p>
 <h5 id="5-1-interactive-logon">5-1. Interactive Logon (대화형 로그온)</h5>
-<ul>
-<li>정책</li>
-<li>기본값</li>
-<li>설명</li>
-<li>Interactive Logon: Do not</li>
-<li>require Ctrl+Alt+Del</li>
-<li>Disabled</li>
-<li>로그인 시 Ctrl+Alt+Del 키를 요구하지 않겠다</li>
-<li>는 정책. 기본값이 Disabled이므로</li>
-<li>Ctrl+Alt+Del이 요구된다.</li>
-<li>Ctrl+Alt+Del을 누르지 않아도 로그인 창이 바로 뜨도록 설정하려면 이 정책을 Enable</li>
-<li>로 변경한다. 변경 후 재부팅하면 Ctrl+Alt+Del 요구 없이 로그인 화면이 표시된다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>정책</th>
+<th>기본값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interactive Logon: Do not<br>require Ctrl+Alt+Del</td>
+<td>Disabled</td>
+<td>로그인 시 Ctrl+Alt+Del 키를 요구하지 않겠다<br>는 정책. 기본값이 Disabled이므로<br>Ctrl+Alt+Del이 요구된다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ctrl+Alt+Del을 누르지 않아도 로그인 창이 바로 뜨도록 설정하려면 이 정책을 Enable 로 변경한다. 변경 후 재부팅하면 Ctrl+Alt+Del 요구 없이 로그인 화면이 표시된다.</p>
 <h4 id="6-계정-정책--패스워드-정책password-policy">6. 계정 정책 — 패스워드 정책(Password Policy)</h4>
-<p>경로: Local Security Policy → Account Policies → Password Policy
-정책
-설명
-Password must meet complexity
-requirements
-패스워드 복잡성 요구 여부. Enable 시 영문 대·소문자, 숫
-자, 특수문자 조합이 필요하다.
-Minimum password length
-패스워드 최소 글자 수. 기본값 0. 예: 4로 설정 시 최소 4자
-이상이어야 한다.
-Maximum password age
-패스워드 최대 사용 기간(만료 기간)
-Minimum password age
-패스워드 최소 유지 기간
-Windows Server 설치 시 및 FTP 사용자 계정 생성 시 복잡한 패스워드(대·소문자·숫자
-·특수문자 조합)를 사용한 이유는 Password must meet complexity requirements
-정책이 기본 Enable 상태이기 때문이다.
-복잡성 요구를 Disable하면 1234 와 같은 단순 패스워드도 사용 가능하다. 단, Minimum
-password length에서 지정한 최소 글자 수는 여전히 충족해야 한다.</p>
+<p>경로: Local Security Policy → Account Policies → Password Policy</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>정책</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Password must meet complexity<br>requirements</td>
+<td>패스워드 복잡성 요구 여부. Enable 시 영문 대·소문자, 숫<br>자, 특수문자 조합이 필요하다.</td>
+</tr>
+<tr>
+<td>Minimum password length</td>
+<td>패스워드 최소 글자 수. 기본값 0. 예: 4로 설정 시 최소 4자<br>이상이어야 한다.</td>
+</tr>
+<tr>
+<td>Maximum password age</td>
+<td>패스워드 최대 사용 기간(만료 기간)</td>
+</tr>
+<tr>
+<td>Minimum password age</td>
+<td>패스워드 최소 유지 기간</td>
+</tr>
+</tbody>
+</table></div>
+<p>Windows Server 설치 시 및 FTP 사용자 계정 생성 시 복잡한 패스워드(대·소문자·숫자 ·특수문자 조합)를 사용한 이유는 Password must meet complexity requirements 정책이 기본 Enable 상태이기 때문이다.</p>
+<p>복잡성 요구를 Disable하면 1234 와 같은 단순 패스워드도 사용 가능하다. 단, Minimum password length에서 지정한 최소 글자 수는 여전히 충족해야 한다.</p>
 <h4 id="7-계정-정책--계정-잠금-정책account-lockout-policy">7. 계정 정책 — 계정 잠금 정책(Account Lockout Policy)</h4>
 <p>경로: Local Security Policy → Account Policies → Account Lockout Policy</p>
-<p>정책
-설명
-Account lockout threshold
-로그인 실패 허용 횟수. 이 횟수를 초과하면 계정이 잠긴다. 기
-본값: 0(잠금 없음)
-Account lockout duration
-계정 잠금 유지 시간(분). 설정 후 자동으로 30분으로 초기 설정
-된다.
-Reset account lockout
-counter after
-로그인 실패 카운트를 초기화하는 시간(분).
-설정 예시: Threshold를 3으로 설정하면, 로그인 3회 실패 시 계정이 잠긴다. 잠금 시간
-(duration)을 30분으로 설정하면 30분 동안 로그인을 시도할 수 없다. 리셋 시간을 60
-분으로 설정하면 60분 후에 실패 카운트가 초기화되어 다시 로그인을 시도할 수 있다.
-인터넷뱅킹에서 패스워드를 여러 번 잘못 입력하면 일정 시간 로그인이 차단되거나 계정
-이 잠기는 것이 이 계정 잠금 정책에 의한 동작이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>정책</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account lockout threshold</td>
+<td>로그인 실패 허용 횟수. 이 횟수를 초과하면 계정이 잠긴다. 기<br>본값: 0(잠금 없음)</td>
+</tr>
+<tr>
+<td>Account lockout duration</td>
+<td>계정 잠금 유지 시간(분). 설정 후 자동으로 30분으로 초기 설정<br>된다.</td>
+</tr>
+<tr>
+<td>Reset account lockout<br>counter after</td>
+<td>로그인 실패 카운트를 초기화하는 시간(분).</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정 예시: Threshold를 3으로 설정하면, 로그인 3회 실패 시 계정이 잠긴다. 잠금 시간 (duration)을 30분으로 설정하면 30분 동안 로그인을 시도할 수 없다. 리셋 시간을 60 분으로 설정하면 60분 후에 실패 카운트가 초기화되어 다시 로그인을 시도할 수 있다.</p>
+<p>인터넷뱅킹에서 패스워드를 여러 번 잘못 입력하면 일정 시간 로그인이 차단되거나 계정 이 잠기는 것이 이 계정 잠금 정책에 의한 동작이다.</p>
 <h4 id="8-ip-보안-정책ip-security-policy">8. IP 보안 정책(IP Security Policy)</h4>
-<p>경로: Local Security Policy → IP Security Policies on Local Computer
-L3 장비의 ACL(Access Control List)과 유사하게, 출발지·목적지 IP 주소, 프로토콜, 포트
-를 지정하여 트래픽을 필터링하는 정책을 설정할 수 있다.
-설정 항목
-설명
-정책 이름 및 설명
-정책을 식별하기 위한 이름과 설명
-필터 목록(Filter List)
-출발지 IP, 목적지 IP, 프로토콜(TCP 등), 포트 번호 지정
-필터 액션(Filter Action)
-Permit(허용) 또는 Block(차단) 선택
-IP 보안 정책의 구성 방식은 L3 장비에서 ACL을 설정할 때와 동일하다. 출발지와 목적
-지, 포트를 지정하고 허용 또는 차단 여부를 결정한다.
-복수의 정책이 존재할 경우, 목록 상단에 위치한 정책부터 순서대로 트래픽과 비교하여
-적용된다.</p>
+<p>경로: Local Security Policy → IP Security Policies on Local Computer L3 장비의 ACL(Access Control List)과 유사하게, 출발지·목적지 IP 주소, 프로토콜, 포트 를 지정하여 트래픽을 필터링하는 정책을 설정할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책 이름 및 설명</td>
+<td>정책을 식별하기 위한 이름과 설명</td>
+</tr>
+<tr>
+<td>필터 목록(Filter List)</td>
+<td>출발지 IP, 목적지 IP, 프로토콜(TCP 등), 포트 번호 지정</td>
+</tr>
+<tr>
+<td>필터 액션(Filter Action)</td>
+<td>Permit(허용) 또는 Block(차단) 선택</td>
+</tr>
+</tbody>
+</table></div>
+<p>IP 보안 정책의 구성 방식은 L3 장비에서 ACL을 설정할 때와 동일하다. 출발지와 목적 지, 포트를 지정하고 허용 또는 차단 여부를 결정한다.</p>
+<p>복수의 정책이 존재할 경우, 목록 상단에 위치한 정책부터 순서대로 트래픽과 비교하여 적용된다.</p>
 <hr />
 <h3 id="091-windows-server-dns-서버-구축">091. Windows Server DNS 서버 구축</h3>
 <h4 id="1-windows-server-로그인-및-이벤트-트래킹">1. Windows Server 로그인 및 이벤트 트래킹</h4>
 <h5 id="1-1_2">1-1. 이전 설정 확인</h5>
-<p>이전 시간에 로컬 보안정책에서 Ctrl+Alt+Del 비활성화를 설정했기 때문에, 로그인 화면에
-서 해당 안내 문구가 사라진 것을 확인할 수 있다. 어드민 계정으로 바로 로그인이 가능하며,
-왼쪽에 설정된 사용자 목록이 표시된다.</p>
+<p>이전 시간에 로컬 보안정책에서 Ctrl+Alt+Del 비활성화를 설정했기 때문에, 로그인 화면에 서 해당 안내 문구가 사라진 것을 확인할 수 있다. 어드민 계정으로 바로 로그인이 가능하며, 왼쪽에 설정된 사용자 목록이 표시된다.</p>
 <h5 id="1-2-shutdown-event-tracking">1-2. 이벤트 트래킹 (Shutdown Event Tracking)</h5>
-<p>서버는 셧다운이 발생해서는 안 되기 때문에, 셧다운 이벤트 발생 시 원인을 기록하고 추적
-하는 기능이 활성화되어 있다. 부팅 후 이벤트 트래킹 창이 뜨면 셧다운 분류(전력 부족, 보
-안 이슈, 시스템 이슈 등)와 관리자 주석을 기입하는 란이 나타난다. 직접 종료한 경우에는
-Cancel로 닫으면 된다.</p>
+<p>서버는 셧다운이 발생해서는 안 되기 때문에, 셧다운 이벤트 발생 시 원인을 기록하고 추적 하는 기능이 활성화되어 있다. 부팅 후 이벤트 트래킹 창이 뜨면 셧다운 분류(전력 부족, 보 안 이슈, 시스템 이슈 등)와 관리자 주석을 기입하는 란이 나타난다. 직접 종료한 경우에는 Cancel로 닫으면 된다.</p>
 <h4 id="2-dns-서버-구축-windows-server">2. DNS 서버 구축 (Windows Server)</h4>
 <h5 id="2-1-dns">2-1. DNS 관리자 실행</h5>
-<ul>
-<li>Tools 메뉴의 DNS 항목을 클릭하면 DNS 관리자가 실행된다. DNS가 설치되지 않은 경우</li>
-<li>Server Manager &gt; Manage &gt; Add Roles에서 DNS를 체크하여 추가 설치한다.</li>
-<li>DNS 관리자에는 다음 두 개의 주요 영역이 존재한다.</li>
-<li>영역</li>
-<li>설명</li>
-<li>Forward Lookup Zones (정방향 존)</li>
-<li>도메인 → IP 매핑 레코드를 보유하는 영역</li>
-<li>Reverse Lookup Zones (역방향 존)</li>
-<li>IP → 도메인 매핑 레코드를 보유하는 영역</li>
-<li>정방향 존만 있어도 DNS 서버로서의 역할은 충분히 수행할 수 있다.</li>
-</ul>
+<p>Tools 메뉴의 DNS 항목을 클릭하면 DNS 관리자가 실행된다. DNS가 설치되지 않은 경우 Server Manager &gt; Manage &gt; Add Roles에서 DNS를 체크하여 추가 설치한다.</p>
+<p>DNS 관리자에는 다음 두 개의 주요 영역이 존재한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>영역</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forward Lookup Zones (정방향 존)</td>
+<td>도메인 → IP 매핑 레코드를 보유하는 영역</td>
+</tr>
+<tr>
+<td>Reverse Lookup Zones (역방향 존)</td>
+<td>IP → 도메인 매핑 레코드를 보유하는 영역</td>
+</tr>
+</tbody>
+</table></div>
+<p>정방향 존만 있어도 DNS 서버로서의 역할은 충분히 수행할 수 있다.</p>
 <h4 id="3-forward-lookup-zone-생성">3. Forward Lookup Zone 생성</h4>
 <h5 id="3-1-zone">3-1. Zone 종류</h5>
-<p>종류
-설명
-Primary Zone
-1차(주) 존. 직접 편집이 가능한 기본 존
-Secondary Zone
-보조 존. Primary Zone과 동기화하여 백업 역할을 수행
-Stub Zone
-독립적인 존. 다른 존과 동기화하지 않고 독립적으로 운영
-Primary Zone과 Secondary Zone은 서로 존 내의 레코드 정보를 동기화한다. 보조 서버
-가 Primary가 동작하지 못할 때 백업 역할을 하기 위해 평상시에 정보가 동기화되어 있어야
-하기 때문이다. Stub Zone은 다른 존과 연결할 필요 없이 해당 영역 안에서만 독립적으로
-레코드를 관리할 때 사용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>종류</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary Zone</td>
+<td>1차(주) 존. 직접 편집이 가능한 기본 존</td>
+</tr>
+<tr>
+<td>Secondary Zone</td>
+<td>보조 존. Primary Zone과 동기화하여 백업 역할을 수행</td>
+</tr>
+<tr>
+<td>Stub Zone</td>
+<td>독립적인 존. 다른 존과 동기화하지 않고 독립적으로 운영</td>
+</tr>
+</tbody>
+</table></div>
+<p>Primary Zone과 Secondary Zone은 서로 존 내의 레코드 정보를 동기화한다. 보조 서버 가 Primary가 동작하지 못할 때 백업 역할을 하기 위해 평상시에 정보가 동기화되어 있어야 하기 때문이다. Stub Zone은 다른 존과 연결할 필요 없이 해당 영역 안에서만 독립적으로 레코드를 관리할 때 사용한다.</p>
 <h5 id="3-2-forward-lookup-zone">3-2. Forward Lookup Zone 생성 절차</h5>
 <p>Forward Lookup Zones에서 우클릭 &gt; New Zone으로 마법사를 실행한다.</p>
 <h4 id="1-primary-zone-선택-후-next">1. Primary Zone 선택 후 Next</h4>
@@ -735,106 +951,111 @@ Primary Zone과 Secondary Zone은 서로 존 내의 레코드 정보를 동기�
 <h4 id="3-zone-파일명-자동-생성-도메인명dns-형식">3. Zone 파일명 자동 생성: 도메인명.dns  형식</h4>
 <h4 id="4-dynamic-update-보조-서버가-없는-경우-기본값none---마지막-항목-유지">4. Dynamic Update: 보조 서버가 없는 경우 기본값(None - 마지막 항목) 유지</h4>
 <h4 id="5-finish-후-존이-running-상태로-생성됨">5. Finish 후 존이 Running 상태로 생성됨</h4>
-<p>⚠️ Zone 이름으로 사용할 도메인은 반드시 호스트 브라우저에서 미리 확인하여 실제로
-연결되지 않는 도메인을 사용한다.</p>
+<p>⚠️ Zone 이름으로 사용할 도메인은 반드시 호스트 브라우저에서 미리 확인하여 실제로 연결되지 않는 도메인을 사용한다.</p>
 <h4 id="4-soa-및-ns-레코드-자동-생성">4. SOA 및 NS 레코드 자동 생성</h4>
 <h5 id="4-1-soa-start-of-authority">4-1. SOA 레코드 (Start of Authority)</h5>
-<ul>
-<li>Windows에서 Zone을 생성하면 SOA 레코드와 NS 레코드가 자동으로 생성된다. Linux에</li>
-<li>서 수동으로 입력하던 항목들이 마법사로 자동 구성된다.</li>
-<li>SOA 레코드에서 확인 가능한 주요 항목은 다음과 같다.</li>
-<li>항목</li>
-<li>설명</li>
-<li>Serial Number</li>
-<li>존 파일의 버전 번호</li>
-<li>DNS 서버명</li>
-<li>이 존을 관리하는 DNS 서버 호스트명</li>
-<li>관리자 이메일</li>
-<li>존 관리자 연락처</li>
-<li>Refresh Time</li>
-<li>보조 서버가 주 서버에서 업데이트를 확인하는 주기</li>
-<li>Retry Interval</li>
-<li>
-<p>업데이트 실패 후 재시도 간격</p>
-</li>
-<li>
-<p>항목</p>
-</li>
-<li>설명</li>
-<li>Expire Time</li>
-<li>보조 서버의 존 데이터 만료 시간</li>
-<li>Minimum TTL</li>
-<li>최소 캐시 유지 시간</li>
-</ul>
+<p>Windows에서 Zone을 생성하면 SOA 레코드와 NS 레코드가 자동으로 생성된다. Linux에 서 수동으로 입력하던 항목들이 마법사로 자동 구성된다.</p>
+<p>SOA 레코드에서 확인 가능한 주요 항목은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serial Number</td>
+<td>존 파일의 버전 번호</td>
+</tr>
+<tr>
+<td>DNS 서버명</td>
+<td>이 존을 관리하는 DNS 서버 호스트명</td>
+</tr>
+<tr>
+<td>관리자 이메일</td>
+<td>존 관리자 연락처</td>
+</tr>
+<tr>
+<td>Refresh Time</td>
+<td>보조 서버가 주 서버에서 업데이트를 확인하는 주기</td>
+</tr>
+<tr>
+<td>Retry Interval</td>
+<td>업데이트 실패 후 재시도 간격</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expire Time</td>
+<td>보조 서버의 존 데이터 만료 시간</td>
+</tr>
+<tr>
+<td>Minimum TTL</td>
+<td>최소 캐시 유지 시간</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-2-ns-ip">4-2. NS 레코드 IP 연결</h5>
-<p>NS 레코드 더블클릭 &gt; Name Servers 탭에서 IP를 연결한다. 기존에 언나운(Unknown)
-상태로 표시된 항목을 선택하고 Edit을 누른 후, Resolve 버튼을 클릭하면 해당 DNS 서버
-의 IP가 자동으로 확인되어 등록된다. 불필요한 항목은 Remove로 삭제하고 한 줄만 유지한
-다.
-SOA 레코드 또는 NS 레코드를 수정한 경우 반드시 Apply 후 OK를 눌러 적용한다.
-SOA 레코드와 NS 레코드의 Name 필드에 "(same as parent folder)"로 표시되는 것
-은 상위 도메인(예: hoon777.com)과 동일한 도메인을 사용한다는 의미이다.</p>
+<p>NS 레코드 더블클릭 &gt; Name Servers 탭에서 IP를 연결한다. 기존에 언나운(Unknown) 상태로 표시된 항목을 선택하고 Edit을 누른 후, Resolve 버튼을 클릭하면 해당 DNS 서버 의 IP가 자동으로 확인되어 등록된다. 불필요한 항목은 Remove로 삭제하고 한 줄만 유지한 다.</p>
+<p>SOA 레코드 또는 NS 레코드를 수정한 경우 반드시 Apply 후 OK를 눌러 적용한다.</p>
+<p>SOA 레코드와 NS 레코드의 Name 필드에 "(same as parent folder)"로 표시되는 것 은 상위 도메인(예: hoon777.com)과 동일한 도메인을 사용한다는 의미이다.</p>
 <h4 id="5-dns-레코드-추가">5. DNS 레코드 추가</h4>
 <h5 id="5-1-a-ipv4">5-1. A 레코드 (IPv4 주소 매핑)</h5>
-<p>빈 공간에서 우클릭 &gt; New Host (A or AAAA)를 선택한다.
-레코드 종류
-용도
-A
-IPv4 주소와 도메인 매핑
-AAAA
-IPv6 주소와 도메인 매핑
-호스트 이름 입력란에 값을 입력하면 해당 서브도메인(예: www.hoon777.com )이 생성된다. 입
-력란을 공백으로 두면 부모 도메인(예: hoon777.com )이 해당 IP와 직접 연결된다.
-FTP 서버, 웹 서버 등 서비스별로 각각 A 레코드를 추가하면 된다. 모두 동일한 시스템에서
-운영할 경우 IP 주소는 같아도 무방하다.</p>
+<p>빈 공간에서 우클릭 &gt; New Host (A or AAAA)를 선택한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>레코드 종류</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>IPv4 주소와 도메인 매핑</td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>IPv6 주소와 도메인 매핑</td>
+</tr>
+</tbody>
+</table></div>
+<p>호스트 이름 입력란에 값을 입력하면 해당 서브도메인(예: www.hoon777.com )이 생성된다. 입 력란을 공백으로 두면 부모 도메인(예: hoon777.com )이 해당 IP와 직접 연결된다.</p>
+<p>FTP 서버, 웹 서버 등 서비스별로 각각 A 레코드를 추가하면 된다. 모두 동일한 시스템에서 운영할 경우 IP 주소는 같아도 무방하다.</p>
 <h5 id="5-2-cname">5-2. CNAME 레코드 (별칭 레코드)</h5>
-<p>별칭(Alias)을 부여할 때 사용하는 레코드이다. 우클릭 &gt; New Alias (CNAME)를 선택한
-다.
-별칭 이름 입력 (예: web )
-Browse 버튼으로 실제 연결될 호스트 선택 (예: www.hoon777.com )
-결과: web.hoon777.com  접속 시 www.hoon777.com 으로 연결됨</p>
-<p>A 레코드를 직접 추가하는 방식과 CNAME으로 별칭을 부여하는 방식 두 가지가 모두 가
-능하다.</p>
+<p>별칭(Alias)을 부여할 때 사용하는 레코드이다. 우클릭 &gt; New Alias (CNAME)를 선택한 다.</p>
+<p>별칭 이름 입력 (예: web )</p>
+<p>Browse 버튼으로 실제 연결될 호스트 선택 (예: www.hoon777.com )</p>
+<p>결과: web.hoon777.com  접속 시 www.hoon777.com 으로 연결됨 A 레코드를 직접 추가하는 방식과 CNAME으로 별칭을 부여하는 방식 두 가지가 모두 가 능하다.</p>
 <h5 id="5-3-mx">5-3. MX 레코드</h5>
-<p>메일 서버가 있을 경우 메일 서버와 도메인을 연결하는 레코드이다. 우클릭 &gt; New Mail
-Exchanger (MX) 선택 후 메일 서버 호스트명을 지정한다.</p>
+<p>메일 서버가 있을 경우 메일 서버와 도메인을 연결하는 레코드이다. 우클릭 &gt; New Mail Exchanger (MX) 선택 후 메일 서버 호스트명을 지정한다.</p>
 <h5 id="5-4">5-4. 기타 레코드</h5>
-<p>우클릭 &gt; Other New Records에서 다양한 레코드 유형을 확인할 수 있다. 실제 운영 환경
-에서 가장 많이 사용되는 순서는 A 레코드, CNAME 레코드, MX 레코드이다.</p>
+<p>우클릭 &gt; Other New Records에서 다양한 레코드 유형을 확인할 수 있다. 실제 운영 환경 에서 가장 많이 사용되는 순서는 A 레코드, CNAME 레코드, MX 레코드이다.</p>
 <h4 id="6-reverse-lookup-zone-생성">6. Reverse Lookup Zone 생성</h4>
 <h5 id="6-1">6-1. 역방향 존 생성 절차</h5>
-<p>Reverse Lookup Zones에서 우클릭 &gt; New Zone &gt; Primary Zone 선택 후 IPv4
-Reverse Lookup Zone을 선택한다. 네트워크 ID를 입력하면(예: 192.168.100 ) 존 파일명
-이 자동으로 생성된다. 이후 Finish하면 역방향 존과 함께 SOA, NS 레코드가 자동으로 생
-성된다.</p>
+<p>Reverse Lookup Zones에서 우클릭 &gt; New Zone &gt; Primary Zone 선택 후 IPv4 Reverse Lookup Zone을 선택한다. 네트워크 ID를 입력하면(예: 192.168.100 ) 존 파일명 이 자동으로 생성된다. 이후 Finish하면 역방향 존과 함께 SOA, NS 레코드가 자동으로 생 성된다.</p>
 <h5 id="6-2-ptr">6-2. PTR 레코드</h5>
-<p>PTR 레코드는 정방향의 A 레코드에 대응하는 역방향 레코드이다. IP를 입력하고 해당 IP와
-연결될 도메인을 선택하여 생성한다. A 레코드를 추가할 때 "Create associated PTR
-record" 옵션을 체크하면 역방향 존이 존재할 경우 PTR 레코드가 자동으로 등록된다.</p>
+<p>PTR 레코드는 정방향의 A 레코드에 대응하는 역방향 레코드이다. IP를 입력하고 해당 IP와 연결될 도메인을 선택하여 생성한다. A 레코드를 추가할 때 "Create associated PTR record" 옵션을 체크하면 역방향 존이 존재할 경우 PTR 레코드가 자동으로 등록된다.</p>
 <h5 id="6-3-wins">6-3. WINS 서버</h5>
-<p>WINS(Windows Internet Naming Service)는 TCP/IP 초기 시절 컴퓨터 이름 인식을 위
-해 사용하던 프로토콜이다. 현재는 TCP/IP 기반으로 호스트명 연결이 가능하기 때문에
-WINS 서버를 사용하는 환경은 거의 없다.</p>
+<p>WINS(Windows Internet Naming Service)는 TCP/IP 초기 시절 컴퓨터 이름 인식을 위 해 사용하던 프로토콜이다. 현재는 TCP/IP 기반으로 호스트명 연결이 가능하기 때문에 WINS 서버를 사용하는 환경은 거의 없다.</p>
 <h5 id="6-4-zone-transfer">6-4. Zone Transfer (존 전송)</h5>
-<p>주 서버와 보조 서버 간의 존 레코드 동기화 기능이다. 보조 서버의 IP를 추가하고 Allow
-Zone Transfer를 설정하면 자동으로 동기화가 이루어진다. 보조 서버가 없는 경우에는 설
-정할 필요가 없다.</p>
+<p>주 서버와 보조 서버 간의 존 레코드 동기화 기능이다. 보조 서버의 IP를 추가하고 Allow Zone Transfer를 설정하면 자동으로 동기화가 이루어진다. 보조 서버가 없는 경우에는 설 정할 필요가 없다.</p>
 <h4 id="7-dns-테스트">7. DNS 테스트</h4>
 <h5 id="7-1">7-1. 테스트 전 확인 사항</h5>
-<p>도메인으로 접속하기 전 IP 주소로 먼저 접속이 되는지 확인한다. IP로 접속이 안 되면 도메
-인으로도 접속이 되지 않는다.
-⚠️ IP 접속이 확인된 이후에만 도메인 접속 테스트를 진행한다.</p>
+<p>도메인으로 접속하기 전 IP 주소로 먼저 접속이 되는지 확인한다. IP로 접속이 안 되면 도메 인으로도 접속이 되지 않는다.</p>
+<p>⚠️ IP 접속이 확인된 이후에만 도메인 접속 테스트를 진행한다.</p>
 <h5 id="7-2-dns">7-2. 호스트 DNS 주소 변경</h5>
-<ul>
-<li>테스트를 위해 호스트 컴퓨터의 DNS 주소를 윈도우 서버 IP로 임시 변경한다.</li>
-<li>경로: 네트워크 및 인터넷 설정 열기</li>
-<li>→ 이더넷(또는 Wi-Fi) &gt; 어댑터 옵션 변경</li>
-<li>→ 사용 중인 어댑터 우클릭 &gt; 속성</li>
-<li>→ TCP/IP 버전4 &gt; 속성</li>
-<li>→ DNS 서버 주소를 윈도우 서버 IP로 변경</li>
-<li>변경 후 브라우저에서 www.도메인명.com 을 입력하면 DNS 서버에 질의하여 해당 IP로 접속된</li>
-<li>다. 테스트 완료 후 DNS 주소를 원래대로 복원한다.</li>
-</ul>
+<p>테스트를 위해 호스트 컴퓨터의 DNS 주소를 윈도우 서버 IP로 임시 변경한다.</p>
+<p>경로: 네트워크 및 인터넷 설정 열기 → 이더넷(또는 Wi-Fi) &gt; 어댑터 옵션 변경 → 사용 중인 어댑터 우클릭 &gt; 속성 → TCP/IP 버전4 &gt; 속성 → DNS 서버 주소를 윈도우 서버 IP로 변경 변경 후 브라우저에서 www.도메인명.com 을 입력하면 DNS 서버에 질의하여 해당 IP로 접속된 다. 테스트 완료 후 DNS 주소를 원래대로 복원한다.</p>
 <hr /><div class="nav"><a href="ch13.html"><span class="lbl">이전</span>핵심키워드 · 리눅스 서버 (2/2)</a><a href="ch15.html"><span class="lbl">다음</span>핵심키워드 · 데이터베이스</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>

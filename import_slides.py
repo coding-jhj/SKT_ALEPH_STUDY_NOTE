@@ -21,6 +21,8 @@ import zipfile
 
 import fitz  # PyMuPDF
 
+from pdf_blocks import merge_payloads, page_blocks, table_to_markdown, text_to_markdown
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR = os.path.join(ROOT, "slides")
 
@@ -70,84 +72,6 @@ def classify(title: str) -> str:
     return "리눅스 서버"  # 남는 것은 기본 명령어 계열이었습니다
 
 
-def clean(text: str, doc_title: str) -> list[str]:
-    """페이지 머리말·쪽번호를 걷어 내고 줄 목록을 돌려줍니다."""
-    out: list[str] = []
-    for raw in text.split("\n"):
-        line = raw.rstrip()
-        if not line.strip():
-            if out and out[-1] != "":
-                out.append("")
-            continue
-        # 페이지마다 반복되는 문서 제목
-        if line.strip() == doc_title.strip():
-            continue
-        # 제목이 잘려 들어간 경우 (마지막 페이지에서 자주 발생)
-        if len(line) > 4 and doc_title.startswith(line.strip()):
-            continue
-        # 쪽번호만 있는 줄
-        if re.fullmatch(r"\d{1,3}", line.strip()):
-            continue
-        out.append(line)
-    # 앞뒤 공백 줄 정리
-    while out and out[0] == "":
-        out.pop(0)
-    while out and out[-1] == "":
-        out.pop()
-    return out
-
-
-def _looks_like_table(block: list[str]) -> bool:
-    """PDF 표에서 칸 구분이 풀린 덩어리인지 판정합니다.
-
-    표 칸은 짧고 문장 부호로 끝나지 않습니다. 어느 칸이 어느 열이었는지는
-    복원할 수 없으므로 **열을 지어내지 않고** 줄 단위 목록으로만 바꿉니다.
-    """
-    if len(block) < 4:
-        return False
-    short = sum(1 for b in block if len(b.strip()) <= 30)
-    ends = sum(1 for b in block if b.strip().endswith(("다.", "요.", "다", ".", "!", "?")))
-    return short / len(block) >= 0.7 and ends / len(block) <= 0.3
-
-
-def _flush(block: list[str], out: list[str]) -> None:
-    if not block:
-        return
-    if _looks_like_table(block):
-        out.extend(f"- {b.strip()}" for b in block)
-    else:
-        out.extend(block)
-    out.append("")
-    block.clear()
-
-
-def to_markdown(lines: list[str]) -> list[str]:
-    """번호 제목을 마크다운 제목으로 올리고, 표가 풀린 덩어리는 목록으로 바꿉니다.
-
-    글자는 바꾸지 않습니다. 줄을 묶는 방식만 정합니다.
-    """
-    out: list[str] = []
-    block: list[str] = []
-    for line in lines:
-        s = line.strip()
-        m3 = H3.match(s)
-        m2 = H2.match(s)
-        if m3 or m2:
-            _flush(block, out)
-            if m3:
-                out.append(f"#### {m3.group(1)}. {m3.group(2)}")
-            else:
-                out.append(f"### {m2.group(1)}. {m2.group(2)}")
-            out.append("")
-            continue
-        if not s:
-            _flush(block, out)
-            continue
-        block.append(line)
-    _flush(block, out)
-    return out
-
-
 def main(zip_path: str) -> int:
     z = zipfile.ZipFile(zip_path)
     names = sorted(n for n in z.namelist() if n.lower().endswith(".pdf"))
@@ -163,10 +87,27 @@ def main(zip_path: str) -> int:
         no, title = (m.group(1), m.group(2).strip()) if m else ("---", base)
 
         doc = fitz.open(stream=z.read(name), filetype="pdf")
-        text = "\n".join(p.get_text() for p in doc)
-        doc.close()
+        body: list[str] = []
+        pending: list[str] = []
 
-        body = to_markdown(clean(text, title))
+        def flush_text() -> None:
+            if pending:
+                body.extend(text_to_markdown(merge_payloads(pending), title))
+                pending.clear()
+
+        for page in doc:
+            for _, kind, payload in page_blocks(page):
+                if kind == "table":
+                    md = table_to_markdown(payload)
+                    if md:
+                        flush_text()
+                        body.append("")
+                        body.extend(md)
+                        body.append("")
+                else:
+                    pending.append(payload)
+        flush_text()
+        doc.close()
         buckets[classify(title)].append((no, title, body))
 
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -193,8 +134,8 @@ def main(zip_path: str) -> int:
                 f"강사 배포 「핵심키워드」 슬라이드 중 **{chunk[0][0]}~{chunk[-1][0]}강 {len(chunk)}편**입니다.",
                 "원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.",
                 "",
-                "> PDF에서 뽑은 텍스트라 원문의 **표는 칸 구분이 풀려** 항목이 줄마다 나열됩니다.",
-                "> 내용은 빠지지 않았으나 표 모양은 복원하지 못했습니다.",
+                "> 원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어",
+                "> (188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.",
                 "",
             ]
             for no, title, body in chunk:

@@ -108,1490 +108,1974 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="cur" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="inchap"><a class="lv3" href="#063-loganalyzer-웹-설치-http-오류-코드와-selinux-파일-권한">063. LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</a><a class="lv4" href="#1-loganalyzer-웹-설치-과정-개요">1. LogAnalyzer 웹 설치 과정 개요</a><a class="lv4" href="#2-http-오류-코드">2. HTTP 오류 코드</a><a class="lv4" href="#3-selinux-파일-권한--chcon-명령어">3. SELinux 파일 권한 — chcon 명령어</a><a class="lv4" href="#4-loganalyzer-웹-화면-구성">4. LogAnalyzer 웹 화면 구성</a><a class="lv3" href="#064-loganalyzer-wget-명령어-압축-파일-형식-쉘-스크립트-개념">064. LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</a><a class="lv4" href="#1-loganalyzer-개요">1. LogAnalyzer 개요</a><a class="lv4" href="#2-wget-명령어--셸에서-파일-다운로드">2. wget 명령어 — 셸에서 파일 다운로드</a><a class="lv4" href="#3-압축-파일-형식--tar와-gz">3. 압축 파일 형식 — tar와 gz</a><a class="lv4" href="#4-셸-스크립트shell-script">4. 셸 스크립트(Shell Script)</a><a class="lv2" href="#이후-스크립트-내용">이후 스크립트 내용</a><a class="lv4" href="#5-loganalyzer의-웹-디렉토리-구조">5. LogAnalyzer의 웹 디렉토리 구조</a><a class="lv3" href="#066-rsyslog-mysql-패키지db-설정">066. rsyslog-mysql 패키지(DB 설정)</a><a class="lv4" href="#1-로그-저장을-위한-데이터베이스-구조">1. 로그 저장을 위한 데이터베이스 구조</a><a class="lv4" href="#2-생성되는-데이터베이스-구조">2. 생성되는 데이터베이스 구조</a><a class="lv4" href="#3-mariadb-사용자-권한-설정">3. MariaDB 사용자 권한 설정</a><a class="lv4" href="#4-rsyslog-출력-모듈-설정-mysql-연동">4. rsyslog 출력 모듈 설정 (MySQL 연동)</a><a class="lv3" href="#067-rsyslog를-활용한-로그-전송">067. rsyslog를 활용한 로그 전송</a><a class="lv4" href="#1-중앙-집중형-로그-서버의-필요성">1. 중앙 집중형 로그 서버의 필요성</a><a class="lv4" href="#2-rsyslog-서비스">2. rsyslog 서비스</a><a class="lv4" href="#3-rsyslog-서버-설정">3. rsyslog 서버 설정</a><a class="lv4" href="#4-rsyslog-클라이언트-설정">4. rsyslog 클라이언트 설정</a><a class="lv4" href="#5-네트워크-연결-확인-명령어">5. 네트워크 연결 확인 명령어</a><a class="lv4" href="#6-파이프-명령어">6. 파이프(|) 명령어</a><a class="lv4" href="#7-실시간-로그-모니터링">7. 실시간 로그 모니터링</a><a class="lv3" href="#068-syslog-facility-priority의-개념-로그-레벨-이해">068. Syslog Facility Priority의 개념, 로그 레벨 이해</a><a class="lv4" href="#1-syslog-개요">1. Syslog 개요</a><a class="lv4" href="#2-facility-시설카테고리">2. Facility (시설/카테고리)</a><a class="lv4" href="#3-priority-우선순위심각도">3. Priority (우선순위/심각도)</a><a class="lv4" href="#4-facility와-priority의-조합">4. Facility와 Priority의 조합</a><a class="lv4" href="#5-syslog-설정-원리">5. Syslog 설정 원리</a><a class="lv3" href="#069-시스템-로그-관리-및-분석리눅스-웹-서버">069. 시스템 로그 관리 및 분석(리눅스 웹 서버)</a><a class="lv4" href="#1-로그-관리의-중요성">1. 로그 관리의 중요성</a><a class="lv4" href="#2-웹-서버-로그-구조">2. 웹 서버 로그 구조</a><a class="lv4" href="#3-http-웹-서비스-로그">3. HTTP 웹 서비스 로그</a><a class="lv4" href="#4-기타-서비스-로그">4. 기타 서비스 로그</a><a class="lv4" href="#5-사용자-로그인-기록-파일">5. 사용자 로그인 기록 파일</a><a class="lv4" href="#6-명령어-히스토리">6. 명령어 히스토리</a><a class="lv4" href="#7-secure-로그-파일">7. Secure 로그 파일</a><a class="lv4" href="#8-messages-로그-파일">8. Messages 로그 파일</a><a class="lv4" href="#9-시스로그syslog-관리">9. 시스로그(Syslog) 관리</a><a class="lv4" href="#10-기본-로그-파일-정리">10. 기본 로그 파일 정리</a><a class="lv3" href="#074-리눅스-계정-파일-구조-salt-파일-권한과-umask">074. 리눅스 계정 파일 구조, Salt, 파일 권한과 umask</a><a class="lv4" href="#1-리눅스-계정-관리-개요">1. 리눅스 계정 관리 개요</a><a class="lv4" href="#2-etcpasswd-파일-구조">2. /etc/passwd  파일 구조</a><a class="lv4" href="#3-etcshadow-파일-구조">3. /etc/shadow  파일 구조</a><a class="lv4" href="#4-패스워드-암호화-알고리즘과-솔트salt">4. 패스워드 암호화 알고리즘과 솔트(Salt)</a><a class="lv4" href="#5-파일-및-디렉토리-유형-표기">5. 파일 및 디렉토리 유형 표기</a><a class="lv4" href="#6-파일-권한과-umask">6. 파일 권한과 umask</a><a class="lv4" href="#7-파일-권한-변경-chmod">7. 파일 권한 변경 (chmod)</a><a class="lv4" href="#8-소유주-및-그룹-변경-chown-chgrp">8. 소유주 및 그룹 변경 (chown, chgrp)</a><a class="lv4" href="#9-계정-관리와-스크립트-활용">9. 계정 관리와 스크립트 활용</a><a class="lv3" href="#075-리눅스-기본-명령어-도움말시스템탐색-명령어">075. 리눅스 기본 명령어, 도움말·시스템·탐색 명령어</a><a class="lv4" href="#1-리눅스-명령어-구조">1. 리눅스 명령어 구조</a><a class="lv4" href="#2-도움말-명령어">2. 도움말 명령어</a><a class="lv4" href="#3-시스템-종료-및-재부팅">3. 시스템 종료 및 재부팅</a><a class="lv4" href="#4-history-명령어">4. history 명령어</a><a class="lv4" href="#5-echo-명령어">5. echo 명령어</a><a class="lv4" href="#6-date-명령어">6. date 명령어</a><a class="lv4" href="#7-계정-및-접속-정보-확인-명령어">7. 계정 및 접속 정보 확인 명령어</a><a class="lv4" href="#8-find-명령어">8. find 명령어</a><a class="lv4" href="#9-ls-명령어-주요-옵션">9. ls 명령어 주요 옵션</a><a class="lv4" href="#10-mkdir-명령어---하위-디렉토리-일괄-생성">10. mkdir 명령어 - 하위 디렉토리 일괄 생성</a><a class="lv4" href="#11-rmdir-명령어---빈-디렉토리-삭제">11. rmdir 명령어 - 빈 디렉토리 삭제</a><a class="lv3" href="#077-파일-조작검색출력-명령어-표준-입출력과-리디렉션">077. 파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</a><a class="lv4" href="#1-rm-명령어-파일디렉토리-삭제">1. rm 명령어 (파일·디렉토리 삭제)</a><a class="lv4" href="#2-mv-명령어-이동-및-이름-변경">2. mv 명령어 (이동 및 이름 변경)</a><a class="lv4" href="#3-file-명령어-파일-유형-확인">3. file 명령어 (파일 유형 확인)</a><a class="lv4" href="#4-tac-명령어-역순-출력">4. tac 명령어 (역순 출력)</a><a class="lv4" href="#5-sort-명령어-정렬">5. sort 명령어 (정렬)</a><a class="lv4" href="#6-nmcli-명령어-네트워크-설정-cli">6. nmcli 명령어 (네트워크 설정 CLI)</a><a class="lv4" href="#7-find-명령어-심화--다중-조건-검색">7. find 명령어 심화 — 다중 조건 검색</a><a class="lv4" href="#8-whereis-명령어-명령어-위치-검색">8. whereis 명령어 (명령어 위치 검색)</a><a class="lv4" href="#9-grep-명령어-문자열-검색">9. grep 명령어 (문자열 검색)</a><a class="lv4" href="#10-표준-입출력-스트림">10. 표준 입출력 스트림</a><a class="lv4" href="#11-리디렉션redirection">11. 리디렉션(Redirection)</a><a class="lv3" href="#089-linux-패스워드-정책-파라미터-설정">089. Linux 패스워드 정책 파라미터 설정</a><a class="lv4" href="#1-windows-dns-연동-테스트-확인">1. Windows DNS 연동 테스트 확인</a><a class="lv4" href="#2-linux-머신-전환-및-패스워드-정책-파일-확인">2. Linux 머신 전환 및 패스워드 정책 파일 확인</a><a class="lv4" href="#3-pwqualityconf-주요-파라미터">3. pwquality.conf 주요 파라미터</a><a class="lv2" href="#difok--1">difok = 1</a><a class="lv4" href="#4-문자-종류별-최소-개수-설정-credit-파라미터">4. 문자 종류별 최소 개수 설정 (Credit 파라미터)</a><a class="lv2" href="#dcredit--1">dcredit = 1</a><a class="lv2" href="#ucredit--1">ucredit = 1</a><a class="lv2" href="#lcredit--1">lcredit = 1</a><a class="lv4" href="#5-추가-복잡도-설정-파라미터">5. 추가 복잡도 설정 파라미터</a><a class="lv2" href="#maxrepeat--0">maxrepeat = 0</a><a class="lv2" href="#maxclassrepeat--0">maxclassrepeat = 0</a><a class="lv2" href="#gecoscheck--0">gecoscheck = 0</a><a class="lv2" href="#dictcheck--1">dictcheck = 1</a><a class="lv4" href="#6-pwqualityconf-파라미터-전체-요약">6. pwquality.conf 파라미터 전체 요약</a><a class="lv3" href="#090-pam-인증-설정-및-auth-select-명령어">090. PAM 인증 설정 및 auth-select 명령어</a><a class="lv4" href="#1-etcpamd-디렉토리-개요">1. /etc/pam.d 디렉토리 개요</a><a class="lv4" href="#2-pampwquality-모듈-추가">2. pam_pwquality 모듈 추가</a><a class="lv4" href="#3-auth-select-명령어">3. auth-select 명령어</a><a class="lv4" href="#4-패스워드-정책-적용-권장-방식">4. 패스워드 정책 적용 권장 방식</a><a class="lv3" href="#097-우분투-서버-개요-및-virtualbox-설치-준비">097. 우분투 서버 개요 및 VirtualBox 설치 준비</a><a class="lv4" href="#1-우분투-버전-구분">1. 우분투 버전 구분</a><a class="lv4" href="#2-우분투와-로키-리눅스의-주요-차이점">2. 우분투와 로키 리눅스의 주요 차이점</a><a class="lv4" href="#3-virtualbox-가상-머신-생성-시-주의사항">3. VirtualBox 가상 머신 생성 시 주의사항</a><a class="lv4" href="#4-우분투-서버-네트워크-설정">4. 우분투 서버 네트워크 설정</a><a class="lv4" href="#5-오픈-ssh-서버">5. 오픈 SSH 서버</a><a class="lv4" href="#6-lxd--도커docker-소개">6. LXD / 도커(Docker) 소개</a><a class="lv3" href="#098-우분투-서버-기본-명령-환경-및-네트워크-설정">098. 우분투 서버 기본 명령 환경 및 네트워크 설정</a><a class="lv4" href="#1-리눅스-배포판-계열-비교">1. 리눅스 배포판 계열 비교</a><a class="lv4" href="#2-apt-명령어">2. apt 명령어</a><a class="lv4" href="#3-sudo-명령어">3. sudo 명령어</a><a class="lv4" href="#4-ping-유틸리티-설치">4. ping 유틸리티 설치</a><a class="lv4" href="#5-파일-권한과-sudo의-관계">5. 파일 권한과 sudo의 관계</a><a class="lv4" href="#6-우분투-서버-네트워크-설정-파일">6. 우분투 서버 네트워크 설정 파일</a><a class="lv4" href="#7-icmp와-ping-개념">7. ICMP와 ping 개념</a><a class="lv4" href="#8-dos--ddos-공격-개념">8. DoS / DDoS 공격 개념</a><a class="lv4" href="#9-virtualbox-가상-머신-복제">9. VirtualBox 가상 머신 복제</a><a class="lv4" href="#10-복제-후-정적-ip-설정-변경">10. 복제 후 정적 IP 설정 변경</a><a class="lv3" href="#115-셸-스크립트-기본-문법-및-awksed-텍스트-처리-도구">115. 셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</a><a class="lv4" href="#1-셸shell-개요">1. 셸(Shell) 개요</a><a class="lv4" href="#2-셸-스크립트-개요">2. 셸 스크립트 개요</a><a class="lv4" href="#3-셸-스크립트-기본-구조">3. 셸 스크립트 기본 구조</a><a class="lv2" href="#이-줄은-주석이다-실행되지-않음">이 줄은 주석이다 (실행되지 않음)</a><a class="lv4" href="#4-변수">4. 변수</a><a class="lv4" href="#5-조건문-if">5. 조건문 (if)</a><a class="lv4" href="#6-사용자-입력-받기">6. 사용자 입력 받기</a><a class="lv4" href="#7-반복문">7. 반복문</a><a class="lv4" href="#8-awk">8. AWK</a><a class="lv2" href="#1-첫-번째-필드-3-세-번째-필드">$1: 첫 번째 필드, $3: 세 번째 필드</a><a class="lv2" href="#f-구분자-지정-콜론을-구분자로-사용">-F: 구분자 지정 (콜론을 구분자로 사용)</a><a class="lv2" href="#usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만</a><a class="lv2" href="#inet-이-포함된-행에서-두-번째-필드ip-주소-출력">&#x27;inet &#x27;이 포함된 행에서 두 번째 필드(IP 주소) 출력</a><a class="lv4" href="#9-sed">9. SED</a><a class="lv2" href="#serverconf-파일에서-disabled를-enable로-치환하여-출력">server.conf 파일에서 &#x27;disabled&#x27;를 &#x27;enable&#x27;로 치환하여 출력</a><a class="lv2" href="#원본-파일-자체를-수정하려면--i-옵션-추가">원본 파일 자체를 수정하려면 -i 옵션 추가</a><a class="lv4" href="#10-셸-스크립트-매개변수argument">10. 셸 스크립트 매개변수(Argument)</a><a class="lv4" href="#11-셸-스크립트-문법-검사-도구">11. 셸 스크립트 문법 검사 도구</a><a class="lv4" href="#12-시스템-취약점-점검-가이드-소개">12. 시스템 취약점 점검 가이드 소개</a></div><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="cur" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="inchap"><a class="lv3" href="#063-loganalyzer-웹-설치-http-오류-코드와-selinux-파일-권한">063. LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</a><a class="lv4" href="#1-loganalyzer-웹-설치-과정-개요">1. LogAnalyzer 웹 설치 과정 개요</a><a class="lv4" href="#2-http-오류-코드">2. HTTP 오류 코드</a><a class="lv4" href="#3-selinux-파일-권한--chcon-명령어">3. SELinux 파일 권한 — chcon 명령어</a><a class="lv4" href="#4-loganalyzer-웹-화면-구성">4. LogAnalyzer 웹 화면 구성</a><a class="lv3" href="#064-loganalyzer-wget-명령어-압축-파일-형식-쉘-스크립트-개념">064. LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</a><a class="lv4" href="#1-loganalyzer-개요">1. LogAnalyzer 개요</a><a class="lv4" href="#2-wget-명령어--셸에서-파일-다운로드">2. wget 명령어 — 셸에서 파일 다운로드</a><a class="lv4" href="#3-압축-파일-형식--tar와-gz">3. 압축 파일 형식 — tar와 gz</a><a class="lv4" href="#4-셸-스크립트shell-script">4. 셸 스크립트(Shell Script)</a><a class="lv4" href="#5-loganalyzer의-웹-디렉토리-구조">5. LogAnalyzer의 웹 디렉토리 구조</a><a class="lv3" href="#066-rsyslog-mysql-패키지db-설정">066. rsyslog-mysql 패키지(DB 설정)</a><a class="lv4" href="#1-로그-저장을-위한-데이터베이스-구조">1. 로그 저장을 위한 데이터베이스 구조</a><a class="lv4" href="#2-생성되는-데이터베이스-구조">2. 생성되는 데이터베이스 구조</a><a class="lv4" href="#3-mariadb-사용자-권한-설정">3. MariaDB 사용자 권한 설정</a><a class="lv4" href="#4-rsyslog-출력-모듈-설정-mysql-연동">4. rsyslog 출력 모듈 설정 (MySQL 연동)</a><a class="lv2" href="#etcrsyslogconf-파일-수정-modload-ommysql--mysql-출력-모듈-로드--ommysqldb서버ipsyslogrsyslogpassword--모든-로그를-db로-전송">/etc/rsyslog.conf 파일 수정 $ModLoad ommysql              ← MySQL 출력 모듈 로드 .   :ommysql:[DB서버IP],syslog,rsyslog,password    ← 모든 로그를 DB로 전송</a><a class="lv3" href="#067-rsyslog를-활용한-로그-전송">067. rsyslog를 활용한 로그 전송</a><a class="lv4" href="#1-중앙-집중형-로그-서버의-필요성">1. 중앙 집중형 로그 서버의 필요성</a><a class="lv4" href="#2-rsyslog-서비스">2. rsyslog 서비스</a><a class="lv4" href="#3-rsyslog-서버-설정">3. rsyslog 서버 설정</a><a class="lv4" href="#4-rsyslog-클라이언트-설정">4. rsyslog 클라이언트 설정</a><a class="lv4" href="#5-네트워크-연결-확인-명령어">5. 네트워크 연결 확인 명령어</a><a class="lv4" href="#6-파이프-명령어">6. 파이프(|) 명령어</a><a class="lv4" href="#7-실시간-로그-모니터링">7. 실시간 로그 모니터링</a><a class="lv3" href="#068-syslog-facility-priority의-개념-로그-레벨-이해">068. Syslog Facility Priority의 개념, 로그 레벨 이해</a><a class="lv4" href="#1-syslog-개요">1. Syslog 개요</a><a class="lv4" href="#2-facility-시설카테고리">2. Facility (시설/카테고리)</a><a class="lv4" href="#3-priority-우선순위심각도">3. Priority (우선순위/심각도)</a><a class="lv4" href="#4-facility와-priority의-조합">4. Facility와 Priority의 조합</a><a class="lv4" href="#5-syslog-설정-원리">5. Syslog 설정 원리</a><a class="lv3" href="#069-시스템-로그-관리-및-분석리눅스-웹-서버">069. 시스템 로그 관리 및 분석(리눅스 웹 서버)</a><a class="lv4" href="#1-로그-관리의-중요성">1. 로그 관리의 중요성</a><a class="lv4" href="#2-웹-서버-로그-구조">2. 웹 서버 로그 구조</a><a class="lv4" href="#3-http-웹-서비스-로그">3. HTTP 웹 서비스 로그</a><a class="lv4" href="#4-기타-서비스-로그">4. 기타 서비스 로그</a><a class="lv4" href="#5-사용자-로그인-기록-파일">5. 사용자 로그인 기록 파일</a><a class="lv4" href="#6-명령어-히스토리">6. 명령어 히스토리</a><a class="lv4" href="#7-secure-로그-파일">7. Secure 로그 파일</a><a class="lv4" href="#8-messages-로그-파일">8. Messages 로그 파일</a><a class="lv4" href="#9-시스로그syslog-관리">9. 시스로그(Syslog) 관리</a><a class="lv4" href="#10-기본-로그-파일-정리">10. 기본 로그 파일 정리</a><a class="lv3" href="#074-리눅스-계정-파일-구조-salt-파일-권한과-umask">074. 리눅스 계정 파일 구조, Salt, 파일 권한과 umask</a><a class="lv4" href="#1-리눅스-계정-관리-개요">1. 리눅스 계정 관리 개요</a><a class="lv4" href="#2-etcpasswd-파일-구조">2. /etc/passwd  파일 구조</a><a class="lv4" href="#3-etcshadow-파일-구조">3. /etc/shadow  파일 구조</a><a class="lv4" href="#4-패스워드-암호화-알고리즘과-솔트salt">4. 패스워드 암호화 알고리즘과 솔트(Salt)</a><a class="lv4" href="#5-파일-및-디렉토리-유형-표기">5. 파일 및 디렉토리 유형 표기</a><a class="lv4" href="#6-파일-권한과-umask">6. 파일 권한과 umask</a><a class="lv4" href="#7-파일-권한-변경-chmod">7. 파일 권한 변경 (chmod)</a><a class="lv4" href="#8-소유주-및-그룹-변경-chown-chgrp">8. 소유주 및 그룹 변경 (chown, chgrp)</a><a class="lv4" href="#9-계정-관리와-스크립트-활용">9. 계정 관리와 스크립트 활용</a><a class="lv3" href="#075-리눅스-기본-명령어-도움말시스템탐색-명령어">075. 리눅스 기본 명령어, 도움말·시스템·탐색 명령어</a><a class="lv4" href="#1-리눅스-명령어-구조">1. 리눅스 명령어 구조</a><a class="lv4" href="#2-도움말-명령어">2. 도움말 명령어</a><a class="lv4" href="#3-시스템-종료-및-재부팅">3. 시스템 종료 및 재부팅</a><a class="lv4" href="#4-history-명령어">4. history 명령어</a><a class="lv4" href="#5-echo-명령어">5. echo 명령어</a><a class="lv4" href="#6-date-명령어">6. date 명령어</a><a class="lv4" href="#7-계정-및-접속-정보-확인-명령어">7. 계정 및 접속 정보 확인 명령어</a><a class="lv4" href="#8-find-명령어">8. find 명령어</a><a class="lv4" href="#9-ls-명령어-주요-옵션">9. ls 명령어 주요 옵션</a><a class="lv4" href="#10-mkdir-명령어---하위-디렉토리-일괄-생성">10. mkdir 명령어 - 하위 디렉토리 일괄 생성</a><a class="lv4" href="#11-rmdir-명령어---빈-디렉토리-삭제">11. rmdir 명령어 - 빈 디렉토리 삭제</a><a class="lv3" href="#077-파일-조작검색출력-명령어-표준-입출력과-리디렉션">077. 파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</a><a class="lv4" href="#1-rm-명령어-파일디렉토리-삭제">1. rm 명령어 (파일·디렉토리 삭제)</a><a class="lv4" href="#2-mv-명령어-이동-및-이름-변경">2. mv 명령어 (이동 및 이름 변경)</a><a class="lv4" href="#3-file-명령어-파일-유형-확인">3. file 명령어 (파일 유형 확인)</a><a class="lv4" href="#4-tac-명령어-역순-출력">4. tac 명령어 (역순 출력)</a><a class="lv4" href="#5-sort-명령어-정렬">5. sort 명령어 (정렬)</a><a class="lv4" href="#6-nmcli-명령어-네트워크-설정-cli">6. nmcli 명령어 (네트워크 설정 CLI)</a><a class="lv4" href="#7-find-명령어-심화--다중-조건-검색">7. find 명령어 심화 — 다중 조건 검색</a><a class="lv4" href="#8-whereis-명령어-명령어-위치-검색">8. whereis 명령어 (명령어 위치 검색)</a><a class="lv4" href="#9-grep-명령어-문자열-검색">9. grep 명령어 (문자열 검색)</a><a class="lv4" href="#10-표준-입출력-스트림">10. 표준 입출력 스트림</a><a class="lv4" href="#11-리디렉션redirection">11. 리디렉션(Redirection)</a><a class="lv3" href="#089-linux-패스워드-정책-파라미터-설정">089. Linux 패스워드 정책 파라미터 설정</a><a class="lv4" href="#1-windows-dns-연동-테스트-확인">1. Windows DNS 연동 테스트 확인</a><a class="lv4" href="#2-linux-머신-전환-및-패스워드-정책-파일-확인">2. Linux 머신 전환 및 패스워드 정책 파일 확인</a><a class="lv4" href="#3-pwqualityconf-주요-파라미터">3. pwquality.conf 주요 파라미터</a><a class="lv2" href="#difok--1">difok = 1</a><a class="lv2" href="#minlen--8">minlen = 8</a><a class="lv4" href="#4-문자-종류별-최소-개수-설정-credit-파라미터">4. 문자 종류별 최소 개수 설정 (Credit 파라미터)</a><a class="lv2" href="#dcredit--1-패스워드에-포함되어야-하는-숫자09의-최소-개수이다-값이-2이면-숫자가-최소-2개-이상-포함되어야-한다">dcredit = 1 패스워드에 포함되어야 하는 숫자(0~9)의 최소 개수이다. 값이 2이면 숫자가 최소 2개 이상 포함되어야 한다.</a><a class="lv2" href="#ucredit--1-패스워드에-포함되어야-하는-영문-대문자의-최소-개수이다-값이-1이면-대문자가-최소-1개-이-상-포함되어야-한다">ucredit = 1 패스워드에 포함되어야 하는 영문 대문자의 최소 개수이다. 값이 1이면 대문자가 최소 1개 이 상 포함되어야 한다.</a><a class="lv2" href="#lcredit--1-패스워드에-포함되어야-하는-영문-소문자의-최소-개수이다-값이-1이면-소문자가-최소-1개-이-상-포함되어야-한다">lcredit = 1 패스워드에 포함되어야 하는 영문 소문자의 최소 개수이다. 값이 1이면 소문자가 최소 1개 이 상 포함되어야 한다.</a><a class="lv2" href="#ocredit--1-패스워드에-포함되어야-하는-특수문자의-최소-개수이다-값이-2이면-특수문자가-최소-2개-이상-포함되어야-한다">ocredit = 1 패스워드에 포함되어야 하는 특수문자의 최소 개수이다. 값이 2이면 특수문자가 최소 2개 이상 포함되어야 한다.</a><a class="lv4" href="#5-추가-복잡도-설정-파라미터">5. 추가 복잡도 설정 파라미터</a><a class="lv2" href="#minclass--0-패스워드를-만들-때-반드시-포함해야-하는-문자-종류숫자-대문자-소문자-특수문자의-최-소-수이다">minclass = 0 패스워드를 만들 때 반드시 포함해야 하는 문자 종류(숫자, 대문자, 소문자, 특수문자)의 최 소 수이다.</a><a class="lv2" href="#maxrepeat--0-동일한-문자가-연달아-나올-수-있는-최대-개수이다-값이-2이면-aa-는-허용되지만-aaa-는-허-용되지-않는다-연속이-아닌-경우예-a3a4a-는-각각-1개로-취급한다">maxrepeat = 0 동일한 문자가 연달아 나올 수 있는 최대 개수이다. 값이 2이면 aa 는 허용되지만 aaa 는 허 용되지 않는다. 연속이 아닌 경우(예: a3a4a )는 각각 1개로 취급한다.</a><a class="lv2" href="#maxclassrepeat--0-같은-문자-종류숫자-대문자-소문자-특수문자가-연속으로-나올-수-있는-최대-개수이다-값-이-2이면-1a-다음에-같은-종류의-문자가-2번-이상-연달아-오면-안-된다-패스워드의-문자-종-류가-매번-달라져야-한다">maxclassrepeat = 0 같은 문자 종류(숫자, 대문자, 소문자, 특수문자)가 연속으로 나올 수 있는 최대 개수이다. 값 이 2이면 1A  다음에 같은 종류의 문자가 2번 이상 연달아 오면 안 된다. 패스워드의 문자 종 류가 매번 달라져야 한다.</a><a class="lv2" href="#gecoscheck--0-etcpasswd-파일의-gecos-필드계정-정보-필드에-포함된-3글자-이상의-단어가-새-패스-워드에-포함되어-있는지-검사한다-잘-사용하지-않는-옵션이다">gecoscheck = 0 /etc/passwd  파일의 GECOS 필드(계정 정보 필드)에 포함된 3글자 이상의 단어가 새 패스 워드에 포함되어 있는지 검사한다. 잘 사용하지 않는 옵션이다.</a><a class="lv2" href="#dictcheck--1-사전dictionary에-있는-단어가-패스워드로-사용되는-것을-방지한다-예를-들어-flower-와-같이-사전에-있는-단어를-패스워드로-설정하면-거부된다-값을-0으로-설정하면-검사를-비활-성화한다">dictcheck = 1 사전(Dictionary)에 있는 단어가 패스워드로 사용되는 것을 방지한다. 예를 들어 flower 와 같이 사전에 있는 단어를 패스워드로 설정하면 거부된다. 값을 0으로 설정하면 검사를 비활 성화한다.</a><a class="lv4" href="#6-pwqualityconf-파라미터-전체-요약">6. pwquality.conf 파라미터 전체 요약</a><a class="lv3" href="#090-pam-인증-설정-및-auth-select-명령어">090. PAM 인증 설정 및 auth-select 명령어</a><a class="lv4" href="#1-etcpamd-디렉토리-개요">1. /etc/pam.d 디렉토리 개요</a><a class="lv4" href="#2-pampwquality-모듈-추가">2. pam_pwquality 모듈 추가</a><a class="lv4" href="#3-auth-select-명령어">3. auth-select 명령어</a><a class="lv4" href="#4-패스워드-정책-적용-권장-방식">4. 패스워드 정책 적용 권장 방식</a><a class="lv3" href="#097-우분투-서버-개요-및-virtualbox-설치-준비">097. 우분투 서버 개요 및 VirtualBox 설치 준비</a><a class="lv4" href="#1-우분투-버전-구분">1. 우분투 버전 구분</a><a class="lv4" href="#2-우분투와-로키-리눅스의-주요-차이점">2. 우분투와 로키 리눅스의 주요 차이점</a><a class="lv4" href="#3-virtualbox-가상-머신-생성-시-주의사항">3. VirtualBox 가상 머신 생성 시 주의사항</a><a class="lv4" href="#4-우분투-서버-네트워크-설정">4. 우분투 서버 네트워크 설정</a><a class="lv4" href="#5-오픈-ssh-서버">5. 오픈 SSH 서버</a><a class="lv4" href="#6-lxd--도커docker-소개">6. LXD / 도커(Docker) 소개</a><a class="lv3" href="#098-우분투-서버-기본-명령-환경-및-네트워크-설정">098. 우분투 서버 기본 명령 환경 및 네트워크 설정</a><a class="lv4" href="#1-리눅스-배포판-계열-비교">1. 리눅스 배포판 계열 비교</a><a class="lv4" href="#2-apt-명령어">2. apt 명령어</a><a class="lv4" href="#3-sudo-명령어">3. sudo 명령어</a><a class="lv4" href="#4-ping-유틸리티-설치">4. ping 유틸리티 설치</a><a class="lv4" href="#5-파일-권한과-sudo의-관계">5. 파일 권한과 sudo의 관계</a><a class="lv4" href="#6-우분투-서버-네트워크-설정-파일">6. 우분투 서버 네트워크 설정 파일</a><a class="lv4" href="#7-icmp와-ping-개념">7. ICMP와 ping 개념</a><a class="lv4" href="#8-dos--ddos-공격-개념">8. DoS / DDoS 공격 개념</a><a class="lv4" href="#9-virtualbox-가상-머신-복제">9. VirtualBox 가상 머신 복제</a><a class="lv4" href="#10-복제-후-정적-ip-설정-변경">10. 복제 후 정적 IP 설정 변경</a><a class="lv3" href="#115-셸-스크립트-기본-문법-및-awksed-텍스트-처리-도구">115. 셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</a><a class="lv4" href="#1-셸shell-개요">1. 셸(Shell) 개요</a><a class="lv4" href="#2-셸-스크립트-개요">2. 셸 스크립트 개요</a><a class="lv4" href="#3-셸-스크립트-기본-구조">3. 셸 스크립트 기본 구조</a><a class="lv2" href="#이-줄은-주석이다-실행되지-않음">이 줄은 주석이다 (실행되지 않음)</a><a class="lv4" href="#4-변수">4. 변수</a><a class="lv4" href="#5-조건문-if">5. 조건문 (if)</a><a class="lv4" href="#6-사용자-입력-받기">6. 사용자 입력 받기</a><a class="lv4" href="#7-반복문">7. 반복문</a><a class="lv4" href="#8-awk">8. AWK</a><a class="lv2" href="#usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만-출력-awk-3-gt-30--print-1-3--usertxt">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만 출력 awk &#x27;$3 &amp;gt;= 30 { print $1, $3 }&#x27; user.txt</a><a class="lv4" href="#9-sed">9. SED</a><a class="lv2" href="#serverconf-파일에서-disabled를-enable로-치환하여-출력-원본-유지-sed-sdisabledenableg-serverconf--원본-파일-자체를-수정하려면--i-옵션-추가-sed--i-sdisabledenableg-serverconf---i-옵션-없이-실행하면-변경된-내용이-화면에만-출력되고-원본-파일은-수정되지-않는-다">server.conf 파일에서 &#x27;disabled&#x27;를 &#x27;enable&#x27;로 치환하여 출력 (원본 유지) sed &#x27;s/disabled/enable/g&#x27; server.conf # 원본 파일 자체를 수정하려면 -i 옵션 추가 sed -i &#x27;s/disabled/enable/g&#x27; server.conf ⚠️ -i  옵션 없이 실행하면 변경된 내용이 화면에만 출력되고 원본 파일은 수정되지 않는 다.</a><a class="lv4" href="#10-셸-스크립트-매개변수argument">10. 셸 스크립트 매개변수(Argument)</a><a class="lv4" href="#11-셸-스크립트-문법-검사-도구">11. 셸 스크립트 문법 검사 도구</a><a class="lv4" href="#12-시스템-취약점-점검-가이드-소개">12. 시스템 취약점 점검 가이드 소개</a></div><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
 </aside>
 <main><div class="chapter-no">CHAPTER 13</div><h1>핵심키워드 · 리눅스 서버 (2/2)</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>063~115강 14편</strong>입니다.
 원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.</p>
 <blockquote>
-<p>PDF에서 뽑은 텍스트라 원문의 <strong>표는 칸 구분이 풀려</strong> 항목이 줄마다 나열됩니다.
-내용은 빠지지 않았으나 표 모양은 복원하지 못했습니다.</p>
+<p>원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어
+(188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.</p>
 </blockquote>
 <h3 id="063-loganalyzer-웹-설치-http-오류-코드와-selinux-파일-권한">063. LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</h3>
 <p>코드와 SELinux 파일 권한</p>
 <h4 id="1-loganalyzer-웹-설치-과정-개요">1. LogAnalyzer 웹 설치 과정 개요</h4>
 <h5 id="1-1">1-1. 설치 파일 역할 구분</h5>
-<ul>
-<li>파일명</li>
-<li>역할</li>
-<li>install.php</li>
-<li>최초 설치 시 웹 브라우저에서 단계별로 진행하는 설치 스크립트</li>
-<li>index.php</li>
-<li>설치 완료 후 LogAnalyzer 메인 화면 진입점</li>
-<li>config.php</li>
-<li>설치 과정에서 생성되는 환경설정 파일</li>
-<li>config.sh</li>
-<li>config.php  파일을 생성하고 권한을 설정하는 셸 스크립트</li>
-<li>설치 중 오류가 발생하여 처음부터 다시 시작하려면 config.php  파일을 삭제한 후</li>
-<li>config.sh  스크립트를 다시 실행하면 된다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>install.php</td>
+<td>최초 설치 시 웹 브라우저에서 단계별로 진행하는 설치 스크립트</td>
+</tr>
+<tr>
+<td>index.php</td>
+<td>설치 완료 후 LogAnalyzer 메인 화면 진입점</td>
+</tr>
+<tr>
+<td>config.php</td>
+<td>설치 과정에서 생성되는 환경설정 파일</td>
+</tr>
+<tr>
+<td>config.sh</td>
+<td>config.php 파일을 생성하고 권한을 설정하는 셸 스크립트</td>
+</tr>
+</tbody>
+</table></div>
+<p>설치 중 오류가 발생하여 처음부터 다시 시작하려면 config.php  파일을 삭제한 후 config.sh  스크립트를 다시 실행하면 된다.</p>
 <h4 id="2-http-오류-코드">2. HTTP 오류 코드</h4>
 <h5 id="2-1-http-500">2-1. HTTP 500 오류</h5>
-<ul>
-<li>HTTP 500 오류는 서버 측 오류를 의미한다. 클라이언트(브라우저)가 아닌 서버 자체에서</li>
-<li>문제가 발생한 경우에 반환된다.</li>
-<li>오류 코드</li>
-<li>의미</li>
-<li>원인</li>
-<li>500 Internal Server Error</li>
-<li>서버 측 오류</li>
-<li>설정 오류, DB 연결 실패, 권한 문제 등</li>
-<li>HTTP 500 오류 발생 시 httpd 서비스와 MariaDB 서비스를 재시작하고 설정을 재확인</li>
-<li>해야 한다.</li>
-</ul>
+<p>HTTP 500 오류는 서버 측 오류를 의미한다. 클라이언트(브라우저)가 아닌 서버 자체에서 문제가 발생한 경우에 반환된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>오류 코드</th>
+<th>의미</th>
+<th>원인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500 Internal Server Error</td>
+<td>서버 측 오류</td>
+<td>설정 오류, DB 연결 실패, 권한 문제 등</td>
+</tr>
+</tbody>
+</table></div>
+<p>HTTP 500 오류 발생 시 httpd 서비스와 MariaDB 서비스를 재시작하고 설정을 재확인 해야 한다.</p>
 <h4 id="3-selinux-파일-권한--chcon-명령어">3. SELinux 파일 권한 — chcon 명령어</h4>
 <h5 id="3-1-chcon">3-1. chcon 개요</h5>
-<p>일반적인 파일 권한( chmod )과 별도로, SELinux(보안 모듈)는 파일에 대한 추가적인 보안 컨
-텍스트를 관리한다. 웹 서비스가 특정 파일에 쓰기 작업을 수행하려면 SELinux 컨텍스트 권
-한도 적절하게 설정되어야 한다.
-chcon -t httpd_sys_script_rw_t config.php    ← 웹 서비스에 c
-onfig.php 읽기·쓰기 권한 부여
-옵션
-의미
--t
-SELinux 타입 지정
-httpd_sys_script_rw_t
-웹 서비스(httpd)가 읽기·쓰기 가능한 타입
-chmod 로 파일 권한을 변경해도 SELinux 컨텍스트가 맞지 않으면 웹 서비스에서 파일에
-쓸 수 없다. 이 경우 chcon  명령으로 SELinux 컨텍스트를 추가로 설정해야 한다.</p>
+<p>일반적인 파일 권한( chmod )과 별도로, SELinux(보안 모듈)는 파일에 대한 추가적인 보안 컨 텍스트를 관리한다. 웹 서비스가 특정 파일에 쓰기 작업을 수행하려면 SELinux 컨텍스트 권 한도 적절하게 설정되어야 한다.</p>
+<p>chcon -t httpd_sys_script_rw_t config.php    ← 웹 서비스에 c onfig.php 읽기·쓰기 권한 부여</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-t</td>
+<td>SELinux 타입 지정</td>
+</tr>
+<tr>
+<td>httpd sys script rw t<br>_ _ _ _</td>
+<td>웹 서비스(httpd)가 읽기·쓰기 가능한 타입</td>
+</tr>
+</tbody>
+</table></div>
+<p>chmod 로 파일 권한을 변경해도 SELinux 컨텍스트가 맞지 않으면 웹 서비스에서 파일에 쓸 수 없다. 이 경우 chcon  명령으로 SELinux 컨텍스트를 추가로 설정해야 한다.</p>
 <h4 id="4-loganalyzer-웹-화면-구성">4. LogAnalyzer 웹 화면 구성</h4>
 <h5 id="4-1">4-1. 로그 목록 화면</h5>
-<ul>
-<li>LogAnalyzer 설치 완료 후 메인 화면에는 수집된 로그가 시간 순서로 표시된다. 위로 갈수</li>
-<li>록 최신 로그다.</li>
-<li>각 로그 항목에는 다음 정보가 표시된다.</li>
-<li>항목</li>
-<li>설명</li>
-<li>날짜/시간</li>
-<li>로그 발생 시각</li>
-<li>호스트 이름</li>
-<li>로그가 발생한 시스템 (클라이언트 호스트 네임)</li>
-<li>Facility</li>
-<li>로그의 분류 (cron, sshd 등)</li>
-<li>Severity</li>
-<li>로그의 심각도 (Priority)</li>
-<li>메시지</li>
-<li>로그 내용</li>
-</ul>
+<p>LogAnalyzer 설치 완료 후 메인 화면에는 수집된 로그가 시간 순서로 표시된다. 위로 갈수 록 최신 로그다.</p>
+<p>각 로그 항목에는 다음 정보가 표시된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>날짜/시간</td>
+<td>로그 발생 시각</td>
+</tr>
+<tr>
+<td>호스트 이름</td>
+<td>로그가 발생한 시스템 (클라이언트 호스트 네임)</td>
+</tr>
+<tr>
+<td>Facility</td>
+<td>로그의 분류 (cron, sshd 등)</td>
+</tr>
+<tr>
+<td>Severity</td>
+<td>로그의 심각도 (Priority)</td>
+</tr>
+<tr>
+<td>메시지</td>
+<td>로그 내용</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-2">4-2. 로그 화면 설정</h5>
-<p>페이지당 표시할 로그 메시지 수를 설정할 수 있다.
-자동 새로고침(Auto-reload) 주기를 설정할 수 있다.</p>
+<p>페이지당 표시할 로그 메시지 수를 설정할 수 있다.</p>
+<p>자동 새로고침(Auto-reload) 주기를 설정할 수 있다.</p>
 <hr />
 <h3 id="064-loganalyzer-wget-명령어-압축-파일-형식-쉘-스크립트-개념">064. LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</h3>
 <p>파일 형식, 쉘 스크립트 개념</p>
 <h4 id="1-loganalyzer-개요">1. LogAnalyzer 개요</h4>
 <h5 id="1-1-loganalyzer">1-1. LogAnalyzer란</h5>
-<p>LogAnalyzer는 PHP 기반의 웹 애플리케이션으로, MariaDB에 저장된 rsyslog 로그 데이
-터를 웹 인터페이스에서 시각화하여 보여준다.</p>
+<p>LogAnalyzer는 PHP 기반의 웹 애플리케이션으로, MariaDB에 저장된 rsyslog 로그 데이 터를 웹 인터페이스에서 시각화하여 보여준다.</p>
 <h5 id="1-2">1-2. 필요 구성 요소</h5>
-<ul>
-<li>LogAnalyzer가 정상적으로 동작하려면 다음 요소가 갖춰져 있어야 한다.</li>
-<li>요소</li>
-<li>설명</li>
-<li>APM (Apache, PHP, MariaDB)</li>
-<li>웹 서버 기반 환경</li>
-<li>PHP-MySQL 연결 패키지</li>
-<li>PHP와 데이터베이스를 연결하기 위한 패키지</li>
-<li>httpd (Apache) 서비스</li>
-<li>웹 서비스가 실행 중이어야 웹 페이지 접근 가능</li>
-</ul>
+<p>LogAnalyzer가 정상적으로 동작하려면 다음 요소가 갖춰져 있어야 한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>요소</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APM (Apache, PHP, MariaDB)</td>
+<td>웹 서버 기반 환경</td>
+</tr>
+<tr>
+<td>PHP-MySQL 연결 패키지</td>
+<td>PHP와 데이터베이스를 연결하기 위한 패키지</td>
+</tr>
+<tr>
+<td>httpd (Apache) 서비스</td>
+<td>웹 서비스가 실행 중이어야 웹 페이지 접근 가능</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="2-wget-명령어--셸에서-파일-다운로드">2. wget 명령어 — 셸에서 파일 다운로드</h4>
 <h5 id="2-1-wget">2-1. wget 개요</h5>
-<p>wget 은 웹 브라우저 없이 셸(CLI)에서 파일을 다운로드할 수 있는 명령어다. GUI 환경이 없
-는 서버에서 파일을 내려받을 때 사용한다.
-dnf install -y wget           ← wget이 없을 경우 설치
-wget [다운로드 URL]           ← 현재 작업 디렉토리에 다운로드
-wget -P /tmp [다운로드 URL]   ← 다운로드 경로를 /tmp로 지정
--P  옵션을 사용하면 다운로드 경로를 직접 지정할 수 있다. 지정하지 않으면 현재 작업
-디렉토리에 저장된다.</p>
+<p>wget 은 웹 브라우저 없이 셸(CLI)에서 파일을 다운로드할 수 있는 명령어다. GUI 환경이 없 는 서버에서 파일을 내려받을 때 사용한다.</p>
+<p>dnf install -y wget           ← wget이 없을 경우 설치 wget [다운로드 URL]           ← 현재 작업 디렉토리에 다운로드 wget -P /tmp [다운로드 URL]   ← 다운로드 경로를 /tmp로 지정 -P  옵션을 사용하면 다운로드 경로를 직접 지정할 수 있다. 지정하지 않으면 현재 작업 디렉토리에 저장된다.</p>
 <h4 id="3-압축-파일-형식--tar와-gz">3. 압축 파일 형식 — tar와 gz</h4>
 <h5 id="3-1-tar">3-1. tar 파일</h5>
-<p>tar 는 여러 개의 파일이나 디렉토리를 하나의 파일로 묶는 것이다. 압축은 아니며, 묶기만
-한다.</p>
+<p>tar 는 여러 개의 파일이나 디렉토리를 하나의 파일로 묶는 것이다. 압축은 아니며, 묶기만 한다.</p>
 <h5 id="3-2-gz-gzip">3-2. gz (gzip) 파일</h5>
 <p>.gz  확장자는 gzip 형식으로 압축된 파일을 의미한다.</p>
 <h5 id="3-3-targz">3-3. tar.gz 파일</h5>
-<ul>
-<li>확장자</li>
-<li>의미</li>
-<li>.tar</li>
-<li>여러 파일/디렉토리가 하나로 묶여 있음</li>
-<li>.gz</li>
-<li>gzip으로 압축되어 있음</li>
-<li>.tar.gz</li>
-<li>묶기(tar) + 압축(gz)이 동시에 적용된 아카이브</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>확장자</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.tar</td>
+<td>여러 파일/디렉토리가 하나로 묶여 있음</td>
+</tr>
+<tr>
+<td>.gz</td>
+<td>gzip으로 압축되어 있음</td>
+</tr>
+<tr>
+<td>.tar.gz</td>
+<td>묶기(tar) + 압축(gz)이 동시에 적용된 아카이브</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="4-셸-스크립트shell-script">4. 셸 스크립트(Shell Script)</h4>
 <h5 id="4-1_1">4-1. 셸 스크립트 개요</h5>
-<p>.sh  확장자로 끝나는 파일은 셸 스크립트 파일이다. SQL 스크립트와 마찬가지로, 스크립트
-란 파일 안에 있는 명령어들을 위에서부터 한 줄씩 순서대로 일괄 처리하는 것을 의미한다.</p>
+<p>.sh  확장자로 끝나는 파일은 셸 스크립트 파일이다. SQL 스크립트와 마찬가지로, 스크립트 란 파일 안에 있는 명령어들을 위에서부터 한 줄씩 순서대로 일괄 처리하는 것을 의미한다.</p>
 <h5 id="4-2-shebang">4-2. 쉬뱅(Shebang)</h5>
-<p>셸 스크립트 파일의 맨 첫 줄에는 #!/bin/sh  또는 #!/bin/bash 와 같이 사용할 셸을 정의하는
-구문이 온다. 이를 쉬뱅(shebang) 또는 c 방(#!) 이라고 한다.</p>
-<h1 id="binsh-shebang">!/bin/sh      ← 사용할 셸 정의 (shebang)</h1>
-<h2 id="이후-스크립트-내용">이후 스크립트 내용</h2>
+<p>셸 스크립트 파일의 맨 첫 줄에는 #!/bin/sh  또는 #!/bin/bash 와 같이 사용할 셸을 정의하는 구문이 온다. 이를 쉬뱅(shebang) 또는 c 방(#!) 이라고 한다.</p>
+<h1 id="binsh-shebang">!/bin/sh      ← 사용할 셸 정의 (shebang) # 이후 스크립트 내용</h1>
 <h5 id="4-3-configsh">4-3. config.sh의 역할</h5>
-<p>LogAnalyzer 설치 패키지 안의 config.sh  스크립트를 실행하면 config.php  파일을 생성
-하고 적절한 권한을 자동으로 설정한다.</p>
+<p>LogAnalyzer 설치 패키지 안의 config.sh  스크립트를 실행하면 config.php  파일을 생성 하고 적절한 권한을 자동으로 설정한다.</p>
 <h4 id="5-loganalyzer의-웹-디렉토리-구조">5. LogAnalyzer의 웹 디렉토리 구조</h4>
 <h5 id="5-1">5-1. 웹 서비스 루트 디렉토리</h5>
-<p>웹 서비스의 파일은 기본적으로 /var/www/html/  경로 아래에 위치해야 한다.
-/var/www/html/loganalyzer/    ← LogAnalyzer 파일이 위치할 디
-렉토리</p>
+<p>웹 서비스의 파일은 기본적으로 /var/www/html/  경로 아래에 위치해야 한다.</p>
+<p>/var/www/html/loganalyzer/    ← LogAnalyzer 파일이 위치할 디 렉토리</p>
 <h5 id="5-2">5-2. 주요 파일</h5>
-<ul>
-<li>파일명</li>
-<li>역할</li>
-<li>install.php</li>
-<li>최초 설치 시 웹 브라우저에서 실행하는 설치 스크립트</li>
-<li>index.php</li>
-<li>설치 완료 후 LogAnalyzer 시작 페이지</li>
-<li>config.php</li>
-<li>LogAnalyzer 환경설정 파일 (config.sh 실행으로 생성됨)</li>
-<li>웹 서버(httpd) 서비스가 실행 중이어야 웹 브라우저에서 해당 파일에 접근할 수 있다.</li>
-<li>httpd가 동작하지 않으면 웹 페이지 자체가 열리지 않는다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>install.php</td>
+<td>최초 설치 시 웹 브라우저에서 실행하는 설치 스크립트</td>
+</tr>
+<tr>
+<td>index.php</td>
+<td>설치 완료 후 LogAnalyzer 시작 페이지</td>
+</tr>
+<tr>
+<td>config.php</td>
+<td>LogAnalyzer 환경설정 파일 (config.sh 실행으로 생성됨)</td>
+</tr>
+</tbody>
+</table></div>
+<p>웹 서버(httpd) 서비스가 실행 중이어야 웹 브라우저에서 해당 파일에 접근할 수 있다. httpd가 동작하지 않으면 웹 페이지 자체가 열리지 않는다.</p>
 <hr />
 <h3 id="066-rsyslog-mysql-패키지db-설정">066. rsyslog-mysql 패키지(DB 설정)</h3>
 <h4 id="1-로그-저장을-위한-데이터베이스-구조">1. 로그 저장을 위한 데이터베이스 구조</h4>
 <h5 id="1-1-db">1-1. 로그 저장에 필요한 DB 구조</h5>
-<p>로그 데이터를 MariaDB에 저장하려면 다음과 같은 구조가 필요하다.
-데이터베이스 이름 (syslog)
-└── 테이블 (SystemEvents, SystemEventsProperties)
-    └── 필드 (id, facility, priority, message ...)
-        └── 실제 로그 데이터</p>
+<p>로그 데이터를 MariaDB에 저장하려면 다음과 같은 구조가 필요하다.</p>
+<p>데이터베이스 이름 (syslog)</p>
+<p>└── 테이블 (SystemEvents, SystemEventsProperties)</p>
+<p>└── 필드 (id, facility, priority, message ...) └── 실제 로그 데이터</p>
 <h5 id="1-2-createdbsql">1-2. createdb.sql 스크립트</h5>
-<p>rsyslog-mysql  패키지를 설치하면 DB 구조를 자동으로 생성하는 SQL 스크립트가 함께 제
-공된다.
-/usr/share/doc/rsyslog-mysql/createDB.sql    ← DB 자동 생성
-스크립트 위치
-기본적으로 패키지 설치 시 usr/share/doc/  경로에 관련 파일들이 저장된다.
-스크립트는 위에서부터 한 줄씩 순서대로 처리되며, 이와 같이 일괄적으로 처리되는 파일을
-스크립트라고 한다.</p>
+<p>rsyslog-mysql  패키지를 설치하면 DB 구조를 자동으로 생성하는 SQL 스크립트가 함께 제 공된다.</p>
+<p>/usr/share/doc/rsyslog-mysql/createDB.sql    ← DB 자동 생성 스크립트 위치 기본적으로 패키지 설치 시 usr/share/doc/  경로에 관련 파일들이 저장된다.</p>
+<p>스크립트는 위에서부터 한 줄씩 순서대로 처리되며, 이와 같이 일괄적으로 처리되는 파일을 스크립트라고 한다.</p>
 <h4 id="2-생성되는-데이터베이스-구조">2. 생성되는 데이터베이스 구조</h4>
 <h5 id="2-1-sql">2-1. 생성 SQL 개요</h5>
-<p>CREATE DATABASE syslog;        ← syslog 데이터베이스 생성
-USE syslog;                    ← syslog 데이터베이스로 이동
-CREATE TABLE SystemEvents ...  ← 로그 저장용 테이블 생성</p>
-<p>CREATE TABLE SystemEventsProperties ...  ← 이벤트 속성 저장
-테이블 생성</p>
+<p>CREATE DATABASE syslog;        ← syslog 데이터베이스 생성 USE syslog;                    ← syslog 데이터베이스로 이동 CREATE TABLE SystemEvents ...  ← 로그 저장용 테이블 생성 CREATE TABLE SystemEventsProperties ...  ← 이벤트 속성 저장 테이블 생성</p>
 <h5 id="2-2">2-2. 생성되는 테이블 구조</h5>
-<ul>
-<li>테이블명</li>
-<li>주요 필드</li>
-<li>설명</li>
-<li>SystemEvents</li>
-<li>id, customerID, facility, priority, message</li>
-<li>로그 메시지 본체 저</li>
-<li>장</li>
-<li>SystemEventsProperties</li>
-<li>id, systemEventID, paramName,</li>
-<li>paramValue</li>
-<li>이벤트 부가 속성 저</li>
-<li>장</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>테이블명</th>
+<th>주요 필드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SystemEvents</td>
+<td>id, customerID, facility, priority, message</td>
+<td>로그 메시지 본체 저<br>장</td>
+</tr>
+<tr>
+<td>SystemEventsProperties</td>
+<td>id, systemEventID, paramName,<br>paramValue</td>
+<td>이벤트 부가 속성 저<br>장</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="2-3-auto-increment">2-3. auto-increment 개념</h5>
-<p>SQL에서 AUTO_INCREMENT 를 지정하면 id 값이 레코드가 추가될 때마다 자동으로 증가한다(1
-→ 2 → 3 → ...). 이를 통해 중복 없이 고유한 식별자를 유지할 수 있다.
-increment 는 증가, decrement 는 감소를 의미한다. AUTO_INCREMENT 는 자동 증가를 나타낸
-다.</p>
+<p>SQL에서 AUTO_INCREMENT 를 지정하면 id 값이 레코드가 추가될 때마다 자동으로 증가한다(1 → 2 → 3 → ...). 이를 통해 중복 없이 고유한 식별자를 유지할 수 있다.</p>
+<p>increment 는 증가, decrement 는 감소를 의미한다. AUTO_INCREMENT 는 자동 증가를 나타낸 다.</p>
 <h4 id="3-mariadb-사용자-권한-설정">3. MariaDB 사용자 권한 설정</h4>
 <h5 id="3-1-rsyslog">3-1. rsyslog 전용 사용자 생성</h5>
-<ul>
-<li>rsyslog가 MariaDB에 접속하여 로그를 저장하려면 전용 사용자 계정을 생성하고 적절한</li>
-<li>권한을 부여해야 한다.</li>
-<li>GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'localhost' I</li>
-<li>DENTIFIED BY 'password';</li>
-<li>구성 요소</li>
-<li>의미</li>
-<li>ALL PRIVILEGES ON syslog.*</li>
-<li>syslog 데이터베이스의 모든 권한 부여</li>
-<li>'rsyslog'@'localhost'</li>
-<li>사용자 이름은 rsyslog, 로컬에서만 접속 가능</li>
-<li>IDENTIFIED BY 'password'</li>
-<li>해당 사용자의 패스워드 설정</li>
-<li>⚠️ 실제 운영 환경에서는 패스워드를 충분히 복잡하게 설정해야 한다.</li>
-</ul>
+<p>rsyslog가 MariaDB에 접속하여 로그를 저장하려면 전용 사용자 계정을 생성하고 적절한 권한을 부여해야 한다.</p>
+<p>GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'localhost' I DENTIFIED BY 'password';</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALL PRIVILEGES ON syslog.*</td>
+<td>syslog 데이터베이스의 모든 권한 부여</td>
+</tr>
+<tr>
+<td>'rsyslog'@'localhost'</td>
+<td>사용자 이름은 rsyslog, 로컬에서만 접속 가능</td>
+</tr>
+<tr>
+<td>IDENTIFIED BY 'password'</td>
+<td>해당 사용자의 패스워드 설정</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ 실제 운영 환경에서는 패스워드를 충분히 복잡하게 설정해야 한다.</p>
 <h5 id="3-2-db">3-2. 로그 서버와 DB 서버가 분리된 경우</h5>
-<p>로그 서버와 DB가 서로 다른 시스템에 있다면 @'localhost'  대신 DB 서버의 IP 주소를 지
-정해야 한다.
-GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'[DB서버IP]'
-IDENTIFIED BY 'password';</p>
+<p>로그 서버와 DB가 서로 다른 시스템에 있다면 @'localhost'  대신 DB 서버의 IP 주소를 지 정해야 한다.</p>
+<p>GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'[DB서버IP]' IDENTIFIED BY 'password';</p>
 <h4 id="4-rsyslog-출력-모듈-설정-mysql-연동">4. rsyslog 출력 모듈 설정 (MySQL 연동)</h4>
 <h5 id="4-1-rsyslogconf">4-1. rsyslog.conf 출력 모듈 추가</h5>
-<ul>
-<li>rsyslog가 MariaDB로 로그를 보내도록 설정 파일에 출력 모듈을 추가한다.</li>
-<li>
-<h1 id="etcrsyslogconf">/etc/rsyslog.conf 파일 수정</h1>
-</li>
-<li>$ModLoad ommysql              ← MySQL 출력 모듈 로드</li>
-<li><em>.</em>   :ommysql:[DB서버IP],syslog,rsyslog,password    ← 모든</li>
-<li>로그를 DB로 전송</li>
-<li>구성 요소</li>
-<li>의미</li>
-<li>ommysql</li>
-<li>rsyslog의 MySQL 출력 모듈 이름</li>
-<li>[DB서버IP]</li>
-<li>DB가 로컬이면 localhost , 원격이면 해당 IP 입력</li>
-<li>syslog</li>
-<li>로그가 저장될 데이터베이스 이름</li>
-<li>DB 접속 사용자 이름</li>
-<li>password</li>
-<li>DB 사용자 패스워드</li>
-</ul>
+<p>rsyslog가 MariaDB로 로그를 보내도록 설정 파일에 출력 모듈을 추가한다.</p>
+<h2 id="etcrsyslogconf-파일-수정-modload-ommysql--mysql-출력-모듈-로드--ommysqldb서버ipsyslogrsyslogpassword--모든-로그를-db로-전송">/etc/rsyslog.conf 파일 수정 $ModLoad ommysql              ← MySQL 출력 모듈 로드 <em>.</em>   :ommysql:[DB서버IP],syslog,rsyslog,password    ← 모든 로그를 DB로 전송</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ommysql</td>
+<td>rsyslog의 MySQL 출력 모듈 이름</td>
+</tr>
+<tr>
+<td>[DB서버IP]</td>
+<td>DB가 로컬이면 localhost , 원격이면 해당 IP 입력</td>
+</tr>
+<tr>
+<td>syslog</td>
+<td>로그가 저장될 데이터베이스 이름</td>
+</tr>
+<tr>
+<td>rsyslog</td>
+<td>DB 접속 사용자 이름</td>
+</tr>
+<tr>
+<td>password</td>
+<td>DB 사용자 패스워드</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-2-mysql">4-2. MySQL 포트 방화벽 허용</h5>
-<p>firewall-cmd --permanent --add-port=3306/tcp    ← MySQL 기
-본 포트 허용
-firewall-cmd --reload                           ← 방화벽 설
-정 적용</p>
+<p>firewall-cmd --permanent --add-port=3306/tcp    ← MySQL 기 본 포트 허용 firewall-cmd --reload                           ← 방화벽 설 정 적용</p>
 <hr />
 <h3 id="067-rsyslog를-활용한-로그-전송">067. rsyslog를 활용한 로그 전송</h3>
 <h4 id="1-중앙-집중형-로그-서버의-필요성">1. 중앙 집중형 로그 서버의 필요성</h4>
 <h5 id="1-1_1">1-1. 로컬 로그 관리의 한계</h5>
-<p>로그는 해킹 분석 및 시스템 분석 시 가장 필요한 데이터다. 그러나 각 시스템에서만 로그가
-저장된다면 다음과 같은 문제가 발생한다.
-cat , last  등의 명령어를 통해 그때그때마다 개별 시스템에서 직접 확인해야 하므로
-관리가 어렵다.
-로그가 분산되어 있어 통합 분석이 불가능하다.</p>
+<p>로그는 해킹 분석 및 시스템 분석 시 가장 필요한 데이터다. 그러나 각 시스템에서만 로그가 저장된다면 다음과 같은 문제가 발생한다.</p>
+<p>cat , last  등의 명령어를 통해 그때그때마다 개별 시스템에서 직접 확인해야 하므로 관리가 어렵다.</p>
+<p>로그가 분산되어 있어 통합 분석이 불가능하다.</p>
 <h5 id="1-2_1">1-2. 중앙 집중형 로그 서버의 구조</h5>
-<ul>
-<li>이러한 문제를 해결하기 위해 로그 서버를 별도로 구축하여 클라이언트에서 발생하는 로그</li>
-<li>를 실시간으로 수집한다. 구성 흐름은 다음과 같다.</li>
-<li>단계</li>
-<li>구성 요소</li>
-<li>역할</li>
-<li>1단계</li>
-<li>클라이언트 (rsyslog)</li>
-<li>이벤트 발생 → 로그를 서버로 전송</li>
-<li>2단계</li>
-<li>로그 서버 (rsyslog)</li>
-<li>클라이언트 로그를 수신하여 DB에 저장</li>
-<li>3단계</li>
-<li>데이터베이스 (MariaDB)</li>
-<li>로그를 구조화하여 저장</li>
-<li>4단계</li>
-<li>웹 인터페이스 (LogAnalyzer)</li>
-<li>DB의 로그를 시각화하여 제공</li>
-</ul>
+<p>이러한 문제를 해결하기 위해 로그 서버를 별도로 구축하여 클라이언트에서 발생하는 로그 를 실시간으로 수집한다. 구성 흐름은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>구성 요소</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1단계</td>
+<td>클라이언트 (rsyslog)</td>
+<td>이벤트 발생 → 로그를 서버로 전송</td>
+</tr>
+<tr>
+<td>2단계</td>
+<td>로그 서버 (rsyslog)</td>
+<td>클라이언트 로그를 수신하여 DB에 저장</td>
+</tr>
+<tr>
+<td>3단계</td>
+<td>데이터베이스 (MariaDB)</td>
+<td>로그를 구조화하여 저장</td>
+</tr>
+<tr>
+<td>4단계</td>
+<td>웹 인터페이스 (LogAnalyzer)</td>
+<td>DB의 로그를 시각화하여 제공</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="1-3">1-3. 로그 서버 활용의 장점</h5>
-<p>DB에 저장되므로 SQL 질의나 웹 인터페이스를 통해 언제든지 로그를 조회·검색할 수 있다.
-또한 로그를 시각화하여 관리자가 더 효율적으로 로그를 분석할 수 있다. 향후 SIEM(보안
-정보 및 이벤트 관리) 솔루션으로 발전 가능하다.
-⚠️ 1단계(클라이언트 → 서버) 연결이 확인되지 않으면 이후 DB 저장, 웹 시각화 작업이
-모두 의미 없다. 단계별 확인이 필수다.</p>
+<p>DB에 저장되므로 SQL 질의나 웹 인터페이스를 통해 언제든지 로그를 조회·검색할 수 있다. 또한 로그를 시각화하여 관리자가 더 효율적으로 로그를 분석할 수 있다. 향후 SIEM(보안 정보 및 이벤트 관리) 솔루션으로 발전 가능하다.</p>
+<p>⚠️ 1단계(클라이언트 → 서버) 연결이 확인되지 않으면 이후 DB 저장, 웹 시각화 작업이 모두 의미 없다. 단계별 확인이 필수다.</p>
 <h5 id="1-4">1-4. 백업 로그 서버</h5>
-<p>로그는 중요하기 때문에 주 로그 서버 외에 백업 로그 서버를 추가로 구성하여 이중화하는
-것이 일반적이다.</p>
+<p>로그는 중요하기 때문에 주 로그 서버 외에 백업 로그 서버를 추가로 구성하여 이중화하는 것이 일반적이다.</p>
 <h4 id="2-rsyslog-서비스">2. rsyslog 서비스</h4>
 <h5 id="2-1">2-1. 개요</h5>
-<p>rsyslog는 클라이언트와 서버 간에 로그를 전송하는 서비스다. 서버와 클라이언트 양쪽 모
-두에 공통으로 설치 및 실행되어야 한다.</p>
+<p>rsyslog는 클라이언트와 서버 간에 로그를 전송하는 서비스다. 서버와 클라이언트 양쪽 모 두에 공통으로 설치 및 실행되어야 한다.</p>
 <h5 id="2-2_1">2-2. 설치 패키지</h5>
-<p>dnf install -y rsyslog rsyslog-doc    ← 서버·클라이언트 공통
-설치</p>
+<p>dnf install -y rsyslog rsyslog-doc    ← 서버·클라이언트 공통 설치</p>
 <h5 id="2-3">2-3. 서비스 관리</h5>
-<p>systemctl start rsyslog     ← rsyslog 서비스 시작
-systemctl enable rsyslog    ← 재부팅 후에도 자동 실행 (영구 적
-용)
-enable 은 재부팅 이후에도 해당 서비스가 자동으로 시작되도록 등록한다. permanent 와
-같은 의미다.</p>
+<p>systemctl start rsyslog     ← rsyslog 서비스 시작 systemctl enable rsyslog    ← 재부팅 후에도 자동 실행 (영구 적 용)</p>
+<p>enable 은 재부팅 이후에도 해당 서비스가 자동으로 시작되도록 등록한다. permanent 와 같은 의미다.</p>
 <h4 id="3-rsyslog-서버-설정">3. rsyslog 서버 설정</h4>
 <h5 id="3-1">3-1. 설정 파일 위치</h5>
-<ul>
-<li>/etc/rsyslog.conf    ← rsyslog 주 환경설정 파일</li>
-<li>설정 파일은 다음과 같은 섹션으로 구성된다.</li>
-<li>섹션</li>
-<li>설명</li>
-<li>GLOBAL DIRECTIVES</li>
-<li>전역 설정</li>
-<li>MODULES</li>
-<li>입출력 모듈 설정</li>
-<li>RULES</li>
-<li>로그 저장 규칙 설정</li>
-</ul>
+<p>/etc/rsyslog.conf    ← rsyslog 주 환경설정 파일 설정 파일은 다음과 같은 섹션으로 구성된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>섹션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOBAL DIRECTIVES</td>
+<td>전역 설정</td>
+</tr>
+<tr>
+<td>MODULES</td>
+<td>입출력 모듈 설정</td>
+</tr>
+<tr>
+<td>RULES</td>
+<td>로그 저장 규칙 설정</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="3-2">3-2. 서버 입력 모듈 설정</h5>
 <p>서버에서 클라이언트의 로그를 수신하려면 MODULES  섹션에 아래 내용을 추가한다.</p>
-<p>$ModLoad imtcp               ← TCP 입력 모듈 로드
-$InputTCPServerRun 514       ← TCP 514번 포트로 로그 수신 대기
-$ModLoad imudp               ← UDP 입력 모듈 로드
-$UDPServerRun 514            ← UDP 514번 포트로 로그 수신 대기
-⚠️ 대소문자를 정확하게 입력해야 한다. $ModLoad , imtcp , $InputTCPServerRun  모두 대
-소문자 구분이 있다.</p>
+<p>$ModLoad imtcp               ← TCP 입력 모듈 로드 $InputTCPServerRun 514       ← TCP 514번 포트로 로그 수신 대기 $ModLoad imudp               ← UDP 입력 모듈 로드 $UDPServerRun 514            ← UDP 514번 포트로 로그 수신 대기 ⚠️ 대소문자를 정확하게 입력해야 한다. $ModLoad , imtcp , $InputTCPServerRun  모두 대 소문자 구분이 있다.</p>
 <h5 id="3-3-rsyslog">3-3. rsyslog 전송 포트</h5>
-<p>rsyslog는 기본적으로 514번 포트를 사용하며 TCP와 UDP 두 가지 프로토콜을 지원한다.
-서버의 방화벽에서 해당 포트를 허용해야 한다.
-firewall-cmd --permanent --add-port=514/tcp    ← TCP 514번
-허용
-firewall-cmd --permanent --add-port=514/udp    ← UDP 514번
-허용
-firewall-cmd --reload                          ← 방화벽 설정
-적용</p>
+<p>rsyslog는 기본적으로 514번 포트를 사용하며 TCP와 UDP 두 가지 프로토콜을 지원한다. 서버의 방화벽에서 해당 포트를 허용해야 한다.</p>
+<p>firewall-cmd --permanent --add-port=514/tcp    ← TCP 514번 허용 firewall-cmd --permanent --add-port=514/udp    ← UDP 514번 허용 firewall-cmd --reload                          ← 방화벽 설정 적용</p>
 <h4 id="4-rsyslog-클라이언트-설정">4. rsyslog 클라이언트 설정</h4>
 <h5 id="4-1_2">4-1. 클라이언트 설정 내용</h5>
-<p>클라이언트도 동일하게 /etc/rsyslog.conf  파일의 맨 마지막 줄에 다음 내용을 추가하여 어
-느 서버로 로그를 보낼지 지정한다.
-<em>.</em>    @@<a href="514">서버IP</a>:514    ← 모든 로그를 서버로 TCP 전송
-<em>.</em>    @<a href="514">서버IP</a>:514     ← 모든 로그를 서버로 UDP 전송</p>
+<p>클라이언트도 동일하게 /etc/rsyslog.conf  파일의 맨 마지막 줄에 다음 내용을 추가하여 어 느 서버로 로그를 보낼지 지정한다.</p>
+<p><em>.</em>    @@[서버IP]:514    ← 모든 로그를 서버로 TCP 전송 <em>.</em>    @[서버IP]:514     ← 모든 로그를 서버로 UDP 전송</p>
 <h5 id="4-2_1">4-2. 설정 문법 의미</h5>
-<ul>
-<li>구성 요소</li>
-<li>의미</li>
-<li><em>.</em></li>
-<li>모든 Facility(분류)의 모든 Priority(심각도) 로그</li>
-<li>@@</li>
-<li>TCP 프로토콜 사용</li>
-<li>@</li>
-<li>UDP 프로토콜 사용</li>
-<li></li>
-<li>로그를 전송할 서버 IP와 포트 번호</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>.</em></td>
+<td>모든 Facility(분류)의 모든 Priority(심각도) 로그</td>
+</tr>
+<tr>
+<td>@@</td>
+<td>TCP 프로토콜 사용</td>
+</tr>
+<tr>
+<td>@</td>
+<td>UDP 프로토콜 사용</td>
+</tr>
+<tr>
+<td>[서버IP]:514</td>
+<td>로그를 전송할 서버 IP와 포트 번호</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="5-네트워크-연결-확인-명령어">5. 네트워크 연결 확인 명령어</h4>
 <h5 id="5-1-lsof">5-1. lsof 명령어</h5>
-<p>열려 있는 파일 및 포트 목록을 확인한다.
-lsof -i tcp::514    ← TCP 514번 포트 상태 확인
-lsof -i udp::514    ← UDP 514번 포트 상태 확인</p>
+<p>열려 있는 파일 및 포트 목록을 확인한다.</p>
+<p>lsof -i tcp::514    ← TCP 514번 포트 상태 확인 lsof -i udp::514    ← UDP 514번 포트 상태 확인</p>
 <h5 id="5-2-netstat">5-2. netstat 명령어</h5>
-<p>net-tools  패키지를 설치해야 사용 가능하다. Windows에서는 기본으로 내장되어 있으나,
-리눅스에서는 별도 설치가 필요하다.
-dnf install -y net-tools    ← netstat 사용을 위한 패키지 설치
-netstat -natp               ← 현재 네트워크 연결 상태 확인
-netstat -natp | grep 514    ← 514번 포트만 필터링</p>
+<p>net-tools  패키지를 설치해야 사용 가능하다. Windows에서는 기본으로 내장되어 있으나, 리눅스에서는 별도 설치가 필요하다.</p>
+<p>dnf install -y net-tools    ← netstat 사용을 위한 패키지 설치 netstat -natp               ← 현재 네트워크 연결 상태 확인 netstat -natp | grep 514    ← 514번 포트만 필터링</p>
 <h5 id="5-3">5-3. 연결 상태 구분</h5>
-<ul>
-<li>상태</li>
-<li>의미</li>
-<li>LISTEN</li>
-<li>연결을 기다리는 상태 (접속 대기)</li>
-<li>ESTABLISHED</li>
-<li>연결이 성립된 상태</li>
-<li>서버에서 0.0.0.0:514 로 LISTEN 상태가 확인되면, 모든 네트워크로부터 514번 포트로</li>
-<li>수신 대기 중임을 의미한다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상태</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LISTEN</td>
+<td>연결을 기다리는 상태 (접속 대기)</td>
+</tr>
+<tr>
+<td>ESTABLISHED</td>
+<td>연결이 성립된 상태</td>
+</tr>
+</tbody>
+</table></div>
+<p>서버에서 0.0.0.0:514 로 LISTEN 상태가 확인되면, 모든 네트워크로부터 514번 포트로 수신 대기 중임을 의미한다.</p>
 <h4 id="6-파이프-명령어">6. 파이프(|) 명령어</h4>
-<p>두 개 이상의 명령어를 연결할 때 사용하는 특수 문자다. 앞 명령어의 실행 결과를 뒤 명령어
-의 입력값으로 전달한다.
-netstat -natp | grep 514    ← netstat 결과 중 514가 포함된 줄
-만 출력
-키보드에서 Shift + \  (또는 Enter  키 위의 |  키)로 입력한다. 내용이 많은 출력 결과에서
-필요한 부분만 빠르게 확인할 때 자주 활용된다.</p>
+<p>두 개 이상의 명령어를 연결할 때 사용하는 특수 문자다. 앞 명령어의 실행 결과를 뒤 명령어 의 입력값으로 전달한다.</p>
+<p>netstat -natp | grep 514    ← netstat 결과 중 514가 포함된 줄 만 출력 키보드에서 Shift + \  (또는 Enter  키 위의 |  키)로 입력한다. 내용이 많은 출력 결과에서 필요한 부분만 빠르게 확인할 때 자주 활용된다.</p>
 <h4 id="7-실시간-로그-모니터링">7. 실시간 로그 모니터링</h4>
-<p>tail -f /var/log/messages    ← 서버에서 실시간 로그 수신 확인
-서버에서 위 명령을 실행한 후 클라이언트에서 이벤트를 발생시키면(예: systemctl restart
-sshd ), 클라이언트의 로그가 서버 /var/log/messages 에 실시간으로 기록된다.</p>
+<p>tail -f /var/log/messages    ← 서버에서 실시간 로그 수신 확인 서버에서 위 명령을 실행한 후 클라이언트에서 이벤트를 발생시키면(예: systemctl restart sshd ), 클라이언트의 로그가 서버 /var/log/messages 에 실시간으로 기록된다.</p>
 <hr />
 <h3 id="068-syslog-facility-priority의-개념-로그-레벨-이해">068. Syslog Facility Priority의 개념, 로그 레벨 이해</h3>
-<p>Syslog Facility/Priority의 개념,
-로그 레벨 이해</p>
+<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
 <h4 id="1-syslog-개요">1. Syslog 개요</h4>
 <h5 id="1-1-syslog">1-1. Syslog의 구성 요소</h5>
-<p>Syslog는 로그 메시지를 분류하고 관리하기 위해 두 가지 주요 요소로 구성된다:
-Facility: 로그가 발생한 출처나 카테고리
-Priority: 로그의 우선순위 또는 심각도</p>
+<p>Syslog는 로그 메시지를 분류하고 관리하기 위해 두 가지 주요 요소로 구성된다:</p>
+<p>Facility: 로그가 발생한 출처나 카테고리 Priority: 로그의 우선순위 또는 심각도</p>
 <h4 id="2-facility-시설카테고리">2. Facility (시설/카테고리)</h4>
 <h5 id="2-1-facility">2-1. Facility의 정의</h5>
-<p>Facility는 로그가 어디서 발생했는지를 나타내는 분류 항목이다. 로그 메시지의 출처를 식
-별하는 데 사용된다.</p>
+<p>Facility는 로그가 어디서 발생했는지를 나타내는 분류 항목이다. 로그 메시지의 출처를 식 별하는 데 사용된다.</p>
 <h5 id="2-2-facility">2-2. 주요 Facility 종류</h5>
-<ul>
-<li>Facility</li>
-<li>설명</li>
-<li>AUTH</li>
-<li>인증과 관련된 로그 (사용자 로그인, 비밀번호 관련)</li>
-<li>LPR</li>
-<li>프린터 서비스와 관련된 로그</li>
-<li>Syslog 대몬 자체에서 발생하는 로그</li>
-<li>Local 0-7</li>
-<li>사용자 정의 목적으로 사용 가능한 로그 카테고리</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Facility</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUTH</td>
+<td>인증과 관련된 로그 (사용자 로그인, 비밀번호 관련)</td>
+</tr>
+<tr>
+<td>LPR</td>
+<td>프린터 서비스와 관련된 로그</td>
+</tr>
+<tr>
+<td>Syslog</td>
+<td>Syslog 대몬 자체에서 발생하는 로그</td>
+</tr>
+<tr>
+<td>Local 0-7</td>
+<td>사용자 정의 목적으로 사용 가능한 로그 카테고리</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="2-3-facility">2-3. Facility의 역할</h5>
-<p>어떤 로그가 AUTH로 지정되어 있으면 인증 관련 로그임을 알 수 있다. 마찬가지로 LPR이
-면 프린트 관련 기록임을 식별할 수 있다. 따라서 로그를 빠르게 분류하고 원하는 항목을 찾
-는 데 도움이 된다.</p>
+<p>어떤 로그가 AUTH로 지정되어 있으면 인증 관련 로그임을 알 수 있다. 마찬가지로 LPR이 면 프린트 관련 기록임을 식별할 수 있다. 따라서 로그를 빠르게 분류하고 원하는 항목을 찾 는 데 도움이 된다.</p>
 <h4 id="3-priority-우선순위심각도">3. Priority (우선순위/심각도)</h4>
 <p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
 <h5 id="3-1-priority">3-1. Priority의 개념</h5>
-<p>Priority는 로그의 우선순위 또는 심각도(Severity Level)를 나타낸다. 발생한 문제가 시스
-템에 미치는 영향의 정도를 표현한다.</p>
+<p>Priority는 로그의 우선순위 또는 심각도(Severity Level)를 나타낸다. 발생한 문제가 시스 템에 미치는 영향의 정도를 표현한다.</p>
 <h5 id="3-2-priority-0-7">3-2. Priority 레벨 (0-7)</h5>
-<ul>
-<li>레벨</li>
-<li>이름</li>
-<li>설명</li>
-<li>영향도</li>
-<li>Emergency (이머젠시)</li>
-<li>시스템 사용 불가능한 긴급 상황</li>
-<li>매우 높음</li>
-<li>Alert</li>
-<li>즉시 조치가 필요한 상황</li>
-<li>매우 높음</li>
-<li>Critical</li>
-<li>심각한 상황</li>
-<li>높음</li>
-<li>Error</li>
-<li>오류 발생</li>
-<li>중간</li>
-<li>Warning</li>
-<li>경고 상황</li>
-<li>중간</li>
-<li>Notice</li>
-<li>일반적인 알림</li>
-<li>낮음</li>
-<li>Informational</li>
-<li>정보성 메시지</li>
-<li>낮음</li>
-<li>Debug</li>
-<li>디버깅 정보</li>
-<li>최하위</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>레벨</th>
+<th>이름</th>
+<th>설명</th>
+<th>영향도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Emergency (이머젠시)</td>
+<td>시스템 사용 불가능한 긴급 상황</td>
+<td>매우 높음</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Alert</td>
+<td>즉시 조치가 필요한 상황</td>
+<td>매우 높음</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Critical</td>
+<td>심각한 상황</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Error</td>
+<td>오류 발생</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Warning</td>
+<td>경고 상황</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Notice</td>
+<td>일반적인 알림</td>
+<td>낮음</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Informational</td>
+<td>정보성 메시지</td>
+<td>낮음</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Debug</td>
+<td>디버깅 정보</td>
+<td>최하위</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="3-3">3-3. 심각도의 의미</h5>
-<p>어떤 일이 발생했을 때, 그 문제가 시스템에 얼마만큼 영향을 미칠 것인가를 나타내는 것이
-심각도이다. Emergency 레벨이 발생하면 시스템에 아주 긴급한 문제가 있다는 의미이고,
-적극적인 조치를 하지 않으면 시스템이 정상적으로 동작하지 않는다.</p>
+<p>어떤 일이 발생했을 때, 그 문제가 시스템에 얼마만큼 영향을 미칠 것인가를 나타내는 것이 심각도이다. Emergency 레벨이 발생하면 시스템에 아주 긴급한 문제가 있다는 의미이고, 적극적인 조치를 하지 않으면 시스템이 정상적으로 동작하지 않는다.</p>
 <h5 id="3-4-warning">3-4. Warning 레벨의 일반적 사용</h5>
-<p>대부분의 서비스가 구동될 때, 로그 관련 심각도는 기본적으로 Warning 레벨로 정해져 있
-다. 이는 일반적인 운영 환경에서의 표준 레벨이다.</p>
+<p>대부분의 서비스가 구동될 때, 로그 관련 심각도는 기본적으로 Warning 레벨로 정해져 있 다. 이는 일반적인 운영 환경에서의 표준 레벨이다.</p>
 <h5 id="3-5-debug">3-5. Debug 레벨의 특징</h5>
-<p>Debug 레벨은 가장 낮은 우선순위를 가지므로, 개발 또는 문제 해결 시 상세한 정보를 확인
-할 때 사용된다.</p>
+<p>Debug 레벨은 가장 낮은 우선순위를 가지므로, 개발 또는 문제 해결 시 상세한 정보를 확인 할 때 사용된다.</p>
 <h4 id="4-facility와-priority의-조합">4. Facility와 Priority의 조합</h4>
 <h5 id="4-1_3">4-1. 로그의 완전한 분류</h5>
-<p>로그 메시지는 Facility와 Priority의 조합으로 완전하게 분류된다:
-Facility는 로그의 출처(어디서)를 나타낸다
-Priority는 로그의 중요도(얼마나 심각한지)를 나타낸다
-Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
+<p>로그 메시지는 Facility와 Priority의 조합으로 완전하게 분류된다:</p>
+<p>Facility는 로그의 출처(어디서)를 나타낸다</p>
+<p>Priority는 로그의 중요도(얼마나 심각한지)를 나타낸다</p>
+<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
 <h5 id="4-2_2">4-2. 로그 처리의 실제 적용</h5>
-<p>로그 관리 정책에서:
-특정 Facility의 특정 Priority 이상만 기록하도록 설정할 수 있다
-Emergency 레벨의 로그는 즉시 관리자에게 알림을 보낼 수 있다
-낮은 Priority의 로그는 보존 기간을 짧게 설정할 수 있다</p>
+<p>로그 관리 정책에서:</p>
+<p>특정 Facility의 특정 Priority 이상만 기록하도록 설정할 수 있다</p>
+<p>Emergency 레벨의 로그는 즉시 관리자에게 알림을 보낼 수 있다</p>
+<p>낮은 Priority의 로그는 보존 기간을 짧게 설정할 수 있다</p>
 <h4 id="5-syslog-설정-원리">5. Syslog 설정 원리</h4>
 <h5 id="5-1_1">5-1. 로그 분류의 중요성</h5>
-<p>로그는 대량으로 생성되기 때문에 Facility와 Priority를 통해 체계적으로 분류해야 한다. 이
-를 통해 필요한 정보를 빠르게 찾고, 중요한 로그에 우선순위를 부여할 수 있다.</p>
+<p>로그는 대량으로 생성되기 때문에 Facility와 Priority를 통해 체계적으로 분류해야 한다. 이 를 통해 필요한 정보를 빠르게 찾고, 중요한 로그에 우선순위를 부여할 수 있다.</p>
 <h5 id="5-2_1">5-2. 설정값 변경의 영향</h5>
-<p>Syslog 설정 파일에서 설정값을 변경하면 기록되는 로그의 내용과 형식이 변경될 수 있다.
-따라서 로그 관리 정책을 조정할 때는 신중하게 변경해야 한다.
-Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
+<p>Syslog 설정 파일에서 설정값을 변경하면 기록되는 로그의 내용과 형식이 변경될 수 있다. 따라서 로그 관리 정책을 조정할 때는 신중하게 변경해야 한다.</p>
+<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
 <hr />
 <h3 id="069-시스템-로그-관리-및-분석리눅스-웹-서버">069. 시스템 로그 관리 및 분석(리눅스 웹 서버)</h3>
 <p>서버)</p>
 <h4 id="1-로그-관리의-중요성">1. 로그 관리의 중요성</h4>
 <h5 id="1-1_2">1-1. 로그의 정의와 보안적 가치</h5>
-<p>시스템에서 발생하는 모든 사건과 작업은 로그라고 불리는 기록에 저장된다. 로그는 단순한
-기록을 넘어 보안적으로도 중요한 부분이다.</p>
+<p>시스템에서 발생하는 모든 사건과 작업은 로그라고 불리는 기록에 저장된다. 로그는 단순한 기록을 넘어 보안적으로도 중요한 부분이다.</p>
 <h5 id="1-2_2">1-2. 법적 규제와 로그 보존</h5>
-<p>법적으로 일정 수준 이상의 시스템에서는 로그를 마음대로 삭제할 수 없도록 규정되어 있다.
-어떤 일이 일어났는지 확인할 수 있는 중요한 정보들이 포함되어 있기 때문이다. 개인이나
-소규모 시스템에서는 삭제가 가능하지만, 기본적으로 시스템이나 장비에서 발생하는 모든
-작업은 기록된다.</p>
+<p>법적으로 일정 수준 이상의 시스템에서는 로그를 마음대로 삭제할 수 없도록 규정되어 있다. 어떤 일이 일어났는지 확인할 수 있는 중요한 정보들이 포함되어 있기 때문이다. 개인이나 소규모 시스템에서는 삭제가 가능하지만, 기본적으로 시스템이나 장비에서 발생하는 모든 작업은 기록된다.</p>
 <h4 id="2-웹-서버-로그-구조">2. 웹 서버 로그 구조</h4>
 <h5 id="2-1_1">2-1. 웹 서버 디렉토리 구조</h5>
-<p>웹 서버의 설정과 로그는 /etc/httpd/  경로 아래에 위치한다. 이 디렉토리 내에 웹 서비스와
-관련된 모든 내용이 저장된다.</p>
+<p>웹 서버의 설정과 로그는 /etc/httpd/  경로 아래에 위치한다. 이 디렉토리 내에 웹 서비스와 관련된 모든 내용이 저장된다.</p>
 <h5 id="2-2_2">2-2. 로그 파일의 위치 및 심볼릭 링크</h5>
-<p>/etc/httpd/logs  디렉토리는 심볼릭 링크이며, 실제 로그 파일은 /var/log/  경로에 저장되
-어 있다. 이러한 구조를 통해 웹 서비스와 관련된 다양한 로그 파일들을 관리한다.</p>
+<p>/etc/httpd/logs  디렉토리는 심볼릭 링크이며, 실제 로그 파일은 /var/log/  경로에 저장되 어 있다. 이러한 구조를 통해 웹 서비스와 관련된 다양한 로그 파일들을 관리한다.</p>
 <h4 id="3-http-웹-서비스-로그">3. HTTP 웹 서비스 로그</h4>
 <h5 id="3-1_1">3-1. 로그 파일의 종류</h5>
-<ul>
-<li>파일명</li>
-<li>용도</li>
-<li>설명</li>
-<li>access.log</li>
-<li>정상 접속 기록</li>
-<li>
-<p>HTTP를 통한 모든 정상 접속 정보</p>
-</li>
-<li>
-<p>파일명</p>
-</li>
-<li>용도</li>
-<li>설명</li>
-<li>access_log</li>
-<li>HTTPS 접속</li>
-<li>SSL/TLS를 통한 보안 접속 기록</li>
-<li>error.log</li>
-<li>접속 오류</li>
-<li>접속 시 발생한 오류 정보</li>
-<li>ssl_error.log</li>
-<li>HTTPS 오류</li>
-<li>보안 접속 관련 오류</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>용도</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access.log</td>
+<td>정상 접속 기록</td>
+<td>HTTP를 통한 모든 정상 접속 정보</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>용도</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access_log</td>
+<td>HTTPS 접속</td>
+<td>SSL/TLS를 통한 보안 접속 기록</td>
+</tr>
+<tr>
+<td>error.log</td>
+<td>접속 오류</td>
+<td>접속 시 발생한 오류 정보</td>
+</tr>
+<tr>
+<td>ssl_error.log</td>
+<td>HTTPS 오류</td>
+<td>보안 접속 관련 오류</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="3-2-access-log">3-2. Access Log의 구조</h5>
-<ul>
-<li>접속 로그는 다음 정보를 포함한다:</li>
-<li>클라이언트의 IP 주소</li>
-<li>접속 시간 및 날짜</li>
-<li>HTTP 요청 방식 (GET, POST 등)</li>
-<li>요청한 리소스 경로</li>
-<li>HTTP 상태 코드</li>
-<li>User-Agent (브라우저 정보)</li>
-</ul>
+<p>접속 로그는 다음 정보를 포함한다:</p>
+<p>클라이언트의 IP 주소 접속 시간 및 날짜 HTTP 요청 방식 (GET, POST 등)</p>
+<p>요청한 리소스 경로 HTTP 상태 코드 User-Agent (브라우저 정보)</p>
 <h5 id="3-3_1">3-3. 로그 파일 분석</h5>
-<p>로그 파일은 시간 순서로 기록되며, 맨 아래의 최신 항목부터 위로 올라갈수록 이전 기록이
-다. 각 접속에 대해 IP 주소, 접속 시간, 요청 방식, User-Agent 값 등의 정보를 확인할 수
-있다.</p>
+<p>로그 파일은 시간 순서로 기록되며, 맨 아래의 최신 항목부터 위로 올라갈수록 이전 기록이 다. 각 접속에 대해 IP 주소, 접속 시간, 요청 방식, User-Agent 값 등의 정보를 확인할 수 있다.</p>
 <h5 id="3-4-error-log">3-4. Error Log의 역할</h5>
-<p>오류 로그에는 접속 시도 중에 발생한 오류 정보가 기록된다. 옵션 불일치, 설정 오류 등 다양
-한 접속 실패 원인을 파악할 수 있다.</p>
+<p>오류 로그에는 접속 시도 중에 발생한 오류 정보가 기록된다. 옵션 불일치, 설정 오류 등 다양 한 접속 실패 원인을 파악할 수 있다.</p>
 <h4 id="4-기타-서비스-로그">4. 기타 서비스 로그</h4>
 <h5 id="4-1_4">4-1. 데이터베이스 로그</h5>
-<p>MariaDB 같은 데이터베이스도 /var/log/  하위의 별도 디렉토리에서 관리되며, DB와 관련
-된 여러 로그들이 존재한다.</p>
+<p>MariaDB 같은 데이터베이스도 /var/log/  하위의 별도 디렉토리에서 관리되며, DB와 관련 된 여러 로그들이 존재한다.</p>
 <h5 id="4-2-ftp">4-2. FTP 서비스 로그</h5>
-<p>FTP 서비스는 xferlog  파일에 로그가 기록된다. FTP 업로드, 다운로드 등의 기록이 여기에
-저장된다.</p>
+<p>FTP 서비스는 xferlog  파일에 로그가 기록된다. FTP 업로드, 다운로드 등의 기록이 여기에 저장된다.</p>
 <h5 id="4-3-samba">4-3. Samba 로그</h5>
 <p>Samba 서비스는 별도의 디렉토리에서 관리되며, Samba와 관련된 기록이 저장된다.</p>
 <h4 id="5-사용자-로그인-기록-파일">5. 사용자 로그인 기록 파일</h4>
 <h5 id="5-1-wtmp">5-1. WTMP 파일 (로그인/로그아웃 기록)</h5>
-<ul>
-<li>특징</li>
-<li>설명</li>
-<li>저장 위치</li>
-<li>/var/log/wtmp</li>
-<li>파일 형식</li>
-<li>바이너리 데이터 파일</li>
-<li>기록 내용</li>
-<li>사용자 로그인, 로그아웃</li>
-<li>추가 기록</li>
-<li>시스템 부팅, 종료, 리부팅</li>
-<li>조회 명령어</li>
-<li>last</li>
-<li>WTMP 파일은 사용자가 로그인했거나 로그아웃했을 때의 정보를 저장한다. 일반 텍스트 파</li>
-<li>일이 아니라 바이너리 데이터 형식으로 저장되므로 직접 읽을 수 없다. last  명령어를 사용</li>
-<li>하여 읽을 수 있다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 위치</td>
+<td>/var/log/wtmp</td>
+</tr>
+<tr>
+<td>파일 형식</td>
+<td>바이너리 데이터 파일</td>
+</tr>
+<tr>
+<td>기록 내용</td>
+<td>사용자 로그인, 로그아웃</td>
+</tr>
+<tr>
+<td>추가 기록</td>
+<td>시스템 부팅, 종료, 리부팅</td>
+</tr>
+<tr>
+<td>조회 명령어</td>
+<td>last</td>
+</tr>
+</tbody>
+</table></div>
+<p>WTMP 파일은 사용자가 로그인했거나 로그아웃했을 때의 정보를 저장한다. 일반 텍스트 파 일이 아니라 바이너리 데이터 형식으로 저장되므로 직접 읽을 수 없다. last  명령어를 사용 하여 읽을 수 있다.</p>
 <h5 id="5-2-btmp">5-2. BTMP 파일 (로그인 실패 기록)</h5>
-<ul>
-<li>특징</li>
-<li>설명</li>
-<li>저장 위치</li>
-<li>/var/log/btmp</li>
-<li>파일 형식</li>
-<li>바이너리 데이터 파일</li>
-<li>기록 내용</li>
-<li>원격 접속 실패 기록</li>
-<li>조회 명령어</li>
-<li>last -b</li>
-<li>BTMP 파일에는 SSH나 기타 원격 접속 시도 중 실패한 기록이 저장된다. SSH 접속 실패,</li>
-<li>로그인 오류 등이 기록된다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 위치</td>
+<td>/var/log/btmp</td>
+</tr>
+<tr>
+<td>파일 형식</td>
+<td>바이너리 데이터 파일</td>
+</tr>
+<tr>
+<td>기록 내용</td>
+<td>원격 접속 실패 기록</td>
+</tr>
+<tr>
+<td>조회 명령어</td>
+<td>last -b</td>
+</tr>
+</tbody>
+</table></div>
+<p>BTMP 파일에는 SSH나 기타 원격 접속 시도 중 실패한 기록이 저장된다. SSH 접속 실패, 로그인 오류 등이 기록된다.</p>
 <h5 id="5-3-utmp">5-3. UTMP 파일 (현재 로그인 세션)</h5>
-<ul>
-<li>특징</li>
-<li>설명</li>
-<li>파일 형식</li>
-<li>바이너리 데이터 파일</li>
-<li>기록 내용</li>
-<li>현재 시스템에 로그인한 사용자 정보</li>
-<li>조회 명령어</li>
-<li>w , who , finger</li>
-<li>UTMP 파일은 현재 시스템에 로그인한 사용자들의 정보를 포함한다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파일 형식</td>
+<td>바이너리 데이터 파일</td>
+</tr>
+<tr>
+<td>기록 내용</td>
+<td>현재 시스템에 로그인한 사용자 정보</td>
+</tr>
+<tr>
+<td>조회 명령어</td>
+<td>w , who , finger</td>
+</tr>
+</tbody>
+</table></div>
+<p>UTMP 파일은 현재 시스템에 로그인한 사용자들의 정보를 포함한다.</p>
 <h5 id="5-4-lastlog">5-4. Lastlog 파일 (최근 로그인 정보)</h5>
-<ul>
-<li>특징</li>
-<li>설명</li>
-<li>저장 위치</li>
-<li>/var/log/lastlog</li>
-<li>기록 내용</li>
-<li>각 사용자의 가장 최근 로그인 정보</li>
-<li>조회 명령어</li>
-<li>lastlog</li>
-<li>각 사용자의 가장 최근 로그인 시간, 터미널, 로그인 위치 등을 나타낸다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 위치</td>
+<td>/var/log/lastlog</td>
+</tr>
+<tr>
+<td>기록 내용</td>
+<td>각 사용자의 가장 최근 로그인 정보</td>
+</tr>
+<tr>
+<td>조회 명령어</td>
+<td>lastlog</td>
+</tr>
+</tbody>
+</table></div>
+<p>각 사용자의 가장 최근 로그인 시간, 터미널, 로그인 위치 등을 나타낸다.</p>
 <h4 id="6-명령어-히스토리">6. 명령어 히스토리</h4>
 <h5 id="6-1-bash-history">6-1. Bash History 파일</h5>
-<p>각 사용자가 내린 명령어는 해당 사용자의 홈 디렉토리에 .bash_history  파일로 저장된다.
-숨김 파일(점으로 시작)이므로 ls -a  명령으로만 볼 수 있다.</p>
+<p>각 사용자가 내린 명령어는 해당 사용자의 홈 디렉토리에 .bash_history  파일로 저장된다. 숨김 파일(점으로 시작)이므로 ls -a  명령으로만 볼 수 있다.</p>
 <h5 id="6-2">6-2. 히스토리 파일의 특징</h5>
-<p>사용자별로 별도의 히스토리 파일이 존재한다
-명령어 실행 시간 정보는 포함되지 않는다
-명령어 목록만 저장된다
-터미널에서 위/아래 화살표 키로 과거 명령어를 확인할 수 있다</p>
+<p>사용자별로 별도의 히스토리 파일이 존재한다</p>
+<p>명령어 실행 시간 정보는 포함되지 않는다</p>
+<p>명령어 목록만 저장된다</p>
+<p>터미널에서 위/아래 화살표 키로 과거 명령어를 확인할 수 있다</p>
 <h5 id="6-3">6-3. 히스토리 파일 위치</h5>
-<p>Root 사용자: /root/.bash_history
-일반 사용자: /home/[username]/.bash_history</p>
+<p>Root 사용자: /root/.bash_history 일반 사용자: /home/[username]/.bash_history</p>
 <h5 id="6-4">6-4. 보안 관점의 주의사항</h5>
-<p>침입자는 자신의 명령어를 은폐하기 위해 히스토리 파일을 삭제하거나, 심볼릭 링크를 변경
-할 수 있다.</p>
+<p>침입자는 자신의 명령어를 은폐하기 위해 히스토리 파일을 삭제하거나, 심볼릭 링크를 변경 할 수 있다.</p>
 <h4 id="7-secure-로그-파일">7. Secure 로그 파일</h4>
 <h5 id="7-1">7-1. 정의와 저장 위치</h5>
-<p>Secure 로그는 원격 접속 및 사용자 인증과 관련된 모든 기록을 저장한다. 저장 위치는
-/var/log/secure 이다.</p>
+<p>Secure 로그는 원격 접속 및 사용자 인증과 관련된 모든 기록을 저장한다. 저장 위치는 /var/log/secure 이다.</p>
 <h5 id="7-2">7-2. 기록 내용</h5>
-<ul>
-<li>항목</li>
-<li>설명</li>
-<li>SSH 접속</li>
-<li>sshd 서비스를 통한 원격 접속 기록</li>
-<li>FTP 접속</li>
-<li>FTP 서비스를 통한 인증 기록</li>
-<li>사용자 인증</li>
-<li>모든 사용자 인증 과정과 결과</li>
-<li>패스워드 변경</li>
-<li>사용자 패스워드 변경 기록</li>
-<li>새 사용자 생성</li>
-<li>새 사용자 계정 생성 기록</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSH 접속</td>
+<td>sshd 서비스를 통한 원격 접속 기록</td>
+</tr>
+<tr>
+<td>FTP 접속</td>
+<td>FTP 서비스를 통한 인증 기록</td>
+</tr>
+<tr>
+<td>사용자 인증</td>
+<td>모든 사용자 인증 과정과 결과</td>
+</tr>
+<tr>
+<td>패스워드 변경</td>
+<td>사용자 패스워드 변경 기록</td>
+</tr>
+<tr>
+<td>새 사용자 생성</td>
+<td>새 사용자 계정 생성 기록</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="7-3">7-3. 로그 분석</h5>
-<p>Secure 로그는 일반 텍스트 파일이므로 cat  명령어로 직접 읽을 수 있다. 시간 순서로 기록
-되며, 아래쪽부터 최신 기록이다.</p>
+<p>Secure 로그는 일반 텍스트 파일이므로 cat  명령어로 직접 읽을 수 있다. 시간 순서로 기록 되며, 아래쪽부터 최신 기록이다.</p>
 <h5 id="7-4">7-4. 보안 감시 중요성</h5>
 <p>이 파일을 통해 비정상적인 접속 시도, 비인가 로그인, 패스워드 공격 등을 감지할 수 있다.</p>
 <h4 id="8-messages-로그-파일">8. Messages 로그 파일</h4>
 <h5 id="8-1">8-1. 역할과 중요성</h5>
-<p>Messages 로그는 로그인 기록, 디바이스 정보, 시스템 설정 오류, 파일 시스템 네트워크 연
-결 기록 등 매우 다양한 내용을 포함한다. 상당히 중요한 로그 파일이다.</p>
+<p>Messages 로그는 로그인 기록, 디바이스 정보, 시스템 설정 오류, 파일 시스템 네트워크 연 결 기록 등 매우 다양한 내용을 포함한다. 상당히 중요한 로그 파일이다.</p>
 <h5 id="8-2">8-2. 기록 내용의 범위</h5>
-<ul>
-<li>시스템 시작(Booting) 및 종료 기록</li>
-<li>패키지 설치/업그레이드 기록</li>
-<li>네임 서비스(DNS) 관련 기록</li>
-<li>FTP, SSH 등 주요 서비스 기록</li>
-<li>시스템 오류 및 경고</li>
-</ul>
+<p>시스템 시작(Booting) 및 종료 기록 패키지 설치/업그레이드 기록 네임 서비스(DNS) 관련 기록 FTP, SSH 등 주요 서비스 기록 시스템 오류 및 경고</p>
 <h5 id="8-3">8-3. 파일 형식</h5>
 <p>텍스트 형식으로 저장되므로 cat  명령어로 직접 읽을 수 있다.</p>
 <h5 id="8-4">8-4. 대용량 로그 검색</h5>
 <p>로그 파일이 매우 크면 grep  명령어를 사용하여 필요한 부분만 빠르게 검색할 수 있다.</p>
-<p>grep "검색문자열" /var/log/messages  ← 특정 문자열 검색
-grep "192.168.100.91" /var/log/messages  ← 특정 IP 검색</p>
+<p>grep "검색문자열" /var/log/messages  ← 특정 문자열 검색 grep "192.168.100.91" /var/log/messages  ← 특정 IP 검색</p>
 <h4 id="9-시스로그syslog-관리">9. 시스로그(Syslog) 관리</h4>
 <h5 id="9-1">9-1. 시스로그의 역할</h5>
-<p>Syslog는 시스템 로그 관리를 담당하는 프로세스다. 로그 파일에 기록되는 내용과 형식을
-제어한다.</p>
+<p>Syslog는 시스템 로그 관리를 담당하는 프로세스다. 로그 파일에 기록되는 내용과 형식을 제어한다.</p>
 <h5 id="9-2">9-2. 설정 파일</h5>
-<p>시스로그D(syslogd) 서비스에서 설정값을 변경하면 기록되는 내용과 형식이 변경될 수 있
-다.</p>
+<p>시스로그D(syslogd) 서비스에서 설정값을 변경하면 기록되는 내용과 형식이 변경될 수 있 다.</p>
 <h4 id="10-기본-로그-파일-정리">10. 기본 로그 파일 정리</h4>
 <h5 id="10-1-4">10-1. 리눅스 기본 로그 4가지</h5>
-<ul>
-<li>파일명</li>
-<li>저장 위치</li>
-<li>용도</li>
-<li>명령어</li>
-<li>WTMP</li>
-<li>/var/log/wtmp</li>
-<li>로그인/로그아웃</li>
-<li>last</li>
-<li>BTMP</li>
-<li>/var/log/btmp</li>
-<li>로그인 실패</li>
-<li>last -b</li>
-<li>UTMP</li>
-<li>메모리</li>
-<li>현재 로그인 세션</li>
-<li>w , who , finger</li>
-<li>Lastlog</li>
-<li>/var/log/lastlog</li>
-<li>최근 로그인 정보</li>
-<li>lastlog</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>저장 위치</th>
+<th>용도</th>
+<th>명령어</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WTMP</td>
+<td>/var/log/wtmp</td>
+<td>로그인/로그아웃</td>
+<td>last</td>
+</tr>
+<tr>
+<td>BTMP</td>
+<td>/var/log/btmp</td>
+<td>로그인 실패</td>
+<td>last -b</td>
+</tr>
+<tr>
+<td>UTMP</td>
+<td>메모리</td>
+<td>현재 로그인 세션</td>
+<td>w , who , finger</td>
+</tr>
+<tr>
+<td>Lastlog</td>
+<td>/var/log/lastlog</td>
+<td>최근 로그인 정보</td>
+<td>lastlog</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="10-2">10-2. 추가 중요 로그</h5>
-<ul>
-<li>파일명</li>
-<li>저장 위치</li>
-<li>용도</li>
-<li>secure</li>
-<li>/var/log/secure</li>
-<li>인증 및 원격 접속 기록</li>
-<li>messages</li>
-<li>/var/log/messages</li>
-<li>시스템 전반 기록</li>
-<li>httpd access.log</li>
-<li>/var/log/httpd/</li>
-<li>웹 서비스 접속</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>저장 위치</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secure</td>
+<td>/var/log/secure</td>
+<td>인증 및 원격 접속 기록</td>
+</tr>
+<tr>
+<td>messages</td>
+<td>/var/log/messages</td>
+<td>시스템 전반 기록</td>
+</tr>
+<tr>
+<td>httpd access.log</td>
+<td>/var/log/httpd/</td>
+<td>웹 서비스 접속</td>
+</tr>
+</tbody>
+</table></div>
 <hr />
 <h3 id="074-리눅스-계정-파일-구조-salt-파일-권한과-umask">074. 리눅스 계정 파일 구조, Salt, 파일 권한과 umask</h3>
 <p>한과 umask</p>
 <h4 id="1-리눅스-계정-관리-개요">1. 리눅스 계정 관리 개요</h4>
-<p>시스템 보안에서 로그 관리, 계정 관리, 권한 관리는 핵심 요소이다. 이 중 계정과 권한 관리
-는 보안 점검 시 가장 기본이 되는 항목에 해당한다.
-계정과 관련된 정보는 /etc/passwd 와 /etc/shadow  두 파일에 나뉘어 저장된다.</p>
+<p>시스템 보안에서 로그 관리, 계정 관리, 권한 관리는 핵심 요소이다. 이 중 계정과 권한 관리 는 보안 점검 시 가장 기본이 되는 항목에 해당한다.</p>
+<p>계정과 관련된 정보는 /etc/passwd 와 /etc/shadow  두 파일에 나뉘어 저장된다.</p>
 <h4 id="2-etcpasswd-파일-구조">2. /etc/passwd  파일 구조</h4>
-<ul>
-<li>cat /etc/passwd</li>
-<li>각 레코드(행)는 콜론( : )으로 구분된 7개의 필드로 구성된다.</li>
-<li>필드 번호</li>
-<li>필드명</li>
-<li>설명</li>
-<li>사용자 계정명</li>
-<li>시스템에 로그인할 때 사용하는 계정 이름</li>
-<li>패스워드</li>
-<li>x 는 암호가 /etc/shadow 에 암호화되어 저장되어 있음을</li>
-<li>의미</li>
-<li>UID (User ID)</li>
-<li>사용자 식별 번호. 관리자(root)는 0 , 일반 사용자는 1000</li>
-<li>부터 부여</li>
-<li>GID (Group ID)</li>
-<li>사용자가 속한 그룹 식별 번호. root의 기본값은 0</li>
-<li>사용자 설명(이름)</li>
-<li>시스템에 영향 없는 사용자 설명 정보. 통상 계정명과 동일하</li>
-<li>게 기입</li>
-<li>홈 디렉토리</li>
-<li>해당 사용자가 로그인 시 이동하는 기본 디렉토리 경로</li>
-<li>기본 셸</li>
-<li>로그인 시 실행되는 셸 경로 (예: /bin/bash )</li>
-<li>⚠️ UID와 GID 값이 0 인 계정은 root와 동일한 권한을 가진다. 일반 사용자 계정이라도</li>
-<li>UID/GID를 0 으로 변경하면 관리자 권한을 획득하게 되므로, 정기적으로 이 값을 점검해</li>
-<li>야 한다.</li>
-</ul>
-<p>리눅스 버전에 따라 일반 사용자 UID 시작값이 다를 수 있다. Rocky Linux 등 최신 계열은
-1000 부터, 일부 구버전(CentOS 7 이전 등)은 500 부터 부여하는 경우도 있다.</p>
+<p>cat /etc/passwd 각 레코드(행)는 콜론( : )으로 구분된 7개의 필드로 구성된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드 번호</th>
+<th>필드명</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>사용자 계정명</td>
+<td>시스템에 로그인할 때 사용하는 계정 이름</td>
+</tr>
+<tr>
+<td>2</td>
+<td>패스워드</td>
+<td>x 는 암호가 /etc/shadow 에 암호화되어 저장되어 있음을<br>의미</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UID (User ID)</td>
+<td>사용자 식별 번호. 관리자(root)는 0 , 일반 사용자는 1000<br>부터 부여</td>
+</tr>
+<tr>
+<td>4</td>
+<td>GID (Group ID)</td>
+<td>사용자가 속한 그룹 식별 번호. root의 기본값은 0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>사용자 설명(이름)</td>
+<td>시스템에 영향 없는 사용자 설명 정보. 통상 계정명과 동일하<br>게 기입</td>
+</tr>
+<tr>
+<td>6</td>
+<td>홈 디렉토리</td>
+<td>해당 사용자가 로그인 시 이동하는 기본 디렉토리 경로</td>
+</tr>
+<tr>
+<td>7</td>
+<td>기본 셸</td>
+<td>로그인 시 실행되는 셸 경로 (예: /bin/bash )</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ UID와 GID 값이 0 인 계정은 root와 동일한 권한을 가진다. 일반 사용자 계정이라도 UID/GID를 0 으로 변경하면 관리자 권한을 획득하게 되므로, 정기적으로 이 값을 점검해 야 한다.</p>
+<p>리눅스 버전에 따라 일반 사용자 UID 시작값이 다를 수 있다. Rocky Linux 등 최신 계열은 1000 부터, 일부 구버전(CentOS 7 이전 등)은 500 부터 부여하는 경우도 있다.</p>
 <h4 id="3-etcshadow-파일-구조">3. /etc/shadow  파일 구조</h4>
-<p>cat /etc/shadow
-/etc/shadow  파일에는 계정별 암호화된 패스워드와 패스워드 정책 정보가 저장된다.
-필드 번호
-설명
-사용자 계정명
-암호화된 패스워드 (알고리즘 식별자 + 솔트 + 해시값)
-1970년 1월 1일부터 마지막 패스워드 변경일까지의 경과 일수
-패스워드를 변경한 후 변경 전 사용 기간(일수)
-패스워드 최대 사용 기간. 이 일수가 경과하면 변경을 요구. (기본값: 9999 )
-패스워드 만료 전 경고 통지 일수 (예: 7 이면 만료 7일 전 경고)
-패스워드 만료 후 계정 사용 불가 전까지의 유예 기간(일수)
-1970년 1월 1일부터 계정 완전 비활성화 날짜까지의 일수
-관리자 임의 설정 필드(예약)
-패스워드 만료 기간을 60일로 설정하더라도, 만료 이후에 갑자기 통보하는 것이 아니라
-만료 전 7일 등 미리 경고 메시지를 통해 사용자에게 변경을 안내해야 한다.</p>
+<p>cat /etc/shadow /etc/shadow  파일에는 계정별 암호화된 패스워드와 패스워드 정책 정보가 저장된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드 번호</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>사용자 계정명</td>
+</tr>
+<tr>
+<td>2</td>
+<td>암호화된 패스워드 (알고리즘 식별자 + 솔트 + 해시값)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1970년 1월 1일부터 마지막 패스워드 변경일까지의 경과 일수</td>
+</tr>
+<tr>
+<td>4</td>
+<td>패스워드를 변경한 후 변경 전 사용 기간(일수)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>패스워드 최대 사용 기간. 이 일수가 경과하면 변경을 요구. (기본값: 9999 )</td>
+</tr>
+<tr>
+<td>6</td>
+<td>패스워드 만료 전 경고 통지 일수 (예: 7 이면 만료 7일 전 경고)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>패스워드 만료 후 계정 사용 불가 전까지의 유예 기간(일수)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1970년 1월 1일부터 계정 완전 비활성화 날짜까지의 일수</td>
+</tr>
+<tr>
+<td>9</td>
+<td>관리자 임의 설정 필드(예약)</td>
+</tr>
+</tbody>
+</table></div>
+<p>패스워드 만료 기간을 60일로 설정하더라도, 만료 이후에 갑자기 통보하는 것이 아니라 만료 전 7일 등 미리 경고 메시지를 통해 사용자에게 변경을 안내해야 한다.</p>
 <h4 id="4-패스워드-암호화-알고리즘과-솔트salt">4. 패스워드 암호화 알고리즘과 솔트(Salt)</h4>
 <h5 id="4-1_5">4-1. 암호화 알고리즘 식별자</h5>
-<ul>
-<li>/etc/shadow  두 번째 필드의 패스워드 문자열은 $알고리즘식별자$솔트$해시값 형식으로 구성된</li>
-<li>다.</li>
-<li>식별자</li>
-<li>알고리즘</li>
-<li>$1$</li>
-<li>MD5</li>
-<li>$5$</li>
-<li>SHA-256</li>
-<li>$6$</li>
-<li>SHA-512 (현재 대부분의 최신 리눅스 시스템 기본값)</li>
-</ul>
-<p>비트 수가 클수록 해독이 어렵다. 최신 리눅스 버전은 대부분 $6$ (SHA-512)를 사용하며,
-구버전(CentOS 7 이전 등)일수록 낮은 알고리즘이 사용될 수 있다.</p>
+<p>/etc/shadow  두 번째 필드의 패스워드 문자열은 $알고리즘식별자$솔트$해시값 형식으로 구성된 다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>식별자</th>
+<th>알고리즘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1$</td>
+<td>MD5</td>
+</tr>
+<tr>
+<td>$5$</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>$6$</td>
+<td>SHA-512 (현재 대부분의 최신 리눅스 시스템 기본값)</td>
+</tr>
+</tbody>
+</table></div>
+<p>비트 수가 클수록 해독이 어렵다. 최신 리눅스 버전은 대부분 $6$ (SHA-512)를 사용하며, 구버전(CentOS 7 이전 등)일수록 낮은 알고리즘이 사용될 수 있다.</p>
 <h5 id="4-2-salt">4-2. 솔트(Salt)의 역할</h5>
-<p>솔트는 동일한 패스워드라도 암호화된 결과값이 달라지도록 랜덤하게 추가되는 값이다.
-솔트 없이 동일한 알고리즘으로 동일한 문자열을 해시하면 결과값이 항상 동일하다.
-공격자가 알고리즘을 알고 있으면, 미리 계산한 해시값 목록(레인보우 테이블)으로 패스
-워드를 역추적할 수 있다.
-솔트를 적용하면, 동일한 패스워드라도 계정마다 솔트 값이 달라 해시 결과가 다르게 나
-와 역추적이 어렵다.
-⚠️ 솔트(Salt) 개념은 정보보안기사 시험에서 출제되는 항목이다.</p>
+<p>솔트는 동일한 패스워드라도 암호화된 결과값이 달라지도록 랜덤하게 추가되는 값이다.</p>
+<p>솔트 없이 동일한 알고리즘으로 동일한 문자열을 해시하면 결과값이 항상 동일하다.</p>
+<p>공격자가 알고리즘을 알고 있으면, 미리 계산한 해시값 목록(레인보우 테이블)으로 패스 워드를 역추적할 수 있다.</p>
+<p>솔트를 적용하면, 동일한 패스워드라도 계정마다 솔트 값이 달라 해시 결과가 다르게 나 와 역추적이 어렵다.</p>
+<p>⚠️ 솔트(Salt) 개념은 정보보안기사 시험에서 출제되는 항목이다.</p>
 <h4 id="5-파일-및-디렉토리-유형-표기">5. 파일 및 디렉토리 유형 표기</h4>
-<ul>
-<li>ls -al  명령어 출력의 첫 번째 문자는 파일 유형을 나타낸다.</li>
-<li>표기</li>
-<li>유형</li>
-<li>설명</li>
-<li>d</li>
-<li>디렉토리</li>
-<li>일반 디렉토리</li>
-<li>-</li>
-<li>일반 파일</li>
-<li>일반 파일</li>
-<li>l</li>
-<li>심볼릭 링크</li>
-<li>다른 파일/디렉토리에 링크된 파일</li>
-<li>c</li>
-<li>캐릭터 특수 파일</li>
-<li>버퍼에 저장되지 않는 특수 파일 (예: 터미널 파일)</li>
-<li>b</li>
-<li>블록 특수 파일</li>
-<li>버퍼링된 특수 파일 (예: 디스크 드라이버)</li>
-<li>s</li>
-<li>소켓 파일</li>
-<li>네트워크 연결을 위한 소켓 파일</li>
-<li>p</li>
-<li>파이프 파일</li>
-<li>파이프 기능을 수행하는 파일</li>
-</ul>
+<p>ls -al  명령어 출력의 첫 번째 문자는 파일 유형을 나타낸다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>표기</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>디렉토리</td>
+<td>일반 디렉토리</td>
+</tr>
+<tr>
+<td>-</td>
+<td>일반 파일</td>
+<td>일반 파일</td>
+</tr>
+<tr>
+<td>l</td>
+<td>심볼릭 링크</td>
+<td>다른 파일/디렉토리에 링크된 파일</td>
+</tr>
+<tr>
+<td>c</td>
+<td>캐릭터 특수 파일</td>
+<td>버퍼에 저장되지 않는 특수 파일 (예: 터미널 파일)</td>
+</tr>
+<tr>
+<td>b</td>
+<td>블록 특수 파일</td>
+<td>버퍼링된 특수 파일 (예: 디스크 드라이버)</td>
+</tr>
+<tr>
+<td>s</td>
+<td>소켓 파일</td>
+<td>네트워크 연결을 위한 소켓 파일</td>
+</tr>
+<tr>
+<td>p</td>
+<td>파이프 파일</td>
+<td>파이프 기능을 수행하는 파일</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="6-파일-권한과-umask">6. 파일 권한과 umask</h4>
 <h5 id="6-1">6-1. 기본 생성 권한</h5>
-<p>파일과 디렉토리가 생성될 때 부여되는 기본 권한은 umask 값에 의해 결정된다.
-umask        ← 현재 umask 값 확인
-기본 umask 값은 0022 이며, 각 유형별 기본 권한 계산 방식은 다음과 같다.</p>
-<ul>
-<li>유형</li>
-<li>최대 권한</li>
-<li>umask 값</li>
-<li>기본 생성 권한</li>
-<li>디렉토리</li>
-<li>파일</li>
-</ul>
+<p>파일과 디렉토리가 생성될 때 부여되는 기본 권한은 umask 값에 의해 결정된다.</p>
+<p>umask        ← 현재 umask 값 확인 기본 umask 값은 0022 이며, 각 유형별 기본 권한 계산 방식은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>유형</th>
+<th>최대 권한</th>
+<th>umask 값</th>
+<th>기본 생성 권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>디렉토리</td>
+<td>777</td>
+<td>022</td>
+<td>755</td>
+</tr>
+<tr>
+<td>파일</td>
+<td>666</td>
+<td>022</td>
+<td>644</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="6-2-umask">6-2. umask 값 변경과 보안</h5>
-<p>umask 0027    ← umask 값 변경 (예시)
-umask 0022    ← 원래 값으로 복구
-⚠️ umask 값이 임의로 변경되어 있으면, 이후 생성되는 파일과 디렉토리가 예기치 않은
-권한을 가지게 된다. 정기적인 보안 점검 시 umask 값 변경 여부를 반드시 확인해야 한
-다.</p>
+<p>umask 0027    ← umask 값 변경 (예시)</p>
+<p>umask 0022    ← 원래 값으로 복구 ⚠️ umask 값이 임의로 변경되어 있으면, 이후 생성되는 파일과 디렉토리가 예기치 않은 권한을 가지게 된다. 정기적인 보안 점검 시 umask 값 변경 여부를 반드시 확인해야 한 다.</p>
 <h4 id="7-파일-권한-변경-chmod">7. 파일 권한 변경 (chmod)</h4>
-<p>파일이나 디렉토리의 권한은 chmod  명령어로 변경할 수 있다.
-chmod 777 test.txt    ← test.txt에 rwxrwxrwx 권한 부여</p>
+<p>파일이나 디렉토리의 권한은 chmod  명령어로 변경할 수 있다.</p>
+<p>chmod 777 test.txt    ← test.txt에 rwxrwxrwx 권한 부여</p>
 <h4 id="8-소유주-및-그룹-변경-chown-chgrp">8. 소유주 및 그룹 변경 (chown, chgrp)</h4>
-<p>파일의 소유주와 그룹도 루트 계정에서 변경할 수 있다.
-chown root ttt.txt    ← ttt.txt의 소유주를 root로 변경
-chgrp root ttt.txt    ← ttt.txt의 그룹을 root로 변경
-chown : change owner (소유주 변경)
-chgrp : change group (그룹 변경)</p>
+<p>파일의 소유주와 그룹도 루트 계정에서 변경할 수 있다.</p>
+<p>chown root ttt.txt    ← ttt.txt의 소유주를 root로 변경 chgrp root ttt.txt    ← ttt.txt의 그룹을 root로 변경 chown : change owner (소유주 변경)</p>
+<p>chgrp : change group (그룹 변경)</p>
 <h4 id="9-계정-관리와-스크립트-활용">9. 계정 관리와 스크립트 활용</h4>
-<p>계정 현황 점검을 위해 /etc/passwd 나 /etc/shadow  파일을 매번 수동으로 확인하는 것은 비
-효율적이다. 실무에서는 관리에 필요한 명령어들을 스크립트로 작성하여 실행함으로써 결과
-를 자동으로 확인하는 방식을 사용한다.</p>
+<p>계정 현황 점검을 위해 /etc/passwd 나 /etc/shadow  파일을 매번 수동으로 확인하는 것은 비 효율적이다. 실무에서는 관리에 필요한 명령어들을 스크립트로 작성하여 실행함으로써 결과 를 자동으로 확인하는 방식을 사용한다.</p>
 <hr />
 <h3 id="075-리눅스-기본-명령어-도움말시스템탐색-명령어">075. 리눅스 기본 명령어, 도움말·시스템·탐색 명령어</h3>
 <p>탐색 명령어</p>
 <h4 id="1-리눅스-명령어-구조">1. 리눅스 명령어 구조</h4>
-<p>리눅스 명령어는 기본적으로 명령어 [옵션] [인자(argument)]  형태로 구성된다.
-짧은 옵션(한 글자)은 하나의  뒤에 묶어 사용할 수 있다.
-예: ls -al 은 ls -a -l 과 동일
-인자(argument)는 하나 이상 여러 개를 지정할 수 있다.
-예: ls -la /etc /home  → /etc 와 /home  두 디렉토리 내용을 함께 출력
-대부분의 명령 실행 중 Ctrl+C 를 누르면 명령을 중단할 수 있다.</p>
+<p>리눅스 명령어는 기본적으로 명령어 [옵션] [인자(argument)]  형태로 구성된다.</p>
+<p>짧은 옵션(한 글자)은 하나의  뒤에 묶어 사용할 수 있다.</p>
+<p>예: ls -al 은 ls -a -l 과 동일 인자(argument)는 하나 이상 여러 개를 지정할 수 있다.</p>
+<p>예: ls -la /etc /home  → /etc 와 /home  두 디렉토리 내용을 함께 출력 대부분의 명령 실행 중 Ctrl+C 를 누르면 명령을 중단할 수 있다.</p>
 <h4 id="2-도움말-명령어">2. 도움말 명령어</h4>
-<ul>
-<li>관리자라도 모든 명령어와 옵션을 외우지 않는다. 필요할 때 도움말 명령어를 활용한다.</li>
-<li>명령어</li>
-<li>설명</li>
-<li>명령어 --help  또는 명령어 -h</li>
-<li>해당 명령어의 간단한 사용법과 옵션 목록 출력</li>
-<li>man 명령어</li>
-<li>명령어의 상세 매뉴얼 페이지 출력. q 를 눌러 종료</li>
-<li>apropos 키워드</li>
-<li>키워드와 관련된 명령어 목록과 설명 출력</li>
-<li>whatis 명령어</li>
-<li>명령어의 짧은 한 줄 설명 출력</li>
-</ul>
+<p>관리자라도 모든 명령어와 옵션을 외우지 않는다. 필요할 때 도움말 명령어를 활용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>명령어 --help 또는 명령어 -h</td>
+<td>해당 명령어의 간단한 사용법과 옵션 목록 출력</td>
+</tr>
+<tr>
+<td>man 명령어</td>
+<td>명령어의 상세 매뉴얼 페이지 출력. q 를 눌러 종료</td>
+</tr>
+<tr>
+<td>apropos 키워드</td>
+<td>키워드와 관련된 명령어 목록과 설명 출력</td>
+</tr>
+<tr>
+<td>whatis 명령어</td>
+<td>명령어의 짧은 한 줄 설명 출력</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="3-시스템-종료-및-재부팅">3. 시스템 종료 및 재부팅</h4>
-<ul>
-<li>shutdown          ← 시스템 종료</li>
-<li>shutdown -h now   ← 즉시 셧다운 (halt)</li>
-<li>shutdown -r       ← 셧다운 후 재부팅</li>
-<li>reboot            ← 시스템 재부팅</li>
-</ul>
-<p>셧다운 명령 시 특정 시간 이후 종료하거나 사용자에게 메시지를 전달하는 옵션도 존재한
-다.</p>
+<p>shutdown          ← 시스템 종료 shutdown -h now   ← 즉시 셧다운 (halt) shutdown -r       ← 셧다운 후 재부팅 reboot            ← 시스템 재부팅 셧다운 명령 시 특정 시간 이후 종료하거나 사용자에게 메시지를 전달하는 옵션도 존재한 다.</p>
 <h4 id="4-history-명령어">4. history 명령어</h4>
-<p>history 는 사용자가 입력했던 명령어 목록을 표시한다. 명령어 이력은 홈 디렉토리의 숨김
-파일 .bash_history 에 저장된다.
-history           ← 현재 세션 명령어 이력 출력
-history -w        ← 현재 세션 이력을 .bash_history 파일에 저장
-history -c        ← 현재 세션의 임시 이력만 삭제 (파일 내용은 유지)
-cat ~/.bash_history   ← 저장된 이력 파일 직접 확인
-history -c 로 삭제되는 것은 현재 세션의 임시 이력뿐이며, .bash_history  파일에 저장된
-내용은 삭제되지 않는다.</p>
+<p>history 는 사용자가 입력했던 명령어 목록을 표시한다. 명령어 이력은 홈 디렉토리의 숨김 파일 .bash_history 에 저장된다.</p>
+<p>history           ← 현재 세션 명령어 이력 출력 history -w        ← 현재 세션 이력을 .bash_history 파일에 저장 history -c        ← 현재 세션의 임시 이력만 삭제 (파일 내용은 유지) cat ~/.bash_history   ← 저장된 이력 파일 직접 확인 history -c 로 삭제되는 것은 현재 세션의 임시 이력뿐이며, .bash_history  파일에 저장된 내용은 삭제되지 않는다.</p>
 <h4 id="5-echo-명령어">5. echo 명령어</h4>
-<p>echo 는 지정한 문자열을 터미널에 출력한다. 셸 스크립트 작성이나 웹 연동 작업에서 자주
-사용된다.
-echo "test"       ← "test" 문자열을 터미널에 출력</p>
+<p>echo 는 지정한 문자열을 터미널에 출력한다. 셸 스크립트 작성이나 웹 연동 작업에서 자주 사용된다.</p>
+<p>echo "test"       ← "test" 문자열을 터미널에 출력</p>
 <h4 id="6-date-명령어">6. date 명령어</h4>
-<p>date 는 시스템의 현재 날짜와 시간 정보를 출력하거나 변경할 때 사용한다.
-date              ← 현재 날짜·시간 출력
-date -d "20260407"    ← 특정 날짜 정보 출력
-date -s "20260407 10:27"  ← 시스템 날짜·시간 변경
-우리나라 표준 연구원의 타임 서버는 전 세계 최고 수준의 정밀도를 보유하며, 시스템 설
-치 시 Asia/Seoul로 설정하면 해당 타임 서버를 통해 시간이 동기화된다.</p>
+<p>date 는 시스템의 현재 날짜와 시간 정보를 출력하거나 변경할 때 사용한다.</p>
+<p>date              ← 현재 날짜·시간 출력 date -d "20260407"    ← 특정 날짜 정보 출력 date -s "20260407 10:27"  ← 시스템 날짜·시간 변경 우리나라 표준 연구원의 타임 서버는 전 세계 최고 수준의 정밀도를 보유하며, 시스템 설 치 시 Asia/Seoul로 설정하면 해당 타임 서버를 통해 시간이 동기화된다.</p>
 <h4 id="7-계정-및-접속-정보-확인-명령어">7. 계정 및 접속 정보 확인 명령어</h4>
-<ul>
-<li>명령어</li>
-<li>설명</li>
-<li>id</li>
-<li>현재 사용자의 UID, GID, 소속 그룹 정보 출력. CTF 등에서 루트 권한 탈취 여부</li>
-<li>확인에 사용</li>
-<li>who</li>
-<li>현재 시스템에 로그인한 사용자 목록과 접속 시간, 접속 터미널 유형 출력</li>
-<li>whoami</li>
-<li>현재 접속 중인 사용자 이름만 출력</li>
-<li>pwd</li>
-<li>현재 작업 디렉토리의 절대 경로 출력</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>현재 사용자의 UID, GID, 소속 그룹 정보 출력. CTF 등에서 루트 권한 탈취 여부<br>확인에 사용</td>
+</tr>
+<tr>
+<td>who</td>
+<td>현재 시스템에 로그인한 사용자 목록과 접속 시간, 접속 터미널 유형 출력</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>현재 접속 중인 사용자 이름만 출력</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>현재 작업 디렉토리의 절대 경로 출력</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="7-1-tty-pts">7-1. TTY와 PTS 구분</h5>
-<p>who  명령 출력에서 접속 터미널 유형을 통해 접속 방식을 확인할 수 있다.
-표기
-의미
-tty
-로컬 터미널에서 직접 접속
-pts/숫자
-가상 콘솔(원격 접속 또는 가상 터미널). 숫자는 가상 콘솔 번호
-동시에 여러 원격 접속이 이루어지면 pts/0 , pts/1  등으로 순서가 부여된다.</p>
+<p>who  명령 출력에서 접속 터미널 유형을 통해 접속 방식을 확인할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>표기</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tty</td>
+<td>로컬 터미널에서 직접 접속</td>
+</tr>
+<tr>
+<td>pts/숫자</td>
+<td>가상 콘솔(원격 접속 또는 가상 터미널). 숫자는 가상 콘솔 번호</td>
+</tr>
+</tbody>
+</table></div>
+<p>동시에 여러 원격 접속이 이루어지면 pts/0 , pts/1  등으로 순서가 부여된다.</p>
 <h4 id="8-find-명령어">8. find 명령어</h4>
-<p>find 는 파일이나 디렉토리를 조건에 따라 검색하는 명령어로, 실무에서 자주 사용된다.
-find /경로 -name "파일명"         ← 파일 이름으로 검색
-find / -name "sshd_config"        ← 최상위 디렉토리부터 sshd_config 검색
-find / -perm 4000                 ← 특정 권한(4000)을 가진 파일 검색
-find /etc -name "파일명" -perm 4000   ← 이름과 권한 조건을 함께 사용
-두 가지 이상의 조건을 동시에 사용할 수 있다.</p>
+<p>find 는 파일이나 디렉토리를 조건에 따라 검색하는 명령어로, 실무에서 자주 사용된다.</p>
+<p>find /경로 -name "파일명"         ← 파일 이름으로 검색 find / -name "sshd_config"        ← 최상위 디렉토리부터 sshd_config 검색 find / -perm 4000                 ← 특정 권한(4000)을 가진 파일 검색 find /etc -name "파일명" -perm 4000   ← 이름과 권한 조건을 함께 사용 두 가지 이상의 조건을 동시에 사용할 수 있다.</p>
 <h4 id="9-ls-명령어-주요-옵션">9. ls 명령어 주요 옵션</h4>
-<ul>
-<li>옵션</li>
-<li>설명</li>
-<li>-l</li>
-<li>목록 형식으로 자세히 출력</li>
-<li>-a</li>
-<li>숨김 파일 포함 출력</li>
-<li>-tr</li>
-<li>마지막 수정 날짜 역순(오래된 것 먼저)으로 정렬하여 출력</li>
-<li>-d</li>
-<li>디렉토리 자체의 정보를 출력 (내용이 아닌 디렉토리 항목 자체)</li>
-<li>-S</li>
-<li>파일 크기 큰 것부터 정렬 출력</li>
-<li>--hide=*.확장자</li>
-<li>지정한 확장자 파일을 출력에서 제외</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>목록 형식으로 자세히 출력</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>숨김 파일 포함 출력</td>
+</tr>
+<tr>
+<td>-tr</td>
+<td>마지막 수정 날짜 역순(오래된 것 먼저)으로 정렬하여 출력</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>디렉토리 자체의 정보를 출력 (내용이 아닌 디렉토리 항목 자체)</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>파일 크기 큰 것부터 정렬 출력</td>
+</tr>
+<tr>
+<td>--hide=*.확장자</td>
+<td>지정한 확장자 파일을 출력에서 제외</td>
+</tr>
+</tbody>
+</table></div>
 <p>기본 정렬은 알파벳 또는 숫자 순이다.</p>
 <h4 id="10-mkdir-명령어---하위-디렉토리-일괄-생성">10. mkdir 명령어 - 하위 디렉토리 일괄 생성</h4>
-<p>mkdir 디렉토리명           ← 단일 디렉토리 생성
-mkdir -p test3/test4/test5 ← 중간 경로가 없어도 하위 디렉토리까지 한꺼번에 생성
-p  옵션이 없으면 상위 디렉토리가 존재하지 않을 경우 생성에 실패한다.</p>
+<p>mkdir 디렉토리명           ← 단일 디렉토리 생성 mkdir -p test3/test4/test5 ← 중간 경로가 없어도 하위 디렉토리까지 한꺼번에 생성 p  옵션이 없으면 상위 디렉토리가 존재하지 않을 경우 생성에 실패한다.</p>
 <h4 id="11-rmdir-명령어---빈-디렉토리-삭제">11. rmdir 명령어 - 빈 디렉토리 삭제</h4>
-<p>rmdir 디렉토리명    ← 비어있는 디렉토리만 삭제 가능
-디렉토리 안에 파일이 하나라도 존재하면 rmdir 은 실패한다. 이 경우 rm  명령어를 사용해
-야 한다.</p>
+<p>rmdir 디렉토리명    ← 비어있는 디렉토리만 삭제 가능 디렉토리 안에 파일이 하나라도 존재하면 rmdir 은 실패한다. 이 경우 rm  명령어를 사용해 야 한다.</p>
 <hr />
 <h3 id="077-파일-조작검색출력-명령어-표준-입출력과-리디렉션">077. 파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</h3>
 <p>출력과 리디렉션</p>
 <h4 id="1-rm-명령어-파일디렉토리-삭제">1. rm 명령어 (파일·디렉토리 삭제)</h4>
-<p>rmdir 은 빈 디렉토리만 삭제할 수 있다. 내부에 파일이 존재하는 디렉토리를 삭제하려면
-rm  명령어를 사용한다.
-rm -rf 디렉토리명    ← 내용물이 있는 디렉토리 강제 삭제
-rm -ri 디렉토리명    ← 삭제 여부를 대화형으로 묻고 삭제
-옵션
-설명
--r
-디렉토리와 하위 내용 모두 삭제
--f
-삭제 여부를 묻지 않고 강제 삭제
--i
-대화형(interactive)으로 삭제 여부를 묻고 진행
-옵션은 명령어 뒤에 위치해야 하며, 명령어 앞에는 둘 수 없다.</p>
+<p>rmdir 은 빈 디렉토리만 삭제할 수 있다. 내부에 파일이 존재하는 디렉토리를 삭제하려면 rm  명령어를 사용한다.</p>
+<p>rm -rf 디렉토리명    ← 내용물이 있는 디렉토리 강제 삭제 rm -ri 디렉토리명    ← 삭제 여부를 대화형으로 묻고 삭제</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>디렉토리와 하위 내용 모두 삭제</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>삭제 여부를 묻지 않고 강제 삭제</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>대화형(interactive)으로 삭제 여부를 묻고 진행</td>
+</tr>
+</tbody>
+</table></div>
+<p>옵션은 명령어 뒤에 위치해야 하며, 명령어 앞에는 둘 수 없다.</p>
 <h4 id="2-mv-명령어-이동-및-이름-변경">2. mv 명령어 (이동 및 이름 변경)</h4>
-<p>mv 는 파일 또는 디렉토리를 이동하거나 이름을 변경할 때 사용한다. 이동 시 원본 위치에서
-는 삭제된다.
-mv 원본파일 대상경로/파일명    ← 이동 (이름을 동일하게 유지)
-mv 원본파일 새이름             ← 이름 변경
-mv 원본파일 대상경로/새이름    ← 이동과 이름 변경 동시 수행</p>
+<p>mv 는 파일 또는 디렉토리를 이동하거나 이름을 변경할 때 사용한다. 이동 시 원본 위치에서 는 삭제된다.</p>
+<p>mv 원본파일 대상경로/파일명    ← 이동 (이름을 동일하게 유지) mv 원본파일 새이름             ← 이름 변경 mv 원본파일 대상경로/새이름    ← 이동과 이름 변경 동시 수행</p>
 <h4 id="3-file-명령어-파일-유형-확인">3. file 명령어 (파일 유형 확인)</h4>
-<p>file  명령어는 파일의 종류(텍스트 파일, 바이너리, 디렉토리 등)를 출력한다. 악성코드 분
-석 등에서도 활용된다.</p>
-<p>file /etc/passwd              ← 단일 파일 유형 확인
-file /etc/passwd /etc/shadow  ← 여러 파일 유형 동시 확인</p>
+<p>file  명령어는 파일의 종류(텍스트 파일, 바이너리, 디렉토리 등)를 출력한다. 악성코드 분 석 등에서도 활용된다.</p>
+<p>file /etc/passwd              ← 단일 파일 유형 확인 file /etc/passwd /etc/shadow  ← 여러 파일 유형 동시 확인</p>
 <h4 id="4-tac-명령어-역순-출력">4. tac 명령어 (역순 출력)</h4>
-<p>tac 은 cat 의 역방향 동작으로, 파일 내용을 마지막 줄부터 역순으로 출력한다.
-cat /var/log/messages    ← 파일 내용을 정순 출력
-tac /var/log/messages    ← 파일 내용을 역순 출력 (최신 로그가 먼저 표시)
-로그 파일처럼 양이 많고 최신 내용을 먼저 확인하고 싶을 때 유용하다.</p>
+<p>tac 은 cat 의 역방향 동작으로, 파일 내용을 마지막 줄부터 역순으로 출력한다.</p>
+<p>cat /var/log/messages    ← 파일 내용을 정순 출력 tac /var/log/messages    ← 파일 내용을 역순 출력 (최신 로그가 먼저 표시)</p>
+<p>로그 파일처럼 양이 많고 최신 내용을 먼저 확인하고 싶을 때 유용하다.</p>
 <h4 id="5-sort-명령어-정렬">5. sort 명령어 (정렬)</h4>
-<p>sort 는 파일 내용을 정렬하여 출력한다. 기본값은 알파벳·숫자 오름차순이다.
-sort /etc/passwd        ← 알파벳 오름차순 정렬
-sort -r /etc/passwd     ← 역순 정렬
-다양한 정렬 기준(알파벳, 숫자, 역순, 특정 열 기준 등)을 옵션으로 지정할 수 있다.</p>
+<p>sort 는 파일 내용을 정렬하여 출력한다. 기본값은 알파벳·숫자 오름차순이다.</p>
+<p>sort /etc/passwd        ← 알파벳 오름차순 정렬 sort -r /etc/passwd     ← 역순 정렬 다양한 정렬 기준(알파벳, 숫자, 역순, 특정 열 기준 등)을 옵션으로 지정할 수 있다.</p>
 <h4 id="6-nmcli-명령어-네트워크-설정-cli">6. nmcli 명령어 (네트워크 설정 CLI)</h4>
-<p>nmcli 는 네트워크 설정을 명령행(CLI) 방식으로 수행하는 도구이다. nmtui (텍스트 UI 방
-식)와 같은 역할을 수행한다.
-nmcli connection up 인터페이스명    ← 특정 인터페이스 활성화
-⚠️ nmtui 와 nmcli  두 도구를 동시에 사용하여 주소를 설정하면, 동일 주소가 중복 등록
-되거나 통신 오류가 발생할 수 있다. 반드시 하나의 도구로만 설정한다.</p>
+<p>nmcli 는 네트워크 설정을 명령행(CLI) 방식으로 수행하는 도구이다. nmtui (텍스트 UI 방 식)와 같은 역할을 수행한다.</p>
+<p>nmcli connection up 인터페이스명    ← 특정 인터페이스 활성화 ⚠️ nmtui 와 nmcli  두 도구를 동시에 사용하여 주소를 설정하면, 동일 주소가 중복 등록 되거나 통신 오류가 발생할 수 있다. 반드시 하나의 도구로만 설정한다.</p>
 <h4 id="7-find-명령어-심화--다중-조건-검색">7. find 명령어 심화 — 다중 조건 검색</h4>
 <p>find 에서 여러 조건을 동시에 지정하여 검색할 수 있다.</p>
-<ul>
-<li>find / -name "파일명" -perm 4000 -user root</li>
-<li>← 최상위 디렉토리부터, 이름이 '파일명'이고, 권한이 4000이며, 소유주가 root인 파일 검색</li>
-<li>조건 옵션</li>
-<li>설명</li>
-<li>-name</li>
-<li>파일 이름으로 검색</li>
-<li>-perm</li>
-<li>파일 권한으로 검색</li>
-<li>-exec</li>
-<li>실행 파일(이진파일) 검색</li>
-<li>-user</li>
-<li>특정 소유주를 가진 파일 검색</li>
-</ul>
+<p>find / -name "파일명" -perm 4000 -user root ← 최상위 디렉토리부터, 이름이 '파일명'이고, 권한이 4000이며, 소유주가 root인 파일 검색</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조건 옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-name</td>
+<td>파일 이름으로 검색</td>
+</tr>
+<tr>
+<td>-perm</td>
+<td>파일 권한으로 검색</td>
+</tr>
+<tr>
+<td>-exec</td>
+<td>실행 파일(이진파일) 검색</td>
+</tr>
+<tr>
+<td>-user</td>
+<td>특정 소유주를 가진 파일 검색</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="8-whereis-명령어-명령어-위치-검색">8. whereis 명령어 (명령어 위치 검색)</h4>
-<p>whereis 는 명령어의 실행 파일, 소스, 매뉴얼 페이지 경로를 출력한다.
-whereis ls       ← ls 명령어의 위치 확인
-whereis -b ls    ← 이진파일(실행파일) 경로만 확인
-ls  명령어를 내리면, whereis 로 확인한 경로의 실행 파일이 실행되어 결과가 출력된다.</p>
+<p>whereis 는 명령어의 실행 파일, 소스, 매뉴얼 페이지 경로를 출력한다.</p>
+<p>whereis ls       ← ls 명령어의 위치 확인 whereis -b ls    ← 이진파일(실행파일) 경로만 확인 ls  명령어를 내리면, whereis 로 확인한 경로의 실행 파일이 실행되어 결과가 출력된다.</p>
 <h4 id="9-grep-명령어-문자열-검색">9. grep 명령어 (문자열 검색)</h4>
-<p>grep 은 파일 내에서 특정 문자열을 검색한다. 일부 문자열만 입력해도 관련 내용이 모두 출
-력된다. 로그 파일처럼 내용이 방대한 경우 특히 유용하다.
-grep "root" /etc/passwd         ← /etc/passwd에서 "root" 포함 행 출력
-grep -i "root" /etc/passwd      ← 대소문자 구분 없이 검색
-grep -w "root" /etc/passwd      ← 정확히 "root"라는 단어만 검색
-옵션
-설명
--i
-대소문자 무시(case-insensitive)
--w
-정확한 단어(word) 단위 검색</p>
+<p>grep 은 파일 내에서 특정 문자열을 검색한다. 일부 문자열만 입력해도 관련 내용이 모두 출 력된다. 로그 파일처럼 내용이 방대한 경우 특히 유용하다.</p>
+<p>grep "root" /etc/passwd         ← /etc/passwd에서 "root" 포함 행 출력 grep -i "root" /etc/passwd      ← 대소문자 구분 없이 검색 grep -w "root" /etc/passwd      ← 정확히 "root"라는 단어만 검색</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-i</td>
+<td>대소문자 무시(case-insensitive)</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>정확한 단어(word) 단위 검색</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="10-표준-입출력-스트림">10. 표준 입출력 스트림</h4>
 <p>리눅스(유닉스 계열)에서는 세 가지 표준 스트림(채널)을 통해 입출력이 이루어진다.</p>
-<ul>
-<li>스트림</li>
-<li>채널 번호</li>
-<li>기본 장치</li>
-<li>설명</li>
-<li>stdin (표준 입력)</li>
-<li>키보드</li>
-<li>명령 및 데이터를 입력받는 채널</li>
-<li>stdout (표준 출력)</li>
-<li>모니터(화면)</li>
-<li>명령 실행 결과를 출력하는 채널</li>
-<li>stderr (표준 에러)</li>
-<li>모니터(화면)</li>
-<li>에러 메시지를 출력하는 채널</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>스트림</th>
+<th>채널 번호</th>
+<th>기본 장치</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stdin (표준 입력)</td>
+<td>0</td>
+<td>키보드</td>
+<td>명령 및 데이터를 입력받는 채널</td>
+</tr>
+<tr>
+<td>stdout (표준 출력)</td>
+<td>1</td>
+<td>모니터(화면)</td>
+<td>명령 실행 결과를 출력하는 채널</td>
+</tr>
+<tr>
+<td>stderr (표준 에러)</td>
+<td>2</td>
+<td>모니터(화면)</td>
+<td>에러 메시지를 출력하는 채널</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="11-리디렉션redirection">11. 리디렉션(Redirection)</h4>
-<ul>
-<li>리디렉션이란 표준 입출력의 방향을 관리자가 원하는 방향으로 바꾸는 것을 말한다.</li>
-<li>기호</li>
-<li>종류</li>
-<li>설명</li>
-<li>&lt;</li>
-<li>입력 리디렉션</li>
-<li>키보드 대신 파일에서 입력을 읽어들임</li>
-<li>
-<blockquote></blockquote>
-</li>
-<li>출력 리디렉션</li>
-<li>화면 대신 파일로 결과를 출력(기존 내용 덮어씀)</li>
-<li>
-<blockquote>
-<blockquote></blockquote>
-</blockquote>
-</li>
-<li>추가 출력 리디렉션</li>
-<li>파일 끝에 내용을 추가하여 출력</li>
-<li>echo "test" &gt; echo.txt     ← "test" 문자열을 echo.txt 파일에 출력(저장)</li>
-<li>명령어 &lt; 입력파일          ← 키보드 대신 파일에서 입력을 받아 명령 실행</li>
-<li>리디렉션 기호의 방향을 반대로 사용하면 의도치 않은 결과가 발생할 수 있으므로, 방향</li>
-<li>을 정확히 확인하고 사용해야 한다.</li>
-</ul>
+<p>리디렉션이란 표준 입출력의 방향을 관리자가 원하는 방향으로 바꾸는 것을 말한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기호</th>
+<th>종류</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;</td>
+<td>입력 리디렉션</td>
+<td>키보드 대신 파일에서 입력을 읽어들임</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>출력 리디렉션</td>
+<td>화면 대신 파일로 결과를 출력(기존 내용 덮어씀)</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>추가 출력 리디렉션</td>
+<td>파일 끝에 내용을 추가하여 출력</td>
+</tr>
+</tbody>
+</table></div>
+<p>echo "test" &gt; echo.txt     ← "test" 문자열을 echo.txt 파일에 출력(저장) 명령어 &lt; 입력파일          ← 키보드 대신 파일에서 입력을 받아 명령 실행 리디렉션 기호의 방향을 반대로 사용하면 의도치 않은 결과가 발생할 수 있으므로, 방향 을 정확히 확인하고 사용해야 한다.</p>
 <hr />
 <h3 id="089-linux-패스워드-정책-파라미터-설정">089. Linux 패스워드 정책 파라미터 설정</h3>
 <h4 id="1-windows-dns-연동-테스트-확인">1. Windows DNS 연동 테스트 확인</h4>
 <h5 id="1-1-ip">1-1. IP 접속 확인 후 도메인 테스트</h5>
-<p>이전 시간에 이어 도메인 접속 테스트를 진행한다. 호스트 컴퓨터의 DNS 주소를 현재 설정
-중인 윈도우 서버 IP로 변경한 상태에서 브라우저에 www.도메인명.com 을 입력하면 DNS 서버
-에 질의하여 정상적으로 웹페이지에 접속된다.
-호스트 컴퓨터 DNS 변경 경로:
-네트워크 및 인터넷 설정 열기
-→ 어댑터 옵션 변경
-→ 사용 중인 어댑터 우클릭 &gt; 속성
-→ TCP/IP 버전4 &gt; DNS 서버 주소를 윈도우 서버 IP로 변경
-⚠️ DNS 주소 변경 후에도 접속이 안 되는 경우, 네트워크 설정이 정상인지 확인한다.</p>
+<p>이전 시간에 이어 도메인 접속 테스트를 진행한다. 호스트 컴퓨터의 DNS 주소를 현재 설정 중인 윈도우 서버 IP로 변경한 상태에서 브라우저에 www.도메인명.com 을 입력하면 DNS 서버 에 질의하여 정상적으로 웹페이지에 접속된다.</p>
+<p>호스트 컴퓨터 DNS 변경 경로:</p>
+<p>네트워크 및 인터넷 설정 열기 → 어댑터 옵션 변경 → 사용 중인 어댑터 우클릭 &gt; 속성 → TCP/IP 버전4 &gt; DNS 서버 주소를 윈도우 서버 IP로 변경 ⚠️ DNS 주소 변경 후에도 접속이 안 되는 경우, 네트워크 설정이 정상인지 확인한다.</p>
 <h5 id="1-2-dns">1-2. DNS 캐시 초기화</h5>
-<p>DNS 변경 직후에도 접속이 되지 않는 경우, 이미 캐시된 DNS 정보가 남아 있을 수 있다. 네
-트워크 어댑터를 비활성화했다가 다시 활성화하거나 DNS 캐시를 초기화하면 된다.</p>
+<p>DNS 변경 직후에도 접속이 되지 않는 경우, 이미 캐시된 DNS 정보가 남아 있을 수 있다. 네 트워크 어댑터를 비활성화했다가 다시 활성화하거나 DNS 캐시를 초기화하면 된다.</p>
 <h4 id="2-linux-머신-전환-및-패스워드-정책-파일-확인">2. Linux 머신 전환 및 패스워드 정책 파일 확인</h4>
 <h5 id="2-1_2">2-1. 패스워드 정책 파일 경로</h5>
-<p>Linux에서 기본적인 패스워드 정책은 아래 파일을 통해 설정한다.
-/etc/security/pwquality.conf    ← 패스워드 품질 정책 설정 파일
-이 파일에서 패스워드 복잡도, 길이, 문자 종류 등의 규칙을 설정할 수 있다. 각 옵션 앞에 #
-이 붙어 있으면 주석 처리된 것이므로 해당 기능은 적용되지 않는다.</p>
+<p>Linux에서 기본적인 패스워드 정책은 아래 파일을 통해 설정한다.</p>
+<p>/etc/security/pwquality.conf    ← 패스워드 품질 정책 설정 파일 이 파일에서 패스워드 복잡도, 길이, 문자 종류 등의 규칙을 설정할 수 있다. 각 옵션 앞에 # 이 붙어 있으면 주석 처리된 것이므로 해당 기능은 적용되지 않는다.</p>
 <h4 id="3-pwqualityconf-주요-파라미터">3. pwquality.conf 주요 파라미터</h4>
 <h5 id="3-1-difok">3-1. difok — 유사성 검사</h5>
 <h2 id="difok--1">difok = 1</h2>
-<p>항목
-내용
-의미
-예전 패스워드와 새 패스워드 간에 반드시 달라야 하는 문자 수
-예시
-값이 6이면 예전 패스워드 6글자가 모두 새 패스워드에서 달라야 함
-비활성화
-값을 0으로 설정하거나 주석 처리
-예전 패스워드가 123456 이고 difok가 6일 경우, 순서를 바꾼 654321 이나 일부만 변경한 패
-스워드도 사용할 수 없다. 6개의 문자가 모두 달라야 한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>의미</td>
+<td>예전 패스워드와 새 패스워드 간에 반드시 달라야 하는 문자 수</td>
+</tr>
+<tr>
+<td>예시</td>
+<td>값이 6이면 예전 패스워드 6글자가 모두 새 패스워드에서 달라야 함</td>
+</tr>
+<tr>
+<td>비활성화</td>
+<td>값을 0으로 설정하거나 주석 처리</td>
+</tr>
+</tbody>
+</table></div>
+<p>예전 패스워드가 123456 이고 difok가 6일 경우, 순서를 바꾼 654321 이나 일부만 변경한 패 스워드도 사용할 수 없다. 6개의 문자가 모두 달라야 한다.</p>
 <h5 id="3-2-minlen">3-2. minlen — 최소 길이</h5>
-<ul>
-<li>
-<h1 id="minlen-8">minlen = 8</h1>
-</li>
-<li>항목</li>
-<li>내용</li>
-<li>의미</li>
-<li>패스워드의 최소 길이</li>
-<li>예시</li>
-<li>값이 8이면 8글자 미만의 패스워드는 사용 불가</li>
-<li>비활성화</li>
-<li>주석 처리</li>
-</ul>
+<h2 id="minlen--8">minlen = 8</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>의미</td>
+<td>패스워드의 최소 길이</td>
+</tr>
+<tr>
+<td>예시</td>
+<td>값이 8이면 8글자 미만의 패스워드는 사용 불가</td>
+</tr>
+<tr>
+<td>비활성화</td>
+<td>주석 처리</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="4-문자-종류별-최소-개수-설정-credit-파라미터">4. 문자 종류별 최소 개수 설정 (Credit 파라미터)</h4>
 <h5 id="4-1-dcredit-digit">4-1. dcredit — 숫자(Digit) 최소 개수</h5>
-<h2 id="dcredit--1">dcredit = 1</h2>
-<p>패스워드에 포함되어야 하는 숫자(0~9)의 최소 개수이다. 값이 2이면 숫자가 최소 2개 이상
-포함되어야 한다.</p>
+<h2 id="dcredit--1-패스워드에-포함되어야-하는-숫자09의-최소-개수이다-값이-2이면-숫자가-최소-2개-이상-포함되어야-한다">dcredit = 1 패스워드에 포함되어야 하는 숫자(0~9)의 최소 개수이다. 값이 2이면 숫자가 최소 2개 이상 포함되어야 한다.</h2>
 <h5 id="4-2-ucredit-uppercase">4-2. ucredit — 대문자(Uppercase) 최소 개수</h5>
-<h2 id="ucredit--1">ucredit = 1</h2>
-<p>패스워드에 포함되어야 하는 영문 대문자의 최소 개수이다. 값이 1이면 대문자가 최소 1개 이
-상 포함되어야 한다.</p>
+<h2 id="ucredit--1-패스워드에-포함되어야-하는-영문-대문자의-최소-개수이다-값이-1이면-대문자가-최소-1개-이-상-포함되어야-한다">ucredit = 1 패스워드에 포함되어야 하는 영문 대문자의 최소 개수이다. 값이 1이면 대문자가 최소 1개 이 상 포함되어야 한다.</h2>
 <h5 id="4-3-lcredit-lowercase">4-3. lcredit — 소문자(Lowercase) 최소 개수</h5>
-<h2 id="lcredit--1">lcredit = 1</h2>
-<p>패스워드에 포함되어야 하는 영문 소문자의 최소 개수이다. 값이 1이면 소문자가 최소 1개 이
-상 포함되어야 한다.</p>
+<h2 id="lcredit--1-패스워드에-포함되어야-하는-영문-소문자의-최소-개수이다-값이-1이면-소문자가-최소-1개-이-상-포함되어야-한다">lcredit = 1 패스워드에 포함되어야 하는 영문 소문자의 최소 개수이다. 값이 1이면 소문자가 최소 1개 이 상 포함되어야 한다.</h2>
 <h5 id="4-4-ocredit-other-character">4-4. ocredit — 특수문자(Other Character) 최소 개수</h5>
-<ul>
-<li>
-<h1 id="ocredit-1">ocredit = 1</h1>
-</li>
-<li>패스워드에 포함되어야 하는 특수문자의 최소 개수이다. 값이 2이면 특수문자가 최소 2개</li>
-<li>이상 포함되어야 한다.</li>
-<li>Credit 파라미터 전체 요약:</li>
-<li>파라미터</li>
-<li>대상 문자 종류</li>
-<li>비고</li>
-<li>dcredit</li>
-<li>숫자 (Digit)</li>
-<li>0~9</li>
-<li>ucredit</li>
-<li>영문 대문자 (Uppercase)</li>
-<li>A~Z</li>
-<li>lcredit</li>
-<li>영문 소문자 (Lowercase)</li>
-<li>a~z</li>
-<li>ocredit</li>
-<li>특수문자 (Other Character)</li>
-<li>!, @, # 등</li>
-</ul>
+<h2 id="ocredit--1-패스워드에-포함되어야-하는-특수문자의-최소-개수이다-값이-2이면-특수문자가-최소-2개-이상-포함되어야-한다">ocredit = 1 패스워드에 포함되어야 하는 특수문자의 최소 개수이다. 값이 2이면 특수문자가 최소 2개 이상 포함되어야 한다.</h2>
+<p>Credit 파라미터 전체 요약:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파라미터</th>
+<th>대상 문자 종류</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dcredit</td>
+<td>숫자 (Digit)</td>
+<td>0~9</td>
+</tr>
+<tr>
+<td>ucredit</td>
+<td>영문 대문자 (Uppercase)</td>
+<td>A~Z</td>
+</tr>
+<tr>
+<td>lcredit</td>
+<td>영문 소문자 (Lowercase)</td>
+<td>a~z</td>
+</tr>
+<tr>
+<td>ocredit</td>
+<td>특수문자 (Other Character)</td>
+<td>!, @, # 등</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="5-추가-복잡도-설정-파라미터">5. 추가 복잡도 설정 파라미터</h4>
 <h5 id="5-1-minclass">5-1. minclass — 최소 문자 종류 수</h5>
-<ul>
-<li>
-<h1 id="minclass-0">minclass = 0</h1>
-</li>
-<li>패스워드를 만들 때 반드시 포함해야 하는 문자 종류(숫자, 대문자, 소문자, 특수문자)의 최</li>
-<li>소 수이다.</li>
-<li>값</li>
-<li>의미</li>
-<li>
-<p>숫자, 대문자, 소문자, 특수문자 중 최소 1가지 포함</p>
-</li>
-<li>
-<p>값</p>
-</li>
-<li>의미</li>
-<li>최소 2가지 포함 (예: 숫자와 대문자)</li>
-<li>숫자·대문자·소문자·특수문자 모두 포함</li>
-<li>특정 종류만 지정하고 싶은 경우에는 minclass 대신 ucredit, lcredit 등의 Credit 파라</li>
-<li>미터를 사용한다.</li>
-</ul>
+<h2 id="minclass--0-패스워드를-만들-때-반드시-포함해야-하는-문자-종류숫자-대문자-소문자-특수문자의-최-소-수이다">minclass = 0 패스워드를 만들 때 반드시 포함해야 하는 문자 종류(숫자, 대문자, 소문자, 특수문자)의 최 소 수이다.</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>숫자, 대문자, 소문자, 특수문자 중 최소 1가지 포함</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>최소 2가지 포함 (예: 숫자와 대문자)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>숫자·대문자·소문자·특수문자 모두 포함</td>
+</tr>
+</tbody>
+</table></div>
+<p>특정 종류만 지정하고 싶은 경우에는 minclass 대신 ucredit, lcredit 등의 Credit 파라 미터를 사용한다.</p>
 <h5 id="5-2-maxrepeat">5-2. maxrepeat — 연속 반복 문자 최대 개수</h5>
-<h2 id="maxrepeat--0">maxrepeat = 0</h2>
-<p>동일한 문자가 연달아 나올 수 있는 최대 개수이다. 값이 2이면 aa 는 허용되지만 aaa 는 허
-용되지 않는다. 연속이 아닌 경우(예: a3a4a )는 각각 1개로 취급한다.</p>
+<h2 id="maxrepeat--0-동일한-문자가-연달아-나올-수-있는-최대-개수이다-값이-2이면-aa-는-허용되지만-aaa-는-허-용되지-않는다-연속이-아닌-경우예-a3a4a-는-각각-1개로-취급한다">maxrepeat = 0 동일한 문자가 연달아 나올 수 있는 최대 개수이다. 값이 2이면 aa 는 허용되지만 aaa 는 허 용되지 않는다. 연속이 아닌 경우(예: a3a4a )는 각각 1개로 취급한다.</h2>
 <h5 id="5-3-maxclassrepeat">5-3. maxclassrepeat — 동일 종류 연속 반복 최대 개수</h5>
-<h2 id="maxclassrepeat--0">maxclassrepeat = 0</h2>
-<p>같은 문자 종류(숫자, 대문자, 소문자, 특수문자)가 연속으로 나올 수 있는 최대 개수이다. 값
-이 2이면 1A  다음에 같은 종류의 문자가 2번 이상 연달아 오면 안 된다. 패스워드의 문자 종
-류가 매번 달라져야 한다.</p>
+<h2 id="maxclassrepeat--0-같은-문자-종류숫자-대문자-소문자-특수문자가-연속으로-나올-수-있는-최대-개수이다-값-이-2이면-1a-다음에-같은-종류의-문자가-2번-이상-연달아-오면-안-된다-패스워드의-문자-종-류가-매번-달라져야-한다">maxclassrepeat = 0 같은 문자 종류(숫자, 대문자, 소문자, 특수문자)가 연속으로 나올 수 있는 최대 개수이다. 값 이 2이면 1A  다음에 같은 종류의 문자가 2번 이상 연달아 오면 안 된다. 패스워드의 문자 종 류가 매번 달라져야 한다.</h2>
 <h5 id="5-4-gecoscheck-gecos">5-4. gecoscheck — GECOS 필드 검사</h5>
-<h2 id="gecoscheck--0">gecoscheck = 0</h2>
-<p>/etc/passwd  파일의 GECOS 필드(계정 정보 필드)에 포함된 3글자 이상의 단어가 새 패스
-워드에 포함되어 있는지 검사한다. 잘 사용하지 않는 옵션이다.
-/etc/passwd  파일 안에는 각 계정별 여러 필드가 있으며, 이 필드들을 GECOS 필드라고
-한다.</p>
+<h2 id="gecoscheck--0-etcpasswd-파일의-gecos-필드계정-정보-필드에-포함된-3글자-이상의-단어가-새-패스-워드에-포함되어-있는지-검사한다-잘-사용하지-않는-옵션이다">gecoscheck = 0 /etc/passwd  파일의 GECOS 필드(계정 정보 필드)에 포함된 3글자 이상의 단어가 새 패스 워드에 포함되어 있는지 검사한다. 잘 사용하지 않는 옵션이다.</h2>
+<p>/etc/passwd  파일 안에는 각 계정별 여러 필드가 있으며, 이 필드들을 GECOS 필드라고 한다.</p>
 <h5 id="5-5-dictcheck">5-5. dictcheck — 사전 단어 검사</h5>
-<h2 id="dictcheck--1">dictcheck = 1</h2>
-<p>사전(Dictionary)에 있는 단어가 패스워드로 사용되는 것을 방지한다. 예를 들어 flower 와
-같이 사전에 있는 단어를 패스워드로 설정하면 거부된다. 값을 0으로 설정하면 검사를 비활
-성화한다.
-사전 단어 범위가 워낙 넓기 때문에 실제 운영에서는 잘 사용하지 않는 경우도 있다.</p>
+<h2 id="dictcheck--1-사전dictionary에-있는-단어가-패스워드로-사용되는-것을-방지한다-예를-들어-flower-와-같이-사전에-있는-단어를-패스워드로-설정하면-거부된다-값을-0으로-설정하면-검사를-비활-성화한다">dictcheck = 1 사전(Dictionary)에 있는 단어가 패스워드로 사용되는 것을 방지한다. 예를 들어 flower 와 같이 사전에 있는 단어를 패스워드로 설정하면 거부된다. 값을 0으로 설정하면 검사를 비활 성화한다.</h2>
+<p>사전 단어 범위가 워낙 넓기 때문에 실제 운영에서는 잘 사용하지 않는 경우도 있다.</p>
 <h4 id="6-pwqualityconf-파라미터-전체-요약">6. pwquality.conf 파라미터 전체 요약</h4>
-<ul>
-<li>파라미터</li>
-<li>기능</li>
-<li>비고</li>
-<li>difok</li>
-<li>예전 패스워드와 다른 문자 수 (유사성 검사)</li>
-<li>0: 비활성화</li>
-<li>minlen</li>
-<li>패스워드 최소 길이</li>
-<li>dcredit</li>
-<li>숫자 최소 개수</li>
-<li>ucredit</li>
-<li>대문자 최소 개수</li>
-<li>lcredit</li>
-<li>소문자 최소 개수</li>
-<li>ocredit</li>
-<li>특수문자 최소 개수</li>
-<li>minclass</li>
-<li>포함해야 할 문자 종류 최소 수</li>
-<li>maxrepeat</li>
-<li>같은 문자 연속 반복 최대 개수</li>
-<li>0: 제한 없음</li>
-<li>maxclassrepeat</li>
-<li>같은 종류 문자 연속 반복 최대 개수</li>
-<li>0: 제한 없음</li>
-<li>gecoscheck</li>
-<li>/etc/passwd GECOS 필드 단어 검사</li>
-<li>잘 사용 안 함</li>
-<li>dictcheck</li>
-<li>사전 단어 사용 금지 검사</li>
-<li>0: 비활성화</li>
-<li>주석( # )이 있는 항목은 해당 기능이 적용되지 않는다. 설정을 활성화하려면 주석을 제거</li>
-<li>하고 원하는 값을 지정한다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파라미터</th>
+<th>기능</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>difok</td>
+<td>예전 패스워드와 다른 문자 수 (유사성 검사)</td>
+<td>0: 비활성화</td>
+</tr>
+<tr>
+<td>minlen</td>
+<td>패스워드 최소 길이</td>
+<td></td>
+</tr>
+<tr>
+<td>dcredit</td>
+<td>숫자 최소 개수</td>
+<td></td>
+</tr>
+<tr>
+<td>ucredit</td>
+<td>대문자 최소 개수</td>
+<td></td>
+</tr>
+<tr>
+<td>lcredit</td>
+<td>소문자 최소 개수</td>
+<td></td>
+</tr>
+<tr>
+<td>ocredit</td>
+<td>특수문자 최소 개수</td>
+<td></td>
+</tr>
+<tr>
+<td>minclass</td>
+<td>포함해야 할 문자 종류 최소 수</td>
+<td></td>
+</tr>
+<tr>
+<td>maxrepeat</td>
+<td>같은 문자 연속 반복 최대 개수</td>
+<td>0: 제한 없음</td>
+</tr>
+<tr>
+<td>maxclassrepeat</td>
+<td>같은 종류 문자 연속 반복 최대 개수</td>
+<td>0: 제한 없음</td>
+</tr>
+<tr>
+<td>gecoscheck</td>
+<td>/etc/passwd GECOS 필드 단어 검사</td>
+<td>잘 사용 안 함</td>
+</tr>
+<tr>
+<td>dictcheck</td>
+<td>사전 단어 사용 금지 검사</td>
+<td>0: 비활성화</td>
+</tr>
+</tbody>
+</table></div>
+<p>주석( # )이 있는 항목은 해당 기능이 적용되지 않는다. 설정을 활성화하려면 주석을 제거 하고 원하는 값을 지정한다.</p>
 <hr />
 <h3 id="090-pam-인증-설정-및-auth-select-명령어">090. PAM 인증 설정 및 auth-select 명령어</h3>
 <p>령어</p>
 <h4 id="1-etcpamd-디렉토리-개요">1. /etc/pam.d 디렉토리 개요</h4>
 <h5 id="1-1-pam">1-1. PAM 인증 관련 디렉토리 구조</h5>
-<ul>
-<li>Linux에서 패스워드 인증과 관련된 추가 설정은 /etc/pam.d  디렉토리에서 관리한다.</li>
-<li>cd /etc/pam.d</li>
-<li>ls</li>
-<li>이 디렉토리 안에는 패스워드 인증 및 인증 방식과 관련된 다양한 파일들이 포함되어 있다.</li>
-<li>이 중 인증 방식을 설정하는 주요 파일은 다음과 같다.</li>
-<li>파일명</li>
-<li>역할</li>
-<li>system-auth</li>
-<li>시스템 전반의 인증 방식 설정</li>
-<li>password-auth</li>
-<li>패스워드 인증 방식 설정</li>
-</ul>
+<p>Linux에서 패스워드 인증과 관련된 추가 설정은 /etc/pam.d  디렉토리에서 관리한다.</p>
+<p>cd /etc/pam.d ls 이 디렉토리 안에는 패스워드 인증 및 인증 방식과 관련된 다양한 파일들이 포함되어 있다. 이 중 인증 방식을 설정하는 주요 파일은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>system-auth</td>
+<td>시스템 전반의 인증 방식 설정</td>
+</tr>
+<tr>
+<td>password-auth</td>
+<td>패스워드 인증 방식 설정</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="1-2-password-auth">1-2. password-auth 파일 내용 확인</h5>
-<p>cat /etc/pam.d/password-auth
-이 파일을 확인하면 현재 시스템에서 인증에 적용되는 기본 구성 목록을 볼 수 있다. 각 줄은
-크게 세 개의 필드로 구성된다.</p>
+<p>cat /etc/pam.d/password-auth 이 파일을 확인하면 현재 시스템에서 인증에 적용되는 기본 구성 목록을 볼 수 있다. 각 줄은 크게 세 개의 필드로 구성된다.</p>
 <h4 id="2-pampwquality-모듈-추가">2. pam_pwquality 모듈 추가</h4>
 <h5 id="2-1_3">2-1. 단순 패스워드 거부 설정</h5>
-<p>만약 단순한 패스워드(복잡도가 낮은 패스워드)를 사용하지 못하도록 하려면
-/etc/pam.d/password-auth  파일에 다음 내용을 추가한다.</p>
-<p>password    require    pam_pwquality    ← 복잡도 낮은 패스워드 거부
-VI 편집기로 파일을 열어 password 로 시작하는 항목에 위 내용을 추가하면, 이후 시스템에
-들어오는 모든 인증에서 복잡도가 낮은 패스워드는 거부된다.
-⚠️ 기본적으로는 /etc/security/pwquality.conf  파일을 통해 패스워드 정책을 설정하는
-것이 우선이다. /etc/pam.d 는 특별한 추가 인증이 필요한 경우에만 사용한다.</p>
+<p>만약 단순한 패스워드(복잡도가 낮은 패스워드)를 사용하지 못하도록 하려면 /etc/pam.d/password-auth  파일에 다음 내용을 추가한다.</p>
+<p>password    require    pam_pwquality    ← 복잡도 낮은 패스워드 거부 VI 편집기로 파일을 열어 password 로 시작하는 항목에 위 내용을 추가하면, 이후 시스템에 들어오는 모든 인증에서 복잡도가 낮은 패스워드는 거부된다.</p>
+<p>⚠️ 기본적으로는 /etc/security/pwquality.conf  파일을 통해 패스워드 정책을 설정하는 것이 우선이다. /etc/pam.d 는 특별한 추가 인증이 필요한 경우에만 사용한다.</p>
 <h4 id="3-auth-select-명령어">3. auth-select 명령어</h4>
 <h5 id="3-1_2">3-1. 현재 인증 설정 확인</h5>
-<p>현재 시스템의 인증 구성 상태를 확인하는 명령어는 다음과 같다.
-authselect current --raw    ← 현재 인증 설정 확인
-구성 파일이 없거나 탐지되지 않는 경우 "기존의 구성이 탐지되지 않았다"는 메시지가 출력
-된다. 이것은 오류가 아니며, 현재 기본 구성 상태임을 나타낸다.</p>
+<p>현재 시스템의 인증 구성 상태를 확인하는 명령어는 다음과 같다.</p>
+<p>authselect current --raw    ← 현재 인증 설정 확인 구성 파일이 없거나 탐지되지 않는 경우 "기존의 구성이 탐지되지 않았다"는 메시지가 출력 된다. 이것은 오류가 아니며, 현재 기본 구성 상태임을 나타낸다.</p>
 <h5 id="3-2-auth-select">3-2. auth-select 도움말</h5>
-<p>명령어만 입력하면 사용 가능한 옵션들이 출력된다.
-authselect</p>
+<p>명령어만 입력하면 사용 가능한 옵션들이 출력된다.</p>
+<p>authselect</p>
 <h5 id="3-3_2">3-3. 서비스별 패스워드 정책 일관 적용</h5>
-<ul>
-<li>특정 서비스에 패스워드 품질 정책을 강제로 일관되게 적용할 수 있다.</li>
-<li>authselect select sshd with pw-quality-force    ← sshd 서비스에 패스워드 품질 정책 강제 적용</li>
-<li>구성 요소</li>
-<li>의미</li>
-<li>select sshd</li>
-<li>sshd 서비스에 대해 인증 방식을 선택</li>
-<li>with pw-quality</li>
-<li>패스워드 품질 정책(pwquality.conf)과 함께 적용</li>
-<li>force</li>
-<li>강제로 일관되게 적용</li>
-</ul>
-<p>이 명령어는 실행 단계가 아니라 설정 방법 설명 수준으로 제시된 것이다. 실제 적용 시에
-는 해당 서비스와 정책을 정확히 지정한다.</p>
+<p>특정 서비스에 패스워드 품질 정책을 강제로 일관되게 적용할 수 있다.</p>
+<p>authselect select sshd with pw-quality-force    ← sshd 서비스에 패스워드 품질 정책 강제 적용</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select sshd</td>
+<td>sshd 서비스에 대해 인증 방식을 선택</td>
+</tr>
+<tr>
+<td>with pw-quality</td>
+<td>패스워드 품질 정책(pwquality.conf)과 함께 적용</td>
+</tr>
+<tr>
+<td>force</td>
+<td>강제로 일관되게 적용</td>
+</tr>
+</tbody>
+</table></div>
+<p>이 명령어는 실행 단계가 아니라 설정 방법 설명 수준으로 제시된 것이다. 실제 적용 시에 는 해당 서비스와 정책을 정확히 지정한다.</p>
 <h4 id="4-패스워드-정책-적용-권장-방식">4. 패스워드 정책 적용 권장 방식</h4>
 <h5 id="4-1_6">4-1. 기본 설정 파일 우선 사용</h5>
-<p>일반적인 패스워드 복잡도 정책은 다음 파일을 통해 설정한다.
-/etc/security/pwquality.conf    ← 기본 패스워드 품질 정책 파일
-이 파일 하나로 대부분의 패스워드 정책 설정이 가능하다.</p>
+<p>일반적인 패스워드 복잡도 정책은 다음 파일을 통해 설정한다.</p>
+<p>/etc/security/pwquality.conf    ← 기본 패스워드 품질 정책 파일 이 파일 하나로 대부분의 패스워드 정책 설정이 가능하다.</p>
 <h5 id="4-2_3">4-2. 추가 인증이 필요한 경우</h5>
-<p>특별한 인증 방식이나 추가적인 인증 요구가 필요한 경우에만 다음 방법을 사용한다.
-방법
-경로
-PAM 모듈 추가
-/etc/pam.d/  디렉토리 내 파일 편집
-인증 프로파일 선택
-authselect select  명령어 사용
-기본적으로는 pwquality.conf 파일을 통한 설정을 먼저 검토하고, 추가 인증이나 특수한
-정책 적용이 필요한 경우에만 PAM 및 authselect를 활용한다.</p>
+<p>특별한 인증 방식이나 추가적인 인증 요구가 필요한 경우에만 다음 방법을 사용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>경로</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PAM 모듈 추가</td>
+<td>/etc/pam.d/ 디렉토리 내 파일 편집</td>
+</tr>
+<tr>
+<td>인증 프로파일 선택</td>
+<td>authselect select 명령어 사용</td>
+</tr>
+</tbody>
+</table></div>
+<p>기본적으로는 pwquality.conf 파일을 통한 설정을 먼저 검토하고, 추가 인증이나 특수한 정책 적용이 필요한 경우에만 PAM 및 authselect를 활용한다.</p>
 <hr />
 <h3 id="097-우분투-서버-개요-및-virtualbox-설치-준비">097. 우분투 서버 개요 및 VirtualBox 설치 준비</h3>
 <p>치 준비</p>
 <h4 id="1-우분투-버전-구분">1. 우분투 버전 구분</h4>
-<ul>
-<li>우분투는 데스크탑 버전과 서버 버전으로 구분된다.</li>
-<li>구분</li>
-<li>설명</li>
-<li>비교 대상</li>
-<li>데스크탑 버전</li>
-<li>GUI 환경 포함, 서버로도 사용 가능하나 서버 최적</li>
-<li>화 기능은 부족</li>
-<li>Windows 10/11과 유사</li>
-<li>서버 버전</li>
-<li>서버 구축에 최적화된 패키지 포함, GUI 없음</li>
-<li>Windows Server 2022와</li>
-<li>유사</li>
-<li>우분투 서버 버전에는 로키 리눅스의 '미니멀' 설치 옵션과 유사하게 Ubuntu Server</li>
-<li>(minimized) 옵션이 제공된다. 최소한의 패키지만 설치하여 자원을 절약한다.</li>
-</ul>
+<p>우분투는 데스크탑 버전과 서버 버전으로 구분된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+<th>비교 대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데스크탑 버전</td>
+<td>GUI 환경 포함, 서버로도 사용 가능하나 서버 최적<br>화 기능은 부족</td>
+<td>Windows 10/11과 유사</td>
+</tr>
+<tr>
+<td>서버 버전</td>
+<td>서버 구축에 최적화된 패키지 포함, GUI 없음</td>
+<td>Windows Server 2022와<br>유사</td>
+</tr>
+</tbody>
+</table></div>
+<p>우분투 서버 버전에는 로키 리눅스의 '미니멀' 설치 옵션과 유사하게 Ubuntu Server (minimized) 옵션이 제공된다. 최소한의 패키지만 설치하여 자원을 절약한다.</p>
 <h4 id="2-우분투와-로키-리눅스의-주요-차이점">2. 우분투와 로키 리눅스의 주요 차이점</h4>
-<ul>
-<li>항목</li>
-<li>로키 리눅스</li>
-<li>계열</li>
-<li>Red Hat 계열</li>
-<li>Debian 계열</li>
-<li>패키지 관리</li>
-<li>dnf</li>
-<li>apt</li>
-<li>root 계정</li>
-<li>설치 중 root 패스워드 설정 가능</li>
-<li>root 직접 로그인 비권장; sudo  명령 사용</li>
-<li>미니멀 설치</li>
-<li>미니멀 ISO 이미지로 제공</li>
-<li>설치 과정 중 'Minimized' 옵션 선택</li>
-<li>우분투에서 관리자 권한이 필요한 작업은 sudo  명령어를 앞에 붙여 실행한다. root 계정</li>
-<li>으로 직접 로그인하는 방식보다 sudo 를 사용하는 것이 보안상 더 안전하다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>로키 리눅스</th>
+<th>우분투 서버</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>계열</td>
+<td>Red Hat 계열</td>
+<td>Debian 계열</td>
+</tr>
+<tr>
+<td>패키지 관리</td>
+<td>dnf</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>root 계정</td>
+<td>설치 중 root 패스워드 설정 가능</td>
+<td>root 직접 로그인 비권장; sudo 명령 사용</td>
+</tr>
+<tr>
+<td>미니멀 설치</td>
+<td>미니멀 ISO 이미지로 제공</td>
+<td>설치 과정 중 'Minimized' 옵션 선택</td>
+</tr>
+</tbody>
+</table></div>
+<p>우분투에서 관리자 권한이 필요한 작업은 sudo  명령어를 앞에 붙여 실행한다. root 계정 으로 직접 로그인하는 방식보다 sudo 를 사용하는 것이 보안상 더 안전하다.</p>
 <h4 id="3-virtualbox-가상-머신-생성-시-주의사항">3. VirtualBox 가상 머신 생성 시 주의사항</h4>
-<p>여러 대의 가상 머신을 동시에 실행하면 호스트 시스템의 디스크 용량, CPU, 메모리 등 모든
-자원을 공유하여 소모한다. 향후 보안 솔루션 실습 환경 구성 시 가상 머신의 수가 늘어나므
-로 아래 사항을 미리 점검해야 한다.</p>
-<p>호스트 PC의 여유 디스크 용량 확인
-불필요한 가상 머신 삭제 또는 파일 정리
-각 가상 머신의 디스크 용량을 필요한 최소 수준으로 설정</p>
+<p>여러 대의 가상 머신을 동시에 실행하면 호스트 시스템의 디스크 용량, CPU, 메모리 등 모든 자원을 공유하여 소모한다. 향후 보안 솔루션 실습 환경 구성 시 가상 머신의 수가 늘어나므 로 아래 사항을 미리 점검해야 한다.</p>
+<p>호스트 PC의 여유 디스크 용량 확인 불필요한 가상 머신 삭제 또는 파일 정리 각 가상 머신의 디스크 용량을 필요한 최소 수준으로 설정</p>
 <h4 id="4-우분투-서버-네트워크-설정">4. 우분투 서버 네트워크 설정</h4>
-<ul>
-<li>우분투 서버 설치 과정에서 네트워크 설정 방식을 선택할 수 있다.</li>
-<li>방식</li>
-<li>설명</li>
-<li>DHCP (자동)</li>
-<li>공유기·네트워크 장비에서 IP를 자동 할당받음</li>
-<li>Manual (수동)</li>
-<li>IP 주소, 서브넷, 게이트웨이, 네임서버를 직접 입력</li>
-<li>수동 설정 시 필요한 정보는 호스트 PC에서 ipconfig /all  명령으로 확인한 후, 동일 대역의</li>
-<li>사용하지 않는 IP를 지정한다.</li>
-<li>설정 후 IP 할당 방식은 DHCP  또는 static 으로 표시된다.</li>
-</ul>
+<p>우분투 서버 설치 과정에서 네트워크 설정 방식을 선택할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방식</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DHCP (자동)</td>
+<td>공유기·네트워크 장비에서 IP를 자동 할당받음</td>
+</tr>
+<tr>
+<td>Manual (수동)</td>
+<td>IP 주소, 서브넷, 게이트웨이, 네임서버를 직접 입력</td>
+</tr>
+</tbody>
+</table></div>
+<p>수동 설정 시 필요한 정보는 호스트 PC에서 ipconfig /all  명령으로 확인한 후, 동일 대역의 사용하지 않는 IP를 지정한다.</p>
+<p>설정 후 IP 할당 방식은 DHCP  또는 static 으로 표시된다.</p>
 <h4 id="5-오픈-ssh-서버">5. 오픈 SSH 서버</h4>
-<p>우분투 서버 설치 과정에서 OpenSSH 서버 설치를 선택할 수 있다. 설치하면 외부 시스템
-에서 SSH로 원격 접속이 가능해진다. 선택하지 않더라도 설치 후 apt install openssh-
-server  명령으로 별도 설치할 수 있다.</p>
+<p>우분투 서버 설치 과정에서 OpenSSH 서버 설치를 선택할 수 있다. 설치하면 외부 시스템 에서 SSH로 원격 접속이 가능해진다. 선택하지 않더라도 설치 후 apt install opensshserver  명령으로 별도 설치할 수 있다.</p>
 <h4 id="6-lxd--도커docker-소개">6. LXD / 도커(Docker) 소개</h4>
-<p>설치 과정 중 추가 소프트웨어 목록에 LXD가 포함된다.
-도구
-설명
-Docker
-컨테이너 기반 가상화 도구. 경량 가상 환경을 빠르게 생성·삭제 가능
-LXD
-Docker와 유사한 리눅스 컨테이너 관리 도구
-이러한 가상화 도구는 필요 시 설치 과정에서 선택하거나, 설치 후 apt 로 수동 설치할 수 있
-다.</p>
+<p>설치 과정 중 추가 소프트웨어 목록에 LXD가 포함된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>도구</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>컨테이너 기반 가상화 도구. 경량 가상 환경을 빠르게 생성·삭제 가능</td>
+</tr>
+<tr>
+<td>LXD</td>
+<td>Docker와 유사한 리눅스 컨테이너 관리 도구</td>
+</tr>
+</tbody>
+</table></div>
+<p>이러한 가상화 도구는 필요 시 설치 과정에서 선택하거나, 설치 후 apt 로 수동 설치할 수 있 다.</p>
 <hr />
 <h3 id="098-우분투-서버-기본-명령-환경-및-네트워크-설정">098. 우분투 서버 기본 명령 환경 및 네트워크 설정</h3>
 <p>크 설정</p>
 <h4 id="1-리눅스-배포판-계열-비교">1. 리눅스 배포판 계열 비교</h4>
-<ul>
-<li>리눅스 배포판은 계열에 따라 패키지 관리 방식이 다르다.</li>
-<li>배포판</li>
-<li>계열</li>
-<li>패키지 관리 명령</li>
-<li>로키 리눅스(Rocky Linux)</li>
-<li>Red Hat 계열</li>
-<li>dnf</li>
-<li>우분투(Ubuntu)</li>
-<li>Debian 계열</li>
-<li>apt  / apt-get</li>
-<li>칼리 리눅스(Kali Linux)</li>
-<li>Debian 계열</li>
-<li>apt  / apt-get</li>
-<li>우분투와 칼리 리눅스는 동일한 Debian 계열이므로 패키지 관리 명령이 동일하다.</li>
-</ul>
+<p>리눅스 배포판은 계열에 따라 패키지 관리 방식이 다르다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>배포판</th>
+<th>계열</th>
+<th>패키지 관리 명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>로키 리눅스(Rocky Linux)</td>
+<td>Red Hat 계열</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>우분투(Ubuntu)</td>
+<td>Debian 계열</td>
+<td>apt / apt-get</td>
+</tr>
+<tr>
+<td>칼리 리눅스(Kali Linux)</td>
+<td>Debian 계열</td>
+<td>apt / apt-get</td>
+</tr>
+</tbody>
+</table></div>
+<p>우분투와 칼리 리눅스는 동일한 Debian 계열이므로 패키지 관리 명령이 동일하다.</p>
 <h4 id="2-apt-명령어">2. apt 명령어</h4>
-<p>우분투(Debian 계열)에서 패키지를 설치·삭제·업데이트할 때 사용하는 명령어는 apt  또는
-apt-get 이다. 로키 리눅스의 dnf 에 해당하는 명령이다.
-apt install 패키지명      ← 패키지 설치
-apt-get install 패키지명  ← apt와 동일 (구버전 방식)</p>
+<p>우분투(Debian 계열)에서 패키지를 설치·삭제·업데이트할 때 사용하는 명령어는 apt  또는 apt-get 이다. 로키 리눅스의 dnf 에 해당하는 명령이다.</p>
+<p>apt install 패키지명      ← 패키지 설치 apt-get install 패키지명  ← apt와 동일 (구버전 방식)</p>
 <h4 id="3-sudo-명령어">3. sudo 명령어</h4>
-<p>우분투 서버에서는 root 계정으로 직접 로그인하는 대신, 일반 사용자 계정에서 sudo  명령
-을 앞에 붙여 관리자 권한으로 명령을 실행한다.
-sudo 명령어   ← 해당 명령을 관리자(root) 권한으로 실행
-sudo  없이 관리자 권한이 필요한 명령을 실행하면 Permission denied 오류가 발생한다.
-이 경우 명령 앞에 sudo 를 추가하면 된다.</p>
-<p>sudo 는 관리자 권한이 필요한 작업에만 사용하고, 일반 작업은 일반 사용자 권한으로 수
-행하는 것이 보안상 안전하다.</p>
+<p>우분투 서버에서는 root 계정으로 직접 로그인하는 대신, 일반 사용자 계정에서 sudo  명령 을 앞에 붙여 관리자 권한으로 명령을 실행한다.</p>
+<p>sudo 명령어   ← 해당 명령을 관리자(root) 권한으로 실행 sudo  없이 관리자 권한이 필요한 명령을 실행하면 Permission denied 오류가 발생한다. 이 경우 명령 앞에 sudo 를 추가하면 된다.</p>
+<p>sudo 는 관리자 권한이 필요한 작업에만 사용하고, 일반 작업은 일반 사용자 권한으로 수 행하는 것이 보안상 안전하다.</p>
 <h4 id="4-ping-유틸리티-설치">4. ping 유틸리티 설치</h4>
-<p>우분투 서버 최소 설치 환경에서는 ping  명령이 기본으로 설치되어 있지 않을 수 있다. 이
-경우 iputils-ping  패키지를 설치해야 한다.
-sudo apt install iputils-ping   ← ping 명령 사용을 위한 패키지
-설치</p>
+<p>우분투 서버 최소 설치 환경에서는 ping  명령이 기본으로 설치되어 있지 않을 수 있다. 이 경우 iputils-ping  패키지를 설치해야 한다.</p>
+<p>sudo apt install iputils-ping   ← ping 명령 사용을 위한 패키지 설치</p>
 <h4 id="5-파일-권한과-sudo의-관계">5. 파일 권한과 sudo의 관계</h4>
-<p>리눅스에서 파일 권한은 ls -l  명령으로 확인할 수 있다. 파일 소유자가 root이고 일반 사용
-자에게 쓰기 권한이 없는 경우, 해당 파일을 편집하려면 sudo 가 필요하다.
-ls -l 파일경로   ← 파일 권한 확인 (rw- 등으로 표시)
-권한이 root에게만 부여된 파일(예: 네트워크 설정 파일)은 반드시 sudo 로 편집해야 한다.</p>
+<p>리눅스에서 파일 권한은 ls -l  명령으로 확인할 수 있다. 파일 소유자가 root이고 일반 사용 자에게 쓰기 권한이 없는 경우, 해당 파일을 편집하려면 sudo 가 필요하다.</p>
+<p>ls -l 파일경로   ← 파일 권한 확인 (rw- 등으로 표시)</p>
+<p>권한이 root에게만 부여된 파일(예: 네트워크 설정 파일)은 반드시 sudo 로 편집해야 한다.</p>
 <h4 id="6-우분투-서버-네트워크-설정-파일">6. 우분투 서버 네트워크 설정 파일</h4>
-<p>우분투 서버의 네트워크 설정은 /etc/netplan/  디렉토리의 YAML 형식 파일로 관리한다.
-/etc/netplan/50-cloud-init.yaml   ← 우분투 서버 네트워크 설정
-파일
-이 파일은 root 소유이므로 편집 시 sudo 가 필요하다.
-sudo vi /etc/netplan/50-cloud-init.yaml   ← 네트워크 설정 파
-일 편집</p>
+<p>우분투 서버의 네트워크 설정은 /etc/netplan/  디렉토리의 YAML 형식 파일로 관리한다.</p>
+<p>/etc/netplan/50-cloud-init.yaml   ← 우분투 서버 네트워크 설정 파일 이 파일은 root 소유이므로 편집 시 sudo 가 필요하다.</p>
+<p>sudo vi /etc/netplan/50-cloud-init.yaml   ← 네트워크 설정 파 일 편집</p>
 <h4 id="7-icmp와-ping-개념">7. ICMP와 ping 개념</h4>
-<p>ping  명령은 ICMP(Internet Control Message Protocol) 프로토콜을 사용하여 네트워
-크 연결 상태를 확인한다.</p>
-<ul>
-<li>구분</li>
-<li>설명</li>
-<li>ICMP Echo Request</li>
-<li>출발지에서 목적지로 보내는 ping 요청 패킷</li>
-<li>ICMP Echo Reply</li>
-<li>목적지에서 출발지로 돌아오는 ping 응답 패킷</li>
-<li>ping 명령을 실행하면 ICMP Echo Request를 보내고, 대상 시스템이 살아 있으면 ICMP</li>
-<li>Echo Reply로 응답한다.</li>
-</ul>
+<p>ping  명령은 ICMP(Internet Control Message Protocol) 프로토콜을 사용하여 네트워 크 연결 상태를 확인한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ICMP Echo Request</td>
+<td>출발지에서 목적지로 보내는 ping 요청 패킷</td>
+</tr>
+<tr>
+<td>ICMP Echo Reply</td>
+<td>목적지에서 출발지로 돌아오는 ping 응답 패킷</td>
+</tr>
+</tbody>
+</table></div>
+<p>ping 명령을 실행하면 ICMP Echo Request를 보내고, 대상 시스템이 살아 있으면 ICMP Echo Reply로 응답한다.</p>
 <h4 id="8-dos--ddos-공격-개념">8. DoS / DDoS 공격 개념</h4>
 <h5 id="8-1-dos-ddos">8-1. DoS와 DDoS</h5>
-<ul>
-<li>공격 유형</li>
-<li>설명</li>
-<li>DoS (Denial of</li>
-<li>Service)</li>
-<li>단일 공격자가 대량의 트래픽·요청을 전송하여 대상 시스템의 서비스를 마</li>
-<li>비시키는 공격</li>
-<li>DDoS (Distributed</li>
-<li>DoS)</li>
-<li>여러 대의 시스템이 분산되어 동시에 DoS 공격을 수행하는 방식</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>공격 유형</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DoS (Denial of<br>Service)</td>
+<td>단일 공격자가 대량의 트래픽·요청을 전송하여 대상 시스템의 서비스를 마<br>비시키는 공격</td>
+</tr>
+<tr>
+<td>DDoS (Distributed<br>DoS)</td>
+<td>여러 대의 시스템이 분산되어 동시에 DoS 공격을 수행하는 방식</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="8-2-ping-of-death">8-2. Ping of Death (죽음의 핑)</h5>
-<p>Ping of Death는 ICMP를 이용한 DoS 공격의 대표적인 유형이다. 비정상적으로 크거나
-변형된 ping 패킷을 전송하여 대상 시스템을 다운시키는 공격 방식이다.
-⚠️ Ping of Death는 오래된 공격 기법으로, 현재 대부분의 운영체제에서 방어 기능이
-내장되어 있다.</p>
+<p>Ping of Death는 ICMP를 이용한 DoS 공격의 대표적인 유형이다. 비정상적으로 크거나 변형된 ping 패킷을 전송하여 대상 시스템을 다운시키는 공격 방식이다.</p>
+<p>⚠️ Ping of Death는 오래된 공격 기법으로, 현재 대부분의 운영체제에서 방어 기능이 내장되어 있다.</p>
 <h4 id="9-virtualbox-가상-머신-복제">9. VirtualBox 가상 머신 복제</h4>
-<ul>
-<li>기존 가상 머신을 복제하여 동일한 환경의 새 가상 머신을 빠르게 생성할 수 있다. 복제 방식</li>
-<li>은 <strong>완전한 복제(Full Clone)</strong>를 사용한다.</li>
-<li>설정 항목</li>
-<li>권장 값</li>
-<li>설명</li>
-<li>복제 유형</li>
-<li>완전한 복제</li>
-<li>원본과 완전히 독립된 가상 디스크 생성</li>
-<li>MAC 주소 정책</li>
-<li>새 MAC 주소 생성</li>
-<li>네트워크 충돌 방지를 위해 반드시 새 MAC 주소 지정</li>
-<li>⚠️ 복제 시 MAC 주소를 원본과 동일하게 유지하면, 같은 네트워크에서 두 가상 머신이</li>
-<li>동일한 MAC을 가지게 되어 네트워크 충돌이 발생할 수 있다. 반드시 새 MAC 주소를 할</li>
-<li>당해야 한다.</li>
-</ul>
+<p>기존 가상 머신을 복제하여 동일한 환경의 새 가상 머신을 빠르게 생성할 수 있다. 복제 방식 은 <strong>완전한 복제(Full Clone)</strong>를 사용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>권장 값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>복제 유형</td>
+<td>완전한 복제</td>
+<td>원본과 완전히 독립된 가상 디스크 생성</td>
+</tr>
+<tr>
+<td>MAC 주소 정책</td>
+<td>새 MAC 주소 생성</td>
+<td>네트워크 충돌 방지를 위해 반드시 새 MAC 주소 지정</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ 복제 시 MAC 주소를 원본과 동일하게 유지하면, 같은 네트워크에서 두 가상 머신이 동일한 MAC을 가지게 되어 네트워크 충돌이 발생할 수 있다. 반드시 새 MAC 주소를 할 당해야 한다.</p>
 <h4 id="10-복제-후-정적-ip-설정-변경">10. 복제 후 정적 IP 설정 변경</h4>
-<p>가상 머신을 복제한 경우, 원본 머신과 IP 주소가 동일하게 복사된다. 정적 IP(static)로 설정
-된 가상 머신을 복제하면, 복제본에서 반드시 IP 주소를 변경해야 한다.
-sudo vi /etc/netplan/50-cloud-init.yaml   ← IP 주소 변경을 위
-해 설정 파일 편집
-변경 후 네트워크 설정을 적용해야 변경사항이 반영된다.
-⚠️ 복제된 가상 머신과 원본 가상 머신이 동일한 IP를 사용하면 IP 충돌이 발생하여 양쪽
-모두 네트워크 통신이 불가능해진다.</p>
+<p>가상 머신을 복제한 경우, 원본 머신과 IP 주소가 동일하게 복사된다. 정적 IP(static)로 설정 된 가상 머신을 복제하면, 복제본에서 반드시 IP 주소를 변경해야 한다.</p>
+<p>sudo vi /etc/netplan/50-cloud-init.yaml   ← IP 주소 변경을 위 해 설정 파일 편집 변경 후 네트워크 설정을 적용해야 변경사항이 반영된다.</p>
+<p>⚠️ 복제된 가상 머신과 원본 가상 머신이 동일한 IP를 사용하면 IP 충돌이 발생하여 양쪽 모두 네트워크 통신이 불가능해진다.</p>
 <hr />
 <h3 id="115-셸-스크립트-기본-문법-및-awksed-텍스트-처리-도구">115. 셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</h3>
 <p>텍스트 처리 도구</p>
@@ -1599,307 +2083,384 @@ sudo vi /etc/netplan/50-cloud-init.yaml   ← IP 주소 변경을 위
 <h5 id="1-1_3">1-1. 셸의 정의</h5>
 <p>셸은 리눅스 커널과 사용자 사이에서 명령어를 읽고 해석하고 실행해 주는 프로그램이다.</p>
 <h5 id="1-2_3">1-2. 셸의 종류</h5>
-<ul>
-<li>셸 이름</li>
-<li>특징</li>
-<li>sh (Bourne Shell)</li>
-<li>초기에 사용하던 셸, 1977년 발표</li>
-<li>ksh (Korn Shell)</li>
-<li>sh의 확장 버전</li>
-<li>csh (C Shell)</li>
-<li>C 언어 문법과 유사한 구조</li>
-<li>bash (Bash Shell)</li>
-<li>현재 대부분의 리눅스 기본 셸, 위 셸들과 호환성</li>
-<li>제공</li>
-<li>현재 사용 중인 셸을 확인하는 명령어:</li>
-<li>echo $SHELL              ← SHELL 환경변수 값 출력 (예: /bin/b</li>
-<li>ash)</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>셸 이름</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sh (Bourne Shell)</td>
+<td>초기에 사용하던 셸, 1977년 발표</td>
+</tr>
+<tr>
+<td>ksh (Korn Shell)</td>
+<td>sh의 확장 버전</td>
+</tr>
+<tr>
+<td>csh (C Shell)</td>
+<td>C 언어 문법과 유사한 구조</td>
+</tr>
+<tr>
+<td>bash (Bash Shell)</td>
+<td>현재 대부분의 리눅스 기본 셸, 위 셸들과 호환성<br>제공</td>
+</tr>
+</tbody>
+</table></div>
+<p>현재 사용 중인 셸을 확인하는 명령어:</p>
+<p>echo $SHELL              ← SHELL 환경변수 값 출력 (예: /bin/b ash)</p>
 <h4 id="2-셸-스크립트-개요">2. 셸 스크립트 개요</h4>
 <h5 id="2-1_4">2-1. 정의 및 목적</h5>
-<ul>
-<li>셸 스크립트는 셸에서 사용할 수 있는 명령어들을 모아서 첫 줄부터 순차적으로 실행시켜 주</li>
-<li>는 인터프리터 방식의 스크립트이다.</li>
-<li>작성 목적:</li>
-<li>목적</li>
-<li>예시</li>
-<li>반복 작업 자동화</li>
-<li>
-<p>로그 백업, 디스크 정리 주기적 수행</p>
-</li>
-<li>
-<p>목적</p>
-</li>
-<li>예시</li>
-<li>일괄 설치 자동화</li>
-<li>소프트웨어 설치 과정을 스크립트 한 번 실행으로</li>
-<li>처리</li>
-<li>시스템 취약점 점검</li>
-<li>점검 가이드 항목에 따라 자동 점검 수행</li>
-<li>윈도우의 배치(Batch) 파일과 동일한 개념이다. 배치는 일괄 처리 프로그램으로, 반복적</li>
-<li>인 작업을 모아서 한꺼번에 처리한다.</li>
-</ul>
+<p>셸 스크립트는 셸에서 사용할 수 있는 명령어들을 모아서 첫 줄부터 순차적으로 실행시켜 주 는 인터프리터 방식의 스크립트이다.</p>
+<p>작성 목적:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>목적</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>반복 작업 자동화</td>
+<td>로그 백업, 디스크 정리 주기적 수행</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>목적</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>일괄 설치 자동화</td>
+<td>소프트웨어 설치 과정을 스크립트 한 번 실행으로<br>처리</td>
+</tr>
+<tr>
+<td>시스템 취약점 점검</td>
+<td>점검 가이드 항목에 따라 자동 점검 수행</td>
+</tr>
+</tbody>
+</table></div>
+<p>윈도우의 배치(Batch) 파일과 동일한 개념이다. 배치는 일괄 처리 프로그램으로, 반복적 인 작업을 모아서 한꺼번에 처리한다.</p>
 <h5 id="2-2_3">2-2. 스크립트 파일 형식</h5>
-<p>확장자: .sh
-파일 권한: 실행 권한이 없으면 실행 불가 → chmod +x &lt;파일명&gt;  으로 부여</p>
+<p>확장자: .sh 파일 권한: 실행 권한이 없으면 실행 불가 → chmod +x &lt;파일명&gt;  으로 부여</p>
 <h5 id="2-3_1">2-3. 스크립트 실행 방법</h5>
-<p>./test.sh                ← 현재 디렉토리임을 명시하여 실행
-bash test.sh             ← 실행할 셸(bash)을 지정하여 실행
-⚠️ 스크립트 파일명만 입력하면 실행되지 않는다. 반드시 현재 디렉토리( ./ )를 명시하
-거나 실행할 셸을 지정해야 한다.</p>
+<p>./test.sh                ← 현재 디렉토리임을 명시하여 실행 bash test.sh             ← 실행할 셸(bash)을 지정하여 실행 ⚠️ 스크립트 파일명만 입력하면 실행되지 않는다. 반드시 현재 디렉토리( ./ )를 명시하 거나 실행할 셸을 지정해야 한다.</p>
 <h4 id="3-셸-스크립트-기본-구조">3. 셸 스크립트 기본 구조</h4>
 <h5 id="3-1-shebang">3-1. Shebang(시방, #!)</h5>
 <p>스크립트의 첫 줄에 반드시 작성하며, 해당 코드를 실행할 셸의 경로를 지정한다.</p>
-<h1 id="binbash-bash">!/bin/bash              ← bash 셸로 아래 코드를 실행</h1>
-<p>모든 스크립트는 첫 번째 줄에 Shebang이 있어야 아래 명령어들이 어떤 셸로 실행될지
-알 수 있다.</p>
+<h1 id="binbash-bash-shebang">!/bin/bash              ← bash 셸로 아래 코드를 실행 모든 스크립트는 첫 번째 줄에 Shebang이 있어야 아래 명령어들이 어떤 셸로 실행될지 알 수 있다.</h1>
 <h5 id="3-2_1">3-2. 주석</h5>
 <h2 id="이-줄은-주석이다-실행되지-않음">이 줄은 주석이다 (실행되지 않음)</h2>
 <h4 id="4-변수">4. 변수</h4>
 <h5 id="4-1_7">4-1. 변수 규칙</h5>
-<ul>
-<li>규칙</li>
-<li>설명</li>
-<li>대소문자 구분</li>
-<li>name 과 NAME 은 서로 다른 변수</li>
-<li>공백 금지</li>
-<li>name=value  (등호 좌우에 공백 없어야 함)</li>
-<li>숫자로 시작 불가</li>
-<li>0name  불가, name0  가능</li>
-<li>자료형 미지정</li>
-<li>기본적으로 문자열로 인식</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>규칙</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대소문자 구분</td>
+<td>name 과 NAME 은 서로 다른 변수</td>
+</tr>
+<tr>
+<td>공백 금지</td>
+<td>name=value (등호 좌우에 공백 없어야 함)</td>
+</tr>
+<tr>
+<td>숫자로 시작 불가</td>
+<td>0name 불가, name0 가능</td>
+</tr>
+<tr>
+<td>자료형 미지정</td>
+<td>기본적으로 문자열로 인식</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="4-2_4">4-2. 변수 선언 및 사용</h5>
-<h1 id="binbash">!/bin/bash</h1>
-<p>NAME="Ubuntu 24.04"      ← 문자열 변수 (따옴표 사용)
-VERSION=24.04            ← 숫자형 변수 (기본적으로 문자열로 인
-식)
-echo "Welcome to $NAME"  ← 변수 사용 시 앞에 $ 붙임
-변수를 가져올 때는 반드시 변수명 앞에 $ 를 붙인다.</p>
+<h1 id="binbash-nameubuntu-2404-version2404">!/bin/bash NAME="Ubuntu 24.04"      ← 문자열 변수 (따옴표 사용) VERSION=24.04            ← 숫자형 변수 (기본적으로 문자열로 인 식)</h1>
+<p>echo "Welcome to $NAME"  ← 변수 사용 시 앞에 $ 붙임 변수를 가져올 때는 반드시 변수명 앞에 $ 를 붙인다.</p>
 <h4 id="5-조건문-if">5. 조건문 (if)</h4>
 <h5 id="5-1_2">5-1. 기본 문법</h5>
-<ul>
-<li>if [ 조건 ]; then</li>
-<li>
-<h1 id="_3">조건이 참일 때 실행</h1>
-</li>
-<li>else</li>
-<li>
-<h1 id="_4">조건이 거짓일 때 실행</h1>
-</li>
-<li>fi</li>
-</ul>
+<p>if [ 조건 ]; then # 조건이 참일 때 실행 else # 조건이 거짓일 때 실행 fi</p>
 <h5 id="5-2_2">5-2. 비교 연산자</h5>
-<ul>
-<li>연산자</li>
-<li>의미</li>
-<li>-eq</li>
-<li>같다 (Equal)</li>
-<li>-gt</li>
-<li>크다 (Greater Than)</li>
-<li>-lt</li>
-<li>
-<p>작다 (Lower Than)</p>
-</li>
-<li>
-<p>연산자</p>
-</li>
-<li>의미</li>
-<li>-ne</li>
-<li>같지 않다 (Not Equal)</li>
-<li>
-<blockquote>
-<p>, &lt; , !=</p>
-</blockquote>
-</li>
-<li>부등호·부정 기호로도 조건 지정 가능</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>연산자</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-eq</td>
+<td>같다 (Equal)</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>크다 (Greater Than)</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>작다 (Lower Than)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>연산자</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-ne</td>
+<td>같지 않다 (Not Equal)</td>
+</tr>
+<tr>
+<td>&gt; , &lt; , !=</td>
+<td>부등호·부정 기호로도 조건 지정 가능</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="5-3_1">5-3. 파일·디렉토리 조건</h5>
-<ul>
-<li>옵션</li>
-<li>의미</li>
-<li>-d &lt;경로&gt;</li>
-<li>해당 디렉토리가 존재하는지 검사</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d &lt;경로&gt;</td>
+<td>해당 디렉토리가 존재하는지 검사</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="5-4">5-4. 예제</h5>
-<ul>
-<li>
-<h1 id="binbash_1">!/bin/bash</h1>
-</li>
-<li>NUM=10</li>
-<li>if [ $NUM -gt 5 ]; then</li>
-<li>echo "5 higher"         ← 10 &gt; 5 이므로 참일 때 실행</li>
-<li>else</li>
-<li>echo "5 or lower"</li>
-<li>fi</li>
-</ul>
+<h1 id="binbash-num10-if-num-gt-5-then-echo-5-higher-10-5-else-echo-5-or-lower-fi">!/bin/bash NUM=10 if [ $NUM -gt 5 ]; then echo "5 higher"         ← 10 &gt; 5 이므로 참일 때 실행 else echo "5 or lower" fi</h1>
 <h4 id="6-사용자-입력-받기">6. 사용자 입력 받기</h4>
-<p>echo -n "당신의 이름을 입력하세요: "
-read USERNAME            ← 사용자가 입력한 값을 USERNAME 변수에
-저장
-if [ $USERNAME = "ubuntu" ]; then
-  echo "관리자 계정으로 로그인했습니다."
-else
-  echo "환영합니다, ${USERNAME}님"
-fi
-read  명령어는 사용자가 입력한 값을 지정한 변수에 저장한다.</p>
+<p>echo -n "당신의 이름을 입력하세요: " read USERNAME            ← 사용자가 입력한 값을 USERNAME 변수에 저장 if [ $USERNAME = "ubuntu" ]; then echo "관리자 계정으로 로그인했습니다." else echo "환영합니다, ${USERNAME}님" fi read  명령어는 사용자가 입력한 값을 지정한 변수에 저장한다.</p>
 <h4 id="7-반복문">7. 반복문</h4>
 <h5 id="7-1-for">7-1. for 문</h5>
-<ul>
-<li>정해진 범위나 리스트의 크기만큼 반복할 때 사용한다.</li>
-<li>for i in 1 2 3; do</li>
-<li>echo "number $i"</li>
-<li>done</li>
-</ul>
+<p>정해진 범위나 리스트의 크기만큼 반복할 때 사용한다.</p>
+<p>for i in 1 2 3; do echo "number $i" done</p>
 <h5 id="7-2-while">7-2. while 문</h5>
-<p>조건이 참인 동안 계속 반복한다.
-COUNTER=1
-while [ $COUNTER -lt 4 ]; do   ← COUNTER 값이 4보다 작은 동안
-반복
-  echo $COUNTER
-  COUNTER=$(( COUNTER + 1 ))   ← COUNTER 값 1씩 증가
-done
-연산(산술)을 수행할 때는 $(( 계산식 ))  형태를 사용한다.
-⚠️ while 문에서 변수 값을 증가시키지 않으면 조건이 영원히 참이 되어 무한 루프가 발
-생한다.</p>
+<p>조건이 참인 동안 계속 반복한다.</p>
+<p>COUNTER=1 while [ $COUNTER -lt 4 ]; do   ← COUNTER 값이 4보다 작은 동안 반복 echo $COUNTER COUNTER=$(( COUNTER + 1 ))   ← COUNTER 값 1씩 증가 done 연산(산술)을 수행할 때는 $(( 계산식 ))  형태를 사용한다.</p>
+<p>⚠️ while 문에서 변수 값을 증가시키지 않으면 조건이 영원히 참이 되어 무한 루프가 발 생한다.</p>
 <h4 id="8-awk">8. AWK</h4>
 <h5 id="8-1_1">8-1. 개념</h5>
-<p>AWK는 텍스트 기반의 표·데이터를 공백(또는 지정 구분자)을 기준으로 필드(열)로 분리하여
-분석하고 추출하는 프로그래밍 언어이다.
-이름 유래: Aho(에이호), Weinberger(웬버거), Kernighan(커링한) — 세 개발자의 이
-름 첫 글자.</p>
+<p>AWK는 텍스트 기반의 표·데이터를 공백(또는 지정 구분자)을 기준으로 필드(열)로 분리하여 분석하고 추출하는 프로그래밍 언어이다.</p>
+<p>이름 유래: Aho(에이호), Weinberger(웬버거), Kernighan(커링한) — 세 개발자의 이 름 첫 글자.</p>
 <h5 id="8-2_1">8-2. 기본 문법</h5>
-<p>awk '{ 행동 }' 파일명
-awk '조건 { 행동 }' 파일명</p>
+<p>awk '{ 행동 }' 파일명 awk '조건 { 행동 }' 파일명</p>
 <h5 id="8-3_1">8-3. 필드 참조</h5>
-<p>공백을 구분자로 사용하는 경우:
-awk '{ print $1, $3 }' user.txt</p>
-<h2 id="1-첫-번째-필드-3-세-번째-필드">$1: 첫 번째 필드, $3: 세 번째 필드</h2>
-<p>다른 구분자(예: : )를 사용하는 경우:
-awk -F: '{ print $1 }' /etc/passwd</p>
-<h2 id="f-구분자-지정-콜론을-구분자로-사용">-F: 구분자 지정 (콜론을 구분자로 사용)</h2>
+<p>공백을 구분자로 사용하는 경우:</p>
+<p>awk '{ print $1, $3 }' user.txt # $1: 첫 번째 필드, $3: 세 번째 필드 다른 구분자(예: : )를 사용하는 경우:</p>
+<p>awk -F: '{ print $1 }' /etc/passwd # -F: 구분자 지정 (콜론을 구분자로 사용)</p>
 <h5 id="8-4_1">8-4. 조건을 포함한 예제</h5>
-<h2 id="usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만</h2>
-<p>출력
-awk '$3 &gt;= 30 { print $1, $3 }' user.txt</p>
+<h2 id="usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만-출력-awk-3-gt-30--print-1-3--usertxt">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만 출력 awk '$3 &gt;= 30 { print $1, $3 }' user.txt</h2>
 <h5 id="8-5">8-5. 특정 문자열이 포함된 행 추출</h5>
-<p>ip address | awk '/inet / { print $2 }'</p>
-<h2 id="inet-이-포함된-행에서-두-번째-필드ip-주소-출력">'inet '이 포함된 행에서 두 번째 필드(IP 주소) 출력</h2>
+<p>ip address | awk '/inet / { print $2 }' # 'inet '이 포함된 행에서 두 번째 필드(IP 주소) 출력</p>
 <h4 id="9-sed">9. SED</h4>
 <h5 id="9-1_1">9-1. 개념</h5>
-<p>SED는 <strong>Stream Editor(스트림 에디터)</strong>의 약자로, 파일이나 파이프 입력에서 특정 문자
-열을 삭제·추가·치환하기 위한 도구이다.</p>
+<p>SED는 <strong>Stream Editor(스트림 에디터)</strong>의 약자로, 파일이나 파이프 입력에서 특정 문자 열을 삭제·추가·치환하기 위한 도구이다.</p>
 <h5 id="9-2_1">9-2. 기본 문법</h5>
-<ul>
-<li>sed 's/찾을문자열/바꿀문자열/' 파일명</li>
-<li>기호</li>
-<li>의미</li>
-<li>s</li>
-<li>Substitute(치환)의 약자</li>
-<li>g</li>
-<li>
-<p>Global — 파일 전체에서 모두 치환</p>
-</li>
-<li>
-<p>기호</p>
-</li>
-<li>의미</li>
-<li>i</li>
-<li>In-place — 원본 파일을 직접 수정</li>
-</ul>
+<p>sed 's/찾을문자열/바꿀문자열/' 파일명</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기호</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s</td>
+<td>Substitute(치환)의 약자</td>
+</tr>
+<tr>
+<td>g</td>
+<td>Global — 파일 전체에서 모두 치환</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기호</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>In-place — 원본 파일을 직접 수정</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="9-3">9-3. 치환 예제</h5>
-<h2 id="serverconf-파일에서-disabled를-enable로-치환하여-출력">server.conf 파일에서 'disabled'를 'enable'로 치환하여 출력</h2>
-<p>(원본 유지)
-sed 's/disabled/enable/g' server.conf</p>
-<h2 id="원본-파일-자체를-수정하려면--i-옵션-추가">원본 파일 자체를 수정하려면 -i 옵션 추가</h2>
-<p>sed -i 's/disabled/enable/g' server.conf
-⚠️ -i  옵션 없이 실행하면 변경된 내용이 화면에만 출력되고 원본 파일은 수정되지 않는
-다.</p>
+<h2 id="serverconf-파일에서-disabled를-enable로-치환하여-출력-원본-유지-sed-sdisabledenableg-serverconf--원본-파일-자체를-수정하려면--i-옵션-추가-sed--i-sdisabledenableg-serverconf---i-옵션-없이-실행하면-변경된-내용이-화면에만-출력되고-원본-파일은-수정되지-않는-다">server.conf 파일에서 'disabled'를 'enable'로 치환하여 출력 (원본 유지) sed 's/disabled/enable/g' server.conf # 원본 파일 자체를 수정하려면 -i 옵션 추가 sed -i 's/disabled/enable/g' server.conf ⚠️ -i  옵션 없이 실행하면 변경된 내용이 화면에만 출력되고 원본 파일은 수정되지 않는 다.</h2>
 <h5 id="9-4">9-4. 특정 줄 삭제</h5>
-<p>sed '2d' server.conf     ← 두 번째 줄을 삭제하여 출력 (원본 유
-지)</p>
+<p>sed '2d' server.conf     ← 두 번째 줄을 삭제하여 출력 (원본 유 지)</p>
 <h5 id="9-5-awk-sed">9-5. AWK와 SED 비교</h5>
-<ul>
-<li>도구</li>
-<li>주요 용도</li>
-<li>AWK</li>
-<li>특정 열(필드) 추출, 수치 비교, 데이터 분석</li>
-<li>SED</li>
-<li>특정 문자열 치환·삭제·추가, 파일 편집</li>
-<li>AWK와 SED는 셸 스크립트 작성 시 필수적으로 자주 사용되는 도구이다.</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>도구</th>
+<th>주요 용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWK</td>
+<td>특정 열(필드) 추출, 수치 비교, 데이터 분석</td>
+</tr>
+<tr>
+<td>SED</td>
+<td>특정 문자열 치환·삭제·추가, 파일 편집</td>
+</tr>
+</tbody>
+</table></div>
+<p>AWK와 SED는 셸 스크립트 작성 시 필수적으로 자주 사용되는 도구이다.</p>
 <h4 id="10-셸-스크립트-매개변수argument">10. 셸 스크립트 매개변수(Argument)</h4>
-<ul>
-<li>스크립트 실행 시 인자(Argument)를 함께 전달할 수 있다.</li>
-<li>./test.sh arg1 arg2 arg3 arg4</li>
-<li>변수</li>
-<li>의미</li>
-<li>$0</li>
-<li>
-<p>스크립트 파일명 자체</p>
-</li>
-<li>
-<p>변수</p>
-</li>
-<li>의미</li>
-<li>$1</li>
-<li>첫 번째 인자</li>
-<li>$2</li>
-<li>두 번째 인자</li>
-<li>$4</li>
-<li>네 번째 인자</li>
-<li>$#</li>
-<li>전체 인자 개수</li>
-</ul>
+<p>스크립트 실행 시 인자(Argument)를 함께 전달할 수 있다.</p>
+<p>./test.sh arg1 arg2 arg3 arg4</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>변수</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>스크립트 파일명 자체</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>변수</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1</td>
+<td>첫 번째 인자</td>
+</tr>
+<tr>
+<td>$2</td>
+<td>두 번째 인자</td>
+</tr>
+<tr>
+<td>$4</td>
+<td>네 번째 인자</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>전체 인자 개수</td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="11-셸-스크립트-문법-검사-도구">11. 셸 스크립트 문법 검사 도구</h4>
-<p>작성한 셸 스크립트의 문법이 올바른지 확인하려면 온라인 도구를 활용할 수 있다.
-사이트 예시: www.shellcheck.net
-스크립트 붙여넣기 후 문법적으로 잘못된 부분과 개선 방향을 확인 가능</p>
+<p>작성한 셸 스크립트의 문법이 올바른지 확인하려면 온라인 도구를 활용할 수 있다.</p>
+<p>사이트 예시: www.shellcheck.net 스크립트 붙여넣기 후 문법적으로 잘못된 부분과 개선 방향을 확인 가능</p>
 <h4 id="12-시스템-취약점-점검-가이드-소개">12. 시스템 취약점 점검 가이드 소개</h4>
 <h5 id="12-1">12-1. 출처</h5>
-<p>한국인터넷진흥원(KISA) 사이트(kisa.or.kr) → 지식 플랫폼 → 법령·가이드라인 → 가이드
-라인 탭에서 공식 가이드 문서를 확인할 수 있다.</p>
+<p>한국인터넷진흥원(KISA) 사이트(kisa.or.kr) → 지식 플랫폼 → 법령·가이드라인 → 가이드 라인 탭에서 공식 가이드 문서를 확인할 수 있다.</p>
 <h5 id="12-2">12-2. 주요 문서</h5>
-<p>주요 정보통신 기반시설 기술적 취약점 분석·평가 방법 상세 가이드 (2025년 12월 기준
-최신판, 873페이지)</p>
+<p>주요 정보통신 기반시설 기술적 취약점 분석·평가 방법 상세 가이드 (2025년 12월 기준 최신판, 873페이지)</p>
 <h5 id="12-3">12-3. 점검 대상 시스템</h5>
-<ul>
-<li>시스템 유형</li>
-<li>비고</li>
-<li>유닉스·리눅스 서버</li>
-<li>리눅스는 유닉스 계열에 해당</li>
-<li>윈도우즈 서버</li>
-<li>—</li>
-<li>웹 서비스</li>
-<li>—</li>
-<li>보안 장비</li>
-<li>—</li>
-<li>네트워크 장비</li>
-<li>—</li>
-<li>DBMS</li>
-<li>데이터베이스</li>
-<li>PC</li>
-<li>일반 사용자 PC</li>
-<li>제어 시스템, 이동통신, 가상화 장비, 클라우드 등</li>
-<li>—</li>
-</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>시스템 유형</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>유닉스·리눅스 서버</td>
+<td>리눅스는 유닉스 계열에 해당</td>
+</tr>
+<tr>
+<td>윈도우즈 서버</td>
+<td>—</td>
+</tr>
+<tr>
+<td>웹 서비스</td>
+<td>—</td>
+</tr>
+<tr>
+<td>보안 장비</td>
+<td>—</td>
+</tr>
+<tr>
+<td>네트워크 장비</td>
+<td>—</td>
+</tr>
+<tr>
+<td>DBMS</td>
+<td>데이터베이스</td>
+</tr>
+<tr>
+<td>PC</td>
+<td>일반 사용자 PC</td>
+</tr>
+<tr>
+<td>제어 시스템, 이동통신, 가상화 장비, 클라우드 등</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
 <h5 id="12-4">12-4. 공통 점검 항목</h5>
-<ul>
-<li>시스템 종류에 관계없이 공통적으로 포함되는 점검 항목은 다음 다섯 가지이다.</li>
-<li>항목</li>
-<li>설명 예시</li>
-<li>계정 관리</li>
-<li>루트 원격 접속 차단 여부, 패스워드 복잡성 정책</li>
-<li>파일 및 디렉토리 관리</li>
-<li>SetUID 파일 존재 여부 등</li>
-<li>서비스 관리</li>
-<li>불필요한 서비스 실행 여부</li>
-<li>패치 관리</li>
-<li>최신 패치 적용 여부</li>
-<li>로그 관리</li>
-<li>/var/log/wtmp , /var/log/btmp  등 로그 점</li>
-<li>검</li>
-</ul>
+<p>시스템 종류에 관계없이 공통적으로 포함되는 점검 항목은 다음 다섯 가지이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>계정 관리</td>
+<td>루트 원격 접속 차단 여부, 패스워드 복잡성 정책</td>
+</tr>
+<tr>
+<td>파일 및 디렉토리 관리</td>
+<td>SetUID 파일 존재 여부 등</td>
+</tr>
+<tr>
+<td>서비스 관리</td>
+<td>불필요한 서비스 실행 여부</td>
+</tr>
+<tr>
+<td>패치 관리</td>
+<td>최신 패치 적용 여부</td>
+</tr>
+<tr>
+<td>로그 관리</td>
+<td>/var/log/wtmp , /var/log/btmp 등 로그 점<br>검</td>
+</tr>
+</tbody>
+</table></div>
 <hr /><div class="nav"><a href="ch12.html"><span class="lbl">이전</span>핵심키워드 · 리눅스 서버 (1/2)</a><a href="ch14.html"><span class="lbl">다음</span>핵심키워드 · 윈도우 서버</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
