@@ -28,9 +28,12 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 ORDER: list[tuple[str, str | None]] = [
     ("book/00-이-책의-사용법.md", "들어가기"),
     ("book/01-커리큘럼-지도.md", None),
+    ("slides/0-과정개요-이미지슬라이드.md", None),
     ("notes/2026-08-18_라우팅-ACL-NAT-VPN.md", "1부 · 네트워크"),
+    ("notes/네트워크보안-통합Lab-결과보고서.md", None),
     ("notes/RockyLinux9_개인서버랩.md", "2부 · 리눅스 서버"),
     ("notes/2026-08-25_NFS-Samba-SELinux-rsyslog.md", None),
+    ("notes/2026-08-27_보강-vi-프로토콜-IIS.md", None),
     ("notes/2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md", None),
     ("notes/2026-08-27_MariaDB-SQL-백업-복제.md", "3부 · 데이터베이스"),
     ("notes/2026-08-28_팀웹-원격MariaDB연동.md", None),

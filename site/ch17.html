@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>핵심키워드 · 파이썬 · 자동화 · SKT ALEPH 학습 노트</title>
+<title>핵심키워드 · 윈도우 서버 · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -108,752 +108,955 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="cur" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="inchap"><a class="lv3" href="#121-실전-예제-코드를-활용한-파이썬-자동화-활용-이해">121. 실전 예제 코드를 활용한 파이썬 자동화 활용 이해</a><a class="lv4" href="#1-파이썬-기본-문법-요소">1. 파이썬 기본 문법 요소</a><a class="lv2" href="#예시-리스트-인덱스-test--19216810010-19216810020-1921681003-0--test0--19216810010--test1--19216810020--test2--19216810030">예시: 리스트 인덱스 test = [&#x27;192.168.100.10&#x27;, &#x27;192.168.100.20&#x27;, &#x27;192.168.100.3 0&#x27;] # test[0] → &#x27;192.168.100.10&#x27; # test[1] → &#x27;192.168.100.20&#x27; # test[2] → &#x27;192.168.100.30&#x27;</a><a class="lv4" href="#2-ip-점검-스크립트">2. IP 점검 스크립트</a><a class="lv2" href="#변수-선언-예시-문자열-정수형-불-리스트-servername--ubuntu-web-01-maxconnections--500-isactive--true--점검-대상-ip-리스트-targetips--19216810010-19216810020-192168-10030">변수 선언 예시 (문자열, 정수형, 불, 리스트) server_name = &#x27;ubuntu-web-01&#x27; max_connections = 500 is_active = True # 점검 대상 IP 리스트 target_ips = [&#x27;192.168.100.10&#x27;, &#x27;192.168.100.20&#x27;, &#x27;192.168. 100.30&#x27;]</a><a class="lv2" href="#조건문-maxconnections-값에-따라-서버-규모-판별-if-maxconnections-gt-1000--대형-서버-elif-maxconnections-gt-300--중형-서버-else--소형-서버-300개까지">조건문: max_connections 값에 따라 서버 규모 판별 if max_connections &amp;gt; 1000: # 대형 서버 elif max_connections &amp;gt; 300: # 중형 서버 else: # 소형 서버 (300개까지)</a><a class="lv2" href="#for-반복문-리스트의-각-ip를-순서대로-처리-for-ip-in-targetips--점검-중-ip-변수에-현재-ip가-들어와-처리됨-awk--f--로-콜론-기준-분리하는-셸-스크립트-방식이-파이썬에서는-split-함수로-대응된다">for 반복문: 리스트의 각 IP를 순서대로 처리 for ip in target_ips: # 점검 중 IP 변수에 현재 IP가 들어와 처리됨 awk -F &#x27;:&#x27; 로 콜론 기준 분리하는 셸 스크립트 방식이 파이썬에서는 split(&#x27;:&#x27;)  함수로 대응된다.</a><a class="lv4" href="#3-파일-정리-스크립트">3. 파일 정리 스크립트</a><a class="lv2" href="#내부-라이브러리-임포트-별도-설치-불필요-import-os-import-shutil--대상-디렉토리-변수-설정-targetdir--workspace--디렉토리가-없으면-생성-osmakedirs">내부 라이브러리 임포트 (별도 설치 불필요) import os import shutil # 대상 디렉토리 변수 설정 target_dir = &#x27;./.workspace&#x27; # 디렉토리가 없으면 생성 os.makedirs(...)</a><a class="lv2" href="#디렉토리-내-파일-목록-순회-for-filename-in-oslistdirtargetdir-filepath----파일인지-확인-후-확장자-추출-if-ospathisfilefilepath-ext--ospathsplitextfilename--확장자별-디렉토리로-이동">디렉토리 내 파일 목록 순회 for filename in os.listdir(target_dir): file_path = ... # 파일인지 확인 후 확장자 추출 if os.path.isfile(file_path): ext = os.path.splitext(filename) # 확장자별 디렉토리로 이동</a><a class="lv4" href="#4-네트워크-상태-점검-스크립트">4. 네트워크 상태 점검 스크립트</a><a class="lv2" href="#내부-라이브러리-임포트-import-subprocess--ping-명령어-실행--c-1-1회-전송--w-1-1초-타임아웃-result--subprocessrun-ping--c-1--w-1-server-stdoutsubprocessdevnull-stderrsubprocessdevnull--반환값-0-성공-0-이외-실패-stdoutsubprocessdevnull-은-리눅스의-gt-devnull-과-동일하게-출력-결과를-화면에-표시-하지-않는-역할을-한다">내부 라이브러리 임포트 import subprocess # ping 명령어 실행 (-c 1: 1회 전송, -W 1: 1초 타임아웃) result = subprocess.run( [&#x27;ping&#x27;, &#x27;-c&#x27;, &#x27;1&#x27;, &#x27;-W&#x27;, &#x27;1&#x27;, server], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL ) # 반환값 0: 성공, 0 이외: 실패 stdout=subprocess.DEVNULL 은 리눅스의 &amp;gt; /dev/null 과 동일하게 출력 결과를 화면에 표시 하지 않는 역할을 한다.</a><a class="lv4" href="#5-시스템-리소스-모니터링-스크립트">5. 시스템 리소스 모니터링 스크립트</a><a class="lv2" href="#psutil-라이브러리-설치-외부-라이브러리-pip-install-psutil---break-system-packages---break-system-packages-옵션은-외부에서-관리되는-환경이라는-메시지가-뜰-때-설치를-강행하는-옵션이다">psutil 라이브러리 설치 (외부 라이브러리) pip install psutil --break-system-packages --break-system-packages  옵션은 &quot;외부에서 관리되는 환경&quot;이라는 메시지가 뜰 때 설치를 강행하는 옵션이다.</a><a class="lv2" href="#80-초과-시-경고-출력-if-cpu-gt-80--경고-cpu-인계치-초과-if-mempercent-gt-80--경고-메모리-공간-부족--2초-대기-interval-1초-포함하여-총-3초-간격-timesleep2-except-keyboardinterrupt--ctrlc-입력-시-종료-break-while-true-는-조건이-항상-참이므로-무한-반복된다-tryexcept-예외-처리를-통해-ctrlckeyboardinterrupt-입력-시-종료하도록-처리한다">80 초과 시 경고 출력 if cpu &amp;gt; 80: # 경고: CPU 인계치 초과 if mem.percent &amp;gt; 80: # 경고: 메모리 공간 부족 # 2초 대기 (interval 1초 포함하여 총 3초 간격) time.sleep(2) except KeyboardInterrupt: # Ctrl+C 입력 시 종료 break while True 는 조건이 항상 참이므로 무한 반복된다. try/except  예외 처리를 통해 Ctrl+C(KeyboardInterrupt)  입력 시 종료하도록 처리한다.</a><a class="lv4" href="#6-로그-백업-및-정리-스크립트">6. 로그 백업 및 정리 스크립트</a><a class="lv2" href="#내부-라이브러리-임포트-import-os-import-tarfile-import-time-from-datetime-import-datetime--변수-설정-targetdir--workspacelog--백업할-로그-디렉토리-backupdir--backupstore--백업-저장-디렉토리-retentiondays--30--보관-기간-일">내부 라이브러리 임포트 import os import tarfile import time from datetime import datetime # 변수 설정 target_dir = &#x27;./.workspace/log&#x27;       # 백업할 로그 디렉토리 backup_dir = &#x27;./backup_store&#x27;          # 백업 저장 디렉토리 retention_days = 30                    # 보관 기간 (일)</a><a class="lv2" href="#오늘-날짜로-백업-파일명-생성-y-연도-m-월-d-일-today--datetimenowstrftimeymd-backupfile--fbackuptodaytargz--targz으로-압축-백업-with-tarfileopenbackuppath-wgz-as-tar-taraddtargetdir">오늘 날짜로 백업 파일명 생성 (%Y: 연도, %m: 월, %d: 일) today = datetime.now().strftime(&#x27;%Y%m%d&#x27;) backup_file = f&#x27;backup_{today}.tar.gz&#x27; # tar.gz으로 압축 백업 with tarfile.open(backup_path, &#x27;w:gz&#x27;) as tar: tar.add(target_dir)</a><a class="lv2" href="#30일-경과-파일-삭제--retentiondays-86400-1일--86400초-기준-실제-운용-서버에서는-로그-파일이-지속적으로-생성되어-디스크-용량을-차지한다-법적으로-로그-보관-의무가-있는-기업은-보관-기간을-별도로-설정하여-운용해야-한다">30일 경과 파일 삭제 # retention_days * 86400 (1일 = 86400초) 기준 실제 운용 서버에서는 로그 파일이 지속적으로 생성되어 디스크 용량을 차지한다. 법적으로 로그 보관 의무가 있는 기업은 보관 기간을 별도로 설정하여 운용해야 한다.</a><a class="lv4" href="#7-웹-서버-상태-점검-스크립트">7. 웹 서버 상태 점검 스크립트</a><a class="lv2" href="#requests-라이브러리-설치-외부-라이브러리-pip-install-requests---break-system-packages-requests-라이브러리는-웹-크롤링-라이브러리인-beautifulsoup과-함께-많이-사용되며-웹-사이트에-요청request을-보낼-때-필요한-라이브러리다">requests 라이브러리 설치 (외부 라이브러리) pip install requests --break-system-packages requests  라이브러리는 웹 크롤링 라이브러리인 BeautifulSoup과 함께 많이 사용되며, 웹 사이트에 요청(request)을 보낼 때 필요한 라이브러리다.</a><a class="lv4" href="#8-사용자-계정-필터링-및-csv-생성-스크립트">8. 사용자 계정 필터링 및 CSV 생성 스크립트</a><a class="lv2" href="#내부-라이브러리-임포트-import-csv-inputfile--etcpasswd-outfile--loginusersreportcsv-loginusers---로그인-가능한-계정-저장-리스트-with-openinputfile-r-as-f-for-line-in-f--빈-줄-또는-주석-건너뜀-if-linestartswith-or-not-linestrip-continue--콜론을-기준으로-필드-분리-awk--f--와-동일-parts--linestripsplit">내부 라이브러리 임포트 import csv input_file = &#x27;/etc/passwd&#x27; out_file = &#x27;./login_users_report.csv&#x27; login_users = []  # 로그인 가능한 계정 저장 리스트 with open(input_file, &#x27;r&#x27;) as f: for line in f: # 빈 줄 또는 주석 건너뜀 if line.startswith(&#x27;#&#x27;) or not line.strip(): continue # 콜론(:)을 기준으로 필드 분리 (awk -F &#x27;:&#x27; 와 동일) parts = line.strip().split(&#x27;:&#x27;)</a><a class="lv2" href="#리스트-인덱스-0사용자명-2uid-5홈디렉토리-6로그-인셸-username--parts0-uid--parts2--세-번째-필드--리스트-인덱스-2-homedir--parts5-loginshell--parts6">리스트 인덱스: 0=사용자명, 2=uid, 5=홈디렉토리, 6=로그 인셸 username = parts[0] uid = parts[2]        # 세 번째 필드 → 리스트 인덱스 2 home_dir = parts[5] login_shell = parts[6]</a><a class="lv2" href="#binbash-또는-binsh-셸을-가진-계정만-필터링-if-bash-in-loginshell-or-sh-in-loginshell-loginusersappendusername-uid-homedir-loginshell">/bin/bash 또는 /bin/sh 셸을 가진 계정만 필터링 if &#x27;/bash&#x27; in login_shell or &#x27;/sh&#x27; in login_shell: login_users.append([username, uid, home_dir, login_shell])</a><a class="lv2" href="#csv-모듈의-writer-함수로-csv-파일-저장-with-openoutfile-w-as-f-writer--csvwriterf-writerwriterowsloginusers">csv 모듈의 writer 함수로 CSV 파일 저장 with open(out_file, &#x27;w&#x27;) as f: writer = csv.writer(f) writer.writerows(login_users)</a><a class="lv4" href="#9-ai-에이전트-보안-관련-사항">9. AI 에이전트 보안 관련 사항</a><a class="lv3" href="#122-파이썬-gui-프로그래밍-tkinter">122. 파이썬 GUI 프로그래밍 (Tkinter)</a><a class="lv4" href="#1-windows-파이썬-설치">1. Windows 파이썬 설치</a><a class="lv4" href="#2-vs-code-설치-및-설정">2. VS Code 설치 및 설정</a><a class="lv4" href="#3-tkinter-gui-프로그래밍-기초">3. Tkinter GUI 프로그래밍 기초</a><a class="lv2" href="#tkinter-임포트-from-tkinter-import">Tkinter 임포트 from tkinter import *</a><a class="lv2" href="#창-제목-설정-roottitle테스트-프로그램">창 제목 설정 root.title(&#x27;테스트 프로그램&#x27;)</a><a class="lv2" href="#창-크기-설정-가로-x-세로-단위-픽셀-rootgeometry640x480">창 크기 설정 (가로 x 세로, 단위: 픽셀) root.geometry(&#x27;640x480&#x27;)</a><a class="lv2" href="#창이-닫히기-전까지-계속-표시-메인-루프-rootmainloop">창이 닫히기 전까지 계속 표시 (메인 루프) root.mainloop()</a><a class="lv2" href="#버튼-생성-btn1--button-root--배치할-창-text로그인--버튼에-표시될-텍스트-width10--가로-크기-픽셀-height10--세로-크기-픽셀-bgyellow--배경색-background-fg--전경색-foreground-글자색">버튼 생성 btn1 = Button( root,           # 배치할 창 text=&#x27;로그인&#x27;,  # 버튼에 표시될 텍스트 width=10,       # 가로 크기 (픽셀) height=10,      # 세로 크기 (픽셀) bg=&#x27;yellow&#x27;,    # 배경색 (background) fg=&#x27;...&#x27;        # 전경색 (foreground, 글자색) )</a><a class="lv2" href="#버튼을-화면에-배치-pack-필수-btn1pack">버튼을 화면에 배치 (pack 필수) btn1.pack()</a><a class="lv2" href="#레이블-생성-텍스트-표시-영역-label1--labelroot-text안녕">레이블 생성 (텍스트 표시 영역) label1 = Label(root, text=&#x27;안녕&#x27;)</a><a class="lv2" href="#레이블을-화면에-배치-label1pack">레이블을 화면에 배치 label1.pack()</a><a class="lv4" href="#4-메모장-프로그램-구현">4. 메모장 프로그램 구현</a><a class="lv2" href="#전체-메뉴-바-생성-menu--menuroot">전체 메뉴 바 생성 menu = Menu(root)</a><a class="lv2" href="#파일-메뉴-항목-생성-tearoff0-메뉴-분리-비활성화-menufile--menumenu-tearoff0">파일 메뉴 항목 생성 (tearoff=0: 메뉴 분리 비활성화) menu_file = Menu(menu, tearoff=0)</a><a class="lv2" href="#파일-메뉴에-항목-추가-menufileaddcommandlabel열기-commandopenfile-menufileaddcommandlabel저장-commandsavefile-menufileaddseparator--구분선-추가-menufileaddcommandlabel끝내기-commandrootquit">파일 메뉴에 항목 추가 menu_file.add_command(label=&#x27;열기&#x27;, command=open_file) menu_file.add_command(label=&#x27;저장&#x27;, command=save_file) menu_file.add_separator()                               # 구분선 추가 menu_file.add_command(label=&#x27;끝내기&#x27;, command=root.quit)</a><a class="lv2" href="#메뉴-바에-파일-메뉴를-캐스케이드하위-메뉴로-등록-menuaddcascadelabel파일-menumenufile">메뉴 바에 파일 메뉴를 캐스케이드(하위 메뉴)로 등록 menu.add_cascade(label=&#x27;파일&#x27;, menu=menu_file)</a><a class="lv2" href="#메뉴-바-적용-rootconfigmenumenu">메뉴 바 적용 root.config(menu=menu)</a><a class="lv2" href="#스크롤바-생성-대문자-s로-시작하는-scrollbar-클래스-사용-scrollbar--scrollbarroot">스크롤바 생성 (대문자 S로 시작하는 Scrollbar 클래스 사용) scrollbar = Scrollbar(root)</a><a class="lv2" href="#스크롤바-배치-오른쪽에-위치-세로-방향으로-채움-scrollbarpacksideright-fillyes">스크롤바 배치: 오른쪽에 위치, 세로 방향으로 채움 scrollbar.pack(side=RIGHT, fill=YES)</a><a class="lv2" href="#텍스트-영역-생성-대문자-t로-시작하는-text-클래스-사용-txt--textroot-yscrollcommandscrollbarset">텍스트 영역 생성 (대문자 T로 시작하는 Text 클래스 사용) txt = Text(root, yscrollcommand=scrollbar.set)</a><a class="lv2" href="#텍스트-영역-배치-왼쪽-가로세로-채움-창-크기에-따라-확장-txtpacksideleft-fillboth-expandtrue">텍스트 영역 배치: 왼쪽, 가로세로 채움, 창 크기에 따라 확장 txt.pack(side=LEFT, fill=BOTH, expand=True)</a><a class="lv2" href="#저장할-파일-경로-변수-현재-디렉토리에-mynotetxt로-저장-filename--mynotetxt--저장-함수-정의-def-함수-정의-키워드-def-savefile--쓰기-권한w으로-파일-열기-한글-지원을-위해-utf-8-인코딩-지정-with-openfilename-w-encodingutf-8-as-f--텍스트-영역의-모든-내용첫-번째-줄-10부터-끝까지-읽어-서-저장-fwritetxtget10-end">저장할 파일 경로 변수 (현재 디렉토리에 mynote.txt로 저장) file_name = &#x27;mynote.txt&#x27; # 저장 함수 정의 (def: 함수 정의 키워드) def save_file(): # 쓰기 권한(&#x27;w&#x27;)으로 파일 열기, 한글 지원을 위해 utf-8 인코딩 지정 with open(file_name, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as f: # 텍스트 영역의 모든 내용(첫 번째 줄 1.0부터 끝까지) 읽어 서 저장 f.write(txt.get(&#x27;1.0&#x27;, END))</a><a class="lv2" href="#창-생성-root--tk-roottitle윈도우즈-메모장-rootgeometry640x480">창 생성 root = Tk() root.title(&#x27;윈도우즈 메모장&#x27;) root.geometry(&#x27;640x480&#x27;)</a><a class="lv2" href="#메뉴-바-구성-menu--menuroot-menufile--menumenu-tearoff0-menufileaddcommandlabel열기-commandopenfile-menufileaddcommandlabel저장-commandsavefile-menufileaddseparator-menufileaddcommandlabel끝내기-commandrootquit-menuaddcascadelabel파일-menumenufile-rootconfigmenumenu">메뉴 바 구성 menu = Menu(root) menu_file = Menu(menu, tearoff=0) menu_file.add_command(label=&#x27;열기&#x27;, command=open_file) menu_file.add_command(label=&#x27;저장&#x27;, command=save_file) menu_file.add_separator() menu_file.add_command(label=&#x27;끝내기&#x27;, command=root.quit) menu.add_cascade(label=&#x27;파일&#x27;, menu=menu_file) root.config(menu=menu)</a><a class="lv2" href="#스크롤바-scrollbar--scrollbarroot-scrollbarpacksideright-fillyes">스크롤바 scrollbar = Scrollbar(root) scrollbar.pack(side=RIGHT, fill=YES)</a><a class="lv2" href="#텍스트-영역-txt--textroot-yscrollcommandscrollbarset-txtpacksideleft-fillboth-expandtrue">텍스트 영역 txt = Text(root, yscrollcommand=scrollbar.set) txt.pack(side=LEFT, fill=BOTH, expand=True)</a><a class="lv2" href="#메인-루프-rootmainloop">메인 루프 root.mainloop()</a><a class="lv4" href="#5-추가-학습-방향">5. 추가 학습 방향</a><a class="lv3" href="#123-파이썬-가상-환경-설정-및-기초-개념">123. 파이썬 가상 환경 설정 및 기초 개념</a><a class="lv4" href="#1-코드-편집기">1. 코드 편집기</a><a class="lv4" href="#2-파이썬-가상-환경-virtual-environment">2. 파이썬 가상 환경 (Virtual Environment)</a><a class="lv4" href="#3-가상-환경-설정-실습">3. 가상 환경 설정 실습</a><a class="lv2" href="#실습용-디렉토리-생성-mkdir-pythonpractice--디렉토리-목록-확인-ls--실습-디렉토리로-이동-cd-pythonpractice--숨김-파일-포함-목록-확인-아무것도-없는-상태-ls--a">실습용 디렉토리 생성 mkdir python_practice # 디렉토리 목록 확인 ls # 실습 디렉토리로 이동 cd python_practice # 숨김 파일 포함 목록 확인 (아무것도 없는 상태) ls -a</a><a class="lv2" href="#가상-환경-생성-시도-venv-모듈이-없을-경우-오류-발생-python3--m-venv-venv--venv-모듈이-설치되어-있지-않으면-오류-메시지가-나타난다-이-경우-먼저-venv-도구를-설치해야-한다">가상 환경 생성 시도 (venv 모듈이 없을 경우 오류 발생) python3 -m venv venv ⚠️ venv 모듈이 설치되어 있지 않으면 오류 메시지가 나타난다. 이 경우 먼저 venv 도구를 설치해야 한다.</a><a class="lv2" href="#venv-도구-설치-sudo-apt-install-python3-venv--설치-후-가상-환경-재생성-python3--m-venv-venv--생성-확인-ls-ls-venv-명령어에서--m-venv-의-의미">venv 도구 설치 sudo apt install python3-venv # 설치 후 가상 환경 재생성 python3 -m venv venv # 생성 확인 ls ls venv/ 명령어에서 -m venv  의 의미:</a><a class="lv2" href="#가상-환경-활성화-source-명령어-사용-source-venvbinactivate-활성화-후에는-프롬프트-앞에-venv-와-같이-가상-환경-이름이-표시된다">가상 환경 활성화 (source 명령어 사용) source venv/bin/activate 활성화 후에는 프롬프트 앞에 (venv) 와 같이 가상 환경 이름이 표시된다.</a><a class="lv2" href="#pip-위치-확인-which-pip">pip 위치 확인 which pip</a><a class="lv2" href="#pip-설치-가상-환경-연결이-안-된-경우-sudo-apt-install--y-pip--설치-후-다시-확인-sudo-없이-which-pip--which-pip-실행-결과가-가상-환경-경로-pythonpracticevenvbinpip-가-아니라-시스템-기본-경로-usrbinpip-로-나온다면-가상-환경이-제대로-동작하지-않는-것이다-이-경우-venv-디렉토리-내-파일을-삭제하고-다시-생성하는-것이-좋다">pip 설치 (가상 환경 연결이 안 된 경우) sudo apt install -y pip # 설치 후 다시 확인 (sudo 없이) which pip ⚠️ which pip  실행 결과가 가상 환경 경로( ~/python_practice/venv/bin/pip )가 아니라 시스템 기본 경로( /usr/bin/pip )로 나온다면, 가상 환경이 제대로 동작하지 않는 것이다. 이 경우 venv 디렉토리 내 파일을 삭제하고 다시 생성하는 것이 좋다.</a><a class="lv2" href="#가상-환경-비활성화-deactivate-비활성화-후에는-프롬프트가-일반-우분투-셸로-돌아온다">가상 환경 비활성화 deactivate 비활성화 후에는 프롬프트가 일반 우분투 셸로 돌아온다.</a><a class="lv2" href="#가상-환경-재진입-source-venvbinactivate-재진입-후에는-반드시-which-pip-로-가상-환경-경로에서-실행되고-있는지-확인해야-한다">가상 환경 재진입 source venv/bin/activate 재진입 후에는 반드시 which pip 로 가상 환경 경로에서 실행되고 있는지 확인해야 한다.</a><a class="lv4" href="#4-파이썬-기본-개념">4. 파이썬 기본 개념</a><a class="lv2" href="#패키지-설치-pip-install-패키지이름">패키지 설치 pip install 패키지이름</a><a class="lv3" href="#124-파이썬-설치-가이드">124. 파이썬 설치 가이드</a><a class="lv4" href="#1-내-컴퓨터-사양-확인">1. 내 컴퓨터 사양 확인</a><a class="lv4" href="#2-내-컴퓨터-계정명-확인">2. 내 컴퓨터 계정명 확인</a><a class="lv4" href="#3-파이썬-설치-파일-다운로드">3. 파이썬 설치 파일 다운로드</a><a class="lv4" href="#1-구글에-파이썬-31210-버전-설치-검색">1. 구글에 파이썬 3.12.10 버전 설치 검색</a><a class="lv4" href="#2-파이썬-공식-홈페이지링크로-이동">2. 파이썬 공식 홈페이지(링크)로 이동</a><a class="lv4" href="#3-1번에서-확인한-운영체제-버전에-맞는-설치-파일-다운로드">3. 1번에서 확인한 운영체제 버전에 맞는 설치 파일 다운로드</a><a class="lv4" href="#4-관리자-권한으로-실행-하여-설치">4. 관리자 권한으로 실행 하여 설치</a><a class="lv4" href="#4-파이썬-설치-확인">4. 파이썬 설치 확인</a><a class="lv4" href="#1-윈도우-검색-화면에서-cmd-검색">1. 윈도우 검색 화면에서 cmd  검색</a><a class="lv4" href="#2-cmd-실행">2. cmd  실행</a><a class="lv4" href="#3-python---version-입력버전-출력-확인">3. python --version  입력버전 출력 확인</a><a class="lv4" href="#1-vs-code-설치-파일-다운로드">1. VS Code 설치 파일 다운로드</a><a class="lv4" href="#1-구글에-vs-code-설치-검색">1. 구글에 VS Code 설치 검색</a><a class="lv4" href="#2-vs-code-공식-홈페이지링크로-이동">2. VS Code 공식 홈페이지(링크)로 이동</a><a class="lv4" href="#3-1번에서-확인한-운영체제-버전에-맞는-설치-파일-다운로드-2">3. 1번에서 확인한 운영체제 버전에 맞는 설치 파일 다운로드</a><a class="lv4" href="#4-관리자-권한으로-실행-하여-설치-2">4. 관리자 권한으로 실행 하여 설치</a></div><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="cur" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="inchap"><a class="lv3" href="#070-iis-웹ftp-사이트-구성-주요-설정-항목-에러-코드-및-보안-설정">070. IIS 웹·FTP 사이트 구성, 주요 설정 항목, 에러 코드 및 보안 설정</a><a class="lv4" href="#1-iis-웹-사이트-추가">1. IIS 웹 사이트 추가</a><a class="lv4" href="#2-iis-웹-서버-기본-테스트-페이지">2. IIS 웹 서버 기본 테스트 페이지</a><a class="lv4" href="#3-default-document-시작-페이지-우선순위">3. Default Document (시작 페이지 우선순위)</a><a class="lv4" href="#4-iis-주요-설정-항목">4. IIS 주요 설정 항목</a><a class="lv4" href="#5-iis-ftp-사이트-추가">5. IIS FTP 사이트 추가</a><a class="lv4" href="#6-웹-보안-계층-구조">6. 웹 보안 계층 구조</a><a class="lv3" href="#071-windows-ftp-방화벽-허용-및-접속-테스트">071. Windows FTP 방화벽 허용 및 접속 테스트</a><a class="lv4" href="#1-로컬-사용자-계정-옵션">1. 로컬 사용자 계정 옵션</a><a class="lv4" href="#2-그룹-멤버십과-권한-상속">2. 그룹 멤버십과 권한 상속</a><a class="lv4" href="#3-ftp-서버-접속-테스트-준비">3. FTP 서버 접속 테스트 준비</a><a class="lv4" href="#4-windows-defender-firewall--ftp-트래픽-허용">4. Windows Defender Firewall — FTP 트래픽 허용</a><a class="lv4" href="#5-ftp-접속-테스트-filezilla">5. FTP 접속 테스트 (FileZilla)</a><a class="lv4" href="#6-iis-ftp-인증-및-인가-설정-확인">6. IIS FTP 인증 및 인가 설정 확인</a><a class="lv4" href="#7-ftp-현재-세션-확인">7. FTP 현재 세션 확인</a><a class="lv3" href="#072-windows-server-소개-설치-버전-구분-administrator-계정">072. Windows Server 소개, 설치 버전 구분, Administrator 계정</a><a class="lv4" href="#1-windows-server-활용-목적">1. Windows Server 활용 목적</a><a class="lv4" href="#2-windows-server-2022-설치-버전-유형">2. Windows Server 2022 설치 버전 유형</a><a class="lv4" href="#3-virtualbox-가상-머신-주요-설정-항목">3. VirtualBox 가상 머신 주요 설정 항목</a><a class="lv4" href="#4-virtualbox에서-ctrlaltdel-입력-방법">4. VirtualBox에서 Ctrl+Alt+Del 입력 방법</a><a class="lv4" href="#5-administrator-계정">5. Administrator 계정</a><a class="lv3" href="#073-windows-server-초기-네트워크-설정-서버-관리자-iisdns-역할-추가">073. Windows Server 초기 네트워크 설정, 서버 관리자, IIS·DNS 역할 추가</a><a class="lv4" href="#1-windows-server-로그인-후-네트워크-설정">1. Windows Server 로그인 후 네트워크 설정</a><a class="lv4" href="#2-서버-관리자server-manager">2. 서버 관리자(Server Manager)</a><a class="lv4" href="#3-역할role-및-기능feature-추가">3. 역할(Role) 및 기능(Feature) 추가</a><a class="lv4" href="#4-iisinternet-information-services-개요">4. IIS(Internet Information Services) 개요</a><a class="lv3" href="#076-이벤트-뷰어-보안-로그-컴퓨터-관리-로컬-보안-정책">076. 이벤트 뷰어 보안 로그, 컴퓨터 관리, 로컬 보안 정책</a><a class="lv4" href="#1-이벤트-뷰어event-viewer--보안-로그">1. 이벤트 뷰어(Event Viewer) — 보안 로그</a><a class="lv4" href="#2-컴퓨터-관리computer-management-구성">2. 컴퓨터 관리(Computer Management) 구성</a><a class="lv4" href="#3-리소스-모니터resource-monitor">3. 리소스 모니터(Resource Monitor)</a><a class="lv4" href="#4-로컬-보안-정책local-security-policy">4. 로컬 보안 정책(Local Security Policy)</a><a class="lv4" href="#5-로컬-정책--보안-옵션security-options">5. 로컬 정책 — 보안 옵션(Security Options)</a><a class="lv4" href="#6-계정-정책--패스워드-정책password-policy">6. 계정 정책 — 패스워드 정책(Password Policy)</a><a class="lv4" href="#7-계정-정책--계정-잠금-정책account-lockout-policy">7. 계정 정책 — 계정 잠금 정책(Account Lockout Policy)</a><a class="lv4" href="#8-ip-보안-정책ip-security-policy">8. IP 보안 정책(IP Security Policy)</a><a class="lv3" href="#091-windows-server-dns-서버-구축">091. Windows Server DNS 서버 구축</a><a class="lv4" href="#1-windows-server-로그인-및-이벤트-트래킹">1. Windows Server 로그인 및 이벤트 트래킹</a><a class="lv4" href="#2-dns-서버-구축-windows-server">2. DNS 서버 구축 (Windows Server)</a><a class="lv4" href="#3-forward-lookup-zone-생성">3. Forward Lookup Zone 생성</a><a class="lv4" href="#1-primary-zone-선택-후-next">1. Primary Zone 선택 후 Next</a><a class="lv4" href="#2-zone-이름-입력-실제로-접속되지-않는-도메인을-사용-브라우저에서-미리-확인">2. Zone 이름 입력: 실제로 접속되지 않는 도메인을 사용 (브라우저에서 미리 확인)</a><a class="lv4" href="#3-zone-파일명-자동-생성-도메인명dns-형식">3. Zone 파일명 자동 생성: 도메인명.dns  형식</a><a class="lv4" href="#4-dynamic-update-보조-서버가-없는-경우-기본값none---마지막-항목-유지">4. Dynamic Update: 보조 서버가 없는 경우 기본값(None - 마지막 항목) 유지</a><a class="lv4" href="#5-finish-후-존이-running-상태로-생성됨">5. Finish 후 존이 Running 상태로 생성됨</a><a class="lv4" href="#4-soa-및-ns-레코드-자동-생성">4. SOA 및 NS 레코드 자동 생성</a><a class="lv4" href="#5-dns-레코드-추가">5. DNS 레코드 추가</a><a class="lv4" href="#6-reverse-lookup-zone-생성">6. Reverse Lookup Zone 생성</a><a class="lv4" href="#7-dns-테스트">7. DNS 테스트</a></div><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 명령어 색인</a><a class="" href="ch27.html">27. 용어집</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 17</div><h1>핵심키워드 · 파이썬 · 자동화</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>121~124강 4편</strong>입니다.
+<main><div class="chapter-no">CHAPTER 17</div><h1>핵심키워드 · 윈도우 서버</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>070~091강 6편</strong>입니다.
 원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.</p>
 <blockquote>
 <p>원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어
 (188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.</p>
 </blockquote>
-<h3 id="121-실전-예제-코드를-활용한-파이썬-자동화-활용-이해">121. 실전 예제 코드를 활용한 파이썬 자동화 활용 이해</h3>
-<p>화 활용 이해</p>
-<h4 id="1-파이썬-기본-문법-요소">1. 파이썬 기본 문법 요소</h4>
-<h5 id="1-1">1-1. 자료형</h5>
+<h3 id="070-iis-웹ftp-사이트-구성-주요-설정-항목-에러-코드-및-보안-설정">070. IIS 웹·FTP 사이트 구성, 주요 설정 항목, 에러 코드 및 보안 설정</h3>
+<p>목, 에러 코드 및 보안 설정</p>
+<h4 id="1-iis-웹-사이트-추가">1. IIS 웹 사이트 추가</h4>
+<p>IIS 관리자에서 Sites → 우클릭 → Add Website로 웹 사이트를 추가한다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>자료형</th>
+<th>설정 항목</th>
 <th>설명</th>
-<th></th>
-<th>예시</th>
-<th></th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>문자열</td>
-<td>텍스트 데이터</td>
-<td></td>
-<td>"ubuntu-web-01"</td>
-<td></td>
-<td></td>
+<td>사이트 이름</td>
+<td>관리자가 임의로 지정</td>
 </tr>
 <tr>
-<td>정수형(int)</td>
-<td>정수 데이터</td>
-<td></td>
-<td>500</td>
-<td></td>
-<td></td>
+<td>물리적 경로(Physical Path)</td>
+<td>웹에서 보여질 파일들이 위치할 디렉토리 경<br>로</td>
 </tr>
 <tr>
-<td>불(bool)</td>
-<td>참/거짓 두 값만 가짐</td>
-<td></td>
-<td>True , False</td>
-<td></td>
-<td></td>
+<td>IP 주소</td>
+<td>서버에 할당된 IP 주소 선택</td>
 </tr>
 <tr>
-<td>리스트(list)</td>
-<td>여러 개의 데이터를 담는 자료<br>형, 대괄호 [] 사용</td>
-<td></td>
-<td>['192.168.100.10',</td>
-<td></td>
-<td></td>
+<td>포트 번호</td>
+<td>기본값 80 (HTTP). 변경 시 클라이언트 접속<br>URL에 포트 번호를 반드시 포함해야 함</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>['192.168.100.10',</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>[] 사용</td>
-<td>'192.168.100.20']</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>딕셔너리(dict)</td>
-<td>키-값 쌍의 자료형, 중괄호 {}<br>사용</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>집합형</td>
-<td>교집합, 합집합 등을 다루는 자<br>료형</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>호스트 이름</td>
+<td>도메인이 없는 경우 비워둠</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="1-2">1-2. 제어 구조</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구조</th>
-<th>파이썬 문법</th>
-<th>셸 스크립트 대응</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>조건문</td>
-<td>if , elif , else</td>
-<td>if , elif , else , fi</td>
-</tr>
-<tr>
-<td>반복문 (for)</td>
-<td>for 변수 in 리스트:</td>
-<td>for</td>
-</tr>
-<tr>
-<td>반복문 (while)</td>
-<td>while 조건:</td>
-<td>while</td>
-</tr>
-</tbody>
-</table></div>
-<p>파이썬은 들여쓰기(indentation)가 매우 중요하다. 들여쓰기가 맞지 않으면 오류가 발생하거나 의도하지 않은 결과가 나타난다.</p>
-<h5 id="1-3">1-3. 리스트 인덱스</h5>
-<p>파이썬 리스트의 인덱스는 0부터 시작한다.</p>
-<h2 id="예시-리스트-인덱스-test--19216810010-19216810020-1921681003-0--test0--19216810010--test1--19216810020--test2--19216810030">예시: 리스트 인덱스 test = ['192.168.100.10', '192.168.100.20', '192.168.100.3 0'] # test[0] → '192.168.100.10' # test[1] → '192.168.100.20' # test[2] → '192.168.100.30'</h2>
-<h5 id="1-4-vs">1-4. 내부 라이브러리 vs 외부 라이브러리</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구분</th>
-<th>설명</th>
-<th>설치 방법</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>내부(기본) 라이브러리</td>
-<td>파이썬 설치 시 기본으로 포함된<br>라이브러리</td>
-<td>별도 설치 불필요</td>
-</tr>
-<tr>
-<td>외부 라이브러리</td>
-<td>별도로 설치해야 하는 라이브러<br>리</td>
-<td>pip install 라이브러리명</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="2-ip-점검-스크립트">2. IP 점검 스크립트</h4>
-<h5 id="2-1">2-1. 스크립트 실행</h5>
-<p>python3 basic.py 실행 결과: 점검 대상 서버 목록의 각 IP가 대형·중형·소형 서버인지 판별하여 출력한다.</p>
-<h5 id="2-2">2-2. 코드 주요 내용</h5>
-<h2 id="변수-선언-예시-문자열-정수형-불-리스트-servername--ubuntu-web-01-maxconnections--500-isactive--true--점검-대상-ip-리스트-targetips--19216810010-19216810020-192168-10030">변수 선언 예시 (문자열, 정수형, 불, 리스트) server_name = 'ubuntu-web-01' max_connections = 500 is_active = True # 점검 대상 IP 리스트 target_ips = ['192.168.100.10', '192.168.100.20', '192.168. 100.30']</h2>
-<h2 id="조건문-maxconnections-값에-따라-서버-규모-판별-if-maxconnections-gt-1000--대형-서버-elif-maxconnections-gt-300--중형-서버-else--소형-서버-300개까지">조건문: max_connections 값에 따라 서버 규모 판별 if max_connections &gt; 1000: # 대형 서버 elif max_connections &gt; 300: # 중형 서버 else: # 소형 서버 (300개까지)</h2>
-<h2 id="for-반복문-리스트의-각-ip를-순서대로-처리-for-ip-in-targetips--점검-중-ip-변수에-현재-ip가-들어와-처리됨-awk--f--로-콜론-기준-분리하는-셸-스크립트-방식이-파이썬에서는-split-함수로-대응된다">for 반복문: 리스트의 각 IP를 순서대로 처리 for ip in target_ips: # 점검 중 IP 변수에 현재 IP가 들어와 처리됨 awk -F ':' 로 콜론 기준 분리하는 셸 스크립트 방식이 파이썬에서는 split(':')  함수로 대응된다.</h2>
-<h4 id="3-파일-정리-스크립트">3. 파일 정리 스크립트</h4>
-<h5 id="3-1">3-1. 스크립트 실행</h5>
-<p>python3 file_op.py 실행 결과: .workspace  디렉토리 내 파일들이 확장자별로 분류되어 하위 디렉토리에 저장된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>확장자</th>
-<th>이동 대상 디렉토리</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>.log</td>
-<td>log/ 디렉토리</td>
-</tr>
-<tr>
-<td>.txt</td>
-<td>txt/ 디렉토리</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="3-2">3-2. 코드 주요 내용</h5>
-<h2 id="내부-라이브러리-임포트-별도-설치-불필요-import-os-import-shutil--대상-디렉토리-변수-설정-targetdir--workspace--디렉토리가-없으면-생성-osmakedirs">내부 라이브러리 임포트 (별도 설치 불필요) import os import shutil # 대상 디렉토리 변수 설정 target_dir = './.workspace' # 디렉토리가 없으면 생성 os.makedirs(...)</h2>
-<h2 id="디렉토리-내-파일-목록-순회-for-filename-in-oslistdirtargetdir-filepath----파일인지-확인-후-확장자-추출-if-ospathisfilefilepath-ext--ospathsplitextfilename--확장자별-디렉토리로-이동">디렉토리 내 파일 목록 순회 for filename in os.listdir(target_dir): file_path = ... # 파일인지 확인 후 확장자 추출 if os.path.isfile(file_path): ext = os.path.splitext(filename) # 확장자별 디렉토리로 이동</h2>
-<h4 id="4-네트워크-상태-점검-스크립트">4. 네트워크 상태 점검 스크립트</h4>
-<h5 id="4-1">4-1. 스크립트 실행</h5>
-<p>python3 network_check.py 실행 결과: 서버 리스트의 각 도메인/IP에 ping을 보내 정상 여부를 출력한다.</p>
-<h5 id="4-2-subprocess">4-2. subprocess 모듈</h5>
-<p>subprocess  모듈을 사용하면 파이썬에서 리눅스 명령어를 그대로 실행할 수 있다.</p>
-<h2 id="내부-라이브러리-임포트-import-subprocess--ping-명령어-실행--c-1-1회-전송--w-1-1초-타임아웃-result--subprocessrun-ping--c-1--w-1-server-stdoutsubprocessdevnull-stderrsubprocessdevnull--반환값-0-성공-0-이외-실패-stdoutsubprocessdevnull-은-리눅스의-gt-devnull-과-동일하게-출력-결과를-화면에-표시-하지-않는-역할을-한다">내부 라이브러리 임포트 import subprocess # ping 명령어 실행 (-c 1: 1회 전송, -W 1: 1초 타임아웃) result = subprocess.run( ['ping', '-c', '1', '-W', '1', server], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL ) # 반환값 0: 성공, 0 이외: 실패 stdout=subprocess.DEVNULL 은 리눅스의 &gt; /dev/null 과 동일하게 출력 결과를 화면에 표시 하지 않는 역할을 한다.</h2>
-<h4 id="5-시스템-리소스-모니터링-스크립트">5. 시스템 리소스 모니터링 스크립트</h4>
-<h5 id="5-1">5-1. 외부 라이브러리 설치</h5>
-<h2 id="psutil-라이브러리-설치-외부-라이브러리-pip-install-psutil---break-system-packages---break-system-packages-옵션은-외부에서-관리되는-환경이라는-메시지가-뜰-때-설치를-강행하는-옵션이다">psutil 라이브러리 설치 (외부 라이브러리) pip install psutil --break-system-packages --break-system-packages  옵션은 "외부에서 관리되는 환경"이라는 메시지가 뜰 때 설치를 강행하는 옵션이다.</h2>
-<h5 id="5-2">5-2. 스크립트 실행</h5>
-<p>python3 resource_monitor.py 실행 결과: CPU 사용량과 메모리 사용량이 3초 간격으로 실시간 출력되며, Ctrl+C 로 종료한다.</p>
-<h5 id="5-3">5-3. 코드 주요 내용</h5>
-<p>import psutil  # 외부 라이브러리 import time    # 내부 라이브러리 # while True: 무한 루프 (조건이 항상 참) while True: try: # CPU 사용량 측정 (interval=1: 1초 간격) cpu = psutil.cpu_percent(interval=1) # 메모리 정보 가져오기 mem = psutil.virtual_memory()</p>
-<h2 id="80-초과-시-경고-출력-if-cpu-gt-80--경고-cpu-인계치-초과-if-mempercent-gt-80--경고-메모리-공간-부족--2초-대기-interval-1초-포함하여-총-3초-간격-timesleep2-except-keyboardinterrupt--ctrlc-입력-시-종료-break-while-true-는-조건이-항상-참이므로-무한-반복된다-tryexcept-예외-처리를-통해-ctrlckeyboardinterrupt-입력-시-종료하도록-처리한다">80 초과 시 경고 출력 if cpu &gt; 80: # 경고: CPU 인계치 초과 if mem.percent &gt; 80: # 경고: 메모리 공간 부족 # 2초 대기 (interval 1초 포함하여 총 3초 간격) time.sleep(2) except KeyboardInterrupt: # Ctrl+C 입력 시 종료 break while True 는 조건이 항상 참이므로 무한 반복된다. try/except  예외 처리를 통해 Ctrl+C(KeyboardInterrupt)  입력 시 종료하도록 처리한다.</h2>
-<h5 id="5-4-tryexcept">5-4. 예외 처리 (try/except)</h5>
-<p>예외 처리란 개발자가 예상하지 못한 상황에서 프로그램이 에러 없이 동작하도록 하는 방법이다.</p>
-<p>try: # 실행할 코드 except 예외종류: # 예외 발생 시 처리할 코드</p>
-<h4 id="6-로그-백업-및-정리-스크립트">6. 로그 백업 및 정리 스크립트</h4>
-<h5 id="6-1">6-1. 스크립트 실행</h5>
-<p>sudo python3 backup_manager.py 실행 결과: 로그 파일을 tar.gz으로 압축 백업하고, 30일이 경과한 백업 파일은 자동 삭제한다.</p>
-<h5 id="6-2">6-2. 코드 주요 내용</h5>
-<h2 id="내부-라이브러리-임포트-import-os-import-tarfile-import-time-from-datetime-import-datetime--변수-설정-targetdir--workspacelog--백업할-로그-디렉토리-backupdir--backupstore--백업-저장-디렉토리-retentiondays--30--보관-기간-일">내부 라이브러리 임포트 import os import tarfile import time from datetime import datetime # 변수 설정 target_dir = './.workspace/log'       # 백업할 로그 디렉토리 backup_dir = './backup_store'          # 백업 저장 디렉토리 retention_days = 30                    # 보관 기간 (일)</h2>
-<h2 id="오늘-날짜로-백업-파일명-생성-y-연도-m-월-d-일-today--datetimenowstrftimeymd-backupfile--fbackuptodaytargz--targz으로-압축-백업-with-tarfileopenbackuppath-wgz-as-tar-taraddtargetdir">오늘 날짜로 백업 파일명 생성 (%Y: 연도, %m: 월, %d: 일) today = datetime.now().strftime('%Y%m%d') backup_file = f'backup_{today}.tar.gz' # tar.gz으로 압축 백업 with tarfile.open(backup_path, 'w:gz') as tar: tar.add(target_dir)</h2>
-<h2 id="30일-경과-파일-삭제--retentiondays-86400-1일--86400초-기준-실제-운용-서버에서는-로그-파일이-지속적으로-생성되어-디스크-용량을-차지한다-법적으로-로그-보관-의무가-있는-기업은-보관-기간을-별도로-설정하여-운용해야-한다">30일 경과 파일 삭제 # retention_days * 86400 (1일 = 86400초) 기준 실제 운용 서버에서는 로그 파일이 지속적으로 생성되어 디스크 용량을 차지한다. 법적으로 로그 보관 의무가 있는 기업은 보관 기간을 별도로 설정하여 운용해야 한다.</h2>
-<h4 id="7-웹-서버-상태-점검-스크립트">7. 웹 서버 상태 점검 스크립트</h4>
-<h5 id="7-1">7-1. 외부 라이브러리 설치</h5>
-<h2 id="requests-라이브러리-설치-외부-라이브러리-pip-install-requests---break-system-packages-requests-라이브러리는-웹-크롤링-라이브러리인-beautifulsoup과-함께-많이-사용되며-웹-사이트에-요청request을-보낼-때-필요한-라이브러리다">requests 라이브러리 설치 (외부 라이브러리) pip install requests --break-system-packages requests  라이브러리는 웹 크롤링 라이브러리인 BeautifulSoup과 함께 많이 사용되며, 웹 사이트에 요청(request)을 보낼 때 필요한 라이브러리다.</h2>
-<h5 id="7-2">7-2. 스크립트 실행</h5>
-<p>python3 web_health.py 실행 결과: 점검 대상 URL 목록에 HTTP 요청을 보내 응답 코드를 확인하고 정상/장애 여부를 출력한다.</p>
-<h5 id="7-3">7-3. 코드 주요 내용</h5>
-<p>import requests  # 외부 라이브러리 # 점검 대상 URL 리스트 urls = ['<a href="https://google.com">https://google.com</a>', '<a href="https://github.com">https://github.com</a>', ...]</p>
-<p>for url in urls:</p>
-<p>try: # timeout=2: 2초 내 응답 확인 response = requests.get(url, timeout=2) # 상태 코드 200이면 정상, 그 외는 경고 if response.status_code == 200: # 정상 else: # 경고 (상태 코드 출력) except: # 예외 처리</p>
-<h4 id="8-사용자-계정-필터링-및-csv-생성-스크립트">8. 사용자 계정 필터링 및 CSV 생성 스크립트</h4>
-<h5 id="8-1">8-1. 스크립트 실행</h5>
-<p>sudo python3 user_report.py 실행 결과: /etc/passwd  파일에서 로그인 가능한 계정을 필터링하여 login_users_report.csv 파일로 저장한다.</p>
-<h5 id="8-2">8-2. 코드 주요 내용</h5>
-<h2 id="내부-라이브러리-임포트-import-csv-inputfile--etcpasswd-outfile--loginusersreportcsv-loginusers---로그인-가능한-계정-저장-리스트-with-openinputfile-r-as-f-for-line-in-f--빈-줄-또는-주석-건너뜀-if-linestartswith-or-not-linestrip-continue--콜론을-기준으로-필드-분리-awk--f--와-동일-parts--linestripsplit">내부 라이브러리 임포트 import csv input_file = '/etc/passwd' out_file = './login_users_report.csv' login_users = []  # 로그인 가능한 계정 저장 리스트 with open(input_file, 'r') as f: for line in f: # 빈 줄 또는 주석 건너뜀 if line.startswith('#') or not line.strip(): continue # 콜론(:)을 기준으로 필드 분리 (awk -F ':' 와 동일) parts = line.strip().split(':')</h2>
-<h2 id="리스트-인덱스-0사용자명-2uid-5홈디렉토리-6로그-인셸-username--parts0-uid--parts2--세-번째-필드--리스트-인덱스-2-homedir--parts5-loginshell--parts6">리스트 인덱스: 0=사용자명, 2=uid, 5=홈디렉토리, 6=로그 인셸 username = parts[0] uid = parts[2]        # 세 번째 필드 → 리스트 인덱스 2 home_dir = parts[5] login_shell = parts[6]</h2>
-<h2 id="binbash-또는-binsh-셸을-가진-계정만-필터링-if-bash-in-loginshell-or-sh-in-loginshell-loginusersappendusername-uid-homedir-loginshell">/bin/bash 또는 /bin/sh 셸을 가진 계정만 필터링 if '/bash' in login_shell or '/sh' in login_shell: login_users.append([username, uid, home_dir, login_shell])</h2>
-<h2 id="csv-모듈의-writer-함수로-csv-파일-저장-with-openoutfile-w-as-f-writer--csvwriterf-writerwriterowsloginusers">csv 모듈의 writer 함수로 CSV 파일 저장 with open(out_file, 'w') as f: writer = csv.writer(f) writer.writerows(login_users)</h2>
-<p>split(':')  함수는 셸 스크립트의 awk -F ':' 와 동일하게 콜론을 기준으로 문자열을 분 리한다. 파이썬 리스트는 0부터 인덱스가 시작하므로 세 번째 필드(uid)는 인덱스 2가 된다.</p>
-<h4 id="9-ai-에이전트-보안-관련-사항">9. AI 에이전트 보안 관련 사항</h4>
-<h5 id="9-1-ai">9-1. AI 에이전트 연결 시 주의사항</h5>
-<p>Claude Code 등의 AI 에이전트를 서버와 연결하여 사용할 경우 보안 설정이 필요하다.</p>
-<p>⚠️ AI 에이전트가 의도하지 않은 디렉토리를 열람하거나 삭제하는 사례가 보고되고 있다. 이를 방지하기 위한 규칙 설정이 중요하다.</p>
+<p>웹에서 보여지는 파일의 기본 저장 경로는 C:\inetpub\wwwroot 이다. 리눅스 웹 서버의 문서 루트( /var/www/html )와 동일한 역할을 한다.</p>
+<p>⚠️ HTTP만 사용 가능하다. HTTPS(암호화 통신)를 사용하려면 SSL 서버 인증서가 필요하다.</p>
+<h4 id="2-iis-웹-서버-기본-테스트-페이지">2. IIS 웹 서버 기본 테스트 페이지</h4>
+<p>웹 사이트 구성 후 브라우저에서 서버 IP 주소로 접속하면 IIS 기본 테스트 페이지가 표시된다.</p>
+<p>리눅스(Apache) 설치 후 표시되는 Apache 테스트 페이지와 동일한 역할 테스트 페이지 파일명: iisstart.htm</p>
+<h4 id="3-default-document-시작-페이지-우선순위">3. Default Document (시작 페이지 우선순위)</h4>
+<p>클라이언트가 특정 파일명 없이 도메인 또는 IP만으로 접속했을 때 서버가 순서대로 찾아 응답하는 파일 목록이다.</p>
+<p>기본 등록 파일 예시: default.htm , default.asp , index.htm , index.html , iisstart.htm  등 목록 위쪽 파일이 우선순위가 높다.</p>
+<p>해당 파일이 존재하면 그 파일을 시작 페이지로 로드한다.</p>
+<p>관리자가 새 파일을 추가하거나 우선순위를 위/아래로 변경할 수 있다.</p>
+<p>웹 서버에 접속 시 등록된 파일이 존재해야 해당 파일이 시작 페이지로 로드된다. 목록에 없는 파일명은 시작 페이지로 동작하지 않는다.</p>
+<h4 id="4-iis-주요-설정-항목">4. IIS 주요 설정 항목</h4>
 <div class="tablewrap"><table>
 <thead>
 <tr>
 <th>항목</th>
-<th>내용</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>규칙 파일</td>
-<td>Claude Code의 경우 claude.md 파일을 통해<br>규칙 사전 설정 가능</td>
+<td>Authentication (인증)</td>
+<td>익명 인증(Anonymous Authentication)이<br>기본 활성화. 인증 없이 웹 사이트에 접근 가<br>능</td>
 </tr>
 <tr>
-<td>규칙 내용</td>
-<td>sudo 접근 제한, 접근 불가 디렉토리 지정 등</td>
+<td>Directory Browsing</td>
+<td>기본 비활성화(Disabled). 활성화 시 웹 서버<br>내 디렉토리 및 파일 목록이 클라이언트에 노<br>출됨</td>
 </tr>
 <tr>
-<td>시스템 측 대응</td>
-<td>AI 에이전트의 잘못된 접근 시도를 시스템에서도<br>감지하고 차단하는 것이 필요</td>
+<td>Error Pages (에러 페이지)</td>
+<td>HTTP 상태 코드별 에러 응답 페이지 설정</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td>웹 서버 로그 파일 설정 (포맷, 저장 경로, 갱<br>신 주기)</td>
+</tr>
+<tr>
+<td>MIME Types</td>
+<td>파일 확장자와 미디어 타입 간 매핑 정보</td>
+</tr>
+<tr>
+<td>Handler Mappings</td>
+<td>웹 서비스 구동에 필요한 모듈(DLL 등) 처리<br>설정</td>
+</tr>
+<tr>
+<td>Request Filtering</td>
+<td>URL 스캔·헤더 값 기반의 요청 필터링 규칙<br>설정</td>
+</tr>
+<tr>
+<td>HTTP Response Headers</td>
+<td>서버 응답 헤더 값 사전 설정</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>응답 데이터 압축 여부 설정</td>
+</tr>
+<tr>
+<td>SSL Settings</td>
+<td>HTTPS 인증서 설정 (인증서 필요)</td>
+</tr>
+<tr>
+<td>Modules</td>
+<td>웹 서비스 내부에서 동작하는 모듈 목록 확인</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="9-2">9-2. 학습 권장 사항</h5>
-<p>직접 무언가를 만들어보는 것이 실력 향상에 가장 효과적이다. 관심 분야별 추천 방향은 다음과 같다.</p>
+<h5 id="4-1-directory-browsing">4-1. Directory Browsing (디렉토리 리스팅) 보안</h5>
+<p>활성화 시 클라이언트가 웹 서버 내 디렉토리 구조와 파일 전체를 브라우저에서 볼 수 있다.</p>
+<p>웹 서버의 내부 구조가 외부에 노출되므로 보안상 기본 비활성화 상태로 유지해야 한다.</p>
+<h5 id="4-2-http">4-2. HTTP 상태 코드</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>관심 분야</th>
-<th>추천 접근 방법</th>
+<th>상태 코드 범위</th>
+<th>의미</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>모니터링</td>
-<td>자빅스, 와즈처럼 웹 대시보드 형태의 모니터링 도<br>구 직접 구현</td>
+<td>100번대</td>
+<td>정보 응답</td>
 </tr>
 <tr>
-<td>게임</td>
-<td>pygame 라이브러리를 활용한 간단한 게임 제작</td>
+<td>200번대</td>
+<td>성공 응답</td>
 </tr>
 <tr>
-<td>이미지 처리</td>
-<td>OpenCV를 활용한 이미지 처리 실습</td>
+<td>300번대</td>
+<td>리다이렉션</td>
+</tr>
+<tr>
+<td>400번대</td>
+<td>클라이언트 오류 (예: 404 - 요청한 페이지<br>없음)</td>
+</tr>
+<tr>
+<td>500번대</td>
+<td>서버 오류</td>
 </tr>
 </tbody>
 </table></div>
+<p>404 오류: 클라이언트가 URL을 잘못 입력하거나 존재하지 않는 페이지를 요청할 때 서버가 전송한다. 실제 404.html  파일이 웹 서버에 존재하며 해당 파일이 브라우저에 렌더 링된다.</p>
+<h5 id="4-3-logging">4-3. 로그(Logging) 설정</h5>
+<p>기본 로그 포맷: W3C (웹 표준 로그 형식)</p>
+<p>로그 파일 저장 경로: C:\inetpub\logs\LogFiles\ 로그 파일 갱신 주기: 일별, 주별, 월별, 용량 기준 등 설정 가능</p>
+<h5 id="4-4-mime-types">4-4. MIME Types</h5>
+<p>MIME 타입은 파일 확장자와 미디어 타입을 매핑하여 웹 브라우저가 해당 파일을 올바르게 처리하도록 한다.</p>
+<p>대부분의 확장자가 자동으로 등록되어 있으며, 새로운 확장자가 있을 경우 수동으로 추가할 수 있다.</p>
+<h4 id="5-iis-ftp-사이트-추가">5. IIS FTP 사이트 추가</h4>
+<p>Sites → 우클릭 → Add FTP Site로 FTP 사이트를 추가한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사이트 이름</td>
+<td>관리자가 임의로 지정</td>
+</tr>
+<tr>
+<td>물리적 경로</td>
+<td>FTP 파일이 저장될 디렉토리 경로 (기본:<br>C:\inetpub\ftproot )</td>
+</tr>
+<tr>
+<td>IP 주소·포트</td>
+<td>IP 선택, 기본 포트 21</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSL</td>
+<td>인증서 없으므로 No SSL 선택 → 평문 전송<br>FTP</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="5-1-ftp">5-1. FTP 접속 허용 사용자 설정</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All Users</td>
+<td>모든 사용자 접속 허용</td>
+</tr>
+<tr>
+<td>Anonymous</td>
+<td>익명 사용자만 접속 허용</td>
+</tr>
+<tr>
+<td>Specified Roles or User Groups</td>
+<td>특정 역할 또는 그룹에 속한 사용자만 접속 허<br>용</td>
+</tr>
+<tr>
+<td>Specified Users</td>
+<td>특정 사용자만 접속 허용</td>
+</tr>
+</tbody>
+</table></div>
+<p>접속 권한은 Read(다운로드만 가능)와 Write(업로드 포함)로 구분된다. 업로드까지 허용 하려면 Write 권한을 함께 부여해야 한다.</p>
+<p>⚠️ FTP 사이트에서 지정한 사용자 계정은 컴퓨터 관리(Computer Management) → 로컬 사용자에서 별도로 생성해야 한다.</p>
+<h4 id="6-웹-보안-계층-구조">6. 웹 보안 계층 구조</h4>
+<p>웹 서버 보안은 단일 솔루션이 아닌 여러 계층의 보안 장비와 설정으로 구성된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>계층</th>
+<th>보안 수단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>네트워크 계층 (L3)</td>
+<td>ACL(접근 제어 목록), 방화벽(Firewall)</td>
+</tr>
+<tr>
+<td>응용 프로그램 계층</td>
+<td>WAF(Web Application Firewall) — 웹 서<br>비스 앞 단에서 HTTP 요청을 필터링</td>
+</tr>
+<tr>
+<td>웹 서버 자체</td>
+<td>IIS Request Filtering 규칙</td>
+</tr>
+</tbody>
+</table></div>
+<p>보안 솔루션은 하나만 운영하지 않고, 네트워크 상황과 시스템 및 데이터의 중요도에 따라 여러 장비를 혼합하여 운영한다.</p>
 <hr />
-<h3 id="122-파이썬-gui-프로그래밍-tkinter">122. 파이썬 GUI 프로그래밍 (Tkinter)</h3>
-<h4 id="1-windows-파이썬-설치">1. Windows 파이썬 설치</h4>
-<h5 id="1-1_1">1-1. 설치 방법</h5>
-<p>Windows 환경에서 파이썬을 설치하려면 python.org 에 접속하여 Windows용 인스톨러를 다운로드한다.</p>
-<p>⚠️ 설치 시 경로(PATH) 관련 체크박스가 표시된다. 어떤 경로에서든 파이썬을 실행할 수 있도록 해당 항목을 반드시 체크하고 설치를 진행해야 한다.</p>
-<p>설치 확인 방법: Windows 검색에서 python 을 입력하여 설치 여부를 확인한다.</p>
-<h4 id="2-vs-code-설치-및-설정">2. VS Code 설치 및 설정</h4>
-<h5 id="2-1-vs-code">2-1. VS Code 설치</h5>
+<h3 id="071-windows-ftp-방화벽-허용-및-접속-테스트">071. Windows FTP 방화벽 허용 및 접속 테스트</h3>
+<p>테스트</p>
+<h4 id="1-로컬-사용자-계정-옵션">1. 로컬 사용자 계정 옵션</h4>
+<p>컴퓨터 관리(Computer Management) → 로컬 사용자 및 그룹(Local Users and Groups) → Users에서 사용자 계정을 생성하거나 더블 클릭하여 속성을 편집할 수 있다.</p>
+<h5 id="1-1">1-1. 계정 생성 시 주요 옵션</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User must change<br>password at next logon</td>
+<td>사용자가 다음 로그인 시 반드시 패스워드를 변경하도록 요구한다. 기<br>본적으로 체크되어 있으며, 관리자가 지정한 패스워드를 사용자 스스<br>로 변경하게 된다.</td>
+</tr>
+<tr>
+<td>User cannot change<br>password</td>
+<td>사용자가 패스워드를 변경할 수 없도록 제한한다. 위 항목을 체크 해제<br>시 활성화된다.</td>
+</tr>
+<tr>
+<td>Password never expires</td>
+<td>패스워드 만료 기간을 적용하지 않는다. 위 항목을 체크 해제 시 활성<br>화된다.</td>
+</tr>
+<tr>
+<td>Account is disabled</td>
+<td>해당 계정을 비활성화한다.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>첫 번째 항목(User must change password)</strong>을 체크 해제하면 두 번째·세 번째 옵션이 활성화된다. 관리자가 패스워드를 지정하고 사용자에게 변경을 요구하지 않을 경우, 이 항목을 해제한다.</p>
+<h5 id="1-2-account-is-disabled">1-2. 계정 비활성화(Account is disabled)</h5>
+<p>계정을 완전히 삭제하지 않고 일시적으로 비활성화할 수 있다. 비활성화된 계정은 로그인이 불가능하며, 비활성화 해제만으로 즉시 복구된다.</p>
+<p>활용 사례: 육아휴직 중인 직원의 계정을 삭제하면 복직 시 권한 설정을 처음부터 다시 구성해야 한다. 비활성화로 처리하면 복직 후 체크만 해제하면 이전 설정 그대로 사용할 수 있다.</p>
+<h4 id="2-그룹-멤버십과-권한-상속">2. 그룹 멤버십과 권한 상속</h4>
+<h5 id="2-1">2-1. 사용자 기본 그룹</h5>
+<p>로컬 사용자를 생성하면 기본적으로 Users  그룹에 소속된다. 사용자 속성 → Member Of 탭에서 소속 그룹을 확인하고 추가·제거할 수 있다.</p>
+<p>그룹 추가 경로: Member Of 탭 → Add → Advanced → Find Now → 그룹 선택 → OK</p>
+<h5 id="2-2">2-2. 복수 그룹 소속 시 권한 결정</h5>
+<p>한 사용자가 두 개 이상의 그룹에 속할 경우, 권한이 높은 그룹의 권한을 상속받는다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>소속 그룹</th>
+<th>적용 권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users + Administrators</td>
+<td>Administrators 그룹 권한 적용</td>
+</tr>
+<tr>
+<td>Users만</td>
+<td>Users 그룹 권한 적용</td>
+</tr>
+</tbody>
+</table></div>
+<p>실제 운영 환경에서는 부서별로 별도의 그룹(회계부, 관리부, 마케팅부 등)을 생성하고 각 그룹에 적절한 권한을 부여하여 운영한다. 한 사용자가 두 개 이상의 그룹에 속하는 경우는 일반적으로 드물다.</p>
+<h5 id="2-3">2-3. 그룹 생성</h5>
+<p>컴퓨터 관리 → Local Users and Groups → Groups → 우클릭 → New Group에서 그룹을 생성하고 멤버를 추가하거나 제거할 수 있다.</p>
+<h4 id="3-ftp-서버-접속-테스트-준비">3. FTP 서버 접속 테스트 준비</h4>
+<p>FTP 접속 시 클라이언트에서 확인할 수 있는 파일과 폴더를 FTP 루트 경로에 미리 생성한다.</p>
+<p>FTP 루트 기본 경로: C:\inetpub\ftproot Windows 탐색기에서 해당 경로에 폴더 및 파일을 생성하면 FTP 클라이언트 접속 시 목록에 표시된다.</p>
+<h4 id="4-windows-defender-firewall--ftp-트래픽-허용">4. Windows Defender Firewall — FTP 트래픽 허용</h4>
+<h5 id="4-1-ftp">4-1. 웹 서버와 FTP 서버의 방화벽 처리 차이</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>서비스</th>
+<th>방화벽 허용 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>웹 서버 (HTTP, 포트 80)</td>
+<td>IIS 역할 설치 시 자동으로 방화벽 허용 처리</td>
+</tr>
+<tr>
+<td>FTP 서버 (포트 21)</td>
+<td>수동으로 방화벽에서 FTP 트래픽을 허용해야<br>함</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="4-2-windows-defender-firewall">4-2. Windows Defender Firewall 비활성화 방법</h5>
+<p>검색 창에 Windows Defender Firewall  입력 → Turn Windows Defender Firewall on or off 클릭 → 방화벽 비활성화(Turn off) 선택 → OK ⚠️ 방화벽을 전체 비활성화하는 것은 보안상 권장되지 않는다. 운영 환경에서는 방화벽 규칙에서 FTP 트래픽(포트 21)을 명시적으로 허용하는 방식을 사용해야 한다.</p>
+<h4 id="5-ftp-접속-테스트-filezilla">5. FTP 접속 테스트 (FileZilla)</h4>
+<p>호스트 컴퓨터에서 FileZilla를 실행하여 Windows Server의 FTP 서버에 접속한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>접속 항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>호스트(서버 IP)</td>
+<td>Windows Server IP 주소 입력</td>
+</tr>
+<tr>
+<td>사용자 이름</td>
+<td>생성한 FTP 사용자 계정명</td>
+</tr>
+<tr>
+<td>패스워드</td>
+<td>해당 계정의 패스워드</td>
+</tr>
+<tr>
+<td>포트</td>
+<td>21 (기본값이므로 입력하지 않아도 무방)</td>
+</tr>
+</tbody>
+</table></div>
+<p>FTP는 SSL 없이 평문으로 전송되므로, 접속 시 "안전하지 않은 연결"이라는 경고 메시지가 표시된다. 이는 No SSL 설정에 의한 것으로, 확인을 눌러 계속 진행한다.</p>
+<p>접속 성공 시 FTP 루트 경로의 파일과 폴더 목록이 FileZilla 우측 패널에 표시된다. 다운로드 또는 업로드 작업을 수행할 수 있다.</p>
+<h4 id="6-iis-ftp-인증-및-인가-설정-확인">6. IIS FTP 인증 및 인가 설정 확인</h4>
+<p>FTP 접속이 되지 않을 경우 IIS 관리자에서 다음 항목을 확인한다.</p>
+<h5 id="6-1-ftp-authentication">6-1. FTP Authentication (인증)</h5>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Authentication 더블 클릭</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
 <th>항목</th>
-<th>내용</th>
+<th>상태</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>다운로드 경로</td>
-<td>VS Code 공식 사이트 → Windows용 다운로드</td>
+<td>Anonymous Authentication</td>
+<td>Enabled</td>
 </tr>
 <tr>
-<td>설치 방법</td>
-<td>다운로드된 .exe 파일 실행 → 라이선스 동의<br>→ 설치 경로 지정 → 설치</td>
-</tr>
-<tr>
-<td>지원 언어</td>
-<td>파이썬, C, Flutter, Java 등 다양한 언어 지원</td>
+<td>Basic Authentication</td>
+<td>Enabled</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="2-2-extensions">2-2. Extensions (확장팩) 설치</h5>
-<p>VS Code 왼쪽 메뉴의 Extensions에서 다양한 확장팩을 설치할 수 있다.</p>
+<h5 id="6-2-ftp-authorization-rules">6-2. FTP Authorization Rules (인가)</h5>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Authorization Rules 더블 클릭 허용된 사용자(예: ftp user )가 Allow 상태로 등록되어 있어야 접속이 가능하다.</p>
+<h4 id="7-ftp-현재-세션-확인">7. FTP 현재 세션 확인</h4>
+<p>IIS 관리자 → FTP 사이트 선택 → FTP Current Sessions에서 현재 접속 중인 세션 정보를 확인할 수 있다.</p>
+<p>접속한 클라이언트의 IP 주소, 접속 시각 등 세션 정보가 표시된다.</p>
+<p>여러 사용자가 동시에 접속 중이면 해당 수만큼 세션 목록이 나타난다.</p>
+<hr />
+<h3 id="072-windows-server-소개-설치-버전-구분-administrator-계정">072. Windows Server 소개, 설치 버전 구분, Administrator 계정</h3>
+<p>구분, Administrator 계정</p>
+<h4 id="1-windows-server-활용-목적">1. Windows Server 활용 목적</h4>
+<p>Windows Server를 설치하는 목적은 Rocky Linux에서 구축했던 것과 동일한 서버 환경을 Windows 환경에서도 경험하는 것이다. 구체적으로 다음 항목들을 다룬다.</p>
+<p>웹(Web), FTP, 네임(Name) 서버 구축 및 테스트 로컬 보안 정책(Local Security Policy) 설정 및 확인 사용자 계정 정책 관리 Windows 로그 확인 방법 Windows Server는 일상적으로 사용하는 Windows 운영체제와 동일한 기반이므로, 리눅스에서 구축한 경험과 결합하면 더 쉽게 이해할 수 있다.</p>
+<h4 id="2-windows-server-2022-설치-버전-유형">2. Windows Server 2022 설치 버전 유형</h4>
+<p>Windows Server 2022 설치 시 다음 네 가지 버전 중 하나를 선택하게 된다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>확장팩</th>
-<th>설명</th>
-<th>설치 필요 여부</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Python</td>
-<td>파이썬 개발 환경 (Python<br>Debug, Python Environment<br>포함)</td>
-<td>파이썬 사용 시 필수</td>
-</tr>
-<tr>
-<td>Python Indent</td>
-<td>들여쓰기를 시각적으로 표시하<br>여 코딩 가독성 향상</td>
-<td>권장</td>
-</tr>
-<tr>
-<td>C/C++</td>
-<td>C 언어 개발 환경</td>
-<td>C 사용 시</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>확장팩</th>
-<th>설명</th>
-<th>설치 필요 여부</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Flutter</td>
-<td>Flutter 앱 개발 환경</td>
-<td>Flutter 사용 시</td>
-</tr>
-</tbody>
-</table></div>
-<p>Python 확장팩을 설치하면 Python Debug, Python Environment까지 함께 자동 설치된다.</p>
-<h5 id="2-3">2-3. 워크스페이스 설정</h5>
-<p>파일(File) → Add Folder to Workspace → 새 폴더 생성 (예: py_project)</p>
-<p>왼쪽 상단 Explorer에서 워크스페이스 폴더 확인 가능 폴더 선택 후 마우스 오른쪽 클릭 → New Folder  / New File  생성 가능 # 파일명 규칙 # 파이썬 파일 확장자: .py # 이미 정의된 라이브러리·모듈·함수명은 파일명으로 사용 불가</p>
-<h5 id="2-4-vs-code">2-4. VS Code에서 파이썬 실행</h5>
-<p>F5  키를 눌러 파이썬 파일 실행 최초 실행 시 Python Debug  선택 필요, 이후에는 선택 불필요 하단 터미널에서 실행 결과 확인 외부 라이브러리 설치가 필요한 경우 하단 터미널에서 직접 pip  명령어 입력 실행 중 코드에 오류가 있으면 해당 위치에서 멈추고 오류 내용이 자동으로 표시된다.</p>
-<h4 id="3-tkinter-gui-프로그래밍-기초">3. Tkinter GUI 프로그래밍 기초</h4>
-<h5 id="3-1-tkinter">3-1. Tkinter 개요</h5>
-<p>Tkinter는 파이썬에서 GUI(그래픽 사용자 인터페이스) 프로그램을 만들기 위한 라이브러리 다. 파이썬 설치 시 기본으로 포함되어 있는 내부 모듈이므로 별도 설치가 필요 없다.</p>
-<h2 id="tkinter-임포트-from-tkinter-import">Tkinter 임포트 from tkinter import *</h2>
-<h5 id="3-2_1">3-2. 기본 창(프레임) 생성</h5>
-<p>from tkinter import * # 창(프레임) 생성 - Tk 클래스 사용 root = Tk()</p>
-<h2 id="창-제목-설정-roottitle테스트-프로그램">창 제목 설정 root.title('테스트 프로그램')</h2>
-<h2 id="창-크기-설정-가로-x-세로-단위-픽셀-rootgeometry640x480">창 크기 설정 (가로 x 세로, 단위: 픽셀) root.geometry('640x480')</h2>
-<h2 id="창이-닫히기-전까지-계속-표시-메인-루프-rootmainloop">창이 닫히기 전까지 계속 표시 (메인 루프) root.mainloop()</h2>
-<p>root : 생성된 창이 저장된 변수 geometry('640x480') : 가로 640, 세로 480 픽셀로 창 크기 지정 mainloop() : 창이 계속 화면에 표시되도록 반복하는 함수</p>
-<h5 id="3-3-button">3-3. 위젯 — 버튼(Button)</h5>
-<h2 id="버튼-생성-btn1--button-root--배치할-창-text로그인--버튼에-표시될-텍스트-width10--가로-크기-픽셀-height10--세로-크기-픽셀-bgyellow--배경색-background-fg--전경색-foreground-글자색">버튼 생성 btn1 = Button( root,           # 배치할 창 text='로그인',  # 버튼에 표시될 텍스트 width=10,       # 가로 크기 (픽셀) height=10,      # 세로 크기 (픽셀) bg='yellow',    # 배경색 (background) fg='...'        # 전경색 (foreground, 글자색) )</h2>
-<h2 id="버튼을-화면에-배치-pack-필수-btn1pack">버튼을 화면에 배치 (pack 필수) btn1.pack()</h2>
-<h5 id="3-4-label">3-4. 위젯 — 레이블(Label)</h5>
-<h2 id="레이블-생성-텍스트-표시-영역-label1--labelroot-text안녕">레이블 생성 (텍스트 표시 영역) label1 = Label(root, text='안녕')</h2>
-<h2 id="레이블을-화면에-배치-label1pack">레이블을 화면에 배치 label1.pack()</h2>
-<h4 id="4-메모장-프로그램-구현">4. 메모장 프로그램 구현</h4>
-<h5 id="4-1_1">4-1. 전체 구조 개요</h5>
-<p>실제 Windows 메모장을 참고하여 구현할 항목은 다음과 같다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구성 요소</th>
+<th>버전</th>
 <th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>창 제목</td>
-<td>상단에 프로그램 이름 표시</td>
+<td>Windows Server 2022 Standard Evaluation</td>
+<td>평가판 표준 에디션. GUI 없이 터미널 명령어<br>로만 운영</td>
 </tr>
 <tr>
-<td>메뉴 바</td>
-<td>파일, 편집, 서식, 보기, 도움말 메뉴</td>
+<td>Windows Server 2022 Standard Evaluation<br>(Desktop Experience)</td>
+<td>평가판 표준 에디션 + 그래픽 UI 포함. 수업에<br>서 선택</td>
 </tr>
 <tr>
-<td>스크롤바</td>
-<td>내용이 많아질 경우 스크롤 지원</td>
+<td>Windows Server 2022 Datacenter Evaluation</td>
+<td>데이터센터 전용 에디션. Standard보다 기능<br>이 많음. GUI 없음</td>
 </tr>
 <tr>
-<td>텍스트 영역</td>
-<td>글자를 입력할 수 있는 본문 영역</td>
+<td>Windows Server 2022 Datacenter Evaluation<br>(Desktop Experience)</td>
+<td>데이터센터 에디션 + 그래픽 UI 포함</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="4-2">4-2. 메뉴 바 구성</h5>
-<p>import os from tkinter import * root = Tk() root.title('윈도우즈 메모장') root.geometry('640x480')</p>
-<h2 id="전체-메뉴-바-생성-menu--menuroot">전체 메뉴 바 생성 menu = Menu(root)</h2>
-<h2 id="파일-메뉴-항목-생성-tearoff0-메뉴-분리-비활성화-menufile--menumenu-tearoff0">파일 메뉴 항목 생성 (tearoff=0: 메뉴 분리 비활성화) menu_file = Menu(menu, tearoff=0)</h2>
-<h2 id="파일-메뉴에-항목-추가-menufileaddcommandlabel열기-commandopenfile-menufileaddcommandlabel저장-commandsavefile-menufileaddseparator--구분선-추가-menufileaddcommandlabel끝내기-commandrootquit">파일 메뉴에 항목 추가 menu_file.add_command(label='열기', command=open_file) menu_file.add_command(label='저장', command=save_file) menu_file.add_separator()                               # 구분선 추가 menu_file.add_command(label='끝내기', command=root.quit)</h2>
-<h2 id="메뉴-바에-파일-메뉴를-캐스케이드하위-메뉴로-등록-menuaddcascadelabel파일-menumenufile">메뉴 바에 파일 메뉴를 캐스케이드(하위 메뉴)로 등록 menu.add_cascade(label='파일', menu=menu_file)</h2>
-<h2 id="메뉴-바-적용-rootconfigmenumenu">메뉴 바 적용 root.config(menu=menu)</h2>
-<p>메뉴 구성 방식:</p>
+<p>⚠️ 반드시 <strong>"Desktop Experience"가 포함된 두 번째 항목(Standard Evaluation Desktop Experience)</strong>을 선택해야 한다. 이를 선택하지 않으면 Rocky Linux처럼 터미널 명령어로만 조작해야 하며, 그래픽 화면이 표시되지 않는다.</p>
+<p>Standard 에디션은 일반 서버 운영 목적에 적합하다.</p>
+<p>Datacenter 에디션은 대규모 데이터센터 환경을 위한 추가 기능을 포함한다.</p>
+<h4 id="3-virtualbox-가상-머신-주요-설정-항목">3. VirtualBox 가상 머신 주요 설정 항목</h4>
+<p>Windows Server 2022 가상 머신 생성 시 다음 설정이 적용된다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>함수</th>
+<th>설정 항목</th>
+<th>권장 값</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS 유형</td>
+<td>Windows Server 2022</td>
+<td>목록에서 선택</td>
+</tr>
+<tr>
+<td>디스크 용량</td>
+<td>30GB</td>
+<td>실제 운영 환경에서는 TB 단위 이상 필요</td>
+</tr>
+<tr>
+<td>메모리</td>
+<td>4096MB (4GB)</td>
+<td>여유가 된다면 이 값으로 설정</td>
+</tr>
+<tr>
+<td>부팅 순서</td>
+<td>하드 디스크 1순위, 광디스크 2<br>순위</td>
+<td>설치 완료 후 재부팅 시 설치 과정이 반복되는<br>것을 방지</td>
+</tr>
+<tr>
+<td>CPU 가상화 기능</td>
+<td>체크 가능한 항목 전부 활성화</td>
+<td>프로세서 탭에서 설정</td>
+</tr>
+<tr>
+<td>저장소</td>
+<td>ISO 파일을 CD-ROM에 마운<br>트</td>
+<td>설치 이미지 파일 선택</td>
+</tr>
+<tr>
+<td>오디오</td>
+<td>비활성화</td>
+<td>리소스 절감</td>
+</tr>
+<tr>
+<td>네트워크</td>
+<td>브리지 어댑터</td>
+<td>IP 자동 할당 또는 수동 지정</td>
+</tr>
+<tr>
+<td>USB</td>
+<td>비활성화</td>
+<td>리소스 절감</td>
+</tr>
+</tbody>
+</table></div>
+<p>실제 하드웨어에서 지정한 디스크 용량만큼의 여유 공간이 필요하다. 가상 머신 설정에서 지정하는 크기는 호스트 컴퓨터의 실제 저장공간을 사용한다.</p>
+<h4 id="4-virtualbox에서-ctrlaltdel-입력-방법">4. VirtualBox에서 Ctrl+Alt+Del 입력 방법</h4>
+<p>Windows Server 로그인 화면에서는 Ctrl+Alt+Del 키를 눌러야 언락(unlock)이 된다. 그러나 VirtualBox에서 해당 키를 직접 누르면 호스트 컴퓨터의 작업 관리자가 열린다. 이를 해결하는 방법은 다음과 같다.</p>
+<p>VirtualBox 메뉴 → 입력 → 키보드 → Ctrl+Alt+Del 입력 클릭</p>
+<h4 id="5-administrator-계정">5. Administrator 계정</h4>
+<p>Windows Server에서 기본으로 제공되는 관리자 계정이다.</p>
+<p>계정명: Administrator 역할: 리눅스의 root 와 동일하게 시스템 전체 권한을 보유한 관리자 계정 소속 그룹: Administrators 패스워드 설정 시 Windows Server의 기본 복잡성 요구사항을 충족해야 한다. 요구사항을 충족하지 못하면 설정이 거부된다. 패스워드 복잡성 정책은 이후 로컬 보안 정책 수업에서 상세히 다룬다.</p>
+<p>관리자 패스워드는 10자 이상, 영문 대문자·소문자·숫자·특수문자를 혼합하여 설정한다. 분실 시 관리자 계정으로 로그인할 수 없다.</p>
+<hr />
+<h3 id="073-windows-server-초기-네트워크-설정-서버-관리자-iisdns-역할-추가">073. Windows Server 초기 네트워크 설정, 서버 관리자, IIS·DNS 역할 추가</h3>
+<p>정, 서버 관리자, IIS·DNS 역할 추가</p>
+<h4 id="1-windows-server-로그인-후-네트워크-설정">1. Windows Server 로그인 후 네트워크 설정</h4>
+<p>로그인 직후 네트워크 상태에 따라 두 가지 상황이 발생한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>처리 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면에 파란색 "네트워크에 참여하시겠습니까?" 팝<br>업이 뜨는 경우</td>
+<td>Yes 선택 → IP 자동 할당(브리지 방식), 추가<br>설정 불필요</td>
+</tr>
+<tr>
+<td>팝업이 뜨지 않고 지구본 아이콘(인터넷 없음) 표시<br>되는 경우</td>
+<td>수동으로 IP 주소 설정 필요</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="1-1-ip">1-1. 수동 IP 설정 방법</h5>
+<p>작업표시줄 지구본 아이콘 우클릭 → Open Network and Internet Settings → 이더넷 → Change Adapter Options → 어댑터 우클릭 → Properties → TCP/IPv4 Properties 설정 값:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설정 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP 주소</td>
+<td>호스트 컴퓨터와 동일 대역에서 사용 중이지 않은 주소 입력</td>
+</tr>
+<tr>
+<td>서브넷</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+<tr>
+<td>기본 게이트웨이</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+<tr>
+<td>DNS 서버</td>
+<td>호스트 컴퓨터와 동일하게 입력</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ IP 주소만 달라야 하며, 이미 사용 중인 IP인지 확인하려면 호스트 컴퓨터에서 해당 IP로 ping을 보내 응답 여부를 확인한다. 응답이 없으면 사용 가능한 IP이다.</p>
+<p>⚠️ 윈도우 서버에서 인터넷이 되지 않으면 IIS, DNS 등의 역할을 추가할 때 필요한 구성 요소를 저장소(인터넷)에서 가져올 수 없어 설치가 실패한다. 리눅스에서 DNF 명령으로 패키지 설치 시 인터넷 연결이 필요한 것과 동일하다.</p>
+<h4 id="2-서버-관리자server-manager">2. 서버 관리자(Server Manager)</h4>
+<p>서버 관리자는 Windows Server의 중앙 관리 도구이다. 로그인 시 자동으로 실행된다.</p>
+<p>실행 방법: 시작 메뉴 → 서버 관리자(Server Manager)</p>
+<p>서버 관리자 우측 상단 메뉴 구성:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>메뉴</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manage</td>
+<td>역할(Role) 및 기능(Feature) 추가·제거, 서버 관리</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>DNS, IIS 관리자, 이벤트 뷰어, 컴퓨터 관리 등 각종 관리 도구 접근</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-역할role-및-기능feature-추가">3. 역할(Role) 및 기능(Feature) 추가</h4>
+<p>Windows Server에서 서버 기능을 사용하려면 역할을 추가해야 한다.</p>
+<p>진입 경로: 서버 관리자 → Manage → Add Roles and Features 추가 역할 항목:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
 <th>역할</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Menu(root)</td>
-<td>전체 메뉴 바 생성</td>
+<td>DNS Server</td>
+<td>네임 서버 구축용</td>
 </tr>
 <tr>
-<td>Menu(menu, tearoff=0)</td>
-<td>특정 메뉴 항목 생성</td>
-</tr>
-<tr>
-<td>add command(label='이름', command=함수)<br>_</td>
-<td>클릭 시 실행할 명령어가 있는 항목 추가</td>
-</tr>
-<tr>
-<td>add separator()<br>_</td>
-<td>메뉴 항목 사이에 구분선 추가</td>
-</tr>
-<tr>
-<td>add cascade(label='이름', menu=메뉴변수)<br>_</td>
-<td>상위 메뉴에 하위 메뉴 연결</td>
-</tr>
-<tr>
-<td>root.config(menu=menu)</td>
-<td>창에 메뉴 바 적용</td>
+<td>Web Server (IIS)</td>
+<td>웹 서버 및 FTP 서버 구축용 도구</td>
 </tr>
 </tbody>
 </table></div>
-<p>command=root.quit 은 Tkinter에서 기본으로 제공하는 창 종료 함수이므로 별도 정의가 필요 없다.</p>
-<p>⚠️ command 에 지정한 함수가 코드에 정의되어 있지 않으면 실행 시 오류가 발생한다. 인 터프리트 언어이므로 함수는 사용하기 전에 먼저 정의해야 한다.</p>
-<h5 id="4-3">4-3. 스크롤바 추가</h5>
-<h2 id="스크롤바-생성-대문자-s로-시작하는-scrollbar-클래스-사용-scrollbar--scrollbarroot">스크롤바 생성 (대문자 S로 시작하는 Scrollbar 클래스 사용) scrollbar = Scrollbar(root)</h2>
-<h2 id="스크롤바-배치-오른쪽에-위치-세로-방향으로-채움-scrollbarpacksideright-fillyes">스크롤바 배치: 오른쪽에 위치, 세로 방향으로 채움 scrollbar.pack(side=RIGHT, fill=YES)</h2>
-<p>pack()  배치 옵션:</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>side=RIGHT</td>
-<td>오른쪽에 배치</td>
-</tr>
-<tr>
-<td>side=LEFT</td>
-<td>왼쪽에 배치</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fill=YES</td>
-<td>해당 방향으로 채움</td>
-</tr>
-<tr>
-<td>fill=BOTH</td>
-<td>가로·세로 모두 채움</td>
-</tr>
-<tr>
-<td>expand=True</td>
-<td>창 크기에 따라 확장 (대문자 T 사용)</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="4-4">4-4. 텍스트 영역 추가</h5>
-<h2 id="텍스트-영역-생성-대문자-t로-시작하는-text-클래스-사용-txt--textroot-yscrollcommandscrollbarset">텍스트 영역 생성 (대문자 T로 시작하는 Text 클래스 사용) txt = Text(root, yscrollcommand=scrollbar.set)</h2>
-<h2 id="텍스트-영역-배치-왼쪽-가로세로-채움-창-크기에-따라-확장-txtpacksideleft-fillboth-expandtrue">텍스트 영역 배치: 왼쪽, 가로세로 채움, 창 크기에 따라 확장 txt.pack(side=LEFT, fill=BOTH, expand=True)</h2>
-<p>yscrollcommand=scrollbar.set : 텍스트 영역의 세로 스크롤을 스크롤바와 연결</p>
-<h5 id="4-5-save_file">4-5. 함수 정의 — 저장 기능 (save_file)</h5>
-<h2 id="저장할-파일-경로-변수-현재-디렉토리에-mynotetxt로-저장-filename--mynotetxt--저장-함수-정의-def-함수-정의-키워드-def-savefile--쓰기-권한w으로-파일-열기-한글-지원을-위해-utf-8-인코딩-지정-with-openfilename-w-encodingutf-8-as-f--텍스트-영역의-모든-내용첫-번째-줄-10부터-끝까지-읽어-서-저장-fwritetxtget10-end">저장할 파일 경로 변수 (현재 디렉토리에 mynote.txt로 저장) file_name = 'mynote.txt' # 저장 함수 정의 (def: 함수 정의 키워드) def save_file(): # 쓰기 권한('w')으로 파일 열기, 한글 지원을 위해 utf-8 인코딩 지정 with open(file_name, 'w', encoding='utf-8') as f: # 텍스트 영역의 모든 내용(첫 번째 줄 1.0부터 끝까지) 읽어 서 저장 f.write(txt.get('1.0', END))</h2>
-<p>'w' : 쓰기(write) 권한 encoding='utf-8' : 한글 처리를 위한 인코딩 지정 txt.get('1.0', END) : 텍스트 영역의 1번째 줄 0번째 위치부터 끝(END)까지 내용을 가져옴 def  키워드로 함수를 정의한다. 함수 이름만 있고 내용이 없으면 마우스를 올렸을 때 None 으로 표시된다.</p>
-<h5 id="4-6">4-6. 전체 코드 구조 요약</h5>
-<p>import os from tkinter import * # 파일명 변수 (함수보다 먼저 정의) file_name = 'mynote.txt' # 저장 함수 (메뉴보다 먼저 정의) def save_file(): with open(file_name, 'w', encoding='utf-8') as f: f.write(txt.get('1.0', END))</p>
-<h2 id="창-생성-root--tk-roottitle윈도우즈-메모장-rootgeometry640x480">창 생성 root = Tk() root.title('윈도우즈 메모장') root.geometry('640x480')</h2>
-<h2 id="메뉴-바-구성-menu--menuroot-menufile--menumenu-tearoff0-menufileaddcommandlabel열기-commandopenfile-menufileaddcommandlabel저장-commandsavefile-menufileaddseparator-menufileaddcommandlabel끝내기-commandrootquit-menuaddcascadelabel파일-menumenufile-rootconfigmenumenu">메뉴 바 구성 menu = Menu(root) menu_file = Menu(menu, tearoff=0) menu_file.add_command(label='열기', command=open_file) menu_file.add_command(label='저장', command=save_file) menu_file.add_separator() menu_file.add_command(label='끝내기', command=root.quit) menu.add_cascade(label='파일', menu=menu_file) root.config(menu=menu)</h2>
-<h2 id="스크롤바-scrollbar--scrollbarroot-scrollbarpacksideright-fillyes">스크롤바 scrollbar = Scrollbar(root) scrollbar.pack(side=RIGHT, fill=YES)</h2>
-<h2 id="텍스트-영역-txt--textroot-yscrollcommandscrollbarset-txtpacksideleft-fillboth-expandtrue">텍스트 영역 txt = Text(root, yscrollcommand=scrollbar.set) txt.pack(side=LEFT, fill=BOTH, expand=True)</h2>
-<h2 id="메인-루프-rootmainloop">메인 루프 root.mainloop()</h2>
-<h4 id="5-추가-학습-방향">5. 추가 학습 방향</h4>
-<p>코드를 빠르게 익히는 방법 중 하나는 게임을 직접 만들어보는 것이다. 예를 들어 '파이썬 게임'으로 검색하면 다양한 토이 프로젝트 예제를 찾을 수 있다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>관심 분야</th>
-<th>추천</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>게임 제작</td>
-<td>파이썬 게임 예제 검색 후 따라 만들어보기</td>
-</tr>
-<tr>
-<td>이미지 처리</td>
-<td>OpenCV(오픈CV) 라이브러리 활용</td>
-</tr>
-<tr>
-<td>자동화</td>
-<td>앞서 실습한 리눅스 자동화 스크립트 응용</td>
-</tr>
-</tbody>
-</table></div>
+<p>IIS(Internet Information Services)는 웹 서버와 FTP 서버를 하나의 도구에서 함께 구축할 수 있는 Windows Server 전용 도구이다.</p>
+<p>역할 추가 시 주의 사항:</p>
+<p>서버 이름과 IP 주소가 올바르게 표시되는지 확인 후 Next를 진행한다.</p>
+<p>"정적 IP 주소가 발견되지 않았다"는 메시지는 오류가 아닌 <strong>경고(Warning)</strong>이므로 Continue하면 된다.</p>
+<p>IIS 역할 추가 시, 하위 항목에서 FTP Server 항목을 함께 체크하면 FTP 서비스도 동시에 구성된다.</p>
+<p>설치가 완료되면 서버 관리자 메뉴와 Tools 목록에 DNS, IIS 관리자가 새로 추가된다.</p>
+<h4 id="4-iisinternet-information-services-개요">4. IIS(Internet Information Services) 개요</h4>
+<p>IIS는 Windows Server에서 웹 및 FTP 서비스를 구축하는 전용 도구이다.</p>
+<p>리눅스의 APM(Apache+PHP+MySQL) 환경과 대응하는 Windows Server의 웹 서비스 도구 웹 서비스 기반 언어: IIS는 ASP(Active Server Pages) 언어 기반으로 동작 리눅스 웹 서버는 PHP 언어 기반으로 동작 설치 완료 후 Tools → <strong>IIS 관리자(Internet Information Services Manager)</strong>에 서 실행</p>
 <hr />
-<h3 id="123-파이썬-가상-환경-설정-및-기초-개념">123. 파이썬 가상 환경 설정 및 기초 개념</h3>
-<h4 id="1-코드-편집기">1. 코드 편집기</h4>
-<h5 id="1-1_2">1-1. 기본 편집기</h5>
-<p>파이썬 코드는 C, Java와 마찬가지로 다양한 편집기로 작성할 수 있다.</p>
+<h3 id="076-이벤트-뷰어-보안-로그-컴퓨터-관리-로컬-보안-정책">076. 이벤트 뷰어 보안 로그, 컴퓨터 관리, 로컬 보안 정책</h3>
+<p>로컬 보안 정책</p>
+<h4 id="1-이벤트-뷰어event-viewer--보안-로그">1. 이벤트 뷰어(Event Viewer) — 보안 로그</h4>
+<p>이벤트 뷰어는 서버 관리자 → Tools → Event Viewer, 또는 컴퓨터 관리 내에서도 접근할 수 있다.</p>
+<h5 id="1-1_1">1-1. 보안 로그 위치</h5>
+<p>이벤트 뷰어 → Windows Logs → Security</p>
+<h5 id="1-2">1-2. 보안 로그에 기록되는 이벤트 유형</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>환경</th>
-<th>사용 가능한 편집기</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td>메모장 등 일반 텍스트 편집기</td>
-</tr>
-<tr>
-<td>Linux</td>
-<td>vi 편집기, nano 등 터미널 편집기</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="1-2-ide">1-2. IDE (통합 개발 도구)</h5>
-<p>코딩을 보다 유연하게 하고 여러 기능이 통합된 도구를 IDE(통합 개발 도구)라고 한다. 통상적으로 사용하는 IDE는 다음과 같다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>IDE</th>
-<th>특징</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>VS Code (Visual Studio Code)</td>
-<td>다양한 언어 지원, 확장팩 설치 가능</td>
-</tr>
-<tr>
-<td>Visual Studio</td>
-<td>Microsoft의 대형 IDE</td>
-</tr>
-<tr>
-<td>Eclipse</td>
-<td>Java 및 다양한 언어 지원</td>
-</tr>
-</tbody>
-</table></div>
-<p>현재 대부분의 IDE에는 AI가 접목되어 코파일럿, GPT 등을 사용할 수 있도록 함께 제공 되고 있다.</p>
-<h4 id="2-파이썬-가상-환경-virtual-environment">2. 파이썬 가상 환경 (Virtual Environment)</h4>
-<h5 id="2-1_1">2-1. 가상 환경이 필요한 이유</h5>
-<p>가상 환경이란 독립된 파이썬 실행 환경으로, 해당 환경 내에서만 작업이 이루어지고 외부 환경에는 영향을 주지 않는다.</p>
-<p>가상 환경이 필요한 이유는 다음과 같다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>문제 상황</th>
+<th>이벤트 유형</th>
 <th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>버전 호환성</td>
-<td>Ubuntu 24.04에는 파이썬 3.12가 기본 설치되<br>어 있으나, 프로젝트에 따라 다른 버전이 필요할<br>수 있다</td>
+<td>로그온(Logon)</td>
+<td>시스템에 로그인한 이벤트 (누가, 언제, 어떤 방식으로 로<br>그인했는지)</td>
 </tr>
 <tr>
-<td>두 개 이상의 프로젝트 운용</td>
-<td>프로젝트별로 서로 다른 파이썬 버전이나 라이브<br>러리가 필요한 경우 충돌이 발생할 수 있다</td>
+<td>특별 로그온(Special Logon)</td>
+<td>특수 권한을 가진 로그인 이벤트</td>
 </tr>
 <tr>
-<td>운영체제 영향 방지</td>
-<td>가상 환경 없이 패키지를 설치·삭제하면 실제 우분<br>투 운영체제에 영향을 줄 수 있다</td>
-</tr>
-</tbody>
-</table></div>
-<p>가상 환경을 사용하면 각 환경이 독립적으로 동작하므로, 다른 환경에 영향을 미치지 않는다.</p>
-<h5 id="2-2_1">2-2. 가상 환경 디렉토리 구조</h5>
-<p>가상 환경 생성 후 디렉토리 구조는 다음과 같다.</p>
-<p>~/ └── python_practice/        # 실습 디렉토리 └── venv/               # 가상 환경 디렉토리 ├── bin/            # 실행 파일 (python3, python3.12, pip, pip3, pip3.12) └── lib/            # 라이브러리 저장소 bin/  디렉토리: 파이썬 실행 명령어 위치 lib/  디렉토리: 설치된 라이브러리 파일 저장</p>
-<h4 id="3-가상-환경-설정-실습">3. 가상 환경 설정 실습</h4>
-<h5 id="3-1_1">3-1. 실습 디렉토리 생성</h5>
-<h2 id="실습용-디렉토리-생성-mkdir-pythonpractice--디렉토리-목록-확인-ls--실습-디렉토리로-이동-cd-pythonpractice--숨김-파일-포함-목록-확인-아무것도-없는-상태-ls--a">실습용 디렉토리 생성 mkdir python_practice # 디렉토리 목록 확인 ls # 실습 디렉토리로 이동 cd python_practice # 숨김 파일 포함 목록 확인 (아무것도 없는 상태) ls -a</h2>
-<h5 id="3-2_2">3-2. 가상 환경 생성</h5>
-<h2 id="가상-환경-생성-시도-venv-모듈이-없을-경우-오류-발생-python3--m-venv-venv--venv-모듈이-설치되어-있지-않으면-오류-메시지가-나타난다-이-경우-먼저-venv-도구를-설치해야-한다">가상 환경 생성 시도 (venv 모듈이 없을 경우 오류 발생) python3 -m venv venv ⚠️ venv 모듈이 설치되어 있지 않으면 오류 메시지가 나타난다. 이 경우 먼저 venv 도구를 설치해야 한다.</h2>
-<h2 id="venv-도구-설치-sudo-apt-install-python3-venv--설치-후-가상-환경-재생성-python3--m-venv-venv--생성-확인-ls-ls-venv-명령어에서--m-venv-의-의미">venv 도구 설치 sudo apt install python3-venv # 설치 후 가상 환경 재생성 python3 -m venv venv # 생성 확인 ls ls venv/ 명령어에서 -m venv  의 의미:</h2>
-<p>v : virtual (가상)</p>
-<p>env  / venv : environment (환경)</p>
-<h5 id="3-3">3-3. 가상 환경 활성화</h5>
-<h2 id="가상-환경-활성화-source-명령어-사용-source-venvbinactivate-활성화-후에는-프롬프트-앞에-venv-와-같이-가상-환경-이름이-표시된다">가상 환경 활성화 (source 명령어 사용) source venv/bin/activate 활성화 후에는 프롬프트 앞에 (venv) 와 같이 가상 환경 이름이 표시된다.</h2>
-<p>가상 환경이 생성되었다고 해서 자동으로 활성화되는 것은 아니다. 반드시 source  명령어로 활성화해야 한다.</p>
-<h5 id="3-4-pip">3-4. pip 설치 및 가상 환경 연결 확인</h5>
-<h2 id="pip-위치-확인-which-pip">pip 위치 확인 which pip</h2>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>which pip 결과</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/usr/bin/pip</td>
-<td>가상 환경이 제대로 연결되지 않은 상태</td>
+<td>로그오프(Logoff)</td>
+<td>시스템 로그아웃 이벤트</td>
 </tr>
 <tr>
-<td>~/python practice/venv/bin/pip<br>_</td>
-<td>가상 환경에서 정상 실행 중인 상태</td>
+<td>사용자 계정 관리(User Account<br>Management)</td>
+<td>사용자 계정 생성, 변경, 그룹 멤버십 변경 등의 이벤트</td>
 </tr>
 </tbody>
 </table></div>
-<h2 id="pip-설치-가상-환경-연결이-안-된-경우-sudo-apt-install--y-pip--설치-후-다시-확인-sudo-없이-which-pip--which-pip-실행-결과가-가상-환경-경로-pythonpracticevenvbinpip-가-아니라-시스템-기본-경로-usrbinpip-로-나온다면-가상-환경이-제대로-동작하지-않는-것이다-이-경우-venv-디렉토리-내-파일을-삭제하고-다시-생성하는-것이-좋다">pip 설치 (가상 환경 연결이 안 된 경우) sudo apt install -y pip # 설치 후 다시 확인 (sudo 없이) which pip ⚠️ which pip  실행 결과가 가상 환경 경로( ~/python_practice/venv/bin/pip )가 아니라 시스템 기본 경로( /usr/bin/pip )로 나온다면, 가상 환경이 제대로 동작하지 않는 것이다. 이 경우 venv 디렉토리 내 파일을 삭제하고 다시 생성하는 것이 좋다.</h2>
-<p>가상 환경의 bin/  디렉토리에서 확인 가능한 실행 파일:</p>
+<p>로그인과 관련된 이벤트, 사용자 계정 관련 이벤트, 인증 관련 이벤트 등이 모두 보안 로그에 기록된다. 예를 들어, FTP 사용자 계정 생성이나 Administrators 그룹 추가 이력이 여기서 확인된다.</p>
+<p>보안 로그는 필터링(Filter Current Log) 또는 검색 기능을 사용하여 원하는 이벤트를 찾을 수 있으며, 파일로 저장할 수도 있다.</p>
+<h4 id="2-컴퓨터-관리computer-management-구성">2. 컴퓨터 관리(Computer Management) 구성</h4>
+<p>서버 관리자 → Tools → Computer Management 컴퓨터 관리는 이 시스템의 주요 관리 기능 대부분을 한 곳에서 수행할 수 있는 도구이다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>파일명</th>
+<th>항목</th>
 <th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>python3</td>
-<td>파이썬 3 실행 파일</td>
+<td>이벤트 뷰어(Event Viewer)</td>
+<td>이벤트 뷰어와 동일한 기능</td>
 </tr>
 <tr>
-<td>python3.12</td>
-<td>파이썬 3.12 실행 파일</td>
+<td>공유 폴더(Shared Folders)</td>
+<td>공유된 폴더 목록과 세션 정보 확인</td>
 </tr>
 <tr>
-<td>pip</td>
-<td>pip 패키지 관리자</td>
+<td>성능(Performance)</td>
+<td>성능 모니터 — 메모리, 네트워크, 물리적 디스크, CPU 사용량 실<br>시간 확인</td>
 </tr>
 <tr>
-<td>pip3</td>
-<td>pip3 패키지 관리자</td>
+<td>장치 관리자(Device<br>Manager)</td>
+<td>시스템에 설치된 모든 장치 목록 확인 및 관리</td>
 </tr>
 <tr>
-<td>pip3.12</td>
-<td>pip3.12 패키지 관리자</td>
+<td>디스크 관리(Disk<br>Management)</td>
+<td>파티션 생성·분할·통합 등 디스크 관련 작업 수행</td>
+</tr>
+<tr>
+<td>서비스(Services)</td>
+<td>현재 시스템에서 동작 중인 서비스 목록 및 상태 확인·변경</td>
+</tr>
+<tr>
+<td>WMI Control</td>
+<td>Windows 관리 명령어(WMI) 관련 설정</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="3-5">3-5. 가상 환경 비활성화 및 재진입</h5>
-<h2 id="가상-환경-비활성화-deactivate-비활성화-후에는-프롬프트가-일반-우분투-셸로-돌아온다">가상 환경 비활성화 deactivate 비활성화 후에는 프롬프트가 일반 우분투 셸로 돌아온다.</h2>
-<h2 id="가상-환경-재진입-source-venvbinactivate-재진입-후에는-반드시-which-pip-로-가상-환경-경로에서-실행되고-있는지-확인해야-한다">가상 환경 재진입 source venv/bin/activate 재진입 후에는 반드시 which pip 로 가상 환경 경로에서 실행되고 있는지 확인해야 한다.</h2>
-<h4 id="4-파이썬-기본-개념">4. 파이썬 기본 개념</h4>
-<h5 id="4-1_2">4-1. 파이썬의 활용 분야</h5>
-<p>현재 파이썬이 주로 사용되는 분야는 다음과 같다.</p>
+<h5 id="2-1-services">2-1. 서비스(Services) 최적화</h5>
+<p>서비스 목록에서 실제로 사용하지 않는 서비스가 자동(Automatic) 상태로 실행 중인 경우, 이를 중지하고 시작 유형을 수동(Manual) 또는 사용 안 함(Disabled)으로 변경해야 한다.</p>
+<p>⚠️ 사용하지 않는 서비스는 반드시 재부팅 후에도 시작되지 않도록 완전히 중지해야 한다. 미사용 서비스가 실행 중이면 시스템 성능이 저하되고 보안 취약점이 발생할 수 있다. 리눅스도 동일하게 적용된다.</p>
+<h4 id="3-리소스-모니터resource-monitor">3. 리소스 모니터(Resource Monitor)</h4>
+<p>서버 관리자 → Tools → Resource Monitor 현재 시스템에서 각 프로세스별 CPU, 디스크, 메모리, 네트워크 사용량을 실시간 그래픽으 로 확인할 수 있다.</p>
+<p>상단 탭(CPU, 메모리, 디스크, 네트워크)별로 상세 보기 가능 IIS, DNS 등 서버 서비스의 동작 상태와 발생 이벤트 확인 가능</p>
+<h4 id="4-로컬-보안-정책local-security-policy">4. 로컬 보안 정책(Local Security Policy)</h4>
+<p>서버 관리자 → Tools → Local Security Policy Windows Server 계열에서 보안 정책을 설정하는 도구이다. 각 항목을 더블 클릭하여 Enable/Disable 또는 값을 변경할 수 있으며, Explain 탭에서 해당 정책의 상세 설명을 확인할 수 있다.</p>
+<h4 id="5-로컬-정책--보안-옵션security-options">5. 로컬 정책 — 보안 옵션(Security Options)</h4>
+<p>경로: Local Security Policy → Local Policies → Security Options</p>
+<h5 id="5-1-interactive-logon">5-1. Interactive Logon (대화형 로그온)</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>분야</th>
+<th>정책</th>
+<th>기본값</th>
 <th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>리눅스 자동화</td>
-<td>예전에 C 코드로 하던 작업을 최근에는 파이썬으<br>로 자동화하는 추세</td>
-</tr>
-<tr>
-<td>빅데이터 및 AI</td>
-<td>관련 라이브러리·모듈이 잘 발달되어 있어 기본 언<br>어로 사용</td>
+<td>Interactive Logon: Do not<br>require Ctrl+Alt+Del</td>
+<td>Disabled</td>
+<td>로그인 시 Ctrl+Alt+Del 키를 요구하지 않겠다<br>는 정책. 기본값이 Disabled이므로<br>Ctrl+Alt+Del이 요구된다.</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="4-2_1">4-2. 파이썬의 구성 요소</h5>
-<p>파이썬에도 셸 스크립트와 마찬가지로 변수, 함수, 모듈, 패키지, 라이브러리가 존재한다.</p>
-<h5 id="4-3_1">4-3. 모듈·패키지·라이브러리 비교</h5>
-<p>도서관에 비유하면 다음과 같이 이해할 수 있다.</p>
+<p>Ctrl+Alt+Del을 누르지 않아도 로그인 창이 바로 뜨도록 설정하려면 이 정책을 Enable 로 변경한다. 변경 후 재부팅하면 Ctrl+Alt+Del 요구 없이 로그인 화면이 표시된다.</p>
+<h4 id="6-계정-정책--패스워드-정책password-policy">6. 계정 정책 — 패스워드 정책(Password Policy)</h4>
+<p>경로: Local Security Policy → Account Policies → Password Policy</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>개념</th>
-<th>정의</th>
-<th>도서관 비유</th>
+<th>정책</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>라이브러리(Library)</td>
-<td>한 개 이상의 패키지를 포함하는<br>전체 집합</td>
-<td>도서관 전체</td>
+<td>Password must meet complexity<br>requirements</td>
+<td>패스워드 복잡성 요구 여부. Enable 시 영문 대·소문자, 숫<br>자, 특수문자 조합이 필요하다.</td>
 </tr>
 <tr>
-<td>패키지(Package)</td>
-<td>한 개 이상의 모듈을 포함하는<br>집합</td>
-<td>도서관의 주제별 코너(인문, 과<br>학, 예술 등)</td>
+<td>Minimum password length</td>
+<td>패스워드 최소 글자 수. 기본값 0. 예: 4로 설정 시 최소 4자<br>이상이어야 한다.</td>
 </tr>
 <tr>
-<td>모듈(Module)</td>
-<td>개별 파이썬 파일</td>
-<td>책 한 권</td>
+<td>Maximum password age</td>
+<td>패스워드 최대 사용 기간(만료 기간)</td>
+</tr>
+<tr>
+<td>Minimum password age</td>
+<td>패스워드 최소 유지 기간</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="4-4-pip">4-4. pip 명령어</h5>
-<p>모듈·패키지·라이브러리를 설치하기 위해 pip  명령어를 사용한다.</p>
-<h2 id="패키지-설치-pip-install-패키지이름">패키지 설치 pip install 패키지이름</h2>
+<p>Windows Server 설치 시 및 FTP 사용자 계정 생성 시 복잡한 패스워드(대·소문자·숫자 ·특수문자 조합)를 사용한 이유는 Password must meet complexity requirements 정책이 기본 Enable 상태이기 때문이다.</p>
+<p>복잡성 요구를 Disable하면 1234 와 같은 단순 패스워드도 사용 가능하다. 단, Minimum password length에서 지정한 최소 글자 수는 여전히 충족해야 한다.</p>
+<h4 id="7-계정-정책--계정-잠금-정책account-lockout-policy">7. 계정 정책 — 계정 잠금 정책(Account Lockout Policy)</h4>
+<p>경로: Local Security Policy → Account Policies → Account Lockout Policy</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>정책</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account lockout threshold</td>
+<td>로그인 실패 허용 횟수. 이 횟수를 초과하면 계정이 잠긴다. 기<br>본값: 0(잠금 없음)</td>
+</tr>
+<tr>
+<td>Account lockout duration</td>
+<td>계정 잠금 유지 시간(분). 설정 후 자동으로 30분으로 초기 설정<br>된다.</td>
+</tr>
+<tr>
+<td>Reset account lockout<br>counter after</td>
+<td>로그인 실패 카운트를 초기화하는 시간(분).</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정 예시: Threshold를 3으로 설정하면, 로그인 3회 실패 시 계정이 잠긴다. 잠금 시간 (duration)을 30분으로 설정하면 30분 동안 로그인을 시도할 수 없다. 리셋 시간을 60 분으로 설정하면 60분 후에 실패 카운트가 초기화되어 다시 로그인을 시도할 수 있다.</p>
+<p>인터넷뱅킹에서 패스워드를 여러 번 잘못 입력하면 일정 시간 로그인이 차단되거나 계정이 잠기는 것이 이 계정 잠금 정책에 의한 동작이다.</p>
+<h4 id="8-ip-보안-정책ip-security-policy">8. IP 보안 정책(IP Security Policy)</h4>
+<p>경로: Local Security Policy → IP Security Policies on Local Computer L3 장비의 ACL(Access Control List)과 유사하게, 출발지·목적지 IP 주소, 프로토콜, 포트를 지정하여 트래픽을 필터링하는 정책을 설정할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>설정 항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책 이름 및 설명</td>
+<td>정책을 식별하기 위한 이름과 설명</td>
+</tr>
+<tr>
+<td>필터 목록(Filter List)</td>
+<td>출발지 IP, 목적지 IP, 프로토콜(TCP 등), 포트 번호 지정</td>
+</tr>
+<tr>
+<td>필터 액션(Filter Action)</td>
+<td>Permit(허용) 또는 Block(차단) 선택</td>
+</tr>
+</tbody>
+</table></div>
+<p>IP 보안 정책의 구성 방식은 L3 장비에서 ACL을 설정할 때와 동일하다. 출발지와 목적지, 포트를 지정하고 허용 또는 차단 여부를 결정한다.</p>
+<p>복수의 정책이 존재할 경우, 목록 상단에 위치한 정책부터 순서대로 트래픽과 비교하여 적용된다.</p>
 <hr />
-<h3 id="124-파이썬-설치-가이드">124. 파이썬 설치 가이드</h3>
-<p>파이썬 버전 버전 Version 소프트웨어가 개발 되는 과정에서 발생한 변경 사항과 발전 과정의 산출물(output)을 체계 적으로 표현하는 중요한 수단.</p>
-<p>숫자로 표기되며, 각 숫자 별로 다음과 같은 의미를 가지고 있음.</p>
-<p>주 버전.마이너 버전.패치 버전 (Major.Minor.Patch)</p>
-<p>3.12.4 주 버전 (Major): 큰 기능 추가나 프로그램의 큰 흐름 변경이 있을 때.</p>
-<p>마이너 버전 (Minor): 새로운 기능이 추가되지만 기존 기능과 호환될 때.</p>
-<p>패치 버전 (Patch): 버그 수정 등 사소한 개선이 있을 때.</p>
-<h4 id="1-내-컴퓨터-사양-확인">1. 내 컴퓨터 사양 확인</h4>
-<p>[설정] → [시스템] → [정보]장치 사양 탭에서 시스템 종류 확인 시스템 종류에 따른 설치 버전 확인 64비트 운영 체제, x64 기반 프로세서 : Windows installer (64-bit)</p>
-<p>32비트 운영 체제, x32 기반 프로세서 : Windows installer (32-bit)</p>
-<h4 id="2-내-컴퓨터-계정명-확인">2. 내 컴퓨터 계정명 확인</h4>
-<p>만약 내 컴퓨터의 계정 이름이 한글로 되어 있다면, 영어로 변경하는 것을 권장</p>
-<h4 id="3-파이썬-설치-파일-다운로드">3. 파이썬 설치 파일 다운로드</h4>
-<h4 id="1-구글에-파이썬-31210-버전-설치-검색">1. 구글에 파이썬 3.12.10 버전 설치 검색</h4>
-<h4 id="2-파이썬-공식-홈페이지링크로-이동">2. 파이썬 공식 홈페이지(링크)로 이동</h4>
-<h4 id="3-1번에서-확인한-운영체제-버전에-맞는-설치-파일-다운로드">3. 1번에서 확인한 운영체제 버전에 맞는 설치 파일 다운로드</h4>
-<h4 id="4-관리자-권한으로-실행-하여-설치">4. 관리자 권한으로 실행 하여 설치</h4>
-<p>설치시 체크해야 할 설정 Add python.exe to PATH Install Python 3.12 for all users Disable path length limit</p>
-<h4 id="4-파이썬-설치-확인">4. 파이썬 설치 확인</h4>
-<h4 id="1-윈도우-검색-화면에서-cmd-검색">1. 윈도우 검색 화면에서 cmd  검색</h4>
-<h4 id="2-cmd-실행">2. cmd  실행</h4>
-<h4 id="3-python---version-입력버전-출력-확인">3. python --version  입력버전 출력 확인</h4>
-<p>VS Code 설치</p>
-<h4 id="1-vs-code-설치-파일-다운로드">1. VS Code 설치 파일 다운로드</h4>
-<h4 id="1-구글에-vs-code-설치-검색">1. 구글에 VS Code 설치 검색</h4>
-<h4 id="2-vs-code-공식-홈페이지링크로-이동">2. VS Code 공식 홈페이지(링크)로 이동</h4>
-<h4 id="3-1번에서-확인한-운영체제-버전에-맞는-설치-파일-다운로드-2">3. 1번에서 확인한 운영체제 버전에 맞는 설치 파일 다운로드</h4>
-<h4 id="4-관리자-권한으로-실행-하여-설치-2">4. 관리자 권한으로 실행 하여 설치</h4>
-<hr /><div class="nav"><a href="ch16.html"><span class="lbl">이전</span>핵심키워드 · 모니터링 · 운영 · 클라우드</a><a href="ch18.html"><span class="lbl">다음</span>핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a></div></main>
+<h3 id="091-windows-server-dns-서버-구축">091. Windows Server DNS 서버 구축</h3>
+<h4 id="1-windows-server-로그인-및-이벤트-트래킹">1. Windows Server 로그인 및 이벤트 트래킹</h4>
+<h5 id="1-1_2">1-1. 이전 설정 확인</h5>
+<p>이전 시간에 로컬 보안정책에서 Ctrl+Alt+Del 비활성화를 설정했기 때문에, 로그인 화면에서 해당 안내 문구가 사라진 것을 확인할 수 있다. 어드민 계정으로 바로 로그인이 가능하며, 왼쪽에 설정된 사용자 목록이 표시된다.</p>
+<h5 id="1-2-shutdown-event-tracking">1-2. 이벤트 트래킹 (Shutdown Event Tracking)</h5>
+<p>서버는 셧다운이 발생해서는 안 되기 때문에, 셧다운 이벤트 발생 시 원인을 기록하고 추적하는 기능이 활성화되어 있다. 부팅 후 이벤트 트래킹 창이 뜨면 셧다운 분류(전력 부족, 보안 이슈, 시스템 이슈 등)와 관리자 주석을 기입하는 란이 나타난다. 직접 종료한 경우에는 Cancel로 닫으면 된다.</p>
+<h4 id="2-dns-서버-구축-windows-server">2. DNS 서버 구축 (Windows Server)</h4>
+<h5 id="2-1-dns">2-1. DNS 관리자 실행</h5>
+<p>Tools 메뉴의 DNS 항목을 클릭하면 DNS 관리자가 실행된다. DNS가 설치되지 않은 경우 Server Manager &gt; Manage &gt; Add Roles에서 DNS를 체크하여 추가 설치한다.</p>
+<p>DNS 관리자에는 다음 두 개의 주요 영역이 존재한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>영역</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forward Lookup Zones (정방향 존)</td>
+<td>도메인 → IP 매핑 레코드를 보유하는 영역</td>
+</tr>
+<tr>
+<td>Reverse Lookup Zones (역방향 존)</td>
+<td>IP → 도메인 매핑 레코드를 보유하는 영역</td>
+</tr>
+</tbody>
+</table></div>
+<p>정방향 존만 있어도 DNS 서버로서의 역할은 충분히 수행할 수 있다.</p>
+<h4 id="3-forward-lookup-zone-생성">3. Forward Lookup Zone 생성</h4>
+<h5 id="3-1-zone">3-1. Zone 종류</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>종류</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary Zone</td>
+<td>1차(주) 존. 직접 편집이 가능한 기본 존</td>
+</tr>
+<tr>
+<td>Secondary Zone</td>
+<td>보조 존. Primary Zone과 동기화하여 백업 역할을 수행</td>
+</tr>
+<tr>
+<td>Stub Zone</td>
+<td>독립적인 존. 다른 존과 동기화하지 않고 독립적으로 운영</td>
+</tr>
+</tbody>
+</table></div>
+<p>Primary Zone과 Secondary Zone은 서로 존 내의 레코드 정보를 동기화한다. 보조 서버가 Primary가 동작하지 못할 때 백업 역할을 하기 위해 평상시에 정보가 동기화되어 있어야 하기 때문이다. Stub Zone은 다른 존과 연결할 필요 없이 해당 영역 안에서만 독립적으로 레코드를 관리할 때 사용한다.</p>
+<h5 id="3-2-forward-lookup-zone">3-2. Forward Lookup Zone 생성 절차</h5>
+<p>Forward Lookup Zones에서 우클릭 &gt; New Zone으로 마법사를 실행한다.</p>
+<h4 id="1-primary-zone-선택-후-next">1. Primary Zone 선택 후 Next</h4>
+<h4 id="2-zone-이름-입력-실제로-접속되지-않는-도메인을-사용-브라우저에서-미리-확인">2. Zone 이름 입력: 실제로 접속되지 않는 도메인을 사용 (브라우저에서 미리 확인)</h4>
+<h4 id="3-zone-파일명-자동-생성-도메인명dns-형식">3. Zone 파일명 자동 생성: 도메인명.dns  형식</h4>
+<h4 id="4-dynamic-update-보조-서버가-없는-경우-기본값none---마지막-항목-유지">4. Dynamic Update: 보조 서버가 없는 경우 기본값(None - 마지막 항목) 유지</h4>
+<h4 id="5-finish-후-존이-running-상태로-생성됨">5. Finish 후 존이 Running 상태로 생성됨</h4>
+<p>⚠️ Zone 이름으로 사용할 도메인은 반드시 호스트 브라우저에서 미리 확인하여 실제로 연결되지 않는 도메인을 사용한다.</p>
+<h4 id="4-soa-및-ns-레코드-자동-생성">4. SOA 및 NS 레코드 자동 생성</h4>
+<h5 id="4-1-soa-start-of-authority">4-1. SOA 레코드 (Start of Authority)</h5>
+<p>Windows에서 Zone을 생성하면 SOA 레코드와 NS 레코드가 자동으로 생성된다. Linux에서 수동으로 입력하던 항목들이 마법사로 자동 구성된다.</p>
+<p>SOA 레코드에서 확인 가능한 주요 항목은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serial Number</td>
+<td>존 파일의 버전 번호</td>
+</tr>
+<tr>
+<td>DNS 서버명</td>
+<td>이 존을 관리하는 DNS 서버 호스트명</td>
+</tr>
+<tr>
+<td>관리자 이메일</td>
+<td>존 관리자 연락처</td>
+</tr>
+<tr>
+<td>Refresh Time</td>
+<td>보조 서버가 주 서버에서 업데이트를 확인하는 주기</td>
+</tr>
+<tr>
+<td>Retry Interval</td>
+<td>업데이트 실패 후 재시도 간격</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expire Time</td>
+<td>보조 서버의 존 데이터 만료 시간</td>
+</tr>
+<tr>
+<td>Minimum TTL</td>
+<td>최소 캐시 유지 시간</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="4-2-ns-ip">4-2. NS 레코드 IP 연결</h5>
+<p>NS 레코드 더블클릭 &gt; Name Servers 탭에서 IP를 연결한다. 기존에 언나운(Unknown) 상태로 표시된 항목을 선택하고 Edit을 누른 후, Resolve 버튼을 클릭하면 해당 DNS 서버의 IP가 자동으로 확인되어 등록된다. 불필요한 항목은 Remove로 삭제하고 한 줄만 유지한다.</p>
+<p>SOA 레코드 또는 NS 레코드를 수정한 경우 반드시 Apply 후 OK를 눌러 적용한다.</p>
+<p>SOA 레코드와 NS 레코드의 Name 필드에 "(same as parent folder)"로 표시되는 것은 상위 도메인(예: hoon777.com)과 동일한 도메인을 사용한다는 의미이다.</p>
+<h4 id="5-dns-레코드-추가">5. DNS 레코드 추가</h4>
+<h5 id="5-1-a-ipv4">5-1. A 레코드 (IPv4 주소 매핑)</h5>
+<p>빈 공간에서 우클릭 &gt; New Host (A or AAAA)를 선택한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>레코드 종류</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>IPv4 주소와 도메인 매핑</td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>IPv6 주소와 도메인 매핑</td>
+</tr>
+</tbody>
+</table></div>
+<p>호스트 이름 입력란에 값을 입력하면 해당 서브도메인(예: www.hoon777.com )이 생성된다. 입 력란을 공백으로 두면 부모 도메인(예: hoon777.com )이 해당 IP와 직접 연결된다.</p>
+<p>FTP 서버, 웹 서버 등 서비스별로 각각 A 레코드를 추가하면 된다. 모두 동일한 시스템에서 운영할 경우 IP 주소는 같아도 무방하다.</p>
+<h5 id="5-2-cname">5-2. CNAME 레코드 (별칭 레코드)</h5>
+<p>별칭(Alias)을 부여할 때 사용하는 레코드이다. 우클릭 &gt; New Alias (CNAME)를 선택한다.</p>
+<p>별칭 이름 입력 (예: web )</p>
+<p>Browse 버튼으로 실제 연결될 호스트 선택 (예: www.hoon777.com )</p>
+<p>결과: web.hoon777.com  접속 시 www.hoon777.com 으로 연결됨 A 레코드를 직접 추가하는 방식과 CNAME으로 별칭을 부여하는 방식 두 가지가 모두 가능하다.</p>
+<h5 id="5-3-mx">5-3. MX 레코드</h5>
+<p>메일 서버가 있을 경우 메일 서버와 도메인을 연결하는 레코드이다. 우클릭 &gt; New Mail Exchanger (MX) 선택 후 메일 서버 호스트명을 지정한다.</p>
+<h5 id="5-4">5-4. 기타 레코드</h5>
+<p>우클릭 &gt; Other New Records에서 다양한 레코드 유형을 확인할 수 있다. 실제 운영 환경에서 가장 많이 사용되는 순서는 A 레코드, CNAME 레코드, MX 레코드이다.</p>
+<h4 id="6-reverse-lookup-zone-생성">6. Reverse Lookup Zone 생성</h4>
+<h5 id="6-1">6-1. 역방향 존 생성 절차</h5>
+<p>Reverse Lookup Zones에서 우클릭 &gt; New Zone &gt; Primary Zone 선택 후 IPv4 Reverse Lookup Zone을 선택한다. 네트워크 ID를 입력하면(예: 192.168.100 ) 존 파일명 이 자동으로 생성된다. 이후 Finish하면 역방향 존과 함께 SOA, NS 레코드가 자동으로 생성된다.</p>
+<h5 id="6-2-ptr">6-2. PTR 레코드</h5>
+<p>PTR 레코드는 정방향의 A 레코드에 대응하는 역방향 레코드이다. IP를 입력하고 해당 IP와 연결될 도메인을 선택하여 생성한다. A 레코드를 추가할 때 "Create associated PTR record" 옵션을 체크하면 역방향 존이 존재할 경우 PTR 레코드가 자동으로 등록된다.</p>
+<h5 id="6-3-wins">6-3. WINS 서버</h5>
+<p>WINS(Windows Internet Naming Service)는 TCP/IP 초기 시절 컴퓨터 이름 인식을 위해 사용하던 프로토콜이다. 현재는 TCP/IP 기반으로 호스트명 연결이 가능하기 때문에 WINS 서버를 사용하는 환경은 거의 없다.</p>
+<h5 id="6-4-zone-transfer">6-4. Zone Transfer (존 전송)</h5>
+<p>주 서버와 보조 서버 간의 존 레코드 동기화 기능이다. 보조 서버의 IP를 추가하고 Allow Zone Transfer를 설정하면 자동으로 동기화가 이루어진다. 보조 서버가 없는 경우에는 설정할 필요가 없다.</p>
+<h4 id="7-dns-테스트">7. DNS 테스트</h4>
+<h5 id="7-1">7-1. 테스트 전 확인 사항</h5>
+<p>도메인으로 접속하기 전 IP 주소로 먼저 접속이 되는지 확인한다. IP로 접속이 안 되면 도메 인으로도 접속이 되지 않는다.</p>
+<p>⚠️ IP 접속이 확인된 이후에만 도메인 접속 테스트를 진행한다.</p>
+<h5 id="7-2-dns">7-2. 호스트 DNS 주소 변경</h5>
+<p>테스트를 위해 호스트 컴퓨터의 DNS 주소를 윈도우 서버 IP로 임시 변경한다.</p>
+<p>경로: 네트워크 및 인터넷 설정 열기 → 이더넷(또는 Wi-Fi) &gt; 어댑터 옵션 변경 → 사용 중인 어댑터 우클릭 &gt; 속성 → TCP/IP 버전4 &gt; 속성 → DNS 서버 주소를 윈도우 서버 IP로 변경 변경 후 브라우저에서 www.도메인명.com 을 입력하면 DNS 서버에 질의하여 해당 IP로 접속된다. 테스트 완료 후 DNS 주소를 원래대로 복원한다.</p>
+<hr /><div class="nav"><a href="ch16.html"><span class="lbl">이전</span>핵심키워드 · 리눅스 서버 (2/2)</a><a href="ch18.html"><span class="lbl">다음</span>핵심키워드 · 데이터베이스</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
 <script>

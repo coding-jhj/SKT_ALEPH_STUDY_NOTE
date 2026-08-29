@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>260818 Cisco Packet Tracer 실습 정리 · SKT ALEPH 학습 노트</title>
+<title>과정 개요 (이미지 슬라이드 판독본) · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -108,2292 +108,1202 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="cur" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="inchap"><a class="lv2" href="#1-전체-실습-흐름">1. 전체 실습 흐름</a><a class="lv2" href="#2-실습-토폴로지-핵심">2. 실습 토폴로지 핵심</a><a class="lv2" href="#3-cisco-cli-모드-구분">3. Cisco CLI 모드 구분</a><a class="lv3" href="#do를-붙이는-경우">do를 붙이는 경우</a><a class="lv2" href="#4-ospf-기본-구성">4. OSPF 기본 구성</a><a class="lv3" href="#ospf-시작">OSPF 시작</a><a class="lv3" href="#network-등록-예">Network 등록 예</a><a class="lv2" href="#5-area-0--multi-area--abr">5. Area 0 / Multi-Area / ABR</a><a class="lv3" href="#area-0">Area 0</a><a class="lv3" href="#abr">ABR</a><a class="lv3" href="#virtual-link">Virtual Link</a><a class="lv3" href="#single-area-주의">Single Area 주의</a><a class="lv2" href="#6-router-id">6. Router ID</a><a class="lv3" href="#처음-r3">처음 R3</a><a class="lv3" href="#loopback-생성">Loopback 생성</a><a class="lv3" href="#직접-지정">직접 지정</a><a class="lv4" href="#clear-ip-ospf-process와-삭제-차이">clear ip ospf process와 삭제 차이</a><a class="lv2" href="#7-ospf-neighbor">7. OSPF Neighbor</a><a class="lv3" href="#hello와-full의-관계">Hello와 FULL의 관계</a><a class="lv2" href="#8-point-to-point--broadcast--drbdr">8. Point-to-Point / Broadcast / DR·BDR</a><a class="lv3" href="#serial">Serial</a><a class="lv3" href="#ethernet">Ethernet</a><a class="lv2" href="#9-lsdb--lsa">9. LSDB / LSA</a><a class="lv3" href="#lsdb">LSDB</a><a class="lv3" href="#lsa">LSA</a><a class="lv2" href="#10-ospf-확인-명령어">10. OSPF 확인 명령어</a><a class="lv2" href="#11-라우팅-테이블-코드">11. 라우팅 테이블 코드</a><a class="lv2" href="#12-eigrp-100으로-전환">12. EIGRP 100으로 전환</a><a class="lv2" href="#13-redistribution이-필요한-이유">13. Redistribution이 필요한 이유</a><a class="lv2" href="#14-ospf--eigrp-재분배">14. OSPF → EIGRP 재분배</a><a class="lv2" href="#15-eigrp--ospf-재분배">15. EIGRP → OSPF 재분배</a><a class="lv2" href="#16-경계-네트워크-중복-광고-주의">16. 경계 네트워크 중복 광고 주의</a><a class="lv2" href="#17-redistribution-확인-결과">17. Redistribution 확인 결과</a><a class="lv2" href="#18-redistribution-설계-주의">18. Redistribution 설계 주의</a><a class="lv2" href="#19-acl-기본-개념">19. ACL 기본 개념</a><a class="lv3" href="#standard-acl">Standard ACL</a><a class="lv3" href="#extended-acl">Extended ACL</a><a class="lv2" href="#20-acl-설계-원칙">20. ACL 설계 원칙</a><a class="lv2" href="#21-numbered-standard-acl-실습">21. Numbered Standard ACL 실습</a><a class="lv2" href="#22-named-standard-acl">22. Named Standard ACL</a><a class="lv2" href="#23-extended-acl-100--icmp-필터링">23. Extended ACL 100 — ICMP 필터링</a><a class="lv3" href="#icmp-규칙">ICMP 규칙</a><a class="lv2" href="#24-permit-ip-any-any-아래의-규칙-문제">24. permit ip any any 아래의 규칙 문제</a><a class="lv2" href="#25-named-extended-acl과-포트-조건">25. Named Extended ACL과 포트 조건</a><a class="lv2" href="#26-tcp-포트-연산자">26. TCP 포트 연산자</a><a class="lv2" href="#27-acl-실전-문제">27. ACL 실전 문제</a><a class="lv4" href="#왜-ping은-가능한가">왜 Ping은 가능한가?</a><a class="lv2" href="#28-acl-번호는-라우터마다-독립적">28. ACL 번호는 라우터마다 독립적</a><a class="lv2" href="#29-acl이-맞는데-web-차단이-안-된-원인">29. ACL이 맞는데 Web 차단이 안 된 원인</a><a class="lv2" href="#30-19216820034가-연결된-인터페이스-찾기">30. 192.168.200.34가 연결된 인터페이스 찾기</a><a class="lv2" href="#31-acl-100을-gi0030-outbound에-적용">31. ACL 100을 Gi0/0.30 outbound에 적용</a><a class="lv4" href="#왜-out인가">왜 out인가?</a><a class="lv2" href="#32-acl-실전-테스트-예상-결과">32. ACL 실전 테스트 예상 결과</a><a class="lv2" href="#33-packet-tracer-ftp-서버-설정과-테스트">33. Packet Tracer FTP 서버 설정과 테스트</a><a class="lv2" href="#34-nat-기본-개념">34. NAT 기본 개념</a><a class="lv2" href="#35-nat-pool-생성">35. NAT Pool 생성</a><a class="lv2" href="#36-nat-변환-대상-acl">36. NAT 변환 대상 ACL</a><a class="lv2" href="#37-acl-10과-nat-pool-연결">37. ACL 10과 NAT Pool 연결</a><a class="lv2" href="#38-nat는-아직-인터페이스-지정이-필요함">38. NAT는 아직 인터페이스 지정이 필요함</a><a class="lv2" href="#39-dynamic-nat-동작-예시">39. Dynamic NAT 동작 예시</a><a class="lv2" href="#40-nat-확인-명령">40. NAT 확인 명령</a><a class="lv3" href="#show-ip-nat-translations">show ip nat translations</a><a class="lv3" href="#show-ip-nat-statistics">show ip nat statistics</a><a class="lv2" href="#41-nat-실습에서-주의할-점">41. NAT 실습에서 주의할 점</a><a class="lv2" href="#42-문제-발생-시-점검-순서">42. 문제 발생 시 점검 순서</a><a class="lv3" href="#routing-문제">Routing 문제</a><a class="lv3" href="#acl-문제">ACL 문제</a><a class="lv3" href="#ftp-문제">FTP 문제</a><a class="lv3" href="#nat-문제">NAT 문제</a><a class="lv2" href="#43-핵심-명령어-치트시트">43. 핵심 명령어 치트시트</a><a class="lv3" href="#ospf">OSPF</a><a class="lv3" href="#eigrp">EIGRP</a><a class="lv3" href="#redistribution">Redistribution</a><a class="lv3" href="#standard-acl-2">Standard ACL</a><a class="lv3" href="#extended-acl-2">Extended ACL</a><a class="lv3" href="#named-acl">Named ACL</a><a class="lv3" href="#nat">NAT</a><a class="lv2" href="#44-시험실습-전에-반드시-구분할-것">44. 시험·실습 전에 반드시 구분할 것</a><a class="lv2" href="#45-최종-기억-흐름">45. 최종 기억 흐름</a><a class="lv3" href="#nat-실습-추가--insideoutside-지정-dynamic-nat-확인-static-nat">NAT 실습 추가 — Inside/Outside 지정, Dynamic NAT 확인, Static NAT</a><a class="lv4" href="#1-nat-inside--outside-인터페이스-지정">1. NAT Inside / Outside 인터페이스 지정</a><a class="lv4" href="#2-show-ip-nat-statistics">2. show ip nat statistics</a><a class="lv4" href="#3-dynamic-nat이-실제로-동작한-결과">3. Dynamic NAT이 실제로 동작한 결과</a><a class="lv4" href="#4-nat-용어-4가지">4. NAT 용어 4가지</a><a class="lv4" href="#5-dynamic-nat-전체-설정-구조">5. Dynamic NAT 전체 설정 구조</a><a class="lv4" href="#6-static-nat-설정">6. Static NAT 설정</a><a class="lv4" href="#7-static-nat-직후-translation-table">7. Static NAT 직후 Translation Table</a><a class="lv4" href="#8-static-nat-이후-실제-ping-트래픽">8. Static NAT 이후 실제 Ping 트래픽</a><a class="lv4" href="#9-dynamic-nat과-static-nat-비교">9. Dynamic NAT과 Static NAT 비교</a><a class="lv4" href="#10-show-ip-nat-statistics와-show-ip-nat-translations-차이">10. show ip nat statistics와 show ip nat translations 차이</a><a class="lv4" href="#11-이번-nat-실습에서-확인한-전체-흐름">11. 이번 NAT 실습에서 확인한 전체 흐름</a><a class="lv4" href="#12-nat-점검-순서">12. NAT 점검 순서</a><a class="lv4" href="#13-nat에서-특히-주의할-점">13. NAT에서 특히 주의할 점</a><a class="lv4" href="#14-nat-한-문장-복습">14. NAT 한 문장 복습</a><a class="lv2" href="#gt-현재-실제로-만들어진-nat-주소-변환-테이블을-확인한다">&amp;gt; 현재 실제로 만들어진 NAT 주소 변환 테이블을 확인한다.</a><a class="lv3" href="#acl-핵심-원칙-요약">ACL 핵심 원칙 요약</a><a class="lv4" href="#분류-기준">분류 기준</a><a class="lv4" href="#acl-검사-순서">ACL 검사 순서</a><a class="lv4" href="#implicit-deny">Implicit Deny</a><a class="lv3" href="#nat-statistics-추가-확인">NAT Statistics 추가 확인</a><a class="lv4" href="#total-translations-1">Total translations: 1</a><a class="lv4" href="#왜-dynamic-nat은-0인가">왜 Dynamic NAT은 0인가?</a><a class="lv4" href="#hits-4">Hits: 4</a><a class="lv4" href="#misses-32">Misses: 32</a><a class="lv4" href="#expired-translations-24">Expired translations: 24</a><a class="lv4" href="#allocated-0-0">allocated 0 (0%)</a><a class="lv3" href="#현재-nat-상태-한눈에-보기">현재 NAT 상태 한눈에 보기</a><a class="lv3" href="#nat-statistics-읽는-순서">NAT Statistics 읽는 순서</a><a class="lv2" href="#vpn-기초-정리">VPN 기초 정리</a><a class="lv3" href="#1-vpn이란">1. VPN이란?</a><a class="lv3" href="#2-vpn의-대표적인-두-가지-형태">2. VPN의 대표적인 두 가지 형태</a><a class="lv3" href="#3-site-to-site-vpn">3. Site-to-Site VPN</a><a class="lv4" href="#주로-사용하는-상황">주로 사용하는 상황</a><a class="lv3" href="#4-remote-access-vpn">4. Remote Access VPN</a><a class="lv3" href="#5-site-to-site와-remote-access-비교">5. Site-to-Site와 Remote Access 비교</a><a class="lv3" href="#6-vpn-tunnel">6. VPN Tunnel</a><a class="lv3" href="#7-vpn에서-자주-사용하는-기술">7. VPN에서 자주 사용하는 기술</a><a class="lv4" href="#ipsec">IPsec</a><a class="lv4" href="#openvpn">OpenVPN</a><a class="lv4" href="#wireguard">WireGuard</a><a class="lv3" href="#8-pfsense">8. pfSense</a><a class="lv3" href="#9-utn-필기-확인--utm일-가능성이-높음">9. utn 필기 확인 — UTM일 가능성이 높음</a><a class="lv3" href="#10-pfsense와-utm의-관계를-이해하는-방법">10. pfSense와 UTM의 관계를 이해하는 방법</a><a class="lv3" href="#11-vpn-전체-그림">11. VPN 전체 그림</a><a class="lv3" href="#12-한-문장-복습">12. 한 문장 복습</a><a class="lv4" href="#vpn">VPN</a><a class="lv4" href="#site-to-site-vpn">Site-to-Site VPN</a><a class="lv4" href="#remote-access-vpn">Remote Access VPN</a><a class="lv4" href="#utm">UTM</a><a class="lv4" href="#pfsense">pfSense</a></div><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="cur" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="inchap"><a class="lv3" href="#1-it-인프라의-구성-요소">1. IT 인프라의 구성 요소</a><a class="lv3" href="#2-정보보호관리체계isms-p와-이-과정의-범위">2. 정보보호관리체계(ISMS-P)와 이 과정의 범위</a><a class="lv3" href="#3-osi-7계층-iso-osi-표준-모델">3. OSI 7계층 (ISO-OSI 표준 모델)</a><a class="lv3" href="#4-osi-모델과-tcpip-모델-대응">4. OSI 모델과 TCP/IP 모델 대응</a><a class="lv3" href="#5-ip-주소-체계">5. IP 주소 체계</a><a class="lv3" href="#6-iso-통신망-관리-모델-fcaps">6. ISO 통신망 관리 모델 (FCAPS)</a><a class="lv3" href="#7-시스코-장비-모드">7. 시스코 장비 모드</a><a class="lv3" href="#8-네트워크-실습--기본-설정-명령어">8. 네트워크 실습 — 기본 설정 명령어</a><a class="lv3" href="#9-스위치--vlan-설정">9. 스위치 — VLAN 설정</a><a class="lv3" href="#10-라우팅-프로토콜-비교">10. 라우팅 프로토콜 비교</a><a class="lv3" href="#11-스태틱-라우팅">11. 스태틱 라우팅</a><a class="lv3" href="#12-acl--표준">12. ACL — 표준</a><a class="lv3" href="#13-acl--확장">13. ACL — 확장</a><a class="lv3" href="#14-nat--동적dynamic">14. NAT — 동적(Dynamic)</a><a class="lv3" href="#15-nat--정적static">15. NAT — 정적(Static)</a><a class="lv3" href="#16-vpn-종류">16. VPN 종류</a><a class="lv3" href="#17-시스템-실습-범위">17. 시스템 실습 범위</a><a class="lv3" href="#18-리눅스-파일과-디렉터리-구조">18. 리눅스 파일과 디렉터리 구조</a><a class="lv3" href="#19-vi-편집기-명령-요약">19. vi 편집기 명령 요약</a><a class="lv3" href="#20-yum-도구-명령어">20. YUM 도구 명령어</a><a class="lv3" href="#21-다양한-서버-구축-및-설정-실습-대상">21. 다양한 서버 구축 및 설정 (실습 대상)</a><a class="lv3" href="#22-dns-zone-파일-설정">22. DNS ZONE 파일 설정</a><a class="lv3" href="#23-syslog-facility">23. Syslog Facility</a><a class="lv3" href="#24-syslog-priority-level">24. Syslog Priority Level</a><a class="lv3" href="#25-클라우드-서비스-모델">25. 클라우드 서비스 모델</a><a class="lv3" href="#26-퍼블릭-클라우드-vs-프라이빗-클라우드">26. 퍼블릭 클라우드 vs 프라이빗 클라우드</a><a class="lv3" href="#27-aws-주요-서비스">27. AWS 주요 서비스</a></div><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 명령어 색인</a><a class="" href="ch27.html">27. 용어집</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 03</div><h1>260818 Cisco Packet Tracer 실습 정리</h1><blockquote>
-<p>범위: OSPF · EIGRP · Redistribution · ACL · FTP 테스트 · NAT<br />
-목적: 수업 중 실제로 입력한 명령과 출력 결과를 기준으로, 중복을 줄이고 <strong>왜 쓰는지 / 어떻게 확인하는지 / 어디서 틀리기 쉬운지</strong>까지 한 문서에 정리</p>
+<main><div class="chapter-no">CHAPTER 03</div><h1>과정 개요 (이미지 슬라이드 판독본)</h1><p><code>it인프라의이해_1.pdf</code>, <code>it인프라의이해_2.pdf</code>, <code>it인프라의 이해_３_1.pdf</code>,
+<code>it인프라의 이해_３_２.pdf</code>, <code>kload.pdf</code>, <code>8.27보강내용.pdf</code> — 강사 박남훈.</p>
+<p>이 여섯 파일은 <strong>텍스트 레이어가 없는 이미지 슬라이드</strong>입니다(추출 결과 99~431자).
+페이지를 이미지로 렌더링해 눈으로 읽고 옮겼습니다. 표와 다이어그램은 구조를 살려
+표·목록으로 바꿨고, 슬라이드에 없는 내용은 넣지 않았습니다.</p>
+<hr />
+<h3 id="1-it-인프라의-구성-요소">1. IT 인프라의 구성 요소</h3>
+<p>IT Infrastructure Components — 다섯 축입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hardware</td>
+<td>물리 장비</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>운영체제·애플리케이션</td>
+</tr>
+<tr>
+<td>Networks</td>
+<td>연결</td>
+</tr>
+<tr>
+<td>Data Centers</td>
+<td>설치·운영 공간</td>
+</tr>
+<tr>
+<td>Cloud Services</td>
+<td>클라우드</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2-정보보호관리체계isms-p와-이-과정의-범위">2. 정보보호관리체계(ISMS-P)와 이 과정의 범위</h3>
+<p><strong>정보보안의 3요소: 기밀성 / 무결성 / 가용성</strong></p>
+<p>보안은 세 축으로 나뉩니다.</p>
+<ul>
+<li><strong>물리적 보안</strong></li>
+<li><strong>관리적 보안</strong></li>
+<li><strong>기술적 보안</strong> ← 이 과정이 다루는 부분</li>
+</ul>
+<p>기술적 보안 안에서 배우는 세 갈래입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>분야</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>네트워크 보안</strong></td>
+<td>스위칭 / 라우팅 / 접근제어정책 등<br>VPN / NAT / IDS(IPS) / NMS<br>Firewall / DDoS / 프로젝트 등</td>
+</tr>
+<tr>
+<td><strong>시스템 보안</strong></td>
+<td>다양한 서버 구축 및 관리(보안) 설정<br>BoF / Log 관리 / 쉘 스크립트 / 프로젝트 등</td>
+</tr>
+<tr>
+<td><strong>웹 보안</strong></td>
+<td>웹 공격 탐지 및 로그 관리<br>모의해킹 / CTF / 워게임 / OWASP<br>모의해킹 포트폴리오 작성 및 발표</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>이 표가 커리큘럼 전체의 뼈대입니다. 「커리큘럼 지도」의 부 구분과 그대로 대응합니다.</p>
 </blockquote>
-<hr />
-<h2 id="1-전체-실습-흐름">1. 전체 실습 흐름</h2>
-<div class="codehilite"><pre><span></span><code>기존 EIGRP 제거
-    ↓
-OSPF 구성
-    ↓
-Area / Router ID / Neighbor / LSDB 확인
-    ↓
-Loopback과 Router ID 변경 실습
-    ↓
-EIGRP 100 + OSPF 1 동시 운용
-    ↓
-EIGRP ↔ OSPF Redistribution
-    ↓
-라우팅 테이블에서 O / O E2 확인
-    ↓
-Standard ACL
-    ↓
-Named ACL
-    ↓
-Extended ACL
-    ↓
-FTP / Web / Ping 정책 테스트
-    ↓
-NAT Pool + ACL을 이용한 Dynamic NAT 구성 시작
+<h3 id="3-osi-7계층-iso-osi-표준-모델">3. OSI 7계층 (ISO-OSI 표준 모델)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>OSI 7 Layer</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application (응용-7계층)</td>
+<td>사용자 인터페이스 제공 (사용자층의 인터넷 서비스 지원 등)</td>
+</tr>
+<tr>
+<td>Presentation (표현-6계층)</td>
+<td>데이터의 의미와 표현 방법 (암호화, 압축 등)</td>
+</tr>
+<tr>
+<td>Session (세션-5계층)</td>
+<td>통신 연결 관리 (토큰 제어, 동기화 등)</td>
+</tr>
+<tr>
+<td>Transport (전송-4계층)</td>
+<td>단대단(End to End) 통신 기능 (흐름 제어 등)</td>
+</tr>
+<tr>
+<td>Network (네트워크-3계층)</td>
+<td>라우팅 문제 해결 (최적 경로 설정, 혼잡 제어 등)</td>
+</tr>
+<tr>
+<td>Data Link (데이터링크-2계층)</td>
+<td>물리적 전송 오류 해결 (전송 기능, 흐름 제어 등)</td>
+</tr>
+<tr>
+<td>Physical (물리-1계층)</td>
+<td>전송 매체의 물리적 인터페이스 사항 (데이터의 전송 속도, 클록 동기화, 물리적 연결 형태 등)</td>
+</tr>
+</tbody>
+</table></div>
+<p>계층 묶음과 데이터 흐름:</p>
+<ul>
+<li><strong>Upper Layer (사용자 지원)</strong> — 7·6·5계층</li>
+<li><strong>Transport Layer (전송)</strong> — 4계층</li>
+<li><strong>Lower Layer (네트워크 지원)</strong> — 3·2·1계층</li>
+</ul>
+<p>보내는 쪽은 위에서 아래로 내려가며 <strong>Encapsulation(캡슐화)</strong>, 받는 쪽은 아래에서 위로
+올라가며 <strong>De-encapsulation(역 캡슐화)</strong> 합니다. 물리 구간(Physical Link)에서 실제로 오갑니다.</p>
+<h3 id="4-osi-모델과-tcpip-모델-대응">4. OSI 모델과 TCP/IP 모델 대응</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>OSI Model</th>
+<th>데이터 표현</th>
+<th>TCP/IP Model</th>
+<th>Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application / Presentation / Session</td>
+<td>Data</td>
+<td>Application</td>
+<td>FTP(21), TELNET(23), SMTP(25), HTTP(80), SNMP(169), ETC</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>Segment</td>
+<td>Transport</td>
+<td>TCP, UDP</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Packet</td>
+<td>Internet</td>
+<td>IP, ICMP, IGMP</td>
+</tr>
+<tr>
+<td>Data Link / Physical</td>
+<td>Frame / Bit</td>
+<td>Network Access (Link)</td>
+<td>Network Interface</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>슬라이드에 SNMP 포트가 <strong>169</strong>로 적혀 있습니다. 공식 표준은 <strong>161</strong>(SNMP), <strong>162</strong>(SNMP Trap)입니다.
+부록의 「원문과 공식 문서가 어긋나는 곳」을 함께 보십시오.</p>
+</blockquote>
+<h3 id="5-ip-주소-체계">5. IP 주소 체계</h3>
+<p>출처 표기: <code>https://한국인터넷정보센터.한국</code></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Network Class</th>
+<th>Start Octets</th>
+<th>Address Range(범위)</th>
+<th>Private(사설) Address</th>
+<th>특수 용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>1~126</td>
+<td>1.0.0.0~126.255.255.254</td>
+<td>10.0.0.0/8</td>
+<td>0.0.0.0/8 – 자체 네트워크</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128~191</td>
+<td>128.0.0.1~191.255.255.254</td>
+<td>172.16.0.0/12</td>
+<td>169.254.0.0/16 – 링크로컬(link local)</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192~223</td>
+<td>192.0.0.1~223.255.255.254</td>
+<td>192.168.0.0/16</td>
+<td>192.0.2.0/24 – 예제 등 문서에서 사용</td>
+</tr>
+<tr>
+<td>D</td>
+<td>224~239</td>
+<td>224.0.0.1~239.255.255.254</td>
+<td>Multicasting(멀티캐스팅)</td>
+<td>192.88.99.0/24 – 6to4 릴레이 에이전트</td>
+</tr>
+<tr>
+<td>E</td>
+<td>240~255</td>
+<td>240.0.0.1~255.255.255.254</td>
+<td>실험, 연구용 미래 사용 용도</td>
+<td>198.18.0.0/15 – 네트워크 장비 벤치마킹 테스트</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>127.0.0.0/8 – 루프백(Loopback)</strong> — A와 B 사이에 따로 표시되어 있습니다.</li>
+<li><strong>IPv4</strong> — 32bit / 2진수 표기를 10진수로 표현</li>
+<li><strong>IPv6</strong> — 128bit / 16진수 표기</li>
+</ul>
+<p>이어서 <strong>서브넷팅(Subnetting) 개념</strong>으로 넘어갑니다.</p>
+<h3 id="6-iso-통신망-관리-모델-fcaps">6. ISO 통신망 관리 모델 (FCAPS)</h3>
+<p>Network Management를 다섯 축으로 나눕니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>축</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fault</strong> (장애)</td>
+<td>경보 감시, 고장 위치의 측정 및 점검</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong> (구성)</td>
+<td>설비 및 설치 지원, 상태 제어</td>
+</tr>
+<tr>
+<td><strong>Account</strong> (계정)</td>
+<td>계정(과금) 정보의 수집/저장/제어 등</td>
+</tr>
+<tr>
+<td><strong>Performance</strong> (성능)</td>
+<td>성능 감시, 트래픽 관리, 품질관리, 통계관리</td>
+</tr>
+<tr>
+<td><strong>Security</strong> (보안)</td>
+<td>보안, 안전, 기밀 관리 등</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="7-시스코-장비-모드">7. 시스코 장비 모드</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Prompt</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User EXEC Mode (이용자 모드)</td>
+<td><code>Router&gt;enable</code></td>
+<td>제한적으로 이용이 가능한 모드</td>
+</tr>
+<tr>
+<td>Privileged EXEC Mode (관리자 모드)</td>
+<td><code>Router#configure terminal</code></td>
+<td>디버깅하고 테스터하기 위한 모드</td>
+</tr>
+<tr>
+<td>Global Configuration Mode (전역 설정 모드)</td>
+<td><code>Router(config)#</code></td>
+<td>전반적 설정이 가능한 모드</td>
+</tr>
+<tr>
+<td>Other Configuration Mode (하위 설정 모드)</td>
+<td><code>Router(config-?)#</code></td>
+<td>환경에 따른 세부 설정이 가능한 모드</td>
+</tr>
+<tr>
+<td>Setup Mode</td>
+<td><code>Router#setup</code></td>
+<td>초기 설정 시 사용 가능한 모드</td>
+</tr>
+<tr>
+<td>RXBoot Mode</td>
+<td><code>Router&lt;boot&gt;</code></td>
+<td>이미지(IOS) 파일 문제 및 PW 모를 경우 복구하기 위한 모드</td>
+</tr>
+<tr>
+<td>ROM Monitor Mode</td>
+<td><code>&gt;</code> or <code>rommon&gt;</code></td>
+<td>부팅 중 운영체제(IOS)를 로딩하지 못했을 때 수정하기 위한 모드</td>
+</tr>
+<tr>
+<td>Sensitive Help 기능 / Tab 키 활용</td>
+<td><code>#?</code> / <code>#line ?</code> / <code>#en</code> + Tab</td>
+<td>사용 가능한 명령어 모음 도움말, 명령어 완성 기능</td>
+</tr>
+</tbody>
+</table></div>
+<p>빠져나오는 방향은 <code>exit</code>(한 단계 위) 와 <code>end</code> 또는 <code>Ctrl+Z</code>(특권 모드로 한 번에)입니다.</p>
+<h3 id="8-네트워크-실습--기본-설정-명령어">8. 네트워크 실습 — 기본 설정 명령어</h3>
+<p>CISCO Packet Tracer 파일이 함께 제공되었습니다.</p>
+<div class="codehilite"><pre><span></span><code>Router&gt;enable
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname MyRouter                     ← 장비이름 설정
+MyRouter(config)#enable password 1234                ← enable 명령어 입력 시 비밀번호 적용
+MyRouter(config)#enable secret 12345                 ← secret 패스워드 우선 적용
+MyRouter(config)#service password-encryption         ← 설정된 모든 패스워드 암호화
+MyRouter(config)#banner motd #Welcome To MyRouter#   ← 부팅 시 메시지 표시
+MyRouter(config)#interface giga0/0
+MyRouter(config-if)#ip address 192.168.100.254 255.255.255.0
+MyRouter(config-if)#no shutdown                      ← 인터페이스에 IP주소 설정 및 활성화
+MyRouter(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+MyRouter(config-if)#exit
+MyRouter(config)#line console 0
+MyRouter(config-line)#login
+% Login disabled on line 0, until &#39;password&#39; is set
+MyRouter(config-line)#password 12345
+MyRouter(config-line)#exit
+MyRouter(config)#line vty 0 5                        ← 콘솔/원격접속 시 암호 설정
+MyRouter(config-line)#password 12345                 ← Aux 포트로 접속 시 -&gt; #line aux 0
+MyRouter(config-line)#login
+MyRouter(config-line)#
 </code></pre></div>
 
-<hr />
-<h2 id="2-실습-토폴로지-핵심">2. 실습 토폴로지 핵심</h2>
-<p>라우터 간 주요 네트워크:</p>
-<div class="codehilite"><pre><span></span><code>R1 ---------------- R2 ---------------- R3
-      1.1.1.0/24          2.2.2.0/24
-        Area 0               Area 0
+<p>읽을 점 두 가지입니다.</p>
+<ul>
+<li><code>enable password</code>와 <code>enable secret</code>을 둘 다 설정하면 <strong>secret이 우선</strong> 적용됩니다.</li>
+<li><code>login</code>을 먼저 치면 <code>% Login disabled ... until 'password' is set</code>이 나옵니다.
+  비밀번호를 정한 뒤에야 로그인이 켜집니다.</li>
+</ul>
+<h3 id="9-스위치--vlan-설정">9. 스위치 — VLAN 설정</h3>
+<div class="codehilite"><pre><span></span><code>S1(config)#vlan 10
+S1(config-vlan)#vlan 20
+S1(config-vlan)#interface FastEthernet 0/1
+S1(config-if)#switchport mode access
+S1(config-if)#switchport access vlan 10
+S1(config-if)#interface FastEthernet 0/2
+S1(config-if)#switchport mode access
+S1(config-if)#switchport access vlan 20
+
+S1(config-if)#interface FastEthernet 0/3
+S1(config-if)#switchport mode trunk
+S1(config-if)#switchport trunk encapsulation dot1q
 </code></pre></div>
 
-<p>주요 LAN:</p>
-<div class="codehilite"><pre><span></span><code>R1 쪽
-192.168.200.0/28
-192.168.200.16/28
-192.168.200.32/28
-
-R2 쪽
-172.16.100.0/24
-
-R3 쪽
-10.10.10.0/24
+<p>라우터 쪽에서 서브인터페이스로 VLAN 간 라우팅을 만듭니다 (router-on-a-stick).</p>
+<div class="codehilite"><pre><span></span><code>Router(config-if)#interface FastEthernet 0/0.10
+Router(config-subif)#encapsulation dot1q 10
+Router(config-subif)#ip address 10.1.10.254 255.255.255.0
+Router(config-subif)#exit
+Router(config)#interface FastEthernet 0/0.20
+Router(config-subif)#encapsulation dot1q 20
+Router(config-subif)#ip address 10.1.20.254 255.255.255.0
 </code></pre></div>
 
-<p>R3는 <code>2.2.2.0/24 = Area 0</code>, <code>10.10.10.0/24 = Area 1</code>에 참여했던 구성이므로 <strong>ABR(Area Border Router)</strong> 역할을 했습니다.</p>
-<hr />
-<h2 id="3-cisco-cli-모드-구분">3. Cisco CLI 모드 구분</h2>
-<p>프롬프트를 보고 현재 모드를 구분해야 합니다.</p>
-<div class="codehilite"><pre><span></span><code>Router&gt;                 User EXEC
-Router#                 Privileged EXEC
-Router(config)#         Global Configuration
-Router(config-if)#      Interface Configuration
-Router(config-router)#  Routing Protocol Configuration
+<h3 id="10-라우팅-프로토콜-비교">10. 라우팅 프로토콜 비교</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>RIPv1</th>
+<th>RIPv2</th>
+<th>IGRP</th>
+<th>EIGRP**</th>
+<th>OSPF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Distance vector</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>Link-state</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>Classful (auto route summ.)</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>Classless (VLSM support)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Proprietary</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>Scalability</td>
+<td>Small</td>
+<td>Small</td>
+<td>Med.</td>
+<td>Large</td>
+<td>Large</td>
+</tr>
+<tr>
+<td>Convergence time</td>
+<td>Slow</td>
+<td>Slow</td>
+<td>Slow</td>
+<td>Fast</td>
+<td>Fast</td>
+</tr>
+</tbody>
+</table></div>
+<p>** EIGRP is an advanced distance vector protocol</p>
+<h3 id="11-스태틱-라우팅">11. 스태틱 라우팅</h3>
+<p><strong>네트워크 관리자가 직접 목적지 별로 경로를 지정해 주는 것을 의미</strong>합니다.</p>
+<p><strong>장점</strong>
+- Router CPU상에 부담이 없으며, 대역폭을 낭비하는 일이 없다.
+- 보안성이 있다.</p>
+<p><strong>단점</strong>
+- Router가 어떻게 연결되어 있는지 정확히 알고 있어야 한다.
+- 한 회선이 추가될 경우 추가된 경로를 모든 Router들한테 설정을 해주어야 하며,
+  네트워크 규모가 커지면 설정 및 관리가 복잡하다.
+- 네트워크 변화를 제대로 반영하지 못한다.</p>
+<div class="codehilite"><pre><span></span><code>Router(config)# ip route [Destination-network] [Destination-mask]
+                         [next-hop-address | exitinterface] [Administrative-distance]
 </code></pre></div>
 
-<h3 id="do를-붙이는-경우"><code>do</code>를 붙이는 경우</h3>
-<p>설정 모드 안에서 EXEC 명령을 실행할 때 사용합니다.</p>
-<div class="codehilite"><pre><span></span><code>Router(config)#do show ip route
-Router(config-if)#do show access-list
-Router(config-router)#do show run
-</code></pre></div>
-
-<p>반면 이미 <code>Router#</code>라면:</p>
-<div class="codehilite"><pre><span></span><code>Router#show ip route
-</code></pre></div>
-
-<p>처럼 입력해야 합니다.</p>
-<p>잘못된 예:</p>
-<div class="codehilite"><pre><span></span><code>Router#do show ip route
-</code></pre></div>
-
-<p><code>Router#</code>에서는 <code>do</code>가 필요 없으므로 오류가 납니다.</p>
-<hr />
-<h2 id="4-ospf-기본-구성">4. OSPF 기본 구성</h2>
-<h3 id="ospf-시작">OSPF 시작</h3>
-<div class="codehilite"><pre><span></span><code>router ospf 1
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>인자</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Destination-network</td>
+<td>목적지 네트워크를 지정함</td>
+</tr>
+<tr>
+<td>Destination-mask</td>
+<td>목적지 서브넷 마스크</td>
+</tr>
+<tr>
+<td>Next-hop-address</td>
+<td>목적지로 갈 수 있는 경로를 지정함 (다음 Router의 Serial Interface의 IP Address)</td>
+</tr>
+<tr>
+<td>Exitinterface</td>
+<td>목적지에 도착을 하기 위해서 사용되는 Interface</td>
+</tr>
+<tr>
+<td>Administrative-distance</td>
+<td>거리의 값 지정</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dynamic Routing은 RIP / EIGRP / OSPF 등입니다.</p>
+<h3 id="12-acl--표준">12. ACL — 표준</h3>
+<p><strong>ACL(Access Control List)은 접속 제어 목록을 통해 패킷을 제어하기 위해 사용하는
+일반적인 라우터 보안 설정</strong>입니다.</p>
+<div class="codehilite"><pre><span></span><code>Router(config)#access-list access-list-number {permit | deny} source [mask]
 </code></pre></div>
 
 <ul>
-<li><code>1</code> = OSPF Process ID</li>
-<li>Process ID는 <strong>해당 라우터 내부에서 OSPF 프로세스를 구분하는 번호</strong></li>
-<li>이웃 라우터와 Process ID가 반드시 같을 필요는 없음</li>
+<li><strong>Access-list-number</strong> : Entry가 속할 list 번호 설정. <strong>1~99, 1300~1999</strong> 사이의 번호가 들어간다</li>
+<li><strong>permit | deny | remark</strong> 는 해당 Entry에 매치되면 취할 Action을 정의</li>
+<li><strong>Source</strong> 는 송신지 IP Address를 정의한다</li>
+<li><strong>mask</strong> 는 Wildcard mask를 사용하여 Address 필드의 어느 비트들이 일치되어야 하는지 설정한다</li>
 </ul>
-<h3 id="network-등록-예">Network 등록 예</h3>
-<div class="codehilite"><pre><span></span><code>router ospf 1
- network 2.2.2.0 0.0.0.255 area 0
- network 10.10.10.0 0.0.0.255 area 1
+<div class="codehilite"><pre><span></span><code>Router(config-if)#ip access-group access-list-number {in | out}
 </code></pre></div>
 
-<p>뜻:</p>
-<div class="codehilite"><pre><span></span><code>2.2.2.0/24에 해당하는 인터페이스 → Area 0에서 OSPF 동작
-10.10.10.0/24에 해당하는 인터페이스 → Area 1에서 OSPF 동작
+<ul>
+<li>List를 적용할 Interface에서 설정한다</li>
+<li>Inbound 또는 Outbound시 검사하도록 설정한다</li>
+<li><strong>Default = outbound</strong></li>
+<li>Interface에서 <code>no ip access-group access-list-number</code> 명령을 사용하여 적용된 Access-list를 제거한다</li>
+</ul>
+<h3 id="13-acl--확장">13. ACL — 확장</h3>
+<div class="codehilite"><pre><span></span><code>Router(config)#access-list access-list-number
+  {permit | deny} protocol source source-wildcard [operator port]
+  destination destination-wildcard [operator port] [established] [log]
 </code></pre></div>
 
-<p><code>network</code> 명령은 IP 주소를 새로 만드는 명령이 아니라, <strong>어떤 인터페이스에서 OSPF를 활성화하고 그 네트워크를 광고할지 결정</strong>합니다.</p>
-<hr />
-<h2 id="5-area-0--multi-area--abr">5. Area 0 / Multi-Area / ABR</h2>
-<h3 id="area-0">Area 0</h3>
-<div class="codehilite"><pre><span></span><code>Area 0 = Backbone Area
+<ul>
+<li><strong>Access-list-number</strong> : Entry가 속할 list 번호 설정. <strong>100~199, 2000~2699</strong> 사이의 번호가 들어간다</li>
+<li><strong>permit | deny | remark</strong> 는 해당 Entry에 매치되면 취할 Action을 정의</li>
+<li><strong>Source와 Destination</strong> 은 송수신지 IP Address를 정의한다</li>
+<li><strong>mask</strong> 는 Wildcard mask를 사용하여 Address 필드의 어느 비트들이 일치되어야 하는지 설정한다</li>
+<li><strong>Operator port</strong> 는 lt(less then), gt(greater than), eq(equal to), neq(not equal to)와 Protocol Port번호를 명시한다</li>
+<li><strong>established</strong> 는 Inbound TCP에 대해서만 사용된다</li>
+<li><strong>log</strong> 는 Console로 log Message를 보낸다</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>Router(config-if)#ip access-group access-list-number {in | out}
 </code></pre></div>
 
-<p>OSPF Multi-Area에서는 다른 Area들이 Backbone Area 0과 정상적으로 연결되는 구조가 기본입니다.</p>
-<h3 id="abr">ABR</h3>
-<div class="codehilite"><pre><span></span><code>ABR = Area Border Router
+<h3 id="14-nat--동적dynamic">14. NAT — 동적(Dynamic)</h3>
+<p><strong>① IP 변환에 사용할 전역 주소풀을 설정한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config)#ip nat pool name start-ip end-ip {netmask Netmask | prefix-length Prefix-length}
 </code></pre></div>
 
-<p>두 개 이상의 Area를 연결하는 라우터입니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>R3
-2.2.2.0/24    → Area 0
-10.10.10.0/24 → Area 1
+<p><strong>② 내부에서 IP변환을 허용할 주소를 Standard Access-list로 정의한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config)#access-list number permit source-address [wildcard-mask]
 </code></pre></div>
 
-<p>따라서 R3는 ABR입니다.</p>
-<h3 id="virtual-link">Virtual Link</h3>
-<p>Area 0과 정상적인 연속성을 확보하기 어려운 특수한 상황에서는 <strong>Virtual Link</strong>를 이용해 논리적으로 Backbone 연결을 구성할 수 있습니다.</p>
-<p>초보 단계에서는 다음 정도로 기억하면 됩니다.</p>
-<div class="codehilite"><pre><span></span><code>정상 설계 → Area 0 중심으로 구성
-예외 상황 → Virtual Link 고려
+<p><strong>③ 동적 변환을 수립하기 위한 NAT 설정을 한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config)#ip nat inside source list Access-list-number pool name [overload]
 </code></pre></div>
 
-<h3 id="single-area-주의">Single Area 주의</h3>
-<p>Single-Area OSPF에서 Area 0을 쓰는 것이 일반적이고 권장되지만, <strong>프로토콜상 반드시 Area 번호가 0이어야만 OSPF가 동작하는 것은 아닙니다.</strong></p>
-<hr />
-<h2 id="6-router-id">6. Router ID</h2>
-<p>Router ID는 OSPF에서 라우터를 식별하는 값입니다.</p>
-<p>선택 우선순위:</p>
-<div class="codehilite"><pre><span></span><code>1. router-id로 직접 지정
-2. Loopback 인터페이스 중 가장 높은 IP
-3. 활성 일반 인터페이스 중 가장 높은 IP
+<p><strong>④ 각 인터페이스로 이동 후 내부와 외부를 각각 설정한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config-if)#ip nat inside
+Router(config-if)#ip nat outside
 </code></pre></div>
 
-<h3 id="처음-r3">처음 R3</h3>
-<div class="codehilite"><pre><span></span><code>Serial0/3/1        = 2.2.2.2
-GigabitEthernet0/0 = 10.10.10.1
+<p><code>overload</code>를 붙이면 포트까지 써서 공인 주소 하나를 여러 사설 주소가 공유합니다(PAT).</p>
+<h3 id="15-nat--정적static">15. NAT — 정적(Static)</h3>
+<p>내부 서버(<code>192.168.100.5/24</code>)를 공인 주소(<code>210.123.94.10</code>)에 고정으로 매핑하는 구성입니다.
+내부 스위치 — 라우터 E0(내부) / S0(외부) — ISP 로 이어집니다.</p>
+<p><strong>정적 변환을 수립하기 위한 NAT 설정을 한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config)#ip nat inside source Static local-ip global-ip
 </code></pre></div>
 
-<p>Loopback과 직접 지정된 Router ID가 없었으므로:</p>
-<div class="codehilite"><pre><span></span><code>Router ID = 10.10.10.1
+<p><strong>각 인터페이스로 이동 후 내부와 외부를 각각 설정한다</strong></p>
+<div class="codehilite"><pre><span></span><code>Router(config-if)#ip nat inside
+Router(config-if)#ip nat outside
 </code></pre></div>
 
-<h3 id="loopback-생성">Loopback 생성</h3>
-<div class="codehilite"><pre><span></span><code>interface loopback 0
- ip address 5.5.5.5 255.255.255.0
-</code></pre></div>
-
-<p>OSPF 프로세스를 재시작한 뒤 Loopback이 Router ID 후보로 우선됩니다.</p>
-<div class="codehilite"><pre><span></span><code>Router ID = 5.5.5.5
-</code></pre></div>
-
-<h3 id="직접-지정">직접 지정</h3>
-<div class="codehilite"><pre><span></span><code>router ospf 1
- router-id 3.3.3.3
-</code></pre></div>
-
-<p>현재 실행 중인 OSPF에 적용하려면:</p>
-<div class="codehilite"><pre><span></span><code>clear ip ospf process
-</code></pre></div>
-
-<p>최종:</p>
-<div class="codehilite"><pre><span></span><code>Router ID = 3.3.3.3
-</code></pre></div>
-
-<h4 id="clear-ip-ospf-process와-삭제-차이"><code>clear ip ospf process</code>와 삭제 차이</h4>
-<div class="codehilite"><pre><span></span><code>clear ip ospf process
-</code></pre></div>
-
-<p>→ 설정 유지, OSPF 프로세스 재시작</p>
-<div class="codehilite"><pre><span></span><code>no router ospf 1
-</code></pre></div>
-
-<p>→ OSPF 1 설정 자체 삭제</p>
-<hr />
-<h2 id="7-ospf-neighbor">7. OSPF Neighbor</h2>
-<p>확인:</p>
-<div class="codehilite"><pre><span></span><code>show ip ospf neighbor
-</code></pre></div>
-
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>Neighbor ID     Pri  State    Address    Interface
-172.16.100.1      0  FULL/-   2.2.2.1    Serial0/3/1
-</code></pre></div>
-
-<p>해석:</p>
-<div class="codehilite"><pre><span></span><code>Neighbor ID = 상대 라우터의 Router ID
-Address     = 실제 연결된 상대 인터페이스 IP
-FULL        = 필요한 OSPF 정보 동기화 완료
-</code></pre></div>
-
-<p>중요:</p>
-<div class="codehilite"><pre><span></span><code>Neighbor ID 172.16.100.1 ≠ Serial IP 2.2.2.1
-</code></pre></div>
-
-<h3 id="hello와-full의-관계">Hello와 FULL의 관계</h3>
-<p>잘못 기억하기 쉬운 표현:</p>
-<div class="codehilite"><pre><span></span><code>FULL이 되어야 Hello를 주고받는다.  X
-</code></pre></div>
-
-<p>정확한 흐름:</p>
-<div class="codehilite"><pre><span></span><code>Hello 패킷 교환
-    ↓
-Neighbor 발견
-    ↓
-Adjacency 형성 과정
-    ↓
-LSDB 동기화
-    ↓
-FULL
-</code></pre></div>
-
-<p>즉 <strong>Hello가 먼저</strong>입니다.</p>
-<p>대표 상태 흐름:</p>
-<div class="codehilite"><pre><span></span><code>DOWN → INIT → 2-WAY → EXSTART → EXCHANGE → LOADING → FULL
-</code></pre></div>
-
-<p>로그 예:</p>
-<div class="codehilite"><pre><span></span><code>%OSPF-5-ADJCHG: Process 1, Nbr 172.16.100.1 on Serial0/3/1 from LOADING to FULL, Loading Done
-</code></pre></div>
-
-<p>→ Neighbor 관계가 정상적으로 완성된 상태입니다.</p>
-<hr />
-<h2 id="8-point-to-point--broadcast--drbdr">8. Point-to-Point / Broadcast / DR·BDR</h2>
-<h3 id="serial">Serial</h3>
-<div class="codehilite"><pre><span></span><code>Network Type = POINT-TO-POINT
-</code></pre></div>
-
-<p>두 라우터가 1:1로 연결되는 구조이므로 일반적으로 DR/BDR 선출이 필요 없습니다.</p>
-<h3 id="ethernet">Ethernet</h3>
-<div class="codehilite"><pre><span></span><code>Network Type = BROADCAST
-</code></pre></div>
-
-<p>여러 OSPF 라우터가 같은 네트워크에 있을 수 있으므로 DR/BDR 개념이 있습니다.</p>
-<div class="codehilite"><pre><span></span><code>DR  = Designated Router
-BDR = Backup Designated Router
-</code></pre></div>
-
-<p>Router ID와 DR은 다른 개념입니다.</p>
-<div class="codehilite"><pre><span></span><code>Router ID = 라우터 자체의 OSPF 식별자
-DR        = 특정 Broadcast 네트워크에서의 대표 역할
-</code></pre></div>
-
-<hr />
-<h2 id="9-lsdb--lsa">9. LSDB / LSA</h2>
-<h3 id="lsdb">LSDB</h3>
-<div class="codehilite"><pre><span></span><code>LSDB = Link-State Database
-</code></pre></div>
-
-<p>OSPF가 알고 있는 링크 상태 정보를 저장하는 데이터베이스입니다.</p>
-<p>확인:</p>
-<div class="codehilite"><pre><span></span><code>show ip ospf database
-</code></pre></div>
-
-<h3 id="lsa">LSA</h3>
-<div class="codehilite"><pre><span></span><code>LSA = Link-State Advertisement
-</code></pre></div>
-
-<p>라우터들이 서로 전달하는 링크 상태 광고입니다.</p>
-<p><code>ADV Router</code>는 <strong>Advertising Router</strong>, 즉 해당 LSA를 광고한 라우터의 Router ID입니다.</p>
-<hr />
-<h2 id="10-ospf-확인-명령어">10. OSPF 확인 명령어</h2>
-<div class="codehilite"><pre><span></span><code>show ip interface brief
-show ip protocols
-show ip ospf
-show ip ospf neighbor
-show ip ospf database
-show ip ospf interface
-show ip ospf border-routers
-show ip route
-</code></pre></div>
-
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>명령</th>
-<th>확인 내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>show ip interface brief</code></td>
-<td>IP, 인터페이스 up/down</td>
-</tr>
-<tr>
-<td><code>show ip protocols</code></td>
-<td>Process, Router ID, network, area</td>
-</tr>
-<tr>
-<td><code>show ip ospf</code></td>
-<td>OSPF 전체 상태, Area, ABR</td>
-</tr>
-<tr>
-<td><code>show ip ospf neighbor</code></td>
-<td>Neighbor, FULL</td>
-</tr>
-<tr>
-<td><code>show ip ospf database</code></td>
-<td>LSDB / LSA</td>
-</tr>
-<tr>
-<td><code>show ip ospf interface</code></td>
-<td>Area, Cost, Timer, Network Type</td>
-</tr>
-<tr>
-<td><code>show ip route</code></td>
-<td>실제 라우팅 테이블</td>
-</tr>
-</tbody>
-</table></div>
-<hr />
-<h2 id="11-라우팅-테이블-코드">11. 라우팅 테이블 코드</h2>
-<div class="codehilite"><pre><span></span><code>C    = Connected
-L    = Local
-D    = EIGRP
-D EX = EIGRP External
-O    = OSPF Intra-Area
-O IA = OSPF Inter-Area
-O E1 = OSPF External Type 1
-O E2 = OSPF External Type 2
-</code></pre></div>
-
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>O 172.16.100.0/24 [110/65] via 2.2.2.1
-</code></pre></div>
-
-<p>해석:</p>
-<div class="codehilite"><pre><span></span><code>O          → OSPF로 학습
-172.16...  → 목적지 네트워크
-110        → Administrative Distance
-65         → OSPF Cost
-2.2.2.1    → Next Hop
-</code></pre></div>
-
-<p>OSPF 기본 AD:</p>
-<div class="codehilite"><pre><span></span><code>110
-</code></pre></div>
-
-<p>Cost는 낮을수록 선호됩니다.</p>
-<hr />
-<h2 id="12-eigrp-100으로-전환">12. EIGRP 100으로 전환</h2>
-<p>OSPF를 제거한 뒤 EIGRP를 구성했던 단계:</p>
-<div class="codehilite"><pre><span></span><code>conf t
-no router ospf 1
-router eigrp 100
- network 2.2.2.0 0.0.0.255
- network 10.10.10.0 0.0.0.255
- no auto-summary
-</code></pre></div>
-
-<p>Loopback도 EIGRP에 포함:</p>
-<div class="codehilite"><pre><span></span><code>router eigrp 100
- network 5.5.5.0 0.0.0.255
-</code></pre></div>
-
-<hr />
-<h2 id="13-redistribution이-필요한-이유">13. Redistribution이 필요한 이유</h2>
-<p>서로 다른 Routing Protocol은 기본적으로 각자 배운 경로를 자동으로 공유하지 않습니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>EIGRP 영역 ── 경계 라우터 ── OSPF 영역
-</code></pre></div>
-
-<p>이때 경계 라우터에서 <strong>Redistribution(재분배)</strong>을 설정하여 한 프로토콜의 경로를 다른 프로토콜에 전달할 수 있습니다.</p>
-<hr />
-<h2 id="14-ospf--eigrp-재분배">14. OSPF → EIGRP 재분배</h2>
-<div class="codehilite"><pre><span></span><code>router eigrp 100
- redistribute ospf 1 metric 1544 2000 255 1 1500
-</code></pre></div>
-
-<p>EIGRP는 외부에서 받은 경로에 사용할 Seed Metric이 필요합니다.</p>
-<p>순서:</p>
-<div class="codehilite"><pre><span></span><code>1544 = Bandwidth (Kbit/s)
-2000 = Delay (10 microsecond 단위) → 20 ms
-255  = Reliability (255 = 100%)
-1    = Load
-1500 = MTU (bytes)
-</code></pre></div>
-
-<p>즉:</p>
-<div class="codehilite"><pre><span></span><code>redistribute ospf 1
-→ OSPF 1에서 학습한 경로를 EIGRP 100으로 가져온다.
-</code></pre></div>
-
-<p>주의: 해당 라우터에서 OSPF 1이 실제로 존재하고 경로를 가지고 있어야 의미가 있습니다.</p>
-<hr />
-<h2 id="15-eigrp--ospf-재분배">15. EIGRP → OSPF 재분배</h2>
-<p>OSPF를 다시 구성:</p>
-<div class="codehilite"><pre><span></span><code>router ospf 1
- redistribute eigrp 100 subnets
- network 2.2.2.0 0.0.0.255 area 0
-</code></pre></div>
-
-<p><code>subnets</code>:</p>
-<blockquote>
-<p>EIGRP에서 가져온 서브넷 경로까지 OSPF로 재분배하도록 지정</p>
-</blockquote>
-<p>기본적으로 OSPF로 재분배된 외부 경로는 <code>O E2</code>로 보일 수 있습니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>O E2 5.5.5.0/24     [110/20] via 2.2.2.2
-O E2 10.10.10.0/24 [110/20] via 2.2.2.2
-</code></pre></div>
-
-<hr />
-<h2 id="16-경계-네트워크-중복-광고-주의">16. 경계 네트워크 중복 광고 주의</h2>
-<p>수업에서 강조한 핵심:</p>
-<blockquote>
-<p>경계 라우터에서 같은 네트워크를 여러 Routing Protocol로 불필요하게 중복 광고하면 경로 선택이 복잡해질 수 있다.</p>
-</blockquote>
-<p>그래서 <code>2.2.2.0/24</code>를 EIGRP에서 제거:</p>
-<div class="codehilite"><pre><span></span><code>router eigrp 100
- no network 2.2.2.0 0.0.0.255
-</code></pre></div>
-
-<p>최종 개념:</p>
-<div class="codehilite"><pre><span></span><code>EIGRP 100
-  ├─ 10.10.10.0/24
-  └─ 5.5.5.0/24
-
-OSPF 1
-  └─ 2.2.2.0/24 Area 0
-
-EIGRP ↔ OSPF는 Redistribution으로 교환
-</code></pre></div>
-
-<p><code>no network</code>는 인터페이스 IP를 삭제하는 명령이 아닙니다.</p>
-<div class="codehilite"><pre><span></span><code>EIGRP 참여만 제거
-인터페이스 IP는 유지
-</code></pre></div>
-
-<hr />
-<h2 id="17-redistribution-확인-결과">17. Redistribution 확인 결과</h2>
-<p>R3에서:</p>
-<div class="codehilite"><pre><span></span><code>O 1.1.1.0/24 [110/128] via 2.2.2.1
-O 172.16.100.0/24 [110/65] via 2.2.2.1
-O 192.168.200.0/28 [110/129] via 2.2.2.1
-O 192.168.200.16/28 [110/129] via 2.2.2.1
-O 192.168.200.32/28 [110/129] via 2.2.2.1
-</code></pre></div>
-
-<p>→ OSPF 내부 경로로 학습됨.</p>
-<p>R2에서:</p>
-<div class="codehilite"><pre><span></span><code>O E2 5.5.5.0/24 [110/20] via 2.2.2.2
-O E2 10.10.10.0/24 [110/20] via 2.2.2.2
-</code></pre></div>
-
-<p>→ EIGRP에서 OSPF로 재분배된 외부 경로.</p>
-<p>Cost 예:</p>
-<div class="codehilite"><pre><span></span><code>R2 → 192.168.200.0/28 : 65
-R3 → 192.168.200.0/28 : 129
-</code></pre></div>
-
-<p>R3에서 Serial 링크 Cost 64가 추가되어:</p>
-<div class="codehilite"><pre><span></span><code>65 + 64 = 129
-</code></pre></div>
-
-<p>으로 볼 수 있습니다.</p>
-<hr />
-<h2 id="18-redistribution-설계-주의">18. Redistribution 설계 주의</h2>
-<p>양방향 재분배:</p>
-<div class="codehilite"><pre><span></span><code>EIGRP → OSPF
-OSPF  → EIGRP
-</code></pre></div>
-
-<p>를 동시에 사용할 수 있지만, 실제 네트워크에서는 잘못 설계하면 <strong>Route Feedback / Routing Loop / 비정상 경로 선호</strong> 문제가 생길 수 있습니다.</p>
-<p>따라서 실무에서는:</p>
-<div class="codehilite"><pre><span></span><code>경계 네트워크의 소유 프로토콜 명확화
-Route-map / Tag / Metric 제어
-필요한 경로만 재분배
-</code></pre></div>
-
-<p>등을 사용합니다.</p>
-<hr />
-<h2 id="19-acl-기본-개념">19. ACL 기본 개념</h2>
-<div class="codehilite"><pre><span></span><code>ACL = Access Control List
-</code></pre></div>
-
-<p>패킷을 조건에 따라 허용하거나 차단합니다.</p>
-<h3 id="standard-acl">Standard ACL</h3>
-<p>주요 판단 기준:</p>
-<div class="codehilite"><pre><span></span><code>출발지 IP 주소
-</code></pre></div>
-
-<p>번호 범위:</p>
-<div class="codehilite"><pre><span></span><code>1~99
-</code></pre></div>
-
-<h3 id="extended-acl">Extended ACL</h3>
-<p>판단할 수 있는 정보:</p>
-<div class="codehilite"><pre><span></span><code>출발지 IP
-목적지 IP
-프로토콜
-TCP/UDP 포트
-ICMP Type 등
-</code></pre></div>
-
-<p>번호 범위:</p>
-<div class="codehilite"><pre><span></span><code>100~199
-</code></pre></div>
-
-<hr />
-<h2 id="20-acl-설계-원칙">20. ACL 설계 원칙</h2>
+<h3 id="16-vpn-종류">16. VPN 종류</h3>
+<p>기업 네트워크에 안전하게 접속하는 방식은 크게 두 가지입니다.</p>
 <ol>
-<li><strong>기본 통신이 되는지 먼저 확인하고 ACL은 마지막에 적용</strong></li>
-<li>ACL은 위에서 아래로 검사</li>
-<li><strong>첫 번째 Match에서 검사 종료</strong></li>
-<li>구체적인 규칙을 위에 배치</li>
-<li>넓은 규칙을 아래에 배치</li>
-<li>마지막에는 보이지 않는 <code>implicit deny any</code>가 존재</li>
+<li><strong>Remote Access VPN</strong> — 개인이 회사망에 접속</li>
+<li><strong>Site-to-site VPN</strong> — 지사와 본사를 통째로 연결</li>
 </ol>
-<p>기본 배치 원칙:</p>
-<div class="codehilite"><pre><span></span><code>Standard ACL → 목적지 가까이
-Extended ACL → 출발지 가까이
-</code></pre></div>
-
-<p>다만 실습 목적에 따라 여러 정책을 한 ACL로 묶어 목적지 쪽 <code>out</code>에 적용할 수도 있습니다.</p>
-<hr />
-<h2 id="21-numbered-standard-acl-실습">21. Numbered Standard ACL 실습</h2>
-<p>처음 입력:</p>
-<div class="codehilite"><pre><span></span><code>access-list 10 deny 172.16.10.3 0.0.0.0
-</code></pre></div>
-
-<p>주소를 잘못 입력하여 삭제:</p>
-<div class="codehilite"><pre><span></span><code>no access-list 10 deny 172.16.10.3 0.0.0.0
-</code></pre></div>
-
-<p>올바른 규칙:</p>
-<div class="codehilite"><pre><span></span><code>access-list 10 deny 172.16.100.3 0.0.0.0
-access-list 10 permit any
-</code></pre></div>
-
-<p><code>0.0.0.0</code>은 모든 비트가 정확히 일치해야 하므로 단일 Host를 의미합니다.</p>
-<p>다음과 같은 표현도 가능합니다.</p>
-<div class="codehilite"><pre><span></span><code>deny host 172.16.100.3
-</code></pre></div>
-
-<p>인터페이스 적용 예:</p>
-<div class="codehilite"><pre><span></span><code>interface gi0/0
- ip access-group 10 out
-</code></pre></div>
-
-<p>확인:</p>
-<div class="codehilite"><pre><span></span><code>show access-list
-show ip access-list
-</code></pre></div>
-
-<p>출력:</p>
-<div class="codehilite"><pre><span></span><code>10 deny host 172.16.100.3 (36 match(es))
-20 permit any (4 match(es))
-</code></pre></div>
-
-<p>Match Counter는 해당 규칙에 실제로 일치한 패킷 수입니다.</p>
-<hr />
-<h2 id="22-named-standard-acl">22. Named Standard ACL</h2>
-<div class="codehilite"><pre><span></span><code>ip access-list standard test
- deny host 172.16.100.3
- permit any
-</code></pre></div>
-
-<p>인터페이스 적용:</p>
-<div class="codehilite"><pre><span></span><code>interface gi0/0
- ip access-group test out
-</code></pre></div>
-
-<p>Named ACL 삭제:</p>
-<div class="codehilite"><pre><span></span><code>no ip access-list standard test
-</code></pre></div>
-
-<p>인터페이스 적용 해제:</p>
-<div class="codehilite"><pre><span></span><code>interface gi0/0
- no ip access-group test out
-</code></pre></div>
-
-<p><strong>ACL 정의 삭제와 인터페이스 적용 해제는 별개</strong>입니다.</p>
-<hr />
-<h2 id="23-extended-acl-100--icmp-필터링">23. Extended ACL 100 — ICMP 필터링</h2>
-<p>기존 Standard ACL 10 삭제:</p>
-<div class="codehilite"><pre><span></span><code>conf t
-no access-list 10 deny host 172.16.100.3
-no access-list 10 permit any
-</code></pre></div>
-
-<p><code>Router#</code>에서 바로 <code>no access-list ...</code>를 입력하면 Global Configuration 명령이므로 오류가 납니다.</p>
-<h3 id="icmp-규칙">ICMP 규칙</h3>
-<div class="codehilite"><pre><span></span><code>access-list 100 deny icmp host 172.16.100.3 host 10.10.10.2 echo
-access-list 100 deny icmp host 172.16.100.3 host 10.10.10.2 echo-reply
-access-list 100 deny icmp host 172.16.100.4 host 10.10.10.3 echo
-access-list 100 deny icmp host 172.16.100.4 host 10.10.10.3 echo-reply
-access-list 100 permit ip any any
-</code></pre></div>
-
-<p>ICMP:</p>
-<div class="codehilite"><pre><span></span><code>echo       = Ping 요청
- echo-reply = Ping 응답
-</code></pre></div>
-
-<p>주의: 실제 Ping 왕복에서는 Echo Reply의 출발지/목적지가 요청과 반대 방향이므로, <code>echo-reply</code> 규칙을 만들 때는 방향을 확인해야 합니다.</p>
-<hr />
-<h2 id="24-permit-ip-any-any-아래의-규칙-문제">24. <code>permit ip any any</code> 아래의 규칙 문제</h2>
-<p>출력:</p>
-<div class="codehilite"><pre><span></span><code>50 permit ip any any
-60 deny icmp host 192.168.200.35 host 10.10.10.2 echo
-</code></pre></div>
-
-<p>이 구조에서는 60번 규칙이 사실상 적용되지 않습니다.</p>
-<p>이유:</p>
-<div class="codehilite"><pre><span></span><code>패킷
- ↓
-50 permit ip any any와 먼저 Match
- ↓
-허용 후 ACL 검사 종료
- ↓
-60번까지 내려가지 않음
-</code></pre></div>
-
-<p>따라서:</p>
-<div class="codehilite"><pre><span></span><code>구체적인 deny/permit
-        ↓
-permit ip any any
-</code></pre></div>
-
-<p>순서가 되어야 합니다.</p>
-<hr />
-<h2 id="25-named-extended-acl과-포트-조건">25. Named Extended ACL과 포트 조건</h2>
-<div class="codehilite"><pre><span></span><code>ip access-list extended test
- permit tcp host 192.168.200.35 host 10.10.10.2 eq www
- deny tcp 192.168.200.0 0.0.0.255 host 10.10.10.2 eq 80
-</code></pre></div>
-
-<p>첫 번째 규칙:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.35 한 대만 → 10.10.10.2:80 허용
-</code></pre></div>
-
-<p>두 번째 규칙:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.0/24의 나머지 Host → 10.10.10.2:80 차단
-</code></pre></div>
-
-<p><code>192.168.200.35</code>도 <code>/24</code> 범위에 포함되지만 더 구체적인 permit이 위에 있으므로 먼저 허용됩니다.</p>
-<hr />
-<h2 id="26-tcp-포트-연산자">26. TCP 포트 연산자</h2>
+<h3 id="17-시스템-실습-범위">17. 시스템 실습 범위</h3>
+<p><strong>Rocky Linux / Windows Server / Ubuntu Linux — 네트워크 환경 설정 후 다양한 서버 구축 실습</strong></p>
+<p>클라이언트가 정보 및 서비스를 요구하면 서버가 제공하는 구조이며, 서버 쪽에
+<strong>웹 / DB / FTP / DNS / ETC</strong> 를 올립니다. 리눅스 서버와 윈도우 서버를 함께 다룹니다.</p>
+<p>리눅스 쪽 학습 순서는 설치 → 기본 명령어 → 사용자 및 그룹 정책 → 서버 관리 → 서버 구축입니다.</p>
+<h3 id="18-리눅스-파일과-디렉터리-구조">18. 리눅스 파일과 디렉터리 구조</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>경로</th>
+<th>이름</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>루트</td>
+<td>최상위(루트) 디렉터리 (절대 경로를 표기할 때 이 디렉터리로부터 시작함)</td>
+</tr>
+<tr>
+<td><code>/bin</code></td>
+<td>바이너리</td>
+<td>이진파일(실행파일) / 기본적인 명령어가 저장된 디렉터리 (자주 사용하는 <code>mv</code>, <code>cp</code>, <code>rm</code> 등과 같은 명령어들이 여기에 존재함)</td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>부트</td>
+<td>리눅스의 부트로더(Boot loader)가 있는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>디브(디바이스)</td>
+<td>시스템 디바이스(device)파일을 저장하고 있는 디렉터리 (<code>/dev/sda</code>(하드디스크), <code>/dev/cdrom</code>(CD-ROM) 등과 같은 장치 파일들이 여기에 위치함)</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td></td>
+<td>설정파일들 두는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>홈</td>
+<td>사용자의 홈디렉터리 (사용자를 추가하면 사용자의 id와 동일한 디렉터리가 자동으로 생성)</td>
+</tr>
+<tr>
+<td><code>/lib</code></td>
+<td>립(라이브러리)</td>
+<td>커널이 필요로 하는 각종 라이브러리 파일, 커널 모듈파일 등이 존재하는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/media</code></td>
+<td>미디어</td>
+<td>DVD, CD-ROM, USB 등의 탈부착 가능한 장치들의 마운트 포인트로 사용하는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td>마운트</td>
+<td>탈부착 가능한 장치들에 대한 마운트 포인트로 사용하는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>옵트</td>
+<td>응용프로그램 패키지 설치 장소로 패키지 매니저가 자체적으로 설치 및 삭제를 수행함</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>프록(프로세스)</td>
+<td>'가상파일시스템'으로 현재 메모리에 존재하는 작업들이 파일 형태로 존재하는 곳</td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>루트</td>
+<td>관리자계정 root 사용자의 홈디렉터리</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>시스템 바이너리</td>
+<td>시스템 이진파일(실행파일) (<code>ifconfig</code>, <code>ethtool</code>, <code>halt</code>, <code>e2fsck</code>와 같은 시스템 명령어들을 저장하고 있는 디렉터리)</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>유저</td>
+<td>일반 사용자들이 사용하는 디렉터리</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>바</td>
+<td>시스템 운영 중 생성되었다가 삭제되는 데이터를 임시 저장하기 위한 공간으로 사용되는 디렉터리</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="19-vi-편집기-명령-요약">19. vi 편집기 명령 요약</h3>
+<p><strong>커서 이동</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td>한 칸 왼쪽으로 이동</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>한 줄 아래로 이동</td>
+</tr>
+<tr>
+<td><code>k</code></td>
+<td>한 줄 위로 이동</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>한 칸 오른쪽으로 이동</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>현재 줄의 맨 앞으로 이동</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>현재 줄의 맨 끝으로 이동</td>
+</tr>
+<tr>
+<td><code>Ctrl + F</code></td>
+<td>한 화면 아래로 이동</td>
+</tr>
+<tr>
+<td><code>Ctrl + B</code></td>
+<td>한 화면 위로 이동</td>
+</tr>
+<tr>
+<td><code>gg</code></td>
+<td>파일의 처음으로 이동</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>파일의 끝으로 이동</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>삽입 (입력 모드로 전환)</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td>커서 위치 앞에서 삽입</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>커서 위치 뒤에서 삽입</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>현재 줄의 앞에 삽입</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>현재 줄의 끝에 삽입</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>현재 줄 아래에 한 줄 열기</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>현재 줄 위에 한 줄 열기</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>편집 버퍼를 수정했던 마지막 명령을 취소</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>편집 버퍼를 수정했던 마지막 명령 반복</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>문자 삭제</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>커서가 있는 문자 삭제</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>커서의 왼쪽 문자 삭제</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>커서부터 줄의 끝까지 삭제</td>
+</tr>
+<tr>
+<td><code>dd</code></td>
+<td>현재 줄 전체 삭제</td>
+</tr>
+<tr>
+<td><code>dG</code></td>
+<td>커서부터 편집 버퍼의 끝까지 삭제</td>
+</tr>
+<tr>
+<td><code>d1G</code></td>
+<td>커서부터 편집 버퍼의 맨 앞까지 삭제</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>문자 복사·탐색</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>yy</code></td>
+<td>한 줄 복사</td>
+</tr>
+<tr>
+<td><code>5yy</code></td>
+<td>현재 커서부터 5줄 복사</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>현재 라인 밑에서부터 붙여넣기</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>전방 탐색</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>후방 탐색</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="20-yum-도구-명령어">20. YUM 도구 명령어</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
 <th>명령</th>
-<th>의미</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>eq</code></td>
-<td>같은 포트</td>
+<td><code>yum list</code></td>
+<td>설치된 패키지와 업데이트 가능한 패키지 보기</td>
 </tr>
 <tr>
-<td><code>gt</code></td>
-<td>초과</td>
+<td><code>yum list installed [패키지명]</code></td>
+<td>설치된 패키지 리스트 확인 (특정 패키지 설치 여부 확인)</td>
 </tr>
 <tr>
-<td><code>lt</code></td>
-<td>미만</td>
+<td><code>yum list update</code></td>
+<td>설치된 패키지 중 업데이트된 패키지 목록 확인</td>
 </tr>
 <tr>
-<td><code>neq</code></td>
-<td>같지 않음</td>
+<td><code>yum list available</code></td>
+<td>설치 가능한 패키지 목록 확인</td>
 </tr>
 <tr>
-<td><code>range</code></td>
-<td>시작~끝 범위, 양 끝 포함</td>
+<td><code>yum check-update</code></td>
+<td>업데이트 가능한 패키지 패키지 보기</td>
+</tr>
+<tr>
+<td><code>yum install -y [패키지명]</code></td>
+<td>패키지 설치</td>
+</tr>
+<tr>
+<td><code>yum update -y</code></td>
+<td>패키지 업데이트</td>
+</tr>
+<tr>
+<td><code>yum remove [패키지명]</code></td>
+<td>패키지 제거</td>
+</tr>
+<tr>
+<td><code>yum search [패키지명]</code></td>
+<td>패키지 검색</td>
+</tr>
+<tr>
+<td><code>yum info [패키지명]</code></td>
+<td>패키지 정보 알아보기</td>
+</tr>
+<tr>
+<td><code>yum grouplist</code></td>
+<td>그룹별 그룹별 패키지 설치 정보 확인</td>
+</tr>
+<tr>
+<td><code>yum -y groupinstall "Development Tools"</code></td>
+<td>이 그룹에 속한 모든 패키지 설치</td>
+</tr>
+<tr>
+<td><code>yum clean all</code></td>
+<td>yum 관련해서 저장된 정보 삭제</td>
 </tr>
 </tbody>
 </table></div>
-<p>주의:</p>
-<div class="codehilite"><pre><span></span><code>gt = 이상 X → 초과 O
-lt = 이하 X → 미만 O
-</code></pre></div>
-
-<p>대표 서비스:</p>
+<h3 id="21-다양한-서버-구축-및-설정-실습-대상">21. 다양한 서버 구축 및 설정 (실습 대상)</h3>
+<ul>
+<li><strong>WEB-DB</strong> (HTTP/HTTPs)</li>
+<li><strong>FTP</strong> (SFTP/FTPs)</li>
+<li><strong>DNS</strong></li>
+<li><strong>NFS</strong></li>
+<li><strong>Samba</strong></li>
+</ul>
+<h3 id="22-dns-zone-파일-설정">22. DNS ZONE 파일 설정</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>이름</th>
-<th style="text-align: right;">포트</th>
+<th>레코드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SOA</strong>(Start Of Authority)</td>
+<td>해당 도메인에 대하여 설정된 네임서버가 모든 정보를 가지고 있음을 선언</td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>보통 날짜 형식(YYYYMMDD) - 2차 네임 서버와의 연동에 관련된 값</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>2차 네임 서버가 1차 네임 서버로부터 데이터를 가져온 후 다시 업데이트하기 위해 기다리는 시간</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>2차 네임 서버가 1차 네임 서버로 접속을 실패하였을 경우 지정된 시간이 지난 후 다시 재접속하는 시간</td>
+</tr>
+<tr>
+<td>Expire</td>
+<td>1차 네임 서버에서 받아온 도메인 정보를 보관하는 주기로 지정된 시간이 지나면 받아온 데이터는 신뢰성이 없다고 판단하고 삭제</td>
+</tr>
+<tr>
+<td>Minimum</td>
+<td>TTL(Time To Live) - 도메인 정보를 얼마나 보관할 지에 대한 시간</td>
+</tr>
+<tr>
+<td><strong>NS</strong></td>
+<td>해당 도메인의 네임서버 지정</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>해당 도메인의 실제 IP주소를 설정</td>
+</tr>
+<tr>
+<td><strong>MX</strong>(Mail eXchanger)</td>
+<td>해당 도메인의 메일서버 지정</td>
+</tr>
+<tr>
+<td><strong>CNAME</strong></td>
+<td>"Canonical NAME" - 특정 도메인에 대한 서브 도메인을 사용하기 위한 레코드</td>
+</tr>
+<tr>
+<td><strong>PTR</strong></td>
+<td>IP주소에 대해 도메인명을 매핑 - Reverse Zone파일에서 사용</td>
+</tr>
+<tr>
+<td><strong>AAAA</strong></td>
+<td>IPv6주소에서 사용되는 A레코드</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>$TTL</code> – SOA 레코드의 Minimum과 같은 의미 (Minimum 값보다 우선)</p>
+<h3 id="23-syslog-facility">23. Syslog Facility</h3>
+<p>Facility는 로그 메시지의 출처를 나타내는 분류 체계이며, Priority Level은 로그 메시지의
+중요도(긴급성)를 분류하는 체계입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Facility</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth</code></td>
+<td>인증 관련 로그</td>
+</tr>
+<tr>
+<td><code>authpriv</code></td>
+<td>민감한 인증 정보</td>
+</tr>
+<tr>
+<td><code>cron</code></td>
+<td>cron 데몬의 스케줄링 로그</td>
+</tr>
+<tr>
+<td><code>daemon</code></td>
+<td>일반 데몬 프로세스</td>
+</tr>
+<tr>
+<td><code>kern</code></td>
+<td>커널 메시지</td>
+</tr>
+<tr>
+<td><code>lpr</code></td>
+<td>프린터 관련 로그</td>
+</tr>
+<tr>
+<td><code>mail</code></td>
+<td>이메일 관련 로그</td>
+</tr>
+<tr>
+<td><code>news</code></td>
+<td>뉴스 데몬 관련 로그</td>
+</tr>
+<tr>
+<td><code>syslog</code></td>
+<td>syslog 데몬 자체의 로그</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>일반 사용자 프로그램의 로그</td>
+</tr>
+<tr>
+<td><code>uucp</code></td>
+<td>Unix to Unix 복사 프로토콜 관련 로그</td>
+</tr>
+<tr>
+<td><code>local0 ~ local7</code></td>
+<td>사용자 정의 facility (Custom Facility)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="24-syslog-priority-level">24. Syslog Priority Level</h3>
+<p><code>emerg</code> = 0 … <code>debug</code> = 7 로 번호가 매겨집니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Priority Level</th>
+<th>심각도</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>emerg</code></td>
+<td>긴급</td>
+<td>시스템이 사용 불가능한 상태 (즉각조치 필요)</td>
+</tr>
+<tr>
+<td><code>alert</code></td>
+<td>경고</td>
+<td>즉각적인 조치가 필요한 상황</td>
+</tr>
+<tr>
+<td><code>crit</code></td>
+<td>치명적</td>
+<td>심각한 상황이지만 시스템 전체에는 영향이 없는 경우</td>
+</tr>
+<tr>
+<td><code>err</code></td>
+<td>오류</td>
+<td>일반적인 오류 발생 (파일 접근 실패)</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>경고</td>
+<td>위험은 아니지만 주의가 필요한 상태</td>
+</tr>
+<tr>
+<td><code>notice</code></td>
+<td>주목</td>
+<td>정상 동작 중이지만 중요한 이벤트 (구성 변경)</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>정보</td>
+<td>정보 제공용 메시지 (서비스 시작/종료)</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>디버그</td>
+<td>문제 해결을 위해 추가 정보 제공 (내부 상태, 변수 값 출력)</td>
+</tr>
+</tbody>
+</table></div>
+<p>이어서 <strong>rsyslog / loganalyzer 구축 실습</strong>과 <strong>Windows Server(web, ftp, dns 및 기본 설정)</strong> 으로 넘어갑니다.</p>
+<h3 id="25-클라우드-서비스-모델">25. 클라우드 서비스 모델</h3>
+<p><strong>(Infra / Platform / Software) as a Service — AIaaS</strong></p>
+<p>클라우드 서비스 별 관리 범위입니다. 아래에서 위로 네트워킹 → 스토리지 → 서버 → 가상화 →
+OS → 미들웨어 → 런타임 → 데이터 → 애플리케이션 순으로 쌓입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>모델</th>
+<th>본인이 관리</th>
+<th>공급 업체가 제어 및 관리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IaaS</strong></td>
+<td>애플리케이션, 데이터, 런타임, 미들웨어, OS</td>
+<td>가상화, 서버, 스토리지, 네트워킹</td>
+</tr>
+<tr>
+<td><strong>PaaS</strong></td>
+<td>애플리케이션, 데이터</td>
+<td>런타임, 미들웨어, OS, 가상화, 서버, 스토리지, 네트워킹</td>
+</tr>
+<tr>
+<td><strong>SaaS</strong></td>
+<td>없음</td>
+<td>전 계층</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="26-퍼블릭-클라우드-vs-프라이빗-클라우드">26. 퍼블릭 클라우드 vs 프라이빗 클라우드</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>퍼블릭 클라우드</th>
+<th>프라이빗 클라우드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>장점</strong></td>
+<td>유지 및 관리 용이<br>시스템 확장 용이<br>사용량에 따른 지불<br>비용 절감</td>
+<td>높은 보안성<br>넓은 네트워크 대역폭<br>개별 애플리케이션의 개발 가능<br>커스터마이징 유연성</td>
+</tr>
+<tr>
+<td><strong>단점</strong></td>
+<td>이용자 관리 권한 낮음<br>데이터 보안 100% 보장 불가<br>표준화 된 애플리케이션만 사용 가능</td>
+<td>낮은 탄력성<br>IT 인력 구축 필요<br>장비 구축에 고비용 발생<br>데이터 센터 구축 비용 발생</td>
+</tr>
+</tbody>
+</table></div>
+<p>둘을 함께 쓰는 것이 <strong>Hybrid Cloud</strong>입니다.</p>
+<h3 id="27-aws-주요-서비스">27. AWS 주요 서비스</h3>
+<p><strong>Amazon Cloud Compute</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
 <th>서비스</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>ftp</code></td>
-<td style="text-align: right;">21</td>
-<td>FTP control</td>
+<td>Amazon EC2</td>
+<td>아마존 클라우드 상의 유연하며 가상 서버 (Elastic Virtual servers in the cloud)</td>
 </tr>
 <tr>
-<td><code>telnet</code></td>
-<td style="text-align: right;">23</td>
-<td>Telnet</td>
+<td>Auto Scaling</td>
+<td>EC2 용량 및 Instance 확장에 대응한 자동 스케쥴링 기능 (Automated scaling of EC2 capacity)</td>
 </tr>
 <tr>
-<td><code>smtp</code></td>
-<td style="text-align: right;">25</td>
-<td>SMTP</td>
-</tr>
-<tr>
-<td><code>domain</code></td>
-<td style="text-align: right;">53</td>
-<td>DNS</td>
-</tr>
-<tr>
-<td><code>www</code></td>
-<td style="text-align: right;">80</td>
-<td>HTTP</td>
-</tr>
-<tr>
-<td><code>pop3</code></td>
-<td style="text-align: right;">110</td>
-<td>POP3</td>
+<td>Elastic Load Balancing</td>
+<td>동적 트래픽 분배 기능 (Dynamic traffic distribution)</td>
 </tr>
 </tbody>
 </table></div>
-<hr />
-<h2 id="27-acl-실전-문제">27. ACL 실전 문제</h2>
-<p>조건:</p>
-<div class="codehilite"><pre><span></span><code>1. 10.10.10.0/24 → 192.168.200.34 FTP 접속 불가능
-   단 Ping은 가능
-
-2. 10.10.10.3 → 192.168.200.34 FTP 접속 가능
-
-3. 172.16.100.3 → 192.168.200.34 Web 접속 불가능
-
-4. 그 외 모든 트래픽 허용
-</code></pre></div>
-
-<p>핵심은 <code>10.10.10.3</code>이 <code>10.10.10.0/24</code> 안에 포함되는 <strong>예외 Host</strong>라는 것입니다.</p>
-<p>따라서 예외 permit을 먼저 둡니다.</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 permit tcp host 10.10.10.3 host 192.168.200.34 eq ftp
-access-list 100 deny tcp 10.10.10.0 0.0.0.255 host 192.168.200.34 eq ftp
-access-list 100 deny tcp host 172.16.100.3 host 192.168.200.34 eq www
-access-list 100 permit ip any any
-</code></pre></div>
-
-<h4 id="왜-ping은-가능한가">왜 Ping은 가능한가?</h4>
-<p>FTP 차단 규칙은:</p>
-<div class="codehilite"><pre><span></span><code>TCP port 21
-</code></pre></div>
-
-<p>만 막습니다.</p>
-<p>Ping은 ICMP이므로 FTP deny에 걸리지 않고 마지막:</p>
-<div class="codehilite"><pre><span></span><code>permit ip any any
-</code></pre></div>
-
-<p>에 의해 허용됩니다.</p>
-<hr />
-<h2 id="28-acl-번호는-라우터마다-독립적">28. ACL 번호는 라우터마다 독립적</h2>
-<p>다른 라우터에서 ACL 100을 이미 사용했더라도 <strong>현재 라우터에서 ACL 100을 다시 사용할 수 있습니다.</strong></p>
-<div class="codehilite"><pre><span></span><code>R1 ACL 100
-R2 ACL 100
-R3 ACL 100
-</code></pre></div>
-
-<p>은 각각 별개의 로컬 설정입니다.</p>
-<p>잘못 101로 만들었다면 전체 삭제:</p>
-<div class="codehilite"><pre><span></span><code>conf t
-no access-list 101
-</code></pre></div>
-
-<p>인터페이스에 적용했다면 적용도 따로 제거:</p>
-<div class="codehilite"><pre><span></span><code>interface &lt;인터페이스&gt;
- no ip access-group 101 in
-</code></pre></div>
-
-<p>또는:</p>
-<div class="codehilite"><pre><span></span><code>no ip access-group 101 out
-</code></pre></div>
-
-<hr />
-<h2 id="29-acl이-맞는데-web-차단이-안-된-원인">29. ACL이 맞는데 Web 차단이 안 된 원인</h2>
-<p>ACL 자체:</p>
-<div class="codehilite"><pre><span></span><code>10 permit tcp host 10.10.10.3 host 192.168.200.34 eq ftp
-20 deny tcp 10.10.10.0 0.0.0.255 host 192.168.200.34 eq ftp
-30 deny tcp host 172.16.100.3 host 192.168.200.34 eq www
-40 permit ip any any
-</code></pre></div>
-
-<p>은 올바르게 구성되어 있었습니다.</p>
-<p>그런데 Web 접속이 계속 성공했습니다.</p>
-<p><code>show ip interface</code> 확인 결과:</p>
-<div class="codehilite"><pre><span></span><code>Outgoing access list is not set
-Inbound access list is not set
-</code></pre></div>
-
-<p>즉 <strong>ACL은 만들어졌지만 인터페이스에 적용되지 않은 상태</strong>였습니다.</p>
-<hr />
-<h2 id="30-19216820034가-연결된-인터페이스-찾기">30. 192.168.200.34가 연결된 인터페이스 찾기</h2>
-<p><code>show ip interface brief</code>:</p>
-<div class="codehilite"><pre><span></span><code>GigabitEthernet0/0.10  192.168.200.1
-GigabitEthernet0/0.20  192.168.200.17
-GigabitEthernet0/0.30  192.168.200.33
-Serial0/3/0            1.1.1.1
-</code></pre></div>
-
-<p>서버:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.34
-</code></pre></div>
-
-<p><code>192.168.200.34</code>는:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.32/28
-</code></pre></div>
-
-<p>에 속합니다.</p>
-<p>범위:</p>
-<div class="codehilite"><pre><span></span><code>Network   192.168.200.32
-Gateway   192.168.200.33
-Host      192.168.200.33 ~ 192.168.200.46
-Broadcast 192.168.200.47
-</code></pre></div>
-
-<p>따라서 서버 쪽 서브인터페이스는:</p>
-<div class="codehilite"><pre><span></span><code>GigabitEthernet0/0.30 = 192.168.200.33/28
-</code></pre></div>
-
-<p>입니다.</p>
-<hr />
-<h2 id="31-acl-100을-gi0030-outbound에-적용">31. ACL 100을 Gi0/0.30 outbound에 적용</h2>
-<div class="codehilite"><pre><span></span><code>conf t
-interface gi0/0.30
- ip access-group 100 out
-end
-</code></pre></div>
-
-<p>확인:</p>
-<div class="codehilite"><pre><span></span><code>show ip interface gi0/0.30
-</code></pre></div>
-
-<p>정상:</p>
-<div class="codehilite"><pre><span></span><code>Outgoing access list is 100
-</code></pre></div>
-
-<h4 id="왜-out인가">왜 <code>out</code>인가?</h4>
-<div class="codehilite"><pre><span></span><code>172.16.100.3 / 10.10.10.x
-          ↓
-       라우터들
-          ↓
-현재 R1
-          ↓
-Gi0/0.30 OUT
-   [ACL 100 검사]
-          ↓
-192.168.200.34 서버
-</code></pre></div>
-
-<p>서버 LAN으로 <strong>나가는 패킷</strong>을 검사하기 때문입니다.</p>
-<hr />
-<h2 id="32-acl-실전-테스트-예상-결과">32. ACL 실전 테스트 예상 결과</h2>
+<p><strong>Amazon Storage, Database</strong></p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>출발지</th>
-<th>목적지/서비스</th>
-<th>기대 결과</th>
+<th>서비스</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>10.10.10.2</code></td>
-<td><code>192.168.200.34</code> Ping</td>
-<td>성공</td>
+<td>Amazon EBS</td>
+<td>EC2와 네트워크로 연결된 블록 스토리지 (Block storage for use with Amazon EC2)</td>
 </tr>
 <tr>
-<td><code>10.10.10.2</code></td>
-<td><code>192.168.200.34</code> FTP</td>
-<td>실패</td>
+<td>Amazon S3</td>
+<td>API를 통한 인터넷 규모의 오브젝트 스토리지 (Internet scale object storage via API)</td>
 </tr>
 <tr>
-<td><code>10.10.10.3</code></td>
-<td><code>192.168.200.34</code> FTP</td>
-<td>성공</td>
-</tr>
-<tr>
-<td><code>172.16.100.3</code></td>
-<td><code>192.168.200.34</code> Web</td>
-<td>실패</td>
-</tr>
-<tr>
-<td>기타</td>
-<td>기타 정상 트래픽</td>
-<td>허용</td>
+<td>Amazon RDS</td>
+<td>관계형 데이터베이스 관리 서비스 (Managed relational database service)</td>
 </tr>
 </tbody>
 </table></div>
-<p>테스트 후:</p>
-<div class="codehilite"><pre><span></span><code>show access-list
-</code></pre></div>
-
-<p>으로 Match Counter가 증가하는지 확인합니다.</p>
-<hr />
-<h2 id="33-packet-tracer-ftp-서버-설정과-테스트">33. Packet Tracer FTP 서버 설정과 테스트</h2>
-<p>서버 <code>192.168.200.34</code>에서:</p>
-<div class="codehilite"><pre><span></span><code>Server → Services → FTP → On
-</code></pre></div>
-
-<p>사용자 예:</p>
-<div class="codehilite"><pre><span></span><code>Username: cisco
-Password: 설정한 비밀번호
-</code></pre></div>
-
-<p>클라이언트에서:</p>
-<div class="codehilite"><pre><span></span><code>C:\&gt;ftp 192.168.200.34
-</code></pre></div>
-
-<p>정상 연결 예:</p>
-<div class="codehilite"><pre><span></span><code>Trying to connect...192.168.200.34
-Connected to 192.168.200.34
-220- Welcome to PT Ftp server
-Username:cisco
-331- Username ok, need password
-Password:*****
-230- Logged in
-(passive mode On)
-ftp&gt;
-</code></pre></div>
-
-<p><code>230- Logged in</code>이 나오면 <strong>FTP 로그인 성공</strong>입니다.</p>
-<p>파일 목록:</p>
-<div class="codehilite"><pre><span></span><code>ftp&gt;dir
-</code></pre></div>
-
-<p>실제 실습에서는 IOS 이미지 파일 목록이 정상적으로 출력되어 FTP 접속 성공을 확인했습니다.</p>
-<p>FTP 종료:</p>
-<div class="codehilite"><pre><span></span><code>ftp&gt;quit
-</code></pre></div>
-
-<p>주의:</p>
-<div class="codehilite"><pre><span></span><code>ftp&gt;
-</code></pre></div>
-
-<p>상태는 이미 FTP 클라이언트 내부입니다.</p>
-<p>따라서 여기서 다시:</p>
-<div class="codehilite"><pre><span></span><code>ftp&gt;ftp 192.168.200.34
-</code></pre></div>
-
-<p>를 입력하면:</p>
-<div class="codehilite"><pre><span></span><code>Invalid or non supported command.
-</code></pre></div>
-
-<p>가 뜹니다.</p>
-<p>새 연결을 하려면 먼저 <code>quit</code>으로 나온 뒤:</p>
-<div class="codehilite"><pre><span></span><code>C:\&gt;ftp 192.168.200.34
-</code></pre></div>
-
-<p>를 실행합니다.</p>
-<hr />
-<h2 id="34-nat-기본-개념">34. NAT 기본 개념</h2>
-<div class="codehilite"><pre><span></span><code>NAT = Network Address Translation
-</code></pre></div>
-
-<p>IP 주소를 다른 IP 주소로 변환하는 기술입니다.</p>
-<p>이번 실습에서는 <strong>ACL로 변환 대상 내부 주소를 지정하고, NAT Pool에서 변환에 사용할 주소 범위를 정의</strong>하는 Dynamic NAT 형태를 구성하기 시작했습니다.</p>
-<p>큰 흐름:</p>
-<div class="codehilite"><pre><span></span><code>Inside Local 주소
-172.16.100.x
-      ↓
-ACL 10으로 변환 대상 선택
-      ↓
-NAT Pool dnat
-1.1.1.1 ~ 1.1.1.254
-      ↓
-Inside Global 주소로 변환
-</code></pre></div>
-
-<hr />
-<h2 id="35-nat-pool-생성">35. NAT Pool 생성</h2>
-<p>도움말 확인:</p>
-<div class="codehilite"><pre><span></span><code>Router(config)#ip nat pool ?
-  WORD  Pool name
-</code></pre></div>
-
-<p>Pool 이름을 <code>dnat</code>으로 지정:</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool dnat 1.1.1.1 1.1.1.254 netmask 255.255.255.0
-</code></pre></div>
-
-<p>구조:</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool
-  dnat             → Pool 이름
-  1.1.1.1          → 시작 주소
-  1.1.1.254        → 끝 주소
-  netmask
-  255.255.255.0    → Pool의 네트워크 마스크
-</code></pre></div>
-
-<p>처음 다음처럼 입력했을 때:</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool dnat 1.1.1.1 1.1.1.254 255.255.255.0
-</code></pre></div>
-
-<p>오류가 난 이유는 <code>255.255.255.0</code> 앞에 <strong><code>netmask</code> 키워드가 필요했기 때문</strong>입니다.</p>
-<p>올바른 문법:</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool dnat 1.1.1.1 1.1.1.254 netmask 255.255.255.0
-</code></pre></div>
-
-<hr />
-<h2 id="36-nat-변환-대상-acl">36. NAT 변환 대상 ACL</h2>
-<div class="codehilite"><pre><span></span><code>access-list 10 permit 172.16.100.0 0.0.0.255
-</code></pre></div>
-
-<p>뜻:</p>
-<blockquote>
-<p><code>172.16.100.0/24</code>를 NAT 변환 대상으로 선택한다.</p>
-</blockquote>
-<p>여기서 ACL은 보안 차단 목적이라기보다 <strong>NAT가 어떤 내부 주소를 변환할지 Match하는 용도</strong>입니다.</p>
-<div class="codehilite"><pre><span></span><code>permit = NAT 대상에 포함
-</code></pre></div>
-
-<hr />
-<h2 id="37-acl-10과-nat-pool-연결">37. ACL 10과 NAT Pool 연결</h2>
-<div class="codehilite"><pre><span></span><code>ip nat inside source list 10 pool dnat
-</code></pre></div>
-
-<p>구성 요소:</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source
-→ Inside에서 출발한 Source Address를 변환
-
-list 10
-→ ACL 10에 Match되는 주소를 대상으로 함
-
-pool dnat
-→ dnat Pool의 주소 중 하나로 변환
-</code></pre></div>
-
-<p>즉 한 문장으로:</p>
-<blockquote>
-<p><code>172.16.100.0/24</code> 출발지 주소를 NAT Pool <code>dnat</code>의 <code>1.1.1.1~1.1.1.254</code> 주소 중 하나로 변환한다.</p>
-</blockquote>
-<hr />
-<h2 id="38-nat는-아직-인터페이스-지정이-필요함">38. NAT는 아직 인터페이스 지정이 필요함</h2>
-<p>현재 입력한 명령만으로는 NAT 설정이 완전히 끝난 것이 아닙니다.</p>
-<p>NAT를 사용할 인터페이스에:</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside
-</code></pre></div>
-
-<p>와:</p>
-<div class="codehilite"><pre><span></span><code>ip nat outside
-</code></pre></div>
-
-<p>를 지정해야 합니다.</p>
-<p>일반 구조:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.0/24
-      │
-      │ Inside
-      ▼
-[ Router ]
-      │
-      │ Outside
-      ▼
-외부 네트워크
-</code></pre></div>
-
-<p>예시 형태:</p>
-<div class="codehilite"><pre><span></span><code>interface &lt;172.16.100.0/24 쪽 인터페이스&gt;
- ip nat inside
-
-interface &lt;외부망 쪽 인터페이스&gt;
- ip nat outside
-</code></pre></div>
-
-<p><strong>정확한 인터페이스는 해당 NAT를 설정하는 라우터의 <code>show ip interface brief</code>를 보고 결정해야 합니다.</strong></p>
-<hr />
-<h2 id="39-dynamic-nat-동작-예시">39. Dynamic NAT 동작 예시</h2>
-<p>가정:</p>
-<div class="codehilite"><pre><span></span><code>Inside Host = 172.16.100.3
-NAT Pool    = 1.1.1.1 ~ 1.1.1.254
-</code></pre></div>
-
-<p>외부로 통신할 때 예:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.3
-      ↓ NAT
-1.1.1.10
-      ↓
-외부 네트워크
-</code></pre></div>
-
-<p>Pool 주소는 필요에 따라 할당됩니다.</p>
-<p>이 방식은 여러 내부 Host가 동시에 통신하려면 Pool에 충분한 주소가 있어야 합니다.</p>
-<hr />
-<h2 id="40-nat-확인-명령">40. NAT 확인 명령</h2>
-<p>설정을 마친 뒤 확인할 명령:</p>
-<div class="codehilite"><pre><span></span><code>show ip nat translations
-show ip nat statistics
-show run | include ip nat
-show access-list 10
-</code></pre></div>
-
-<p>Packet Tracer IOS에서 파이프 필터가 제한되면 그냥:</p>
-<div class="codehilite"><pre><span></span><code>show run
-</code></pre></div>
-
-<p>으로 확인하면 됩니다.</p>
-<h3 id="show-ip-nat-translations"><code>show ip nat translations</code></h3>
-<p>실제 변환 테이블 확인.</p>
-<h3 id="show-ip-nat-statistics"><code>show ip nat statistics</code></h3>
-<p>Inside / Outside 인터페이스와 Pool 등 NAT 상태 확인.</p>
-<hr />
-<h2 id="41-nat-실습에서-주의할-점">41. NAT 실습에서 주의할 점</h2>
-<p>이번 Pool:</p>
-<div class="codehilite"><pre><span></span><code>1.1.1.1 ~ 1.1.1.254 /24
-</code></pre></div>
-
-<p>을 사용하기 전에 해당 주소 범위가 실제 토폴로지에서 다른 인터페이스 주소나 실제 장비 주소와 충돌하지 않는지 확인해야 합니다.</p>
-<p>실습 토폴로지에서는 이미 <code>1.1.1.0/24</code>가 라우터 간 링크로 사용된 적이 있으므로, <strong>Pool 주소와 실제 인터페이스 주소가 중복되지 않는지 확인하는 것이 중요</strong>합니다.</p>
-<p>수업에서 지정된 값이라면 강의 토폴로지 의도대로 진행하되, 실제 네트워크에서는 NAT Pool을 설계할 때 주소 충돌을 피해야 합니다.</p>
-<hr />
-<h2 id="42-문제-발생-시-점검-순서">42. 문제 발생 시 점검 순서</h2>
-<h3 id="routing-문제">Routing 문제</h3>
-<div class="codehilite"><pre><span></span><code>1. show ip interface brief
-2. show ip protocols
-3. show ip ospf neighbor
-4. show ip route
-5. ping
-</code></pre></div>
-
-<h3 id="acl-문제">ACL 문제</h3>
-<div class="codehilite"><pre><span></span><code>1. 기본 Ping/서비스가 ACL 적용 전 정상인가?
-2. show access-list
-3. ACL 규칙 순서가 맞는가?
-4. permit any가 deny보다 위에 있지 않은가?
-5. show ip interface
-6. ACL이 실제 인터페이스에 적용되어 있는가?
-7. in / out 방향이 맞는가?
-8. Match Counter가 증가하는가?
-</code></pre></div>
-
-<h3 id="ftp-문제">FTP 문제</h3>
-<div class="codehilite"><pre><span></span><code>1. Server Services → FTP = On
-2. 사용자 계정 존재
-3. Ping 성공 여부
-4. C:\&gt; ftp 서버IP
-5. ACL에서 TCP 21이 허용/차단되는지 확인
-</code></pre></div>
-
-<h3 id="nat-문제">NAT 문제</h3>
-<div class="codehilite"><pre><span></span><code>1. ACL이 올바른 Inside 주소를 Match하는가?
-2. NAT Pool 주소 범위가 맞는가?
-3. ip nat inside source list ... pool ... 설정이 있는가?
-4. Inside 인터페이스에 ip nat inside가 있는가?
-5. Outside 인터페이스에 ip nat outside가 있는가?
-6. show ip nat translations
-7. show ip nat statistics
-8. 주소 충돌이 없는가?
-</code></pre></div>
-
-<hr />
-<h2 id="43-핵심-명령어-치트시트">43. 핵심 명령어 치트시트</h2>
-<h3 id="ospf">OSPF</h3>
-<div class="codehilite"><pre><span></span><code>router ospf 1
- network &lt;network&gt; &lt;wildcard&gt; area &lt;area&gt;
- router-id &lt;RID&gt;
-clear ip ospf process
-show ip ospf
-show ip ospf neighbor
-show ip ospf database
-show ip route
-</code></pre></div>
-
-<h3 id="eigrp">EIGRP</h3>
-<div class="codehilite"><pre><span></span><code>router eigrp 100
- network &lt;network&gt; &lt;wildcard&gt;
- no auto-summary
-show ip protocols
-show ip route
-</code></pre></div>
-
-<h3 id="redistribution">Redistribution</h3>
-<div class="codehilite"><pre><span></span><code>router eigrp 100
- redistribute ospf 1 metric 1544 2000 255 1 1500
-
-router ospf 1
- redistribute eigrp 100 subnets
-</code></pre></div>
-
-<h3 id="standard-acl-2">Standard ACL</h3>
-<div class="codehilite"><pre><span></span><code>access-list 10 deny host &lt;IP&gt;
-access-list 10 permit any
-interface &lt;interface&gt;
- ip access-group 10 in|out
-</code></pre></div>
-
-<h3 id="extended-acl-2">Extended ACL</h3>
-<div class="codehilite"><pre><span></span><code>access-list 100 permit|deny tcp|udp|icmp|ip &lt;source&gt; &lt;destination&gt; [port/type]
-access-list 100 permit ip any any
-</code></pre></div>
-
-<h3 id="named-acl">Named ACL</h3>
-<div class="codehilite"><pre><span></span><code>ip access-list standard &lt;name&gt;
-ip access-list extended &lt;name&gt;
-</code></pre></div>
-
-<h3 id="nat">NAT</h3>
-<div class="codehilite"><pre><span></span><code>ip nat pool dnat 1.1.1.1 1.1.1.254 netmask 255.255.255.0
-access-list 10 permit 172.16.100.0 0.0.0.255
-ip nat inside source list 10 pool dnat
-
-interface &lt;inside-interface&gt;
- ip nat inside
-
-interface &lt;outside-interface&gt;
- ip nat outside
-
-show ip nat translations
-show ip nat statistics
-</code></pre></div>
-
-<hr />
-<h2 id="44-시험실습-전에-반드시-구분할-것">44. 시험·실습 전에 반드시 구분할 것</h2>
-<div class="codehilite"><pre><span></span><code>Process ID
-→ 라우터 내부의 OSPF 프로세스 번호
-
-Router ID
-→ OSPF에서 라우터를 식별하는 값
-
-Neighbor ID
-→ 상대 라우터의 Router ID
-
-Neighbor Address
-→ 실제 상대 인터페이스 IP
-
-Next Hop
-→ 목적지로 갈 때 다음으로 전달할 라우터 주소
-
-Area 0
-→ OSPF Backbone Area
-
-ABR
-→ 서로 다른 OSPF Area를 연결
-
-O
-→ OSPF 내부 경로
-
-O E2
-→ 다른 프로토콜에서 OSPF로 재분배된 External Type 2 경로
-
-D EX
-→ EIGRP로 재분배된 외부 경로
-
-Standard ACL
-→ 주로 출발지 기준
-
-Extended ACL
-→ 출발지 + 목적지 + 프로토콜 + 포트 등
-
-NAT ACL
-→ 차단용이 아니라 변환 대상을 선택하는 용도로도 사용 가능
-</code></pre></div>
-
-<hr />
-<h2 id="45-최종-기억-흐름">45. 최종 기억 흐름</h2>
-<div class="codehilite"><pre><span></span><code>[Routing]
-인터페이스가 살아 있는가?
-        ↓
-라우팅 프로토콜 설정이 맞는가?
-        ↓
-Neighbor가 FULL인가?
-        ↓
-라우팅 테이블에 경로가 있는가?
-        ↓
-Ping이 되는가?
-
-[Redistribution]
-서로 다른 프로토콜인가?
-        ↓
-경계 라우터에서 필요한 경로만 재분배
-        ↓
-O E2 / D EX 등으로 외부 경로 확인
-
-[ACL]
-기본 통신 확인
-        ↓
-구체적인 규칙부터 작성
-        ↓
-마지막 permit/implicit deny 확인
-        ↓
-인터페이스 + in/out 적용
-        ↓
-Match Counter로 검증
-
-[NAT]
-변환 대상 ACL
-        ↓
-NAT Pool 생성
-        ↓
-ACL과 Pool 연결
-        ↓
-Inside / Outside 인터페이스 지정
-        ↓
-실제 트래픽 발생
-        ↓
-show ip nat translations로 검증
-</code></pre></div>
-
-<hr />
-<h3 id="nat-실습-추가--insideoutside-지정-dynamic-nat-확인-static-nat">NAT 실습 추가 — Inside/Outside 지정, Dynamic NAT 확인, Static NAT</h3>
-<h4 id="1-nat-inside--outside-인터페이스-지정">1. NAT Inside / Outside 인터페이스 지정</h4>
-<p>NAT 설정은 Pool과 ACL만 만든다고 끝나는 것이 아닙니다.<br />
-라우터가 어느 쪽을 <strong>Inside(내부망)</strong>, 어느 쪽을 <strong>Outside(외부망)</strong> 로 볼지 인터페이스에 지정해야 합니다.</p>
-<p>이번 실습에서는:</p>
-<div class="codehilite"><pre><span></span><code>interface GigabitEthernet0/0
- ip nat inside
-!
-interface Serial0/3/0
- ip nat outside
-</code></pre></div>
-
-<p>로 설정했습니다.</p>
-<p>의미:</p>
-<div class="codehilite"><pre><span></span><code>GigabitEthernet0/0
-→ NAT 내부망 쪽 인터페이스
-
-Serial0/3/0
-→ NAT 외부망 쪽 인터페이스
-</code></pre></div>
-
-<p>패킷 흐름을 단순화하면:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.0/24
-      │
-      │ Inside
-      ▼
-GigabitEthernet0/0
-      │
-    [NAT]
-      │
-Serial0/3/0
-      │ Outside
-      ▼
-외부 네트워크
-</code></pre></div>
-
-<hr />
-<h4 id="2-show-ip-nat-statistics">2. <code>show ip nat statistics</code></h4>
-<p>확인 명령:</p>
-<div class="codehilite"><pre><span></span><code>show ip nat statistics
-</code></pre></div>
-
-<p>실제 출력:</p>
-<div class="codehilite"><pre><span></span><code>Total translations: 0 (0 static, 0 dynamic, 0 extended)
-
-Outside Interfaces: Serial0/3/0
-Inside Interfaces: GigabitEthernet0/0
-
-Hits: 0  Misses: 0
-Expired translations: 0
-
-Dynamic mappings:
--- Inside Source
-access-list 10 pool dnat refCount 0
-
- pool dnat: netmask 255.255.255.0
-       start 1.1.1.1 end 1.1.1.254
-       type generic, total addresses 254 , allocated 0 (0%), misses 0
-</code></pre></div>
-
-<p>이 출력에서 확인할 수 있는 것:</p>
+<p><strong>Amazon CDN &amp; Management</strong></p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>항목</th>
-<th>의미</th>
+<th>서비스</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Outside Interfaces: Serial0/3/0</code></td>
-<td>외부망 인터페이스</td>
+<td>Amazon CloudFront</td>
+<td>세계로의 콘텐츠 배포 (Distribute content globally)</td>
 </tr>
 <tr>
-<td><code>Inside Interfaces: GigabitEthernet0/0</code></td>
-<td>내부망 인터페이스</td>
+<td>Amazon CloudWatch</td>
+<td>클라우드 자원의 모니터링 (Monitor resources)</td>
 </tr>
 <tr>
-<td><code>access-list 10 pool dnat</code></td>
-<td>ACL 10과 NAT Pool <code>dnat</code>이 연결됨</td>
-</tr>
-<tr>
-<td><code>start 1.1.1.1 end 1.1.1.254</code></td>
-<td>변환에 사용할 Global 주소 범위</td>
-</tr>
-<tr>
-<td><code>total addresses 254</code></td>
-<td>Pool에서 사용 가능한 주소 수</td>
-</tr>
-<tr>
-<td><code>allocated 0</code></td>
-<td>아직 실제로 할당된 주소가 없었음</td>
-</tr>
-<tr>
-<td><code>Hits / Misses</code></td>
-<td>NAT 변환 성공/미적용 횟수 관련 통계</td>
+<td>AWS IAM (Identity &amp; Access Mgmt)</td>
+<td>사용자, 그룹 및 권한 관리 (users, groups &amp; permissions)</td>
 </tr>
 </tbody>
 </table></div>
-<p>즉 이 시점에는 <strong>설정은 완료됐지만 아직 NAT 트래픽이 발생하지 않은 상태</strong>였습니다.</p>
-<hr />
-<h4 id="3-dynamic-nat이-실제로-동작한-결과">3. Dynamic NAT이 실제로 동작한 결과</h4>
-<p>내부 PC <code>172.16.100.3</code>에서 외부 쪽 주소로 Ping을 발생시킨 뒤:</p>
-<div class="codehilite"><pre><span></span><code>show ip nat translations
-</code></pre></div>
-
-<p>를 확인했습니다.</p>
-<div class="codehilite"><pre><span></span><code>Pro  Inside global     Inside local       Outside local      Outside global
-
-icmp 1.1.1.1:5         172.16.100.3:5     192.168.200.18:5   192.168.200.18:5
-icmp 1.1.1.1:6         172.16.100.3:6     192.168.200.18:6   192.168.200.18:6
-icmp 1.1.1.1:7         172.16.100.3:7     192.168.200.18:7   192.168.200.18:7
-icmp 1.1.1.1:8         172.16.100.3:8     192.168.200.18:8   192.168.200.18:8
-</code></pre></div>
-
-<p>핵심 변환:</p>
-<div class="codehilite"><pre><span></span><code>Inside local  : 172.16.100.3
-Inside global : 1.1.1.1
-</code></pre></div>
-
-<p>즉 내부 PC의 실제 주소 <code>172.16.100.3</code>이 외부로 나갈 때 NAT Pool에서 <code>1.1.1.1</code>을 할당받았습니다.</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.3
-      │
-      │ NAT
-      ▼
-   1.1.1.1
-      │
-      ▼
-192.168.200.18
-</code></pre></div>
-
-<p>이것이 <strong>Dynamic NAT</strong>입니다.</p>
-<p>Dynamic NAT은 미리 특정 PC와 특정 Global IP를 고정하지 않고,<br />
-Pool에서 사용 가능한 주소를 필요할 때 할당합니다.</p>
-<hr />
-<h4 id="4-nat-용어-4가지">4. NAT 용어 4가지</h4>
-<p><code>show ip nat translations</code>에서 가장 중요한 네 개의 주소 표현입니다.</p>
-<h5 id="inside-local">Inside Local</h5>
-<div class="codehilite"><pre><span></span><code>172.16.100.3
-</code></pre></div>
-
-<p>내부 네트워크에서 실제로 사용하는 사설/내부 주소입니다.</p>
-<blockquote>
-<p>내부 호스트의 원래 주소</p>
-</blockquote>
-<h5 id="inside-global">Inside Global</h5>
-<div class="codehilite"><pre><span></span><code>1.1.1.1
-</code></pre></div>
-
-<p>Inside Local 주소가 외부 네트워크에 보일 때 사용하는 변환된 주소입니다.</p>
-<blockquote>
-<p>NAT 이후 외부에서 보이는 내부 호스트 주소</p>
-</blockquote>
-<h5 id="outside-global">Outside Global</h5>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.18
-</code></pre></div>
-
-<p>외부 호스트가 실제 외부 네트워크에서 사용하는 주소입니다.</p>
-<h5 id="outside-local">Outside Local</h5>
-<p>이번 실습에서는:</p>
-<div class="codehilite"><pre><span></span><code>192.168.200.18
-</code></pre></div>
-
-<p>처럼 Outside Global과 동일했습니다.</p>
-<p>Outside Local은 <strong>내부 네트워크에서 바라보는 외부 호스트의 주소</strong>입니다.</p>
-<p>일반적인 NAT 실습에서는 Outside Local과 Outside Global이 같은 경우가 많습니다.</p>
-<hr />
-<h4 id="5-dynamic-nat-전체-설정-구조">5. Dynamic NAT 전체 설정 구조</h4>
-<p>이번 실습의 Dynamic NAT 설정을 하나로 보면:</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool dnat 1.1.1.1 1.1.1.254 netmask 255.255.255.0
-
-access-list 10 permit 172.16.100.0 0.0.0.255
-
-ip nat inside source list 10 pool dnat
-
-interface GigabitEthernet0/0
- ip nat inside
-
-interface Serial0/3/0
- ip nat outside
-</code></pre></div>
-
-<p>각 명령의 역할:</p>
-<div class="codehilite"><pre><span></span><code>ACL 10
-→ 어떤 내부 주소를 NAT할 것인가?
-
-Pool dnat
-→ 어떤 Global IP 주소로 바꿀 것인가?
-
-ip nat inside source list 10 pool dnat
-→ ACL 10에 해당하는 출발지를 dnat Pool의 주소로 변환
-
-ip nat inside
-→ 내부 인터페이스 지정
-
-ip nat outside
-→ 외부 인터페이스 지정
-</code></pre></div>
-
-<p>즉 NAT 설정은 다음 네 요소가 맞아야 합니다.</p>
-<div class="codehilite"><pre><span></span><code>① NAT 대상 ACL
-② NAT Pool
-③ ACL과 Pool 연결
-④ Inside / Outside 인터페이스 지정
-</code></pre></div>
-
-<hr />
-<h4 id="6-static-nat-설정">6. Static NAT 설정</h4>
-<p>다음으로 Static NAT을 설정했습니다.</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source static 172.16.100.4 1.1.1.10
-</code></pre></div>
-
-<p>형식:</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source static &lt;Inside-Local&gt; &lt;Inside-Global&gt;
-</code></pre></div>
-
-<p>이번 값:</p>
-<div class="codehilite"><pre><span></span><code>Inside Local  = 172.16.100.4
-Inside Global = 1.1.1.10
-</code></pre></div>
-
-<p>즉:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.4  ↔  1.1.1.10
-</code></pre></div>
-
-<p>의 <strong>고정 1:1 매핑</strong>을 만든 것입니다.</p>
-<p>Dynamic NAT과 달리 트래픽이 없더라도 이 매핑 자체는 설정에 존재합니다.</p>
-<hr />
-<h4 id="7-static-nat-직후-translation-table">7. Static NAT 직후 Translation Table</h4>
-<p>Static NAT을 설정한 직후:</p>
-<div class="codehilite"><pre><span></span><code>do show ip nat translations
-</code></pre></div>
-
-<p>출력:</p>
-<div class="codehilite"><pre><span></span><code>Pro  Inside global     Inside local       Outside local      Outside global
-
----  1.1.1.10          172.16.100.4       ---                ---
-</code></pre></div>
-
-<p>여기서 <code>---</code>는 특정 TCP/UDP/ICMP 세션이 아니라<br />
-<strong>정적으로 설정된 주소 매핑 자체</strong>를 보여주는 것입니다.</p>
-<p>즉 아직 실제 통신을 하지 않았더라도:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.4 ↔ 1.1.1.10
-</code></pre></div>
-
-<p>매핑은 이미 존재합니다.</p>
-<hr />
-<h4 id="8-static-nat-이후-실제-ping-트래픽">8. Static NAT 이후 실제 Ping 트래픽</h4>
-<p><code>172.16.100.4</code>에서 <code>192.168.200.34</code>로 Ping을 발생시키자:</p>
-<div class="codehilite"><pre><span></span><code>icmp 1.1.1.10:1  172.16.100.4:1  192.168.200.34:1  192.168.200.34:1
-icmp 1.1.1.10:2  172.16.100.4:2  192.168.200.34:2  192.168.200.34:2
-...
-icmp 1.1.1.10:8  172.16.100.4:8  192.168.200.34:8  192.168.200.34:8
-
----  1.1.1.10    172.16.100.4    ---               ---
-</code></pre></div>
-
-<p>가 나타났습니다.</p>
-<p>해석:</p>
-<div class="codehilite"><pre><span></span><code>Inside Local
-172.16.100.4
-
-       NAT
-
-Inside Global
-1.1.1.10
-</code></pre></div>
-
-<p>그리고 목적지는:</p>
-<div class="codehilite"><pre><span></span><code>Outside Global
-192.168.200.34
-</code></pre></div>
-
-<p>입니다.</p>
-<p>즉 외부에서는 <code>172.16.100.4</code>가 아니라:</p>
-<div class="codehilite"><pre><span></span><code>1.1.1.10
-</code></pre></div>
-
-<p>으로 보이게 됩니다.</p>
-<hr />
-<h4 id="9-dynamic-nat과-static-nat-비교">9. Dynamic NAT과 Static NAT 비교</h4>
+<p><strong>Amazon Network</strong></p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>구분</th>
-<th>Dynamic NAT</th>
-<th>Static NAT</th>
+<th>서비스</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>매핑 방식</td>
-<td>Pool에서 필요할 때 할당</td>
-<td>미리 고정</td>
+<td>Amazon Virtual Private Cloud(VPC)</td>
+<td>사설 격리형 AWS 클라우드 (Private, isolated section of the AWS Cloud)</td>
 </tr>
 <tr>
-<td>주소 관계</td>
-<td>상황에 따라 달라질 수 있음</td>
-<td>항상 1:1</td>
-</tr>
-<tr>
-<td>예시</td>
-<td><code>172.16.100.3 → 1.1.1.1</code></td>
-<td><code>172.16.100.4 ↔ 1.1.1.10</code></td>
-</tr>
-<tr>
-<td>설정</td>
-<td><code>ip nat inside source list ... pool ...</code></td>
-<td><code>ip nat inside source static ...</code></td>
-</tr>
-<tr>
-<td>주 용도</td>
-<td>여러 내부 호스트의 동적 변환</td>
-<td>서버 등 고정 주소가 필요한 장비</td>
+<td>Amazon Route 53</td>
+<td>DNS(Domain Name System) 웹서비스 (Domain Name System (DNS) web service)</td>
 </tr>
 </tbody>
-</table></div>
-<p>기억:</p>
-<div class="codehilite"><pre><span></span><code>Dynamic NAT
-→ Pool에서 빌려 쓴다.
-
-Static NAT
-→ 특정 내부 IP와 특정 Global IP를 고정으로 묶는다.
-</code></pre></div>
-
-<hr />
-<h4 id="10-show-ip-nat-statistics와-show-ip-nat-translations-차이">10. <code>show ip nat statistics</code>와 <code>show ip nat translations</code> 차이</h4>
-<div class="codehilite"><pre><span></span><code>show ip nat statistics
-</code></pre></div>
-
-<p>→ NAT의 <strong>전체 설정과 통계</strong>를 확인합니다.</p>
-<p>주요 확인 대상:</p>
-<div class="codehilite"><pre><span></span><code>Inside Interface
-Outside Interface
-NAT Pool
-ACL
-할당 주소 수
-Hits / Misses
-</code></pre></div>
-
-<p>반면:</p>
-<div class="codehilite"><pre><span></span><code>show ip nat translations
-</code></pre></div>
-
-<p>→ 현재 생성된 <strong>실제 주소 변환 테이블</strong>을 확인합니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.3 → 1.1.1.1
-172.16.100.4 → 1.1.1.10
-</code></pre></div>
-
-<p>따라서 문제를 찾을 때:</p>
-<div class="codehilite"><pre><span></span><code>설정 자체 확인
-→ show ip nat statistics
-
-실제 변환 확인
-→ show ip nat translations
-</code></pre></div>
-
-<p>순서로 보면 좋습니다.</p>
-<hr />
-<h4 id="11-이번-nat-실습에서-확인한-전체-흐름">11. 이번 NAT 실습에서 확인한 전체 흐름</h4>
-<div class="codehilite"><pre><span></span><code>NAT Pool 생성
-1.1.1.1 ~ 1.1.1.254
-        ↓
-ACL 10으로
-172.16.100.0/24 선택
-        ↓
-ACL 10과 dnat Pool 연결
-        ↓
-Gi0/0 = ip nat inside
-        ↓
-S0/3/0 = ip nat outside
-        ↓
-172.16.100.3에서 통신 발생
-        ↓
-Dynamic NAT 생성
-172.16.100.3 → 1.1.1.1
-        ↓
-Static NAT 추가
-172.16.100.4 ↔ 1.1.1.10
-        ↓
-172.16.100.4에서 Ping
-        ↓
-Translation Table에서
-1.1.1.10으로 변환되는 것 확인
-</code></pre></div>
-
-<hr />
-<h4 id="12-nat-점검-순서">12. NAT 점검 순서</h4>
-<p>NAT이 동작하지 않을 때는 다음 순서로 확인합니다.</p>
-<div class="codehilite"><pre><span></span><code>show ip interface brief
-show run
-show access-list
-show ip nat statistics
-show ip nat translations
-show ip route
-</code></pre></div>
-
-<p>확인 사항:</p>
-<div class="codehilite"><pre><span></span><code>1. 내부/외부 인터페이스가 up/up인가?
-2. ip nat inside / outside 방향이 맞는가?
-3. NAT ACL이 실제 내부 주소를 포함하는가?
-4. NAT Pool 주소와 Netmask가 맞는가?
-5. ACL과 Pool 연결 명령이 존재하는가?
-6. 실제 트래픽을 발생시켰는가?
-7. Translation Table에 변환이 생기는가?
-8. 목적지까지 라우팅 경로가 존재하는가?
-</code></pre></div>
-
-<hr />
-<h4 id="13-nat에서-특히-주의할-점">13. NAT에서 특히 주의할 점</h4>
-<p>이번 실습에서는 NAT Pool로:</p>
-<div class="codehilite"><pre><span></span><code>1.1.1.1 ~ 1.1.1.254
-</code></pre></div>
-
-<p>를 사용했습니다.</p>
-<p>그런데 앞선 라우팅 실습에서도 <code>1.1.1.0/24</code>가 실제 Serial 링크 대역으로 사용되었습니다.</p>
-<p>실습 지시상 의도된 구성일 수 있지만, 일반적인 네트워크 설계에서는 <strong>NAT Global Pool 주소가 이미 다른 실제 인터페이스/호스트 주소와 충돌하지 않는지 반드시 확인</strong>해야 합니다.</p>
-<p>주소가 중복되면:</p>
-<div class="codehilite"><pre><span></span><code>ARP / Routing / Return Path
-</code></pre></div>
-
-<p>문제가 생길 수 있습니다.</p>
-<hr />
-<h4 id="14-nat-한-문장-복습">14. NAT 한 문장 복습</h4>
-<h5 id="ip-nat-inside"><code>ip nat inside</code></h5>
-<blockquote>
-<p>현재 인터페이스를 NAT 내부망 방향으로 지정한다.</p>
-</blockquote>
-<h5 id="ip-nat-outside"><code>ip nat outside</code></h5>
-<blockquote>
-<p>현재 인터페이스를 NAT 외부망 방향으로 지정한다.</p>
-</blockquote>
-<h5 id="ip-nat-inside-source-list-10-pool-dnat"><code>ip nat inside source list 10 pool dnat</code></h5>
-<blockquote>
-<p>ACL 10에 해당하는 내부 출발지 주소를 <code>dnat</code> Pool의 Global 주소로 동적으로 변환한다.</p>
-</blockquote>
-<h5 id="ip-nat-inside-source-static-172161004-11110"><code>ip nat inside source static 172.16.100.4 1.1.1.10</code></h5>
-<blockquote>
-<p>내부 주소 <code>172.16.100.4</code>와 Global 주소 <code>1.1.1.10</code>을 고정으로 1:1 매핑한다.</p>
-</blockquote>
-<h5 id="show-ip-nat-statistics_1"><code>show ip nat statistics</code></h5>
-<blockquote>
-<p>NAT의 인터페이스, Pool, ACL, Hit/Miss 등 전체 상태를 확인한다.</p>
-</blockquote>
-<h5 id="show-ip-nat-translations_1"><code>show ip nat translations</code></h5>
-<h2 id="gt-현재-실제로-만들어진-nat-주소-변환-테이블을-확인한다">&gt; 현재 실제로 만들어진 NAT 주소 변환 테이블을 확인한다.</h2>
-<h3 id="acl-핵심-원칙-요약">ACL 핵심 원칙 요약</h3>
-<p>ACL(Access Control List, 접근제어목록)은 패킷을 조건에 따라 허용하거나 차단하는 정책입니다.</p>
-<h4 id="분류-기준">분류 기준</h4>
-<h5 id="1_1">1. 필터링 기준</h5>
-<div class="codehilite"><pre><span></span><code>Standard ACL
-→ 주로 출발지 IP 주소 기준
-
-Extended ACL
-→ 출발지 IP + 목적지 IP + 프로토콜 + 포트 등 세부 조건
-</code></pre></div>
-
-<h5 id="2_1">2. 설정 방식</h5>
-<div class="codehilite"><pre><span></span><code>Numbered ACL
-→ 번호로 관리
-
-Named ACL
-→ 이름으로 관리
-</code></pre></div>
-
-<h4 id="acl-검사-순서">ACL 검사 순서</h4>
-<p>ACL은:</p>
-<div class="codehilite"><pre><span></span><code>첫 번째 규칙
-   ↓
-두 번째 규칙
-   ↓
-세 번째 규칙
-   ↓
-...
-</code></pre></div>
-
-<p>순서로 위에서 아래로 검사합니다.</p>
-<p><strong>첫 번째로 일치한 규칙에서 처리가 끝납니다.</strong></p>
-<p>따라서 일반적으로:</p>
-<div class="codehilite"><pre><span></span><code>구체적이고 범위가 좁은 규칙
-        ↓
-넓고 포괄적인 규칙
-</code></pre></div>
-
-<p>순서로 배치하는 것이 좋습니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>permit host 10.10.10.3 ...
-deny 10.10.10.0/24 ...
-permit ip any any
-</code></pre></div>
-
-<p>처럼 예외 Host를 먼저 처리합니다.</p>
-<h4 id="implicit-deny">Implicit Deny</h4>
-<p>ACL 마지막에는 화면에 보이지 않는 기본 규칙이 존재합니다.</p>
-<p>Standard ACL:</p>
-<div class="codehilite"><pre><span></span><code>deny any
-</code></pre></div>
-
-<p>Extended ACL:</p>
-<div class="codehilite"><pre><span></span><code>deny ip any any
-</code></pre></div>
-
-<p>즉 아무 규칙에도 일치하지 않은 패킷은 기본적으로 차단됩니다.</p>
-<p>그래서 특정 트래픽만 막고 나머지는 모두 허용하려면 명시적으로:</p>
-<div class="codehilite"><pre><span></span><code>permit any
-</code></pre></div>
-
-<p>또는:</p>
-<div class="codehilite"><pre><span></span><code>permit ip any any
-</code></pre></div>
-
-<p>를 마지막에 추가해야 합니다.</p>
-<hr />
-<h3 id="nat-statistics-추가-확인">NAT Statistics 추가 확인</h3>
-<p>실습 후 다음 명령을 확인했습니다.</p>
-<div class="codehilite"><pre><span></span><code>show ip nat statistics
-</code></pre></div>
-
-<p>출력:</p>
-<div class="codehilite"><pre><span></span><code>Total translations: 1 (1 static, 0 dynamic, 0 extended)
-
-Outside Interfaces: Serial0/3/0
-Inside Interfaces: GigabitEthernet0/0
-
-Hits: 4  Misses: 32
-Expired translations: 24
-
-Dynamic mappings:
--- Inside Source
-access-list 10 pool dnat refCount 0
-
- pool dnat: netmask 255.255.255.0
-       start 1.1.1.1 end 1.1.1.254
-       type generic, total addresses 254 , allocated 0 (0%), misses 0
-</code></pre></div>
-
-<h4 id="total-translations-1"><code>Total translations: 1</code></h4>
-<div class="codehilite"><pre><span></span><code>Total translations: 1
-(1 static, 0 dynamic, 0 extended)
-</code></pre></div>
-
-<p>현재 NAT Translation Table에 총 1개의 변환 항목이 존재한다는 뜻입니다.</p>
-<p>구성:</p>
-<div class="codehilite"><pre><span></span><code>Static NAT  = 1
-Dynamic NAT = 0
-Extended    = 0
-</code></pre></div>
-
-<p>앞에서 설정한:</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source static 172.16.100.4 1.1.1.10
-</code></pre></div>
-
-<p>이 Static NAT 항목이 계속 유지되고 있기 때문에 <code>1 static</code>으로 보입니다.</p>
-<hr />
-<h4 id="왜-dynamic-nat은-0인가">왜 Dynamic NAT은 0인가?</h4>
-<p>앞서 <code>172.16.100.3</code>이 Dynamic NAT을 사용했을 때는:</p>
-<div class="codehilite"><pre><span></span><code>172.16.100.3 → 1.1.1.1
-</code></pre></div>
-
-<p>같은 변환이 Translation Table에 보였습니다.</p>
-<p>하지만 Dynamic NAT 항목은 영구적으로 유지되는 것이 아니라,
-사용하지 않는 상태가 일정 시간 지속되면 만료될 수 있습니다.</p>
-<p>현재 출력:</p>
-<div class="codehilite"><pre><span></span><code>0 dynamic
-Expired translations: 24
-</code></pre></div>
-
-<p>를 보면 이전에 생성된 동적 변환 항목들이 이미 만료된 것으로 볼 수 있습니다.</p>
-<p>반면 Static NAT은 사용 여부와 관계없이 설정이 존재하는 동안 유지됩니다.</p>
-<hr />
-<h4 id="hits-4"><code>Hits: 4</code></h4>
-<div class="codehilite"><pre><span></span><code>Hits: 4
-</code></pre></div>
-
-<p>NAT Translation 또는 NAT 규칙을 사용해 정상적으로 처리된 패킷과 관련된 누적 카운터입니다.</p>
-<p>쉽게 기억하면:</p>
-<blockquote>
-<p>NAT가 실제로 사용된 횟수를 확인하는 통계</p>
-</blockquote>
-<p>입니다.</p>
-<hr />
-<h4 id="misses-32"><code>Misses: 32</code></h4>
-<div class="codehilite"><pre><span></span><code>Misses: 32
-</code></pre></div>
-
-<p>NAT 처리를 위해 Translation Table을 조회했지만 기존 Translation Entry가 없어서,
-새 변환을 찾거나 생성해야 했던 경우 등에 관련된 누적 통계입니다.</p>
-<p>따라서 단순히:</p>
-<div class="codehilite"><pre><span></span><code>Miss = NAT 실패
-</code></pre></div>
-
-<p>라고 외우면 정확하지 않습니다.</p>
-<p>Packet Tracer 실습에서는 우선:</p>
-<blockquote>
-<p>NAT 변환 조회 시 기존 항목을 바로 재사용하지 못한 횟수와 관련된 값</p>
-</blockquote>
-<p>정도로 이해하면 충분합니다.</p>
-<hr />
-<h4 id="expired-translations-24"><code>Expired translations: 24</code></h4>
-<div class="codehilite"><pre><span></span><code>Expired translations: 24
-</code></pre></div>
-
-<p>일정 시간 사용되지 않아 삭제된 Dynamic Translation Entry의 누적 개수입니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>Dynamic NAT 생성
-      ↓
-통신 종료
-      ↓
-Idle 상태 유지
-      ↓
-Timeout
-      ↓
-Translation Entry 삭제
-      ↓
-Expired translations 증가
-</code></pre></div>
-
-<p>Static NAT 설정 자체는 이렇게 자동 만료되지 않습니다.</p>
-<hr />
-<h4 id="allocated-0-0"><code>allocated 0 (0%)</code></h4>
-<div class="codehilite"><pre><span></span><code>total addresses 254
-allocated 0 (0%)
-</code></pre></div>
-
-<p>NAT Pool:</p>
-<div class="codehilite"><pre><span></span><code>1.1.1.1 ~ 1.1.1.254
-</code></pre></div>
-
-<p>에는 254개의 주소가 있지만,
-현재 Dynamic NAT에서 실제 사용 중인 주소가 하나도 없다는 뜻입니다.</p>
-<p>즉:</p>
-<div class="codehilite"><pre><span></span><code>Dynamic NAT Session 없음
-→ Pool 주소 할당 0개
-</code></pre></div>
-
-<p>상태입니다.</p>
-<p>앞에서 Dynamic NAT을 테스트했더라도 해당 변환이 만료되면 다시 <code>allocated 0</code>으로 돌아갈 수 있습니다.</p>
-<hr />
-<h3 id="현재-nat-상태-한눈에-보기">현재 NAT 상태 한눈에 보기</h3>
-<div class="codehilite"><pre><span></span><code>Static NAT
-172.16.100.4 ↔ 1.1.1.10
-→ 설정 유지
-→ Total translations에 1 static으로 표시
-
-Dynamic NAT
-172.16.100.0/24
-→ Pool 1.1.1.1 ~ 1.1.1.254 사용 가능
-→ 현재 활성 Dynamic Translation 없음
-→ allocated 0
-
-이전에 생성된 Dynamic Translation
-→ 일부 만료됨
-→ Expired translations 24
-</code></pre></div>
-
-<hr />
-<h3 id="nat-statistics-읽는-순서">NAT Statistics 읽는 순서</h3>
-<p><code>show ip nat statistics</code>를 보면 다음 순서로 읽으면 쉽습니다.</p>
-<div class="codehilite"><pre><span></span><code>① Total translations
-   현재 변환 항목이 몇 개인가?
-
-② Inside / Outside Interfaces
-   NAT 방향 지정이 맞는가?
-
-③ Hits / Misses
-   NAT가 실제로 처리되고 있는가?
-
-④ Expired translations
-   만료된 동적 변환이 있는가?
-
-⑤ Dynamic mappings
-   어떤 ACL과 Pool을 사용하고 있는가?
-
-⑥ allocated
-   Pool에서 현재 몇 개 주소가 사용 중인가?
-</code></pre></div>
-
-<hr />
-<h2 id="vpn-기초-정리">VPN 기초 정리</h2>
-<h3 id="1-vpn이란">1. VPN이란?</h3>
-<p>VPN은:</p>
-<div class="codehilite"><pre><span></span><code>Virtual Private Network
-= 가상 사설망
-</code></pre></div>
-
-<p>입니다.</p>
-<p>인터넷과 같은 공용 네트워크를 사용하면서도,
-논리적으로는 사설망처럼 안전한 통신 경로를 만드는 기술입니다.</p>
-<p>쉽게 말하면:</p>
-<div class="codehilite"><pre><span></span><code>공용 인터넷
-     │
-     │ 암호화된 VPN Tunnel
-     ▼
-사설 네트워크처럼 통신
-</code></pre></div>
-
-<p>하는 방식입니다.</p>
-<p>VPN에서는 일반적으로 통신 내용을 암호화하고,
-VPN 양 끝단 또는 사용자 인증을 통해 허가된 장비/사용자만 연결하도록 구성합니다.</p>
-<hr />
-<h3 id="2-vpn의-대표적인-두-가지-형태">2. VPN의 대표적인 두 가지 형태</h3>
-<p>수업에서 우선 구분할 것은:</p>
-<div class="codehilite"><pre><span></span><code>① Site-to-Site VPN
-② Remote Access VPN
-</code></pre></div>
-
-<p>입니다.</p>
-<hr />
-<h3 id="3-site-to-site-vpn">3. Site-to-Site VPN</h3>
-<p>Site-to-Site VPN은:</p>
-<blockquote>
-<p>서로 떨어져 있는 두 개 이상의 네트워크를 VPN Tunnel로 연결하는 방식</p>
-</blockquote>
-<p>입니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>서울 본사 LAN
-192.168.10.0/24
-      │
- [VPN 장비]
-      │
-====== 인터넷 ======
-      │
- [VPN 장비]
-      │
-부산 지사 LAN
-192.168.20.0/24
-</code></pre></div>
-
-<p>두 지점의 VPN 장비가 Tunnel을 만들기 때문에,
-내부 PC들은 VPN을 직접 실행하지 않아도 서로 통신할 수 있습니다.</p>
-<p>예를 들어:</p>
-<div class="codehilite"><pre><span></span><code>서울 PC
-192.168.10.10
-       ↓
-   VPN Tunnel
-       ↓
-부산 Server
-192.168.20.20
-</code></pre></div>
-
-<p>처럼 LAN-to-LAN 통신이 가능합니다.</p>
-<p>pfSense 공식 문서에서도 Site-to-Site IPsec VPN은
-두 네트워크를 라우터로 직접 연결한 것과 비슷하게 상호 연결하는 형태로 설명합니다.</p>
-<h4 id="주로-사용하는-상황">주로 사용하는 상황</h4>
-<div class="codehilite"><pre><span></span><code>본사 ↔ 지사
-회사 ↔ 데이터센터
-사무실 A ↔ 사무실 B
-</code></pre></div>
-
-<p>처럼 <strong>네트워크 전체를 서로 연결</strong>할 때 사용합니다.</p>
-<hr />
-<h3 id="4-remote-access-vpn">4. Remote Access VPN</h3>
-<p>Remote Access VPN은:</p>
-<blockquote>
-<p>외부의 개별 사용자나 장비가 회사 내부 네트워크에 원격으로 접속하는 방식</p>
-</blockquote>
-<p>입니다.</p>
-<p>예:</p>
-<div class="codehilite"><pre><span></span><code>회사 내부망
-192.168.10.0/24
-      │
- [VPN Server]
-      │
-==== 인터넷 ====
-      │
-      │ VPN Client
-      ▼
-재택근무 노트북
-</code></pre></div>
-
-<p>사용자는 노트북이나 스마트폰에서 VPN Client를 실행하고,
-인증을 거쳐 회사 내부망에 접속합니다.</p>
-<p>pfSense에서는 OpenVPN, IPsec, WireGuard 등의 방식으로 Remote Access VPN 구성이 가능합니다.</p>
-<hr />
-<h3 id="5-site-to-site와-remote-access-비교">5. Site-to-Site와 Remote Access 비교</h3>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구분</th>
-<th>Site-to-Site</th>
-<th>Remote Access</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>연결 대상</td>
-<td>네트워크 ↔ 네트워크</td>
-<td>사용자/장비 ↔ 네트워크</td>
-</tr>
-<tr>
-<td>대표 상황</td>
-<td>본사 ↔ 지사</td>
-<td>재택근무자 ↔ 회사</td>
-</tr>
-<tr>
-<td>VPN Client</td>
-<td>일반 PC에 보통 불필요</td>
-<td>사용자 장비에 필요할 수 있음</td>
-</tr>
-<tr>
-<td>Tunnel Endpoint</td>
-<td>양쪽 VPN 장비</td>
-<td>VPN 서버 ↔ 사용자 Client</td>
-</tr>
-<tr>
-<td>관리 목적</td>
-<td>여러 LAN 연결</td>
-<td>개별 원격 사용자 접속</td>
-</tr>
-</tbody>
-</table></div>
-<p>기억:</p>
-<div class="codehilite"><pre><span></span><code>Site-to-Site
-→ 장소와 장소를 연결
-
-Remote Access
-→ 사람이 밖에서 내부망에 접속
-</code></pre></div>
-
-<hr />
-<h3 id="6-vpn-tunnel">6. VPN Tunnel</h3>
-<p>VPN에서는 흔히:</p>
-<div class="codehilite"><pre><span></span><code>Tunnel
-</code></pre></div>
-
-<p>이라는 표현을 사용합니다.</p>
-<p>실제 전용선을 새로 설치하는 것이 아니라,
-인터넷 위에 논리적인 통신 경로를 만들어 사용하는 것입니다.</p>
-<p>개념적으로:</p>
-<div class="codehilite"><pre><span></span><code>원래 인터넷 경로
-A ----------------------------- B
-
-VPN 사용
-A ===== 암호화된 Tunnel ===== B
-</code></pre></div>
-
-<p>처럼 생각하면 됩니다.</p>
-<hr />
-<h3 id="7-vpn에서-자주-사용하는-기술">7. VPN에서 자주 사용하는 기술</h3>
-<p>대표적인 VPN 기술:</p>
-<div class="codehilite"><pre><span></span><code>IPsec
-OpenVPN
-WireGuard
-</code></pre></div>
-
-<h4 id="ipsec">IPsec</h4>
-<p>IP 계층에서 패킷을 보호하는 VPN 기술입니다.</p>
-<p>Site-to-Site VPN에서 매우 흔하게 사용됩니다.</p>
-<p>pfSense 공식 문서에서도 서로 다른 VPN 장비 간
-Site-to-Site 연결에서는 IPsec이 일반적인 선택이라고 설명합니다.</p>
-<h4 id="openvpn">OpenVPN</h4>
-<p>SSL/TLS 기반으로 구성할 수 있는 VPN 솔루션입니다.</p>
-<p>다음 모두에 사용할 수 있습니다.</p>
-<div class="codehilite"><pre><span></span><code>Site-to-Site
-Remote Access
-</code></pre></div>
-
-<h4 id="wireguard">WireGuard</h4>
-<p>비교적 단순한 구조와 현대적인 암호 기술을 사용하는 VPN 방식입니다.</p>
-<p>pfSense에서도 Site-to-Site 및 Remote Access 형태로 구성할 수 있습니다.</p>
-<hr />
-<h3 id="8-pfsense">8. pfSense</h3>
-<p>필기의:</p>
-<div class="codehilite"><pre><span></span><code>pf sense
-</code></pre></div>
-
-<p>는 정확한 표기로:</p>
-<div class="codehilite"><pre><span></span><code>pfSense
-</code></pre></div>
-
-<p>입니다.</p>
-<p>pfSense는 방화벽과 라우팅 기능을 제공하는 네트워크 소프트웨어로,
-VPN 기능도 제공합니다.</p>
-<p>예를 들어 pfSense에서 구성할 수 있는 VPN으로:</p>
-<div class="codehilite"><pre><span></span><code>IPsec
-OpenVPN
-WireGuard
-</code></pre></div>
-
-<p>등이 있습니다.</p>
-<p>따라서 실습에서는 pfSense를 사용해서:</p>
-<div class="codehilite"><pre><span></span><code>Firewall
-Routing
-NAT
-VPN
-</code></pre></div>
-
-<p>같은 네트워크/보안 기능을 함께 학습할 수 있습니다.</p>
-<hr />
-<h3 id="9-utn-필기-확인--utm일-가능성이-높음">9. <code>utn</code> 필기 확인 — UTM일 가능성이 높음</h3>
-<p>수업 필기의:</p>
-<div class="codehilite"><pre><span></span><code>utn
-</code></pre></div>
-
-<p>은 현재 문맥상:</p>
-<div class="codehilite"><pre><span></span><code>UTM
-</code></pre></div>
-
-<p>을 적은 것일 가능성이 높습니다.</p>
-<p>UTM:</p>
-<div class="codehilite"><pre><span></span><code>Unified Threat Management
-= 통합 위협 관리
-</code></pre></div>
-
-<p>입니다.</p>
-<p>NIST에서도 UTM을 <code>Unified Threat Management</code>로 정의하고 있으며,
-일반적으로 하나의 보안 장비/플랫폼에 여러 네트워크 보안 기능을 통합하는 개념입니다.</p>
-<p>대표 기능:</p>
-<div class="codehilite"><pre><span></span><code>Firewall
-VPN
-IDS / IPS
-Anti-malware
-Web Filtering
-</code></pre></div>
-
-<p>등입니다.</p>
-<p>즉:</p>
-<div class="codehilite"><pre><span></span><code>UTM 장비
- ├─ Firewall
- ├─ VPN
- ├─ IDS/IPS
- ├─ Web Filtering
- └─ 기타 보안 기능
-</code></pre></div>
-
-<p>처럼 하나의 장비에서 여러 보안 기능을 제공하는 형태입니다.</p>
-<blockquote>
-<p>주의: 수업에서 실제로 <code>UTN</code>이라는 별도 제품/용어를 말한 것이라면 이 해석은 달라질 수 있습니다. 현재 필기와 네트워크 보안 문맥으로는 <code>UTM</code> 오타일 가능성이 가장 높습니다.</p>
-</blockquote>
-<hr />
-<h3 id="10-pfsense와-utm의-관계를-이해하는-방법">10. pfSense와 UTM의 관계를 이해하는 방법</h3>
-<p>초보 단계에서는 다음처럼 이해하면 편합니다.</p>
-<div class="codehilite"><pre><span></span><code>전통적인 Router
-→ Routing 중심
-
-Firewall
-→ 허용/차단 중심
-
-UTM
-→ Firewall + VPN + IDS/IPS 등 보안 기능 통합
-
-pfSense
-→ Firewall / Routing / NAT / VPN 등의 기능을 제공하는 플랫폼
-</code></pre></div>
-
-<p>pfSense를 무조건 하나의 특정 상용 UTM 제품과 동일시하기보다는,
-여러 네트워크·보안 기능을 통합해 사용할 수 있는 방화벽 플랫폼으로 이해하는 것이 정확합니다.</p>
-<hr />
-<h3 id="11-vpn-전체-그림">11. VPN 전체 그림</h3>
-<div class="codehilite"><pre><span></span><code>                 Internet
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-Site-to-Site VPN           Remote Access VPN
-        │                       │
-본사 LAN ↔ 지사 LAN        사용자 PC → 회사 LAN
-        │                       │
-네트워크 전체 연결          개별 사용자 접속
-</code></pre></div>
-
-<hr />
-<h3 id="12-한-문장-복습">12. 한 문장 복습</h3>
-<h4 id="vpn">VPN</h4>
-<blockquote>
-<p>공용 네트워크 위에 논리적으로 사설 통신망을 만들어 안전하게 통신하는 기술이다.</p>
-</blockquote>
-<h4 id="site-to-site-vpn">Site-to-Site VPN</h4>
-<blockquote>
-<p>서로 떨어진 두 네트워크를 VPN Tunnel로 연결한다.</p>
-</blockquote>
-<h4 id="remote-access-vpn">Remote Access VPN</h4>
-<blockquote>
-<p>외부 사용자가 VPN Client를 통해 내부 네트워크에 접속한다.</p>
-</blockquote>
-<h4 id="utm">UTM</h4>
-<blockquote>
-<p>방화벽, VPN, IDS/IPS 등 여러 보안 기능을 하나의 플랫폼에 통합하는 개념이다.</p>
-</blockquote>
-<h4 id="pfsense">pfSense</h4>
-<blockquote>
-<p>방화벽, 라우팅, NAT, VPN 등의 네트워크 기능을 구성할 수 있는 방화벽 소프트웨어 플랫폼이다.</p>
-</blockquote><div class="nav"><a href="ch02.html"><span class="lbl">이전</span>커리큘럼 지도</a><a href="ch04.html"><span class="lbl">다음</span>Rocky Linux 9 개인 서버랩 학습 노트</a></div></main>
+</table></div><div class="nav"><a href="ch02.html"><span class="lbl">이전</span>커리큘럼 지도</a><a href="ch04.html"><span class="lbl">다음</span>260818 Cisco Packet Tracer 실습 정리</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
 <script>

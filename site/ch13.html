@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>핵심키워드 · 리눅스 서버 (2/2) · SKT ALEPH 학습 노트</title>
+<title>핵심키워드 · 네트워크 (2/3) · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -108,92 +108,41 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="cur" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="inchap"><a class="lv3" href="#063-loganalyzer-웹-설치-http-오류-코드와-selinux-파일-권한">063. LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</a><a class="lv4" href="#1-loganalyzer-웹-설치-과정-개요">1. LogAnalyzer 웹 설치 과정 개요</a><a class="lv4" href="#2-http-오류-코드">2. HTTP 오류 코드</a><a class="lv4" href="#3-selinux-파일-권한--chcon-명령어">3. SELinux 파일 권한 — chcon 명령어</a><a class="lv4" href="#4-loganalyzer-웹-화면-구성">4. LogAnalyzer 웹 화면 구성</a><a class="lv3" href="#064-loganalyzer-wget-명령어-압축-파일-형식-쉘-스크립트-개념">064. LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</a><a class="lv4" href="#1-loganalyzer-개요">1. LogAnalyzer 개요</a><a class="lv4" href="#2-wget-명령어--셸에서-파일-다운로드">2. wget 명령어 — 셸에서 파일 다운로드</a><a class="lv4" href="#3-압축-파일-형식--tar와-gz">3. 압축 파일 형식 — tar와 gz</a><a class="lv4" href="#4-셸-스크립트shell-script">4. 셸 스크립트(Shell Script)</a><a class="lv4" href="#5-loganalyzer의-웹-디렉토리-구조">5. LogAnalyzer의 웹 디렉토리 구조</a><a class="lv3" href="#066-rsyslog-mysql-패키지db-설정">066. rsyslog-mysql 패키지(DB 설정)</a><a class="lv4" href="#1-로그-저장을-위한-데이터베이스-구조">1. 로그 저장을 위한 데이터베이스 구조</a><a class="lv4" href="#2-생성되는-데이터베이스-구조">2. 생성되는 데이터베이스 구조</a><a class="lv4" href="#3-mariadb-사용자-권한-설정">3. MariaDB 사용자 권한 설정</a><a class="lv4" href="#4-rsyslog-출력-모듈-설정-mysql-연동">4. rsyslog 출력 모듈 설정 (MySQL 연동)</a><a class="lv2" href="#etcrsyslogconf-파일-수정-modload-ommysql--mysql-출력-모듈-로드--ommysqldb서버ipsyslogrsyslogpassword--모든-로그를-db로-전송">/etc/rsyslog.conf 파일 수정 $ModLoad ommysql              ← MySQL 출력 모듈 로드 .   :ommysql:[DB서버IP],syslog,rsyslog,password    ← 모든 로그를 DB로 전송</a><a class="lv3" href="#067-rsyslog를-활용한-로그-전송">067. rsyslog를 활용한 로그 전송</a><a class="lv4" href="#1-중앙-집중형-로그-서버의-필요성">1. 중앙 집중형 로그 서버의 필요성</a><a class="lv4" href="#2-rsyslog-서비스">2. rsyslog 서비스</a><a class="lv4" href="#3-rsyslog-서버-설정">3. rsyslog 서버 설정</a><a class="lv4" href="#4-rsyslog-클라이언트-설정">4. rsyslog 클라이언트 설정</a><a class="lv4" href="#5-네트워크-연결-확인-명령어">5. 네트워크 연결 확인 명령어</a><a class="lv4" href="#6-파이프-명령어">6. 파이프(|) 명령어</a><a class="lv4" href="#7-실시간-로그-모니터링">7. 실시간 로그 모니터링</a><a class="lv3" href="#068-syslog-facility-priority의-개념-로그-레벨-이해">068. Syslog Facility Priority의 개념, 로그 레벨 이해</a><a class="lv4" href="#1-syslog-개요">1. Syslog 개요</a><a class="lv4" href="#2-facility-시설카테고리">2. Facility (시설/카테고리)</a><a class="lv4" href="#3-priority-우선순위심각도">3. Priority (우선순위/심각도)</a><a class="lv4" href="#4-facility와-priority의-조합">4. Facility와 Priority의 조합</a><a class="lv4" href="#5-syslog-설정-원리">5. Syslog 설정 원리</a><a class="lv3" href="#069-시스템-로그-관리-및-분석리눅스-웹-서버">069. 시스템 로그 관리 및 분석(리눅스 웹 서버)</a><a class="lv4" href="#1-로그-관리의-중요성">1. 로그 관리의 중요성</a><a class="lv4" href="#2-웹-서버-로그-구조">2. 웹 서버 로그 구조</a><a class="lv4" href="#3-http-웹-서비스-로그">3. HTTP 웹 서비스 로그</a><a class="lv4" href="#4-기타-서비스-로그">4. 기타 서비스 로그</a><a class="lv4" href="#5-사용자-로그인-기록-파일">5. 사용자 로그인 기록 파일</a><a class="lv4" href="#6-명령어-히스토리">6. 명령어 히스토리</a><a class="lv4" href="#7-secure-로그-파일">7. Secure 로그 파일</a><a class="lv4" href="#8-messages-로그-파일">8. Messages 로그 파일</a><a class="lv4" href="#9-시스로그syslog-관리">9. 시스로그(Syslog) 관리</a><a class="lv4" href="#10-기본-로그-파일-정리">10. 기본 로그 파일 정리</a><a class="lv3" href="#074-리눅스-계정-파일-구조-salt-파일-권한과-umask">074. 리눅스 계정 파일 구조, Salt, 파일 권한과 umask</a><a class="lv4" href="#1-리눅스-계정-관리-개요">1. 리눅스 계정 관리 개요</a><a class="lv4" href="#2-etcpasswd-파일-구조">2. /etc/passwd  파일 구조</a><a class="lv4" href="#3-etcshadow-파일-구조">3. /etc/shadow  파일 구조</a><a class="lv4" href="#4-패스워드-암호화-알고리즘과-솔트salt">4. 패스워드 암호화 알고리즘과 솔트(Salt)</a><a class="lv4" href="#5-파일-및-디렉토리-유형-표기">5. 파일 및 디렉토리 유형 표기</a><a class="lv4" href="#6-파일-권한과-umask">6. 파일 권한과 umask</a><a class="lv4" href="#7-파일-권한-변경-chmod">7. 파일 권한 변경 (chmod)</a><a class="lv4" href="#8-소유주-및-그룹-변경-chown-chgrp">8. 소유주 및 그룹 변경 (chown, chgrp)</a><a class="lv4" href="#9-계정-관리와-스크립트-활용">9. 계정 관리와 스크립트 활용</a><a class="lv3" href="#075-리눅스-기본-명령어-도움말시스템탐색-명령어">075. 리눅스 기본 명령어, 도움말·시스템·탐색 명령어</a><a class="lv4" href="#1-리눅스-명령어-구조">1. 리눅스 명령어 구조</a><a class="lv4" href="#2-도움말-명령어">2. 도움말 명령어</a><a class="lv4" href="#3-시스템-종료-및-재부팅">3. 시스템 종료 및 재부팅</a><a class="lv4" href="#4-history-명령어">4. history 명령어</a><a class="lv4" href="#5-echo-명령어">5. echo 명령어</a><a class="lv4" href="#6-date-명령어">6. date 명령어</a><a class="lv4" href="#7-계정-및-접속-정보-확인-명령어">7. 계정 및 접속 정보 확인 명령어</a><a class="lv4" href="#8-find-명령어">8. find 명령어</a><a class="lv4" href="#9-ls-명령어-주요-옵션">9. ls 명령어 주요 옵션</a><a class="lv4" href="#10-mkdir-명령어---하위-디렉토리-일괄-생성">10. mkdir 명령어 - 하위 디렉토리 일괄 생성</a><a class="lv4" href="#11-rmdir-명령어---빈-디렉토리-삭제">11. rmdir 명령어 - 빈 디렉토리 삭제</a><a class="lv3" href="#077-파일-조작검색출력-명령어-표준-입출력과-리디렉션">077. 파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</a><a class="lv4" href="#1-rm-명령어-파일디렉토리-삭제">1. rm 명령어 (파일·디렉토리 삭제)</a><a class="lv4" href="#2-mv-명령어-이동-및-이름-변경">2. mv 명령어 (이동 및 이름 변경)</a><a class="lv4" href="#3-file-명령어-파일-유형-확인">3. file 명령어 (파일 유형 확인)</a><a class="lv4" href="#4-tac-명령어-역순-출력">4. tac 명령어 (역순 출력)</a><a class="lv4" href="#5-sort-명령어-정렬">5. sort 명령어 (정렬)</a><a class="lv4" href="#6-nmcli-명령어-네트워크-설정-cli">6. nmcli 명령어 (네트워크 설정 CLI)</a><a class="lv4" href="#7-find-명령어-심화--다중-조건-검색">7. find 명령어 심화 — 다중 조건 검색</a><a class="lv4" href="#8-whereis-명령어-명령어-위치-검색">8. whereis 명령어 (명령어 위치 검색)</a><a class="lv4" href="#9-grep-명령어-문자열-검색">9. grep 명령어 (문자열 검색)</a><a class="lv4" href="#10-표준-입출력-스트림">10. 표준 입출력 스트림</a><a class="lv4" href="#11-리디렉션redirection">11. 리디렉션(Redirection)</a><a class="lv3" href="#089-linux-패스워드-정책-파라미터-설정">089. Linux 패스워드 정책 파라미터 설정</a><a class="lv4" href="#1-windows-dns-연동-테스트-확인">1. Windows DNS 연동 테스트 확인</a><a class="lv4" href="#2-linux-머신-전환-및-패스워드-정책-파일-확인">2. Linux 머신 전환 및 패스워드 정책 파일 확인</a><a class="lv4" href="#3-pwqualityconf-주요-파라미터">3. pwquality.conf 주요 파라미터</a><a class="lv2" href="#difok--1">difok = 1</a><a class="lv2" href="#minlen--8">minlen = 8</a><a class="lv4" href="#4-문자-종류별-최소-개수-설정-credit-파라미터">4. 문자 종류별 최소 개수 설정 (Credit 파라미터)</a><a class="lv2" href="#dcredit--1-패스워드에-포함되어야-하는-숫자09의-최소-개수이다-값이-2이면-숫자가-최소-2개-이상-포함되어야-한다">dcredit = 1 패스워드에 포함되어야 하는 숫자(0~9)의 최소 개수이다. 값이 2이면 숫자가 최소 2개 이상 포함되어야 한다.</a><a class="lv2" href="#ucredit--1-패스워드에-포함되어야-하는-영문-대문자의-최소-개수이다-값이-1이면-대문자가-최소-1개-이상-포함되어야-한다">ucredit = 1 패스워드에 포함되어야 하는 영문 대문자의 최소 개수이다. 값이 1이면 대문자가 최소 1개 이상 포함되어야 한다.</a><a class="lv2" href="#lcredit--1-패스워드에-포함되어야-하는-영문-소문자의-최소-개수이다-값이-1이면-소문자가-최소-1개-이상-포함되어야-한다">lcredit = 1 패스워드에 포함되어야 하는 영문 소문자의 최소 개수이다. 값이 1이면 소문자가 최소 1개 이상 포함되어야 한다.</a><a class="lv2" href="#ocredit--1-패스워드에-포함되어야-하는-특수문자의-최소-개수이다-값이-2이면-특수문자가-최소-2개-이상-포함되어야-한다">ocredit = 1 패스워드에 포함되어야 하는 특수문자의 최소 개수이다. 값이 2이면 특수문자가 최소 2개 이상 포함되어야 한다.</a><a class="lv4" href="#5-추가-복잡도-설정-파라미터">5. 추가 복잡도 설정 파라미터</a><a class="lv2" href="#minclass--0-패스워드를-만들-때-반드시-포함해야-하는-문자-종류숫자-대문자-소문자-특수문자의-최소-수이다">minclass = 0 패스워드를 만들 때 반드시 포함해야 하는 문자 종류(숫자, 대문자, 소문자, 특수문자)의 최소 수이다.</a><a class="lv2" href="#maxrepeat--0-동일한-문자가-연달아-나올-수-있는-최대-개수이다-값이-2이면-aa-는-허용되지만-aaa-는-허-용되지-않는다-연속이-아닌-경우예-a3a4a-는-각각-1개로-취급한다">maxrepeat = 0 동일한 문자가 연달아 나올 수 있는 최대 개수이다. 값이 2이면 aa 는 허용되지만 aaa 는 허 용되지 않는다. 연속이 아닌 경우(예: a3a4a )는 각각 1개로 취급한다.</a><a class="lv2" href="#maxclassrepeat--0-같은-문자-종류숫자-대문자-소문자-특수문자가-연속으로-나올-수-있는-최대-개수이다-값이-2이면-1a-다음에-같은-종류의-문자가-2번-이상-연달아-오면-안-된다-패스워드의-문자-종-류가-매번-달라져야-한다">maxclassrepeat = 0 같은 문자 종류(숫자, 대문자, 소문자, 특수문자)가 연속으로 나올 수 있는 최대 개수이다. 값이 2이면 1A  다음에 같은 종류의 문자가 2번 이상 연달아 오면 안 된다. 패스워드의 문자 종 류가 매번 달라져야 한다.</a><a class="lv2" href="#gecoscheck--0-etcpasswd-파일의-gecos-필드계정-정보-필드에-포함된-3글자-이상의-단어가-새-패스워드에-포함되어-있는지-검사한다-잘-사용하지-않는-옵션이다">gecoscheck = 0 /etc/passwd  파일의 GECOS 필드(계정 정보 필드)에 포함된 3글자 이상의 단어가 새 패스워드에 포함되어 있는지 검사한다. 잘 사용하지 않는 옵션이다.</a><a class="lv2" href="#dictcheck--1-사전dictionary에-있는-단어가-패스워드로-사용되는-것을-방지한다-예를-들어-flower-와-같이-사전에-있는-단어를-패스워드로-설정하면-거부된다-값을-0으로-설정하면-검사를-비활성화한다">dictcheck = 1 사전(Dictionary)에 있는 단어가 패스워드로 사용되는 것을 방지한다. 예를 들어 flower 와 같이 사전에 있는 단어를 패스워드로 설정하면 거부된다. 값을 0으로 설정하면 검사를 비활성화한다.</a><a class="lv4" href="#6-pwqualityconf-파라미터-전체-요약">6. pwquality.conf 파라미터 전체 요약</a><a class="lv3" href="#090-pam-인증-설정-및-auth-select-명령어">090. PAM 인증 설정 및 auth-select 명령어</a><a class="lv4" href="#1-etcpamd-디렉토리-개요">1. /etc/pam.d 디렉토리 개요</a><a class="lv4" href="#2-pampwquality-모듈-추가">2. pam_pwquality 모듈 추가</a><a class="lv4" href="#3-auth-select-명령어">3. auth-select 명령어</a><a class="lv4" href="#4-패스워드-정책-적용-권장-방식">4. 패스워드 정책 적용 권장 방식</a><a class="lv3" href="#097-우분투-서버-개요-및-virtualbox-설치-준비">097. 우분투 서버 개요 및 VirtualBox 설치 준비</a><a class="lv4" href="#1-우분투-버전-구분">1. 우분투 버전 구분</a><a class="lv4" href="#2-우분투와-로키-리눅스의-주요-차이점">2. 우분투와 로키 리눅스의 주요 차이점</a><a class="lv4" href="#3-virtualbox-가상-머신-생성-시-주의사항">3. VirtualBox 가상 머신 생성 시 주의사항</a><a class="lv4" href="#4-우분투-서버-네트워크-설정">4. 우분투 서버 네트워크 설정</a><a class="lv4" href="#5-오픈-ssh-서버">5. 오픈 SSH 서버</a><a class="lv4" href="#6-lxd--도커docker-소개">6. LXD / 도커(Docker) 소개</a><a class="lv3" href="#098-우분투-서버-기본-명령-환경-및-네트워크-설정">098. 우분투 서버 기본 명령 환경 및 네트워크 설정</a><a class="lv4" href="#1-리눅스-배포판-계열-비교">1. 리눅스 배포판 계열 비교</a><a class="lv4" href="#2-apt-명령어">2. apt 명령어</a><a class="lv4" href="#3-sudo-명령어">3. sudo 명령어</a><a class="lv4" href="#4-ping-유틸리티-설치">4. ping 유틸리티 설치</a><a class="lv4" href="#5-파일-권한과-sudo의-관계">5. 파일 권한과 sudo의 관계</a><a class="lv4" href="#6-우분투-서버-네트워크-설정-파일">6. 우분투 서버 네트워크 설정 파일</a><a class="lv4" href="#7-icmp와-ping-개념">7. ICMP와 ping 개념</a><a class="lv4" href="#8-dos--ddos-공격-개념">8. DoS / DDoS 공격 개념</a><a class="lv4" href="#9-virtualbox-가상-머신-복제">9. VirtualBox 가상 머신 복제</a><a class="lv4" href="#10-복제-후-정적-ip-설정-변경">10. 복제 후 정적 IP 설정 변경</a><a class="lv3" href="#115-셸-스크립트-기본-문법-및-awksed-텍스트-처리-도구">115. 셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</a><a class="lv4" href="#1-셸shell-개요">1. 셸(Shell) 개요</a><a class="lv4" href="#2-셸-스크립트-개요">2. 셸 스크립트 개요</a><a class="lv4" href="#3-셸-스크립트-기본-구조">3. 셸 스크립트 기본 구조</a><a class="lv2" href="#이-줄은-주석이다-실행되지-않음">이 줄은 주석이다 (실행되지 않음)</a><a class="lv4" href="#4-변수">4. 변수</a><a class="lv4" href="#5-조건문-if">5. 조건문 (if)</a><a class="lv4" href="#6-사용자-입력-받기">6. 사용자 입력 받기</a><a class="lv4" href="#7-반복문">7. 반복문</a><a class="lv4" href="#8-awk">8. AWK</a><a class="lv2" href="#usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만-출력-awk-3-gt-30--print-1-3--usertxt">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만 출력 awk &#x27;$3 &amp;gt;= 30 { print $1, $3 }&#x27; user.txt</a><a class="lv4" href="#9-sed">9. SED</a><a class="lv2" href="#serverconf-파일에서-disabled를-enable로-치환하여-출력-원본-유지-sed-sdisabledenableg-serverconf--원본-파일-자체를-수정하려면--i-옵션-추가-sed--i-sdisabledenableg-serverconf---i-옵션-없이-실행하면-변경된-내용이-화면에만-출력되고-원본-파일은-수정되지-않는다">server.conf 파일에서 &#x27;disabled&#x27;를 &#x27;enable&#x27;로 치환하여 출력 (원본 유지) sed &#x27;s/disabled/enable/g&#x27; server.conf # 원본 파일 자체를 수정하려면 -i 옵션 추가 sed -i &#x27;s/disabled/enable/g&#x27; server.conf ⚠️ -i  옵션 없이 실행하면 변경된 내용이 화면에만 출력되고 원본 파일은 수정되지 않는다.</a><a class="lv4" href="#10-셸-스크립트-매개변수argument">10. 셸 스크립트 매개변수(Argument)</a><a class="lv4" href="#11-셸-스크립트-문법-검사-도구">11. 셸 스크립트 문법 검사 도구</a><a class="lv4" href="#12-시스템-취약점-점검-가이드-소개">12. 시스템 취약점 점검 가이드 소개</a></div><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="cur" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><div class="inchap"><a class="lv3" href="#021-이중화-회선-구성---부하-분산-장애-대비-다중-경로-라우팅">021. 이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</a><a class="lv4" href="#1-이중화-회선-구성">1. 이중화 회선 구성</a><a class="lv4" href="#1-저장--반드시-먼저-설정-저장">1. 저장 ← 반드시 먼저 설정 저장</a><a class="lv4" href="#2-전원-차단--장비-전원-끔">2. 전원 차단 ← 장비 전원 끔</a><a class="lv4" href="#3-모듈-설치--physical-섹션에서-시리얼-모듈-추가">3. 모듈 설치 ← Physical 섹션에서 시리얼 모듈 추가</a><a class="lv4" href="#4-전원-재시동--장비-전원-켬">4. 전원 재시동 ← 장비 전원 켬</a><a class="lv4" href="#2-라우팅-테이블의-변화">2. 라우팅 테이블의 변화</a><a class="lv4" href="#3-부하-분산load-balancing">3. 부하 분산(Load Balancing)</a><a class="lv4" href="#4-이중화-설정의-실행">4. 이중화 설정의 실행</a><a class="lv4" href="#5-다중-회선의-라우팅-복잡성">5. 다중 회선의 라우팅 복잡성</a><a class="lv4" href="#6-라우팅-정보-저장">6. 라우팅 정보 저장</a><a class="lv4" href="#7-이중화-라우팅의-고급-개념">7. 이중화 라우팅의 고급 개념</a><a class="lv4" href="#8-네트워크-설정의-실제-적용">8. 네트워크 설정의 실제 적용</a><a class="lv4" href="#1-주소-설정--모든-인터페이스에-ip-주소-할당">1. 주소 설정 ← 모든 인터페이스에 IP 주소 할당</a><a class="lv4" href="#2-인터페이스-활성화--no-shutdown-설정">2. 인터페이스 활성화 ← no shutdown 설정</a><a class="lv4" href="#3-라우팅-설정--경로-정보-입력">3. 라우팅 설정 ← 경로 정보 입력</a><a class="lv4" href="#4-라우팅-테이블-확인--show-ip-route">4. 라우팅 테이블 확인 ← show ip route</a><a class="lv4" href="#5-통신-테스트--ping-명령어로-검증">5. 통신 테스트 ← ping 명령어로 검증</a><a class="lv3" href="#022-dhcp-동적-호스트-주소-할당-프로토콜의-개념과-설정">022. DHCP 동적 호스트 주소 할당 프로토콜의 개념과 설정</a><a class="lv4" href="#1-dhcp-개요">1. DHCP 개요</a><a class="lv4" href="#2-dhcp-설정-명령어">2. DHCP 설정 명령어</a><a class="lv4" href="#3-dhcp-동작-원리">3. DHCP 동작 원리</a><a class="lv4" href="#4-dhcp-테이블-확인">4. DHCP 테이블 확인</a><a class="lv4" href="#5-고정-ip와-동적-ip">5. 고정 IP와 동적 IP</a><a class="lv3" href="#023-dhcp-릴레이-개념과-ospf-기초-에어리어-구조-및-설정">023. DHCP 릴레이 개념과 OSPF 기초 에어리어 구조 및 설정</a><a class="lv4" href="#1-dhcp-릴레이">1. DHCP 릴레이</a><a class="lv4" href="#2-기존-라우팅-프로토콜-설정-삭제">2. 기존 라우팅 프로토콜 설정 삭제</a><a class="lv4" href="#3-ospf-기초">3. OSPF 기초</a><a class="lv4" href="#4-ospf-에어리어-미스매치">4. OSPF 에어리어 미스매치</a><a class="lv4" href="#5-라우터-아이디router-id">5. 라우터 아이디(Router ID)</a><a class="lv3" href="#024-ospf-virtual-link와-fhrp-hsrp-게이트웨이-이중화">024. OSPF Virtual Link와 FHRP HSRP 게이트웨이 이중화</a><a class="lv4" href="#1-virtual-link와-라우터-id">1. Virtual Link와 라우터 ID</a><a class="lv4" href="#2-fhrp-first-hop-redundancy-protocol">2. FHRP (First Hop Redundancy Protocol)</a><a class="lv4" href="#3-hsrp-hot-standby-router-protocol">3. HSRP (Hot Standby Router Protocol)</a><a class="lv3" href="#025-vlan-기반-서브네팅과-l3-스위치-설정">025. VLAN 기반 서브네팅과 L3 스위치 설정</a><a class="lv4" href="#1-vlan과-서브네팅">1. VLAN과 서브네팅</a><a class="lv4" href="#2-l3-스위치">2. L3 스위치</a><a class="lv4" href="#3-라우터-서브-인터페이스와-encapsulation-dot1q">3. 라우터 서브 인터페이스와 Encapsulation DOT1Q</a><a class="lv4" href="#4-라우터와-스위치의-역할-구분">4. 라우터와 스위치의 역할 구분</a><a class="lv3" href="#026-라우터-id-loopback-인터페이스-dr-bdr-개념">026. 라우터 ID, Loopback 인터페이스, DR BDR 개념</a><a class="lv4" href="#1-라우터-아이디router-id-심화">1. 라우터 아이디(Router ID) 심화</a><a class="lv4" href="#2-loopback-인터페이스">2. Loopback 인터페이스</a><a class="lv4" href="#3-확장형-핑-extended-ping">3. 확장형 핑 (Extended Ping)</a><a class="lv4" href="#4-dr--bdr-designated-router--backup-designated">4. DR / BDR (Designated Router / Backup Designated</a><a class="lv3" href="#027-acl-규칙의-순서와-정책-관리">027. ACL 규칙의 순서와 정책 관리</a><a class="lv4" href="#1-acl-규칙의-순서-중요성">1. ACL 규칙의 순서 중요성</a><a class="lv4" href="#1-첫-번째-규칙과-비교">1. 첫 번째 규칙과 비교</a><a class="lv4" href="#2-일치하면-해당-규칙-적용-후-더-이상의-규칙은-검사하지-않음">2. 일치하면 해당 규칙 적용 후 더 이상의 규칙은 검사하지 않음</a><a class="lv4" href="#3-일치하지-않으면-다음-규칙으로-진행">3. 일치하지 않으면 다음 규칙으로 진행</a><a class="lv4" href="#2-acl-규칙-추가와-라인-번호">2. ACL 규칙 추가와 라인 번호</a><a class="lv4" href="#3-실무에서의-acl-관리-방법">3. 실무에서의 ACL 관리 방법</a><a class="lv4" href="#1-계획-단계-메모장이나-문서-작성-프로그램에-acl-정책-전체를-작성">1. 계획 단계: 메모장이나 문서 작성 프로그램에 ACL 정책 전체를 작성</a><a class="lv4" href="#2-검증-단계-클라이언트-요구사항-및-조직의-보안-정책과-일치하는지-확인">2. 검증 단계: 클라이언트 요구사항 및 조직의 보안 정책과 일치하는지 확인</a><a class="lv4" href="#3-적용-단계-검증이-완료된-후-라우터에-입력">3. 적용 단계: 검증이 완료된 후 라우터에 입력</a><a class="lv4" href="#4-라인-번호를-이용한-규칙-관리">4. 라인 번호를 이용한 규칙 관리</a><a class="lv4" href="#5-acl-설정의-best-practice">5. ACL 설정의 Best Practice</a><a class="lv4" href="#6-acl-다음-단계-nat의-필요성">6. ACL 다음 단계: NAT의 필요성</a><a class="lv3" href="#028-acl-및-nat-개념과-역할-이해">028. ACL 및 NAT 개념과 역할 이해</a><a class="lv4" href="#1-acl접근-제어-목록-access-control-list-개요">1. ACL(접근 제어 목록; Access Control List) 개요</a><a class="lv4" href="#2-acl의-분류">2. ACL의 분류</a><a class="lv4" href="#3-acl-설정의-기본-개념">3. ACL 설정의 기본 개념</a><a class="lv4" href="#1-허용차단-여부-permit-또는-deny">1. 허용/차단 여부 (permit 또는 deny)</a><a class="lv4" href="#2-프로토콜-종류-tcp-udp-icmp-등">2. 프로토콜 종류 (TCP, UDP, ICMP 등)</a><a class="lv4" href="#3-출발지-주소-source">3. 출발지 주소 (source)</a><a class="lv4" href="#4-목적지-주소-destination">4. 목적지 주소 (destination)</a><a class="lv4" href="#5-특정-서비스-포트-번호-또는-키워드">5. 특정 서비스 (포트 번호 또는 키워드)</a><a class="lv4" href="#4-acl의-동작-원리">4. ACL의 동작 원리</a><a class="lv4" href="#5-named-acl">5. Named ACL</a><a class="lv4" href="#6-natnetwork-address-translation-개요">6. NAT(Network Address Translation) 개요</a><a class="lv4" href="#1-ip-부족-사설-ip-대역을-사용하면서-공인-ip를-효율적으로-활용">1. IP 부족: 사설 IP 대역을 사용하면서 공인 IP를 효율적으로 활용</a><a class="lv4" href="#2-보안-내부-네트워크-구조를-외부에-노출하지-않음">2. 보안: 내부 네트워크 구조를 외부에 노출하지 않음</a><a class="lv4" href="#3-네트워크-독립성-내부-주소-변경-시-외부-영향-최소화">3. 네트워크 독립성: 내부 주소 변경 시 외부 영향 최소화</a><a class="lv4" href="#7-ip-주소의-분류">7. IP 주소의 분류</a><a class="lv4" href="#8-nat의-종류">8. NAT의 종류</a><a class="lv4" href="#9-patport-address-translation">9. PAT(Port Address Translation)</a><a class="lv4" href="#10-가정용-공유기의-natpat">10. 가정용 공유기의 NAT/PAT</a><a class="lv4" href="#11-acl과-nat의-관계">11. ACL과 NAT의 관계</a><a class="lv4" href="#1-acl-정책으로-변환할-사설-ip-범위-정의">1. ACL 정책으로 변환할 사설 IP 범위 정의</a><a class="lv4" href="#2-nat-풀pool로-공인-ip-범위-정의">2. NAT 풀(pool)로 공인 IP 범위 정의</a><a class="lv4" href="#3-acl과-nat-풀을-연결하는-명령-실행">3. ACL과 NAT 풀을 연결하는 명령 실행</a><a class="lv4" href="#12-nat의-보안-측면">12. NAT의 보안 측면</a><a class="lv3" href="#029-acl의-개념-및-필터링-원리">029. ACL의 개념 및 필터링 원리</a><a class="lv4" href="#1-acl접근-제어-목록-개요">1. ACL(접근 제어 목록) 개요</a><a class="lv4" href="#3-환경-세팅">3. 환경 세팅</a><a class="lv3" href="#030-acl의-유형별-특징-및-필터링-기준">030. ACL의 유형별 특징 및 필터링 기준</a><a class="lv4" href="#1-스탠다드-aclstandard-acl">1. 스탠다드 ACL(Standard ACL)</a><a class="lv4" href="#2-확장-aclextended-acl">2. 확장 ACL(Extended ACL)</a><a class="lv4" href="#3-acl의-분류-비교">3. ACL의 분류 비교</a><a class="lv4" href="#4-acl-번호-체계">4. ACL 번호 체계</a><a class="lv4" href="#5-필터링의-동작-원리">5. 필터링의 동작 원리</a><a class="lv4" href="#1-라우터에-패킷이-도착한다">1. 라우터에 패킷이 도착한다</a><a class="lv4" href="#2-적용된-acl-규칙과-패킷-정보를-비교한다">2. 적용된 ACL 규칙과 패킷 정보를 비교한다</a><a class="lv4" href="#3-규칙과-일치하면-허용permit-또는-거부deny-결정을-수행한다">3. 규칙과 일치하면 허용(permit) 또는 거부(deny) 결정을 수행한다</a><a class="lv4" href="#4-결정에-따라-패킷을-전달하거나-폐기한다">4. 결정에 따라 패킷을 전달하거나 폐기한다</a><a class="lv4" href="#6-프로토콜과-포트의-이해">6. 프로토콜과 포트의 이해</a><a class="lv4" href="#7-packet-tracer의-서버-시스템">7. Packet Tracer의 서버 시스템</a><a class="lv3" href="#031-ipv6-주소-체계-이해-및-듀얼-스택-개념-라우팅">031. IPv6 주소 체계 이해 및 듀얼 스택 개념, 라우팅</a><a class="lv4" href="#1-ipv4와-ipv6의-차이">1. IPv4와 IPv6의 차이</a><a class="lv4" href="#2-ipv6-주소의-구조">2. IPv6 주소의 구조</a><a class="lv4" href="#3-ipv6-주소-축약-표기법">3. IPv6 주소 축약 표기법</a><a class="lv4" href="#4-ipv6-주소의-분류">4. IPv6 주소의 분류</a><a class="lv4" href="#5-ipv6-주소-통신-범위">5. IPv6 주소 통신 범위</a><a class="lv4" href="#6-ipv4와-ipv6-혼용-듀얼-스택">6. IPv4와 IPv6 혼용: 듀얼 스택</a><a class="lv4" href="#7-ipv4와-ipv6-간-변환-터널링">7. IPv4와 IPv6 간 변환: 터널링</a><a class="lv4" href="#8-ipv6의-장점">8. IPv6의 장점</a><a class="lv4" href="#9-ipv6-주소-설정">9. IPv6 주소 설정</a><a class="lv4" href="#10-ipv6-라우팅-듀얼-스택-환경">10. IPv6 라우팅: 듀얼 스택 환경</a><a class="lv4" href="#11-ipv6의-라우팅-프로토콜-지원">11. IPv6의 라우팅 프로토콜 지원</a><a class="lv4" href="#12-현재와-미래">12. 현재와 미래</a><a class="lv4" href="#1-ipv6-라우팅">1. IPv6 라우팅</a><a class="lv4" href="#2-ipv6-라우팅-테이블-확인">2. IPv6 라우팅 테이블 확인</a><a class="lv4" href="#3-ipv6-라우팅의-특징">3. IPv6 라우팅의 특징</a><a class="lv4" href="#4-ipv6-통신-테스트">4. IPv6 통신 테스트</a><a class="lv4" href="#5-ospf-상태-확인">5. OSPF 상태 확인</a><a class="lv4" href="#6-설정-확인">6. 설정 확인</a><a class="lv3" href="#032-vpn-개념">032. VPN 개념</a><a class="lv4" href="#7-vpnvirtual-private-network-개요">7. VPN(Virtual Private Network) 개요</a><a class="lv4" href="#8-vpn의-분류">8. VPN의 분류</a><a class="lv4" href="#9-vpn-설정-전-필수-조건">9. VPN 설정 전 필수 조건</a><a class="lv4" href="#1-ip-주소-설정-모든-장비와-호스트에-ip-할당">1. IP 주소 설정: 모든 장비와 호스트에 IP 할당</a><a class="lv4" href="#2-라우팅-설정-모든-구간에서-기본-통신-가능">2. 라우팅 설정: 모든 구간에서 기본 통신 가능</a><a class="lv4" href="#3-통신-확인-ping-등으로-통신-검증">3. 통신 확인: ping 등으로 통신 검증</a><a class="lv4" href="#10-vpn-구축을-위한-네트워크-설계">10. VPN 구축을 위한 네트워크 설계</a><a class="lv4" href="#11-vpn-설정-준비">11. VPN 설정 준비</a><a class="lv4" href="#12-vpn-설정의-다음-단계">12. VPN 설정의 다음 단계</a><a class="lv4" href="#13-vpn-설정-시-주의사항">13. VPN 설정 시 주의사항</a><a class="lv4" href="#1-traceroute로-경로-확인">1. traceroute로 경로 확인</a><a class="lv4" href="#2-show-ip-route로-라우팅-테이블-검증">2. show ip route로 라우팅 테이블 검증</a><a class="lv4" href="#3-show-running-config로-설정-확인">3. show running-config로 설정 확인</a><a class="lv4" href="#4-no-명령으로-문제-부분-삭제-후-재설정">4. no 명령으로 문제 부분 삭제 후 재설정</a><a class="lv3" href="#033-동적-nat-및-pat-설정의-원리와-동작-메커니즘-이해">033. 동적 NAT 및 PAT 설정의 원리와 동작 메커니즘 이해</a><a class="lv4" href="#1-동적-nat-설정의-기본-구조">1. 동적 NAT 설정의 기본 구조</a><a class="lv4" href="#1-acl-정책-변환할-사설-ip-범위-지정">1. ACL 정책: 변환할 사설 IP 범위 지정</a><a class="lv4" href="#2-nat-풀-변환되는-공인-ip-범위-정의">2. NAT 풀: 변환되는 공인 IP 범위 정의</a><a class="lv4" href="#3-연결-명령-acl과-nat-풀을-연결">3. 연결 명령: ACL과 NAT 풀을 연결</a><a class="lv4" href="#2-nat-설정-전-준비">2. NAT 설정 전 준비</a><a class="lv4" href="#3-동적-nat-설정-과정">3. 동적 NAT 설정 과정</a><a class="lv4" href="#4-인터페이스에-nat-적용">4. 인터페이스에 NAT 적용</a><a class="lv4" href="#5-nat-동작-확인">5. NAT 동작 확인</a><a class="lv4" href="#6-동적-nat의-한계">6. 동적 NAT의 한계</a><a class="lv4" href="#7-patport-address-translation">7. PAT(Port Address Translation)</a><a class="lv4" href="#8-가정용-공유기의-natpat">8. 가정용 공유기의 NAT/PAT</a><a class="lv4" href="#9-nat가-필요-없는-상황">9. NAT가 필요 없는 상황</a><a class="lv4" href="#10-nat와-보안">10. NAT와 보안</a><a class="lv4" href="#1-구조-숨김-내부-네트워크-구조가-외부에-노출되지-않음">1. 구조 숨김: 내부 네트워크 구조가 외부에 노출되지 않음</a><a class="lv4" href="#2-공격-방어-외부에서-직접-내부-시스템에-접근-불가능">2. 공격 방어: 외부에서 직접 내부 시스템에 접근 불가능</a><a class="lv4" href="#3-정보-보호-ip-주소-시스템-정보-등을-보호">3. 정보 보호: IP 주소, 시스템 정보 등을 보호</a><a class="lv4" href="#11-nat-삭제-및-초기화">11. NAT 삭제 및 초기화</a><a class="lv4" href="#1-연결-명령-삭제-inside-source-삭제">1. 연결 명령 삭제 (inside source 삭제)</a><a class="lv4" href="#2-nat-풀-삭제">2. NAT 풀 삭제</a><a class="lv4" href="#3-acl-정책-삭제">3. ACL 정책 삭제</a><a class="lv4" href="#4-인터페이스-설정-삭제">4. 인터페이스 설정 삭제</a><a class="lv4" href="#12-ipv6-주소-소개">12. IPv6 주소 소개</a><a class="lv3" href="#034-확장-acl-포트와-프로토콜-기반-세밀한-필터링">034. 확장 ACL 포트와 프로토콜 기반 세밀한 필터링</a><a class="lv4" href="#1-확장-acl의-실전-구성">1. 확장 ACL의 실전 구성</a><a class="lv4" href="#2-포트-번호와-서비스-매핑">2. 포트 번호와 서비스 매핑</a><a class="lv4" href="#3-포트-필터링의-실전-예제">3. 포트 필터링의 실전 예제</a><a class="lv4" href="#4-acl-규칙-작성의-best-practice">4. ACL 규칙 작성의 Best Practice</a><a class="lv4" href="#1-조건설정-요구사항을-명확히-파악">1. 조건(설정 요구사항)을 명확히 파악</a><a class="lv4" href="#2-출발지와-목적지를-정확히-식별">2. 출발지와 목적지를 정확히 식별</a><a class="lv4" href="#3-포트-번호-오류가-없는지-확인">3. 포트 번호 오류가 없는지 확인</a><a class="lv4" href="#4-호스트-vs-네트워크-구분을-정확히-함">4. 호스트 vs 네트워크 구분을 정확히 함</a><a class="lv4" href="#5-실습-준비">5. 실습 준비</a><a class="lv4" href="#1-라우터-설정-진입-config-모드">1. 라우터 설정 진입: config 모드</a><a class="lv4" href="#2-acl-번호-선택-100번대-확장-acl">2. ACL 번호 선택: 100번대 (확장 ACL)</a><a class="lv4" href="#3-규칙-입력-출발지-목적지-프로토콜-포트-지정">3. 규칙 입력: 출발지, 목적지, 프로토콜, 포트 지정</a><a class="lv4" href="#4-라우터-인터페이스에-적용-ip-access-group">4. 라우터 인터페이스에 적용: ip access-group</a><a class="lv4" href="#5-테스트-ping-웹-브라우저-접속-등으로-확인">5. 테스트: ping, 웹 브라우저 접속 등으로 확인</a><a class="lv4" href="#6-복잡한-필터링-정책의-관리">6. 복잡한 필터링 정책의 관리</a><a class="lv3" href="#035-aclnatvpn-통합-실습-보조-개념-정리">035. ACL·NAT·VPN 통합 실습 보조 개념 정리</a><a class="lv4" href="#1-실습-진행-순서-원칙">1. 실습 진행 순서 원칙</a><a class="lv4" href="#2-acl-관련-주요-사항">2. ACL 관련 주요 사항</a><a class="lv4" href="#3-nat와-acl의-상호작용">3. NAT와 ACL의 상호작용</a><a class="lv4" href="#4-l2-스위치-동작-원리">4. L2 스위치 동작 원리</a><a class="lv3" href="#037-nat-개념-정리-및-가상화-환경-소개">037. NAT 개념 정리 및 가상화 환경 소개</a><a class="lv4" href="#1-natnetwork-address-translation-개념-정리">1. NAT(Network Address Translation) 개념 정리</a><a class="lv4" href="#2-클라이언트-서버-네트워크">2. 클라이언트-서버 네트워크</a><a class="lv4" href="#3-가상화virtualization-개념">3. 가상화(Virtualization) 개념</a><a class="lv4" href="#4-rocky-linux-소개">4. Rocky Linux 소개</a><a class="lv3" href="#041-vpn-개념과-gre-터널링">041. VPN 개념과 GRE 터널링</a><a class="lv4" href="#1-수업-개요">1. 수업 개요</a><a class="lv4" href="#2-vpnvirtual-private-network-개념">2. VPN(Virtual Private Network) 개념</a><a class="lv4" href="#3-vpn-터널링">3. VPN 터널링</a><a class="lv4" href="#4-gre-터널링">4. GRE 터널링</a><a class="lv4" href="#5-vpn-라우팅-설정">5. VPN 라우팅 설정</a><a class="lv4" href="#6-ip-securityipsec-개요">6. IP Security(IPSec) 개요</a><a class="lv3" href="#042-네트워크-기본-내용-복습-및-핵심-개념-정리">042. 네트워크 기본 내용 복습 및 핵심 개념 정리</a><a class="lv4" href="#1-osi-7계층-모델">1. OSI 7계층 모델</a><a class="lv4" href="#2-정보보안의-3요소와-5대-요소">2. 정보보안의 3요소와 5대 요소</a><a class="lv4" href="#3-fcaps--iso-네트워크-관리-모델">3. FCAPS — ISO 네트워크 관리 모델</a><a class="lv4" href="#4-이때까지-다룬-네트워크-주요-기능-정리">4. 이때까지 다룬 네트워크 주요 기능 정리</a><a class="lv4" href="#5-서브네팅subnetting">5. 서브네팅(Subnetting)</a><a class="lv3" href="#082-acl-심화">082. ACL 심화</a><a class="lv4" href="#1-acl-기본-적용-방향">1. ACL 기본 적용 방향</a><a class="lv4" href="#2-tcp-established-옵션">2. TCP Established 옵션</a><a class="lv4" href="#3-reflected-acl-racl">3. Reflected ACL (RACL)</a><a class="lv4" href="#4-dynamic-acl-dacl">4. Dynamic ACL (DACL)</a><a class="lv4" href="#5-racl-vs-dacl-비교">5. RACL vs DACL 비교</a><a class="lv4" href="#6-정책-삭제-방법">6. 정책 삭제 방법</a><a class="lv2" href="#1단계-인터페이스-적용-제거-interface-f01-no-ip-access-group-정책이름-in-no-ip-access-group-정책이름-out--2단계-acl-정책-삭제-no-ip-access-list-extended-정책이름">1단계: 인터페이스 적용 제거 interface f0/1 no ip access-group [정책이름] in no ip access-group [정책이름] out # 2단계: ACL 정책 삭제 no ip access-list extended [정책이름]</a><a class="lv3" href="#083-gns3">083. GNS3</a><a class="lv4" href="#1-gns3-개요">1. GNS3 개요</a><a class="lv4" href="#2-gns3-인터페이스-구성">2. GNS3 인터페이스 구성</a><a class="lv4" href="#3-장비-등록-ios-이미지">3. 장비 등록 (IOS 이미지)</a><a class="lv4" href="#4-장비-시작과-인터페이스-활성화">4. 장비 시작과 인터페이스 활성화</a><a class="lv4" href="#5-디버깅-기능">5. 디버깅 기능</a><a class="lv4" href="#6-프로젝트-저장-방법">6. 프로젝트 저장 방법</a><a class="lv4" href="#1-gns3-실행-후-데스크탑-서버-녹색-불-확인">1. GNS3 실행 후 데스크탑 서버 녹색 불 확인</a><a class="lv4" href="#2-file--open-project-또는-도구-모음의-open-클릭">2. File → Open Project 또는 도구 모음의 Open 클릭</a><a class="lv4" href="#3-저장된-프로젝트-폴더gns3--projects--프로젝트명에서-아이콘-더블클릭">3. 저장된 프로젝트 폴더(GNS3 → projects → 프로젝트명)에서 아이콘 더블클릭</a><a class="lv4" href="#7-기본-토폴로지-구성-요건">7. 기본 토폴로지 구성 요건</a></div><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 명령어 색인</a><a class="" href="ch27.html">27. 용어집</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 13</div><h1>핵심키워드 · 리눅스 서버 (2/2)</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>063~115강 14편</strong>입니다.
+<main><div class="chapter-no">CHAPTER 13</div><h1>핵심키워드 · 네트워크 (2/3)</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>021~083강 20편</strong>입니다.
 원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.</p>
 <blockquote>
 <p>원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어
 (188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.</p>
 </blockquote>
-<h3 id="063-loganalyzer-웹-설치-http-오류-코드와-selinux-파일-권한">063. LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</h3>
-<p>코드와 SELinux 파일 권한</p>
-<h4 id="1-loganalyzer-웹-설치-과정-개요">1. LogAnalyzer 웹 설치 과정 개요</h4>
-<h5 id="1-1">1-1. 설치 파일 역할 구분</h5>
+<h3 id="021-이중화-회선-구성---부하-분산-장애-대비-다중-경로-라우팅">021. 이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</h3>
+<p>대비, 다중 경로 라우팅</p>
+<h4 id="1-이중화-회선-구성">1. 이중화 회선 구성</h4>
+<h5 id="1-1">1-1. 이중화의 정의</h5>
+<p>이중화(Redundancy): 네트워크 장애에 대비하기 위해 동일한 기능을 하는 회선이나 장비를 중복으로 구성하는 방식이다.</p>
+<h5 id="1-2">1-2. 이중화의 목적</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>파일명</th>
-<th>역할</th>
+<th>목적</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>install.php</td>
-<td>최초 설치 시 웹 브라우저에서 단계별로 진행하는 설치 스크립트</td>
+<td>장애 대비</td>
+<td>주 회선 장애 시 백업 회선으로 자동 전<br>환</td>
 </tr>
 <tr>
-<td>index.php</td>
-<td>설치 완료 후 LogAnalyzer 메인 화면 진입점</td>
-</tr>
-<tr>
-<td>config.php</td>
-<td>설치 과정에서 생성되는 환경설정 파일</td>
-</tr>
-<tr>
-<td>config.sh</td>
-<td>config.php 파일을 생성하고 권한을 설정하는 셸 스크립트</td>
+<td>부하 분산</td>
+<td>두 회선을 동시에 활용하여 트래픽 분산</td>
 </tr>
 </tbody>
 </table></div>
-<p>설치 중 오류가 발생하여 처음부터 다시 시작하려면 config.php  파일을 삭제한 후 config.sh  스크립트를 다시 실행하면 된다.</p>
-<h4 id="2-http-오류-코드">2. HTTP 오류 코드</h4>
-<h5 id="2-1-http-500">2-1. HTTP 500 오류</h5>
-<p>HTTP 500 오류는 서버 측 오류를 의미한다. 클라이언트(브라우저)가 아닌 서버 자체에서 문제가 발생한 경우에 반환된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>오류 코드</th>
-<th>의미</th>
-<th>원인</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>500 Internal Server Error</td>
-<td>서버 측 오류</td>
-<td>설정 오류, DB 연결 실패, 권한 문제 등</td>
-</tr>
-</tbody>
-</table></div>
-<p>HTTP 500 오류 발생 시 httpd 서비스와 MariaDB 서비스를 재시작하고 설정을 재확인 해야 한다.</p>
-<h4 id="3-selinux-파일-권한--chcon-명령어">3. SELinux 파일 권한 — chcon 명령어</h4>
-<h5 id="3-1-chcon">3-1. chcon 개요</h5>
-<p>일반적인 파일 권한( chmod )과 별도로, SELinux(보안 모듈)는 파일에 대한 추가적인 보안 컨 텍스트를 관리한다. 웹 서비스가 특정 파일에 쓰기 작업을 수행하려면 SELinux 컨텍스트 권 한도 적절하게 설정되어야 한다.</p>
-<p>chcon -t httpd_sys_script_rw_t config.php    ← 웹 서비스에 config.php 읽기·쓰기 권한 부여</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-t</td>
-<td>SELinux 타입 지정</td>
-</tr>
-<tr>
-<td>httpd sys script rw t<br>_ _ _ _</td>
-<td>웹 서비스(httpd)가 읽기·쓰기 가능한 타입</td>
-</tr>
-</tbody>
-</table></div>
-<p>chmod 로 파일 권한을 변경해도 SELinux 컨텍스트가 맞지 않으면 웹 서비스에서 파일에 쓸 수 없다. 이 경우 chcon  명령으로 SELinux 컨텍스트를 추가로 설정해야 한다.</p>
-<h4 id="4-loganalyzer-웹-화면-구성">4. LogAnalyzer 웹 화면 구성</h4>
-<h5 id="4-1">4-1. 로그 목록 화면</h5>
-<p>LogAnalyzer 설치 완료 후 메인 화면에는 수집된 로그가 시간 순서로 표시된다. 위로 갈수 록 최신 로그다.</p>
-<p>각 로그 항목에는 다음 정보가 표시된다.</p>
+<h5 id="1-3">1-3. 회선의 특성</h5>
+<p>실제 네트워크 회선의 특성:</p>
+<p>회선의 속도는 비용에 비례한다. 더 높은 비용을 내면 더 빠른 속도를 제공받는다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -203,38 +152,2159 @@ th{background:var(--accent-soft); font-weight:700}
 </thead>
 <tbody>
 <tr>
-<td>날짜/시간</td>
-<td>로그 발생 시각</td>
+<td>대역폭 한정</td>
+<td>회선은 정해진 속도만 제공 가능</td>
 </tr>
 <tr>
-<td>호스트 이름</td>
-<td>로그가 발생한 시스템 (클라이언트 호스트 네임)</td>
+<td>트래픽 몰림</td>
+<td>일시적으로 트래픽이 몰리면 장애 발생 가능</td>
 </tr>
 <tr>
-<td>Facility</td>
-<td>로그의 분류 (cron, sshd 등)</td>
-</tr>
-<tr>
-<td>Severity</td>
-<td>로그의 심각도 (Priority)</td>
-</tr>
-<tr>
-<td>메시지</td>
-<td>로그 내용</td>
+<td>속도 차이</td>
+<td>회선마다 속도가 다를 수 있음</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="4-2">4-2. 로그 화면 설정</h5>
-<p>페이지당 표시할 로그 메시지 수를 설정할 수 있다.</p>
-<p>자동 새로고침(Auto-reload) 주기를 설정할 수 있다.</p>
+<h5 id="1-4">1-4. 추가 회선 설치</h5>
+<p>물리적 모듈 추가 절차</p>
+<h4 id="1-저장--반드시-먼저-설정-저장">1. 저장 ← 반드시 먼저 설정 저장</h4>
+<h4 id="2-전원-차단--장비-전원-끔">2. 전원 차단 ← 장비 전원 끔</h4>
+<h4 id="3-모듈-설치--physical-섹션에서-시리얼-모듈-추가">3. 모듈 설치 ← Physical 섹션에서 시리얼 모듈 추가</h4>
+<h4 id="4-전원-재시동--장비-전원-켬">4. 전원 재시동 ← 장비 전원 켬</h4>
+<p>설정 저장 명령어:</p>
+<p>write memory ← 간단한 방식 또는 configure terminal copy running-config startup-config ← 표준 방식 저장 후 전원을 끄지 않으면 모든 설정이 손실된다.</p>
+<p>설정 미저장의 위험 설정 미저장 → 전원 차단 → 모든 설정 초기화 결론: 물리적 작업 전에 반드시 저장이 필수이다.</p>
+<h5 id="1-5">1-5. 라우터별 추가 인터페이스 설정</h5>
+<p>새로운 회선에 대한 IP 주소 설정:</p>
+<p>네트워크 주소: 30.30.30.0/24 A 라우터 설정:</p>
+<p>configure terminal interface serial 0/3/1 ← 새로운 시리얼 인터페이스 ip address 30.30.30.30 255.255.255.0 no shutdown exit B 라우터 설정:</p>
+<p>configure terminal interface serial 0/2/0 ← 새로운 시리얼 인터페이스 ip address 30.30.30.60 255.255.255.0 no shutdown exit</p>
+<h5 id="1-6">1-6. 새 회선을 통한 라우팅 설정</h5>
+<p>스태틱 라우팅에 경유지 추가 기존 라우팅 설정에 새로운 경유지를 추가한다.</p>
+<p>A 라우터 - 150.0 네트워크로의 경로:</p>
+<p>기존 경로:</p>
+<p>ip route 192.168.150.0 255.255.255.0 10.10.10.20 ← 기존 고속 회선 추가 경로:</p>
+<p>ip route 192.168.150.0 255.255.255.0 30.30.30.60 ← 이중화 회선 추가 결과: 동일한 목적지에 두 개의 경유지 존재 A 라우터 - 100.0 네트워크로의 경로:</p>
+<p>ip route 192.168.100.0 255.255.255.0 30.30.30.60 ← 이중화 회선으로도 도달 가능</p>
+<h4 id="2-라우팅-테이블의-변화">2. 라우팅 테이블의 변화</h4>
+<h5 id="2-1">2-1. 이중화 설정 전</h5>
+<p>S 192.168.150.0/24 [1/0] via 10.10.10.20 S 192.168.100.0/24 [1/0] via 10.10.10.20 특징:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>경유지</td>
+<td>하나만 존재</td>
+</tr>
+<tr>
+<td>트래픽</td>
+<td>모두 동일 경로로 이동</td>
+</tr>
+<tr>
+<td>단점</td>
+<td>해당 회선 장애 시 통신 불가능</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-2">2-2. 이중화 설정 후</h5>
+<p>S 192.168.150.0/24 [1/0] via 10.10.10.20 S 192.168.150.0/24 [1/0] via 30.30.30.60 S 192.168.100.0/24 [1/0] via 10.10.10.20 S 192.168.100.0/24 [1/0] via 30.30.30.60 변화:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>경유지</td>
+<td>동일 목적지에 두 개 존재</td>
+</tr>
+<tr>
+<td>트래픽</td>
+<td>두 회선 모두 활용</td>
+</tr>
+<tr>
+<td>효과</td>
+<td>부하 분산 및 장애 대비 가능</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-부하-분산load-balancing">3. 부하 분산(Load Balancing)</h4>
+<h5 id="3-1">3-1. 부하 분산의 정의</h5>
+<p>로드 밸런싱(Load Balancing): 네트워크 트래픽을 여러 경로에 분산시키는 기법이다.</p>
+<h5 id="3-2">3-2. 동작 원리</h5>
+<p>동일 목적지로의 네트워크 트래픽이 여러 경로로 분산된다.</p>
+<p>일부 데이터: 아래쪽 회선 (10.10.10.20 경유)</p>
+<p>일부 데이터: 위쪽 회선 (30.30.30.60 경유)</p>
+<p>예시: A 라우터 → B 라우터 간 데이터 이동 시 패킷 1, 3, 5... → 10.10.10.20으로 전송 패킷 2, 4, 6... → 30.30.30.60으로 전송</p>
+<h5 id="3-3">3-3. 부하 분산의 효과</h5>
+<p>성능 향상:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>트래픽 분산</td>
+<td>두 회선에 걸쳐 분산</td>
+</tr>
+<tr>
+<td>각 회선 부하</td>
+<td>감소</td>
+</tr>
+<tr>
+<td>전체 대역폭</td>
+<td>활용도 극대화</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>응답 시간</td>
+<td>개선</td>
+</tr>
+<tr>
+<td>안정성</td>
+<td>향상</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="3-4">3-4. 속도 차이가 있는 회선의 부하 분산</h5>
+<p>회선별 속도가 다를 경우:</p>
+<p>상황:</p>
+<p>회선 1: 고속 (10.10.10.0)</p>
+<p>회선 2: 저속 (30.30.30.0)</p>
+<p>문제점:</p>
+<p>저속 회선 사용 시 클라이언트가 느린 속도 체감 전체 성능이 저속 회선에 의해 제한됨 해결 방안: Floating Static Routing (부동 스태틱 라우팅)</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주 경로</td>
+<td>고속 회선만 활성 (10.10.10.20)</td>
+</tr>
+<tr>
+<td>백업 경로</td>
+<td>저속 회선은 예비로 대기<br>(30.30.30.60)</td>
+</tr>
+<tr>
+<td>동작</td>
+<td>주 경로 정상 시 사용, 장애 시 자동 전<br>환</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="4-이중화-설정의-실행">4. 이중화 설정의 실행</h4>
+<h5 id="4-1-b">4-1. B 라우터의 추가 경로 설정</h5>
+<p>B 라우터에서도 동일하게 이중화 경로를 설정한다.</p>
+<p>100.0 네트워크로의 경로:</p>
+<p>ip route 192.168.100.0 255.255.255.0 30.30.30.30 ← 새로운 이중화 회선으로도 도달 가능 150.0 네트워크로의 경로:</p>
+<p>ip route 192.168.150.0 255.255.255.0 30.30.30.30 ← 이중화 회선 추가</p>
+<h5 id="4-2">4-2. 설정의 대칭성</h5>
+<p>원칙:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>양방향 설정</td>
+<td>A에서 B로의 경로를 설정하면, B에서 A로의 경로도 설<br>정</td>
+</tr>
+<tr>
+<td>통신 방향</td>
+<td>양방향 통신을 위해 양쪽 라우터에서 대칭적 설정 필수</td>
+</tr>
+<tr>
+<td>결과</td>
+<td>어느 방향의 통신도 정상 작동</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정 예:</p>
+<p>A → B 경로: A에서 B로 가는 경로 설정 B → A 경로: B에서 A로 가는 경로 설정</p>
+<h4 id="5-다중-회선의-라우팅-복잡성">5. 다중 회선의 라우팅 복잡성</h4>
+<h5 id="5-1">5-1. 복수 인터페이스 관리</h5>
+<p>라우터에 여러 회선이 연결될 때 인터페이스 구성:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>인터페이스</th>
+<th>용도</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serial 0/3/0</td>
+<td>주 회선 (A 연결)</td>
+<td>기존 고속 회선</td>
+</tr>
+<tr>
+<td>Serial 0/3/1</td>
+<td>이중화 회선 (A 연결)</td>
+<td>백업/부하분산 회선</td>
+</tr>
+<tr>
+<td>GigabitEthernet 0/0</td>
+<td>내부 네트워크</td>
+<td>게이트웨이 인터페이스</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="5-2">5-2. 복수 인터페이스 설정 시 주의사항</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>인터페이스 확인</td>
+<td>어느 인터페이스에서 작업 중인지 항상 확인 필수</td>
+</tr>
+<tr>
+<td>IP 주소 혼동 방지</td>
+<td>각 인터페이스에 올바른 IP만 할당</td>
+</tr>
+<tr>
+<td>설정 검증</td>
+<td>각 설정 후 라우팅 테이블로 확인</td>
+</tr>
+<tr>
+<td>명령어 정확성</td>
+<td>인터페이스명 정확하게 입력</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="6-라우팅-정보-저장">6. 라우팅 정보 저장</h4>
+<h5 id="6-1">6-1. 설정 저장의 중요성</h5>
+<p>라우터 전원 차단 시 설정 유지 여부:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상태</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 전</td>
+<td>모든 설정 초기화</td>
+</tr>
+<tr>
+<td>저장 후</td>
+<td>설정 유지</td>
+</tr>
+</tbody>
+</table></div>
+<p>물리적 작업(모듈 추가 등) 전에 반드시 저장해야 한다.</p>
+<h5 id="6-2">6-2. 저장 방법</h5>
+<p>방법 1: Write Memory (간단):</p>
+<p>write memory 방법 2: Copy 명령어 (표준):</p>
+<p>copy running-config startup-config</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>특징</th>
+<th>사용 시기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>write memory</td>
+<td>간단함</td>
+<td>빠른 저장 필요 시</td>
+</tr>
+<tr>
+<td>copy 명령어</td>
+<td>표준 방식</td>
+<td>정확한 저장 필요 시</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="6-3">6-3. 스위치에서의 저장</h5>
+<p>스위치도 라우터와 동일하게 저장이 필요하다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 필요성</td>
+<td>라우터와 마찬가지로 필수</td>
+</tr>
+<tr>
+<td>저장 명령어</td>
+<td>write memory 또는 copy 명령어</td>
+</tr>
+<tr>
+<td>전원 차단</td>
+<td>저장 후에만 안전</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="7-이중화-라우팅의-고급-개념">7. 이중화 라우팅의 고급 개념</h4>
+<h5 id="7-1">7-1. 다양한 이중화 전략</h5>
+<p>부하 분산 목적의 이중화 설정: 두 경로 모두 활성화 동작: 트래픽 분산 효과: 대역폭 극대화, 성능 향상 사용 시나리오:</p>
+<p>두 회선의 속도가 동일할 때 대역폭 극대화가 목표일 때 장애 대비 목적의 이중화 (Floating Static Routing)</p>
+<p>설정: 주 경로와 백업 경로 구분 동작: 주 경로 장애 시 자동 전환 효과: 가용성 극대화 사용 시나리오:</p>
+<p>두 회선의 속도가 다를 때 안정성이 최우선 목표일 때 빠른 응답 시간 필요 시 장애 대비 목적의 설정은 다이나믹 라우팅에서 더 효과적이다.</p>
+<h4 id="8-네트워크-설정의-실제-적용">8. 네트워크 설정의 실제 적용</h4>
+<h5 id="8-1">8-1. 설정 순서의 중요성</h5>
+<p>네트워크 설정은 다음 순서를 따라야 한다.</p>
+<h4 id="1-주소-설정--모든-인터페이스에-ip-주소-할당">1. 주소 설정 ← 모든 인터페이스에 IP 주소 할당</h4>
+<h4 id="2-인터페이스-활성화--no-shutdown-설정">2. 인터페이스 활성화 ← no shutdown 설정</h4>
+<h4 id="3-라우팅-설정--경로-정보-입력">3. 라우팅 설정 ← 경로 정보 입력</h4>
+<h4 id="4-라우팅-테이블-확인--show-ip-route">4. 라우팅 테이블 확인 ← show ip route</h4>
+<h4 id="5-통신-테스트--ping-명령어로-검증">5. 통신 테스트 ← ping 명령어로 검증</h4>
+<h5 id="8-2">8-2. 설정 검증 명령어</h5>
+<p>설정을 검증하기 위한 주요 명령어들:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show ip route</td>
+<td>현재 라우팅 테이블 표시</td>
+</tr>
+<tr>
+<td>show running-config</td>
+<td>현재 실행 중인 설정 전체 표시</td>
+</tr>
+<tr>
+<td>ping [대상IP]</td>
+<td>특정 호스트 도달 가능 여부 확인</td>
+</tr>
+</tbody>
+</table></div>
 <hr />
-<h3 id="064-loganalyzer-wget-명령어-압축-파일-형식-쉘-스크립트-개념">064. LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</h3>
-<p>파일 형식, 쉘 스크립트 개념</p>
-<h4 id="1-loganalyzer-개요">1. LogAnalyzer 개요</h4>
-<h5 id="1-1-loganalyzer">1-1. LogAnalyzer란</h5>
-<p>LogAnalyzer는 PHP 기반의 웹 애플리케이션으로, MariaDB에 저장된 rsyslog 로그 데이터를 웹 인터페이스에서 시각화하여 보여준다.</p>
-<h5 id="1-2">1-2. 필요 구성 요소</h5>
-<p>LogAnalyzer가 정상적으로 동작하려면 다음 요소가 갖춰져 있어야 한다.</p>
+<h3 id="022-dhcp-동적-호스트-주소-할당-프로토콜의-개념과-설정">022. DHCP 동적 호스트 주소 할당 프로토콜의 개념과 설정</h3>
+<p>DHCP: 동적 호스트 주소 할당 프로토콜의 개념과 설정</p>
+<h4 id="1-dhcp-개요">1. DHCP 개요</h4>
+<h5 id="1-1-dhcp">1-1. DHCP 개념</h5>
+<p>DHCP는 Dynamic Host Configuration Protocol(다이나믹 호스트 컨피규레이션 프로토콜)의 약자로, 동적으로 호스트를 설정하는 프로토콜이다. 네트워크에 연결된 클라이언트에게 IP 주소, 게이트웨이 주소, DNS 서버 주소 등을 자동으로 할당한다.</p>
+<h4 id="2-dhcp-설정-명령어">2. DHCP 설정 명령어</h4>
+<h5 id="2-1_1">2-1. 주요 명령어 구조</h5>
+<p>비교·분류 항목은 아래 표와 같이 정리된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>service DHCP</td>
+<td>DHCP 서비스 시작 (먼저 입력 필요)</td>
+</tr>
+<tr>
+<td>ip dhcp pool [이름]</td>
+<td>DHCP 풀(정책) 생성, 이름은 임의로 지정 가능</td>
+</tr>
+<tr>
+<td>network [주소] [마스크]</td>
+<td>IP 할당 범위 지정</td>
+</tr>
+<tr>
+<td>default-router [게이트웨이]</td>
+<td>클라이언트에게 전달할 게이트웨이(default-route) 주소</td>
+</tr>
+<tr>
+<td>ip dhcp excluded-address [주소]</td>
+<td>할당 제외 범위 설정 (prevent: 거부/제외)</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-2_1">2-2. 설정 순서 및 예시</h5>
+<p>DHCP 설정 시 service DHCP 를 먼저 입력하고, 이후 풀 설정을 진행한다.</p>
+<p>service DHCP                              ← DHCP 서비스 시작 ip dhcp pool [풀이름]                     ← 풀(정책) 이름 지정 (임의) network 192.168.100.0 255.255.255.0     ← IP 할당 범위 default-router 192.168.100.254          ← 게이트웨이 주소 ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위 DHCP: 동적 호스트 주소 할당 프로토콜의 개념과 설정 ⚠️ default-router 는 게이트웨이 주소를 클라이언트에게 할당해 주기 위한 명령어이다. 예를 들어 게이트웨이가 192.168.100.254라면 해당 값을 입력한다.</p>
+<h5 id="2-3-excluded-address">2-3. Excluded Address (할당 제외)</h5>
+<p>할당 범위에서 제외하고 싶은 주소가 있을 경우 excluded-address  명령어로 지정한다.</p>
+<p>명령어 뒤에 제외할 주소(또는 범위)를 입력하면 해당 주소는 클라이언트에게 할당되지 않는다.</p>
+<h4 id="3-dhcp-동작-원리">3. DHCP 동작 원리</h4>
+<h5 id="3-1-">3-1. 클라이언트-서버 통신 과정</h5>
+<p>DHCP는 클라이언트와 서버 간의 요청-응답 구조로 동작한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>방향</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Request(리퀘스트)</td>
+<td>클라이언트 → 서버</td>
+<td>IP 주소 요청</td>
+</tr>
+<tr>
+<td>Reply(리플라이)</td>
+<td>서버 → 클라이언트</td>
+<td>IP 주소 제안 응답</td>
+</tr>
+<tr>
+<td>Request(리퀘스트)</td>
+<td>클라이언트 → 서버</td>
+<td>제안된 주소 사용 확인 요청</td>
+</tr>
+<tr>
+<td>Acknowledge(에크날리지)</td>
+<td>서버 → 클라이언트</td>
+<td>최종 승인</td>
+</tr>
+</tbody>
+</table></div>
+<p>최종적으로 클라이언트가 서버로부터 주소를 수락하며 할당이 완료된다.</p>
+<h4 id="4-dhcp-테이블-확인">4. DHCP 테이블 확인</h4>
+<h5 id="4-1-binding">4-1. Binding 테이블 (임대 현황)</h5>
+<p>DHCP 서버에서 현재 임대 중인 IP 주소 목록을 확인할 수 있다.</p>
+<p>show ip dhcp binding    ← 서버에서 어떤 IP가 임대되고 있는지 확인</p>
+<h5 id="4-2-conflict">4-2. Conflict 테이블 (충돌 현황)</h5>
+<p>서로 다른 클라이언트가 동일한 IP 주소를 할당 받을 경우 충돌이 발생한다.</p>
+<p>충돌이 발생한 주소는 Conflict 테이블에 저장되고, 이후 다른 클라이언트에게는 할당되지 않는다.</p>
+<h4 id="5-고정-ip와-동적-ip">5. 고정 IP와 동적 IP</h4>
+<p>DHCP: 동적 호스트 주소 할당 프로토콜의 개념과 설정</p>
+<h5 id="5-1-ip">5-1. 동적 IP의 특성과 한계</h5>
+<p>DHCP로 자동 할당되는 동적 IP는 재접속 시 동일한 IP를 받는 경우가 많으나, 경우에 따라 주소가 변경될 수 있다.</p>
+<p>일반 시스템은 주소 변경이 문제되지 않으나, 서버의 경우 주소가 바뀌면 관련 설정을 새롭게 해야 하는 문제가 발생한다.</p>
+<p>서버와 같이 주소가 고정되어야 하는 장비는 고정 IP를 사용해야 한다. 해당 고정 IP 대역은 excluded-address 로 DHCP 할당 범위에서 제외한다.</p>
+<p>DHCP: 동적 호스트 주소 할당 프로토콜의 개념과 설정</p>
+<hr />
+<h3 id="023-dhcp-릴레이-개념과-ospf-기초-에어리어-구조-및-설정">023. DHCP 릴레이 개념과 OSPF 기초 에어리어 구조 및 설정</h3>
+<p>DHCP 릴레이 개념과 OSPF 기초: 에어리어 구조 및 설정</p>
+<h4 id="1-dhcp-릴레이">1. DHCP 릴레이</h4>
+<h5 id="1-1-dhcp_1">1-1. DHCP 릴레이 개념</h5>
+<p>DHCP 릴레이는 서로 다른 네트워크 대역에 있는 DHCP 서버로부터 클라이언트가 IP 주소를 할당 받을 수 있도록 중계하는 기능이다.</p>
+<h4 id="2-기존-라우팅-프로토콜-설정-삭제">2. 기존 라우팅 프로토콜 설정 삭제</h4>
+<h5 id="2-1-ospf">2-1. OSPF 전환 전 기존 설정 정리</h5>
+<p>OSPF를 새로 설정하기 전에 기존의 라우팅 프로토콜(RIP, EIGRP 등) 설정을 삭제해야 한다. 기존 설정을 삭제하지 않고 새로운 프로토콜을 추가하면 라우팅 테이블 확인 시 문제가 발생할 수 있다.</p>
+<p>예시: A 라우터에 EIGRP 10, EIGRP 30이 설정되어 있는 경우 2개를 삭제한다.</p>
+<p>설정이 남아 있는지 확인하는 방법:</p>
+<p>do show run    ← Config 모드에서 설정 내용 확인</p>
+<h4 id="3-ospf-기초">3. OSPF 기초</h4>
+<h5 id="3-1-ospf">3-1. OSPF 에어리어 구조</h5>
+<p>OSPF에서는 네트워크를 에어리어(Area) 단위로 나누어 관리한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>에어리어</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Area 0</td>
+<td>백본(Backbone) 에어리어, 반드시 존재해야 함</td>
+</tr>
+<tr>
+<td>Area 1, 2, ...</td>
+<td>일반 에어리어, Area 0에 연결되어야 함</td>
+</tr>
+</tbody>
+</table></div>
+<p>강의에서의 설정 예시:</p>
+<p>DHCP 릴레이 개념과 OSPF 기초: 에어리어 구조 및 설정 ABC 구간 → Area 0 D 구간 → Area 1 AB 구간은 이미 Area 0에 속해 있으므로 별도 에어리어 지정 없이 동일하게 처리한다.</p>
+<h5 id="3-2-ospf">3-2. OSPF 설정 명령어</h5>
+<p>router ospf [프로세스ID]                       ← OSPF 시작, 프로세스 ID는 임의 network [네트워크주소] [와일드카드] area [번호]  ← 네트워크 광고 및 에어리어 지정 예시:</p>
+<p>router ospf 10 network 40.40.40.0 0.0.0.255 area 1    ← 40.40.40.0 네트워크를 Area 1로 광고</p>
+<h5 id="3-3_1">3-3. 라우팅 정보 확인 명령어</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show ip route</td>
+<td>라우팅 테이블 확인 (enable 모드에서 사용)</td>
+</tr>
+<tr>
+<td>show ip protocols</td>
+<td>라우팅 프로토콜 정보 확인 (광고 네트워크, 최대 경로 수 등)</td>
+</tr>
+<tr>
+<td>do show run</td>
+<td>Config 모드에서 현재 설정 내용 확인</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ show ip route 는 enable 모드에서 사용하는 명령어이다. Config 모드에서 사용하려면 앞에 do 를 붙여야 한다.</p>
+<p>show ip protocols  결과에서 확인 가능한 정보:</p>
+<p>최대 경로 수 (Maximum path): 기본값 4 현재 광고 중인 네트워크 목록</p>
+<h4 id="4-ospf-에어리어-미스매치">4. OSPF 에어리어 미스매치</h4>
+<h5 id="4-1">4-1. 에어리어 미스매치 발생과 처리</h5>
+<p>서로 연결된 라우터 간 Area ID가 일치하지 않으면 인접(Neighbor) 관계가 형성되지 않고, 미스매치 로그 메시지가 반복적으로 출력된다.</p>
+<p>DHCP 릴레이 개념과 OSPF 기초: 에어리어 구조 및 설정 ← Area Mismatch 메시지 예시: 연결 구간의 Area 번호가 서로 다름 처리 방법: 연결된 인터페이스의 Area 번호를 동일하게 맞추어 재설정한다.</p>
+<p>미스매치 메시지가 표시되는 중에도 명령어 입력은 계속 가능하다. 메시지를 무시하고 올바른 명령어를 그대로 입력하면 된다.</p>
+<h4 id="5-라우터-아이디router-id">5. 라우터 아이디(Router ID)</h4>
+<h5 id="5-1_1">5-1. 라우터 아이디 개념</h5>
+<p>라우터 아이디: OSPF 네트워크 내에서 자기 자신을 인식하는 식별값 에어리어 아이디와는 별개의 개념으로, 에어리어와 상관없이 라우터 자신을 구별하는 값이다.</p>
+<p>DHCP 릴레이 개념과 OSPF 기초: 에어리어 구조 및 설정</p>
+<hr />
+<h3 id="024-ospf-virtual-link와-fhrp-hsrp-게이트웨이-이중화">024. OSPF Virtual Link와 FHRP HSRP 게이트웨이 이중화</h3>
+<p>OSPF Virtual Link와 FHRP/HSRP 게이트웨이 이중화</p>
+<h4 id="1-virtual-link와-라우터-id">1. Virtual Link와 라우터 ID</h4>
+<h5 id="1-1-ospf-virtual-link">1-1. OSPF Virtual Link</h5>
+<p>OSPF에서 Area 0(백본)에 물리적으로 직접 연결되지 않은 Area가 존재할 경우, 해당 Area의 라우터들은 정상적인 통신이 불가능하다.</p>
+<p>에어리어 2에 있는 장비들이 물리적으로 에어리어 1을 통해 연결되어 있으나 에어리어 0과 직접 연결되지 않은 경우, 통신이 되지 않는다.</p>
+<p>이러한 상황에서 Virtual Link를 사용하면 물리적으로 연결할 수 없는 경우에도 Area 0에 논리적으로 연결하여 통신이 가능하도록 할 수 있다.</p>
+<p>show ip ospf    ← Virtual Link 정보 포함한 OSPF 전반 확인</p>
+<h5 id="1-2-ospf-id">1-2. OSPF 라우터 ID 관련 인터페이스 정보 확인</h5>
+<p>show ip ospf interface    ← 인터페이스별 OSPF 정보 및 라우터 ID 확인이 명령어에서 라우터 아이디와 관련된 정보를 확인할 수 있다. Loopback 인터페이스를 설정한 경우 해당 주소가 라우터 아이디에 반영된다.</p>
+<h4 id="2-fhrp-first-hop-redundancy-protocol">2. FHRP (First Hop Redundancy Protocol)</h4>
+<h5 id="2-1-fhrp">2-1. FHRP 개념</h5>
+<p>FHRP는 게이트웨이 이중화 프로토콜로, 두 대 이상의 라우터가 하나의 가상 게이트웨이 역할을 공유하는 방식이다.</p>
+<p>FHRP에는 아래 세 가지 프로토콜이 존재한다.</p>
+<p>OSPF Virtual Link와 FHRP/HSRP 게이트웨이 이중화</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>프로토콜</th>
+<th>전체명</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSRP</td>
+<td>Hot Standby Router Protocol</td>
+<td>Cisco 독자 프로토콜</td>
+</tr>
+<tr>
+<td>VRRP</td>
+<td>Virtual Router Redundancy Protocol</td>
+<td>표준 프로토콜</td>
+</tr>
+<tr>
+<td>GLBP</td>
+<td>Gateway Load Balancing Protocol</td>
+<td>Cisco 독자 프로토콜</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-hsrp-hot-standby-router-protocol">3. HSRP (Hot Standby Router Protocol)</h4>
+<h5 id="3-1-hsrp">3-1. HSRP 개념</h5>
+<p>HSRP는 두 라우터가 하나의 가상 IP(Virtual IP)를 공유하여 게이트웨이 역할을 수행하는 프로토콜이다.</p>
+<p>한 라우터는 Active 상태로 실제 트래픽을 처리 다른 라우터는 Standby 상태로 대기 Active 라우터에 장애가 발생하면 Standby 라우터가 자동으로 Active 역할을 이어받 음</p>
+<h5 id="3-2-virtual-ip-ip">3-2. Virtual IP (가상 IP) 개념</h5>
+<p>Virtual IP는 어떤 물리적 인터페이스에도 실제로 할당된 주소가 아니다. 이 네트워크 내에서 물리적인 어떤 장비나 인터페이스에도 Virtual IP로 설정한 곳이 없으며, 논리적으로 만 존재한다.</p>
+<p>클라이언트는 이 가상 IP를 게이트웨이 주소로 사용한다.</p>
+<h5 id="3-3-hsrp">3-3. HSRP 설정 명령어</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>standby [그룹번호] ip [가상IP]</td>
+<td>가상 IP 주소 설정 (Virtual IP)</td>
+</tr>
+<tr>
+<td>standby [그룹번호] priority [값]</td>
+<td>우선순위 설정 (높을수록 Active 선출 유리)</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정 예시:</p>
+<p>interface gi0/0/1 standby 1 ip 192.168.100.254      ← 1번 그룹의 가상 게이트웨이 IP 설정 standby 1 priority 105             ← 우선순위 105 설정</p>
+<h5 id="3-4-hsrp">3-4. HSRP 상태 확인</h5>
+<p>OSPF Virtual Link와 FHRP/HSRP 게이트웨이 이중화 HSRP 설정 후 확인 결과에서 아래 정보를 확인할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>그룹 번호</td>
+<td>1번 그룹에 속함</td>
+</tr>
+<tr>
+<td>우선 순위</td>
+<td>105</td>
+</tr>
+<tr>
+<td>현재 상태</td>
+<td>Active</td>
+</tr>
+<tr>
+<td>Active 라우터</td>
+<td>Local (자기 자신)</td>
+</tr>
+<tr>
+<td>Standby 라우터</td>
+<td>상대 장비의 IP 주소</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="3-5-load-balancing">3-5. 부하 분산 (Load Balancing)</h5>
+<p>평상시에는 Active 라우터 경로만 사용하므로 Standby 쪽 회선은 미사용 상태가 된다. 여러 그룹을 설정하여 서로 다른 경로로 트래픽을 분산시키는 방식으로 부하 분산을 구현할 수 있다.</p>
+<p>한 라우터를 그룹 1의 Active, 그룹 2의 Standby로, 다른 라우터를 그룹 1의 Standby, 그룹 2의 Active로 설정하면 양쪽 회선을 동시에 활용할 수 있다.</p>
+<p>OSPF Virtual Link와 FHRP/HSRP 게이트웨이 이중화</p>
+<hr />
+<h3 id="025-vlan-기반-서브네팅과-l3-스위치-설정">025. VLAN 기반 서브네팅과 L3 스위치 설정</h3>
+<p>설정</p>
+<h4 id="1-vlan과-서브네팅">1. VLAN과 서브네팅</h4>
+<h5 id="1-1-vlan">1-1. VLAN과 네트워크 분할</h5>
+<p>하나의 네트워크 대역을 받아 VLAN으로 논리적 그룹을 나누는 경우, 각 VLAN에 서로 다른 서브네트워크를 할당해야 한다. VLAN이 3개인 경우 최소 3개의 서브네트워크가 필요하다.</p>
+<h5 id="1-2_1">1-2. 서브네팅 계산 방식</h5>
+<p>호스트 비트에서 비트를 빌려 서브네트워크를 분할하는 방식이다.</p>
+<p>예시: 하나의 대역을 4개의 서브네트워크로 분할하는 경우 2개의 비트를 빌리면 2² = 4개의 서브네트워크 분할 가능 남은 비트 수에 따라 각 서브네트워크의 범위 크기가 결정됨</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>서브네트워크</th>
+<th>시작 주소</th>
+<th>끝 주소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>첫 번째</td>
+<td>100.0</td>
+<td>100.63</td>
+</tr>
+<tr>
+<td>두 번째</td>
+<td>100.64</td>
+<td>100.127</td>
+</tr>
+<tr>
+<td>세 번째</td>
+<td>100.128</td>
+<td>100.191</td>
+</tr>
+<tr>
+<td>네 번째</td>
+<td>100.192</td>
+<td>100.255</td>
+</tr>
+</tbody>
+</table></div>
+<p>각 범위의 크기가 64인 경우, 첫 번째 대역에서 64씩 더해가며 두 번째, 세 번째, 네 번째 대역이 결정된다.</p>
+<p>각 VLAN에 맞는 서브네트워크 범위를 정확하게 파악한 후, 그 범위 안에서 중복되지 않는 주소를 사용해야 한다.</p>
+<h4 id="2-l3-스위치">2. L3 스위치</h4>
+<h5 id="2-1-l3">2-1. L3 스위치 개념</h5>
+<p>관리자가 L3 스위치에 특정 설정을 하면 라우터와 동일한 역할을 할 수 있다.</p>
+<h5 id="2-2-l3-ip">2-2. L3 스위치 IP 설정 방법</h5>
+<p>L3 스위치에서 인터페이스에 IP 주소를 설정하려면 먼저 no switchport  명령어를 입력해야한다.</p>
+<p>no switchport        ← IP 주소 설정 전 필수 입력 ip address [주소] [마스크]   ← IP 주소 설정 라우팅 기능을 활성화하려면 Config 모드에서 ip routing  명령어를 입력한다.</p>
+<p>ip routing    ← L3 스위치에서 라우팅 기능 활성화</p>
+<h4 id="3-라우터-서브-인터페이스와-encapsulation-dot1q">3. 라우터 서브 인터페이스와 Encapsulation DOT1Q</h4>
+<h5 id="3-1_1">3-1. 서브 인터페이스 개념</h5>
+<p>하나의 물리적 인터페이스를 여러 VLAN에 대응시키기 위해 서브 인터페이스를 사용한다. 서브 인터페이스 번호는 VLAN 번호와 맞추는 것이 인터페이스 이름만 보고도 어떤 VLAN 을 위한 것인지 알 수 있어 관리에 유리하다.</p>
+<h5 id="3-2-encapsulation-dot1q">3-2. Encapsulation DOT1Q 설정</h5>
+<p>encapsulation dot1q 는 라우터의 서브 인터페이스에서 사용하는 명령어이다.</p>
+<p>interface gi0/0.100              ← 서브 인터페이스 (VLAN 100에 대응)</p>
+<p>encapsulation dot1q 100         ← DOT1Q 캡슐화, VLAN 번호 지정 ip address [게이트웨이IP] [마스크]  ← 해당 VLAN의 게이트웨이 IP 설정 no shutdown IP를 설정하기 전에 encapsulation dot1q [VLAN번호] 를 먼저 입력해야 한다. 순서를 지키지 않으면 정상적으로 입력되지 않는다.</p>
+<h5 id="3-3_2">3-3. 스위치와 라우터 간 연결</h5>
+<p>스위치와 라우터 간에 연결된 스위치 포트는 트렁크(Trunk) 모드로 동작시켜야 여러 VLAN 트래픽을 전달할 수 있다.</p>
+<h4 id="4-라우터와-스위치의-역할-구분">4. 라우터와 스위치의 역할 구분</h4>
+<h5 id="4-1_1">4-1. 핵심 개념 정리</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>장비</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>라우터</td>
+<td>주소를 바탕으로 경로를 설정하는 장비. IP 주소를 부여하는 것은 관리자의 역할</td>
+</tr>
+<tr>
+<td>스위치</td>
+<td>패킷을 분류하는 장비가 아님. 스위치 포트를 통해 VLAN 분리 처리</td>
+</tr>
+</tbody>
+</table></div>
+<p>IP는 주소일 뿐이며, 주소를 바탕으로 라우터가 경로를 설정한다. IP 주소를 부여하는 것은 라우터가 아닌 관리자가 하는 작업이다.</p>
+<hr />
+<h3 id="026-라우터-id-loopback-인터페이스-dr-bdr-개념">026. 라우터 ID, Loopback 인터페이스, DR BDR 개념</h3>
+<p>DR/BDR 개념</p>
+<h4 id="1-라우터-아이디router-id-심화">1. 라우터 아이디(Router ID) 심화</h4>
+<h5 id="1-1_1">1-1. 라우터 아이디에 관여하는 인터페이스</h5>
+<p>라우터 아이디는 물리적인 인터페이스 값만 관여하는 것이 아니라, 논리적인 인터페이스 (Loopback)도 관여한다.</p>
+<h4 id="2-loopback-인터페이스">2. Loopback 인터페이스</h4>
+<h5 id="2-1-loopback">2-1. Loopback 인터페이스 개념</h5>
+<p>논리적인 인터페이스로, 물리적으로 존재하지 않지만 IP 주소를 할당할 수 있다.</p>
+<p>주소가 할당되면 해당 네트워크가 존재하는 것으로 인식된다.</p>
+<p>Loopback은 논리적 인터페이스이지만, 명령어는 물리적 인터페이스와 동일하게 interface 로 시작한다.</p>
+<h5 id="2-2-loopback">2-2. Loopback 인터페이스 생성 및 설정</h5>
+<p>interface loopback 0            ← Loopback 인터페이스 생성 ip address [IP주소] [서브넷마스크]  ← IP 주소 할당 설정 예시:</p>
+<p>interface loopback 0 ip address 150.100.100.1 255.255.255.0 주소만 설정하면 별도로 no shutdown  없이도 해당 네트워크가 존재하는 것으로 인식된다.</p>
+<h5 id="2-3-ospf-loopback">2-3. OSPF에 Loopback 네트워크 광고</h5>
+<p>라우터 ID, Loopback 인터페이스, DR/BDR 개념 Loopback 인터페이스의 네트워크도 OSPF에 참여시키려면 network  명령어로 광고해야한다.</p>
+<p>router ospf 10 network 100.100.100.0 0.0.0.255 area 1    ← Loopback 네트워크를 Area 1로 광고 광고 후 시간이 경과하면 다른 라우터의 라우팅 테이블에 해당 네트워크가 반영된다.</p>
+<h4 id="3-확장형-핑-extended-ping">3. 확장형 핑 (Extended Ping)</h4>
+<h5 id="3-1_2">3-1. 개념 및 사용법</h5>
+<p>라우터 장비에서는 일반 핑과 달리 확장형 핑을 사용할 수 있다.</p>
+<p>ping          ← ping 입력 후 엔터 [Target 주소 입력]    ← 대상 IP 입력 [반복 횟수 입력]      ← 기본값 5회 장비에서의 기본 핑 횟수: 5회 (윈도우는 기본 4회, 리눅스는 관리자가 종료할 때까지)</p>
+<p>통신이 가능한지 확인할 때 사용한다.</p>
+<p>예시: D 라우터에서 150.100 주소로 확장형 핑을 사용하여 통신 가능 여부를 확인한다.</p>
+<h4 id="4-dr--bdr-designated-router--backup-designated">4. DR / BDR (Designated Router / Backup Designated</h4>
+<p>Router)</p>
+<h5 id="4-1-drbdr">4-1. DR/BDR 개념</h5>
+<p>OSPF 네트워크에서 라우터 수가 많을 경우, 네트워크 변화가 발생했을 때 모든 라우터가 서 로에게 직접 전파하면 트래픽이 과다해질 수 있다. 이를 해결하기 위해 DR과 BDR을 선출한 다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>역할</th>
+<th>명칭</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DR</td>
+<td>Designated Router (대장 라우터)</td>
+<td>네트워크 변화 정보를 수집하여 다른 라<br>우터에게 배포</td>
+</tr>
+<tr>
+<td>BDR</td>
+<td>Backup Designated Router (부대<br>장 라우터)</td>
+<td>DR 장애 시 DR 역할을 이어받음</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="4-2-drbdr">4-2. DR/BDR 동작 방식</h5>
+<p>라우터 ID, Loopback 인터페이스, DR/BDR 개념 네트워크 변화가 발생한 라우터는 모든 이웃 라우터에게 직접 전파하는 대신, DR에게만 전달한다. DR이 해당 변화를 다른 라우터들에게 배포하는 방식으로 동작한다.</p>
+<p>DR이 선출되어 있는 경우, 라우터는 DR에게만 변화를 알리면 된다. 이를 통해 네트워크 트래픽을 줄일 수 있다.</p>
+<h5 id="4-3-point-to-point-drbdr">4-3. Point-to-Point 구간에서의 DR/BDR</h5>
+<p>시리얼 등 1:1(Point-to-Point) 연결 구간에서는 DR/BDR이 필요하지 않다.</p>
+<p>1대1 연결에서는 굳이 대장, 부대장을 선출할 필요가 없다.</p>
+<h5 id="4-4-drbdr">4-4. DR/BDR 확인 명령어</h5>
+<p>show ip ospf interface    ← 인터페이스별 OSPF 정보 확인 (DR/BDR 포함)</p>
+<p>이더넷 구간: DR, BDR 정보 표시됨 Point-to-Point 구간: DR/BDR 없음으로 표시됨 라우터 ID, Loopback 인터페이스, DR/BDR 개념</p>
+<hr />
+<h3 id="027-acl-규칙의-순서와-정책-관리">027. ACL 규칙의 순서와 정책 관리</h3>
+<h4 id="1-acl-규칙의-순서-중요성">1. ACL 규칙의 순서 중요성</h4>
+<h5 id="1-1_2">1-1. 규칙 매칭의 원리</h5>
+<p>ACL 규칙들은 위에서부터 아래로 순서대로 적용된다. 패킷이 도착하면:</p>
+<h4 id="1-첫-번째-규칙과-비교">1. 첫 번째 규칙과 비교</h4>
+<h4 id="2-일치하면-해당-규칙-적용-후-더-이상의-규칙은-검사하지-않음">2. 일치하면 해당 규칙 적용 후 더 이상의 규칙은 검사하지 않음</h4>
+<h4 id="3-일치하지-않으면-다음-규칙으로-진행">3. 일치하지 않으면 다음 규칙으로 진행</h4>
+<p>따라서 규칙의 순서가 정책의 결과를 크게 좌우한다.</p>
+<h5 id="1-2_2">1-2. 순서 변경의 영향</h5>
+<p>ACL에 포함된 규칙들의 순서를 변경하면, 동일한 정책 내용이라도 실제 적용 결과가 달라질 수 있다.</p>
+<p>예시:</p>
+<p>규칙 1: IP 10.0.0.1 허용 규칙 2: IP 10.0.0.0/24 (10.0.0.0~10.0.0.255) 차단이 두 규칙의 순서를 바꾸면:</p>
+<p>순서대로 적용: IP 10.0.0.1은 허용됨 순서 반대로 적용: IP 10.0.0.1은 차단됨</p>
+<h4 id="2-acl-규칙-추가와-라인-번호">2. ACL 규칙 추가와 라인 번호</h4>
+<h5 id="2-1_2">2-1. 라인 번호 체계</h5>
+<p>Cisco IOS의 현대적 ACL 관리에서는 라인 번호 개념을 도입했다. 이전에는 정책 번호만 있 었지만, 현재는 라인 번호를 통해 더 유연한 관리가 가능하다.</p>
+<p>정책 번호: ACL 자체의 식별자 (예: ACL 100)</p>
+<p>라인 번호: ACL 내 각 규칙의 순서 번호 (예: 10, 20, 30...)</p>
+<h5 id="2-2_2">2-2. 라인 번호 간격의 설정</h5>
+<p>일반적으로 라인 번호는 10단위로 설정된다:</p>
+<p>10  permit ...</p>
+<p>20  permit ... 30  deny ...</p>
+<p>40  permit ...</p>
+<p>이렇게 간격을 두는 이유는 중간에 새로운 규칙을 삽입할 여유를 남기기 위함이다.</p>
+<h5 id="2-3">2-3. 새로운 규칙의 삽입</h5>
+<p>새로운 규칙이 필요할 때:</p>
+<p>기존 방식: 새 규칙은 항상 맨 마지막에 추가된다</p>
+<p>라인 번호를 이용한 삽입: 특정 라인 번호를 지정하여 원하는 위치에 규칙을 삽입할 수 있다</p>
+<p>예) 10번 규칙과 20번 규칙 사이에 새로운 규칙을 삽입하려면:</p>
+<p>(새로운 규칙을 15번으로 삽입)</p>
+<p>10  permit ... 15  permit ... (새로 추가)</p>
+<p>20  permit ... 30  deny ...</p>
+<h4 id="3-실무에서의-acl-관리-방법">3. 실무에서의 ACL 관리 방법</h4>
+<h5 id="3-1_3">3-1. 문서화의 중요성</h5>
+<p>실무 환경에서 ACL을 설정할 때는 다음 단계를 따른다:</p>
+<h4 id="1-계획-단계-메모장이나-문서-작성-프로그램에-acl-정책-전체를-작성">1. 계획 단계: 메모장이나 문서 작성 프로그램에 ACL 정책 전체를 작성</h4>
+<h4 id="2-검증-단계-클라이언트-요구사항-및-조직의-보안-정책과-일치하는지-확인">2. 검증 단계: 클라이언트 요구사항 및 조직의 보안 정책과 일치하는지 확인</h4>
+<h4 id="3-적용-단계-검증이-완료된-후-라우터에-입력">3. 적용 단계: 검증이 완료된 후 라우터에 입력</h4>
+<h5 id="3-2-acl">3-2. ACL 규모의 현실</h5>
+<p>실제 필드 환경에서:</p>
+<p>소규모 조직: 10줄 미만의 ACL 중규모 조직: 수십 줄의 ACL 대규모 기업(많은 클라이언트): 수백 줄에 이르는 ACL도 존재 규칙이 많아질수록 순서 관리의 중요성이 극대화된다.</p>
+<h5 id="3-3_3">3-3. 규칙 변경과 관리</h5>
+<p>ACL 정책이 이미 수백 줄이 설정된 라우터에서:</p>
+<p>매번 새로운 정책을 추가하려면 전체 정책을 점검해야 함 기존 정책과의 중복, 충돌, 상충 가능성을 검토해야 함 따라서 라인 번호를 이용한 중간 삽입 기능이 매우 중요</p>
+<h4 id="4-라인-번호를-이용한-규칙-관리">4. 라인 번호를 이용한 규칙 관리</h4>
+<h5 id="4-1_2">4-1. 라인 번호 지정 방식</h5>
+<p>현대의 Cisco IOS와 많은 네트워크 장비들은 이전의 제한을 극복했다:</p>
+<p>과거: 새로운 정책은 반드시 맨 마지막에만 추가 가능 현재: 라인 번호를 명시하여 원하는 위치에 삽입 가능</p>
+<h5 id="4-2_1">4-2. 예시 시나리오</h5>
+<p>초기 ACL 설정:</p>
+<p>10  permit 10.0.0.0 0.0.0.255   ← 10.0.0.0/24 허용 20  deny 10.0.0.0 0.0.0.255     ← (나중에 추가, 충돌 가능)</p>
+<p>라인 번호를 사용한 수정:</p>
+<p>10  permit 10.0.0.1              ← 특정 IP만 허용 15  deny 10.0.0.10               ← 새로 삽입: 특정 IP 차단 20  permit 10.0.0.0 0.0.0.255    ← 나머지 네트워크 허용</p>
+<h4 id="5-acl-설정의-best-practice">5. ACL 설정의 Best Practice</h4>
+<p>주의사항: 운영 환경에서 ACL을 변경할 때는 다음 원칙을 따르자 변경 전 현재 정책을 문서로 백업 변경 사항을 별도 문서에 명시 변경 후 테스트를 통해 의도한 결과 확인 특히 트래픽 차단 규칙은 신중하게 검토</p>
+<h4 id="6-acl-다음-단계-nat의-필요성">6. ACL 다음 단계: NAT의 필요성</h4>
+<p>ACL은 패킷 필터링을 통해 네트워크 접근을 제어한다. 다음 주제인 <strong>NAT(Network Address Translation)</strong>는 IP 주소 자체를 변환하여 다른 보안 및 운영상의 목적을 달성한 다.</p>
+<hr />
+<h3 id="028-acl-및-nat-개념과-역할-이해">028. ACL 및 NAT 개념과 역할 이해</h3>
+<h4 id="1-acl접근-제어-목록-access-control-list-개요">1. ACL(접근 제어 목록; Access Control List) 개요</h4>
+<h5 id="1-1-acl">1-1. ACL의 정의 및 목적</h5>
+<p>ACL은 네트워크 트래픽을 필터링하는 기능이다. 관리자가 특정 출발지나 목적지로부터의 트래픽을 허용(permit) 또는 차단(deny)하는 정책을 설정할 수 있다.</p>
+<p>ACL이 필요한 이유는 다음과 같다:</p>
+<p>클라이언트나 기업의 상황에 따라 필터링을 수행 DDoS(분산 서비스 거부) 공격 시 특정 출발지로부터의 트래픽 차단 가능 불필요한 트래픽 제거 및 보안성 강화</p>
+<h4 id="2-acl의-분류">2. ACL의 분류</h4>
+<h5 id="2-1-acl-vs-acl">2-1. 표준 ACL vs 확장 ACL</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>표준 ACL</th>
+<th>확장 ACL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>번호 범위</td>
+<td>1~99</td>
+<td>100~199</td>
+</tr>
+<tr>
+<td>필터링 기준</td>
+<td>출발지 주소만 확인</td>
+<td>출발지, 목적지, 프로토콜, 포트 번호 모두 확인</td>
+</tr>
+<tr>
+<td>유연성</td>
+<td>낮음</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>용도</td>
+<td>기본적인 필터링</td>
+<td>세부적인 필터링</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-acl-설정의-기본-개념">3. ACL 설정의 기본 개념</h4>
+<h5 id="3-1_4">3-1. 주소 표현 방식</h5>
+<p>단일 호스트: host  키워드 사용 (예: host 192.168.1.100)</p>
+<p>대역대: 네트워크 주소와 와일드카드 마스크 사용 (예: 192.168.1.0 0.0.0.255)</p>
+<h5 id="3-2-acl_1">3-2. ACL 설정 요소</h5>
+<p>ACL 규칙은 다음 요소로 구성된다:</p>
+<h4 id="1-허용차단-여부-permit-또는-deny">1. 허용/차단 여부 (permit 또는 deny)</h4>
+<h4 id="2-프로토콜-종류-tcp-udp-icmp-등">2. 프로토콜 종류 (TCP, UDP, ICMP 등)</h4>
+<h4 id="3-출발지-주소-source">3. 출발지 주소 (source)</h4>
+<h4 id="4-목적지-주소-destination">4. 목적지 주소 (destination)</h4>
+<h4 id="5-특정-서비스-포트-번호-또는-키워드">5. 특정 서비스 (포트 번호 또는 키워드)</h4>
+<h4 id="4-acl의-동작-원리">4. ACL의 동작 원리</h4>
+<h5 id="4-1_3">4-1. 매칭 규칙</h5>
+<p>첫 번째로 매칭되는 규칙이 적용된다</p>
+<p>모든 규칙에 매칭되지 않은 트래픽은 암시적 deny가 적용된다</p>
+<p>규칙의 순서가 중요하다</p>
+<h5 id="4-2-icmp">4-2. ICMP와 서비스</h5>
+<p>ICMP: ping 기능을 수행하는 프로토콜 echo: ping 요청 echo-reply: ping 응답 FTP: 파일 전송 프로토콜로, 포트 21 사용</p>
+<h4 id="5-named-acl">5. Named ACL</h4>
+<h5 id="5-1-named-acl">5-1. Named ACL의 특징</h5>
+<p>번호 대신 이름으로 ACL 정책을 구분할 수 있다</p>
+<p>표준 또는 확장 중 선택 가능하다</p>
+<p>가독성이 높고 관리하기 용이하다</p>
+<h5 id="5-2-named-acl">5-2. Named ACL 설정 형태</h5>
+<p>ip access-list extended [정책이름]</p>
+<p>permit tcp 192.168.1.100 192.168.0.200 eq 21 ← FTP(포트 21) permit icmp 192.168.1.100 192.168.0.200 echo echo-reply deny icmp 192.168.1.200 192.168.0.10 echo echo-reply permit ip any any ← 나머지 트래픽 허용</p>
+<h4 id="6-natnetwork-address-translation-개요">6. NAT(Network Address Translation) 개요</h4>
+<h5 id="6-1-nat">6-1. NAT의 정의</h5>
+<p>NAT는 네트워크 주소 변환(Network Address Translation)으로, 한 주소 영역의 IP를 다른 주소로 변환하는 기능이다. 일반적으로 사설 IP를 공인 IP로 변환하는 데 사용된다.</p>
+<h5 id="6-2-nat">6-2. NAT가 필요한 이유</h5>
+<h4 id="1-ip-부족-사설-ip-대역을-사용하면서-공인-ip를-효율적으로-활용">1. IP 부족: 사설 IP 대역을 사용하면서 공인 IP를 효율적으로 활용</h4>
+<h4 id="2-보안-내부-네트워크-구조를-외부에-노출하지-않음">2. 보안: 내부 네트워크 구조를 외부에 노출하지 않음</h4>
+<h4 id="3-네트워크-독립성-내부-주소-변경-시-외부-영향-최소화">3. 네트워크 독립성: 내부 주소 변경 시 외부 영향 최소화</h4>
+<h4 id="7-ip-주소의-분류">7. IP 주소의 분류</h4>
+<h5 id="7-1-ip-vs-ip">7-1. 공인 IP vs 사설 IP</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>공인 IP</th>
+<th>사설 IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>특징</td>
+<td>인터넷 전체에서 유일</td>
+<td>조직 내에서만 유일</td>
+</tr>
+<tr>
+<td>할당 관리</td>
+<td>ISP 또는 IANA 관리</td>
+<td>자유롭게 사용 가능</td>
+</tr>
+<tr>
+<td>외부 통신</td>
+<td>직접 가능</td>
+<td>NAT를 통해서만 가능</td>
+</tr>
+<tr>
+<td>사설 대역</td>
+<td>N/A</td>
+<td>10.x.x.x, 172.16.x.x, 192.168.x.x</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="7-2-ip">7-2. 사설 IP의 특징</h5>
+<p>누구나 사용 가능하지만, 같은 조직 내에서는 중복 불가 공인되지 않았으므로 인터넷에서 직접 라우팅되지 않음 같은 네트워크 내에서만 통신 가능</p>
+<h4 id="8-nat의-종류">8. NAT의 종류</h4>
+<h5 id="8-1-natstatic-nat">8-1. 정적 NAT(Static NAT)</h5>
+<p>관리자가 사설 IP와 공인 IP를 1:1로 수동 설정 특정 서버에 고정적인 공인 IP를 할당할 때 사용</p>
+<h5 id="8-2-natdynamic-nat">8-2. 동적 NAT(Dynamic NAT)</h5>
+<p>사설 IP의 범위를 지정하고, 공인 IP의 범위를 지정하여 자동으로 변환 변환되는 IP들이 자동으로 매핑됨</p>
+<h4 id="9-patport-address-translation">9. PAT(Port Address Translation)</h4>
+<h5 id="9-1-pat">9-1. PAT의 필요성</h5>
+<p>여러 대의 사설 IP 장치가 하나의 공인 IP로 나갈 때 포트 번호를 이용하여 구분한다.</p>
+<h5 id="9-2-nat-vs-pat">9-2. NAT vs PAT</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>NAT</th>
+<th>PAT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP 변환</td>
+<td>IP 주소만 변환</td>
+<td>IP + 포트 번호 변환</td>
+</tr>
+<tr>
+<td>대상 호스트 수</td>
+<td>비슷한 규모</td>
+<td>1개의 공인 IP에 많은 사설 IP 대응</td>
+</tr>
+<tr>
+<td>사용 사례</td>
+<td>기업 내부 통신</td>
+<td>가정용 공유기</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="10-가정용-공유기의-natpat">10. 가정용 공유기의 NAT/PAT</h4>
+<h5 id="10-1">10-1. 동작 원리</h5>
+<p>LAN 포트: 내부 네트워크 연결 WAN 포트: 외부 인터넷 연결 공유기는 내부 여러 장치를 하나의 공인 IP로 변환하여 통신</p>
+<h5 id="10-2">10-2. 포트 포워딩</h5>
+<p>내부 사설 IP 기반 서비스에 외부에서 접근하려면 공유기의 포트 포워딩 설정이 필요하다.</p>
+<h4 id="11-acl과-nat의-관계">11. ACL과 NAT의 관계</h4>
+<h5 id="11-1-nat">11-1. 동적 NAT 설정 절차</h5>
+<h4 id="1-acl-정책으로-변환할-사설-ip-범위-정의">1. ACL 정책으로 변환할 사설 IP 범위 정의</h4>
+<h4 id="2-nat-풀pool로-공인-ip-범위-정의">2. NAT 풀(pool)로 공인 IP 범위 정의</h4>
+<h4 id="3-acl과-nat-풀을-연결하는-명령-실행">3. ACL과 NAT 풀을 연결하는 명령 실행</h4>
+<h5 id="11-2">11-2. 동작 과정</h5>
+<p>정책의 ACL에 일치하는 트래픽이 들어오면 NAT 풀의 IP로 변환 변환되지 않은 트래픽은 원래대로 통신</p>
+<h4 id="12-nat의-보안-측면">12. NAT의 보안 측면</h4>
+<h5 id="12-1">12-1. 보안 이점</h5>
+<p>내부 네트워크 구조가 외부에 노출되지 않음 기업의 시스템 정보 보호 해킹이나 공격 시 직접 대상을 파악하기 어려움</p>
+<h5 id="12-2">12-2. 사용 사례</h5>
+<p>일부 기업은 공인 IP 여유가 있어도 보안 목적으로 사설망 + NAT 구성을 사용한다.</p>
+<hr />
+<h3 id="029-acl의-개념-및-필터링-원리">029. ACL의 개념 및 필터링 원리</h3>
+<h4 id="1-acl접근-제어-목록-개요">1. ACL(접근 제어 목록) 개요</h4>
+<h5 id="1-1-acl_1">1-1. ACL의 정의</h5>
+<p>ACL은 "Access Control List"의 약자로, 접근을 제어하는 목록을 통해 패킷에 대한 필터링을 수행한다. 특정 패킷의 통과를 허용하거나 차단하는 규칙 집합이다.</p>
+<h5 id="1-2-acl">1-2. ACL의 기본 원리</h5>
+<p>패킷이 라우터를 통과할 때 ACL 규칙과 비교하여 통과 여부를 판정한다</p>
+<p>어떤 통신원(source)에서 어떤 통신 대상(destination)으로의 패킷을 허용할지 또는 거부할지 결정한다</p>
+<p>기준에 따라 스탠다드 ACL과 확장 ACL로 분류된다</p>
+<h5 id="1-3-acl">1-3. ACL의 분류</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>분류</th>
+<th>설명</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>스탠다드 ACL</td>
+<td>출발지 IP 주소만을 기준으로 필터링</td>
+<td>간단하지만 제한적</td>
+</tr>
+<tr>
+<td>확장 ACL</td>
+<td>출발지 IP, 목적지 IP, 프로토콜, 포트 등을 기준으로 필터<br>링</td>
+<td>더 세밀한 제어 가<br>능</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-환경-세팅">3. 환경 세팅</h4>
+<h5 id="4-1_4">4-1. 운영체제 다운로드</h5>
+<p>이번 주차부터 실습 환경 구성을 위해 다음 운영체제의 설치 이미지가 필요하다:</p>
+<p>1) Rocky Linux 9 Red Hat 계열의 안정화된 배포판 Rocky Linux 9.7 또는 9.8 버전 사용 Minimal ISO 권장 (약 2.4GB)</p>
+<p>이유: 명령어 중심의 설정이 필요하므로 그래픽 환경은 불필요 2) Windows Server 2022 다운로드 경로: rockylinux.org → Download → Rocky 9 → Minimal ISO 최신 버전(2025)도 있으나, 로그인 및 추가 인증 절차 필요 Windows Server 2022 사용 시 기본 기능은 동일 64비트 버전 다운로드 크기: 약 4.7GB 주의사항: 두 이미지의 다운로드 용량이 크므로, 미리 다운로드를 시작하여 진행 중에 완 료될 수 있도록 준비하자.</p>
+<h5 id="4-2_2">4-2. 운영체제의 필요성</h5>
+<p>서버 기초 구축 실습을 위해서는 Linux와 Windows Server 환경이 필수적이다. 다음 주차부터 이들 운영체제 위에서 네트워크 서비스를 구성할 예정이다.</p>
+<hr />
+<h3 id="030-acl의-유형별-특징-및-필터링-기준">030. ACL의 유형별 특징 및 필터링 기준</h3>
+<h4 id="1-스탠다드-aclstandard-acl">1. 스탠다드 ACL(Standard ACL)</h4>
+<h5 id="1-1_3">1-1. 정의</h5>
+<p>스탠다드 ACL은 출발지 IP 주소만을 기준으로 패킷 필터링을 수행하는 가장 단순한 형태의 ACL이다.</p>
+<h5 id="1-2_3">1-2. 특징</h5>
+<p>필터링 기준이 출발지 IP 주소로만 제한된다</p>
+<p>구성이 간단하고 설정하기 쉽다</p>
+<p>세밀한 필터링은 불가능하다</p>
+<p>특정 네트워크 또는 호스트의 접근만 제어할 수 있다</p>
+<h5 id="1-3_1">1-3. 적용 범위의 제한</h5>
+<p>출발지 IP 주소만으로 필터링하므로, 특정 포트나 서비스를 선택적으로 차단하기 어렵다. 예를 들어, 특정 IP에서의 HTTP 접속만 차단하고 HTTPS는 허용하는 것이 불가능하다.</p>
+<h4 id="2-확장-aclextended-acl">2. 확장 ACL(Extended ACL)</h4>
+<h5 id="2-1_3">2-1. 정의</h5>
+<p>확장 ACL은 출발지 IP, 목적지 IP, 프로토콜, 포트 등 여러 기준을 조합하여 패킷 필터링을 수행한다.</p>
+<h5 id="2-2_3">2-2. 특징</h5>
+<p>출발지 IP 주소와 목적지 IP 주소 모두 고려한다</p>
+<p>프로토콜 타입(TCP, UDP, ICMP 등)을 지정할 수 있다</p>
+<p>포트 번호(예: HTTP의 80번, HTTPS의 443번)를 기반으로 필터링 가능하다</p>
+<p>훨씬 세밀한 트래픽 제어가 가능하다</p>
+<p>설정은 복잡하지만, 보안 정책을 더 효과적으로 구현할 수 있다</p>
+<h5 id="2-3_1">2-3. 활용 예시</h5>
+<p>특정 IP의 특정 포트 접근만 차단 특정 프로토콜(예: Telnet, SSH)만 제한 복합적인 보안 정책 구현 가능</p>
+<h4 id="3-acl의-분류-비교">3. ACL의 분류 비교</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>스탠다드 ACL</th>
+<th>확장 ACL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>필터링 기준</td>
+<td>출발지 IP 주소만</td>
+<td>출발지 IP, 목적지 IP, 프로토콜, 포트</td>
+</tr>
+<tr>
+<td>복잡도</td>
+<td>낮음</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>세밀도</td>
+<td>낮음</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>적용 위치</td>
+<td>목적지에 가까운 위치</td>
+<td>출발지에 가까운 위치</td>
+</tr>
+<tr>
+<td>성능 영향</td>
+<td>낮음</td>
+<td>상대적으로 높음</td>
+</tr>
+<tr>
+<td>사용 시나리오</td>
+<td>특정 네트워크 전체 접근 제어</td>
+<td>특정 서비스/포트 기반 제어</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="4-acl-번호-체계">4. ACL 번호 체계</h4>
+<p>Cisco IOS에서 ACL은 번호로 식별된다.</p>
+<p>스탠다드 ACL: 1~99 또는 1300~1999 범위 확장 ACL: 100~199 또는 2000~2699 범위 ACL 번호는 정책을 구분하고 관리하기 위한 식별자로 사용된다.</p>
+<h4 id="5-필터링의-동작-원리">5. 필터링의 동작 원리</h4>
+<h5 id="5-1_2">5-1. 패킷 처리 과정</h5>
+<h4 id="1-라우터에-패킷이-도착한다">1. 라우터에 패킷이 도착한다</h4>
+<h4 id="2-적용된-acl-규칙과-패킷-정보를-비교한다">2. 적용된 ACL 규칙과 패킷 정보를 비교한다</h4>
+<h4 id="3-규칙과-일치하면-허용permit-또는-거부deny-결정을-수행한다">3. 규칙과 일치하면 허용(permit) 또는 거부(deny) 결정을 수행한다</h4>
+<h4 id="4-결정에-따라-패킷을-전달하거나-폐기한다">4. 결정에 따라 패킷을 전달하거나 폐기한다</h4>
+<h5 id="5-2_1">5-2. 규칙 매칭 순서</h5>
+<p>ACL의 규칙들은 위에서부터 순서대로 적용된다</p>
+<p>첫 번째로 일치하는 규칙이 적용되며, 이후 규칙들은 무시된다</p>
+<p>따라서 ACL 규칙의 순서가 중요하다</p>
+<h4 id="6-프로토콜과-포트의-이해">6. 프로토콜과 포트의 이해</h4>
+<h5 id="6-1_1">6-1. 주요 프로토콜</h5>
+<p>TCP: 신뢰성 있는 연결 기반 통신 (예: HTTP, HTTPS, FTP, SSH)</p>
+<p>UDP: 신뢰성 없는 비연결 통신 (예: DNS, VoIP)</p>
+<p>ICMP: 진단 및 오류 보고 (예: PING)</p>
+<h5 id="6-2_1">6-2. 주요 포트 번호</h5>
+<p>80번: HTTP (웹)</p>
+<p>443번: HTTPS (보안 웹)</p>
+<p>21번: FTP (파일 전송)</p>
+<p>22번: SSH (보안 셸)</p>
+<p>25번: SMTP (메일 송신)</p>
+<h4 id="7-packet-tracer의-서버-시스템">7. Packet Tracer의 서버 시스템</h4>
+<h5 id="7-1-httphttps">7-1. 웹 서비스(HTTP/HTTPS)</h5>
+<p>Packet Tracer의 서버 시스템은 웹 서비스를 제공한다.</p>
+<p>HTTP (80번 포트)와 HTTPS (443번 포트)가 활성화되어 있다</p>
+<p>기본 페이지는 index.html이며, 여러 페이지를 포함할 수 있다</p>
+<p>테스트용 기본 웹 페이지가 제공된다</p>
+<h5 id="7-2-ftp">7-2. FTP 서비스</h5>
+<p>FTP는 파일 전송 프로토콜로서 서버에서 제공된다</p>
+<p>서비스는 자동으로 시작되어 있다</p>
+<h5 id="7-3">7-3. 기타 서비스</h5>
+<p>서버 시스템은 간단한 웹 페이지 관리 기능을 제공한다.</p>
+<p>웹 페이지 추가, 삭제 가능 여러 HTML 파일 관리</p>
+<hr />
+<h3 id="031-ipv6-주소-체계-이해-및-듀얼-스택-개념-라우팅">031. IPv6 주소 체계 이해 및 듀얼 스택 개념, 라우팅</h3>
+<p>념, 라우팅</p>
+<h4 id="1-ipv4와-ipv6의-차이">1. IPv4와 IPv6의 차이</h4>
+<h5 id="1-1_4">1-1. 주소 길이 비교</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비트 수</td>
+<td>32비트</td>
+<td>128비트</td>
+</tr>
+<tr>
+<td>주소 개수</td>
+<td>약 43억 개</td>
+<td>약 2^128개</td>
+</tr>
+<tr>
+<td>표기</td>
+<td>십진수 점 표기</td>
+<td>16진수 콜론 표기</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="1-2-ipv6">1-2. IPv6가 필요한 이유</h5>
+<p>IPv4 주소 고갈 IoT 및 다양한 디바이스의 확산 일반 가전제품도 인터넷 연결 필요</p>
+<h4 id="2-ipv6-주소의-구조">2. IPv6 주소의 구조</h4>
+<h5 id="2-1_4">2-1. 기본 표기법</h5>
+<p>IPv6 주소는 128비트를 16비트씩 8개 부분으로 나누어 표기한다.</p>
+<p>2001:0DB8:0000:0000:0000:0000:1111:2222 각 부분: 16비트 (16진수 4자리)</p>
+<p>구분자: 콜론(:)</p>
+<p>전체: 8개 부분</p>
+<h4 id="3-ipv6-주소-축약-표기법">3. IPv6 주소 축약 표기법</h4>
+<h5 id="3-1-0">3-1. 선행 0 제거</h5>
+<p>16진수 각 부분의 맨 앞 0은 생략 가능하다.</p>
+<p>2001:0DB8:0000:0001  →  2001:DB8:0:1 ↑                          ↑ 선행 0 제거됨</p>
+<h5 id="3-2-0-double-colon">3-2. 연속된 0 제거 (double colon)</h5>
+<p>연속되는 0만으로 이루어진 부분은 ::  으로 표기 가능하다.</p>
+<p>2001:0DB8:0000:0000:0000:0000:0000:0001 축약하면:</p>
+<p>2001:DB8::1 또는 2001:DB8::0001 규칙:</p>
+<p>::  은 주소 내에서 한 번만 사용 가능 맨 앞 또는 맨 뒤의 0만 생략 가능</p>
+<h4 id="4-ipv6-주소의-분류">4. IPv6 주소의 분류</h4>
+<h5 id="4-1-global-address">4-1. 글로벌 주소 (Global Address)</h5>
+<p>역할: IPv4의 공인 IP에 해당 용도: 인터넷 통신 시작 대역: 2001::/16, 2002::/16, 2003::/18 등 특징:</p>
+<p>전 세계에서 유일 인터넷 통신 가능</p>
+<h5 id="4-2-link-local-address">4-2. 링크 로컬 주소 (Link Local Address)</h5>
+<p>시작: FE80::/10 프리픽스: /10 특징: 동일 네트워크(서브넷) 내에서만 통신 가능 설정: 자동으로 할당됨 예시:</p>
+<p>FE80::1 (자동 생성)</p>
+<h5 id="4-3-site-local-address">4-3. 사이트 로컬 주소 (Site Local Address)</h5>
+<p>역할: IPv4의 사설 IP에 유사 범위: 특정 조직/사이트 내에서만 사용 프리픽스: FEC0::/10 특징:</p>
+<p>조직 내부 통신만 가능 링크 로컬, 글로벌 주소와 통신 불가</p>
+<h4 id="5-ipv6-주소-통신-범위">5. IPv6 주소 통신 범위</h4>
+<h5 id="5-1_3">5-1. 같은 유형의 주소 간 통신</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>출발지</th>
+<th>목적지</th>
+<th>통신 가능 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>글로벌 주소</td>
+<td>글로벌 주소</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>링크 로컬</td>
+<td>링크 로컬 (같은 네트워크)</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>사이트 로컬</td>
+<td>사이트 로컬 (같은 사이트)</td>
+<td>가능</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="5-2_2">5-2. 다른 유형의 주소 간 통신</h5>
+<p>글로벌 ↔ 링크 로컬: 불가능 글로벌 ↔ 사이트 로컬: 불가능 링크 로컬 ↔ 사이트 로컬: 불가능</p>
+<h4 id="6-ipv4와-ipv6-혼용-듀얼-스택">6. IPv4와 IPv6 혼용: 듀얼 스택</h4>
+<h5 id="6-1_2">6-1. 듀얼 스택의 개념</h5>
+<p>하나의 인터페이스에 IPv4 주소와 IPv6 주소를 동시에 설정하는 방식이다.</p>
+<p>인터페이스 GigabitEthernet 0/0 IPv4: 192.168.1.1 IPv6: 2001:DB8:1::1/64 장점:</p>
+<p>레거시 IPv4와 새로운 IPv6 동시 지원 점진적 마이그레이션 가능</p>
+<h5 id="6-2-ipv4-ipv6">6-2. IPv4와 IPv6 미지원 네트워크 간 통신</h5>
+<p>네트워크 구성:</p>
+<p>네트워크 A: IPv4만 지원 네트워크 B: IPv4만 지원 네트워크 C: IPv6만 지원 네트워크 D: IPv6만 지원 결과:</p>
+<p>A ↔ B 통신: 가능 (IPv4)</p>
+<p>C ↔ D 통신: 가능 (IPv6)</p>
+<p>A/B ↔ C/D 통신: 불가능 (변환 필요)</p>
+<h4 id="7-ipv4와-ipv6-간-변환-터널링">7. IPv4와 IPv6 간 변환: 터널링</h4>
+<h5 id="7-1_1">7-1. 터널링의 개념</h5>
+<p>IPv4와 IPv6 간 통신이 필요할 때 변환 기술을 사용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기술</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4to6 터널</td>
+<td>IPv4 네트워크를 통해 IPv6 패킷 전송</td>
+</tr>
+<tr>
+<td>6to4 터널</td>
+<td>IPv6 네트워크를 통해 IPv4 패킷 전송</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="7-2">7-2. 터널링 사용 시기</h5>
+<p>IPv4와 IPv6가 모두 존재하는 혼합 환경 완전한 IPv6 전환 전 과도기</p>
+<h4 id="8-ipv6의-장점">8. IPv6의 장점</h4>
+<h5 id="8-1_1">8-1. 기술적 이점</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주소 크기</td>
+<td>128비트로 충분한 주소 공간 제공</td>
+</tr>
+<tr>
+<td>헤더 단순화</td>
+<td>헤더 구조 간결화로 처리 속도 향상</td>
+</tr>
+<tr>
+<td>자동 설정</td>
+<td>Stateless Address Auto configuration 지원</td>
+</tr>
+<tr>
+<td>보안</td>
+<td>IPSec 기본 내장</td>
+</tr>
+<tr>
+<td>모바일</td>
+<td>이동성 지원 개선</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="8-2_1">8-2. 보안 측면</h5>
+<p>IPv4: 별도로 IPSec 프로토콜 설정 필요 IPv6: 기본으로 IPSec이 포함되어 있어 더 안전</p>
+<h4 id="9-ipv6-주소-설정">9. IPv6 주소 설정</h4>
+<h5 id="9-1">9-1. 프리픽스 개념</h5>
+<p>IPv6는 프리픽스를 통해 네트워크 부분과 호스트 부분을 구분한다.</p>
+<p>2001:DB8:1::1/64 ↑ 프리픽스 길이 /64 : 처음 64비트가 네트워크, 나머지 64비트가 호스트</p>
+<h5 id="9-2">9-2. 같은 네트워크 판별</h5>
+<p>프리픽스 길이가 같아야 같은 네트워크로 간주된다.</p>
+<p>2001:DB8:1::1/64   ✓ 같은 네트워크 2001:DB8:1::100/64 ✓ 2001:DB8:2::1/64   ✗ 다른 네트워크 (두 번째 부분이 다름) 2001:DB8:1::1/48   ✗ 프리픽스가 다름</p>
+<h4 id="10-ipv6-라우팅-듀얼-스택-환경">10. IPv6 라우팅: 듀얼 스택 환경</h4>
+<h5 id="10-1_1">10-1. 라우팅 활성화</h5>
+<p>IPv6 라우팅을 사용하려면 먼저 활성화해야 한다.</p>
+<p>ipv6 unicast-routing ← IPv6 유니캐스트 라우팅 활성화</p>
+<h5 id="10-2_1">10-2. 인터페이스 라우팅 설정</h5>
+<p>IPv4와 달리, IPv6 라우팅은 인터페이스 내에서 설정된다.</p>
+<p>interface GigabitEthernet 0/0 ipv6 ospf 1 area 0 ← 이 인터페이스를 OSPF로 라우팅 특징:</p>
+<p>IPv4: 라우터 서브모드에서 설정 IPv6: 인터페이스 서브모드에서 설정</p>
+<h4 id="11-ipv6의-라우팅-프로토콜-지원">11. IPv6의 라우팅 프로토콜 지원</h4>
+<h5 id="11-1">11-1. 지원 프로토콜</h5>
+<p>IPv6를 지원하는 라우팅 프로토콜:</p>
+<p>OSPF (버전 3부터)</p>
+<p>RIPng EIGRP (일부 버전)</p>
+<h5 id="11-2_1">11-2. 프로토콜 선택 시 주의</h5>
+<p>모든 라우팅 프로토콜이 IPv6를 지원하는 것은 아니다:</p>
+<p>최신 버전 사용 필요 프로토콜별 지원 버전 확인 필수</p>
+<h4 id="12-현재와-미래">12. 현재와 미래</h4>
+<h5 id="12-1-ipv4">12-1. IPv4의 지속적 사용</h5>
+<p>장기간 IPv4와 IPv6 혼용 레거시 시스템의 IPv4 의존성 점진적 마이그레이션 필요</p>
+<h5 id="12-2-ipv6">12-2. IPv6 전환의 필요성</h5>
+<p>IoT 확산 스마트 디바이스 증가 주소 공간 한계 도달</p>
+<h4 id="1-ipv6-라우팅">1. IPv6 라우팅</h4>
+<h5 id="1-1_5">1-1. 세 번째 라우터 설정</h5>
+<p>이전 시간의 첫 번째, 두 번째 라우터 설정을 바탕으로 세 번째 라우터도 동일한 방식으로 구성한다.</p>
+<h5 id="1-2-ipv6_1">1-2. IPv6 주소 설정 방식</h5>
+<p>각 인터페이스에 IPv6 주소를 할당하되, 프리픽스 길이는 일관되게 유지해야 한다.</p>
+<p>인터페이스 GigabitEthernet 0/0 ipv6 address 2001:DB8:4::1/64 ← 각 라우터마다 다른 주소 할당</p>
+<h5 id="1-3-ospf">1-3. OSPF 라우팅 설정</h5>
+<p>IPv6 OSPF는 각 인터페이스 내에서 프로세스 ID와 에어리어를 지정한다.</p>
+<p>interface 인터페이스명 ipv6 ospf 1 area 0 ← 프로세스 ID: 1, 에어리어: 0 (백본 에어리어)</p>
+<h4 id="2-ipv6-라우팅-테이블-확인">2. IPv6 라우팅 테이블 확인</h4>
+<h5 id="2-1_5">2-1. 라우팅 테이블 조회</h5>
+<p>show ipv6 route 출력 정보:</p>
+<p>목적지: 대상 네트워크 주소 경로: 어느 인터페이스를 통해 갈 것인가 게이트웨이: 링크 로컬 주소 (경유 라우터)</p>
+<p>메트릭: 경로의 비용 (기본값은 OSPF 디스턴스 110)</p>
+<h5 id="2-2_4">2-2. 경로 정보 해석</h5>
+<p>2001:DB8:1::/64 via FE80::260 (링크 로컬 주소) ← 2001:DB8:1::로 가려면 FE80::260 주소를 가진 라우터를 경유</p>
+<h4 id="3-ipv6-라우팅의-특징">3. IPv6 라우팅의 특징</h4>
+<h5 id="3-1-ipv4">3-1. IPv4와의 유사성</h5>
+<p>디스턴스, 메트릭 값이 동일 라우팅 프로토콜의 기본 동작 원리 유사 주소 체계만 다름</p>
+<h5 id="3-2_1">3-2. 링크 로컬 주소의 역할</h5>
+<p>IPv6에서 라우팅 정보는 링크 로컬 주소를 통해 전달된다:</p>
+<p>IPv4의 일반 유니캐스트 주소 역할 같은 네트워크 내에서만 통신 가능 라우팅 프로토콜 메시지 전달에 사용</p>
+<h4 id="4-ipv6-통신-테스트">4. IPv6 통신 테스트</h4>
+<h5 id="4-1-ping">4-1. PING 명령</h5>
+<p>특정 IPv6 주소로 통신 가능 여부를 테스트한다.</p>
+<p>ping 2001:DB8:1::1 결과 해석:</p>
+<p>느낌표(!): 정상 응답 (통신 성공)</p>
+<p>점(.): 응답 없음 (통신 실패)</p>
+<h5 id="4-2_3">4-2. 테스트 수행</h5>
+<p>라우터 간: 직접 ping PC에서: 원격 네트워크 ping 양방향 모두 테스트하여 통신 확인</p>
+<h4 id="5-ospf-상태-확인">5. OSPF 상태 확인</h4>
+<h5 id="5-1-ospf">5-1. OSPF 이웃 정보 조회</h5>
+<p>show ipv6 ospf neighbor 확인 사항:</p>
+<p>이웃 라우터 목록 인접 상태 최근 통신 시간</p>
+<h5 id="5-2-ospf">5-2. OSPF 토폴로지 테이블</h5>
+<p>show ipv6 ospf topology 정보:</p>
+<p>OSPF가 알고 있는 모든 경로 수렴 완료 여부 최적 경로(routing table에 반영됨)</p>
+<h4 id="6-설정-확인">6. 설정 확인</h4>
+<h5 id="6-1_3">6-1. 전체 설정 조회</h5>
+<p>show running-config 확인 내용:</p>
+<p>IPv4와 IPv6 주소 동시 설정 (듀얼 스택)</p>
+<p>OSPF 명령어 위치 인터페이스별 라우팅 설정</p>
+<h5 id="6-2-ipv6">6-2. IPv6 설정의 특이점</h5>
+<p>IPv4 주소: 인터페이스 설정 IPv6 주소: ipv6 address로 표기 OSPF 설정: 인터페이스 내에서 처리</p>
+<hr />
+<h3 id="032-vpn-개념">032. VPN 개념</h3>
+<h4 id="7-vpnvirtual-private-network-개요">7. VPN(Virtual Private Network) 개요</h4>
+<h5 id="7-1-vpn">7-1. VPN의 정의</h5>
+<p>Virtual Private Network는 공개 네트워크(인터넷) 위에 가상의 사설 네트워크를 구축하는 기술이다.</p>
+<h5 id="7-2-vpn">7-2. VPN의 역할</h5>
+<p>데이터 암호화: 전송되는 데이터의 기밀성 보장 인증: 통신 양쪽의 신원 확인 무결성 검증: 데이터 변조 여부 확인</p>
+<h4 id="8-vpn의-분류">8. VPN의 분류</h4>
+<h5 id="8-1-vpn-site-to-site-vpn">8-1. 사이트 투 사이트 VPN (Site-to-Site VPN)</h5>
+<p>목적: 원격지 사무실 간 안전한 통신 대상: 네트워크 대 네트워크 간 연결 사용처: 기업 지사 간 통신</p>
+<h5 id="8-2-vpn-remote-access-vpn">8-2. 리모트 액세스 VPN (Remote Access VPN)</h5>
+<p>목적: 원격 사용자의 기업 네트워크 접근 대상: 개별 사용자 대 네트워크 사용처: 재택근무, 출장 중 접근</p>
+<h4 id="9-vpn-설정-전-필수-조건">9. VPN 설정 전 필수 조건</h4>
+<h5 id="9-1_1">9-1. 기본 네트워크 구성</h5>
+<p>VPN 설정 전에 반드시 다음이 확보되어야 한다:</p>
+<h4 id="1-ip-주소-설정-모든-장비와-호스트에-ip-할당">1. IP 주소 설정: 모든 장비와 호스트에 IP 할당</h4>
+<h4 id="2-라우팅-설정-모든-구간에서-기본-통신-가능">2. 라우팅 설정: 모든 구간에서 기본 통신 가능</h4>
+<h4 id="3-통신-확인-ping-등으로-통신-검증">3. 통신 확인: ping 등으로 통신 검증</h4>
+<h5 id="9-2_1">9-2. 통신 가능 상태</h5>
+<p>VPN은 기존 통신 경로 위에 추가 보안 기능을 더하는 것이다:</p>
+<p>VPN 자체가 패킷을 전달하지는 않음 패킷 전달은 기본 라우팅이 담당 VPN은 암호화와 인증만 처리</p>
+<h4 id="10-vpn-구축을-위한-네트워크-설계">10. VPN 구축을 위한 네트워크 설계</h4>
+<h5 id="10-1_2">10-1. 네트워크 구성 예시</h5>
+<p>토폴로지:</p>
+<p>[192.168.100.0/24] | 라우터1(100.1) | 공인 IP 구간 (1.1.1.0/24, 2.2.2.0/24) | 라우터2(172.16.1.0/24)</p>
+<p>| [172.16.0.0/24]</p>
+<h5 id="10-2-ip">10-2. IP 주소 할당 전략</h5>
+<p>각 네트워크 대역을 구분하여 할당:</p>
+<p>왼쪽 사이트: 192.168.100.0/24 공인 인터페이스: 1.1.1.0/24, 2.2.2.0/24 오른쪽 사이트: 172.16.0.0/24</p>
+<h5 id="10-3">10-3. 게이트웨이 주소</h5>
+<p>각 네트워크에서 .1 주소를 게이트웨이로 지정 호스트/서버는 .2부터 할당</p>
+<h4 id="11-vpn-설정-준비">11. VPN 설정 준비</h4>
+<h5 id="11-1_1">11-1. 라우팅 프로토콜 선택</h5>
+<p>OSPF 또는 EIGRP 등의 라우팅 프로토콜로 통신을 활성화:</p>
+<p>라우터 ospf 프로세스ID network 광고할_네트워크 영역 에어리어_ID</p>
+<h5 id="11-2_2">11-2. 모든 구간의 통신 확인</h5>
+<p>라우터 간 ping PC에서 원격 네트워크 ping 양방향 모두 성공 확인</p>
+<h5 id="11-3">11-3. 라우팅 테이블 검증</h5>
+<p>show ip route show ipv6 route</p>
+<h4 id="12-vpn-설정의-다음-단계">12. VPN 설정의 다음 단계</h4>
+<h5 id="12-1-vpn">12-1. 패킷 트레이스에서의 VPN</h5>
+<p>이 과정에서는 사이트 투 사이트 VPN을 패킷 트레이스에서 구현한다.</p>
+<h5 id="12-2-vpn">12-2. 실무에서의 리모트 액세스 VPN</h5>
+<p>다음 과정인 "보안 인프라 운영 관리"에서:</p>
+<p>pfsense (UTM 솔루션) 학습 방화벽 기능 함께 학습 리모트 액세스 VPN 설정 실습</p>
+<h4 id="13-vpn-설정-시-주의사항">13. VPN 설정 시 주의사항</h4>
+<h5 id="13-1">13-1. 점진적 설정</h5>
+<p>복잡해 보이지만 실제로는 간단함:</p>
+<p>IP 주소 설정: 1~2줄 라우팅 설정: 3~5줄 전체 구성: 극히 적은 명령어</p>
+<h5 id="13-2">13-2. 문제 해결 방법</h5>
+<p>설정 후 통신이 안 될 경우:</p>
+<h4 id="1-traceroute로-경로-확인">1. traceroute로 경로 확인</h4>
+<h4 id="2-show-ip-route로-라우팅-테이블-검증">2. show ip route로 라우팅 테이블 검증</h4>
+<h4 id="3-show-running-config로-설정-확인">3. show running-config로 설정 확인</h4>
+<h4 id="4-no-명령으로-문제-부분-삭제-후-재설정">4. no 명령으로 문제 부분 삭제 후 재설정</h4>
+<hr />
+<h3 id="033-동적-nat-및-pat-설정의-원리와-동작-메커니즘-이해">033. 동적 NAT 및 PAT 설정의 원리와 동작 메커니즘 이해</h3>
+<p>작 메커니즘 이해</p>
+<h4 id="1-동적-nat-설정의-기본-구조">1. 동적 NAT 설정의 기본 구조</h4>
+<h5 id="1-1-nat">1-1. 동적 NAT의 구성 요소</h5>
+<p>동적 NAT를 설정하기 위해서는 다음 세 가지가 필요하다:</p>
+<h4 id="1-acl-정책-변환할-사설-ip-범위-지정">1. ACL 정책: 변환할 사설 IP 범위 지정</h4>
+<h4 id="2-nat-풀-변환되는-공인-ip-범위-정의">2. NAT 풀: 변환되는 공인 IP 범위 정의</h4>
+<h4 id="3-연결-명령-acl과-nat-풀을-연결">3. 연결 명령: ACL과 NAT 풀을 연결</h4>
+<h4 id="2-nat-설정-전-준비">2. NAT 설정 전 준비</h4>
+<h5 id="2-1-ip">2-1. IP 주소 계획</h5>
+<p>토폴로지 예시:</p>
+<p>사설 IP 대역: 192.168.1.0/24 (내부 네트워크)</p>
+<p>공인 IP 대역: 20.0.0.0/24 (외부 인터페이스)</p>
+<p>1:1 매핑: 내부 254대 + 외부 254대 (1:1 대응 가능)</p>
+<h5 id="1-2_4">1-2. 인터페이스 역할 정의</h5>
+<p>inside: 내부 네트워크 연결 인터페이스 outside: 외부 네트워크 연결 인터페이스 내부 주소 → 외부 주소로의 변환이 일어남</p>
+<h4 id="3-동적-nat-설정-과정">3. 동적 NAT 설정 과정</h4>
+<h5 id="3-1-1-acl-acl">3-1. 1단계: ACL 정책 정의 (표준 ACL)</h5>
+<p>변환할 사설 IP 범위를 허용(permit)으로 지정한다.</p>
+<p>access-list 10 permit 192.168.1.0 0.0.0.255 ← 192.168.1.0/24 네트워크의 모든 호스트를 허용 번호 10: ACL 정책의 이름(1~99는 표준 ACL)</p>
+<p>permit: 이 주소를 NAT 변환 대상으로 지정</p>
+<h5 id="3-2-2-nat">3-2. 2단계: NAT 풀 정의</h5>
+<p>변환될 공인 IP 범위를 지정한다.</p>
+<p>ip nat pool NAT-TEST 20.0.0.1 20.0.0.254 netmask 255.255.255.0 ← NAT-TEST라는 이름의 풀에 20.0.0.1~254를 할당 NAT-TEST: 풀의 이름 시작 IP: 20.0.0.1 끝 IP: 20.0.0.254 netmask: 서브넷 마스크 값</p>
+<h5 id="3-3-3-acl-nat">3-3. 3단계: ACL과 NAT 풀 연결</h5>
+<p>정의된 ACL과 NAT 풀을 연결하여 실제 변환을 수행한다.</p>
+<p>ip nat inside source list 10 pool NAT-TEST ← ACL 10에 해당하는 출발지는 NAT-TEST 풀의 IP로 변환</p>
+<h4 id="4-인터페이스에-nat-적용">4. 인터페이스에 NAT 적용</h4>
+<h5 id="4-1-inside">4-1. inside 인터페이스 설정</h5>
+<p>interface GigabitEthernet 0/0 ip nat inside ← 이 인터페이스를 NAT의 inside(내부)로 지정</p>
+<h5 id="4-2-outside">4-2. outside 인터페이스 설정</h5>
+<p>interface Serial 0/3/1 ip nat outside ← 이 인터페이스를 NAT의 outside(외부)로 지정</p>
+<h4 id="5-nat-동작-확인">5. NAT 동작 확인</h4>
+<h5 id="5-1-nat">5-1. NAT 설정 상태 확인</h5>
+<p>show ip nat statistics ← NAT의 설정 상태, inside/outside 인터페이스 정보, 정책 정보 표시</p>
+<h5 id="5-2-nat">5-2. NAT 변환 테이블 확인</h5>
+<p>show ip nat translations ← 실제로 변환되고 있는 IP 주소의 매핑 테이블 표시 변환 테이블 해석:</p>
+<p>local: 변환 전 사설 IP (192.168.1.100 등)</p>
+<p>global: 변환 후 공인 IP (20.0.0.1 등)</p>
+<h4 id="6-동적-nat의-한계">6. 동적 NAT의 한계</h4>
+<h5 id="6-1-ip">6-1. IP 부족 문제</h5>
+<p>변환할 사설 IP 대역이 공인 IP 대역보다 크면 모든 호스트가 동시에 통신할 수 없다.</p>
+<p>예시:</p>
+<p>사설 IP: 254대 공인 IP: 62개만 할당 결과: 처음 62대만 변환 가능, 나머지는 불가능</p>
+<h4 id="7-patport-address-translation">7. PAT(Port Address Translation)</h4>
+<h5 id="7-1-pat">7-1. PAT의 개념</h5>
+<p>하나의 공인 IP에 여러 사설 IP를 대응시키기 위해 포트 번호를 함께 변환한다.</p>
+<h5 id="7-2-nat-pat">7-2. NAT와 PAT의 차이</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>NAT</th>
+<th>PAT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>변환 대상</td>
+<td>IP 주소만</td>
+<td>IP 주소 + 포트 번호</td>
+</tr>
+<tr>
+<td>1:N 대응</td>
+<td>불가능</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>동시 통신</td>
+<td>제한적</td>
+<td>광범위</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="7-3-pat">7-3. PAT 설정</h5>
+<p>동적 NAT 설정에서 마지막 명령에 overload 옵션만 추가한다.</p>
+<p>ip nat inside source list 10 pool NAT-TEST overload ← overload 옵션이 PAT를 활성화</p>
+<h4 id="8-가정용-공유기의-natpat">8. 가정용 공유기의 NAT/PAT</h4>
+<h5 id="8-1-natpat">8-1. 공유기의 NAT/PAT 동작</h5>
+<p>외부 공인 IP: 하나만 할당받음 (예: 1.1.1.1)</p>
+<p>내부 사설 IP: 여러 장치 (PC, 스마트폰, 태블릿 등)</p>
+<p>포트 변환: 각 장치의 포트를 다르게 변환하여 구분</p>
+<h5 id="8-2_2">8-2. 일반적인 공유기 스펙</h5>
+<p>제품 사양에서 흔히 볼 수 있는 내용:</p>
+<p>DHCP 기능 NAT 기능 PAT 기능 (최대 250세대 이상 대응 가능)</p>
+<h4 id="9-nat가-필요-없는-상황">9. NAT가 필요 없는 상황</h4>
+<h5 id="9-1_2">9-1. 프로그래밍 환경에서</h5>
+<p>패킷 트레이스나 GNS3 같은 시뮬레이터에서는 공인/사설을 구분하지 않으므로 NAT 없이도 모든 통신이 가능하다.</p>
+<h5 id="9-2_2">9-2. 실제 필드와의 차이</h5>
+<p>실제 네트워크에서는:</p>
+<p>양쪽 라우터에 모두 NAT를 설정해야 함 NAT가 없으면 사설망 간 통신 불가능</p>
+<h4 id="10-nat와-보안">10. NAT와 보안</h4>
+<h5 id="10-1_3">10-1. 보안 이점</h5>
+<h4 id="1-구조-숨김-내부-네트워크-구조가-외부에-노출되지-않음">1. 구조 숨김: 내부 네트워크 구조가 외부에 노출되지 않음</h4>
+<h4 id="2-공격-방어-외부에서-직접-내부-시스템에-접근-불가능">2. 공격 방어: 외부에서 직접 내부 시스템에 접근 불가능</h4>
+<h4 id="3-정보-보호-ip-주소-시스템-정보-등을-보호">3. 정보 보호: IP 주소, 시스템 정보 등을 보호</h4>
+<h5 id="10-2-ip_1">10-2. 의도적 IP 변환</h5>
+<p>항상 사설 IP를 공인 IP로 변환하는 것은 아니다:</p>
+<p>공인 IP → 다른 공인 IP로의 변환도 가능 특정 보안 정책에 따라 필요할 수 있음</p>
+<h4 id="11-nat-삭제-및-초기화">11. NAT 삭제 및 초기화</h4>
+<h5 id="11-1-nat_1">11-1. NAT 설정 제거</h5>
+<p>설정된 NAT를 완전히 삭제하려면 NO 명령으로 각 항목을 제거해야 한다.</p>
+<p>no ip nat inside source list 10 pool NAT-TEST overload no ip nat pool NAT-TEST no access-list 10 no ip nat inside (인터페이스 설정) no ip nat outside (인터페이스 설정)</p>
+<h5 id="11-2_3">11-2. 삭제 순서</h5>
+<h4 id="1-연결-명령-삭제-inside-source-삭제">1. 연결 명령 삭제 (inside source 삭제)</h4>
+<h4 id="2-nat-풀-삭제">2. NAT 풀 삭제</h4>
+<h4 id="3-acl-정책-삭제">3. ACL 정책 삭제</h4>
+<h4 id="4-인터페이스-설정-삭제">4. 인터페이스 설정 삭제</h4>
+<h4 id="12-ipv6-주소-소개">12. IPv6 주소 소개</h4>
+<h5 id="12-1-ipv4_1">12-1. IPv4의 한계</h5>
+<p>주소 공간: 32비트 (약 43억 개)</p>
+<p>IoT 시대에 부족</p>
+<h5 id="12-2-ipv6_1">12-2. IPv6의 특징</h5>
+<p>주소 길이: 128비트 주소 부족 문제 해결 자동 설정 기능 IP 보안(IPSec) 기본 내장</p>
+<hr />
+<h3 id="034-확장-acl-포트와-프로토콜-기반-세밀한-필터링">034. 확장 ACL 포트와 프로토콜 기반 세밀한 필터링</h3>
+<p>한 필터링</p>
+<h4 id="1-확장-acl의-실전-구성">1. 확장 ACL의 실전 구성</h4>
+<h5 id="1-1_6">1-1. 기본 구조</h5>
+<p>확장 ACL의 명령어 구조:</p>
+<p>access-list [ACL번호] [permit/deny] [프로토콜]</p>
+<p>[출발지IP] [출발지마스크] [목적지IP] [목적지마스크]</p>
+<p>[포트 조건] [포트번호]</p>
+<h5 id="1-2_5">1-2. 주요 파라미터</h5>
+<p>ACL번호: 100~199 범위 (확장 ACL)</p>
+<p>permit/deny: 허용(permit) 또는 거부(deny)</p>
+<p>프로토콜: tcp, udp, icmp 등 출발지: 패킷의 원본 주소 목적지: 패킷의 대상 주소 포트조건: eq(같음), gt(크다), lt(작다) 등 포트번호: 해당 서비스의 포트 (80, 443, 등)</p>
+<h4 id="2-포트-번호와-서비스-매핑">2. 포트 번호와 서비스 매핑</h4>
+<h5 id="2-1_6">2-1. 주요 포트와 프로토콜</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>포트</th>
+<th>서비스</th>
+<th>프로토콜</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80</td>
+<td>HTTP</td>
+<td>TCP</td>
+<td>일반 웹 서비스</td>
+</tr>
+<tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>TCP</td>
+<td>보안 웹 서비스</td>
+</tr>
+<tr>
+<td>21</td>
+<td>FTP</td>
+<td>TCP</td>
+<td>파일 전송 프로토콜</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>포트</th>
+<th>서비스</th>
+<th>프로토콜</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>SSH</td>
+<td>TCP</td>
+<td>보안 셸 접속</td>
+</tr>
+<tr>
+<td>25</td>
+<td>SMTP</td>
+<td>TCP</td>
+<td>메일 송신</td>
+</tr>
+<tr>
+<td>53</td>
+<td>DNS</td>
+<td>TCP/UDP</td>
+<td>도메인 이름 해석</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ICMP</td>
+<td>ICMP</td>
+<td>핑(ping) 진단</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-2-icmp-ping">2-2. ICMP와 PING</h5>
+<p>ICMP(Internet Control Message Protocol): 진단 및 오류 보고 프로토콜 PING: ICMP echo와 echo reply를 이용한 연결 진단 ICMP echo: 요청 메시지 (PING 명령)</p>
+<p>ICMP echo reply: 응답 메시지 (라우터 또는 호스트의 응답)</p>
+<p>따라서 양방향 PING이 작동하려면 두 개의 규칙이 필요할 수 있다:</p>
+<p>permit icmp [출발지] [목적지]      ← echo 허용 permit icmp [목적지] [출발지]      ← echo reply 허용</p>
+<h4 id="3-포트-필터링의-실전-예제">3. 포트 필터링의 실전 예제</h4>
+<h5 id="3-1-http">3-1. HTTP(웹) 트래픽 필터링</h5>
+<p>특정 IP(예: 192.168.0.0/24)에서 웹 서버로의 웹 접속을 차단하는 예:</p>
+<p>access-list 100 deny tcp 192.168.0.0 0.0.0.255 [웹서버IP] eq 80 프로토콜: TCP (HTTP는 TCP 기반)</p>
+<p>출발지: 192.168.0.0/24 (192.168.0.0부터 192.168.0.255까지)</p>
+<p>목적지: 웹서버 IP 주소 조건: eq(equal, 같음) 80번 포트 결과: HTTP 웹 접속만 차단, 다른 포트는 허용</p>
+<h5 id="3-2_2">3-2. 특정 호스트와 네트워크 구분</h5>
+<p>ACL 설정 시 호스트와 네트워크를 구분하여 사용:</p>
+<p>단일 호스트: IP 주소 + 와일드카드 마스크 0.0.0.0 access-list 100 permit tcp 192.168.1.10 0.0.0.0 ...</p>
+<p>네트워크 범위: IP 주소 + 와일드카드 마스크 (0이 아닌 부분)</p>
+<p>access-list 100 permit tcp 192.168.0.0 0.0.0.255 ...</p>
+<p>host 키워드 (현대 IOS): 호스트를 명시적으로 표시 access-list 100 permit tcp host 192.168.1.10 ...</p>
+<h4 id="4-acl-규칙-작성의-best-practice">4. ACL 규칙 작성의 Best Practice</h4>
+<h5 id="4-1_5">4-1. 규칙 확인 및 검증</h5>
+<p>ACL을 작성할 때:</p>
+<h4 id="1-조건설정-요구사항을-명확히-파악">1. 조건(설정 요구사항)을 명확히 파악</h4>
+<h4 id="2-출발지와-목적지를-정확히-식별">2. 출발지와 목적지를 정확히 식별</h4>
+<h4 id="3-포트-번호-오류가-없는지-확인">3. 포트 번호 오류가 없는지 확인</h4>
+<h4 id="4-호스트-vs-네트워크-구분을-정확히-함">4. 호스트 vs 네트워크 구분을 정확히 함</h4>
+<p>주의사항: 호스트와 네트워크 구분 실수는 정책 적용을 크게 왜곡할 수 있다.</p>
+<h5 id="4-2_4">4-2. 명령어 입력 시 팁</h5>
+<p>와일드카드 마스크 입력: 정확하게 입력 (예: 0.0.0.255, 0.0.0.0)</p>
+<p>포트 번호 입력: 서비스에 해당하는 정확한 포트 번호 조건 입력: eq(같음), gt(크다), lt(작다), range(범위) 등을 상황에 맞게 사용</p>
+<h5 id="4-3">4-3. 매개변수 명시</h5>
+<p>일부 최신 IOS에서는 더 명확한 문법을 지원:</p>
+<p>access-list 100 deny tcp 192.168.0.0 0.0.0.255 host 10.0.0.1 eq 80 host  키워드: 단일 호스트임을 명시 eq  조건: 포트 번호와 함께 사용</p>
+<h4 id="5-실습-준비">5. 실습 준비</h4>
+<p>Packet Tracer에서 ACL을 실습하기 위해서는:</p>
+<h4 id="1-라우터-설정-진입-config-모드">1. 라우터 설정 진입: config 모드</h4>
+<h4 id="2-acl-번호-선택-100번대-확장-acl">2. ACL 번호 선택: 100번대 (확장 ACL)</h4>
+<h4 id="3-규칙-입력-출발지-목적지-프로토콜-포트-지정">3. 규칙 입력: 출발지, 목적지, 프로토콜, 포트 지정</h4>
+<h4 id="4-라우터-인터페이스에-적용-ip-access-group">4. 라우터 인터페이스에 적용: ip access-group</h4>
+<h4 id="5-테스트-ping-웹-브라우저-접속-등으로-확인">5. 테스트: ping, 웹 브라우저 접속 등으로 확인</h4>
+<h4 id="6-복잡한-필터링-정책의-관리">6. 복잡한 필터링 정책의 관리</h4>
+<p>여러 조건이 겹치는 경우:</p>
+<p>명확한 우선순위 규칙 설정 메모장에서 전체 정책 검토 후 적용 라인 번호를 이용하여 특정 위치에 규칙 삽입 충돌 가능한 규칙들의 순서를 신중하게 배치</p>
+<hr />
+<h3 id="035-aclnatvpn-통합-실습-보조-개념-정리">035. ACL·NAT·VPN 통합 실습 보조 개념 정리</h3>
+<p>정리</p>
+<h4 id="1-실습-진행-순서-원칙">1. 실습 진행 순서 원칙</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1단계</td>
+<td>전체 구간 통신 확인 (모든 장비 간 ping 확인)</td>
+</tr>
+<tr>
+<td>2단계</td>
+<td>ACL 정책 적용 및 테스트</td>
+</tr>
+<tr>
+<td>3단계</td>
+<td>NAT 설정 및 확인</td>
+</tr>
+<tr>
+<td>4단계</td>
+<td>VPN 터널 구성 (GRE 터널 + 스태틱 라우팅)</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ 반드시 전체 구간 통신이 정상 확인된 상태에서 세부 정책(ACL, NAT, VPN)을 적용해야 한다. 통신이 되지 않는 상태에서 세부 정책을 설정하면 문제 원인 파악이 어렵다.</p>
+<h4 id="2-acl-관련-주요-사항">2. ACL 관련 주요 사항</h4>
+<h5 id="2-1-extended-acl">2-1. Extended ACL 적용 위치</h5>
+<p>Extended ACL은 목적지에 가까운 인터페이스에 적용하는 것이 효율적이다.</p>
+<h5 id="2-2-acl">2-2. ACL 정책 추가 시 주의 사항</h5>
+<p>ACL 정책을 같은 번호(예: 100번)로 추가하면, 새 정책은 기존 목록의 맨 마지막에 추가된다. 덮어쓰기가 아니다.</p>
+<p>⚠️ ACL 정책 중간에 잘못된 항목이 있을 경우, 기존 정책 전체를 삭제( no access-list 번호)하고 처음부터 다시 입력해야 한다.</p>
+<h5 id="2-3_2">2-3. 호스트 주소와 대역 주소의 와일드카드</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>유형</th>
+<th>표기 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>단일 호스트</td>
+<td>host [IP주소] 또는 [IP주소] 0.0.0.0</td>
+</tr>
+<tr>
+<td>대역대(네트워크)</td>
+<td>[네트워크 주소] [와일드카드 비트값]</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-nat와-acl의-상호작용">3. NAT와 ACL의 상호작용</h4>
+<p>NAT가 적용된 환경에서 ACL을 테스트할 때 주의할 점이 있다. NAT에 의해 출발지 IP가 변환된 이후에 ACL에서 확인하는 출발지 주소가 달라질 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAT 적용 전 ACL 테스트</td>
+<td>내부 IP(사설 IP)를 출발지로 ACL 규칙 적용</td>
+</tr>
+<tr>
+<td>NAT 적용 후 ACL 테스트</td>
+<td>변환된 외부 IP를 출발지로 인식 → ACL 규칙 불일치 가능</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ NAT와 ACL을 함께 사용할 경우, ACL을 먼저 테스트하고 이후 NAT를 적용하거나, NAT 변환 후 주소를 기준으로 ACL 규칙을 재설정해야 한다.</p>
+<h4 id="4-l2-스위치-동작-원리">4. L2 스위치 동작 원리</h4>
+<p>L2 스위치는 물리적으로 정상 연결된 상태라면 VLAN 등 별도 설정 없이도 통신이 가능하다. VLAN 설정이 필요한 경우에는 스위치에서 별도로 설정을 진행해야 한다.</p>
+<hr />
+<h3 id="037-nat-개념-정리-및-가상화-환경-소개">037. NAT 개념 정리 및 가상화 환경 소개</h3>
+<h4 id="1-natnetwork-address-translation-개념-정리">1. NAT(Network Address Translation) 개념 정리</h4>
+<h5 id="1-1-nat_1">1-1. NAT가 필요한 이유</h5>
+<p>사설(Private) IP는 인터넷으로 직접 나갈 수 없는 주소이다. 인터넷에 접속하려면 공인 (Public) IP로 변환되어야 하며, 이 변환 과정을 담당하는 것이 NAT이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사설 IP</td>
+<td>인터넷 직접 통신 불가. 내부 네트워크 전용 주소</td>
+</tr>
+<tr>
+<td>공인 IP</td>
+<td>인터넷 통신에 사용되는 주소</td>
+</tr>
+<tr>
+<td>NAT</td>
+<td>사설 IP ↔ 공인 IP 간의 주소 변환</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="1-2-nat">1-2. NAT의 종류</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>종류</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>다이나믹 NAT</td>
+<td>공인 IP 범위(풀)를 지정하고, 사설 IP가 나갈 때 풀에서 하나를 자동으로 매핑</td>
+</tr>
+<tr>
+<td>스태틱 NAT</td>
+<td>특정 사설 IP를 특정 공인 IP에 1:1로 고정 매핑</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="1-3-nat">1-3. NAT 설정 구조</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACL 설정</td>
+<td>변환 대상이 될 사설 IP 대역을 퍼미트(permit) 처리</td>
+</tr>
+<tr>
+<td>NAT Inside</td>
+<td>변환되어야 할 내부 IP가 있는 인터페이스에 적용</td>
+</tr>
+<tr>
+<td>NAT Outside</td>
+<td>공인 IP(외부)가 있는 인터페이스에 적용</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정 완료 후 show ip nat translations 명령으로 주소 변환 테이블을 확인할 수 있다.</p>
+<h4 id="2-클라이언트-서버-네트워크">2. 클라이언트-서버 네트워크</h4>
+<p>현재 대부분의 네트워크는 클라이언트-서버(C/S) 구조로 이루어져 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>서버(Server)</td>
+<td>정보나 서비스를 제공하는 쪽</td>
+</tr>
+<tr>
+<td>클라이언트(Client)</td>
+<td>정보나 서비스를 요청·이용하는 쪽</td>
+</tr>
+</tbody>
+</table></div>
+<p>예를 들어, 특정 장비가 웹 서버 역할을 할 경우 해당 장비에 웹 요청을 보내는 PC가 웹 클라이언트가 된다. 동일한 장비가 FTP 서버 역할도 동시에 수행할 수 있다.</p>
+<h4 id="3-가상화virtualization-개념">3. 가상화(Virtualization) 개념</h4>
+<h5 id="3-1-vm">3-1. 가상 머신(VM)이란</h5>
+<p>가상 머신(VM, Virtual Machine)은 실제 운영체제 위에 소프트웨어적으로 생성한 가상의 컴퓨터이다. 윈도우즈가 설치된 호스트 컴퓨터 위에 가상 머신을 생성하여 그 안에서 다른 운영체제(리눅스 등)를 설치하고 운용할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>용어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>호스트 OS</td>
+<td>실제 물리적 컴퓨터에 설치된 운영체제 (예: Windows)</td>
+</tr>
+<tr>
+<td>게스트 OS</td>
+<td>가상 머신 안에 설치된 운영체제 (예: Rocky Linux)</td>
+</tr>
+<tr>
+<td>VM(Virtual Machine)</td>
+<td>가상 머신. 소프트웨어로 만들어진 가상 컴퓨터</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="3-2_3">3-2. 가상 머신 생성 도구</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>도구</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VirtualBox</td>
+<td>오라클에서 제공. 프리웨어(무료)</td>
+</tr>
+<tr>
+<td>VMware Player</td>
+<td>단일 VM 실행에는 무료이나, 다중 VM 동시 실행 불가</td>
+</tr>
+<tr>
+<td>VMware Workstation Pro</td>
+<td>다중 VM 동시 실행 가능. 라이선스(유료) 필요</td>
+</tr>
+</tbody>
+</table></div>
+<p>수업에서는 VirtualBox를 사용한다. 여러 개의 가상 머신을 동시에 실행해야 하므로 무 료이면서 다중 실행을 지원하는 VirtualBox를 선택한다.</p>
+<h5 id="3-3-virtualbox">3-3. VirtualBox에서 설치 가능한 운영체제</h5>
+<p>VirtualBox 안에서는 다음과 같은 여러 운영체제를 설치하여 운용할 수 있다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>운영체제</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rocky Linux</td>
+<td>서버 운영체제 학습, 서버 구축</td>
+</tr>
+<tr>
+<td>Windows Server</td>
+<td>윈도우즈 기반 서버 구축</td>
+</tr>
+<tr>
+<td>Ubuntu Linux</td>
+<td>리눅스 다양한 활용</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>운영체제</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kali Linux</td>
+<td>모의 해킹(침투 테스트)</td>
+</tr>
+<tr>
+<td>Metasploitable</td>
+<td>취약한 서버 실습 환경</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="3-4-iso">3-4. ISO 파일이란</h5>
+<p>ISO 파일은 운영체제 이미지 파일이다. 실제 PC나 노트북에 운영체제를 설치할 때와 동일한 방식으로, 이 ISO 이미지를 사용하여 가상 머신에 운영체제를 설치한다.</p>
+<p>가상 머신이지만, 네트워크 설정을 통해 실제 인터넷 접속도 가능하다.</p>
+<h4 id="4-rocky-linux-소개">4. Rocky Linux 소개</h4>
+<p>Rocky Linux는 레드햇(Red Hat) 계열의 리눅스 배포판이다. 가장 많이 사용하는 리눅스 계열이며, 리눅스 마스터 자격증의 명령어 출제 범위도 레드햇 계열을 기준으로 한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>버전</th>
+<th>특성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미니멀(Minimal) 버전</td>
+<td>최소 구성. 그래픽(GUI) 없음. 명령어(CLI) 기반 운용. 용량 적음</td>
+</tr>
+<tr>
+<td>DVD 버전</td>
+<td>그래픽 포함. 용량 크고 설치 시간 더 소요</td>
+</tr>
+</tbody>
+</table></div>
+<p>수업에서는 Rocky Linux 9.7 Minimal 버전을 사용한다.</p>
+<hr />
+<h3 id="041-vpn-개념과-gre-터널링">041. VPN 개념과 GRE 터널링</h3>
+<h4 id="1-수업-개요">1. 수업 개요</h4>
+<p>전일 진행한 토폴로지 구성(IP 주소 지정, 라우팅 설정)을 기반으로, 오늘은 VPN 설정을 진행한다. 이후에는 네트워크 보안 기본 내용을 복습하고, Rocky Linux 운영체제 설치 및 기본 사용법을 학습한다.</p>
+<h4 id="2-vpnvirtual-private-network-개념">2. VPN(Virtual Private Network) 개념</h4>
+<h5 id="2-1-vpn">2-1. VPN이 필요한 이유</h5>
+<p>본사와 지사 간 데이터를 전송할 때, 두 사이트를 연결하는 회선은 신뢰성이 없는 <strong>공용망 (퍼블릭망, 인터넷망)</strong>을 통과하게 된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>가장 이상적인 방<br>법</td>
+<td>본사와 지사를 물리적인 전용선으로 직접 연결 → 외부 망을 거치지 않아 보안상<br>최적</td>
+</tr>
+<tr>
+<td>현실적인 제약</td>
+<td>지리적 거리(서울↔부산, 국내↔해외 등), 비용 문제로 인해 전용선 연결이 불가<br>능한 경우가 대부분</td>
+</tr>
+<tr>
+<td>VPN의 역할</td>
+<td>인터넷망을 통과하지만, <strong>가상의 전용선(터널)</strong>을 만들어 전용선과 유사한 효<br>과를 제공</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ V(Virtual)는 '가상'을 의미한다. 물리적으로는 인터넷 회선을 따라 데이터가 이동하지만, 외부에서는 터널 안으로 들어가는 것처럼 보인다.</p>
+<h4 id="3-vpn-터널링">3. VPN 터널링</h4>
+<h5 id="3-1_5">3-1. 터널의 역할</h5>
+<p>VPN 터널을 구축하면 본지사 간 데이터가 물리적 회선을 따라 이동하면서도, 외부에서는 어떤 경로를 거쳐 어떤 데이터가 이동하는지 확인할 수 없다.</p>
+<p>기차가 터널에 진입하면 외부에서 기차의 위치나 경로를 알 수 없는 것과 유사하다.</p>
+<h5 id="3-2-vpn">3-2. VPN 터널이 제공하는 기능</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기능</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>터널링</td>
+<td>데이터 경로를 숨겨 외부 노출 방지</td>
+</tr>
+<tr>
+<td>인증(Authentication)</td>
+<td>데이터를 주고받는 상대방이 맞는지 검증</td>
+</tr>
+<tr>
+<td>암호화(Encryption)</td>
+<td>주고받는 데이터를 암호화하여 내용 보호</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="4-gre-터널링">4. GRE 터널링</h4>
+<h5 id="4-1-gre">4-1. GRE란</h5>
+<p>GRE(Generic Routing Encapsulation)는 일반적인 경로 캡슐화 프로토콜이다. 패킷을 캡 슐화하여 터널로 전송하는 방식이다.</p>
+<p>⚠️ GRE 자체는 암호화나 인증 기능을 제공하지 않는다. '일반적(Generic)'이라는 이름에서 알 수 있듯이, 단순히 터널만 생성하는 방식이다. 암호화가 필요할 경우 별도로 <strong>IP Security(IPSec)</strong>를 적용해야 한다.</p>
+<h5 id="4-2_5">4-2. 터널 인터페이스의 특성</h5>
+<p>라우터에서 GRE 터널을 구성할 때는 <strong>터널 인터페이스(Tunnel Interface)</strong>라는 논리적 인터페이스를 생성한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>물리적 인터페이스</td>
+<td>실제 케이블이 연결된 인터페이스 (Serial, GigabitEthernet 등)</td>
+</tr>
+<tr>
+<td>논리적 인터페이스</td>
+<td>관리자가 소프트웨어적으로 생성하는 인터페이스 (루프백, 터널 등)</td>
+</tr>
+<tr>
+<td>터널 인터페이스</td>
+<td>VPN 터널 구축에 사용하는 논리적 인터페이스</td>
+</tr>
+</tbody>
+</table></div>
+<p>터널 인터페이스는 이전에 학습한 OSPF에서 사용하던 루프백(Loopback) 인터페이스와 유사한 논리적 인터페이스이다.</p>
+<h5 id="4-3_1">4-3. 터널 구성 요소</h5>
+<p>터널 인터페이스 설정 시 지정해야 하는 주요 항목은 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP 주소</td>
+<td>터널 전용 네트워크 대역의 주소를 할당</td>
+</tr>
+<tr>
+<td>터널 모드</td>
+<td>GRE 방식 및 대상 프로토콜(IPv4) 지정</td>
+</tr>
+<tr>
+<td>터널 소스(Source)</td>
+<td>터널의 출발점이 되는 물리적 인터페이스</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>터널 목적지(Destination)</td>
+<td>터널이 향하는 상대방 라우터의 IP 주소</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="5-vpn-라우팅-설정">5. VPN 라우팅 설정</h4>
+<h5 id="5-1_4">5-1. 스태틱 라우팅과 터널</h5>
+<p>터널을 구축하더라도, 어떤 트래픽이 터널로 전송되는지를 라우팅으로 명시해 주어야 한다. 본지사 간 단일 경로 구성에서는 일반적으로 스태틱 라우팅을 사용한다.</p>
+<p>본사 라우터에서는 지사 네트워크로 가는 경로를 터널 인터페이스의 IP를 경유지로 설정 지사 라우터에서도 동일하게 본사 네트워크로 가는 경로를 터널 인터페이스의 IP를 경유지로 설정 ⚠️ 스태틱 라우팅은 양방향으로 모두 설정해야 통신이 가능하다. 한쪽에만 설정하면 통신이 이루어지지 않는다.</p>
+<h5 id="5-2_3">5-2. 터널 구축 전후 경로 비교</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>트레이스루트 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>터널 구축 전</td>
+<td>물리적 시리얼 회선을 따라 중간 경유지(라우터 IP)들이 표시됨</td>
+</tr>
+<tr>
+<td>터널 구축 후</td>
+<td>게이트웨이 → 터널 인터페이스 IP 순서로 표시되어, 중간 경로가 은폐됨</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="6-ip-securityipsec-개요">6. IP Security(IPSec) 개요</h4>
+<p>GRE 터널만으로는 암호화와 인증이 제공되지 않는다. 터널 안에서 주고받는 데이터의 암호화 및 인증을 위해서는 <strong>IP Security(IPSec)</strong>를 터널에 별도로 적용한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기능 구분</th>
+<th>제공 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRE 터널링 (기본)</td>
+<td>경로 은폐 ○ / 암호화 ✕ / 인증 ✕</td>
+</tr>
+<tr>
+<td>GRE + IPSec 적용</td>
+<td>경로 은폐 ○ / 암호화 ○ / 인증 ○</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3 id="042-네트워크-기본-내용-복습-및-핵심-개념-정리">042. 네트워크 기본 내용 복습 및 핵심 개념 정리</h3>
+<p>정리</p>
+<h4 id="1-osi-7계층-모델">1. OSI 7계층 모델</h4>
+<h5 id="1-1-osi-7">1-1. OSI 7계층과 장비·프로토콜의 대응</h5>
+<p>OSI 7계층은 1계층부터 7계층까지 구성되며, 현재 배우고 있는 모든 제품·서비스·프로토콜 이 이 계층에서 파생된다. 계층 순서와 각 계층의 역할을 이해해야 한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>OSI 계층</th>
+<th>계층명</th>
+<th>주요 장비·프로토콜</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1계층</td>
+<td>물리 계층</td>
+<td>NIC(랜카드), 케이블</td>
+</tr>
+<tr>
+<td>2계층</td>
+<td>데이터 링크 계층</td>
+<td>L2 스위치, NIC</td>
+</tr>
+<tr>
+<td>3계층</td>
+<td>네트워크 계층</td>
+<td>L3 라우터, IP</td>
+</tr>
+<tr>
+<td>4계층</td>
+<td>전송 계층</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>5계층</td>
+<td>세션 계층</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6계층</td>
+<td>표현 계층</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7계층</td>
+<td>응용 계층</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="1-2-tcpip">1-2. TCP/IP 모델과의 대응</h5>
+<p>TCP/IP 모델은 OSI 7계층 모델과 대응 관계를 이루고 있으며, 실제 인터넷 환경에서 사용하는 모델이다.</p>
+<h4 id="2-정보보안의-3요소와-5대-요소">2. 정보보안의 3요소와 5대 요소</h4>
+<h5 id="2-1-3-cia">2-1. 정보보안 3요소 (CIA)</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -244,2224 +2314,639 @@ th{background:var(--accent-soft); font-weight:700}
 </thead>
 <tbody>
 <tr>
-<td>APM (Apache, PHP, MariaDB)</td>
-<td>웹 서버 기반 환경</td>
+<td>기밀성(Confidentiality)</td>
+<td>허가된 사용자만 정보에 접근 가능</td>
 </tr>
 <tr>
-<td>PHP-MySQL 연결 패키지</td>
-<td>PHP와 데이터베이스를 연결하기 위한 패키지</td>
+<td>무결성(Integrity)</td>
+<td>정보가 허가 없이 변조되지 않음</td>
 </tr>
 <tr>
-<td>httpd (Apache) 서비스</td>
-<td>웹 서비스가 실행 중이어야 웹 페이지 접근 가능</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="2-wget-명령어--셸에서-파일-다운로드">2. wget 명령어 — 셸에서 파일 다운로드</h4>
-<h5 id="2-1-wget">2-1. wget 개요</h5>
-<p>wget 은 웹 브라우저 없이 셸(CLI)에서 파일을 다운로드할 수 있는 명령어다. GUI 환경이 없는 서버에서 파일을 내려받을 때 사용한다.</p>
-<p>dnf install -y wget           ← wget이 없을 경우 설치 wget [다운로드 URL]           ← 현재 작업 디렉토리에 다운로드 wget -P /tmp [다운로드 URL]   ← 다운로드 경로를 /tmp로 지정 -P  옵션을 사용하면 다운로드 경로를 직접 지정할 수 있다. 지정하지 않으면 현재 작업 디렉토리에 저장된다.</p>
-<h4 id="3-압축-파일-형식--tar와-gz">3. 압축 파일 형식 — tar와 gz</h4>
-<h5 id="3-1-tar">3-1. tar 파일</h5>
-<p>tar 는 여러 개의 파일이나 디렉토리를 하나의 파일로 묶는 것이다. 압축은 아니며, 묶기만한다.</p>
-<h5 id="3-2-gz-gzip">3-2. gz (gzip) 파일</h5>
-<p>.gz  확장자는 gzip 형식으로 압축된 파일을 의미한다.</p>
-<h5 id="3-3-targz">3-3. tar.gz 파일</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>확장자</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>.tar</td>
-<td>여러 파일/디렉토리가 하나로 묶여 있음</td>
-</tr>
-<tr>
-<td>.gz</td>
-<td>gzip으로 압축되어 있음</td>
-</tr>
-<tr>
-<td>.tar.gz</td>
-<td>묶기(tar) + 압축(gz)이 동시에 적용된 아카이브</td>
+<td>가용성(Availability)</td>
+<td>허가된 사용자가 필요할 때 정보에 접근 가능</td>
 </tr>
 </tbody>
 </table></div>
-<h4 id="4-셸-스크립트shell-script">4. 셸 스크립트(Shell Script)</h4>
-<h5 id="4-1_1">4-1. 셸 스크립트 개요</h5>
-<p>.sh  확장자로 끝나는 파일은 셸 스크립트 파일이다. SQL 스크립트와 마찬가지로, 스크립트 란 파일 안에 있는 명령어들을 위에서부터 한 줄씩 순서대로 일괄 처리하는 것을 의미한다.</p>
-<h5 id="4-2-shebang">4-2. 쉬뱅(Shebang)</h5>
-<p>셸 스크립트 파일의 맨 첫 줄에는 #!/bin/sh  또는 #!/bin/bash 와 같이 사용할 셸을 정의하는 구문이 온다. 이를 쉬뱅(shebang) 또는 c 방(#!) 이라고 한다.</p>
-<h1 id="binsh-shebang">!/bin/sh      ← 사용할 셸 정의 (shebang) # 이후 스크립트 내용</h1>
-<h5 id="4-3-configsh">4-3. config.sh의 역할</h5>
-<p>LogAnalyzer 설치 패키지 안의 config.sh  스크립트를 실행하면 config.php  파일을 생성하고 적절한 권한을 자동으로 설정한다.</p>
-<h4 id="5-loganalyzer의-웹-디렉토리-구조">5. LogAnalyzer의 웹 디렉토리 구조</h4>
-<h5 id="5-1">5-1. 웹 서비스 루트 디렉토리</h5>
-<p>웹 서비스의 파일은 기본적으로 /var/www/html/  경로 아래에 위치해야 한다.</p>
-<p>/var/www/html/loganalyzer/    ← LogAnalyzer 파일이 위치할 디렉토리</p>
-<h5 id="5-2">5-2. 주요 파일</h5>
+<h5 id="2-2-5">2-2. 정보보안 5대 요소</h5>
+<p>3요소에 다음 두 가지를 추가한다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>파일명</th>
-<th>역할</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>install.php</td>
-<td>최초 설치 시 웹 브라우저에서 실행하는 설치 스크립트</td>
-</tr>
-<tr>
-<td>index.php</td>
-<td>설치 완료 후 LogAnalyzer 시작 페이지</td>
-</tr>
-<tr>
-<td>config.php</td>
-<td>LogAnalyzer 환경설정 파일 (config.sh 실행으로 생성됨)</td>
-</tr>
-</tbody>
-</table></div>
-<p>웹 서버(httpd) 서비스가 실행 중이어야 웹 브라우저에서 해당 파일에 접근할 수 있다. httpd가 동작하지 않으면 웹 페이지 자체가 열리지 않는다.</p>
-<hr />
-<h3 id="066-rsyslog-mysql-패키지db-설정">066. rsyslog-mysql 패키지(DB 설정)</h3>
-<h4 id="1-로그-저장을-위한-데이터베이스-구조">1. 로그 저장을 위한 데이터베이스 구조</h4>
-<h5 id="1-1-db">1-1. 로그 저장에 필요한 DB 구조</h5>
-<p>로그 데이터를 MariaDB에 저장하려면 다음과 같은 구조가 필요하다.</p>
-<p>데이터베이스 이름 (syslog)</p>
-<p>└── 테이블 (SystemEvents, SystemEventsProperties)</p>
-<p>└── 필드 (id, facility, priority, message ...) └── 실제 로그 데이터</p>
-<h5 id="1-2-createdbsql">1-2. createdb.sql 스크립트</h5>
-<p>rsyslog-mysql  패키지를 설치하면 DB 구조를 자동으로 생성하는 SQL 스크립트가 함께 제공된다.</p>
-<p>/usr/share/doc/rsyslog-mysql/createDB.sql    ← DB 자동 생성 스크립트 위치 기본적으로 패키지 설치 시 usr/share/doc/  경로에 관련 파일들이 저장된다.</p>
-<p>스크립트는 위에서부터 한 줄씩 순서대로 처리되며, 이와 같이 일괄적으로 처리되는 파일을 스크립트라고 한다.</p>
-<h4 id="2-생성되는-데이터베이스-구조">2. 생성되는 데이터베이스 구조</h4>
-<h5 id="2-1-sql">2-1. 생성 SQL 개요</h5>
-<p>CREATE DATABASE syslog;        ← syslog 데이터베이스 생성 USE syslog;                    ← syslog 데이터베이스로 이동 CREATE TABLE SystemEvents ...  ← 로그 저장용 테이블 생성 CREATE TABLE SystemEventsProperties ...  ← 이벤트 속성 저장 테이블 생성</p>
-<h5 id="2-2">2-2. 생성되는 테이블 구조</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>테이블명</th>
-<th>주요 필드</th>
+<th>추가 요소</th>
 <th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SystemEvents</td>
-<td>id, customerID, facility, priority, message</td>
-<td>로그 메시지 본체 저<br>장</td>
+<td>인증(Authentication)</td>
+<td>상대방이 올바른 사용자인지 확인</td>
 </tr>
 <tr>
-<td>SystemEventsProperties</td>
-<td>id, systemEventID, paramName,<br>paramValue</td>
-<td>이벤트 부가 속성 저<br>장</td>
+<td>부인방지(Non-Repudiation)</td>
+<td>특정 행위를 했음을 나중에 부인할 수 없도록 함</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="2-3-auto-increment">2-3. auto-increment 개념</h5>
-<p>SQL에서 AUTO_INCREMENT 를 지정하면 id 값이 레코드가 추가될 때마다 자동으로 증가한다(1 → 2 → 3 → ...). 이를 통해 중복 없이 고유한 식별자를 유지할 수 있다.</p>
-<p>increment 는 증가, decrement 는 감소를 의미한다. AUTO_INCREMENT 는 자동 증가를 나타낸다.</p>
-<h4 id="3-mariadb-사용자-권한-설정">3. MariaDB 사용자 권한 설정</h4>
-<h5 id="3-1-rsyslog">3-1. rsyslog 전용 사용자 생성</h5>
-<p>rsyslog가 MariaDB에 접속하여 로그를 저장하려면 전용 사용자 계정을 생성하고 적절한 권한을 부여해야 한다.</p>
-<p>GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'localhost' IDENTIFIED BY 'password';</p>
+<h4 id="3-fcaps--iso-네트워크-관리-모델">3. FCAPS — ISO 네트워크 관리 모델</h4>
+<p>FCAPS는 ISO에서 제정한 네트워크 관리 모델이다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>구성 요소</th>
-<th>의미</th>
+<th>항목</th>
+<th>내용</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ALL PRIVILEGES ON syslog.*</td>
-<td>syslog 데이터베이스의 모든 권한 부여</td>
+<td>F (Fault)</td>
+<td>장애 관리</td>
 </tr>
 <tr>
-<td>'rsyslog'@'localhost'</td>
-<td>사용자 이름은 rsyslog, 로컬에서만 접속 가능</td>
+<td>C (Configuration)</td>
+<td>구성 관리</td>
 </tr>
 <tr>
-<td>IDENTIFIED BY 'password'</td>
-<td>해당 사용자의 패스워드 설정</td>
+<td>A (Accounting)</td>
+<td>계정 관리</td>
+</tr>
+<tr>
+<td>P (Performance)</td>
+<td>성능 관리</td>
+</tr>
+<tr>
+<td>S (Security)</td>
+<td>보안 관리</td>
 </tr>
 </tbody>
 </table></div>
-<p>⚠️ 실제 운영 환경에서는 패스워드를 충분히 복잡하게 설정해야 한다.</p>
-<h5 id="3-2-db">3-2. 로그 서버와 DB 서버가 분리된 경우</h5>
-<p>로그 서버와 DB가 서로 다른 시스템에 있다면 @'localhost'  대신 DB 서버의 IP 주소를 지정해야 한다.</p>
-<p>GRANT ALL PRIVILEGES ON syslog.* TO 'rsyslog'@'[DB서버IP]' IDENTIFIED BY 'password';</p>
-<h4 id="4-rsyslog-출력-모듈-설정-mysql-연동">4. rsyslog 출력 모듈 설정 (MySQL 연동)</h4>
-<h5 id="4-1-rsyslogconf">4-1. rsyslog.conf 출력 모듈 추가</h5>
-<p>rsyslog가 MariaDB로 로그를 보내도록 설정 파일에 출력 모듈을 추가한다.</p>
-<h2 id="etcrsyslogconf-파일-수정-modload-ommysql--mysql-출력-모듈-로드--ommysqldb서버ipsyslogrsyslogpassword--모든-로그를-db로-전송">/etc/rsyslog.conf 파일 수정 $ModLoad ommysql              ← MySQL 출력 모듈 로드 <em>.</em>   :ommysql:[DB서버IP],syslog,rsyslog,password    ← 모든 로그를 DB로 전송</h2>
+<h4 id="4-이때까지-다룬-네트워크-주요-기능-정리">4. 이때까지 다룬 네트워크 주요 기능 정리</h4>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>구성 요소</th>
-<th>의미</th>
+<th>기능</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ommysql</td>
-<td>rsyslog의 MySQL 출력 모듈 이름</td>
+<td>IP 주소 설정</td>
+<td>모든 네트워크 실습의 기본; 잘못 설정되면 다른 모든 것이 동작하지 않음</td>
 </tr>
 <tr>
-<td>[DB서버IP]</td>
-<td>DB가 로컬이면 localhost , 원격이면 해당 IP 입력</td>
+<td>라우팅 설정</td>
+<td>장비 간 경로 설정 (스태틱, OSPF, EIGRP 등)</td>
 </tr>
 <tr>
-<td>syslog</td>
-<td>로그가 저장될 데이터베이스 이름</td>
+<td>VLAN</td>
+<td>스위치에서의 논리적 네트워크 분리</td>
 </tr>
 <tr>
-<td>rsyslog</td>
-<td>DB 접속 사용자 이름</td>
+<td>NAT</td>
+<td>사설 IP를 공인 IP로 변환</td>
 </tr>
 <tr>
-<td>password</td>
-<td>DB 사용자 패스워드</td>
+<td>VPN</td>
+<td>공용망에서 가상 터널을 통한 안전한 통신</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>자동 IP 주소 할당</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>트래픽 허용 및 차단 정책</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="4-2-mysql">4-2. MySQL 포트 방화벽 허용</h5>
-<p>firewall-cmd --permanent --add-port=3306/tcp    ← MySQL 기본 포트 허용 firewall-cmd --reload                           ← 방화벽 설정 적용</p>
+<p>⚠️ 가장 중요한 것은 IP 주소 설정이다. 주소 설정이 잘못되면 라우팅, VLAN, NAT, VPN, ACL 등 다른 모든 기능이 정상 동작하지 않는다.</p>
+<h4 id="5-서브네팅subnetting">5. 서브네팅(Subnetting)</h4>
+<h5 id="5-1_5">5-1. 서브네팅의 필요성</h5>
+<p>주소 낭비를 줄이고 네트워크를 효율적으로 나누기 위해 서브네팅을 적용한다.</p>
+<h5 id="5-2_4">5-2. 서브네팅 계산</h5>
+<p>EIN성-2 규칙을 활용하여 서브넷 구조를 산출할 수 있다. 계산이 어려운 경우 서브넷 계산기 를 검색하여 활용할 수 있다. 대역대를 입력하면 서브넷 범위와 관련 정보가 자동으로 산출된다.</p>
 <hr />
-<h3 id="067-rsyslog를-활용한-로그-전송">067. rsyslog를 활용한 로그 전송</h3>
-<h4 id="1-중앙-집중형-로그-서버의-필요성">1. 중앙 집중형 로그 서버의 필요성</h4>
-<h5 id="1-1_1">1-1. 로컬 로그 관리의 한계</h5>
-<p>로그는 해킹 분석 및 시스템 분석 시 가장 필요한 데이터다. 그러나 각 시스템에서만 로그가 저장된다면 다음과 같은 문제가 발생한다.</p>
-<p>cat , last  등의 명령어를 통해 그때그때마다 개별 시스템에서 직접 확인해야 하므로 관리가 어렵다.</p>
-<p>로그가 분산되어 있어 통합 분석이 불가능하다.</p>
-<h5 id="1-2_1">1-2. 중앙 집중형 로그 서버의 구조</h5>
-<p>이러한 문제를 해결하기 위해 로그 서버를 별도로 구축하여 클라이언트에서 발생하는 로그를 실시간으로 수집한다. 구성 흐름은 다음과 같다.</p>
+<h3 id="082-acl-심화">082. ACL 심화</h3>
+<h4 id="1-acl-기본-적용-방향">1. ACL 기본 적용 방향</h4>
+<p>네트워크 경계에 있는 라우터(예: R2)에 ACL 정책을 설정하여 내부망과 외부망 간의 트래픽을 제어한다. 내부망(R1, R2)과 외부망(R3, R4)의 경계에 위치한 장비에 정책을 적용하는 것이 원칙이다.</p>
+<h4 id="2-tcp-established-옵션">2. TCP Established 옵션</h4>
+<h5 id="2-1-established">2-1. Established의 의미</h5>
+<p>TCP는 데이터 전송 전 3-Way Handshaking 과정을 거쳐 연결을 수립한다. established 옵션은 이 연결 수립이 완료된 상태, 즉 TCP 연결이 성립된(established) 패킷에만 정책을 적용한다.</p>
+<h5 id="2-2-established">2-2. Established 옵션의 효과</h5>
+<p>permit tcp any any established 를 설정하면, 내부에서 먼저 시작한 TCP 세션의 응답 패킷은 허용되고, 외부에서 먼저 시작한 TCP 연결 시도는 차단된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>시나리오</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>내부 → 외부 TCP 연결 후 응답 패킷 귀환</td>
+<td>허용</td>
+</tr>
+<tr>
+<td>외부 → 내부 TCP 연결 시도</td>
+<td>차단</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-3-established">2-3. Established 옵션의 한계</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>프로토콜</th>
+<th>Established 옵션 적용 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>적용 가능</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>적용 불가</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>적용 불가</td>
+</tr>
+</tbody>
+</table></div>
+<p>TCP Established는 TCP 트래픽에만 효과가 있으며, UDP·ICMP에는 동일한 효과를 기 대할 수 없다. 이러한 한계를 보완한 것이 Reflected ACL(RACL)이다.</p>
+<h5 id="2-4-acl">2-4. ACL 정책 설정 확인</h5>
+<p>적용 전·후 상태 비교를 위해 아래 명령어로 정책 및 매치 수를 확인할 수 있다.</p>
+<p>show access-list       ← 전체 ACL 정책 및 매치 수 확인 show ip access-list    ← IP ACL 정책 확인</p>
+<h4 id="3-reflected-acl-racl">3. Reflected ACL (RACL)</h4>
+<h5 id="3-1_6">3-1. 개념</h5>
+<p>Reflected ACL은 내부 사용자를 위한 ACL이다.</p>
+<p>내부에서 출발하여 외부로 나간 패킷이 돌아올 때는 허용한다.</p>
+<p>외부에서 먼저 시작해서 내부로 들어오는 패킷은 차단한다.</p>
+<p>TCP뿐만 아니라 UDP, ICMP 등 모든 프로토콜에 적용된다.</p>
+<p>실제 환경에 RACL을 적용하면 내부 사용자는 인터넷 등 외부 통신이 자유롭고, 외부에서는 어떤 트래픽도 내부로 진입할 수 없다.</p>
+<h5 id="3-2-racl-acl">3-2. RACL 동작 원리: 임시 ACL</h5>
+<p>RACL은 고정된 ACL 외에 <strong>임시 ACL(Reflexive ACL)</strong>을 자동으로 생성한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>일반 ACL (관리자 설정)</td>
+<td>reflect 키워드를 사용하여 반사 대상 트래픽을<br>정의</td>
+</tr>
+<tr>
+<td>임시 ACL (시스템 자동 생성)</td>
+<td>내부에서 시작한 패킷의 출발지·목적지 정보를 기<br>반으로 동적으로 생성됨</td>
+</tr>
+</tbody>
+</table></div>
+<p>임시 ACL의 내용은 테스트 내용에 따라 계속 변경된다.</p>
+<p>임시 ACL은 show access-list  결과의 Reflexive 항목으로 확인할 수 있다.</p>
+<p>외부에서 차단된 패킷은 임시 ACL에 등록되지 않는다(드랍 처리).</p>
+<h5 id="3-3-racl">3-3. RACL 정책 구조</h5>
+<p>RACL은 두 개의 ACL 정책으로 구성된다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>ACL 이름 (예시)</th>
+<th>키워드</th>
+<th>역할</th>
+<th>인터페이스 적용 방향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RACL (메인 정책)</td>
+<td>reflect</td>
+<td>내부에서 출발하는 트<br>래픽을 반사 대상으로<br>지정</td>
+<td>out 방향</td>
+</tr>
+<tr>
+<td>test (보조 정책)</td>
+<td>evaluate</td>
+<td>반사 정책을 점검(확인)</td>
+<td>in 방향</td>
+</tr>
+</tbody>
+</table></div>
+<p>permit tcp any any reflect RACL-test    ← TCP 반사 설정 permit udp any any reflect RACL-test    ← UDP 반사 설정 permit icmp any any reflect RACL-test   ← ICMP 반사 설정 evaluate RACL-test    ← 임시 ACL을 참조하여 점검 reflect  뒤에 입력하는 이름은 임시 ACL의 이름이 된다. 관리자가 임의로 지정할 수 있다.</p>
+<h5 id="3-4-racl-ospf">3-4. RACL 정책의 OSPF 허용</h5>
+<p>RACL 정책이 적용된 인터페이스에서는 OSPF 헬로 패킷도 영향을 받는다. OSPF 라우팅이 중단되지 않도록 OSPF 트래픽을 명시적으로 허용하는 규칙을 정책의 첫 번째 줄에 작성해야 한다.</p>
+<p>permit ospf host [R3의 IP] any    ← OSPF 헬로 패킷 허용</p>
+<h5 id="3-5">3-5. 동작 결과 비교</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>시나리오</th>
+<th>프로토콜</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>내부 → 외부 핑(ICMP)</td>
+<td>ICMP</td>
+<td>허용 (반사됨)</td>
+</tr>
+<tr>
+<td>내부 → 외부 텔넷(TCP)</td>
+<td>TCP</td>
+<td>허용 (반사됨)</td>
+</tr>
+<tr>
+<td>내부 → 외부 HTTP(TCP)</td>
+<td>TCP</td>
+<td>허용 (반사됨)</td>
+</tr>
+<tr>
+<td>외부 → 내부 핑(ICMP)</td>
+<td>ICMP</td>
+<td>차단 (Unreachable)</td>
+</tr>
+<tr>
+<td>외부 → 내부 텔넷(TCP)</td>
+<td>TCP</td>
+<td>차단 (Unreachable)</td>
+</tr>
+<tr>
+<td>외부 → 내부 HTTP(TCP)</td>
+<td>TCP</td>
+<td>차단 (Unreachable)</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="4-dynamic-acl-dacl">4. Dynamic ACL (DACL)</h4>
+<h5 id="4-1_6">4-1. 개념</h5>
+<p>Dynamic ACL은 외부 사용자를 위한 ACL이다.</p>
+<p>외부 사용자가 내부 망에 접속을 시도할 때, 경계 라우터에서 인증(Authentication) 절차를 요구한다.</p>
+<p>인증에 성공하면 내부 접속을 허용하는 임시 ACL을 생성한다.</p>
+<p>인증에 실패하면 내부 접속을 차단한다.</p>
+<h5 id="4-2-dacl">4-2. DACL 동작 원리</h5>
 <div class="tablewrap"><table>
 <thead>
 <tr>
 <th>단계</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>외부 사용자가 내부로 트래픽 시도 → DACL 정책<br>적용으로 차단</td>
+</tr>
+<tr>
+<td>2</td>
+<td>외부 사용자가 경계 라우터(R2)로 텔넷 접속 →<br>인증 요구</td>
+</tr>
+<tr>
+<td>3-A</td>
+<td>인증 성공 → 임시 ACL 생성 → 내부 트래픽 허용</td>
+</tr>
+<tr>
+<td>3-B</td>
+<td>인증 실패 (3회 실패 시 연결 종료) → 내부 트래<br>픽 계속 차단</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="4-3-dacl">4-3. DACL 정책의 키워드</h5>
+<p>permit ip any any dynamic DACL    ← dynamic 키워드로 동적 ACL 지정 dynamic  키워드 뒤에 오는 이름은 동적 ACL의 이름이다.</p>
+<p>RACL의 reflect 에 대응하는 역할을 한다.</p>
+<h5 id="4-4-dacl">4-4. DACL에서의 인증 설정</h5>
+<p>별도의 인증 서버 없이 테스트할 경우, 경계 라우터 자체에 텔넷 인증을 설정하여 사용한다.</p>
+<p>enable password [패스워드]     ← Enable 모드 진입 패스워드 설정 line vty 0 4 password [패스워드]          ← 텔넷 접속 시 인증 패스워드 설정 login</p>
+<h5 id="4-5-acl">4-5. 임시 ACL 생성 확인</h5>
+<p>DACL도 RACL과 마찬가지로 인증 성공 후 show access-list  결과에서 임시 ACL이 생성된 것을 확인할 수 있다. 인증 실패 시에는 임시 ACL이 생성되지 않는다.</p>
+<p>⚠️ 한번 인증에 성공하여 생성된 임시 ACL은 캐시에 일정 시간 남아있을 수 있다. 이후 인증 실패를 테스트할 때는 시간 경과 후 또는 장비 재부팅 후에 확인한다.</p>
+<h4 id="5-racl-vs-dacl-비교">5. RACL vs DACL 비교</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>Reflected ACL (RACL)</th>
+<th>Dynamic ACL (DACL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대상</td>
+<td>내부 사용자</td>
+<td>외부 사용자</td>
+</tr>
+<tr>
+<td>기본 방향</td>
+<td>내부→외부 허용, 외부→내부 차<br>단</td>
+<td>외부→내부 기본 차단</td>
+</tr>
+<tr>
+<td>접근 허용 방식</td>
+<td>내부에서 먼저 통신 시작 시 자<br>동 허용</td>
+<td>인증 성공 후 허용</td>
+</tr>
+<tr>
+<td>지원 프로토콜</td>
+<td>TCP, UDP, ICMP 전체</td>
+<td>설정된 프로토콜</td>
+</tr>
+<tr>
+<td>필요한 ACL 수</td>
+<td>2개 (메인 + 점검용)</td>
+<td>1개</td>
+</tr>
+<tr>
+<td>주요 키워드</td>
+<td>reflect , evaluate</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td>임시 ACL</td>
+<td>자동 생성 (허용된 세션 기반)</td>
+<td>인증 성공 시 자동 생성</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="6-정책-삭제-방법">6. 정책 삭제 방법</h4>
+<p>ACL 정책 삭제 시에는 인터페이스에 적용된 정책을 먼저 제거한 후 ACL 정책 자체를 삭제해야 한다.</p>
+<h2 id="1단계-인터페이스-적용-제거-interface-f01-no-ip-access-group-정책이름-in-no-ip-access-group-정책이름-out--2단계-acl-정책-삭제-no-ip-access-list-extended-정책이름">1단계: 인터페이스 적용 제거 interface f0/1 no ip access-group [정책이름] in no ip access-group [정책이름] out # 2단계: ACL 정책 삭제 no ip access-list extended [정책이름]</h2>
+<p>삭제 후 show access-list 로 정책이 모두 제거되었는지 확인한다.</p>
+<hr />
+<h3 id="083-gns3">083. GNS3</h3>
+<h4 id="1-gns3-개요">1. GNS3 개요</h4>
+<h5 id="1-1-gns3">1-1. GNS3란</h5>
+<p>GNS3(Graphical Network Simulator-3)는 시스코 패킷트레이서(Packet Tracer)와 유사한 네트워크 시뮬레이터 툴이다. 패킷트레이서와의 가장 큰 차이점은 실제 장비의 운영체제(IOS) 이미지 파일을 직접 삽입하여 사용한다는 점이다.</p>
+<h5 id="1-2_6">1-2. 패킷트레이서와의 비교</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Cisco Packet Tracer</th>
+<th>GNS3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사용 이미지</td>
+<td>시뮬레이션 전용 가상 장비</td>
+<td>실제 장비의 IOS 이미지 파일</td>
+</tr>
+<tr>
+<td>명령어 범위</td>
+<td>패킷트레이서 지원 범위에 한정</td>
+<td>실제 장비와 동일한 수준의 명령<br>어 사용 가능</td>
+</tr>
+<tr>
+<td>디버깅</td>
+<td>지원 안 됨</td>
+<td>지원 ( debug 명령어 사용 가<br>능)</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>별도 설치 필요</td>
+<td>GNS3 설치 시 함께 설치됨</td>
+</tr>
+<tr>
+<td>시스템 부하</td>
+<td>상대적으로 낮음</td>
+<td>상대적으로 높음</td>
+</tr>
+<tr>
+<td>저장 단위</td>
+<td>단일 파일</td>
+<td>프로젝트 단위</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ GNS3는 실제 장비 이미지를 사용하기 때문에 패킷트레이서보다 시스템 부하가 많이 걸린다.</p>
+<h5 id="1-3_2">1-3. 포함 도구</h5>
+<p>GNS3를 설치하면 함께 설치되는 주요 도구는 다음과 같다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>도구</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wireshark</td>
+<td>패킷 캡처 툴. GNS3 없이도 독립적으로 설치·사<br>용 가능</td>
+</tr>
+<tr>
+<td>Npcap (nmap 제공)</td>
+<td>패킷 캡처를 위한 드라이버. 캡처 파일 확장자는<br>.pcap (Packet Capture의 약자)</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-gns3-인터페이스-구성">2. GNS3 인터페이스 구성</h4>
+<h5 id="2-1_7">2-1. 주요 화면 구성 요소</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
 <th>구성 요소</th>
-<th>역할</th>
+<th>위치</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Topology 창</td>
+<td>중앙 흰 화면</td>
+<td>장비를 배치하고 연결하는 네트<br>워크 구성도 작업 영역</td>
+</tr>
+<tr>
+<td>도구 모음 (상단)</td>
+<td>상단 메뉴 영역</td>
+<td>장비 목록 보기, 선 연결, 시작/<br>일시정지/중지, 확대·축소, 라벨<br>입력 등</td>
+</tr>
+<tr>
+<td>Console 창</td>
+<td>하단</td>
+<td>GNS3 프로그램 자체의 상태 메<br>시지 출력. 서버가 미동작 시 빨<br>간색으로 표시</td>
+</tr>
+<tr>
+<td>Servers 패널</td>
+<td>우측</td>
+<td>서버 이름(컴퓨터 이름) 및<br>CPU·메모리 사용률 확인</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="2-2-gns3">2-2. GNS3 서버 상태 확인 (필수)</h5>
+<p>GNS3를 실행하면 Servers 패널의 데스크탑(본인 컴퓨터 이름) 항목이 반드시 녹색이어야한다. 녹색이 아닌 경우 GNS3 로컬 서버가 동작하지 않는 상태이며, 이 상태에서 장비를 추가하거나 프로젝트를 생성해도 정상 동작하지 않는다.</p>
+<p>⚠️ GNS3 시작 후 가장 먼저 데스크탑 서버의 녹색 불 여부를 확인해야 한다. 이것이 가장 중요한 첫 번째 확인 사항이다.</p>
+<h5 id="2-3_3">2-3. 인터페이스 라벨 표시</h5>
+<p>View → Show/Hide Interface Labels 메뉴를 통해 토폴로지 창에서 각 장비 간 연결된 인터페이스 이름을 표시하거나 숨길 수 있다.</p>
+<p>클릭할 때마다 Toggle(표시 ↔ 숨김) 방식으로 전환된다.</p>
+<p>인터페이스 라벨은 드래그하여 위치를 조정할 수 있다.</p>
+<h4 id="3-장비-등록-ios-이미지">3. 장비 등록 (IOS 이미지)</h4>
+<h5 id="3-1_7">3-1. 등록 경로</h5>
+<p>Edit → Preferences → IOS Routers 메뉴에서 시스코 장비의 IOS 이미지 파일을 등록한다. 등록된 장비는 도구 모음의 라우터/스위치 목록에서 확인하고 토폴로지 창으로 드래그하여 사용할 수 있다.</p>
+<h5 id="3-2_4">3-2. 등록 가능한 장비 유형</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>장비</th>
+<th>IOS 이미지 파일명</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>라우터</td>
+<td>c2691</td>
+<td>시스코 라우터 모델 이름이자 운<br>영체제 이름</td>
+</tr>
+<tr>
+<td>L3 스위치</td>
+<td>c3660</td>
+<td>시스코 L3 스위치 모델 이름이<br>자 운영체제 이름</td>
+</tr>
+</tbody>
+</table></div>
+<p>IOS 이미지 파일은 GNS3.zip 압축 해제 시 포함된 파일을 사용한다.</p>
+<p>이미지 파일을 선택하면 장비의 플랫폼과 모델 정보가 자동으로 설정된다.</p>
+<h5 id="3-3_4">3-3. 등록 이후 장비 확인</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>카테고리</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>라우터 목록</td>
+<td>도구 모음 상단에서 확인 가능</td>
+</tr>
+<tr>
+<td>스위치 목록</td>
+<td>라우터 목록 하단에서 확인 가능. GNS3 기본 제<br>공 스위치 외 등록한 L3 스위치도 표시됨</td>
+</tr>
+<tr>
+<td>End Device</td>
+<td>PC 역할을 하는 기본 제공 장비 (PC, NAT,<br>Cloud 등 3종)</td>
+</tr>
+<tr>
+<td>보안 장비</td>
+<td>별도 카테고리에서 확인 가능</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="4-장비-시작과-인터페이스-활성화">4. 장비 시작과 인터페이스 활성화</h4>
+<h5 id="4-1-no-shutdown">4-1. 녹색 불과 no shutdown의 차이</h5>
+<p>GNS3에서 장비를 시작하면 토폴로지 창의 연결선이 녹색으로 표시된다. 그러나 이 녹색 불 은 장비가 켜진 상태(Power On)를 의미할 뿐, 인터페이스가 활성화된 상태를 의미하지 않는다.</p>
+<p>⚠️ 패킷트레이서와 달리 GNS3에서는 장비를 시작한 후 반드시 각 인터페이스에서 no shutdown  명령을 직접 입력해야 인터페이스가 활성화된다. 녹색 불만 보고 no shutdown 이 된 것으로 착각해서는 안 된다.</p>
+<h5 id="4-2_6">4-2. 콘솔 창 접근 방법</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>장비 더블클릭</td>
+<td>해당 장비의 터미널(콘솔) 창 열기</td>
+</tr>
+<tr>
+<td>장비 우클릭 → Console</td>
+<td>동일한 콘솔 창 열기</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="5-디버깅-기능">5. 디버깅 기능</h4>
+<h5 id="5-1-gns3">5-1. GNS3 디버깅의 특징</h5>
+<p>GNS3는 실제 장비의 IOS 이미지를 사용하기 때문에 debug  명령어를 통한 디버깅이 가능하다. 이 기능을 통해 장비끼리 실시간으로 주고받는 패킷 내용을 콘솔에서 확인할 수 있다.</p>
+<h5 id="5-2_5">5-2. 주요 디버깅 명령어</h5>
+<p>아래 명령어는 모두 Enable 모드에서 실행한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>debug ip packet</td>
+<td>장비에서 주고받는 모든 IP 패킷 정보 출력</td>
+</tr>
+<tr>
+<td>debug ip ospf hello</td>
+<td>OSPF Hello 패킷 송수신 내용 출력</td>
+</tr>
+<tr>
+<td>debug ip ospf adj</td>
+<td>OSPF 인접 관계(Adjacency) 이벤트 출력</td>
+</tr>
+<tr>
+<td>undebug all</td>
+<td>모든 디버깅 중지 ( u all 로 단축 입력 가능)</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="5-3">5-3. 디버깅 출력 내용 이해</h5>
+<p>OSPF 디버깅 시 목적지 IP로 224.0.0.x  형태의 주소가 나타날 수 있다. 이는 D클래스(멀티 캐스트) 주소로, OSPF가 라우터 그룹에 정보를 일제히 전달할 때 사용하는 예약된 주소이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>OSPF 멀티캐스트 주소</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>224.0.0.5</td>
+<td>모든 OSPF 라우터에게 전달</td>
+</tr>
+<tr>
+<td>224.0.0.6</td>
+<td>DR/BDR 라우터에게 전달</td>
+</tr>
+</tbody>
+</table></div>
+<p>⚠️ 디버깅을 켜둔 상태로 계속 두면 메시지를 출력하기 위해 장비 자원을 지속 소모한다. 실제 현장에서도 필요한 정보를 확인한 후 반드시 undebug all 로 디버깅을 중지해야 한다.</p>
+<h4 id="6-프로젝트-저장-방법">6. 프로젝트 저장 방법</h4>
+<h5 id="6-1-gns3">6-1. GNS3의 저장 단위</h5>
+<p>GNS3는 패킷트레이서와 달리 프로젝트 단위로 파일을 저장한다. 단일 파일 저장(Save)이 없으며, File 메뉴에는 Save 항목이 없고 New Blank Project 및 Open Project만 존재한다.</p>
+<h5 id="6-2_2">6-2. 올바른 저장 절차</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>내용</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1단계</td>
-<td>클라이언트 (rsyslog)</td>
-<td>이벤트 발생 → 로그를 서버로 전송</td>
+<td>각 장비 콘솔에서 write memory 또는 copy<br>run start 명령으로 장비별 설정 저장</td>
 </tr>
 <tr>
 <td>2단계</td>
-<td>로그 서버 (rsyslog)</td>
-<td>클라이언트 로그를 수신하여 DB에 저장</td>
+<td>상단 도구 모음의 정지(Stop) 버튼을 클릭하여 모<br>든 장비를 중지 상태로 전환</td>
 </tr>
 <tr>
 <td>3단계</td>
-<td>데이터베이스 (MariaDB)</td>
-<td>로그를 구조화하여 저장</td>
-</tr>
-<tr>
-<td>4단계</td>
-<td>웹 인터페이스 (LogAnalyzer)</td>
-<td>DB의 로그를 시각화하여 제공</td>
+<td>모든 장비가 중지된 상태에서 창(X)을 닫으면<br>GNS3가 프로젝트 경로에 자동 저장</td>
 </tr>
 </tbody>
 </table></div>
-<h5 id="1-3">1-3. 로그 서버 활용의 장점</h5>
-<p>DB에 저장되므로 SQL 질의나 웹 인터페이스를 통해 언제든지 로그를 조회·검색할 수 있다. 또한 로그를 시각화하여 관리자가 더 효율적으로 로그를 분석할 수 있다. 향후 SIEM(보안 정보 및 이벤트 관리) 솔루션으로 발전 가능하다.</p>
-<p>⚠️ 1단계(클라이언트 → 서버) 연결이 확인되지 않으면 이후 DB 저장, 웹 시각화 작업이 모두 의미 없다. 단계별 확인이 필수다.</p>
-<h5 id="1-4">1-4. 백업 로그 서버</h5>
-<p>로그는 중요하기 때문에 주 로그 서버 외에 백업 로그 서버를 추가로 구성하여 이중화하는 것이 일반적이다.</p>
-<h4 id="2-rsyslog-서비스">2. rsyslog 서비스</h4>
-<h5 id="2-1">2-1. 개요</h5>
-<p>rsyslog는 클라이언트와 서버 간에 로그를 전송하는 서비스다. 서버와 클라이언트 양쪽 모 두에 공통으로 설치 및 실행되어야 한다.</p>
-<h5 id="2-2_1">2-2. 설치 패키지</h5>
-<p>dnf install -y rsyslog rsyslog-doc    ← 서버·클라이언트 공통 설치</p>
-<h5 id="2-3">2-3. 서비스 관리</h5>
-<p>systemctl start rsyslog     ← rsyslog 서비스 시작 systemctl enable rsyslog    ← 재부팅 후에도 자동 실행 (영구 적용)</p>
-<p>enable 은 재부팅 이후에도 해당 서비스가 자동으로 시작되도록 등록한다. permanent 와 같은 의미다.</p>
-<h4 id="3-rsyslog-서버-설정">3. rsyslog 서버 설정</h4>
-<h5 id="3-1">3-1. 설정 파일 위치</h5>
-<p>/etc/rsyslog.conf    ← rsyslog 주 환경설정 파일 설정 파일은 다음과 같은 섹션으로 구성된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>섹션</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GLOBAL DIRECTIVES</td>
-<td>전역 설정</td>
-</tr>
-<tr>
-<td>MODULES</td>
-<td>입출력 모듈 설정</td>
-</tr>
-<tr>
-<td>RULES</td>
-<td>로그 저장 규칙 설정</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="3-2">3-2. 서버 입력 모듈 설정</h5>
-<p>서버에서 클라이언트의 로그를 수신하려면 MODULES  섹션에 아래 내용을 추가한다.</p>
-<p>$ModLoad imtcp               ← TCP 입력 모듈 로드 $InputTCPServerRun 514       ← TCP 514번 포트로 로그 수신 대기 $ModLoad imudp               ← UDP 입력 모듈 로드 $UDPServerRun 514            ← UDP 514번 포트로 로그 수신 대기 ⚠️ 대소문자를 정확하게 입력해야 한다. $ModLoad , imtcp , $InputTCPServerRun  모두 대소문자 구분이 있다.</p>
-<h5 id="3-3-rsyslog">3-3. rsyslog 전송 포트</h5>
-<p>rsyslog는 기본적으로 514번 포트를 사용하며 TCP와 UDP 두 가지 프로토콜을 지원한다. 서버의 방화벽에서 해당 포트를 허용해야 한다.</p>
-<p>firewall-cmd --permanent --add-port=514/tcp    ← TCP 514번 허용 firewall-cmd --permanent --add-port=514/udp    ← UDP 514번 허용 firewall-cmd --reload                          ← 방화벽 설정 적용</p>
-<h4 id="4-rsyslog-클라이언트-설정">4. rsyslog 클라이언트 설정</h4>
-<h5 id="4-1_2">4-1. 클라이언트 설정 내용</h5>
-<p>클라이언트도 동일하게 /etc/rsyslog.conf  파일의 맨 마지막 줄에 다음 내용을 추가하여 어느 서버로 로그를 보낼지 지정한다.</p>
-<p><em>.</em>    @@[서버IP]:514    ← 모든 로그를 서버로 TCP 전송 <em>.</em>    @[서버IP]:514     ← 모든 로그를 서버로 UDP 전송</p>
-<h5 id="4-2_1">4-2. 설정 문법 의미</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구성 요소</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em>.</em></td>
-<td>모든 Facility(분류)의 모든 Priority(심각도) 로그</td>
-</tr>
-<tr>
-<td>@@</td>
-<td>TCP 프로토콜 사용</td>
-</tr>
-<tr>
-<td>@</td>
-<td>UDP 프로토콜 사용</td>
-</tr>
-<tr>
-<td>[서버IP]:514</td>
-<td>로그를 전송할 서버 IP와 포트 번호</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="5-네트워크-연결-확인-명령어">5. 네트워크 연결 확인 명령어</h4>
-<h5 id="5-1-lsof">5-1. lsof 명령어</h5>
-<p>열려 있는 파일 및 포트 목록을 확인한다.</p>
-<p>lsof -i tcp::514    ← TCP 514번 포트 상태 확인 lsof -i udp::514    ← UDP 514번 포트 상태 확인</p>
-<h5 id="5-2-netstat">5-2. netstat 명령어</h5>
-<p>net-tools  패키지를 설치해야 사용 가능하다. Windows에서는 기본으로 내장되어 있으나, 리눅스에서는 별도 설치가 필요하다.</p>
-<p>dnf install -y net-tools    ← netstat 사용을 위한 패키지 설치 netstat -natp               ← 현재 네트워크 연결 상태 확인 netstat -natp | grep 514    ← 514번 포트만 필터링</p>
-<h5 id="5-3">5-3. 연결 상태 구분</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>상태</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LISTEN</td>
-<td>연결을 기다리는 상태 (접속 대기)</td>
-</tr>
-<tr>
-<td>ESTABLISHED</td>
-<td>연결이 성립된 상태</td>
-</tr>
-</tbody>
-</table></div>
-<p>서버에서 0.0.0.0:514 로 LISTEN 상태가 확인되면, 모든 네트워크로부터 514번 포트로 수신 대기 중임을 의미한다.</p>
-<h4 id="6-파이프-명령어">6. 파이프(|) 명령어</h4>
-<p>두 개 이상의 명령어를 연결할 때 사용하는 특수 문자다. 앞 명령어의 실행 결과를 뒤 명령어의 입력값으로 전달한다.</p>
-<p>netstat -natp | grep 514    ← netstat 결과 중 514가 포함된 줄 만 출력 키보드에서 Shift + \  (또는 Enter  키 위의 |  키)로 입력한다. 내용이 많은 출력 결과에서 필요한 부분만 빠르게 확인할 때 자주 활용된다.</p>
-<h4 id="7-실시간-로그-모니터링">7. 실시간 로그 모니터링</h4>
-<p>tail -f /var/log/messages    ← 서버에서 실시간 로그 수신 확인 서버에서 위 명령을 실행한 후 클라이언트에서 이벤트를 발생시키면(예: systemctl restart sshd ), 클라이언트의 로그가 서버 /var/log/messages 에 실시간으로 기록된다.</p>
-<hr />
-<h3 id="068-syslog-facility-priority의-개념-로그-레벨-이해">068. Syslog Facility Priority의 개념, 로그 레벨 이해</h3>
-<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
-<h4 id="1-syslog-개요">1. Syslog 개요</h4>
-<h5 id="1-1-syslog">1-1. Syslog의 구성 요소</h5>
-<p>Syslog는 로그 메시지를 분류하고 관리하기 위해 두 가지 주요 요소로 구성된다:</p>
-<p>Facility: 로그가 발생한 출처나 카테고리 Priority: 로그의 우선순위 또는 심각도</p>
-<h4 id="2-facility-시설카테고리">2. Facility (시설/카테고리)</h4>
-<h5 id="2-1-facility">2-1. Facility의 정의</h5>
-<p>Facility는 로그가 어디서 발생했는지를 나타내는 분류 항목이다. 로그 메시지의 출처를 식 별하는 데 사용된다.</p>
-<h5 id="2-2-facility">2-2. 주요 Facility 종류</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>Facility</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AUTH</td>
-<td>인증과 관련된 로그 (사용자 로그인, 비밀번호 관련)</td>
-</tr>
-<tr>
-<td>LPR</td>
-<td>프린터 서비스와 관련된 로그</td>
-</tr>
-<tr>
-<td>Syslog</td>
-<td>Syslog 대몬 자체에서 발생하는 로그</td>
-</tr>
-<tr>
-<td>Local 0-7</td>
-<td>사용자 정의 목적으로 사용 가능한 로그 카테고리</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="2-3-facility">2-3. Facility의 역할</h5>
-<p>어떤 로그가 AUTH로 지정되어 있으면 인증 관련 로그임을 알 수 있다. 마찬가지로 LPR이 면 프린트 관련 기록임을 식별할 수 있다. 따라서 로그를 빠르게 분류하고 원하는 항목을 찾는 데 도움이 된다.</p>
-<h4 id="3-priority-우선순위심각도">3. Priority (우선순위/심각도)</h4>
-<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
-<h5 id="3-1-priority">3-1. Priority의 개념</h5>
-<p>Priority는 로그의 우선순위 또는 심각도(Severity Level)를 나타낸다. 발생한 문제가 시스템에 미치는 영향의 정도를 표현한다.</p>
-<h5 id="3-2-priority-0-7">3-2. Priority 레벨 (0-7)</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>레벨</th>
-<th>이름</th>
-<th>설명</th>
-<th>영향도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Emergency (이머젠시)</td>
-<td>시스템 사용 불가능한 긴급 상황</td>
-<td>매우 높음</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Alert</td>
-<td>즉시 조치가 필요한 상황</td>
-<td>매우 높음</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Critical</td>
-<td>심각한 상황</td>
-<td>높음</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Error</td>
-<td>오류 발생</td>
-<td>중간</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Warning</td>
-<td>경고 상황</td>
-<td>중간</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Notice</td>
-<td>일반적인 알림</td>
-<td>낮음</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Informational</td>
-<td>정보성 메시지</td>
-<td>낮음</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Debug</td>
-<td>디버깅 정보</td>
-<td>최하위</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="3-3">3-3. 심각도의 의미</h5>
-<p>어떤 일이 발생했을 때, 그 문제가 시스템에 얼마만큼 영향을 미칠 것인가를 나타내는 것이 심각도이다. Emergency 레벨이 발생하면 시스템에 아주 긴급한 문제가 있다는 의미이고, 적극적인 조치를 하지 않으면 시스템이 정상적으로 동작하지 않는다.</p>
-<h5 id="3-4-warning">3-4. Warning 레벨의 일반적 사용</h5>
-<p>대부분의 서비스가 구동될 때, 로그 관련 심각도는 기본적으로 Warning 레벨로 정해져 있다. 이는 일반적인 운영 환경에서의 표준 레벨이다.</p>
-<h5 id="3-5-debug">3-5. Debug 레벨의 특징</h5>
-<p>Debug 레벨은 가장 낮은 우선순위를 가지므로, 개발 또는 문제 해결 시 상세한 정보를 확인할 때 사용된다.</p>
-<h4 id="4-facility와-priority의-조합">4. Facility와 Priority의 조합</h4>
-<h5 id="4-1_3">4-1. 로그의 완전한 분류</h5>
-<p>로그 메시지는 Facility와 Priority의 조합으로 완전하게 분류된다:</p>
-<p>Facility는 로그의 출처(어디서)를 나타낸다</p>
-<p>Priority는 로그의 중요도(얼마나 심각한지)를 나타낸다</p>
-<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
-<h5 id="4-2_2">4-2. 로그 처리의 실제 적용</h5>
-<p>로그 관리 정책에서:</p>
-<p>특정 Facility의 특정 Priority 이상만 기록하도록 설정할 수 있다</p>
-<p>Emergency 레벨의 로그는 즉시 관리자에게 알림을 보낼 수 있다</p>
-<p>낮은 Priority의 로그는 보존 기간을 짧게 설정할 수 있다</p>
-<h4 id="5-syslog-설정-원리">5. Syslog 설정 원리</h4>
-<h5 id="5-1_1">5-1. 로그 분류의 중요성</h5>
-<p>로그는 대량으로 생성되기 때문에 Facility와 Priority를 통해 체계적으로 분류해야 한다. 이를 통해 필요한 정보를 빠르게 찾고, 중요한 로그에 우선순위를 부여할 수 있다.</p>
-<h5 id="5-2_1">5-2. 설정값 변경의 영향</h5>
-<p>Syslog 설정 파일에서 설정값을 변경하면 기록되는 로그의 내용과 형식이 변경될 수 있다. 따라서 로그 관리 정책을 조정할 때는 신중하게 변경해야 한다.</p>
-<p>Syslog Facility/Priority의 개념, 로그 레벨 이해</p>
-<hr />
-<h3 id="069-시스템-로그-관리-및-분석리눅스-웹-서버">069. 시스템 로그 관리 및 분석(리눅스 웹 서버)</h3>
-<p>서버)</p>
-<h4 id="1-로그-관리의-중요성">1. 로그 관리의 중요성</h4>
-<h5 id="1-1_2">1-1. 로그의 정의와 보안적 가치</h5>
-<p>시스템에서 발생하는 모든 사건과 작업은 로그라고 불리는 기록에 저장된다. 로그는 단순한 기록을 넘어 보안적으로도 중요한 부분이다.</p>
-<h5 id="1-2_2">1-2. 법적 규제와 로그 보존</h5>
-<p>법적으로 일정 수준 이상의 시스템에서는 로그를 마음대로 삭제할 수 없도록 규정되어 있다. 어떤 일이 일어났는지 확인할 수 있는 중요한 정보들이 포함되어 있기 때문이다. 개인이나 소규모 시스템에서는 삭제가 가능하지만, 기본적으로 시스템이나 장비에서 발생하는 모든 작업은 기록된다.</p>
-<h4 id="2-웹-서버-로그-구조">2. 웹 서버 로그 구조</h4>
-<h5 id="2-1_1">2-1. 웹 서버 디렉토리 구조</h5>
-<p>웹 서버의 설정과 로그는 /etc/httpd/  경로 아래에 위치한다. 이 디렉토리 내에 웹 서비스와 관련된 모든 내용이 저장된다.</p>
-<h5 id="2-2_2">2-2. 로그 파일의 위치 및 심볼릭 링크</h5>
-<p>/etc/httpd/logs  디렉토리는 심볼릭 링크이며, 실제 로그 파일은 /var/log/  경로에 저장되어 있다. 이러한 구조를 통해 웹 서비스와 관련된 다양한 로그 파일들을 관리한다.</p>
-<h4 id="3-http-웹-서비스-로그">3. HTTP 웹 서비스 로그</h4>
-<h5 id="3-1_1">3-1. 로그 파일의 종류</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파일명</th>
-<th>용도</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>access.log</td>
-<td>정상 접속 기록</td>
-<td>HTTP를 통한 모든 정상 접속 정보</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파일명</th>
-<th>용도</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>access_log</td>
-<td>HTTPS 접속</td>
-<td>SSL/TLS를 통한 보안 접속 기록</td>
-</tr>
-<tr>
-<td>error.log</td>
-<td>접속 오류</td>
-<td>접속 시 발생한 오류 정보</td>
-</tr>
-<tr>
-<td>ssl_error.log</td>
-<td>HTTPS 오류</td>
-<td>보안 접속 관련 오류</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="3-2-access-log">3-2. Access Log의 구조</h5>
-<p>접속 로그는 다음 정보를 포함한다:</p>
-<p>클라이언트의 IP 주소 접속 시간 및 날짜 HTTP 요청 방식 (GET, POST 등)</p>
-<p>요청한 리소스 경로 HTTP 상태 코드 User-Agent (브라우저 정보)</p>
-<h5 id="3-3_1">3-3. 로그 파일 분석</h5>
-<p>로그 파일은 시간 순서로 기록되며, 맨 아래의 최신 항목부터 위로 올라갈수록 이전 기록이 다. 각 접속에 대해 IP 주소, 접속 시간, 요청 방식, User-Agent 값 등의 정보를 확인할 수 있다.</p>
-<h5 id="3-4-error-log">3-4. Error Log의 역할</h5>
-<p>오류 로그에는 접속 시도 중에 발생한 오류 정보가 기록된다. 옵션 불일치, 설정 오류 등 다양한 접속 실패 원인을 파악할 수 있다.</p>
-<h4 id="4-기타-서비스-로그">4. 기타 서비스 로그</h4>
-<h5 id="4-1_4">4-1. 데이터베이스 로그</h5>
-<p>MariaDB 같은 데이터베이스도 /var/log/  하위의 별도 디렉토리에서 관리되며, DB와 관련된 여러 로그들이 존재한다.</p>
-<h5 id="4-2-ftp">4-2. FTP 서비스 로그</h5>
-<p>FTP 서비스는 xferlog  파일에 로그가 기록된다. FTP 업로드, 다운로드 등의 기록이 여기에 저장된다.</p>
-<h5 id="4-3-samba">4-3. Samba 로그</h5>
-<p>Samba 서비스는 별도의 디렉토리에서 관리되며, Samba와 관련된 기록이 저장된다.</p>
-<h4 id="5-사용자-로그인-기록-파일">5. 사용자 로그인 기록 파일</h4>
-<h5 id="5-1-wtmp">5-1. WTMP 파일 (로그인/로그아웃 기록)</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>특징</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장 위치</td>
-<td>/var/log/wtmp</td>
-</tr>
-<tr>
-<td>파일 형식</td>
-<td>바이너리 데이터 파일</td>
-</tr>
-<tr>
-<td>기록 내용</td>
-<td>사용자 로그인, 로그아웃</td>
-</tr>
-<tr>
-<td>추가 기록</td>
-<td>시스템 부팅, 종료, 리부팅</td>
-</tr>
-<tr>
-<td>조회 명령어</td>
-<td>last</td>
-</tr>
-</tbody>
-</table></div>
-<p>WTMP 파일은 사용자가 로그인했거나 로그아웃했을 때의 정보를 저장한다. 일반 텍스트 파일이 아니라 바이너리 데이터 형식으로 저장되므로 직접 읽을 수 없다. last  명령어를 사용하여 읽을 수 있다.</p>
-<h5 id="5-2-btmp">5-2. BTMP 파일 (로그인 실패 기록)</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>특징</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장 위치</td>
-<td>/var/log/btmp</td>
-</tr>
-<tr>
-<td>파일 형식</td>
-<td>바이너리 데이터 파일</td>
-</tr>
-<tr>
-<td>기록 내용</td>
-<td>원격 접속 실패 기록</td>
-</tr>
-<tr>
-<td>조회 명령어</td>
-<td>last -b</td>
-</tr>
-</tbody>
-</table></div>
-<p>BTMP 파일에는 SSH나 기타 원격 접속 시도 중 실패한 기록이 저장된다. SSH 접속 실패, 로그인 오류 등이 기록된다.</p>
-<h5 id="5-3-utmp">5-3. UTMP 파일 (현재 로그인 세션)</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>특징</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>파일 형식</td>
-<td>바이너리 데이터 파일</td>
-</tr>
-<tr>
-<td>기록 내용</td>
-<td>현재 시스템에 로그인한 사용자 정보</td>
-</tr>
-<tr>
-<td>조회 명령어</td>
-<td>w , who , finger</td>
-</tr>
-</tbody>
-</table></div>
-<p>UTMP 파일은 현재 시스템에 로그인한 사용자들의 정보를 포함한다.</p>
-<h5 id="5-4-lastlog">5-4. Lastlog 파일 (최근 로그인 정보)</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>특징</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장 위치</td>
-<td>/var/log/lastlog</td>
-</tr>
-<tr>
-<td>기록 내용</td>
-<td>각 사용자의 가장 최근 로그인 정보</td>
-</tr>
-<tr>
-<td>조회 명령어</td>
-<td>lastlog</td>
-</tr>
-</tbody>
-</table></div>
-<p>각 사용자의 가장 최근 로그인 시간, 터미널, 로그인 위치 등을 나타낸다.</p>
-<h4 id="6-명령어-히스토리">6. 명령어 히스토리</h4>
-<h5 id="6-1-bash-history">6-1. Bash History 파일</h5>
-<p>각 사용자가 내린 명령어는 해당 사용자의 홈 디렉토리에 .bash_history  파일로 저장된다. 숨김 파일(점으로 시작)이므로 ls -a  명령으로만 볼 수 있다.</p>
-<h5 id="6-2">6-2. 히스토리 파일의 특징</h5>
-<p>사용자별로 별도의 히스토리 파일이 존재한다</p>
-<p>명령어 실행 시간 정보는 포함되지 않는다</p>
-<p>명령어 목록만 저장된다</p>
-<p>터미널에서 위/아래 화살표 키로 과거 명령어를 확인할 수 있다</p>
-<h5 id="6-3">6-3. 히스토리 파일 위치</h5>
-<p>Root 사용자: /root/.bash_history 일반 사용자: /home/[username]/.bash_history</p>
-<h5 id="6-4">6-4. 보안 관점의 주의사항</h5>
-<p>침입자는 자신의 명령어를 은폐하기 위해 히스토리 파일을 삭제하거나, 심볼릭 링크를 변경할 수 있다.</p>
-<h4 id="7-secure-로그-파일">7. Secure 로그 파일</h4>
-<h5 id="7-1">7-1. 정의와 저장 위치</h5>
-<p>Secure 로그는 원격 접속 및 사용자 인증과 관련된 모든 기록을 저장한다. 저장 위치는 /var/log/secure 이다.</p>
-<h5 id="7-2">7-2. 기록 내용</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>항목</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SSH 접속</td>
-<td>sshd 서비스를 통한 원격 접속 기록</td>
-</tr>
-<tr>
-<td>FTP 접속</td>
-<td>FTP 서비스를 통한 인증 기록</td>
-</tr>
-<tr>
-<td>사용자 인증</td>
-<td>모든 사용자 인증 과정과 결과</td>
-</tr>
-<tr>
-<td>패스워드 변경</td>
-<td>사용자 패스워드 변경 기록</td>
-</tr>
-<tr>
-<td>새 사용자 생성</td>
-<td>새 사용자 계정 생성 기록</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="7-3">7-3. 로그 분석</h5>
-<p>Secure 로그는 일반 텍스트 파일이므로 cat  명령어로 직접 읽을 수 있다. 시간 순서로 기록 되며, 아래쪽부터 최신 기록이다.</p>
-<h5 id="7-4">7-4. 보안 감시 중요성</h5>
-<p>이 파일을 통해 비정상적인 접속 시도, 비인가 로그인, 패스워드 공격 등을 감지할 수 있다.</p>
-<h4 id="8-messages-로그-파일">8. Messages 로그 파일</h4>
-<h5 id="8-1">8-1. 역할과 중요성</h5>
-<p>Messages 로그는 로그인 기록, 디바이스 정보, 시스템 설정 오류, 파일 시스템 네트워크 연결 기록 등 매우 다양한 내용을 포함한다. 상당히 중요한 로그 파일이다.</p>
-<h5 id="8-2">8-2. 기록 내용의 범위</h5>
-<p>시스템 시작(Booting) 및 종료 기록 패키지 설치/업그레이드 기록 네임 서비스(DNS) 관련 기록 FTP, SSH 등 주요 서비스 기록 시스템 오류 및 경고</p>
-<h5 id="8-3">8-3. 파일 형식</h5>
-<p>텍스트 형식으로 저장되므로 cat  명령어로 직접 읽을 수 있다.</p>
-<h5 id="8-4">8-4. 대용량 로그 검색</h5>
-<p>로그 파일이 매우 크면 grep  명령어를 사용하여 필요한 부분만 빠르게 검색할 수 있다.</p>
-<p>grep "검색문자열" /var/log/messages  ← 특정 문자열 검색 grep "192.168.100.91" /var/log/messages  ← 특정 IP 검색</p>
-<h4 id="9-시스로그syslog-관리">9. 시스로그(Syslog) 관리</h4>
-<h5 id="9-1">9-1. 시스로그의 역할</h5>
-<p>Syslog는 시스템 로그 관리를 담당하는 프로세스다. 로그 파일에 기록되는 내용과 형식을 제어한다.</p>
-<h5 id="9-2">9-2. 설정 파일</h5>
-<p>시스로그D(syslogd) 서비스에서 설정값을 변경하면 기록되는 내용과 형식이 변경될 수 있다.</p>
-<h4 id="10-기본-로그-파일-정리">10. 기본 로그 파일 정리</h4>
-<h5 id="10-1-4">10-1. 리눅스 기본 로그 4가지</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파일명</th>
-<th>저장 위치</th>
-<th>용도</th>
-<th>명령어</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WTMP</td>
-<td>/var/log/wtmp</td>
-<td>로그인/로그아웃</td>
-<td>last</td>
-</tr>
-<tr>
-<td>BTMP</td>
-<td>/var/log/btmp</td>
-<td>로그인 실패</td>
-<td>last -b</td>
-</tr>
-<tr>
-<td>UTMP</td>
-<td>메모리</td>
-<td>현재 로그인 세션</td>
-<td>w , who , finger</td>
-</tr>
-<tr>
-<td>Lastlog</td>
-<td>/var/log/lastlog</td>
-<td>최근 로그인 정보</td>
-<td>lastlog</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="10-2">10-2. 추가 중요 로그</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파일명</th>
-<th>저장 위치</th>
-<th>용도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>secure</td>
-<td>/var/log/secure</td>
-<td>인증 및 원격 접속 기록</td>
-</tr>
-<tr>
-<td>messages</td>
-<td>/var/log/messages</td>
-<td>시스템 전반 기록</td>
-</tr>
-<tr>
-<td>httpd access.log</td>
-<td>/var/log/httpd/</td>
-<td>웹 서비스 접속</td>
-</tr>
-</tbody>
-</table></div>
-<hr />
-<h3 id="074-리눅스-계정-파일-구조-salt-파일-권한과-umask">074. 리눅스 계정 파일 구조, Salt, 파일 권한과 umask</h3>
-<p>한과 umask</p>
-<h4 id="1-리눅스-계정-관리-개요">1. 리눅스 계정 관리 개요</h4>
-<p>시스템 보안에서 로그 관리, 계정 관리, 권한 관리는 핵심 요소이다. 이 중 계정과 권한 관리는 보안 점검 시 가장 기본이 되는 항목에 해당한다.</p>
-<p>계정과 관련된 정보는 /etc/passwd 와 /etc/shadow  두 파일에 나뉘어 저장된다.</p>
-<h4 id="2-etcpasswd-파일-구조">2. /etc/passwd  파일 구조</h4>
-<p>cat /etc/passwd 각 레코드(행)는 콜론( : )으로 구분된 7개의 필드로 구성된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>필드 번호</th>
-<th>필드명</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>사용자 계정명</td>
-<td>시스템에 로그인할 때 사용하는 계정 이름</td>
-</tr>
-<tr>
-<td>2</td>
-<td>패스워드</td>
-<td>x 는 암호가 /etc/shadow 에 암호화되어 저장되어 있음을<br>의미</td>
-</tr>
-<tr>
-<td>3</td>
-<td>UID (User ID)</td>
-<td>사용자 식별 번호. 관리자(root)는 0 , 일반 사용자는 1000<br>부터 부여</td>
-</tr>
-<tr>
-<td>4</td>
-<td>GID (Group ID)</td>
-<td>사용자가 속한 그룹 식별 번호. root의 기본값은 0</td>
-</tr>
-<tr>
-<td>5</td>
-<td>사용자 설명(이름)</td>
-<td>시스템에 영향 없는 사용자 설명 정보. 통상 계정명과 동일하<br>게 기입</td>
-</tr>
-<tr>
-<td>6</td>
-<td>홈 디렉토리</td>
-<td>해당 사용자가 로그인 시 이동하는 기본 디렉토리 경로</td>
-</tr>
-<tr>
-<td>7</td>
-<td>기본 셸</td>
-<td>로그인 시 실행되는 셸 경로 (예: /bin/bash )</td>
-</tr>
-</tbody>
-</table></div>
-<p>⚠️ UID와 GID 값이 0 인 계정은 root와 동일한 권한을 가진다. 일반 사용자 계정이라도 UID/GID를 0 으로 변경하면 관리자 권한을 획득하게 되므로, 정기적으로 이 값을 점검해야 한다.</p>
-<p>리눅스 버전에 따라 일반 사용자 UID 시작값이 다를 수 있다. Rocky Linux 등 최신 계열은 1000 부터, 일부 구버전(CentOS 7 이전 등)은 500 부터 부여하는 경우도 있다.</p>
-<h4 id="3-etcshadow-파일-구조">3. /etc/shadow  파일 구조</h4>
-<p>cat /etc/shadow /etc/shadow  파일에는 계정별 암호화된 패스워드와 패스워드 정책 정보가 저장된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>필드 번호</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>사용자 계정명</td>
-</tr>
-<tr>
-<td>2</td>
-<td>암호화된 패스워드 (알고리즘 식별자 + 솔트 + 해시값)</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1970년 1월 1일부터 마지막 패스워드 변경일까지의 경과 일수</td>
-</tr>
-<tr>
-<td>4</td>
-<td>패스워드를 변경한 후 변경 전 사용 기간(일수)</td>
-</tr>
-<tr>
-<td>5</td>
-<td>패스워드 최대 사용 기간. 이 일수가 경과하면 변경을 요구. (기본값: 9999 )</td>
-</tr>
-<tr>
-<td>6</td>
-<td>패스워드 만료 전 경고 통지 일수 (예: 7 이면 만료 7일 전 경고)</td>
-</tr>
-<tr>
-<td>7</td>
-<td>패스워드 만료 후 계정 사용 불가 전까지의 유예 기간(일수)</td>
-</tr>
-<tr>
-<td>8</td>
-<td>1970년 1월 1일부터 계정 완전 비활성화 날짜까지의 일수</td>
-</tr>
-<tr>
-<td>9</td>
-<td>관리자 임의 설정 필드(예약)</td>
-</tr>
-</tbody>
-</table></div>
-<p>패스워드 만료 기간을 60일로 설정하더라도, 만료 이후에 갑자기 통보하는 것이 아니라 만료 전 7일 등 미리 경고 메시지를 통해 사용자에게 변경을 안내해야 한다.</p>
-<h4 id="4-패스워드-암호화-알고리즘과-솔트salt">4. 패스워드 암호화 알고리즘과 솔트(Salt)</h4>
-<h5 id="4-1_5">4-1. 암호화 알고리즘 식별자</h5>
-<p>/etc/shadow  두 번째 필드의 패스워드 문자열은 $알고리즘식별자$솔트$해시값 형식으로 구성된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>식별자</th>
-<th>알고리즘</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$1$</td>
-<td>MD5</td>
-</tr>
-<tr>
-<td>$5$</td>
-<td>SHA-256</td>
-</tr>
-<tr>
-<td>$6$</td>
-<td>SHA-512 (현재 대부분의 최신 리눅스 시스템 기본값)</td>
-</tr>
-</tbody>
-</table></div>
-<p>비트 수가 클수록 해독이 어렵다. 최신 리눅스 버전은 대부분 $6$ (SHA-512)를 사용하며, 구버전(CentOS 7 이전 등)일수록 낮은 알고리즘이 사용될 수 있다.</p>
-<h5 id="4-2-salt">4-2. 솔트(Salt)의 역할</h5>
-<p>솔트는 동일한 패스워드라도 암호화된 결과값이 달라지도록 랜덤하게 추가되는 값이다.</p>
-<p>솔트 없이 동일한 알고리즘으로 동일한 문자열을 해시하면 결과값이 항상 동일하다.</p>
-<p>공격자가 알고리즘을 알고 있으면, 미리 계산한 해시값 목록(레인보우 테이블)으로 패스워드를 역추적할 수 있다.</p>
-<p>솔트를 적용하면, 동일한 패스워드라도 계정마다 솔트 값이 달라 해시 결과가 다르게 나와 역추적이 어렵다.</p>
-<p>⚠️ 솔트(Salt) 개념은 정보보안기사 시험에서 출제되는 항목이다.</p>
-<h4 id="5-파일-및-디렉토리-유형-표기">5. 파일 및 디렉토리 유형 표기</h4>
-<p>ls -al  명령어 출력의 첫 번째 문자는 파일 유형을 나타낸다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>표기</th>
-<th>유형</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>d</td>
-<td>디렉토리</td>
-<td>일반 디렉토리</td>
-</tr>
-<tr>
-<td>-</td>
-<td>일반 파일</td>
-<td>일반 파일</td>
-</tr>
-<tr>
-<td>l</td>
-<td>심볼릭 링크</td>
-<td>다른 파일/디렉토리에 링크된 파일</td>
-</tr>
-<tr>
-<td>c</td>
-<td>캐릭터 특수 파일</td>
-<td>버퍼에 저장되지 않는 특수 파일 (예: 터미널 파일)</td>
-</tr>
-<tr>
-<td>b</td>
-<td>블록 특수 파일</td>
-<td>버퍼링된 특수 파일 (예: 디스크 드라이버)</td>
-</tr>
-<tr>
-<td>s</td>
-<td>소켓 파일</td>
-<td>네트워크 연결을 위한 소켓 파일</td>
-</tr>
-<tr>
-<td>p</td>
-<td>파이프 파일</td>
-<td>파이프 기능을 수행하는 파일</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="6-파일-권한과-umask">6. 파일 권한과 umask</h4>
-<h5 id="6-1">6-1. 기본 생성 권한</h5>
-<p>파일과 디렉토리가 생성될 때 부여되는 기본 권한은 umask 값에 의해 결정된다.</p>
-<p>umask        ← 현재 umask 값 확인 기본 umask 값은 0022 이며, 각 유형별 기본 권한 계산 방식은 다음과 같다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>유형</th>
-<th>최대 권한</th>
-<th>umask 값</th>
-<th>기본 생성 권한</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>디렉토리</td>
-<td>777</td>
-<td>022</td>
-<td>755</td>
-</tr>
-<tr>
-<td>파일</td>
-<td>666</td>
-<td>022</td>
-<td>644</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="6-2-umask">6-2. umask 값 변경과 보안</h5>
-<p>umask 0027    ← umask 값 변경 (예시)</p>
-<p>umask 0022    ← 원래 값으로 복구 ⚠️ umask 값이 임의로 변경되어 있으면, 이후 생성되는 파일과 디렉토리가 예기치 않은 권한을 가지게 된다. 정기적인 보안 점검 시 umask 값 변경 여부를 반드시 확인해야 한다.</p>
-<h4 id="7-파일-권한-변경-chmod">7. 파일 권한 변경 (chmod)</h4>
-<p>파일이나 디렉토리의 권한은 chmod  명령어로 변경할 수 있다.</p>
-<p>chmod 777 test.txt    ← test.txt에 rwxrwxrwx 권한 부여</p>
-<h4 id="8-소유주-및-그룹-변경-chown-chgrp">8. 소유주 및 그룹 변경 (chown, chgrp)</h4>
-<p>파일의 소유주와 그룹도 루트 계정에서 변경할 수 있다.</p>
-<p>chown root ttt.txt    ← ttt.txt의 소유주를 root로 변경 chgrp root ttt.txt    ← ttt.txt의 그룹을 root로 변경 chown : change owner (소유주 변경)</p>
-<p>chgrp : change group (그룹 변경)</p>
-<h4 id="9-계정-관리와-스크립트-활용">9. 계정 관리와 스크립트 활용</h4>
-<p>계정 현황 점검을 위해 /etc/passwd 나 /etc/shadow  파일을 매번 수동으로 확인하는 것은 비 효율적이다. 실무에서는 관리에 필요한 명령어들을 스크립트로 작성하여 실행함으로써 결과를 자동으로 확인하는 방식을 사용한다.</p>
-<hr />
-<h3 id="075-리눅스-기본-명령어-도움말시스템탐색-명령어">075. 리눅스 기본 명령어, 도움말·시스템·탐색 명령어</h3>
-<p>탐색 명령어</p>
-<h4 id="1-리눅스-명령어-구조">1. 리눅스 명령어 구조</h4>
-<p>리눅스 명령어는 기본적으로 명령어 [옵션] [인자(argument)]  형태로 구성된다.</p>
-<p>짧은 옵션(한 글자)은 하나의  뒤에 묶어 사용할 수 있다.</p>
-<p>예: ls -al 은 ls -a -l 과 동일 인자(argument)는 하나 이상 여러 개를 지정할 수 있다.</p>
-<p>예: ls -la /etc /home  → /etc 와 /home  두 디렉토리 내용을 함께 출력 대부분의 명령 실행 중 Ctrl+C 를 누르면 명령을 중단할 수 있다.</p>
-<h4 id="2-도움말-명령어">2. 도움말 명령어</h4>
-<p>관리자라도 모든 명령어와 옵션을 외우지 않는다. 필요할 때 도움말 명령어를 활용한다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>명령어</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>명령어 --help 또는 명령어 -h</td>
-<td>해당 명령어의 간단한 사용법과 옵션 목록 출력</td>
-</tr>
-<tr>
-<td>man 명령어</td>
-<td>명령어의 상세 매뉴얼 페이지 출력. q 를 눌러 종료</td>
-</tr>
-<tr>
-<td>apropos 키워드</td>
-<td>키워드와 관련된 명령어 목록과 설명 출력</td>
-</tr>
-<tr>
-<td>whatis 명령어</td>
-<td>명령어의 짧은 한 줄 설명 출력</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="3-시스템-종료-및-재부팅">3. 시스템 종료 및 재부팅</h4>
-<p>shutdown          ← 시스템 종료 shutdown -h now   ← 즉시 셧다운 (halt) shutdown -r       ← 셧다운 후 재부팅 reboot            ← 시스템 재부팅 셧다운 명령 시 특정 시간 이후 종료하거나 사용자에게 메시지를 전달하는 옵션도 존재한다.</p>
-<h4 id="4-history-명령어">4. history 명령어</h4>
-<p>history 는 사용자가 입력했던 명령어 목록을 표시한다. 명령어 이력은 홈 디렉토리의 숨김 파일 .bash_history 에 저장된다.</p>
-<p>history           ← 현재 세션 명령어 이력 출력 history -w        ← 현재 세션 이력을 .bash_history 파일에 저장 history -c        ← 현재 세션의 임시 이력만 삭제 (파일 내용은 유지) cat ~/.bash_history   ← 저장된 이력 파일 직접 확인 history -c 로 삭제되는 것은 현재 세션의 임시 이력뿐이며, .bash_history  파일에 저장된 내용은 삭제되지 않는다.</p>
-<h4 id="5-echo-명령어">5. echo 명령어</h4>
-<p>echo 는 지정한 문자열을 터미널에 출력한다. 셸 스크립트 작성이나 웹 연동 작업에서 자주 사용된다.</p>
-<p>echo "test"       ← "test" 문자열을 터미널에 출력</p>
-<h4 id="6-date-명령어">6. date 명령어</h4>
-<p>date 는 시스템의 현재 날짜와 시간 정보를 출력하거나 변경할 때 사용한다.</p>
-<p>date              ← 현재 날짜·시간 출력 date -d "20260407"    ← 특정 날짜 정보 출력 date -s "20260407 10:27"  ← 시스템 날짜·시간 변경 우리나라 표준 연구원의 타임 서버는 전 세계 최고 수준의 정밀도를 보유하며, 시스템 설치 시 Asia/Seoul로 설정하면 해당 타임 서버를 통해 시간이 동기화된다.</p>
-<h4 id="7-계정-및-접속-정보-확인-명령어">7. 계정 및 접속 정보 확인 명령어</h4>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>명령어</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>현재 사용자의 UID, GID, 소속 그룹 정보 출력. CTF 등에서 루트 권한 탈취 여부<br>확인에 사용</td>
-</tr>
-<tr>
-<td>who</td>
-<td>현재 시스템에 로그인한 사용자 목록과 접속 시간, 접속 터미널 유형 출력</td>
-</tr>
-<tr>
-<td>whoami</td>
-<td>현재 접속 중인 사용자 이름만 출력</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td>현재 작업 디렉토리의 절대 경로 출력</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="7-1-tty-pts">7-1. TTY와 PTS 구분</h5>
-<p>who  명령 출력에서 접속 터미널 유형을 통해 접속 방식을 확인할 수 있다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>표기</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>tty</td>
-<td>로컬 터미널에서 직접 접속</td>
-</tr>
-<tr>
-<td>pts/숫자</td>
-<td>가상 콘솔(원격 접속 또는 가상 터미널). 숫자는 가상 콘솔 번호</td>
-</tr>
-</tbody>
-</table></div>
-<p>동시에 여러 원격 접속이 이루어지면 pts/0 , pts/1  등으로 순서가 부여된다.</p>
-<h4 id="8-find-명령어">8. find 명령어</h4>
-<p>find 는 파일이나 디렉토리를 조건에 따라 검색하는 명령어로, 실무에서 자주 사용된다.</p>
-<p>find /경로 -name "파일명"         ← 파일 이름으로 검색 find / -name "sshd_config"        ← 최상위 디렉토리부터 sshd_config 검색 find / -perm 4000                 ← 특정 권한(4000)을 가진 파일 검색 find /etc -name "파일명" -perm 4000   ← 이름과 권한 조건을 함께 사용 두 가지 이상의 조건을 동시에 사용할 수 있다.</p>
-<h4 id="9-ls-명령어-주요-옵션">9. ls 명령어 주요 옵션</h4>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-l</td>
-<td>목록 형식으로 자세히 출력</td>
-</tr>
-<tr>
-<td>-a</td>
-<td>숨김 파일 포함 출력</td>
-</tr>
-<tr>
-<td>-tr</td>
-<td>마지막 수정 날짜 역순(오래된 것 먼저)으로 정렬하여 출력</td>
-</tr>
-<tr>
-<td>-d</td>
-<td>디렉토리 자체의 정보를 출력 (내용이 아닌 디렉토리 항목 자체)</td>
-</tr>
-<tr>
-<td>-S</td>
-<td>파일 크기 큰 것부터 정렬 출력</td>
-</tr>
-<tr>
-<td>--hide=*.확장자</td>
-<td>지정한 확장자 파일을 출력에서 제외</td>
-</tr>
-</tbody>
-</table></div>
-<p>기본 정렬은 알파벳 또는 숫자 순이다.</p>
-<h4 id="10-mkdir-명령어---하위-디렉토리-일괄-생성">10. mkdir 명령어 - 하위 디렉토리 일괄 생성</h4>
-<p>mkdir 디렉토리명           ← 단일 디렉토리 생성 mkdir -p test3/test4/test5 ← 중간 경로가 없어도 하위 디렉토리까지 한꺼번에 생성 p  옵션이 없으면 상위 디렉토리가 존재하지 않을 경우 생성에 실패한다.</p>
-<h4 id="11-rmdir-명령어---빈-디렉토리-삭제">11. rmdir 명령어 - 빈 디렉토리 삭제</h4>
-<p>rmdir 디렉토리명    ← 비어있는 디렉토리만 삭제 가능 디렉토리 안에 파일이 하나라도 존재하면 rmdir 은 실패한다. 이 경우 rm  명령어를 사용해야 한다.</p>
-<hr />
-<h3 id="077-파일-조작검색출력-명령어-표준-입출력과-리디렉션">077. 파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</h3>
-<p>출력과 리디렉션</p>
-<h4 id="1-rm-명령어-파일디렉토리-삭제">1. rm 명령어 (파일·디렉토리 삭제)</h4>
-<p>rmdir 은 빈 디렉토리만 삭제할 수 있다. 내부에 파일이 존재하는 디렉토리를 삭제하려면 rm  명령어를 사용한다.</p>
-<p>rm -rf 디렉토리명    ← 내용물이 있는 디렉토리 강제 삭제 rm -ri 디렉토리명    ← 삭제 여부를 대화형으로 묻고 삭제</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-r</td>
-<td>디렉토리와 하위 내용 모두 삭제</td>
-</tr>
-<tr>
-<td>-f</td>
-<td>삭제 여부를 묻지 않고 강제 삭제</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>대화형(interactive)으로 삭제 여부를 묻고 진행</td>
-</tr>
-</tbody>
-</table></div>
-<p>옵션은 명령어 뒤에 위치해야 하며, 명령어 앞에는 둘 수 없다.</p>
-<h4 id="2-mv-명령어-이동-및-이름-변경">2. mv 명령어 (이동 및 이름 변경)</h4>
-<p>mv 는 파일 또는 디렉토리를 이동하거나 이름을 변경할 때 사용한다. 이동 시 원본 위치에서 는 삭제된다.</p>
-<p>mv 원본파일 대상경로/파일명    ← 이동 (이름을 동일하게 유지) mv 원본파일 새이름             ← 이름 변경 mv 원본파일 대상경로/새이름    ← 이동과 이름 변경 동시 수행</p>
-<h4 id="3-file-명령어-파일-유형-확인">3. file 명령어 (파일 유형 확인)</h4>
-<p>file  명령어는 파일의 종류(텍스트 파일, 바이너리, 디렉토리 등)를 출력한다. 악성코드 분석 등에서도 활용된다.</p>
-<p>file /etc/passwd              ← 단일 파일 유형 확인 file /etc/passwd /etc/shadow  ← 여러 파일 유형 동시 확인</p>
-<h4 id="4-tac-명령어-역순-출력">4. tac 명령어 (역순 출력)</h4>
-<p>tac 은 cat 의 역방향 동작으로, 파일 내용을 마지막 줄부터 역순으로 출력한다.</p>
-<p>cat /var/log/messages    ← 파일 내용을 정순 출력 tac /var/log/messages    ← 파일 내용을 역순 출력 (최신 로그가 먼저 표시)</p>
-<p>로그 파일처럼 양이 많고 최신 내용을 먼저 확인하고 싶을 때 유용하다.</p>
-<h4 id="5-sort-명령어-정렬">5. sort 명령어 (정렬)</h4>
-<p>sort 는 파일 내용을 정렬하여 출력한다. 기본값은 알파벳·숫자 오름차순이다.</p>
-<p>sort /etc/passwd        ← 알파벳 오름차순 정렬 sort -r /etc/passwd     ← 역순 정렬 다양한 정렬 기준(알파벳, 숫자, 역순, 특정 열 기준 등)을 옵션으로 지정할 수 있다.</p>
-<h4 id="6-nmcli-명령어-네트워크-설정-cli">6. nmcli 명령어 (네트워크 설정 CLI)</h4>
-<p>nmcli 는 네트워크 설정을 명령행(CLI) 방식으로 수행하는 도구이다. nmtui (텍스트 UI 방식)와 같은 역할을 수행한다.</p>
-<p>nmcli connection up 인터페이스명    ← 특정 인터페이스 활성화 ⚠️ nmtui 와 nmcli  두 도구를 동시에 사용하여 주소를 설정하면, 동일 주소가 중복 등록 되거나 통신 오류가 발생할 수 있다. 반드시 하나의 도구로만 설정한다.</p>
-<h4 id="7-find-명령어-심화--다중-조건-검색">7. find 명령어 심화 — 다중 조건 검색</h4>
-<p>find 에서 여러 조건을 동시에 지정하여 검색할 수 있다.</p>
-<p>find / -name "파일명" -perm 4000 -user root ← 최상위 디렉토리부터, 이름이 '파일명'이고, 권한이 4000이며, 소유주가 root인 파일 검색</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>조건 옵션</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-name</td>
-<td>파일 이름으로 검색</td>
-</tr>
-<tr>
-<td>-perm</td>
-<td>파일 권한으로 검색</td>
-</tr>
-<tr>
-<td>-exec</td>
-<td>실행 파일(이진파일) 검색</td>
-</tr>
-<tr>
-<td>-user</td>
-<td>특정 소유주를 가진 파일 검색</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="8-whereis-명령어-명령어-위치-검색">8. whereis 명령어 (명령어 위치 검색)</h4>
-<p>whereis 는 명령어의 실행 파일, 소스, 매뉴얼 페이지 경로를 출력한다.</p>
-<p>whereis ls       ← ls 명령어의 위치 확인 whereis -b ls    ← 이진파일(실행파일) 경로만 확인 ls  명령어를 내리면, whereis 로 확인한 경로의 실행 파일이 실행되어 결과가 출력된다.</p>
-<h4 id="9-grep-명령어-문자열-검색">9. grep 명령어 (문자열 검색)</h4>
-<p>grep 은 파일 내에서 특정 문자열을 검색한다. 일부 문자열만 입력해도 관련 내용이 모두 출력된다. 로그 파일처럼 내용이 방대한 경우 특히 유용하다.</p>
-<p>grep "root" /etc/passwd         ← /etc/passwd에서 "root" 포함 행 출력 grep -i "root" /etc/passwd      ← 대소문자 구분 없이 검색 grep -w "root" /etc/passwd      ← 정확히 "root"라는 단어만 검색</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-i</td>
-<td>대소문자 무시(case-insensitive)</td>
-</tr>
-<tr>
-<td>-w</td>
-<td>정확한 단어(word) 단위 검색</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="10-표준-입출력-스트림">10. 표준 입출력 스트림</h4>
-<p>리눅스(유닉스 계열)에서는 세 가지 표준 스트림(채널)을 통해 입출력이 이루어진다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>스트림</th>
-<th>채널 번호</th>
-<th>기본 장치</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>stdin (표준 입력)</td>
-<td>0</td>
-<td>키보드</td>
-<td>명령 및 데이터를 입력받는 채널</td>
-</tr>
-<tr>
-<td>stdout (표준 출력)</td>
-<td>1</td>
-<td>모니터(화면)</td>
-<td>명령 실행 결과를 출력하는 채널</td>
-</tr>
-<tr>
-<td>stderr (표준 에러)</td>
-<td>2</td>
-<td>모니터(화면)</td>
-<td>에러 메시지를 출력하는 채널</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="11-리디렉션redirection">11. 리디렉션(Redirection)</h4>
-<p>리디렉션이란 표준 입출력의 방향을 관리자가 원하는 방향으로 바꾸는 것을 말한다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>기호</th>
-<th>종류</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&lt;</td>
-<td>입력 리디렉션</td>
-<td>키보드 대신 파일에서 입력을 읽어들임</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>출력 리디렉션</td>
-<td>화면 대신 파일로 결과를 출력(기존 내용 덮어씀)</td>
-</tr>
-<tr>
-<td>&gt;&gt;</td>
-<td>추가 출력 리디렉션</td>
-<td>파일 끝에 내용을 추가하여 출력</td>
-</tr>
-</tbody>
-</table></div>
-<p>echo "test" &gt; echo.txt     ← "test" 문자열을 echo.txt 파일에 출력(저장) 명령어 &lt; 입력파일          ← 키보드 대신 파일에서 입력을 받아 명령 실행 리디렉션 기호의 방향을 반대로 사용하면 의도치 않은 결과가 발생할 수 있으므로, 방향을 정확히 확인하고 사용해야 한다.</p>
-<hr />
-<h3 id="089-linux-패스워드-정책-파라미터-설정">089. Linux 패스워드 정책 파라미터 설정</h3>
-<h4 id="1-windows-dns-연동-테스트-확인">1. Windows DNS 연동 테스트 확인</h4>
-<h5 id="1-1-ip">1-1. IP 접속 확인 후 도메인 테스트</h5>
-<p>이전 시간에 이어 도메인 접속 테스트를 진행한다. 호스트 컴퓨터의 DNS 주소를 현재 설정 중인 윈도우 서버 IP로 변경한 상태에서 브라우저에 www.도메인명.com 을 입력하면 DNS 서버에 질의하여 정상적으로 웹페이지에 접속된다.</p>
-<p>호스트 컴퓨터 DNS 변경 경로:</p>
-<p>네트워크 및 인터넷 설정 열기 → 어댑터 옵션 변경 → 사용 중인 어댑터 우클릭 &gt; 속성 → TCP/IP 버전4 &gt; DNS 서버 주소를 윈도우 서버 IP로 변경 ⚠️ DNS 주소 변경 후에도 접속이 안 되는 경우, 네트워크 설정이 정상인지 확인한다.</p>
-<h5 id="1-2-dns">1-2. DNS 캐시 초기화</h5>
-<p>DNS 변경 직후에도 접속이 되지 않는 경우, 이미 캐시된 DNS 정보가 남아 있을 수 있다. 네트워크 어댑터를 비활성화했다가 다시 활성화하거나 DNS 캐시를 초기화하면 된다.</p>
-<h4 id="2-linux-머신-전환-및-패스워드-정책-파일-확인">2. Linux 머신 전환 및 패스워드 정책 파일 확인</h4>
-<h5 id="2-1_2">2-1. 패스워드 정책 파일 경로</h5>
-<p>Linux에서 기본적인 패스워드 정책은 아래 파일을 통해 설정한다.</p>
-<p>/etc/security/pwquality.conf    ← 패스워드 품질 정책 설정 파일이 파일에서 패스워드 복잡도, 길이, 문자 종류 등의 규칙을 설정할 수 있다. 각 옵션 앞에 # 이 붙어 있으면 주석 처리된 것이므로 해당 기능은 적용되지 않는다.</p>
-<h4 id="3-pwqualityconf-주요-파라미터">3. pwquality.conf 주요 파라미터</h4>
-<h5 id="3-1-difok">3-1. difok — 유사성 검사</h5>
-<h2 id="difok--1">difok = 1</h2>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>의미</td>
-<td>예전 패스워드와 새 패스워드 간에 반드시 달라야 하는 문자 수</td>
-</tr>
-<tr>
-<td>예시</td>
-<td>값이 6이면 예전 패스워드 6글자가 모두 새 패스워드에서 달라야 함</td>
-</tr>
-<tr>
-<td>비활성화</td>
-<td>값을 0으로 설정하거나 주석 처리</td>
-</tr>
-</tbody>
-</table></div>
-<p>예전 패스워드가 123456 이고 difok가 6일 경우, 순서를 바꾼 654321 이나 일부만 변경한 패스워드도 사용할 수 없다. 6개의 문자가 모두 달라야 한다.</p>
-<h5 id="3-2-minlen">3-2. minlen — 최소 길이</h5>
-<h2 id="minlen--8">minlen = 8</h2>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>의미</td>
-<td>패스워드의 최소 길이</td>
-</tr>
-<tr>
-<td>예시</td>
-<td>값이 8이면 8글자 미만의 패스워드는 사용 불가</td>
-</tr>
-<tr>
-<td>비활성화</td>
-<td>주석 처리</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="4-문자-종류별-최소-개수-설정-credit-파라미터">4. 문자 종류별 최소 개수 설정 (Credit 파라미터)</h4>
-<h5 id="4-1-dcredit-digit">4-1. dcredit — 숫자(Digit) 최소 개수</h5>
-<h2 id="dcredit--1-패스워드에-포함되어야-하는-숫자09의-최소-개수이다-값이-2이면-숫자가-최소-2개-이상-포함되어야-한다">dcredit = 1 패스워드에 포함되어야 하는 숫자(0~9)의 최소 개수이다. 값이 2이면 숫자가 최소 2개 이상 포함되어야 한다.</h2>
-<h5 id="4-2-ucredit-uppercase">4-2. ucredit — 대문자(Uppercase) 최소 개수</h5>
-<h2 id="ucredit--1-패스워드에-포함되어야-하는-영문-대문자의-최소-개수이다-값이-1이면-대문자가-최소-1개-이상-포함되어야-한다">ucredit = 1 패스워드에 포함되어야 하는 영문 대문자의 최소 개수이다. 값이 1이면 대문자가 최소 1개 이상 포함되어야 한다.</h2>
-<h5 id="4-3-lcredit-lowercase">4-3. lcredit — 소문자(Lowercase) 최소 개수</h5>
-<h2 id="lcredit--1-패스워드에-포함되어야-하는-영문-소문자의-최소-개수이다-값이-1이면-소문자가-최소-1개-이상-포함되어야-한다">lcredit = 1 패스워드에 포함되어야 하는 영문 소문자의 최소 개수이다. 값이 1이면 소문자가 최소 1개 이상 포함되어야 한다.</h2>
-<h5 id="4-4-ocredit-other-character">4-4. ocredit — 특수문자(Other Character) 최소 개수</h5>
-<h2 id="ocredit--1-패스워드에-포함되어야-하는-특수문자의-최소-개수이다-값이-2이면-특수문자가-최소-2개-이상-포함되어야-한다">ocredit = 1 패스워드에 포함되어야 하는 특수문자의 최소 개수이다. 값이 2이면 특수문자가 최소 2개 이상 포함되어야 한다.</h2>
-<p>Credit 파라미터 전체 요약:</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파라미터</th>
-<th>대상 문자 종류</th>
-<th>비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dcredit</td>
-<td>숫자 (Digit)</td>
-<td>0~9</td>
-</tr>
-<tr>
-<td>ucredit</td>
-<td>영문 대문자 (Uppercase)</td>
-<td>A~Z</td>
-</tr>
-<tr>
-<td>lcredit</td>
-<td>영문 소문자 (Lowercase)</td>
-<td>a~z</td>
-</tr>
-<tr>
-<td>ocredit</td>
-<td>특수문자 (Other Character)</td>
-<td>!, @, # 등</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="5-추가-복잡도-설정-파라미터">5. 추가 복잡도 설정 파라미터</h4>
-<h5 id="5-1-minclass">5-1. minclass — 최소 문자 종류 수</h5>
-<h2 id="minclass--0-패스워드를-만들-때-반드시-포함해야-하는-문자-종류숫자-대문자-소문자-특수문자의-최소-수이다">minclass = 0 패스워드를 만들 때 반드시 포함해야 하는 문자 종류(숫자, 대문자, 소문자, 특수문자)의 최소 수이다.</h2>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>값</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>숫자, 대문자, 소문자, 특수문자 중 최소 1가지 포함</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>값</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2</td>
-<td>최소 2가지 포함 (예: 숫자와 대문자)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>숫자·대문자·소문자·특수문자 모두 포함</td>
-</tr>
-</tbody>
-</table></div>
-<p>특정 종류만 지정하고 싶은 경우에는 minclass 대신 ucredit, lcredit 등의 Credit 파라미터를 사용한다.</p>
-<h5 id="5-2-maxrepeat">5-2. maxrepeat — 연속 반복 문자 최대 개수</h5>
-<h2 id="maxrepeat--0-동일한-문자가-연달아-나올-수-있는-최대-개수이다-값이-2이면-aa-는-허용되지만-aaa-는-허-용되지-않는다-연속이-아닌-경우예-a3a4a-는-각각-1개로-취급한다">maxrepeat = 0 동일한 문자가 연달아 나올 수 있는 최대 개수이다. 값이 2이면 aa 는 허용되지만 aaa 는 허 용되지 않는다. 연속이 아닌 경우(예: a3a4a )는 각각 1개로 취급한다.</h2>
-<h5 id="5-3-maxclassrepeat">5-3. maxclassrepeat — 동일 종류 연속 반복 최대 개수</h5>
-<h2 id="maxclassrepeat--0-같은-문자-종류숫자-대문자-소문자-특수문자가-연속으로-나올-수-있는-최대-개수이다-값이-2이면-1a-다음에-같은-종류의-문자가-2번-이상-연달아-오면-안-된다-패스워드의-문자-종-류가-매번-달라져야-한다">maxclassrepeat = 0 같은 문자 종류(숫자, 대문자, 소문자, 특수문자)가 연속으로 나올 수 있는 최대 개수이다. 값이 2이면 1A  다음에 같은 종류의 문자가 2번 이상 연달아 오면 안 된다. 패스워드의 문자 종 류가 매번 달라져야 한다.</h2>
-<h5 id="5-4-gecoscheck-gecos">5-4. gecoscheck — GECOS 필드 검사</h5>
-<h2 id="gecoscheck--0-etcpasswd-파일의-gecos-필드계정-정보-필드에-포함된-3글자-이상의-단어가-새-패스워드에-포함되어-있는지-검사한다-잘-사용하지-않는-옵션이다">gecoscheck = 0 /etc/passwd  파일의 GECOS 필드(계정 정보 필드)에 포함된 3글자 이상의 단어가 새 패스워드에 포함되어 있는지 검사한다. 잘 사용하지 않는 옵션이다.</h2>
-<p>/etc/passwd  파일 안에는 각 계정별 여러 필드가 있으며, 이 필드들을 GECOS 필드라고한다.</p>
-<h5 id="5-5-dictcheck">5-5. dictcheck — 사전 단어 검사</h5>
-<h2 id="dictcheck--1-사전dictionary에-있는-단어가-패스워드로-사용되는-것을-방지한다-예를-들어-flower-와-같이-사전에-있는-단어를-패스워드로-설정하면-거부된다-값을-0으로-설정하면-검사를-비활성화한다">dictcheck = 1 사전(Dictionary)에 있는 단어가 패스워드로 사용되는 것을 방지한다. 예를 들어 flower 와 같이 사전에 있는 단어를 패스워드로 설정하면 거부된다. 값을 0으로 설정하면 검사를 비활성화한다.</h2>
-<p>사전 단어 범위가 워낙 넓기 때문에 실제 운영에서는 잘 사용하지 않는 경우도 있다.</p>
-<h4 id="6-pwqualityconf-파라미터-전체-요약">6. pwquality.conf 파라미터 전체 요약</h4>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파라미터</th>
-<th>기능</th>
-<th>비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>difok</td>
-<td>예전 패스워드와 다른 문자 수 (유사성 검사)</td>
-<td>0: 비활성화</td>
-</tr>
-<tr>
-<td>minlen</td>
-<td>패스워드 최소 길이</td>
-<td></td>
-</tr>
-<tr>
-<td>dcredit</td>
-<td>숫자 최소 개수</td>
-<td></td>
-</tr>
-<tr>
-<td>ucredit</td>
-<td>대문자 최소 개수</td>
-<td></td>
-</tr>
-<tr>
-<td>lcredit</td>
-<td>소문자 최소 개수</td>
-<td></td>
-</tr>
-<tr>
-<td>ocredit</td>
-<td>특수문자 최소 개수</td>
-<td></td>
-</tr>
-<tr>
-<td>minclass</td>
-<td>포함해야 할 문자 종류 최소 수</td>
-<td></td>
-</tr>
-<tr>
-<td>maxrepeat</td>
-<td>같은 문자 연속 반복 최대 개수</td>
-<td>0: 제한 없음</td>
-</tr>
-<tr>
-<td>maxclassrepeat</td>
-<td>같은 종류 문자 연속 반복 최대 개수</td>
-<td>0: 제한 없음</td>
-</tr>
-<tr>
-<td>gecoscheck</td>
-<td>/etc/passwd GECOS 필드 단어 검사</td>
-<td>잘 사용 안 함</td>
-</tr>
-<tr>
-<td>dictcheck</td>
-<td>사전 단어 사용 금지 검사</td>
-<td>0: 비활성화</td>
-</tr>
-</tbody>
-</table></div>
-<p>주석( # )이 있는 항목은 해당 기능이 적용되지 않는다. 설정을 활성화하려면 주석을 제거하고 원하는 값을 지정한다.</p>
-<hr />
-<h3 id="090-pam-인증-설정-및-auth-select-명령어">090. PAM 인증 설정 및 auth-select 명령어</h3>
-<p>령어</p>
-<h4 id="1-etcpamd-디렉토리-개요">1. /etc/pam.d 디렉토리 개요</h4>
-<h5 id="1-1-pam">1-1. PAM 인증 관련 디렉토리 구조</h5>
-<p>Linux에서 패스워드 인증과 관련된 추가 설정은 /etc/pam.d  디렉토리에서 관리한다.</p>
-<p>cd /etc/pam.d ls 이 디렉토리 안에는 패스워드 인증 및 인증 방식과 관련된 다양한 파일들이 포함되어 있다. 이 중 인증 방식을 설정하는 주요 파일은 다음과 같다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>파일명</th>
-<th>역할</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>system-auth</td>
-<td>시스템 전반의 인증 방식 설정</td>
-</tr>
-<tr>
-<td>password-auth</td>
-<td>패스워드 인증 방식 설정</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="1-2-password-auth">1-2. password-auth 파일 내용 확인</h5>
-<p>cat /etc/pam.d/password-auth 이 파일을 확인하면 현재 시스템에서 인증에 적용되는 기본 구성 목록을 볼 수 있다. 각 줄은 크게 세 개의 필드로 구성된다.</p>
-<h4 id="2-pampwquality-모듈-추가">2. pam_pwquality 모듈 추가</h4>
-<h5 id="2-1_3">2-1. 단순 패스워드 거부 설정</h5>
-<p>만약 단순한 패스워드(복잡도가 낮은 패스워드)를 사용하지 못하도록 하려면 /etc/pam.d/password-auth  파일에 다음 내용을 추가한다.</p>
-<p>password    require    pam_pwquality    ← 복잡도 낮은 패스워드 거부 VI 편집기로 파일을 열어 password 로 시작하는 항목에 위 내용을 추가하면, 이후 시스템에 들어오는 모든 인증에서 복잡도가 낮은 패스워드는 거부된다.</p>
-<p>⚠️ 기본적으로는 /etc/security/pwquality.conf  파일을 통해 패스워드 정책을 설정하는 것이 우선이다. /etc/pam.d 는 특별한 추가 인증이 필요한 경우에만 사용한다.</p>
-<h4 id="3-auth-select-명령어">3. auth-select 명령어</h4>
-<h5 id="3-1_2">3-1. 현재 인증 설정 확인</h5>
-<p>현재 시스템의 인증 구성 상태를 확인하는 명령어는 다음과 같다.</p>
-<p>authselect current --raw    ← 현재 인증 설정 확인 구성 파일이 없거나 탐지되지 않는 경우 "기존의 구성이 탐지되지 않았다"는 메시지가 출력된다. 이것은 오류가 아니며, 현재 기본 구성 상태임을 나타낸다.</p>
-<h5 id="3-2-auth-select">3-2. auth-select 도움말</h5>
-<p>명령어만 입력하면 사용 가능한 옵션들이 출력된다.</p>
-<p>authselect</p>
-<h5 id="3-3_2">3-3. 서비스별 패스워드 정책 일관 적용</h5>
-<p>특정 서비스에 패스워드 품질 정책을 강제로 일관되게 적용할 수 있다.</p>
-<p>authselect select sshd with pw-quality-force    ← sshd 서비스에 패스워드 품질 정책 강제 적용</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구성 요소</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>select sshd</td>
-<td>sshd 서비스에 대해 인증 방식을 선택</td>
-</tr>
-<tr>
-<td>with pw-quality</td>
-<td>패스워드 품질 정책(pwquality.conf)과 함께 적용</td>
-</tr>
-<tr>
-<td>force</td>
-<td>강제로 일관되게 적용</td>
-</tr>
-</tbody>
-</table></div>
-<p>이 명령어는 실행 단계가 아니라 설정 방법 설명 수준으로 제시된 것이다. 실제 적용 시에는 해당 서비스와 정책을 정확히 지정한다.</p>
-<h4 id="4-패스워드-정책-적용-권장-방식">4. 패스워드 정책 적용 권장 방식</h4>
-<h5 id="4-1_6">4-1. 기본 설정 파일 우선 사용</h5>
-<p>일반적인 패스워드 복잡도 정책은 다음 파일을 통해 설정한다.</p>
-<p>/etc/security/pwquality.conf    ← 기본 패스워드 품질 정책 파일이 파일 하나로 대부분의 패스워드 정책 설정이 가능하다.</p>
-<h5 id="4-2_3">4-2. 추가 인증이 필요한 경우</h5>
-<p>특별한 인증 방식이나 추가적인 인증 요구가 필요한 경우에만 다음 방법을 사용한다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>방법</th>
-<th>경로</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PAM 모듈 추가</td>
-<td>/etc/pam.d/ 디렉토리 내 파일 편집</td>
-</tr>
-<tr>
-<td>인증 프로파일 선택</td>
-<td>authselect select 명령어 사용</td>
-</tr>
-</tbody>
-</table></div>
-<p>기본적으로는 pwquality.conf 파일을 통한 설정을 먼저 검토하고, 추가 인증이나 특수한 정책 적용이 필요한 경우에만 PAM 및 authselect를 활용한다.</p>
-<hr />
-<h3 id="097-우분투-서버-개요-및-virtualbox-설치-준비">097. 우분투 서버 개요 및 VirtualBox 설치 준비</h3>
-<p>치 준비</p>
-<h4 id="1-우분투-버전-구분">1. 우분투 버전 구분</h4>
-<p>우분투는 데스크탑 버전과 서버 버전으로 구분된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구분</th>
-<th>설명</th>
-<th>비교 대상</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>데스크탑 버전</td>
-<td>GUI 환경 포함, 서버로도 사용 가능하나 서버 최적<br>화 기능은 부족</td>
-<td>Windows 10/11과 유사</td>
-</tr>
-<tr>
-<td>서버 버전</td>
-<td>서버 구축에 최적화된 패키지 포함, GUI 없음</td>
-<td>Windows Server 2022와<br>유사</td>
-</tr>
-</tbody>
-</table></div>
-<p>우분투 서버 버전에는 로키 리눅스의 '미니멀' 설치 옵션과 유사하게 Ubuntu Server (minimized) 옵션이 제공된다. 최소한의 패키지만 설치하여 자원을 절약한다.</p>
-<h4 id="2-우분투와-로키-리눅스의-주요-차이점">2. 우분투와 로키 리눅스의 주요 차이점</h4>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>항목</th>
-<th>로키 리눅스</th>
-<th>우분투 서버</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>계열</td>
-<td>Red Hat 계열</td>
-<td>Debian 계열</td>
-</tr>
-<tr>
-<td>패키지 관리</td>
-<td>dnf</td>
-<td>apt</td>
-</tr>
-<tr>
-<td>root 계정</td>
-<td>설치 중 root 패스워드 설정 가능</td>
-<td>root 직접 로그인 비권장; sudo 명령 사용</td>
-</tr>
-<tr>
-<td>미니멀 설치</td>
-<td>미니멀 ISO 이미지로 제공</td>
-<td>설치 과정 중 'Minimized' 옵션 선택</td>
-</tr>
-</tbody>
-</table></div>
-<p>우분투에서 관리자 권한이 필요한 작업은 sudo  명령어를 앞에 붙여 실행한다. root 계정으로 직접 로그인하는 방식보다 sudo 를 사용하는 것이 보안상 더 안전하다.</p>
-<h4 id="3-virtualbox-가상-머신-생성-시-주의사항">3. VirtualBox 가상 머신 생성 시 주의사항</h4>
-<p>여러 대의 가상 머신을 동시에 실행하면 호스트 시스템의 디스크 용량, CPU, 메모리 등 모든 자원을 공유하여 소모한다. 향후 보안 솔루션 실습 환경 구성 시 가상 머신의 수가 늘어나므 로 아래 사항을 미리 점검해야 한다.</p>
-<p>호스트 PC의 여유 디스크 용량 확인 불필요한 가상 머신 삭제 또는 파일 정리 각 가상 머신의 디스크 용량을 필요한 최소 수준으로 설정</p>
-<h4 id="4-우분투-서버-네트워크-설정">4. 우분투 서버 네트워크 설정</h4>
-<p>우분투 서버 설치 과정에서 네트워크 설정 방식을 선택할 수 있다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>방식</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DHCP (자동)</td>
-<td>공유기·네트워크 장비에서 IP를 자동 할당받음</td>
-</tr>
-<tr>
-<td>Manual (수동)</td>
-<td>IP 주소, 서브넷, 게이트웨이, 네임서버를 직접 입력</td>
-</tr>
-</tbody>
-</table></div>
-<p>수동 설정 시 필요한 정보는 호스트 PC에서 ipconfig /all  명령으로 확인한 후, 동일 대역의 사용하지 않는 IP를 지정한다.</p>
-<p>설정 후 IP 할당 방식은 DHCP  또는 static 으로 표시된다.</p>
-<h4 id="5-오픈-ssh-서버">5. 오픈 SSH 서버</h4>
-<p>우분투 서버 설치 과정에서 OpenSSH 서버 설치를 선택할 수 있다. 설치하면 외부 시스템에서 SSH로 원격 접속이 가능해진다. 선택하지 않더라도 설치 후 apt install opensshserver  명령으로 별도 설치할 수 있다.</p>
-<h4 id="6-lxd--도커docker-소개">6. LXD / 도커(Docker) 소개</h4>
-<p>설치 과정 중 추가 소프트웨어 목록에 LXD가 포함된다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>도구</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Docker</td>
-<td>컨테이너 기반 가상화 도구. 경량 가상 환경을 빠르게 생성·삭제 가능</td>
-</tr>
-<tr>
-<td>LXD</td>
-<td>Docker와 유사한 리눅스 컨테이너 관리 도구</td>
-</tr>
-</tbody>
-</table></div>
-<p>이러한 가상화 도구는 필요 시 설치 과정에서 선택하거나, 설치 후 apt 로 수동 설치할 수 있다.</p>
-<hr />
-<h3 id="098-우분투-서버-기본-명령-환경-및-네트워크-설정">098. 우분투 서버 기본 명령 환경 및 네트워크 설정</h3>
-<p>크 설정</p>
-<h4 id="1-리눅스-배포판-계열-비교">1. 리눅스 배포판 계열 비교</h4>
-<p>리눅스 배포판은 계열에 따라 패키지 관리 방식이 다르다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>배포판</th>
-<th>계열</th>
-<th>패키지 관리 명령</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>로키 리눅스(Rocky Linux)</td>
-<td>Red Hat 계열</td>
-<td>dnf</td>
-</tr>
-<tr>
-<td>우분투(Ubuntu)</td>
-<td>Debian 계열</td>
-<td>apt / apt-get</td>
-</tr>
-<tr>
-<td>칼리 리눅스(Kali Linux)</td>
-<td>Debian 계열</td>
-<td>apt / apt-get</td>
-</tr>
-</tbody>
-</table></div>
-<p>우분투와 칼리 리눅스는 동일한 Debian 계열이므로 패키지 관리 명령이 동일하다.</p>
-<h4 id="2-apt-명령어">2. apt 명령어</h4>
-<p>우분투(Debian 계열)에서 패키지를 설치·삭제·업데이트할 때 사용하는 명령어는 apt  또는 apt-get 이다. 로키 리눅스의 dnf 에 해당하는 명령이다.</p>
-<p>apt install 패키지명      ← 패키지 설치 apt-get install 패키지명  ← apt와 동일 (구버전 방식)</p>
-<h4 id="3-sudo-명령어">3. sudo 명령어</h4>
-<p>우분투 서버에서는 root 계정으로 직접 로그인하는 대신, 일반 사용자 계정에서 sudo  명령을 앞에 붙여 관리자 권한으로 명령을 실행한다.</p>
-<p>sudo 명령어   ← 해당 명령을 관리자(root) 권한으로 실행 sudo  없이 관리자 권한이 필요한 명령을 실행하면 Permission denied 오류가 발생한다. 이 경우 명령 앞에 sudo 를 추가하면 된다.</p>
-<p>sudo 는 관리자 권한이 필요한 작업에만 사용하고, 일반 작업은 일반 사용자 권한으로 수행하는 것이 보안상 안전하다.</p>
-<h4 id="4-ping-유틸리티-설치">4. ping 유틸리티 설치</h4>
-<p>우분투 서버 최소 설치 환경에서는 ping  명령이 기본으로 설치되어 있지 않을 수 있다. 이 경우 iputils-ping  패키지를 설치해야 한다.</p>
-<p>sudo apt install iputils-ping   ← ping 명령 사용을 위한 패키지 설치</p>
-<h4 id="5-파일-권한과-sudo의-관계">5. 파일 권한과 sudo의 관계</h4>
-<p>리눅스에서 파일 권한은 ls -l  명령으로 확인할 수 있다. 파일 소유자가 root이고 일반 사용자에게 쓰기 권한이 없는 경우, 해당 파일을 편집하려면 sudo 가 필요하다.</p>
-<p>ls -l 파일경로   ← 파일 권한 확인 (rw- 등으로 표시)</p>
-<p>권한이 root에게만 부여된 파일(예: 네트워크 설정 파일)은 반드시 sudo 로 편집해야 한다.</p>
-<h4 id="6-우분투-서버-네트워크-설정-파일">6. 우분투 서버 네트워크 설정 파일</h4>
-<p>우분투 서버의 네트워크 설정은 /etc/netplan/  디렉토리의 YAML 형식 파일로 관리한다.</p>
-<p>/etc/netplan/50-cloud-init.yaml   ← 우분투 서버 네트워크 설정 파일이 파일은 root 소유이므로 편집 시 sudo 가 필요하다.</p>
-<p>sudo vi /etc/netplan/50-cloud-init.yaml   ← 네트워크 설정 파일 편집</p>
-<h4 id="7-icmp와-ping-개념">7. ICMP와 ping 개념</h4>
-<p>ping  명령은 ICMP(Internet Control Message Protocol) 프로토콜을 사용하여 네트워크 연결 상태를 확인한다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>구분</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ICMP Echo Request</td>
-<td>출발지에서 목적지로 보내는 ping 요청 패킷</td>
-</tr>
-<tr>
-<td>ICMP Echo Reply</td>
-<td>목적지에서 출발지로 돌아오는 ping 응답 패킷</td>
-</tr>
-</tbody>
-</table></div>
-<p>ping 명령을 실행하면 ICMP Echo Request를 보내고, 대상 시스템이 살아 있으면 ICMP Echo Reply로 응답한다.</p>
-<h4 id="8-dos--ddos-공격-개념">8. DoS / DDoS 공격 개념</h4>
-<h5 id="8-1-dos-ddos">8-1. DoS와 DDoS</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>공격 유형</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DoS (Denial of<br>Service)</td>
-<td>단일 공격자가 대량의 트래픽·요청을 전송하여 대상 시스템의 서비스를 마<br>비시키는 공격</td>
-</tr>
-<tr>
-<td>DDoS (Distributed<br>DoS)</td>
-<td>여러 대의 시스템이 분산되어 동시에 DoS 공격을 수행하는 방식</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="8-2-ping-of-death">8-2. Ping of Death (죽음의 핑)</h5>
-<p>Ping of Death는 ICMP를 이용한 DoS 공격의 대표적인 유형이다. 비정상적으로 크거나 변형된 ping 패킷을 전송하여 대상 시스템을 다운시키는 공격 방식이다.</p>
-<p>⚠️ Ping of Death는 오래된 공격 기법으로, 현재 대부분의 운영체제에서 방어 기능이 내장되어 있다.</p>
-<h4 id="9-virtualbox-가상-머신-복제">9. VirtualBox 가상 머신 복제</h4>
-<p>기존 가상 머신을 복제하여 동일한 환경의 새 가상 머신을 빠르게 생성할 수 있다. 복제 방식은 <strong>완전한 복제(Full Clone)</strong>를 사용한다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>설정 항목</th>
-<th>권장 값</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>복제 유형</td>
-<td>완전한 복제</td>
-<td>원본과 완전히 독립된 가상 디스크 생성</td>
-</tr>
-<tr>
-<td>MAC 주소 정책</td>
-<td>새 MAC 주소 생성</td>
-<td>네트워크 충돌 방지를 위해 반드시 새 MAC 주소 지정</td>
-</tr>
-</tbody>
-</table></div>
-<p>⚠️ 복제 시 MAC 주소를 원본과 동일하게 유지하면, 같은 네트워크에서 두 가상 머신이 동일한 MAC을 가지게 되어 네트워크 충돌이 발생할 수 있다. 반드시 새 MAC 주소를 할당해야 한다.</p>
-<h4 id="10-복제-후-정적-ip-설정-변경">10. 복제 후 정적 IP 설정 변경</h4>
-<p>가상 머신을 복제한 경우, 원본 머신과 IP 주소가 동일하게 복사된다. 정적 IP(static)로 설정된 가상 머신을 복제하면, 복제본에서 반드시 IP 주소를 변경해야 한다.</p>
-<p>sudo vi /etc/netplan/50-cloud-init.yaml   ← IP 주소 변경을 위해 설정 파일 편집 변경 후 네트워크 설정을 적용해야 변경사항이 반영된다.</p>
-<p>⚠️ 복제된 가상 머신과 원본 가상 머신이 동일한 IP를 사용하면 IP 충돌이 발생하여 양쪽 모두 네트워크 통신이 불가능해진다.</p>
-<hr />
-<h3 id="115-셸-스크립트-기본-문법-및-awksed-텍스트-처리-도구">115. 셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</h3>
-<p>텍스트 처리 도구</p>
-<h4 id="1-셸shell-개요">1. 셸(Shell) 개요</h4>
-<h5 id="1-1_3">1-1. 셸의 정의</h5>
-<p>셸은 리눅스 커널과 사용자 사이에서 명령어를 읽고 해석하고 실행해 주는 프로그램이다.</p>
-<h5 id="1-2_3">1-2. 셸의 종류</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>셸 이름</th>
-<th>특징</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sh (Bourne Shell)</td>
-<td>초기에 사용하던 셸, 1977년 발표</td>
-</tr>
-<tr>
-<td>ksh (Korn Shell)</td>
-<td>sh의 확장 버전</td>
-</tr>
-<tr>
-<td>csh (C Shell)</td>
-<td>C 언어 문법과 유사한 구조</td>
-</tr>
-<tr>
-<td>bash (Bash Shell)</td>
-<td>현재 대부분의 리눅스 기본 셸, 위 셸들과 호환성<br>제공</td>
-</tr>
-</tbody>
-</table></div>
-<p>현재 사용 중인 셸을 확인하는 명령어:</p>
-<p>echo $SHELL              ← SHELL 환경변수 값 출력 (예: /bin/bash)</p>
-<h4 id="2-셸-스크립트-개요">2. 셸 스크립트 개요</h4>
-<h5 id="2-1_4">2-1. 정의 및 목적</h5>
-<p>셸 스크립트는 셸에서 사용할 수 있는 명령어들을 모아서 첫 줄부터 순차적으로 실행시켜 주는 인터프리터 방식의 스크립트이다.</p>
-<p>작성 목적:</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>목적</th>
-<th>예시</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>반복 작업 자동화</td>
-<td>로그 백업, 디스크 정리 주기적 수행</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>목적</th>
-<th>예시</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>일괄 설치 자동화</td>
-<td>소프트웨어 설치 과정을 스크립트 한 번 실행으로<br>처리</td>
-</tr>
-<tr>
-<td>시스템 취약점 점검</td>
-<td>점검 가이드 항목에 따라 자동 점검 수행</td>
-</tr>
-</tbody>
-</table></div>
-<p>윈도우의 배치(Batch) 파일과 동일한 개념이다. 배치는 일괄 처리 프로그램으로, 반복적 인 작업을 모아서 한꺼번에 처리한다.</p>
-<h5 id="2-2_3">2-2. 스크립트 파일 형식</h5>
-<p>확장자: .sh 파일 권한: 실행 권한이 없으면 실행 불가 → chmod +x &lt;파일명&gt;  으로 부여</p>
-<h5 id="2-3_1">2-3. 스크립트 실행 방법</h5>
-<p>./test.sh                ← 현재 디렉토리임을 명시하여 실행 bash test.sh             ← 실행할 셸(bash)을 지정하여 실행 ⚠️ 스크립트 파일명만 입력하면 실행되지 않는다. 반드시 현재 디렉토리( ./ )를 명시하 거나 실행할 셸을 지정해야 한다.</p>
-<h4 id="3-셸-스크립트-기본-구조">3. 셸 스크립트 기본 구조</h4>
-<h5 id="3-1-shebang">3-1. Shebang(시방, #!)</h5>
-<p>스크립트의 첫 줄에 반드시 작성하며, 해당 코드를 실행할 셸의 경로를 지정한다.</p>
-<h1 id="binbash-bash-shebang">!/bin/bash              ← bash 셸로 아래 코드를 실행 모든 스크립트는 첫 번째 줄에 Shebang이 있어야 아래 명령어들이 어떤 셸로 실행될지 알 수 있다.</h1>
-<h5 id="3-2_1">3-2. 주석</h5>
-<h2 id="이-줄은-주석이다-실행되지-않음">이 줄은 주석이다 (실행되지 않음)</h2>
-<h4 id="4-변수">4. 변수</h4>
-<h5 id="4-1_7">4-1. 변수 규칙</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>규칙</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>대소문자 구분</td>
-<td>name 과 NAME 은 서로 다른 변수</td>
-</tr>
-<tr>
-<td>공백 금지</td>
-<td>name=value (등호 좌우에 공백 없어야 함)</td>
-</tr>
-<tr>
-<td>숫자로 시작 불가</td>
-<td>0name 불가, name0 가능</td>
-</tr>
-<tr>
-<td>자료형 미지정</td>
-<td>기본적으로 문자열로 인식</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="4-2_4">4-2. 변수 선언 및 사용</h5>
-<h1 id="binbash-nameubuntu-2404-version2404">!/bin/bash NAME="Ubuntu 24.04"      ← 문자열 변수 (따옴표 사용) VERSION=24.04            ← 숫자형 변수 (기본적으로 문자열로 인식)</h1>
-<p>echo "Welcome to $NAME"  ← 변수 사용 시 앞에 $ 붙임 변수를 가져올 때는 반드시 변수명 앞에 $ 를 붙인다.</p>
-<h4 id="5-조건문-if">5. 조건문 (if)</h4>
-<h5 id="5-1_2">5-1. 기본 문법</h5>
-<p>if [ 조건 ]; then # 조건이 참일 때 실행 else # 조건이 거짓일 때 실행 fi</p>
-<h5 id="5-2_2">5-2. 비교 연산자</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>연산자</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-eq</td>
-<td>같다 (Equal)</td>
-</tr>
-<tr>
-<td>-gt</td>
-<td>크다 (Greater Than)</td>
-</tr>
-<tr>
-<td>-lt</td>
-<td>작다 (Lower Than)</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>연산자</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-ne</td>
-<td>같지 않다 (Not Equal)</td>
-</tr>
-<tr>
-<td>&gt; , &lt; , !=</td>
-<td>부등호·부정 기호로도 조건 지정 가능</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="5-3_1">5-3. 파일·디렉토리 조건</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>옵션</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-d &lt;경로&gt;</td>
-<td>해당 디렉토리가 존재하는지 검사</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="5-4">5-4. 예제</h5>
-<h1 id="binbash-num10-if-num-gt-5-then-echo-5-higher-10-5-else-echo-5-or-lower-fi">!/bin/bash NUM=10 if [ $NUM -gt 5 ]; then echo "5 higher"         ← 10 &gt; 5 이므로 참일 때 실행 else echo "5 or lower" fi</h1>
-<h4 id="6-사용자-입력-받기">6. 사용자 입력 받기</h4>
-<p>echo -n "당신의 이름을 입력하세요: " read USERNAME            ← 사용자가 입력한 값을 USERNAME 변수에 저장 if [ $USERNAME = "ubuntu" ]; then echo "관리자 계정으로 로그인했습니다." else echo "환영합니다, ${USERNAME}님" fi read  명령어는 사용자가 입력한 값을 지정한 변수에 저장한다.</p>
-<h4 id="7-반복문">7. 반복문</h4>
-<h5 id="7-1-for">7-1. for 문</h5>
-<p>정해진 범위나 리스트의 크기만큼 반복할 때 사용한다.</p>
-<p>for i in 1 2 3; do echo "number $i" done</p>
-<h5 id="7-2-while">7-2. while 문</h5>
-<p>조건이 참인 동안 계속 반복한다.</p>
-<p>COUNTER=1 while [ $COUNTER -lt 4 ]; do   ← COUNTER 값이 4보다 작은 동안 반복 echo $COUNTER COUNTER=$(( COUNTER + 1 ))   ← COUNTER 값 1씩 증가 done 연산(산술)을 수행할 때는 $(( 계산식 ))  형태를 사용한다.</p>
-<p>⚠️ while 문에서 변수 값을 증가시키지 않으면 조건이 영원히 참이 되어 무한 루프가 발생한다.</p>
-<h4 id="8-awk">8. AWK</h4>
-<h5 id="8-1_1">8-1. 개념</h5>
-<p>AWK는 텍스트 기반의 표·데이터를 공백(또는 지정 구분자)을 기준으로 필드(열)로 분리하여 분석하고 추출하는 프로그래밍 언어이다.</p>
-<p>이름 유래: Aho(에이호), Weinberger(웬버거), Kernighan(커링한) — 세 개발자의 이름 첫 글자.</p>
-<h5 id="8-2_1">8-2. 기본 문법</h5>
-<p>awk '{ 행동 }' 파일명 awk '조건 { 행동 }' 파일명</p>
-<h5 id="8-3_1">8-3. 필드 참조</h5>
-<p>공백을 구분자로 사용하는 경우:</p>
-<p>awk '{ print $1, $3 }' user.txt # $1: 첫 번째 필드, $3: 세 번째 필드 다른 구분자(예: : )를 사용하는 경우:</p>
-<p>awk -F: '{ print $1 }' /etc/passwd # -F: 구분자 지정 (콜론을 구분자로 사용)</p>
-<h5 id="8-4_1">8-4. 조건을 포함한 예제</h5>
-<h2 id="usertxt에서-세-번째-필드나이가-30-이상인-행의-13번째-필드만-출력-awk-3-gt-30--print-1-3--usertxt">user.txt에서 세 번째 필드(나이)가 30 이상인 행의 1·3번째 필드만 출력 awk '$3 &gt;= 30 { print $1, $3 }' user.txt</h2>
-<h5 id="8-5">8-5. 특정 문자열이 포함된 행 추출</h5>
-<p>ip address | awk '/inet / { print $2 }' # 'inet '이 포함된 행에서 두 번째 필드(IP 주소) 출력</p>
-<h4 id="9-sed">9. SED</h4>
-<h5 id="9-1_1">9-1. 개념</h5>
-<p>SED는 <strong>Stream Editor(스트림 에디터)</strong>의 약자로, 파일이나 파이프 입력에서 특정 문자열을 삭제·추가·치환하기 위한 도구이다.</p>
-<h5 id="9-2_1">9-2. 기본 문법</h5>
-<p>sed 's/찾을문자열/바꿀문자열/' 파일명</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>기호</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s</td>
-<td>Substitute(치환)의 약자</td>
-</tr>
-<tr>
-<td>g</td>
-<td>Global — 파일 전체에서 모두 치환</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>기호</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i</td>
-<td>In-place — 원본 파일을 직접 수정</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="9-3">9-3. 치환 예제</h5>
-<h2 id="serverconf-파일에서-disabled를-enable로-치환하여-출력-원본-유지-sed-sdisabledenableg-serverconf--원본-파일-자체를-수정하려면--i-옵션-추가-sed--i-sdisabledenableg-serverconf---i-옵션-없이-실행하면-변경된-내용이-화면에만-출력되고-원본-파일은-수정되지-않는다">server.conf 파일에서 'disabled'를 'enable'로 치환하여 출력 (원본 유지) sed 's/disabled/enable/g' server.conf # 원본 파일 자체를 수정하려면 -i 옵션 추가 sed -i 's/disabled/enable/g' server.conf ⚠️ -i  옵션 없이 실행하면 변경된 내용이 화면에만 출력되고 원본 파일은 수정되지 않는다.</h2>
-<h5 id="9-4">9-4. 특정 줄 삭제</h5>
-<p>sed '2d' server.conf     ← 두 번째 줄을 삭제하여 출력 (원본 유지)</p>
-<h5 id="9-5-awk-sed">9-5. AWK와 SED 비교</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>도구</th>
-<th>주요 용도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AWK</td>
-<td>특정 열(필드) 추출, 수치 비교, 데이터 분석</td>
-</tr>
-<tr>
-<td>SED</td>
-<td>특정 문자열 치환·삭제·추가, 파일 편집</td>
-</tr>
-</tbody>
-</table></div>
-<p>AWK와 SED는 셸 스크립트 작성 시 필수적으로 자주 사용되는 도구이다.</p>
-<h4 id="10-셸-스크립트-매개변수argument">10. 셸 스크립트 매개변수(Argument)</h4>
-<p>스크립트 실행 시 인자(Argument)를 함께 전달할 수 있다.</p>
-<p>./test.sh arg1 arg2 arg3 arg4</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>변수</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$0</td>
-<td>스크립트 파일명 자체</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>변수</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$1</td>
-<td>첫 번째 인자</td>
-</tr>
-<tr>
-<td>$2</td>
-<td>두 번째 인자</td>
-</tr>
-<tr>
-<td>$4</td>
-<td>네 번째 인자</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>전체 인자 개수</td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="11-셸-스크립트-문법-검사-도구">11. 셸 스크립트 문법 검사 도구</h4>
-<p>작성한 셸 스크립트의 문법이 올바른지 확인하려면 온라인 도구를 활용할 수 있다.</p>
-<p>사이트 예시: www.shellcheck.net 스크립트 붙여넣기 후 문법적으로 잘못된 부분과 개선 방향을 확인 가능</p>
-<h4 id="12-시스템-취약점-점검-가이드-소개">12. 시스템 취약점 점검 가이드 소개</h4>
-<h5 id="12-1">12-1. 출처</h5>
-<p>한국인터넷진흥원(KISA) 사이트(kisa.or.kr) → 지식 플랫폼 → 법령·가이드라인 → 가이드 라인 탭에서 공식 가이드 문서를 확인할 수 있다.</p>
-<h5 id="12-2">12-2. 주요 문서</h5>
-<p>주요 정보통신 기반시설 기술적 취약점 분석·평가 방법 상세 가이드 (2025년 12월 기준 최신판, 873페이지)</p>
-<h5 id="12-3">12-3. 점검 대상 시스템</h5>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>시스템 유형</th>
-<th>비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>유닉스·리눅스 서버</td>
-<td>리눅스는 유닉스 계열에 해당</td>
-</tr>
-<tr>
-<td>윈도우즈 서버</td>
-<td>—</td>
-</tr>
-<tr>
-<td>웹 서비스</td>
-<td>—</td>
-</tr>
-<tr>
-<td>보안 장비</td>
-<td>—</td>
-</tr>
-<tr>
-<td>네트워크 장비</td>
-<td>—</td>
-</tr>
-<tr>
-<td>DBMS</td>
-<td>데이터베이스</td>
-</tr>
-<tr>
-<td>PC</td>
-<td>일반 사용자 PC</td>
-</tr>
-<tr>
-<td>제어 시스템, 이동통신, 가상화 장비, 클라우드 등</td>
-<td>—</td>
-</tr>
-</tbody>
-</table></div>
-<h5 id="12-4">12-4. 공통 점검 항목</h5>
-<p>시스템 종류에 관계없이 공통적으로 포함되는 점검 항목은 다음 다섯 가지이다.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>항목</th>
-<th>설명 예시</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>계정 관리</td>
-<td>루트 원격 접속 차단 여부, 패스워드 복잡성 정책</td>
-</tr>
-<tr>
-<td>파일 및 디렉토리 관리</td>
-<td>SetUID 파일 존재 여부 등</td>
-</tr>
-<tr>
-<td>서비스 관리</td>
-<td>불필요한 서비스 실행 여부</td>
-</tr>
-<tr>
-<td>패치 관리</td>
-<td>최신 패치 적용 여부</td>
-</tr>
-<tr>
-<td>로그 관리</td>
-<td>/var/log/wtmp , /var/log/btmp 등 로그 점<br>검</td>
-</tr>
-</tbody>
-</table></div>
-<hr /><div class="nav"><a href="ch12.html"><span class="lbl">이전</span>핵심키워드 · 리눅스 서버 (1/2)</a><a href="ch14.html"><span class="lbl">다음</span>핵심키워드 · 윈도우 서버</a></div></main>
+<p>⚠️ 장비를 중지하지 않은 상태에서 창을 닫으면 저장이 정상적으로 이루어지지 않는다.</p>
+<h5 id="6-3_1">6-3. 저장된 프로젝트 불러오기</h5>
+<h4 id="1-gns3-실행-후-데스크탑-서버-녹색-불-확인">1. GNS3 실행 후 데스크탑 서버 녹색 불 확인</h4>
+<h4 id="2-file--open-project-또는-도구-모음의-open-클릭">2. File → Open Project 또는 도구 모음의 Open 클릭</h4>
+<h4 id="3-저장된-프로젝트-폴더gns3--projects--프로젝트명에서-아이콘-더블클릭">3. 저장된 프로젝트 폴더(GNS3 → projects → 프로젝트명)에서 아이콘 더블클릭</h4>
+<h5 id="6-4">6-4. 변경사항 저장 습관</h5>
+<p>GNS3 장비 설정 변경 시 변경사항이 생길 때마다 write memory  또는 copy run start 로 즉시 저장하는 습관이 필요하다.</p>
+<h4 id="7-기본-토폴로지-구성-요건">7. 기본 토폴로지 구성 요건</h4>
+<p>RACL, DACL, Zone-Based FW 등 보안 정책 실습을 진행하기 위한 사전 조건으로, GNS3 토폴로지에서 R1부터 R4까지 모든 구간에 통신이 가능해야 한다. 통신이 가능한 상태를 만들기 위해서는 IP 주소 설정과 라우팅(OSPF) 설정이 선행되어야 한다.</p>
+<p>라우팅이 완료되지 않으면 이후 보안 정책 실습을 정상적으로 진행할 수 없다.</p>
+<hr /><div class="nav"><a href="ch12.html"><span class="lbl">이전</span>핵심키워드 · 네트워크 (1/3)</a><a href="ch14.html"><span class="lbl">다음</span>핵심키워드 · 네트워크 (3/3)</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
 <script>
