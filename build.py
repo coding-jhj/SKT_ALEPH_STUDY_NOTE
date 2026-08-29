@@ -76,12 +76,28 @@ def read(path: str) -> str:
         return f.read()
 
 
+# 노트 본문의 태그는 전부 글자입니다. 실행되면 노트 자체가 취약점이 됩니다(XSS 실습 페이로드 수록).
+# 표 생성기가 넣는 <br> 만 진짜 HTML로 남깁니다. 여는 꺾쇠만 막으면 태그가 성립하지 않습니다.
+LT = re.compile(r"<(?!/?br\s*/?>)", re.I)
+# 홀로 선 <https://...> 는 마크다운 자동 링크입니다. 실행 위험이 없어 링크로 살립니다.
+AUTOLINK = re.compile(r"(?<![\"'=\w])<(https?://[^<>\s]+)>")
+# 본문 목록이 번호 제목으로 잘못 승격된 것들. 화살표 설명이나 문장 끝맺음이 있으면 제목이 아닙니다.
+NOT_HEADING = re.compile(r"←|[가-힣A-Za-z0-9)\]]\.$")
+
+
 def demote(md_text: str) -> tuple[str, str]:
-    """장 제목(첫 h1)을 뽑아내고 나머지 제목 단계를 한 칸 내립니다."""
+    """장 제목(첫 h1)을 뽑아내고 나머지 제목 단계를 한 칸 내립니다.
+
+    첫 h1 뒤에 나오는 우물정(`#`)은 제목이 아니라 본문입니다. PDF·노트에서
+    코드블록 밖으로 새어 나온 셸 주석(`# 설명`), C 전처리기(`#include`) 따위입니다.
+    글자는 그대로 두고 마크다운이 제목으로 읽지 않게 escape 만 합니다.
+    """
     title = ""
     out: list[str] = []
     in_fence = False
-    for line in md_text.split("\n"):
+    # 인용부호(`> `)를 앞에 달고 오는 줄도 같은 규칙을 받습니다.
+    head = re.compile(r"^((?:\s*>)*\s*)(#{1,6})(\s+)?(.*)$")
+    for line in md_text.split(chr(10)):
         if line.lstrip().startswith("```"):
             in_fence = not in_fence
             out.append(line)
@@ -89,16 +105,27 @@ def demote(md_text: str) -> tuple[str, str]:
         if in_fence:
             out.append(line)
             continue
-        m = re.match(r"^(#{1,6})\s+(.*)$", line)
-        if m:
-            level, text = len(m.group(1)), m.group(2).strip()
-            if level == 1 and not title:
-                title = text
-                continue
-            out.append("#" * min(level + 1, 6) + " " + text)
+        keep: list[str] = []
+        line = AUTOLINK.sub(lambda t: keep.append(t.group(0)) or f"@@AL{len(keep) - 1}@@", line)
+        line = LT.sub("&lt;", line)
+        for i, held in enumerate(keep):
+            line = line.replace(f"@@AL{i}@@", held)
+        m = head.match(line)
+        if not m:
+            out.append(line)
             continue
-        out.append(line)
-    return title, "\n".join(out)
+        quote, level, spaced, text = m.group(1), len(m.group(2)), m.group(3), m.group(4).strip()
+        if level >= 2 and spaced and NOT_HEADING.search(text):
+            out.append(quote + text)
+            continue
+        if level == 1 and spaced and not title and not quote.strip():
+            title = text
+            continue
+        if level == 1 or not spaced:
+            out.append(quote + "\\" + line[len(quote):].lstrip())
+            continue
+        out.append(quote + "#" * min(level + 1, 6) + " " + text)
+    return title, chr(10).join(out)
 
 
 def anchor_headings(html_text: str) -> tuple[str, list[tuple[int, str, str]]]:
@@ -200,7 +227,6 @@ th{background:var(--accent-soft); font-weight:700}
 .toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
 .toclist a:hover{background:var(--accent-soft)}
 .toclist .t{display:block; font-weight:700; margin-bottom:2px}
-.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 #top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
      background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
      font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
@@ -325,8 +351,7 @@ def main() -> int:
         if c["part"]:
             toc.append(f'<li class="part">{html.escape(c["part"])}</li>')
         toc.append(
-            f'<li><a href="{c["file"]}"><span class="t">{c["no"]:02d}. {html.escape(c["title"])}</span>'
-            f'<span class="m">소제목 {len(c["items"])}개 · {c["chars"]:,}자</span></a></li>'
+            f'<li><a href="{c["file"]}"><span class="t">{c["no"]:02d}. {html.escape(c["title"])}</span></a></li>'
         )
     toc.append("</ul>")
     with io.open(os.path.join(site, "index.html"), "w", encoding="utf-8", newline="\n") as f:

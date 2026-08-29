@@ -85,7 +85,6 @@ th{background:var(--accent-soft); font-weight:700}
 .toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
 .toclist a:hover{background:var(--accent-soft)}
 .toclist .t{display:block; font-weight:700; margin-bottom:2px}
-.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 #top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
      background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
      font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
@@ -108,7 +107,7 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="cur" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><div class="inchap"><a class="lv3" href="#0-오늘의-큰-그림">0. 오늘의 큰 그림</a><a class="lv3" href="#1-공유share-개념-정리">1. 공유(Share) 개념 정리</a><a class="lv4" href="#nfs-vs-samba-비교">NFS vs Samba 비교</a><a class="lv3" href="#2-nfs-심화">2. NFS 심화</a><a class="lv4" href="#2-1-nfs를-구성하는-데몬-메모-보강--공식-문서-대조">2-1. NFS를 구성하는 데몬 (메모 보강 + 공식 문서 대조)</a><a class="lv4" href="#2-2-서버-구축-절차-81번">2-2. 서버 구축 절차 (81번)</a><a class="lv3" href="#가장-위험한-문법-함정--공백">⚠️ 가장 위험한 문법 함정 — 공백</a><a class="lv4" href="#2-3-etcexports-옵션-완전-정리">2-3. /etc/exports 옵션 완전 정리</a><a class="lv4" href="#2-4-디렉터리-권한-chmod-756-재검토">2-4. 디렉터리 권한 chmod 756 재검토</a><a class="lv4" href="#2-5-클라이언트-마운트-92번">2-5. 클라이언트 마운트 (92번)</a><a class="lv4" href="#2-6-언마운트--메모의-오타">2-6. 언마운트 — 메모의 오타</a><a class="lv4" href="#2-7-영구-마운트--수업에서-빠진-중요-부분">2-7. 영구 마운트 — 수업에서 빠진 중요 부분</a><a class="lv4" href="#2-8-진단-명령">2-8. 진단 명령</a><a class="lv3" href="#3-samba-심화">3. Samba 심화</a><a class="lv4" href="#3-1-데몬과-포트-메모-수정--공식-man-페이지-대조">3-1. 데몬과 포트 (메모 수정 — 공식 man 페이지 대조)</a><a class="lv3" href="#메모-수정-포인트">⚠️ 메모 수정 포인트 ②</a><a class="lv4" href="#3-2-설치와-계정-준비">3-2. 설치와 계정 준비</a><a class="lv3" href="#핵심-개념--왜-계정을-두-번-만드나">핵심 개념 — 왜 계정을 두 번 만드나?</a><a class="lv4" href="#3-3-smbpasswd-옵션-정리-메모-오타-smabauser--sambauser">3-3. smbpasswd 옵션 정리 (메모 오타 smabauser → sambauser)</a><a class="lv4" href="#3-4-etcsambasmbconf-구조-읽기">3-4. /etc/samba/smb.conf 구조 읽기</a><a class="lv3" href="#메모-수정-포인트-2">메모 수정 포인트 ③</a><a class="lv3" href="#메모-수정-포인트---중복-설정">메모 수정 포인트 ④ — 중복 설정</a><a class="lv3" href="#메모-수정-포인트---mask의-정확한-의미">메모 수정 포인트 ⑤ — mask의 정확한 의미</a><a class="lv3" href="#guest-ok--yes의-위험">⚠️ guest ok = yes의 위험</a><a class="lv4" href="#3-5-설정-검증--testparm">3-5. 설정 검증 — testparm</a><a class="lv4" href="#3-6-서비스-기동과-방화벽">3-6. 서비스 기동과 방화벽</a><a class="lv4" href="#3-7-접속-확인--smbstatus-읽는-법">3-7. 접속 확인 — smbstatus 읽는 법</a><a class="lv4" href="#3-8-samba-423-최신-변경사항-실습-버전과-직결">3-8. Samba 4.23 최신 변경사항 (실습 버전과 직결)</a><a class="lv3" href="#4-selinux--오늘-실습의-진짜-핵심">4. SELinux — 오늘 실습의 진짜 핵심</a><a class="lv4" href="#4-1-이름과-개념">4-1. 이름과 개념</a><a class="lv4" href="#4-2-오늘-문제가-생긴-정확한-메커니즘">4-2. 오늘 문제가 생긴 정확한 메커니즘</a><a class="lv4" href="#4-3-세-가지-모드">4-3. 세 가지 모드</a><a class="lv4" href="#4-4-설정-파일과-실습-출력-해석">4-4. 설정 파일과 실습 출력 해석</a><a class="lv4" href="#4-5-명령어-모음">4-5. 명령어 모음</a><a class="lv4" href="#4-6-끄지-않고-해결하기--실무-정답">4-6. 끄지 않고 해결하기 — 실무 정답</a><a class="lv3" href="#증상-감별-요령-실무에서-가장-유용">증상 감별 요령 (실무에서 가장 유용)</a><a class="lv4" href="#4-7-완전-비활성화-시-주의-rhel-9-변경점">4-7. 완전 비활성화 시 주의 (RHEL 9 변경점)</a><a class="lv3" href="#5-호스트네임-변경">5. 호스트네임 변경</a><a class="lv4" href="#5-1-메모에서-확인할-점--프롬프트가-안-바뀐-이유">5-1. 메모에서 확인할 점 — 프롬프트가 안 바뀐 이유</a><a class="lv4" href="#5-2-hostname-server-vs-hostnamectl-set-hostname-server">5-2. hostname server vs hostnamectl set-hostname server</a><a class="lv4" href="#5-3-호스트네임의-세-종류-systemd">5-3. 호스트네임의 세 종류 (systemd)</a><a class="lv4" href="#5-4-hostnamectl-출력-읽기">5-4. hostnamectl 출력 읽기</a><a class="lv3" href="#vm-복제-시-함정-오늘-실습과-직결">⚠️ VM 복제 시 함정 (오늘 실습과 직결)</a><a class="lv4" href="#5-5-etchosts-함께-정리">5-5. /etc/hosts 함께 정리</a><a class="lv3" href="#6-rsyslog--로그-중앙-수집-오후-수업">6. rsyslog — 로그 중앙 수집 (오후 수업)</a><a class="lv4" href="#6-0-왜-rsyslog인가--구조-이해">6-0. 왜 rsyslog인가 — 구조 이해</a><a class="lv4" href="#6-1-설치와-dnf-출력-읽기">6-1. 설치와 dnf 출력 읽기</a><a class="lv4" href="#6-2-포트--514번">6-2. 포트 — 514번</a><a class="lv4" href="#6-3-모듈-개념--im--om">6-3. 모듈 개념 — im / om</a><a class="lv4" href="#6-4-etcrsyslogconf-전체-해부">6-4. /etc/rsyslog.conf 전체 해부</a><a class="lv3" href="#두-문법의-관계">두 문법의 관계</a><a class="lv3" href="#반드시-기억할-규칙--이상의-의미">반드시 기억할 규칙 — &quot;이상&quot;의 의미</a><a class="lv3" href="#이-블록의-핵심-아이디어--디스크-큐">이 블록의 핵심 아이디어 — 디스크 큐</a><a class="lv4" href="#6-5-서버클라이언트-역할-정리">6-5. 서버/클라이언트 역할 정리</a><a class="lv3" href="#7-rsyslog-서버-구축--방화벽--기동--리스닝-확인">7. rsyslog 서버 구축 — 방화벽 · 기동 · 리스닝 확인</a><a class="lv4" href="#7-1-방화벽에-514-열기">7-1. 방화벽에 514 열기</a><a class="lv4" href="#7-2-서비스-기동">7-2. 서비스 기동</a><a class="lv4" href="#7-3-리스닝-확인-도구-설치">7-3. 리스닝 확인 도구 설치</a><a class="lv4" href="#7-4-포트가-실제로-열렸는지-확인--세-가지-방법">7-4. 포트가 실제로 열렸는지 확인 — 세 가지 방법</a><a class="lv3" href="#shell--헷갈리기-쉬운-표시">⚠️ *:shell — 헷갈리기 쉬운 표시</a><a class="lv4" href="#7-5-로그-파일-실시간-확인--tail--head">7-5. 로그 파일 실시간 확인 — tail / head</a><a class="lv3" href="#메모의-오타-정정">메모의 오타 정정</a><a class="lv3" href="#8--실습에서-실제로-발생한-에러--rsyslog-3003">8. ★ 실습에서 실제로 발생한 에러 — rsyslog 3003</a><a class="lv4" href="#8-1-무슨-일이-일어났나">8-1. 무슨 일이 일어났나</a><a class="lv3" href="#에러-3003의-공식-설명">에러 3003의 공식 설명</a><a class="lv4" href="#8-2-두-번째-에러2212가-알려주는-것">8-2. 두 번째 에러(2212)가 알려주는 것</a><a class="lv4" href="#8-3-그런데-왜-tcp-514는-listen-되고-있었나">8-3. 그런데 왜 TCP 514는 LISTEN 되고 있었나</a><a class="lv4" href="#8-4-올바른-해결-방법">8-4. 올바른 해결 방법</a><a class="lv4" href="#8-5-재시작-전에-문법을-검사하는-법-보강">8-5. 재시작 전에 문법을 검사하는 법 (보강)</a><a class="lv3" href="#9-클라이언트--서버-로그-전송">9. 클라이언트 → 서버 로그 전송</a><a class="lv4" href="#9-1-클라이언트-설정---와">9-1. 클라이언트 설정 — @ 와 @@</a><a class="lv3" href="#이-문법이-오늘의-핵심-암기-포인트">이 문법이 오늘의 핵심 암기 포인트</a><a class="lv3" href="#두-줄을-다-쓰면-로그가-두-번-갑니다">⚠️ 두 줄을 다 쓰면 로그가 두 번 갑니다</a><a class="lv4" href="#9-2-전송이-되는지-시험하기--httpd로-로그-만들기">9-2. 전송이 되는지 시험하기 — httpd로 로그 만들기</a><a class="lv3" href="#10-로그를-db에-저장--mariadb--ommysql">10. 로그를 DB에 저장 — MariaDB + ommysql</a><a class="lv4" href="#10-1-왜-db에-넣나">10-1. 왜 DB에 넣나</a><a class="lv4" href="#10-2-패키지-설치와-문서-위치-확인">10-2. 패키지 설치와 문서 위치 확인</a><a class="lv4" href="#10-3-스키마-파일-읽기">10-3. 스키마 파일 읽기</a><a class="lv4" href="#10-4-mariadb-기동--실습에서-만난-에러">10-4. MariaDB 기동 — 실습에서 만난 에러</a><a class="lv3" href="#에러-2002-해석">에러 2002 해석</a><a class="lv4" href="#10-5-스키마-적용과-확인">10-5. 스키마 적용과 확인</a><a class="lv4" href="#10-6-권한-부여--grant--revoke">10-6. 권한 부여 — grant / revoke</a><a class="lv3" href="#rsysloglocalhost--왜-localhost가-중요한가">&#x27;rsyslog&#x27;@&#x27;localhost&#x27; — 왜 @localhost가 중요한가</a><a class="lv4" href="#10-7-rsyslog에-ommysql-연결">10-7. rsyslog에 ommysql 연결</a><a class="lv3" href="#비밀번호가-평문으로-들어갑니다">⚠️ 비밀번호가 평문으로 들어갑니다</a><a class="lv4" href="#10-8-db에-로그가-쌓였는지-확인">10-8. DB에 로그가 쌓였는지 확인</a><a class="lv3" href="#숫자로-저장된-facility--priority-읽기">숫자로 저장된 Facility / Priority 읽기</a><a class="lv3" href="#11-loganalyzer--로그를-웹에서-보기">11. LogAnalyzer — 로그를 웹에서 보기</a><a class="lv4" href="#11-1-웹-스택-설치">11-1. 웹 스택 설치</a><a class="lv4" href="#11-2-내려받기와-압축-해제">11-2. 내려받기와 압축 해제</a><a class="lv3" href="#실습에서-일어난-일--압축이-엉뚱한-곳에-풀림">실습에서 일어난 일 — 압축이 엉뚱한 곳에 풀림</a><a class="lv4" href="#11-3-배포-파일-구조">11-3. 배포 파일 구조</a><a class="lv4" href="#11-4-웹-루트에-배치">11-4. 웹 루트에 배치</a><a class="lv3" href="#메모에-기록된-오류">메모에 기록된 오류</a><a class="lv4" href="#11-5-configuresh-실행">11-5. configure.sh 실행</a><a class="lv3" href="#666-권한은-설치가-끝나면-되돌려야-합니다">⚠️ 666 권한은 설치가 끝나면 되돌려야 합니다</a><a class="lv4" href="#11-6-남은-단계--방화벽과-설치-마법사">11-6. 남은 단계 — 방화벽과 설치 마법사</a><a class="lv3" href="#12-전체-실습-명령-시트-복습용">12. 전체 실습 명령 시트 (복습용)</a><a class="lv4" href="#nfs-서버-81">NFS 서버 (81)</a><a class="lv4" href="#nfs-클라이언트-92">NFS 클라이언트 (92)</a><a class="lv4" href="#samba-서버-81">Samba 서버 (81)</a><a class="lv4" href="#rsyslog-수집-서버-81">rsyslog 수집 서버 (81)</a><a class="lv4" href="#rsyslog-클라이언트-92">rsyslog 클라이언트 (92)</a><a class="lv4" href="#로그를-mariadb에-저장-81">로그를 MariaDB에 저장 (81)</a><a class="lv4" href="#loganalyzer-웹-ui-81">LogAnalyzer 웹 UI (81)</a><a class="lv4" href="#서비스-상태-점검-문제-생겼을-때-순서대로">서비스 상태 점검 (문제 생겼을 때 순서대로)</a><a class="lv3" href="#13-오늘-메모에서-수정보강된-항목-총정리">13. 오늘 메모에서 수정·보강된 항목 총정리</a><a class="lv3" href="#14-출처">14. 출처</a><a class="lv4" href="#nfs">NFS</a><a class="lv4" href="#samba">Samba</a><a class="lv4" href="#selinux">SELinux</a><a class="lv4" href="#rsyslog">rsyslog</a><a class="lv4" href="#mariadb--loganalyzer">MariaDB / LogAnalyzer</a></div><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 원문과 공식 문서가 어긋나는 곳</a><a class="" href="ch27.html">27. 명령어 색인</a><a class="" href="ch28.html">28. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="cur" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><div class="inchap"><a class="lv3" href="#0-오늘의-큰-그림">0. 오늘의 큰 그림</a><a class="lv3" href="#1-공유share-개념-정리">1. 공유(Share) 개념 정리</a><a class="lv4" href="#nfs-vs-samba-비교">NFS vs Samba 비교</a><a class="lv3" href="#2-nfs-심화">2. NFS 심화</a><a class="lv4" href="#2-1-nfs를-구성하는-데몬-메모-보강--공식-문서-대조">2-1. NFS를 구성하는 데몬 (메모 보강 + 공식 문서 대조)</a><a class="lv4" href="#2-2-서버-구축-절차-81번">2-2. 서버 구축 절차 (81번)</a><a class="lv4" href="#가장-위험한-문법-함정--공백">⚠️ 가장 위험한 문법 함정 — 공백</a><a class="lv4" href="#2-3-etcexports-옵션-완전-정리">2-3. /etc/exports 옵션 완전 정리</a><a class="lv4" href="#2-4-디렉터리-권한-chmod-756-재검토">2-4. 디렉터리 권한 chmod 756 재검토</a><a class="lv4" href="#2-5-클라이언트-마운트-92번">2-5. 클라이언트 마운트 (92번)</a><a class="lv4" href="#2-6-언마운트--메모의-오타">2-6. 언마운트 — 메모의 오타</a><a class="lv4" href="#2-7-영구-마운트--수업에서-빠진-중요-부분">2-7. 영구 마운트 — 수업에서 빠진 중요 부분</a><a class="lv4" href="#2-8-진단-명령">2-8. 진단 명령</a><a class="lv3" href="#3-samba-심화">3. Samba 심화</a><a class="lv4" href="#3-1-데몬과-포트-메모-수정--공식-man-페이지-대조">3-1. 데몬과 포트 (메모 수정 — 공식 man 페이지 대조)</a><a class="lv4" href="#메모-수정-포인트">⚠️ 메모 수정 포인트 ②</a><a class="lv4" href="#3-2-설치와-계정-준비">3-2. 설치와 계정 준비</a><a class="lv4" href="#핵심-개념--왜-계정을-두-번-만드나">핵심 개념 — 왜 계정을 두 번 만드나?</a><a class="lv4" href="#3-3-smbpasswd-옵션-정리-메모-오타-smabauser--sambauser">3-3. smbpasswd 옵션 정리 (메모 오타 smabauser → sambauser)</a><a class="lv4" href="#3-4-etcsambasmbconf-구조-읽기">3-4. /etc/samba/smb.conf 구조 읽기</a><a class="lv4" href="#메모-수정-포인트-2">메모 수정 포인트 ③</a><a class="lv4" href="#메모-수정-포인트---중복-설정">메모 수정 포인트 ④ — 중복 설정</a><a class="lv4" href="#메모-수정-포인트---mask의-정확한-의미">메모 수정 포인트 ⑤ — mask의 정확한 의미</a><a class="lv4" href="#guest-ok--yes의-위험">⚠️ guest ok = yes의 위험</a><a class="lv4" href="#3-5-설정-검증--testparm">3-5. 설정 검증 — testparm</a><a class="lv4" href="#3-6-서비스-기동과-방화벽">3-6. 서비스 기동과 방화벽</a><a class="lv4" href="#3-7-접속-확인--smbstatus-읽는-법">3-7. 접속 확인 — smbstatus 읽는 법</a><a class="lv4" href="#3-8-samba-423-최신-변경사항-실습-버전과-직결">3-8. Samba 4.23 최신 변경사항 (실습 버전과 직결)</a><a class="lv3" href="#4-selinux--오늘-실습의-진짜-핵심">4. SELinux — 오늘 실습의 진짜 핵심</a><a class="lv4" href="#4-1-이름과-개념">4-1. 이름과 개념</a><a class="lv4" href="#4-2-오늘-문제가-생긴-정확한-메커니즘">4-2. 오늘 문제가 생긴 정확한 메커니즘</a><a class="lv4" href="#4-3-세-가지-모드">4-3. 세 가지 모드</a><a class="lv4" href="#4-4-설정-파일과-실습-출력-해석">4-4. 설정 파일과 실습 출력 해석</a><a class="lv4" href="#4-5-명령어-모음">4-5. 명령어 모음</a><a class="lv4" href="#4-6-끄지-않고-해결하기--실무-정답">4-6. 끄지 않고 해결하기 — 실무 정답</a><a class="lv4" href="#증상-감별-요령-실무에서-가장-유용">증상 감별 요령 (실무에서 가장 유용)</a><a class="lv4" href="#4-7-완전-비활성화-시-주의-rhel-9-변경점">4-7. 완전 비활성화 시 주의 (RHEL 9 변경점)</a><a class="lv3" href="#5-호스트네임-변경">5. 호스트네임 변경</a><a class="lv4" href="#5-1-메모에서-확인할-점--프롬프트가-안-바뀐-이유">5-1. 메모에서 확인할 점 — 프롬프트가 안 바뀐 이유</a><a class="lv4" href="#5-2-hostname-server-vs-hostnamectl-set-hostname-server">5-2. hostname server vs hostnamectl set-hostname server</a><a class="lv4" href="#5-3-호스트네임의-세-종류-systemd">5-3. 호스트네임의 세 종류 (systemd)</a><a class="lv4" href="#5-4-hostnamectl-출력-읽기">5-4. hostnamectl 출력 읽기</a><a class="lv4" href="#vm-복제-시-함정-오늘-실습과-직결">⚠️ VM 복제 시 함정 (오늘 실습과 직결)</a><a class="lv4" href="#5-5-etchosts-함께-정리">5-5. /etc/hosts 함께 정리</a><a class="lv3" href="#6-rsyslog--로그-중앙-수집-오후-수업">6. rsyslog — 로그 중앙 수집 (오후 수업)</a><a class="lv4" href="#6-0-왜-rsyslog인가--구조-이해">6-0. 왜 rsyslog인가 — 구조 이해</a><a class="lv4" href="#6-1-설치와-dnf-출력-읽기">6-1. 설치와 dnf 출력 읽기</a><a class="lv4" href="#6-2-포트--514번">6-2. 포트 — 514번</a><a class="lv4" href="#6-3-모듈-개념--im--om">6-3. 모듈 개념 — im / om</a><a class="lv4" href="#6-4-etcrsyslogconf-전체-해부">6-4. /etc/rsyslog.conf 전체 해부</a><a class="lv4" href="#두-문법의-관계">두 문법의 관계</a><a class="lv4" href="#반드시-기억할-규칙--이상의-의미">반드시 기억할 규칙 — &quot;이상&quot;의 의미</a><a class="lv4" href="#이-블록의-핵심-아이디어--디스크-큐">이 블록의 핵심 아이디어 — 디스크 큐</a><a class="lv4" href="#6-5-서버클라이언트-역할-정리">6-5. 서버/클라이언트 역할 정리</a><a class="lv3" href="#7-rsyslog-서버-구축--방화벽--기동--리스닝-확인">7. rsyslog 서버 구축 — 방화벽 · 기동 · 리스닝 확인</a><a class="lv4" href="#7-1-방화벽에-514-열기">7-1. 방화벽에 514 열기</a><a class="lv4" href="#7-2-서비스-기동">7-2. 서비스 기동</a><a class="lv4" href="#7-3-리스닝-확인-도구-설치">7-3. 리스닝 확인 도구 설치</a><a class="lv4" href="#7-4-포트가-실제로-열렸는지-확인--세-가지-방법">7-4. 포트가 실제로 열렸는지 확인 — 세 가지 방법</a><a class="lv4" href="#shell--헷갈리기-쉬운-표시">⚠️ *:shell — 헷갈리기 쉬운 표시</a><a class="lv4" href="#7-5-로그-파일-실시간-확인--tail--head">7-5. 로그 파일 실시간 확인 — tail / head</a><a class="lv4" href="#메모의-오타-정정">메모의 오타 정정</a><a class="lv3" href="#8--실습에서-실제로-발생한-에러--rsyslog-3003">8. ★ 실습에서 실제로 발생한 에러 — rsyslog 3003</a><a class="lv4" href="#8-1-무슨-일이-일어났나">8-1. 무슨 일이 일어났나</a><a class="lv4" href="#에러-3003의-공식-설명">에러 3003의 공식 설명</a><a class="lv4" href="#8-2-두-번째-에러2212가-알려주는-것">8-2. 두 번째 에러(2212)가 알려주는 것</a><a class="lv4" href="#8-3-그런데-왜-tcp-514는-listen-되고-있었나">8-3. 그런데 왜 TCP 514는 LISTEN 되고 있었나</a><a class="lv4" href="#8-4-올바른-해결-방법">8-4. 올바른 해결 방법</a><a class="lv4" href="#8-5-재시작-전에-문법을-검사하는-법-보강">8-5. 재시작 전에 문법을 검사하는 법 (보강)</a><a class="lv3" href="#9-클라이언트--서버-로그-전송">9. 클라이언트 → 서버 로그 전송</a><a class="lv4" href="#9-1-클라이언트-설정---와">9-1. 클라이언트 설정 — @ 와 @@</a><a class="lv4" href="#이-문법이-오늘의-핵심-암기-포인트">이 문법이 오늘의 핵심 암기 포인트</a><a class="lv4" href="#두-줄을-다-쓰면-로그가-두-번-갑니다">⚠️ 두 줄을 다 쓰면 로그가 두 번 갑니다</a><a class="lv4" href="#9-2-전송이-되는지-시험하기--httpd로-로그-만들기">9-2. 전송이 되는지 시험하기 — httpd로 로그 만들기</a><a class="lv3" href="#10-로그를-db에-저장--mariadb--ommysql">10. 로그를 DB에 저장 — MariaDB + ommysql</a><a class="lv4" href="#10-1-왜-db에-넣나">10-1. 왜 DB에 넣나</a><a class="lv4" href="#10-2-패키지-설치와-문서-위치-확인">10-2. 패키지 설치와 문서 위치 확인</a><a class="lv4" href="#10-3-스키마-파일-읽기">10-3. 스키마 파일 읽기</a><a class="lv4" href="#10-4-mariadb-기동--실습에서-만난-에러">10-4. MariaDB 기동 — 실습에서 만난 에러</a><a class="lv4" href="#에러-2002-해석">에러 2002 해석</a><a class="lv4" href="#10-5-스키마-적용과-확인">10-5. 스키마 적용과 확인</a><a class="lv4" href="#10-6-권한-부여--grant--revoke">10-6. 권한 부여 — grant / revoke</a><a class="lv4" href="#rsysloglocalhost--왜-localhost가-중요한가">&#x27;rsyslog&#x27;@&#x27;localhost&#x27; — 왜 @localhost가 중요한가</a><a class="lv4" href="#10-7-rsyslog에-ommysql-연결">10-7. rsyslog에 ommysql 연결</a><a class="lv4" href="#비밀번호가-평문으로-들어갑니다">⚠️ 비밀번호가 평문으로 들어갑니다</a><a class="lv4" href="#10-8-db에-로그가-쌓였는지-확인">10-8. DB에 로그가 쌓였는지 확인</a><a class="lv4" href="#숫자로-저장된-facility--priority-읽기">숫자로 저장된 Facility / Priority 읽기</a><a class="lv3" href="#11-loganalyzer--로그를-웹에서-보기">11. LogAnalyzer — 로그를 웹에서 보기</a><a class="lv4" href="#11-1-웹-스택-설치">11-1. 웹 스택 설치</a><a class="lv4" href="#11-2-내려받기와-압축-해제">11-2. 내려받기와 압축 해제</a><a class="lv4" href="#실습에서-일어난-일--압축이-엉뚱한-곳에-풀림">실습에서 일어난 일 — 압축이 엉뚱한 곳에 풀림</a><a class="lv4" href="#11-3-배포-파일-구조">11-3. 배포 파일 구조</a><a class="lv4" href="#11-4-웹-루트에-배치">11-4. 웹 루트에 배치</a><a class="lv4" href="#메모에-기록된-오류">메모에 기록된 오류</a><a class="lv4" href="#11-5-configuresh-실행">11-5. configure.sh 실행</a><a class="lv4" href="#666-권한은-설치가-끝나면-되돌려야-합니다">⚠️ 666 권한은 설치가 끝나면 되돌려야 합니다</a><a class="lv4" href="#11-6-남은-단계--방화벽과-설치-마법사">11-6. 남은 단계 — 방화벽과 설치 마법사</a><a class="lv3" href="#12-전체-실습-명령-시트-복습용">12. 전체 실습 명령 시트 (복습용)</a><a class="lv4" href="#nfs-서버-81">NFS 서버 (81)</a><a class="lv4" href="#nfs-클라이언트-92">NFS 클라이언트 (92)</a><a class="lv4" href="#samba-서버-81">Samba 서버 (81)</a><a class="lv4" href="#rsyslog-수집-서버-81">rsyslog 수집 서버 (81)</a><a class="lv4" href="#rsyslog-클라이언트-92">rsyslog 클라이언트 (92)</a><a class="lv4" href="#로그를-mariadb에-저장-81">로그를 MariaDB에 저장 (81)</a><a class="lv4" href="#loganalyzer-웹-ui-81">LogAnalyzer 웹 UI (81)</a><a class="lv4" href="#서비스-상태-점검-문제-생겼을-때-순서대로">서비스 상태 점검 (문제 생겼을 때 순서대로)</a><a class="lv3" href="#13-오늘-메모에서-수정보강된-항목-총정리">13. 오늘 메모에서 수정·보강된 항목 총정리</a><a class="lv3" href="#14-출처">14. 출처</a><a class="lv4" href="#nfs">NFS</a><a class="lv4" href="#samba">Samba</a><a class="lv4" href="#selinux">SELinux</a><a class="lv4" href="#rsyslog">rsyslog</a><a class="lv4" href="#mariadb--loganalyzer">MariaDB / LogAnalyzer</a></div><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 원문과 공식 문서가 어긋나는 곳</a><a class="" href="ch27.html">27. 명령어 색인</a><a class="" href="ch28.html">28. 용어집</a></nav>
 </aside>
 <main><div class="chapter-no">CHAPTER 07</div><h1>2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</h1><blockquote>
 <p><strong>실습 환경</strong>
@@ -319,7 +318,7 @@ vi<span class="w"> </span>/etc/exports
 </code></pre></div>
 
 <blockquote>
-<h3 id="가장-위험한-문법-함정--공백">⚠️ 가장 위험한 문법 함정 — 공백</h3>
+<h4 id="가장-위험한-문법-함정--공백">⚠️ 가장 위험한 문법 함정 — 공백</h4>
 <p>Red Hat 문서 원문: <em>"Adding a space between a client and options, changes the behavior."</em></p>
 <div class="tablewrap"><table>
 <thead>
@@ -370,11 +369,11 @@ firewall-cmd<span class="w"> </span>--list-all
 
 <blockquote>
 <p><strong>더 정확한 방화벽 설정 (Red Hat 9 권장)</strong>
-```bash</p>
-<h1 id="nfsv4">NFSv4 전용</h1>
-<p>firewall-cmd --permanent --add-service=nfs</p>
-<h1 id="nfsv3-rpcbind-mountd">NFSv3 병행 시 (rpcbind, mountd 포트도 필요)</h1>
-<p>firewall-cmd --permanent --add-service={nfs,rpc-bind,mountd}
+```bash
+# NFSv4 전용
+firewall-cmd --permanent --add-service=nfs</p>
+<p># NFSv3 병행 시 (rpcbind, mountd 포트도 필요)
+firewall-cmd --permanent --add-service={nfs,rpc-bind,mountd}
 firewall-cmd --reload
 <code>``
 포트 번호를 직접 여는 방식(</code>--add-port=2049/tcp`)은 NFSv4만 쓸 때는 동작하지만, NFSv3를 쓰면 mountd/statd의 <strong>동적 포트</strong> 때문에 마운트가 실패합니다. 서비스 단위 개방이 안전합니다.</p>
@@ -473,14 +472,14 @@ firewall-cmd --reload
 <p><strong>왜 1024 미만이 "안전"한가?</strong> 유닉스에서 1024번 미만 포트는 <strong>root만 바인딩 가능</strong>합니다. 즉 "이 요청은 클라이언트의 root 권한으로 만들어진 정상 마운트다"라는 최소한의 신뢰 근거가 됩니다. 일반 사용자가 임의로 NFS 요청을 위조하는 것을 막는 장치입니다.</p>
 <p><strong><code>no_root_squash</code>가 위험한 구체적 시나리오</strong>
 클라이언트 장악자가 공유 디렉터리에 setuid 바이너리를 심으면:
-```bash</p>
-<h1 id="root">클라이언트(root)에서</h1>
-<p>cp /bin/bash /nfsclient/rootshell
-chmod u+s /nfsclient/rootshell</p>
-<h1 id="root_1">→ 서버에서 일반 사용자가 실행하면 root 셸 획득</h1>
-<p><code>방어: `root_squash`(기본) 유지 + `nosuid` 마운트 옵션 병행.</code>bash
-mount -t nfs -o nosuid,nodev 192.168.16.81:/nfsserver /nfsclient
-```</p>
+<code>bash
+\# 클라이언트(root)에서
+cp /bin/bash /nfsclient/rootshell
+chmod u+s /nfsclient/rootshell
+\# → 서버에서 일반 사용자가 실행하면 root 셸 획득</code>
+방어: <code>root_squash</code>(기본) 유지 + <code>nosuid</code> 마운트 옵션 병행.
+<code>bash
+mount -t nfs -o nosuid,nodev 192.168.16.81:/nfsserver /nfsclient</code></p>
 </blockquote>
 <h4 id="2-4-디렉터리-권한-chmod-756-재검토">2-4. 디렉터리 권한 <code>chmod 756</code> 재검토</h4>
 <p>메모의 <code>chmod 756 /nfsserver</code>는 <code>rwx</code>(소유자) / <code>r-x</code>(그룹) / <code>rw-</code>(기타)입니다.</p>
@@ -679,7 +678,7 @@ mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="메모-수정-포인트">⚠️ 메모 수정 포인트 ②</h3>
+<h4 id="메모-수정-포인트">⚠️ 메모 수정 포인트 ②</h4>
 <p>메모: "nmbd =&gt; tcp 포트 139번, udp 포트 137, 138번"
 → <strong>TCP 139는 nmbd가 아니라 smbd가 사용합니다.</strong> nmbd는 UDP 137/138만 담당합니다.
 → 그리고 <strong>현대 SMB의 주력 포트는 TCP 445</strong>입니다. Windows 2000부터 NetBIOS를 거치지 않는 "direct-hosted SMB"가 도입되어 445가 표준이 됐고, 139는 레거시 호환 경로입니다.</p>
@@ -701,7 +700,7 @@ smbpasswd<span class="w"> </span>-a<span class="w"> </span>sambauser<span class=
 </code></pre></div>
 
 <blockquote>
-<h3 id="핵심-개념--왜-계정을-두-번-만드나">핵심 개념 — 왜 계정을 두 번 만드나?</h3>
+<h4 id="핵심-개념--왜-계정을-두-번-만드나">핵심 개념 — 왜 계정을 두 번 만드나?</h4>
 <p><code>smbpasswd -a</code>는 리눅스 비밀번호를 바꾸는 게 아닙니다. <strong><code>tdbsam</code>이라는 별도의 삼바 전용 비밀번호 DB</strong>(<code>/var/lib/samba/private/passdb.tdb</code>)에 항목을 만듭니다.</p>
 <ul>
 <li><strong>리눅스 계정</strong> = UID/GID와 파일 소유권을 담당 → <strong>파일시스템 권한의 주체</strong></li>
@@ -845,7 +844,7 @@ pdbedit<span class="w"> </span>-L<span class="w"> </span>-v<span class="w">     
 </code></pre></div>
 
 <blockquote>
-<h3 id="메모-수정-포인트-2">메모 수정 포인트 ③</h3>
+<h4 id="메모-수정-포인트-2">메모 수정 포인트 ③</h4>
 <p>메모: "<code>[homes]</code> -&gt; 공유폴더 이름"
 → <code>[homes]</code>는 임의로 지은 공유 이름이 아니라 <strong>Samba가 특별 취급하는 예약 섹션</strong>입니다.</p>
 <p><strong>동작 방식</strong>: 사용자 <code>sambauser</code>가 접속하면, Samba가 요청받은 공유 이름이 실제 공유 목록에 없을 때 <code>[homes]</code>를 참조해 <strong>그 사용자의 홈 디렉터리(<code>/home/sambauser</code>)를 즉석에서 공유로 만들어 줍니다.</strong> 사용자 100명이 있어도 섹션 하나로 100개의 개인 공유가 생기는 셈입니다.</p>
@@ -931,10 +930,10 @@ pdbedit<span class="w"> </span>-L<span class="w"> </span>-v<span class="w">     
 </code></pre></div>
 
 <blockquote>
-<h3 id="메모-수정-포인트---중복-설정">메모 수정 포인트 ④ — 중복 설정</h3>
+<h4 id="메모-수정-포인트---중복-설정">메모 수정 포인트 ④ — 중복 설정</h4>
 <p><strong><code>writeable = yes</code> 와 <code>read only = no</code> 는 완전히 같은 설정입니다.</strong> (<code>writable</code>도 같은 별칭) 둘을 동시에 쓰면 파일에서 나중에 나온 값이 적용됩니다. 하나만 쓰세요.
 → 실습의 <code>testparm</code> 출력에 <code>read only = No</code> <strong>하나만</strong> 남은 이유가 이것입니다. Samba가 내부적으로 하나의 파라미터로 정규화하기 때문입니다.</p>
-<h3 id="메모-수정-포인트---mask의-정확한-의미">메모 수정 포인트 ⑤ — mask의 정확한 의미</h3>
+<h4 id="메모-수정-포인트---mask의-정확한-의미">메모 수정 포인트 ⑤ — mask의 정확한 의미</h4>
 <p><code>create mask = 0777</code>은 권한을 <strong>"부여"하는 것이 아니라 "상한(마스크)"</strong> 입니다.
 <code>실제 권한 = 클라이언트가 요청한 권한  AND  create mask</code>
 즉 <code>create mask = 0777</code>은 "최대 777까지 허용"이지 "무조건 777로 만들라"가 아닙니다. <strong>강제로 특정 권한을 부여</strong>하려면 <code>force create mode</code>를 씁니다.
@@ -943,7 +942,7 @@ create mask = 0664
 force create mode = 0664     # 이 비트는 반드시 켬
 directory mask = 0775
 force directory mode = 0775</code></p>
-<h3 id="guest-ok--yes의-위험">⚠️ <code>guest ok = yes</code>의 위험</h3>
+<h4 id="guest-ok--yes의-위험">⚠️ <code>guest ok = yes</code>의 위험</h4>
 <p>인증 없이 누구나 읽고 쓸 수 있게 됩니다. 실습 외에는 계정 기반으로 제한하세요.
 <code>ini
 [sambashare]
@@ -1360,14 +1359,14 @@ journalctl<span class="w"> </span>-t<span class="w"> </span>setroubleshoot<span 
 </code></pre></div>
 
 <blockquote>
-<h3 id="증상-감별-요령-실무에서-가장-유용">증상 감별 요령 (실무에서 가장 유용)</h3>
+<h4 id="증상-감별-요령-실무에서-가장-유용">증상 감별 요령 (실무에서 가장 유용)</h4>
 <p><strong>"권한은 다 줬는데 안 된다"</strong> → 십중팔구 SELinux입니다.</p>
-<p>```bash
-setenforce 0        # 임시로 permissive</p>
-<h1 id="selinux">→ 여기서 되면 SELinux 문제 확정</h1>
-<p>setenforce 1        # 반드시 되돌리고</p>
-<h1 id="semanage-fcontext-setsebool">→ semanage fcontext / setsebool 로 정식 해결</h1>
-<p><code>``</code>setenforce 0` 상태로 방치하고 "해결했다"고 넘어가는 것이 가장 흔한 실수입니다.</p>
+<p><code>bash
+setenforce 0        # 임시로 permissive
+\# → 여기서 되면 SELinux 문제 확정
+setenforce 1        # 반드시 되돌리고
+\# → semanage fcontext / setsebool 로 정식 해결</code>
+<code>setenforce 0</code> 상태로 방치하고 "해결했다"고 넘어가는 것이 가장 흔한 실수입니다.</p>
 </blockquote>
 <h4 id="4-7-완전-비활성화-시-주의-rhel-9-변경점">4-7. 완전 비활성화 시 주의 (RHEL 9 변경점)</h4>
 <p>메모에 캡처된 <code>/etc/selinux/config</code> 주석 그대로, RHEL 8까지와 RHEL 9는 다릅니다.</p>
@@ -1417,10 +1416,9 @@ server
 <blockquote>
 <p><strong>원인</strong>: 셸 프롬프트 <code>PS1</code>의 <code>\h</code>(호스트명)는 <strong>셸이 시작될 때 한 번 읽은 값</strong>을 씁니다. 이미 열려 있는 셸 세션에는 반영되지 않습니다.</p>
 <p><strong>해결</strong>
-```bash
-exec bash          # 현재 셸을 새로 교체</p>
-<h1 id="_4">또는 로그아웃 후 재로그인</h1>
-<p>```</p>
+<code>bash
+exec bash          # 현재 셸을 새로 교체
+\# 또는 로그아웃 후 재로그인</code></p>
 </blockquote>
 <h4 id="5-2-hostname-server-vs-hostnamectl-set-hostname-server">5-2. <code>hostname server</code> vs <code>hostnamectl set-hostname server</code></h4>
 <div class="tablewrap"><table>
@@ -1521,14 +1519,13 @@ Operating System: Rocky Linux 9.7 (Blue Onyx)
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="vm-복제-시-함정-오늘-실습과-직결">⚠️ VM 복제 시 함정 (오늘 실습과 직결)</h3>
+<h4 id="vm-복제-시-함정-오늘-실습과-직결">⚠️ VM 복제 시 함정 (오늘 실습과 직결)</h4>
 <p>92번 노드는 81번의 <strong>복제본</strong>입니다. 복제하면 <code>machine-id</code>가 같아져서 <strong>DHCP가 같은 IP를 두 대에 배정</strong>하거나 systemd journal이 섞이는 문제가 생깁니다.
-```bash</p>
-<h1 id="vm_1">복제한 VM에서 실행</h1>
-<p>rm -f /etc/machine-id
-systemd-machine-id-setup</p>
-<h1 id="networkmanager-uuid">NetworkManager UUID도 재생성 권장</h1>
-<p>```</p>
+<code>bash
+\# 복제한 VM에서 실행
+rm -f /etc/machine-id
+systemd-machine-id-setup
+\# NetworkManager UUID도 재생성 권장</code></p>
 </blockquote>
 <h4 id="5-5-etchosts-함께-정리">5-5. <code>/etc/hosts</code> 함께 정리</h4>
 <div class="codehilite"><pre><span></span><code>vi<span class="w"> </span>/etc/hosts
@@ -1559,7 +1556,7 @@ DB 저장               event
 <p><strong>읽는 법</strong>
 - <strong>클라이언트</strong> 쪽에서 발생하는 것은 <strong>event(이벤트 로그)</strong> 입니다. 로그인 실패, 서비스 시작, 커널 경고 같은 모든 사건이 여기 해당합니다.
 - <strong>서버</strong> 쪽은 그 이벤트를 받아 <strong>저장(DB화)</strong> 합니다. 파일로 쌓거나 데이터베이스에 넣습니다.
-- 화살표가 <strong>양방향(<code>&lt;-&gt;</code>)</strong> 으로 그려진 이유: 서버도 자기 자신의 로그를 남기는 클라이언트 역할을 동시에 하기 때문입니다. 즉 "서버/클라이언트"는 별개의 프로그램이 아니라 <strong>같은 <code>rsyslogd</code>가 설정에 따라 두 역할을 겸하는 것</strong>입니다.</p>
+- 화살표가 <strong>양방향(<code>&amp;lt;-&gt;</code>)</strong> 으로 그려진 이유: 서버도 자기 자신의 로그를 남기는 클라이언트 역할을 동시에 하기 때문입니다. 즉 "서버/클라이언트"는 별개의 프로그램이 아니라 <strong>같은 <code>rsyslogd</code>가 설정에 따라 두 역할을 겸하는 것</strong>입니다.</p>
 <p><strong>왜 로그를 한곳에 모으나?</strong>
 - 서버가 10대, 100대가 되면 문제가 생겼을 때 각 서버에 SSH로 들어가 <code>/var/log</code>를 뒤지는 것이 불가능합니다.
 - 침입자가 서버를 장악하면 <strong>가장 먼저 하는 일이 로그 삭제</strong>입니다. 로그를 다른 서버로 즉시 보내두면 증거가 남습니다.
@@ -1601,9 +1598,7 @@ DB 저장               event
 </table></div>
 <blockquote>
 <p><strong><code>rsyslog-doc</code>을 왜 설치했나?</strong> 설치하면 <code>/usr/share/doc/rsyslog-*/</code> 아래에 HTML 문서 전체가 들어옵니다. 설정 파일 1행의 주석이 가리키는 그 경로입니다.
-```</p>
-<h1 id="for-more-information-see-usrsharedocrsyslog-rsyslog_confhtml">For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html</h1>
-<p>```
+<code>\# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html</code>
 인터넷이 안 되는 폐쇄망 서버에서 특히 유용합니다.</p>
 <p><strong><code>rsyslog-logrotate</code>가 같이 올라온 이유</strong>: 로그는 계속 쌓이면 디스크를 가득 채웁니다. logrotate가 <code>/var/log/messages</code> 등을 주기적으로 잘라내고 압축·삭제해 줍니다. rsyslog와 짝을 이루는 패키지입니다.</p>
 </blockquote>
@@ -1645,9 +1640,7 @@ DB 저장               event
 </table></div>
 <blockquote>
 <p>설정 파일의 주석이 이 점을 정확히 짚고 있습니다:
-```</p>
-<h1 id="remote-logging-we-use-tcp-for-reliable-delivery"># Remote Logging (we use TCP for reliable delivery)</h1>
-<p>```
+<code>\# # Remote Logging (we use TCP for reliable delivery)</code>
 "<strong>신뢰성 있는 전달을 위해 TCP를 쓴다</strong>" — 보안 감사 로그처럼 하나도 잃으면 안 되는 로그는 TCP가 정답입니다.</p>
 </blockquote>
 <h4 id="6-3-모듈-개념--im--om">6-3. 모듈 개념 — im / om</h4>
@@ -1805,7 +1798,7 @@ $InputTCPServerRun 514
 </code></pre></div>
 
 <blockquote>
-<h3 id="두-문법의-관계">두 문법의 관계</h3>
+<h4 id="두-문법의-관계">두 문법의 관계</h4>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -2009,7 +2002,7 @@ $InputTCPServerRun 514
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="반드시-기억할-규칙--이상의-의미">반드시 기억할 규칙 — "이상"의 의미</h3>
+<h4 id="반드시-기억할-규칙--이상의-의미">반드시 기억할 규칙 — "이상"의 의미</h4>
 <p>man 원문: <em>"all messages of the specified priority and higher are logged"</em></p>
 <p><code>*.info</code>라고 쓰면 <strong>info만</strong>이 아니라 <strong>info 이상 전부</strong>(info, notice, warning, err, crit, alert, emerg)가 기록됩니다. 이것이 syslog의 기본 동작입니다.</p>
 <p><strong>정확히 그 등급만</strong> 원하면 <code>=</code>를 씁니다:
@@ -2085,13 +2078,13 @@ mail.none    # mail 시설은 아무것도 기록 안 함</code>
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="이-블록의-핵심-아이디어--디스크-큐">이 블록의 핵심 아이디어 — 디스크 큐</h3>
+<h4 id="이-블록의-핵심-아이디어--디스크-큐">이 블록의 핵심 아이디어 — 디스크 큐</h4>
 <p>주석 원문: <em>"An on-disk queue is created for this action. If the remote host is down, messages are spooled to disk and sent when it is up again."</em></p>
 <p><strong>원격 로그 서버가 죽어 있으면 로그를 버리는 게 아니라 디스크에 쌓아뒀다가, 살아나면 밀린 것까지 전부 보냅니다.</strong> 이것이 rsyslog가 단순 syslog보다 뛰어난 이유입니다. UDP로 그냥 쏘면 서버가 죽은 동안의 로그는 영원히 사라집니다.</p>
 <p>이 큐 파일들이 놓이는 곳이 바로 ①에서 본 <code>global(workDirectory="/var/lib/rsyslog")</code> 입니다. 설정의 앞뒤가 이렇게 연결됩니다.</p>
 </blockquote>
 <h4 id="6-5-서버클라이언트-역할-정리">6-5. 서버/클라이언트 역할 정리</h4>
-<p>메모의 <code>rsyslog server &lt;-&gt; rsyslog client</code> 구조를 설정 파일 항목에 대응시키면 이렇습니다.</p>
+<p>메모의 <code>rsyslog server &amp;lt;-&gt; rsyslog client</code> 구조를 설정 파일 항목에 대응시키면 이렇습니다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -2246,7 +2239,7 @@ rsyslogd 2074 root    5u  IPv6  34839      0t0  TCP *:shell (LISTEN)
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="shell--헷갈리기-쉬운-표시">⚠️ <code>*:shell</code> — 헷갈리기 쉬운 표시</h3>
+<h4 id="shell--헷갈리기-쉬운-표시">⚠️ <code>*:shell</code> — 헷갈리기 쉬운 표시</h4>
 <p><code>lsof</code>는 <code>-n</code> 옵션 없이 실행하면 <strong>포트 번호를 <code>/etc/services</code>의 서비스 이름으로 변환</strong>해 보여줍니다. <strong>514/tcp는 역사적으로 <code>shell</code>(rsh, remote shell)에 할당된 포트</strong>라서 <code>shell</code>이라고 표시된 것입니다.</p>
 <p><strong>rsyslog가 잘못 뜬 게 아닙니다.</strong> 숫자로 보고 싶으면:
 <code>bash
@@ -2294,7 +2287,7 @@ head<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="메모의-오타-정정">메모의 오타 정정</h3>
+<h4 id="메모의-오타-정정">메모의 오타 정정</h4>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -2362,7 +2355,7 @@ Aug 25 14:34:46 server rsyslogd[2074]: imjournal: journal files changed, reloadi
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="에러-3003의-공식-설명">에러 3003의 공식 설명</h3>
+<h4 id="에러-3003의-공식-설명">에러 3003의 공식 설명</h4>
 <p>rsyslog 공식 문서 원문:
 - <em>"An invalid configuration command is part of rsyslog.conf"</em> (잘못된 명령)
 - <em>"The command is valid, but resides in a not-yet-loaded plugin"</em> (<strong>명령은 맞지만 플러그인이 아직 로드되지 않음</strong>)
@@ -2427,7 +2420,7 @@ $InputTCPServerRun 514
 </code></pre></div>
 
 <blockquote>
-<h3 id="이-문법이-오늘의-핵심-암기-포인트">이 문법이 오늘의 핵심 암기 포인트</h3>
+<h4 id="이-문법이-오늘의-핵심-암기-포인트">이 문법이 오늘의 핵심 암기 포인트</h4>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -2453,7 +2446,7 @@ $InputTCPServerRun 514
 <li><code>*.*</code> = <strong>모든 시설의 모든 등급</strong> 로그를 전부 보낸다는 뜻 (6-4절 ④ RULES 문법 그대로)</li>
 <li><code>:514</code> = 목적지 포트. 생략 가능하지만 rsyslog 공식 문서는 <em>"it is strongly advised to use an explicit port number to make sure that client and server configuration match each other"</em> — <strong>명시를 강력히 권장</strong>합니다.</li>
 </ul>
-<h3 id="두-줄을-다-쓰면-로그가-두-번-갑니다">⚠️ 두 줄을 다 쓰면 로그가 두 번 갑니다</h3>
+<h4 id="두-줄을-다-쓰면-로그가-두-번-갑니다">⚠️ 두 줄을 다 쓰면 로그가 두 번 갑니다</h4>
 <p><code>@@</code>(TCP)와 <code>@</code>(UDP)를 <strong>둘 다</strong> 적으면 같은 메시지가 <strong>TCP로 한 번, UDP로 한 번 총 두 번 전송</strong>됩니다. 서버 DB에 중복 레코드가 쌓입니다.</p>
 <p>실습에서는 두 방식을 모두 시험해 보려는 목적이었지만, <strong>실제 운영에서는 하나만 남깁니다.</strong> 신뢰성이 필요하면 <code>@@</code>(TCP)를 택합니다.</p>
 </blockquote>
@@ -2511,7 +2504,7 @@ Aug 25 14:34:46 server systemd[1]: Started System Logging Service.</code>
 <tbody>
 <tr>
 <td><code>grep</code>, <code>tail</code>로 순차 검색</td>
-<td><strong>SQL로 조건 검색</strong> (<code>WHERE FromHost='client' AND Priority&lt;=3</code>)</td>
+<td><strong>SQL로 조건 검색</strong> (<code>WHERE FromHost='client' AND Priority&amp;lt;=3</code>)</td>
 </tr>
 <tr>
 <td>집계하려면 별도 스크립트</td>
@@ -2646,7 +2639,7 @@ ERROR 2002 (HY000): Can&#39;t connect to local MySQL server through socket &#39;
 </code></pre></div>
 
 <blockquote>
-<h3 id="에러-2002-해석">에러 2002 해석</h3>
+<h4 id="에러-2002-해석">에러 2002 해석</h4>
 <p><strong>"소켓 파일을 통해 로컬 MySQL 서버에 연결할 수 없다"</strong> — 뒤의 <code>(2)</code>는 "No such file or directory"입니다.</p>
 <p><code>mysql</code> 클라이언트는 로컬 접속 시 TCP가 아니라 <strong>유닉스 소켓 파일</strong>(<code>/var/lib/mysql/mysql.sock</code>)로 붙습니다. 이 파일은 <strong>서버가 실행 중일 때만 생성</strong>됩니다. 즉 <strong>"DB 서버가 꺼져 있다"</strong>는 뜻입니다.</p>
 </blockquote>
@@ -2700,7 +2693,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → 
 </code></pre></div>
 
 <blockquote>
-<p><code>&lt;</code> 는 <strong>리다이렉션</strong> — 파일 내용을 명령의 표준입력으로 넣습니다. SQL 파일을 한 번에 실행하는 표준 방법입니다.</p>
+<p><code>&amp;lt;</code> 는 <strong>리다이렉션</strong> — 파일 내용을 명령의 표준입력으로 넣습니다. SQL 파일을 한 번에 실행하는 표준 방법입니다.</p>
 </blockquote>
 <div class="codehilite"><pre><span></span><code><span class="n">MariaDB</span><span class="w"> </span><span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">databases</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">--------------------+</span>
@@ -2828,7 +2821,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → 
 </table></div>
 <blockquote>
 <p><strong><code>Query OK, 0 rows affected</code></strong> — 권한 구문은 데이터 행을 바꾸지 않으므로 <code>0 rows</code>가 정상입니다. 에러가 아닙니다.</p>
-<h3 id="rsysloglocalhost--왜-localhost가-중요한가"><code>'rsyslog'@'localhost'</code> — 왜 <code>@localhost</code>가 중요한가</h3>
+<h4 id="rsysloglocalhost--왜-localhost가-중요한가"><code>'rsyslog'@'localhost'</code> — 왜 <code>@localhost</code>가 중요한가</h4>
 <p>MariaDB의 계정은 <strong>"사용자명 + 접속 출발지"</strong> 한 쌍이 하나의 계정입니다.
 - <code>'rsyslog'@'localhost'</code> → <strong>서버 자기 자신에서만</strong> 접속 가능
 - <code>'rsyslog'@'%'</code> → <strong>어디서든</strong> 접속 가능 (<code>%</code>는 와일드카드)</p>
@@ -2885,7 +2878,7 @@ grant insert on Syslog.SystemEvents to 'rsyslog'@'localhost';</code>
 </table></div>
 <blockquote>
 <p><strong>8장의 교훈이 그대로 적용됩니다</strong>: <code>$ModLoad ommysql</code>(모듈 로드) + <code>*.* :ommysql:...</code>(사용) — <strong>로드와 사용은 한 쌍</strong>입니다. <code>$ModLoad ommysql</code>을 빼면 또 3003 에러가 납니다. 그리고 <code>rsyslog-mysql</code> 패키지를 설치하지 않았다면 모듈 파일 자체가 없어 로드에 실패합니다.</p>
-<h3 id="비밀번호가-평문으로-들어갑니다">⚠️ 비밀번호가 평문으로 들어갑니다</h3>
+<h4 id="비밀번호가-평문으로-들어갑니다">⚠️ 비밀번호가 평문으로 들어갑니다</h4>
 <p>rsyslog 공식 문서: <em>"Keep <code>/etc/rsyslog.conf</code> readable by root only, since database credentials are stored in plain text."</em>
 <code>bash
 chmod 600 /etc/rsyslog.conf
@@ -2969,7 +2962,7 @@ firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=192.16
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="숫자로-저장된-facility--priority-읽기">숫자로 저장된 Facility / Priority 읽기</h3>
+<h4 id="숫자로-저장된-facility--priority-읽기">숫자로 저장된 Facility / Priority 읽기</h4>
 <p>6-4절 ④에서 이름(<code>daemon</code>, <code>syslog</code>, <code>info</code>)으로 배운 값이 <strong>DB에는 숫자로 저장</strong>됩니다. syslog 프로토콜이 원래 숫자를 쓰기 때문입니다.</p>
 <p><strong>Facility 숫자</strong>
 | 값 | 이름 |
@@ -2990,7 +2983,7 @@ firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=192.16
 <p>그래서 SQL로 "오류 이상만 보기"는 다음과 같이 씁니다:
 <code>sql
 select ReceivedAt, FromHost, SysLogTag, Message
-  from SystemEvents where Priority &lt;= 3 order by ID desc;</code></p>
+  from SystemEvents where Priority &amp;lt;= 3 order by ID desc;</code></p>
 <p><strong><code>FromHost</code>가 전부 <code>server</code>인 이유</strong>: 이 시점에 쌓인 10건은 모두 <strong>서버 자신(81번)이 만든 로그</strong>입니다. 클라이언트에서 온 로그가 들어오면 이 컬럼에 클라이언트 호스트명이 찍혀 <strong>어느 장비의 로그인지 SQL로 구분</strong>할 수 있게 됩니다. 중앙 수집의 진짜 가치가 이 컬럼에 있습니다.</p>
 <p><strong>메모의 <code>severity - 심각도</code></strong> — Priority와 Severity는 같은 것을 가리키는 두 이름입니다. syslog 표준에서는 <strong>Severity(심각도)</strong> 가 정식 용어이고, 설정 파일과 DB 컬럼에서는 <strong>Priority</strong>라는 이름을 씁니다. 6-4절의 8단계(<code>debug</code>~<code>emerg</code>)가 바로 이 심각도입니다.</p>
 </blockquote>
@@ -3108,7 +3101,7 @@ tar<span class="w"> </span>-xzvf<span class="w"> </span>/tmp/loganalyzer-4.1.13.
 </tbody>
 </table></div>
 <blockquote>
-<h3 id="실습에서-일어난-일--압축이-엉뚱한-곳에-풀림">실습에서 일어난 일 — 압축이 엉뚱한 곳에 풀림</h3>
+<h4 id="실습에서-일어난-일--압축이-엉뚱한-곳에-풀림">실습에서 일어난 일 — 압축이 엉뚱한 곳에 풀림</h4>
 <p>첫 명령을 <code>/sambatest</code> 디렉터리에서 실행했기 때문에 결과가 이랬습니다:
 <code>[root@server sambatest]# ls
 loganalyzer-4.1.13  movie  music  samba.txt  smb.html</code>
@@ -3174,7 +3167,7 @@ cp<span class="w"> </span>/tmp/loganalyzer-4.1.13/contrib/configure.sh<span clas
 <li>따라서 접속 주소는 <strong><code>http://192.168.16.81/loganalyzer</code></strong> 가 됩니다.</li>
 <li><code>cp -r</code> = <strong>r</strong>ecursive, 디렉터리를 통째로 복사. <code>src/*</code>는 "src 안의 항목들"이라 <code>src</code> 폴더 자체는 만들어지지 않습니다.</li>
 </ul>
-<h3 id="메모에-기록된-오류">메모에 기록된 오류</h3>
+<h4 id="메모에-기록된-오류">메모에 기록된 오류</h4>
 <p><code>cp /tmp/loganalyzer-4.1.13/contrib/.sh /var/www/html/loganalyzer
 cp: cannot stat '/tmp/loganalyzer-4.1.13/contrib/.sh': 그런 파일이나 디렉터리가 없습니다</code>
 <code>.sh</code>라는 이름의 파일은 없습니다. <strong><code>*.sh</code></strong>(와일드카드 <code>*</code> 포함)로 쓰거나 파일명을 정확히 지정해야 합니다. 다음 줄에서 <code>configure.sh</code>로 정확히 지정해 성공했습니다.
@@ -3209,7 +3202,7 @@ ls
 <p><strong><code>#!/bin/sh</code></strong> = <strong>셔뱅(shebang)</strong>. 이 스크립트를 어떤 인터프리터로 실행할지 첫 줄에 지정합니다. 실습에서는 <code>bash configure.sh</code>로 bash에 직접 넘겨 실행했습니다. 실행 권한을 준 뒤 <code>./configure.sh</code>로 실행할 수도 있습니다.
 <code>bash
 chmod +x configure.sh &amp;&amp; ./configure.sh</code></p>
-<h3 id="666-권한은-설치가-끝나면-되돌려야-합니다">⚠️ 666 권한은 설치가 끝나면 되돌려야 합니다</h3>
+<h4 id="666-권한은-설치가-끝나면-되돌려야-합니다">⚠️ 666 권한은 설치가 끝나면 되돌려야 합니다</h4>
 <p><code>chmod 666</code>은 <strong>누구나 설정 파일을 고칠 수 있는 상태</strong>입니다. 이 파일에는 DB 접속 정보가 들어갑니다. 설치 마법사를 끝낸 뒤에는 권한을 조여야 합니다.
 <code>bash
 chmod 644 config.php</code>
@@ -3528,7 +3521,7 @@ ausearch<span class="w"> </span>-m<span class="w"> </span>avc<span class="w"> </
 </tr>
 <tr>
 <td>21</td>
-<td><code>rsyslog server &lt;-&gt; rsyslog client</code></td>
+<td><code>rsyslog server &amp;lt;-&gt; rsyslog client</code></td>
 <td>별개 프로그램이 아니라 <strong>같은 <code>rsyslogd</code>가 설정(im/om)에 따라 두 역할을 겸함</strong></td>
 <td>구조 설명</td>
 </tr>

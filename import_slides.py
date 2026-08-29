@@ -2,10 +2,10 @@
 """강사 배포 「핵심키워드」 PDF 188강 -> 마크다운 장 파일.
 
 PDF에서 뽑은 본문을 그대로 옮깁니다. 내용을 요약하거나 바꾸지 않습니다.
-하는 일은 세 가지뿐입니다.
+글자 크기로 구조를 알아냅니다(자세한 규칙은 pdf_blocks 참고).
 
-  1. 페이지마다 반복되는 제목·쪽번호 제거
-  2. `1.` `1-1.` 같은 번호 제목을 마크다운 제목으로 승격
+  1. 쪽마다 반복되는 문서 제목·쪽번호 제거
+  2. 제목 / 문단 / 코드블록 / 표로 나누기
   3. 주제별로 묶고 한 장이 너무 커지지 않게 나누기
 
 실행: python import_slides.py <핵심키워드 zip 경로>
@@ -22,11 +22,12 @@ import zipfile
 import fitz  # PyMuPDF
 
 from pdf_blocks import (
+    SENTENCE_END,
     build_vocab,
-    merge_payloads,
-    page_blocks,
+    join_wrapped,
+    page_items,
     table_to_markdown,
-    text_to_markdown,
+    trim_code,
 )
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -67,10 +68,6 @@ SLUG = {
     "보안 실습 · 모의해킹": "7-보안모의해킹",
 }
 
-H2 = re.compile(r"^(\d{1,2})\.\s+(.+)$")          # 1. 제목
-H3 = re.compile(r"^(\d{1,2}-\d{1,2})\.\s+(.+)$")  # 1-1. 제목
-
-
 def classify(title: str) -> str:
     for name, pat in RULES:
         if re.search(pat, title, re.I):
@@ -104,31 +101,68 @@ def main(zip_path: str) -> int:
 
         doc = fitz.open(stream=z.read(name), filetype="pdf")
         body: list[str] = []
-        pending: list[str] = []
+        para: list[str] = []      # 이어붙이는 중인 문단의 줄들
+        code: list[str] = []      # 이어붙이는 중인 코드블록의 줄들
+        para_block = (-1, -1)     # (쪽, 덩어리) — 바뀌면 새 문단
 
-        def flush_text() -> None:
-            if pending:
-                body.extend(text_to_markdown(merge_payloads(pending), title, vocab))
-                pending.clear()
+        def flush_para() -> None:
+            if not para:
+                return
+            text = join_wrapped(para, vocab)
+            para.clear()
+            if not text:
+                return
+            # 쪽이 넘어가며 문장 도중에 끊긴 것은 앞 문단에 잇습니다.
+            if body and body[-1] and not body[-1].rstrip().endswith(SENTENCE_END):
+                body[-1] = body[-1].rstrip() + " " + text
+                return
+            body.append(text)
+            body.append("")
 
-        for page in doc:
-            for _, kind, payload in page_blocks(page):
+        def flush_code() -> None:
+            lines = trim_code(code)
+            code.clear()
+            if not lines:
+                return
+            body.append("```")
+            body.extend(lines)
+            body.append("```")
+            body.append("")
+
+        for pno, page in enumerate(doc):
+            for _, bno, kind, payload in page_items(page):
+                if kind != "code":
+                    flush_code()
+                if kind != "para":
+                    flush_para()
+
                 if kind == "table":
                     md = table_to_markdown(payload)
                     if md:
-                        flush_text()
                         body.append("")
                         body.extend(md)
                         body.append("")
+                elif kind == "code":
+                    code.append(payload)
+                elif kind == "para":
+                    if (pno, bno) != para_block:
+                        flush_para()
+                        para_block = (pno, bno)
+                    para.append(payload)
                 else:
-                    pending.append(payload)
-        flush_text()
+                    body.append(("### " if kind == "h3" else "#### ") + payload.strip())
+                    body.append("")
+        flush_code()
+        flush_para()
         doc.close()
         buckets[classify(title)].append((no, title, body))
 
     os.makedirs(OUT_DIR, exist_ok=True)
+    # 이 스크립트가 만든 파일만 지웁니다. 이미지 슬라이드 판독본처럼
+    # 다른 경로로 들어온 장이 같은 폴더에 있습니다.
+    prefixes = tuple(SLUG[p] for p in PART_ORDER)
     for old in os.listdir(OUT_DIR):
-        if old.endswith(".md"):
+        if old.endswith(".md") and old.startswith(prefixes):
             os.remove(os.path.join(OUT_DIR, old))
 
     made: list[tuple[str, int, int]] = []
@@ -146,12 +180,6 @@ def main(zip_path: str) -> int:
 
             lines = [
                 f"# {head}",
-                "",
-                f"강사 배포 「핵심키워드」 슬라이드 중 **{chunk[0][0]}~{chunk[-1][0]}강 {len(chunk)}편**입니다.",
-                "원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.",
-                "",
-                "> 원문의 표는 칸 구조를 그대로 살려 옮겼습니다. 이 꾸러미의 슬라이드에는 그림이 없어",
-                "> (188강 전체 이미지 0개) 텍스트와 표만으로 내용이 전부 담깁니다.",
                 "",
             ]
             for no, title, body in chunk:

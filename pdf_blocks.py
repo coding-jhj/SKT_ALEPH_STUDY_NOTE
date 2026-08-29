@@ -1,13 +1,25 @@
 #!/usr/bin/env python3
-"""PDF 한 페이지를 본문과 표로 나눠 읽고 마크다운으로 바꿉니다.
+"""PDF 한 쪽을 제목·본문·코드·표로 나눠 읽고 마크다운으로 바꿉니다.
 
-PyMuPDF의 `find_tables()`가 표의 칸 구조를 그대로 돌려줍니다.
-표 영역에 걸친 글자는 본문에서 빼야 같은 내용이 두 번 나오지 않습니다.
+이 꾸러미의 슬라이드는 글자 크기가 곧 구조입니다. 크기만 보면 무엇이 제목이고
+무엇이 코드인지 정확히 갈립니다(188강 전체 동일).
 
-PDF는 글자의 위치만 담고 있어서 원래 어디가 문단이고 어디가 단순 줄바꿈이었는지,
+    30pt  쪽마다 반복되는 문서 제목      버림 (장 제목은 파일 이름에서 가져옵니다)
+    18pt  대제목  `1. ...`               ###
+    15pt  소제목  `1-1. ...`             ####
+    12pt  본문                            문단
+    10.5pt 표 안 글자                     표에서 처리
+    8~9pt DejaVuSansMono  터미널 화면     ``` 코드블록
+    7.5pt 머리말·쪽번호                   버림
+
+표는 `find_tables(strategy="lines_strict")`로 찾습니다. 기본값 `lines`는 칸을
+그린 선이 아니라 글자 배치까지 선으로 쳐서 없는 열을 만들고 줄바꿈된 칸을
+딴 행으로 흘립니다(실측: 4열 5행 표가 6열 7행으로 깨짐).
+
+PDF는 글자의 위치만 담고 있어 어디가 문단이고 어디가 단순 줄바꿈이었는지,
 줄바꿈 자리에 공백이 있었는지는 남아 있지 않습니다. 세 규칙으로 복원합니다.
 
-  1. 문장 부호로 끝나지 않은 채 덩어리가 끊기면(대개 페이지 넘김) 이어 붙인다
+  1. 덩어리(block)가 바뀌면 새 문단, 안에서는 한 줄로 잇는다
   2. 줄이 잘린 자리는 **문서 전체 어휘**로 판단한다
      — 붙여 만든 낱말이 문서 어딘가에 온전히 나오면 붙이고, 아니면 공백을 넣는다
   3. 영문 하이픈 분철은 붙인다
@@ -19,13 +31,17 @@ from collections import Counter
 
 import fitz  # PyMuPDF
 
-H2 = re.compile(r"^(\d{1,2})\.\s+(.+)$")          # 1. 제목
-H3 = re.compile(r"^(\d{1,2}-\d{1,2})\.\s+(.+)$")  # 1-1. 제목
-
 SENTENCE_END = ("다.", "요.", "다", ".", ":", "!", "?", ")", "]", ";")
 
 # 어휘 사전을 만들 때 낱말 양끝에서 떼어 낼 문자
 STRIP = " \t·,.:;!?()[]{}<>\"'`“”‘’/|"
+
+# 터미널 화면을 그리는 고정폭 글꼴. 크기까지 작으면 코드블록입니다.
+MONO = ("Mono", "WenQuanYi", "Courier")
+
+HEAD_MIN = 13.5   # 이보다 크면 제목
+TITLE_MIN = 25.0  # 쪽마다 반복되는 문서 제목
+NOISE_MAX = 8.0   # 머리말·쪽번호. 코드(8.3pt)보다 작습니다
 
 
 def cell(value) -> str:
@@ -35,42 +51,74 @@ def cell(value) -> str:
 
 
 def table_to_markdown(rows: list[list]) -> list[str]:
-    """find_tables() 결과를 마크다운 표로. 열 수는 원문 그대로 둡니다."""
+    """find_tables() 결과를 마크다운 표로. 아무 행에도 내용이 없는 열은 뺍니다."""
     rows = [r for r in rows if any((c or "").strip() for c in r)]
     if len(rows) < 2:
         return []
     width = max(len(r) for r in rows)
+    rows = [list(r) + [""] * (width - len(r)) for r in rows]
+    keep = [i for i in range(width) if any((r[i] or "").strip() for r in rows)]
+    if len(keep) < 2:
+        return []
 
-    head = [cell(c) for c in rows[0]] + [""] * (width - len(rows[0]))
+    head = [cell(rows[0][i]) for i in keep]
     if not any(head):
-        head = [f"열 {i + 1}" for i in range(width)]
+        head = [f"열 {i + 1}" for i in range(len(keep))]
 
-    out = ["| " + " | ".join(head) + " |", "|" + "---|" * width]
+    out = ["| " + " | ".join(head) + " |", "|" + "---|" * len(keep)]
     for row in rows[1:]:
-        cells = [cell(c) for c in row] + [""] * (width - len(row))
-        out.append("| " + " | ".join(cells) + " |")
+        out.append("| " + " | ".join(cell(row[i]) for i in keep) + " |")
     return out
 
 
-def page_blocks(page) -> list[tuple[float, str, object]]:
-    """한 페이지를 (세로위치, 종류, 내용) 목록으로. 종류는 table 또는 text."""
-    tables = list(page.find_tables().tables)
+def _is_code(spans: list[dict], size: float) -> bool:
+    if size >= HEAD_MIN:
+        return False
+    marked = [s for s in spans if s["text"].strip()]
+    return bool(marked) and all(any(m in s["font"] for m in MONO) for s in marked)
+
+
+def page_items(page) -> list[tuple[float, int, str, object]]:
+    """한 쪽을 (세로위치, 덩어리번호, 종류, 내용) 목록으로.
+
+    종류는 table · code · h3 · h4 · para 입니다.
+    """
+    tables = list(page.find_tables(strategy="lines_strict").tables)
     boxes = [fitz.Rect(t.bbox) for t in tables]
-    items: list[tuple[float, str, object]] = []
+    items: list[tuple[float, int, str, object]] = []
 
     for table, box in zip(tables, boxes):
-        items.append((box.y0, "table", table.extract()))
+        items.append((box.y0, -1, "table", table.extract()))
 
-    for x0, y0, x1, y1, text, *_ in page.get_text("blocks"):
-        rect = fitz.Rect(x0, y0, x1, y1)
-        area = rect.get_area()
-        # 표 영역과 절반 넘게 겹치는 글자 덩어리는 이미 표로 들어갔습니다.
-        if area and any(rect.intersects(b) and (rect & b).get_area() / area > 0.5 for b in boxes):
+    for bno, block in enumerate(page.get_text("dict")["blocks"]):
+        if block.get("type") != 0:
             continue
-        if text.strip():
-            items.append((y0, "text", text))
+        for line in block["lines"]:
+            spans = [s for s in line["spans"] if s["text"].strip()]
+            if not spans:
+                continue
+            rect = fitz.Rect(line["bbox"])
+            area = rect.get_area()
+            # 표 영역과 절반 넘게 겹치는 줄은 이미 표로 들어갔습니다.
+            if area and any(rect.intersects(b) and (rect & b).get_area() / area > 0.5 for b in boxes):
+                continue
+            size = max(s["size"] for s in spans)
+            if size <= NOISE_MAX or size >= TITLE_MIN:
+                continue  # 머리말·쪽번호, 그리고 쪽마다 반복되는 문서 제목
+            text = "".join(s["text"] for s in line["spans"]).rstrip()
+            if _is_code(spans, size):
+                kind = "code"
+            elif size >= 16.5:
+                kind = "h3"
+            elif size >= HEAD_MIN:
+                kind = "h4"
+            else:
+                kind = "para"
+                text = text.strip()
+            if text.strip():
+                items.append((rect.y0, bno, kind, text))
 
-    items.sort(key=lambda item: item[0])
+    items.sort(key=lambda item: (round(item[0], 1), item[1]))
     return items
 
 
@@ -87,24 +135,6 @@ def build_vocab(texts: list[str], min_count: int = 2) -> set[str]:
             if len(word) >= 2:
                 counter[word] += 1
     return {w for w, c in counter.items() if c >= min_count}
-
-
-def merge_payloads(blocks: list[str]) -> str:
-    """텍스트 덩어리들을 하나의 본문으로 잇습니다.
-
-    덩어리는 대개 문단 하나지만 페이지가 바뀌면 문장 도중에도 끊깁니다.
-    앞 덩어리가 문장 부호로 끝나지 않으면 같은 문단으로 이어 붙입니다.
-    """
-    paragraphs: list[str] = []
-    for block in blocks:
-        text = block.strip()
-        if not text:
-            continue
-        if paragraphs and not paragraphs[-1].rstrip().endswith(SENTENCE_END):
-            paragraphs[-1] = paragraphs[-1].rstrip() + chr(10) + text
-        else:
-            paragraphs.append(text)
-    return (chr(10) * 2).join(paragraphs)
 
 
 HANGUL_RUN = re.compile(r"^[가-힣]+")
@@ -164,50 +194,13 @@ def join_wrapped(lines: list[str], vocab: set[str] | None = None) -> str:
     return out
 
 
-def clean_lines(text: str, doc_title: str) -> list[str]:
-    """페이지마다 반복되는 문서 제목과 쪽번호를 걷어 냅니다."""
-    out: list[str] = []
-    title = doc_title.strip()
-    for raw in text.split(chr(10)):
-        line = raw.strip()
-        if not line:
-            out.append("")
-            continue
-        if line == title:
-            continue
-        if len(line) > 4 and title.startswith(line):
-            continue
-        if re.fullmatch(r"\d{1,3}", line):
-            continue
-        out.append(line)
-    return out
-
-
-def text_to_markdown(text: str, doc_title: str, vocab: set[str] | None = None) -> list[str]:
-    """본문을 제목과 문단으로 나눕니다. 글자는 바꾸지 않습니다."""
-    out: list[str] = []
-    buf: list[str] = []
-
-    def flush() -> None:
-        if buf:
-            joined = join_wrapped(buf, vocab)
-            if joined:
-                out.append(joined)
-                out.append("")
-            buf.clear()
-
-    for line in clean_lines(text, doc_title):
-        m3 = H3.match(line)
-        m2 = H2.match(line)
-        if m3 or m2:
-            flush()
-            out.append(f"#### {m3.group(1)}. {m3.group(2)}" if m3
-                       else f"### {m2.group(1)}. {m2.group(2)}")
-            out.append("")
-            continue
-        if not line:
-            flush()
-            continue
-        buf.append(line)
-    flush()
-    return out
+def trim_code(lines: list[str]) -> list[str]:
+    """코드블록의 빈 줄과 공통 들여쓰기를 정리합니다. 글자는 바꾸지 않습니다."""
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    if not lines:
+        return []
+    pad = min(len(l) - len(l.lstrip(" ")) for l in lines if l.strip())
+    return [l[pad:].rstrip() for l in lines]

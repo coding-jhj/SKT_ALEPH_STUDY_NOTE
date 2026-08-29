@@ -85,7 +85,6 @@ th{background:var(--accent-soft); font-weight:700}
 .toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
 .toclist a:hover{background:var(--accent-soft)}
 .toclist .t{display:block; font-weight:700; margin-bottom:2px}
-.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 #top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
      background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
      font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
@@ -164,19 +163,19 @@ Docker, Laravel, 클라우드, 다른 프레임워크도 오늘 과제에 없었
 </thead>
 <tbody>
 <tr>
-<td><code>&lt;DB_USER&gt;</code></td>
+<td><code>&amp;lt;DB_USER&gt;</code></td>
 <td>DB 접속 계정명 (이번 실습에서는 <code>kload_user</code>)</td>
 </tr>
 <tr>
-<td><code>&lt;DB_PASSWORD&gt;</code></td>
+<td><code>&amp;lt;DB_PASSWORD&gt;</code></td>
 <td>DB 계정 비밀번호</td>
 </tr>
 <tr>
-<td><code>&lt;PMM_TOKEN&gt;</code></td>
+<td><code>&amp;lt;PMM_TOKEN&gt;</code></td>
 <td>PMM 인증에 쓰이는 토큰 값</td>
 </tr>
 <tr>
-<td><code>&lt;USERNAME&gt;</code> / <code>&lt;PASSWORD&gt;</code></td>
+<td><code>&amp;lt;USERNAME&gt;</code> / <code>&amp;lt;PASSWORD&gt;</code></td>
 <td>웹사이트 회원 계정 자격증명</td>
 </tr>
 </tbody>
@@ -964,7 +963,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
   1. 데이터베이스 기본 문자셋
   2. 테이블/컬럼 문자셋
   3. <strong>접속 문자셋</strong> ← PDO DSN의 <code>charset=utf8mb4</code>
-  4. 웹페이지 인코딩 (<code>&lt;meta charset="utf-8"&gt;</code>)</li>
+  4. 웹페이지 인코딩 (<code>&amp;lt;meta charset="utf-8"&gt;</code>)</li>
 </ul>
 <h4 id="35-users와-posts의-관계">3.5 users와 posts의 관계</h4>
 <h5 id="author_id-usersid">author_id가 users.id를 참조하는 이유</h5>
@@ -1499,7 +1498,7 @@ DB·테이블이 utf8mb4여도 접속 문자셋이 다르면 소용없습니다.
 </code></pre></div>
 
 <blockquote>
-<p>⚠️ 실제 파일에는 <code>&lt;DB_USER&gt;</code> 자리에 <code>kload_user</code>, <code>&lt;DB_PASSWORD&gt;</code> 자리에 실제 비밀번호가 들어갑니다.
+<p>⚠️ 실제 파일에는 <code>&amp;lt;DB_USER&gt;</code> 자리에 <code>kload_user</code>, <code>&amp;lt;DB_PASSWORD&gt;</code> 자리에 실제 비밀번호가 들어갑니다.
 <strong>이 문서에는 실제 비밀번호를 적지 않습니다.</strong></p>
 </blockquote>
 <h5 id="_11">세 개의 옵션 설명 📘</h5>
@@ -1858,7 +1857,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 </tr>
 <tr>
 <td><strong>오류가 나오면</strong></td>
-<td>해당 줄 근처의 세미콜론 누락, 괄호·따옴표 짝 안 맞음, <code>&lt;?php</code> 태그 누락</td>
+<td>해당 줄 근처의 세미콜론 누락, 괄호·따옴표 짝 안 맞음, <code>&amp;lt;?php</code> 태그 누락</td>
 </tr>
 </tbody>
 </table></div>
@@ -1923,7 +1922,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 </tr>
 <tr>
 <td><strong>오류가 나오면</strong></td>
-<td>지목된 파일·줄 번호를 열어 디렉티브 철자, <code>&lt;/VirtualHost&gt;</code> 닫힘, 경로 존재 여부 확인</td>
+<td>지목된 파일·줄 번호를 열어 디렉티브 철자, <code>&amp;lt;/VirtualHost&gt;</code> 닫힘, 경로 존재 여부 확인</td>
 </tr>
 </tbody>
 </table></div>
@@ -2462,7 +2461,7 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 <h5 id="_26">단계</h5>
 <ol>
 <li>브라우저에서 <code>http://192.168.16.111/team-alpha/</code> 접속</li>
-<li>회원가입 화면에서 <code>&lt;USERNAME&gt;</code> / <code>&lt;PASSWORD&gt;</code> 로 가입 시도</li>
+<li>회원가입 화면에서 <code>&amp;lt;USERNAME&gt;</code> / <code>&amp;lt;PASSWORD&gt;</code> 로 가입 시도</li>
 <li><strong>DB 서버(192.168.16.117) 또는 클라이언트 PC(192.168.16.46)</strong> 에서 아래 SQL 실행</li>
 </ol>
 <div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
@@ -2505,7 +2504,7 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 </thead>
 <tbody>
 <tr>
-<td>방금 가입한 <code>&lt;USERNAME&gt;</code>이 맨 위에 있다</td>
+<td>방금 가입한 <code>&amp;lt;USERNAME&gt;</code>이 맨 위에 있다</td>
 <td>✅ <strong>회원가입이 DB에 실제로 저장됐다</strong></td>
 </tr>
 <tr>
@@ -2702,7 +2701,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </thead>
 <tbody>
 <tr>
-<td>가입한 <code>&lt;USERNAME&gt;</code>/<code>&lt;PASSWORD&gt;</code>로 로그인 성공</td>
+<td>가입한 <code>&amp;lt;USERNAME&gt;</code>/<code>&amp;lt;PASSWORD&gt;</code>로 로그인 성공</td>
 <td>✅ <code>password_verify</code> 동작</td>
 </tr>
 <tr>
@@ -2941,12 +2940,12 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 <td><code>ERROR 1045 (28000): Access denied for user 'X'@'IP' (using password: YES)</code></td>
 <td>해당 <strong>호스트에 대한 계정이 없거나</strong> 비밀번호 불일치</td>
 <td>(DB 서버) <code>SELECT user, host FROM mysql.user WHERE user='kload_user';</code></td>
-<td><code>CREATE USER 'kload_user'@'&lt;그 IP&gt;'</code> + <code>ALTER USER ... IDENTIFIED BY</code> + <code>GRANT</code></td>
+<td><code>CREATE USER 'kload_user'@'&amp;lt;그 IP&gt;'</code> + <code>ALTER USER ... IDENTIFIED BY</code> + <code>GRANT</code></td>
 </tr>
 <tr>
 <td><code>ERROR 1044 (42000): Access denied for user 'X'@'IP' to database 'kload'</code></td>
 <td>인증은 통과, <strong>DB 권한 없음</strong></td>
-<td><code>SHOW GRANTS FOR 'kload_user'@'&lt;IP&gt;';</code></td>
+<td><code>SHOW GRANTS FOR 'kload_user'@'&amp;lt;IP&gt;';</code></td>
 <td><code>GRANT ALL PRIVILEGES ON kload.* TO ...;</code> 후 <strong>재접속</strong></td>
 </tr>
 <tr>
@@ -3110,7 +3109,7 @@ which<span class="w"> </span>mariadb<span class="w"> </span>mysql
 <tbody>
 <tr>
 <td>DB/테이블 생성, 계정·권한 관리</td>
-<td><code>ssh &lt;계정&gt;@192.168.16.117</code> → <code>sudo mariadb</code></td>
+<td><code>ssh &amp;lt;계정&gt;@192.168.16.117</code> → <code>sudo mariadb</code></td>
 <td><strong>DB 서버</strong></td>
 </tr>
 <tr>
@@ -3436,7 +3435,7 @@ PMM Server의 기본 관리자 자격증명은 배포 방식(Docker/OVF/AMI)과 
 </tr>
 <tr>
 <td>문서 표기 규칙</td>
-<td>실제 토큰 값은 <strong>절대 기록하지 않습니다.</strong> <code>&lt;PMM_TOKEN&gt;</code> 으로만 표기합니다</td>
+<td>실제 토큰 값은 <strong>절대 기록하지 않습니다.</strong> <code>&amp;lt;PMM_TOKEN&gt;</code> 으로만 표기합니다</td>
 </tr>
 </tbody>
 </table></div>
@@ -3514,13 +3513,13 @@ DB 연동 검사 절차 (6장)
 <td>1</td>
 <td><strong>비밀번호를 문서·채팅·스크린샷에 적지 않는다</strong></td>
 <td>한 번 노출되면 회수 불가. 캡처는 영원히 남는다</td>
-<td>항상 <code>&lt;DB_PASSWORD&gt;</code> 같은 자리표시자 사용</td>
+<td>항상 <code>&amp;lt;DB_PASSWORD&gt;</code> 같은 자리표시자 사용</td>
 </tr>
 <tr>
 <td>2</td>
 <td><strong>PMM 토큰을 노출하지 않는다</strong></td>
 <td>토큰은 비밀번호와 동등한 자격증명이다</td>
-<td><code>&lt;PMM_TOKEN&gt;</code> 으로 표기</td>
+<td><code>&amp;lt;PMM_TOKEN&gt;</code> 으로 표기</td>
 </tr>
 <tr>
 <td>3</td>
@@ -4036,14 +4035,14 @@ team-alpha-db.php
 <td>없으면 FK 생성 실패 (errno 150)</td>
 </tr>
 <tr>
-<td><code>CREATE USER IF NOT EXISTS 'kload_user'@'192.168.16.46' IDENTIFIED BY '&lt;DB_PASSWORD&gt;';</code></td>
+<td><code>CREATE USER IF NOT EXISTS 'kload_user'@'192.168.16.46' IDENTIFIED BY '&amp;lt;DB_PASSWORD&gt;';</code></td>
 <td>🟥 DB</td>
 <td>클라이언트용 계정 생성</td>
 <td><code>Query OK, 0 rows affected</code></td>
 <td>1227→관리자 계정으로</td>
 </tr>
 <tr>
-<td><code>ALTER USER 'kload_user'@'192.168.16.46' IDENTIFIED BY '&lt;DB_PASSWORD&gt;';</code></td>
+<td><code>ALTER USER 'kload_user'@'192.168.16.46' IDENTIFIED BY '&amp;lt;DB_PASSWORD&gt;';</code></td>
 <td>🟥 DB</td>
 <td>비밀번호 확정</td>
 <td><code>Query OK</code></td>
@@ -4162,7 +4161,7 @@ team-alpha-db.php
 <td><code>running, but not set up</code> → 등록 필요</td>
 </tr>
 <tr>
-<td><code>sudo pmm-admin config --server-url=https://&lt;USER&gt;:&lt;PASSWORD&gt;@192.168.16.58:443 --server-insecure-tls</code></td>
+<td><code>sudo pmm-admin config --server-url=https://&amp;lt;USER&gt;:&amp;lt;PASSWORD&gt;@192.168.16.58:443 --server-insecure-tls</code></td>
 <td>🟪 PMM Client</td>
 <td><strong>PMM Server에 등록</strong></td>
 <td>등록 완료</td>
@@ -4338,7 +4337,7 @@ Apache 설정·PHP 파일은 WEB 서버에 있습니다. → WEB 서버에서 �
 <tr>
 <td>pmm-admin — Configuration commands</td>
 <td>https://docs.percona.com/percona-monitoring-and-management/3/use/commands/pmm-admin/config.html</td>
-<td><code>pmm-admin config [&lt;node-address&gt; ...] [FLAGS]</code> 문법, <code>--server-url=https://username:password@host/</code>, <code>--server-insecure-tls</code>, <code>--metrics-mode</code> — <strong>9.4절</strong></td>
+<td><code>pmm-admin config [&amp;lt;node-address&gt; ...] [FLAGS]</code> 문법, <code>--server-url=https://username:password@host/</code>, <code>--server-insecure-tls</code>, <code>--metrics-mode</code> — <strong>9.4절</strong></td>
 </tr>
 <tr>
 <td>pmm-admin — Status and diagnostics</td>
@@ -4412,7 +4411,7 @@ Apache 설정·PHP 파일은 WEB 서버에 있습니다. → WEB 서버에서 �
 <h3 id="작성-원칙-재확인-문서-마무리">작성 원칙 재확인 (문서 마무리)</h3>
 <p>이 노트는 다음을 지켰습니다.</p>
 <ul>
-<li>✅ 실제 비밀번호·PMM 토큰을 기록하지 않음 (<code>&lt;DB_PASSWORD&gt;</code>, <code>&lt;PMM_TOKEN&gt;</code>, <code>&lt;DB_USER&gt;</code> 자리표시자만 사용)</li>
+<li>✅ 실제 비밀번호·PMM 토큰을 기록하지 않음 (<code>&amp;lt;DB_PASSWORD&gt;</code>, <code>&amp;lt;PMM_TOKEN&gt;</code>, <code>&amp;lt;DB_USER&gt;</code> 자리표시자만 사용)</li>
 <li>✅ WEB 서버 / DB 서버 / 클라이언트 / PMM 명령을 라벨로 명확히 구분</li>
 <li>✅ <strong>HTTP 200을 DB 연동 성공으로 설명하지 않음</strong> (6.8절에서 별도 상세 설명)</li>
 <li>✅ 192.168.16.46 계정 권한 설정을 4.5절에 포함</li>
