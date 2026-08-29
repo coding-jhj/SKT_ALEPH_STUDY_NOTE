@@ -8,7 +8,7 @@
 그래서 **장마다 별도 HTML**을 만들고 index.html은 목차만 갖습니다.
 
 실행: python build.py
-결과: site/index.html + site/ch01.html ...
+결과: docs/index.html + docs/ch01.html ... (GitHub Pages 소스 폴더)
 """
 from __future__ import annotations
 
@@ -338,7 +338,7 @@ def main() -> int:
                 out.append(f'<div class="inchap">{inner}</div>')
         return "".join(out)
 
-    site = os.path.join(ROOT, "site")
+    site = os.path.join(ROOT, "docs")
     os.makedirs(site, exist_ok=True)
 
     # 목차 페이지
