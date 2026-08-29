@@ -119,7 +119,7 @@ th{background:var(--accent-soft); font-weight:700}
 <h3 id="043-apache-설정-적용과-재시작-웹-문서-구조-mariadb-초기-보안-설정">043. Apache 설정 적용과 재시작, 웹 문서 구조, MariaDB 초기 보안 설정</h3>
 <p>서 구조, MariaDB 초기 보안 설정</p>
 <h4 id="1-설정-파일-변경-후-서비스-재시작">1. 설정 파일 변경 후 서비스 재시작</h4>
-<p>httpd.conf  설정 파일에서 단 한 글자라도 변경하면 반드시 서비스를 재시작해야 변경 내용 이 적용된다.</p>
+<p>httpd.conf  설정 파일에서 단 한 글자라도 변경하면 반드시 서비스를 재시작해야 변경 내용이 적용된다.</p>
 <p>systemctl restart httpd    ← 웹 서비스 재시작</p>
 <div class="tablewrap"><table>
 <thead>
@@ -150,13 +150,13 @@ th{background:var(--accent-soft); font-weight:700}
 <p>설정 파일 수정 후 재시작하지 않으면 변경 내용이 반영되지 않는다.</p>
 <h4 id="2-웹-문서-디렉토리-구조">2. 웹 문서 디렉토리 구조</h4>
 <h5 id="2-1-document-root">2-1. Document Root 아래 디렉토리 생성</h5>
-<p>클라이언트에게 제공할 웹 문서는 모두 /var/www/html  디렉토리 안에 위치한다. 하위 디렉토 리를 생성하여 파일을 분류할 수 있다.</p>
-<p>mkdir /var/www/html/test               ← test 디렉토리 생성 cd /var/www/html                       ← Document Root로 이 동 ls                                     ← 현재 파일 목록 확인</p>
+<p>클라이언트에게 제공할 웹 문서는 모두 /var/www/html  디렉토리 안에 위치한다. 하위 디렉토리를 생성하여 파일을 분류할 수 있다.</p>
+<p>mkdir /var/www/html/test               ← test 디렉토리 생성 cd /var/www/html                       ← Document Root로 이동 ls                                     ← 현재 파일 목록 확인</p>
 <h5 id="2-2-cp">2-2. 파일 복사 — cp</h5>
 <p>리눅스에서 파일 복사 명령어는 cp 이다.</p>
 <p>cp 원본파일 대상파일    ← 기본 형식 cp test/test.html index.html    ← test 디렉토리의 test.html을 현재 디렉토리에 index.html로 복사 대상 경로에 디렉토리 경로가 없으면 현재 작업 디렉토리를 의미한다.</p>
 <h5 id="2-3-indexhtml">2-3. 시작 페이지(index.html)</h5>
-<p>브라우저 주소창에 파일 이름 없이 서버 IP만 입력했을 때 자동으로 표시되는 페이지가 있 다. 이는 Apache가 시작 페이지로 등록된 파일 이름을 자동으로 찾기 때문이다.</p>
+<p>브라우저 주소창에 파일 이름 없이 서버 IP만 입력했을 때 자동으로 표시되는 페이지가 있다. 이는 Apache가 시작 페이지로 등록된 파일 이름을 자동으로 찾기 때문이다.</p>
 <p>자동 인식되는 시작 페이지 파일명 index.html index.php /var/www/html  디렉토리 안에 index.html  또는 index.php  파일이 있으면, 브라우저에서 파일 이름을 생략해도 해당 파일이 자동으로 표시된다.</p>
 <h4 id="3-웹-서버와-데이터베이스-서버의-관계">3. 웹 서버와 데이터베이스 서버의 관계</h4>
 <h5 id="3-1">3-1. 프론트엔드와 백엔드</h5>
@@ -181,10 +181,10 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>데이터베이스(DB) 서버는 백엔드에 해당하며, 사용자 정보·게시글 등 다양한 데이터를 저장 하고 질의(Query)에 응답하는 역할을 한다.</p>
+<p>데이터베이스(DB) 서버는 백엔드에 해당하며, 사용자 정보·게시글 등 다양한 데이터를 저장하고 질의(Query)에 응답하는 역할을 한다.</p>
 <h5 id="3-2-db">3-2. 웹 서버와 DB 서버 간 동작 흐름</h5>
 <p>클라이언트가 로그인 페이지에서 아이디와 패스워드를 입력하면 다음과 같이 처리된다.</p>
-<p>클라이언트 → (로그인 정보 전송) → 웹 서버 → (SQL 질의) → DB 서버 ←  (로그인 성공/실패)  ←           ← (결과 반환) ← 웹 서버와 DB 서버는 물리적으로 별도의 시스템으로 구성하는 것이 보안상 권장된다. 하 나의 시스템에 모두 구성하면 보안 위험이 높아진다.</p>
+<p>클라이언트 → (로그인 정보 전송) → 웹 서버 → (SQL 질의) → DB 서버 ←  (로그인 성공/실패)  ←           ← (결과 반환) ← 웹 서버와 DB 서버는 물리적으로 별도의 시스템으로 구성하는 것이 보안상 권장된다. 하나의 시스템에 모두 구성하면 보안 위험이 높아진다.</p>
 <h5 id="3-3-sql">3-3. SQL이란</h5>
 <p>SQL (Structured Query Language) — 구조화된 질의 언어. 데이터베이스에 데이터를 저장하고, 검색하고, 관리하기 위한 언어이다.</p>
 <div class="tablewrap"><table>
@@ -275,17 +275,17 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>⚠️ 여기서 변경하는 root 패스워드는 데이터베이스에 접속하는 root 사용자의 패스워드 이다. 리눅스 시스템 로그인 패스워드와는 별개이다. 혼동하지 않도록 주의한다.</p>
-<p>원격에서 root 계정으로 DB에 직접 접속하는 것은 보안상 권장하지 않는다. 일반 사용자 를 별도로 생성하여 접속하는 것이 원칙이다.</p>
+<p>⚠️ 여기서 변경하는 root 패스워드는 데이터베이스에 접속하는 root 사용자의 패스워드이다. 리눅스 시스템 로그인 패스워드와는 별개이다. 혼동하지 않도록 주의한다.</p>
+<p>원격에서 root 계정으로 DB에 직접 접속하는 것은 보안상 권장하지 않는다. 일반 사용자를 별도로 생성하여 접속하는 것이 원칙이다.</p>
 <h4 id="6-mariadb-접속">6. MariaDB 접속</h4>
-<p>mysql -u root -p    ← root 사용자로 DB 접속 (-u: user, -p: pa ssword 입력)</p>
-<p>접속 성공 시 MariaDB [(none)]&gt;  프롬프트가 표시된다. (none) 은 현재 선택된 데이터베이스 가 없음을 의미한다.</p>
+<p>mysql -u root -p    ← root 사용자로 DB 접속 (-u: user, -p: password 입력)</p>
+<p>접속 성공 시 MariaDB [(none)]&gt;  프롬프트가 표시된다. (none) 은 현재 선택된 데이터베이스가 없음을 의미한다.</p>
 <h4 id="7-데이터베이스-목록-확인">7. 데이터베이스 목록 확인</h4>
 <p>show databases;    ← 현재 존재하는 데이터베이스 목록 출력 SQL 구문 마지막에는 반드시 세미콜론( ; )을 입력한다.</p>
 <p>MariaDB 설치 직후에는 기본으로 3개의 데이터베이스가 존재한다.</p>
 <h4 id="8-외부에서-mariadb에-접속하기-위한-조건">8. 외부에서 MariaDB에 접속하기 위한 조건</h4>
 <p>MariaDB의 기본 서비스 포트는 3306이다. 외부에서 DB 서버에 접속하려면 방화벽에서 해당 포트를 허용해야 한다.</p>
-<p>firewall-cmd --permanent --add-port=3306/tcp firewall-cmd --reload 앞으로 배우는 모든 서버 서비스에서 공통으로 적용되는 원칙: 서비스 시작 → 방화벽 포 트 허용 순서로 진행한다.</p>
+<p>firewall-cmd --permanent --add-port=3306/tcp firewall-cmd --reload 앞으로 배우는 모든 서버 서비스에서 공통으로 적용되는 원칙: 서비스 시작 → 방화벽 포트 허용 순서로 진행한다.</p>
 <hr />
 <h3 id="045-mariadb-sql-기초-crud-개념-데이터베이스테이블-생성-필드-추가">045. MariaDB SQL 기초 CRUD 개념, 데이터베이스·테이블 생성, 필드 추가</h3>
 <p>MariaDB SQL 기초: CRUD 개념, 데이터베이스·테이블 생성, 필드 추가</p>
@@ -327,7 +327,7 @@ th{background:var(--accent-soft); font-weight:700}
 <h5 id="3-2-show-tables">3-2. 테이블 목록 확인 — show tables</h5>
 <p>show tables;    ← 현재 데이터베이스 안의 테이블 목록 출력</p>
 <h5 id="3-3-select">3-3. 테이블 데이터 조회 — select</h5>
-<p>select * from 테이블명;               ← 모든 필드의 데이터 조회 select 필드1, 필드2 from 테이블명;    ← 지정한 필드의 데이터만 조 회 *  (별표)는 모든 필드를 의미한다.</p>
+<p>select * from 테이블명;               ← 모든 필드의 데이터 조회 select 필드1, 필드2 from 테이블명;    ← 지정한 필드의 데이터만 조회 *  (별표)는 모든 필드를 의미한다.</p>
 <h5 id="3-4-desc">3-4. 테이블 필드 구조 확인 — desc</h5>
 <p>desc 테이블명;    ← 테이블의 필드(칼럼) 구조 출력 desc  실행 결과에서 확인할 수 있는 정보는 다음과 같다.</p>
 <div class="tablewrap"><table>
@@ -500,7 +500,7 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>add 는 없던 필드를 추가할 때, modify 는 이미 있는 필드를 수정하거나 순서를 바꿀 때 사 용한다.</p>
+<p>add 는 없던 필드를 추가할 때, modify 는 이미 있는 필드를 수정하거나 순서를 바꿀 때 사용한다.</p>
 <h4 id="2-필드-삭제--alter-table--drop">2. 필드 삭제 — alter table ... drop</h4>
 <p>기존 테이블에서 특정 필드를 삭제할 때 drop 을 사용한다.</p>
 <p>alter table 테이블명 drop 필드명;</p>
@@ -580,7 +580,7 @@ th{background:var(--accent-soft); font-weight:700}
 <h5 id="5-2-where">5-2. 특정 조건의 데이터만 변경 — where</h5>
 <p>update 테이블명 set 필드명=새값 where 조건필드명='조건값';</p>
 <h5 id="5-3">5-3. 여러 필드 동시 변경</h5>
-<p>update 테이블명 set 필드명1=새값1, 필드명2=새값2 where 조건필드명 ='조건값';</p>
+<p>update 테이블명 set 필드명1=새값1, 필드명2=새값2 where 조건필드명='조건값';</p>
 <p>where 를 생략하면 해당 테이블의 모든 행이 일괄 변경된다.</p>
 <p>where 를 사용하면 조건에 해당하는 특정 행만 선택적으로 변경된다.</p>
 <h4 id="6-데이터-삭제--delete-from">6. 데이터 삭제 — delete from</h4>
@@ -588,17 +588,17 @@ th{background:var(--accent-soft); font-weight:700}
 <p>delete from 테이블명 where 조건필드명='조건값';</p>
 <h5 id="6-2_1">6-2. 테이블 내 모든 데이터 삭제</h5>
 <p>delete from 테이블명;</p>
-<p>where 를 생략하면 테이블 안의 모든 데이터(행)가 삭제된다. 테이블 구조(필드)는 남아 있다.</p>
+<p>where 를 생략하면 테이블 안의 모든 데이터(행)가 삭제된다. 테이블 구조(필드)는 남아있다.</p>
 <p>테이블 자체를 삭제하려면 drop table 테이블명을 사용한다.</p>
 <hr />
 <h3 id="065-rsyslog-연결-확인과-mariadb-연동-준비">065. rsyslog 연결 확인과 MariaDB 연동 준비</h3>
 <p>준비</p>
 <h4 id="1-rsyslog-클라이언트-서버-연결-확인">1. rsyslog 클라이언트-서버 연결 확인</h4>
 <h5 id="1-1-tail">1-1. tail 명령을 통한 실시간 로그 모니터링</h5>
-<p>서버에서 tail -f  명령으로 로그 파일을 실시간으로 모니터링하면서 클라이언트에서 이벤 트를 발생시키면, 클라이언트 로그가 서버에 실시간으로 기록된다.</p>
+<p>서버에서 tail -f  명령으로 로그 파일을 실시간으로 모니터링하면서 클라이언트에서 이벤트를 발생시키면, 클라이언트 로그가 서버에 실시간으로 기록된다.</p>
 <p>클라이언트에서 이벤트 발생 시 서버의 /var/log/messages 에 해당 내용이 자동으로 수 신된다.</p>
 <p>수신된 로그에는 클라이언트의 호스트 네임이 함께 표시된다.</p>
-<p>클라이언트에서 발생한 이벤트가 서버에 기록되는 것이지, 서버에서 직접 이벤트가 발생 한 것이 아님을 구분해야 한다.</p>
+<p>클라이언트에서 발생한 이벤트가 서버에 기록되는 것이지, 서버에서 직접 이벤트가 발생한 것이 아님을 구분해야 한다.</p>
 <h5 id="1-2">1-2. 연결 상태 확인 명령어</h5>
 <p>lsof -i tcp::514         ← TCP 514번 포트 연결 목록 확인 netstat -natp | grep 514 ← 514번 포트 연결 상태 필터링 로그를 주고받은 직후에는 ESTABLISHED  상태가 표시된다.</p>
 <div class="tablewrap"><table>
@@ -658,14 +658,14 @@ th{background:var(--accent-soft); font-weight:700}
 </table></div>
 <p>⚠️ Syntax error(문법 오류)는 철자 오류로 발생하며, connection refused 는 서버 설정 또는 방화벽 문제일 가능성이 높다.</p>
 <h4 id="3-서비스-상태의-enabledisabled-개념">3. 서비스 상태의 enable/disabled 개념</h4>
-<p>systemctl enable rsyslog    ← 재부팅 후에도 자동 시작 등록 systemctl status  명령에서 disabled  상태로 표시되어 있어도, 현재 서비스가 running (활성 화) 상태라면 당장의 운영에는 문제가 없다. 다만 disabled 는 재부팅 후 서비스가 자동으로 시작되지 않음을 의미하므로, 영구 운용을 위해서는 enable 로 설정해야 한다.</p>
+<p>systemctl enable rsyslog    ← 재부팅 후에도 자동 시작 등록 systemctl status  명령에서 disabled  상태로 표시되어 있어도, 현재 서비스가 running (활성화) 상태라면 당장의 운영에는 문제가 없다. 다만 disabled 는 재부팅 후 서비스가 자동으로 시작되지 않음을 의미하므로, 영구 운용을 위해서는 enable 로 설정해야 한다.</p>
 <h4 id="4-mariadb와-rsyslog-연동-준비">4. MariaDB와 rsyslog 연동 준비</h4>
 <h5 id="4-1-mariadb">4-1. MariaDB 서비스 확인 및 시작</h5>
 <p>로그를 데이터베이스에 저장하려면 서버에서 MariaDB 서비스가 실행 중이어야 한다.</p>
 <p>systemctl status mariadb       ← MariaDB 서비스 상태 확인 dnf install -y mariadb-server  ← MariaDB가 없을 경우 설치 systemctl start mariadb        ← MariaDB 서비스 시작</p>
 <h5 id="4-2-rsyslog-mysql">4-2. rsyslog-mysql 패키지</h5>
 <p>rsyslog와 MariaDB(MySQL 계열)를 연결하기 위한 전용 패키지가 필요하다.</p>
-<p>dnf install -y rsyslog-mysql    ← rsyslog와 MariaDB를 연결하 는 패키지 설치 이 패키지는 rsyslog에서 발생하는 로그 데이터를 MariaDB에 저장할 수 있도록 연결하는 역할을 한다.</p>
+<p>dnf install -y rsyslog-mysql    ← rsyslog와 MariaDB를 연결하는 패키지 설치 이 패키지는 rsyslog에서 발생하는 로그 데이터를 MariaDB에 저장할 수 있도록 연결하는 역할을 한다.</p>
 <hr />
 <h3 id="092-mariadb-리플리케이션-슬레이브-설정-및-복제-동작-확인">092. MariaDB 리플리케이션 슬레이브 설정 및 복제 동작 확인</h3>
 <p>정 및 복제 동작 확인</p>
@@ -678,7 +678,7 @@ th{background:var(--accent-soft); font-weight:700}
 <p>마스터에서는 1, 슬레이브에서는 2가 출력되어야 한다.</p>
 <h4 id="3-change-master-to--슬레이브에서-마스터-지정">3. CHANGE MASTER TO — 슬레이브에서 마스터 지정</h4>
 <p>슬레이브 DB에서 SQL 명령으로 마스터 정보를 지정한다. 이 명령은 환경 설정 파일이 아닌 MariaDB SQL 명령으로 실행해야 한다.</p>
-<p>CHANGE MASTER TO MASTER_HOST='마스터IP',         ← 마스터 DB 서버의 IP 주소 MASTER_USER='slave_db',         ← 마스터에서 생성한 복제 전용 계정명 MASTER_PASSWORD='패스워드',     ← 복제 전용 계정의 패스워드 MASTER_PORT=3306,               ← 마스터 DB 서비스 포트 (기 본값: 3306) MASTER_LOG_FILE='mysql-bin.000001',  ← 마스터의 바이너리 로 그 파일명 MASTER_LOG_POS=342;             ← 복제를 시작할 로그 파일 내 좌표값(Position)</p>
+<p>CHANGE MASTER TO MASTER_HOST='마스터IP',         ← 마스터 DB 서버의 IP 주소 MASTER_USER='slave_db',         ← 마스터에서 생성한 복제 전용 계정명 MASTER_PASSWORD='패스워드',     ← 복제 전용 계정의 패스워드 MASTER_PORT=3306,               ← 마스터 DB 서비스 포트 (기본값: 3306) MASTER_LOG_FILE='mysql-bin.000001',  ← 마스터의 바이너리 로그 파일명 MASTER_LOG_POS=342;             ← 복제를 시작할 로그 파일 내 좌표값(Position)</p>
 <h5 id="3-1-position">3-1. 바이너리 로그 파일과 Position</h5>
 <p>마스터에서 DB 작업이 발생하면 바이너리 로그 파일이 생성된다. 파일명은 mysqlbin.000001 , mysql-bin.000002  등 순차적으로 증가한다.</p>
 <p>MASTER_LOG_FILE: 슬레이브가 복제를 시작할 마스터의 바이너리 로그 파일명 MASTER_LOG_POS: 해당 파일 내에서 복제를 시작할 위치(좌표값). 마스터에 이미 생성된 파일이 있는 경우 중복되지 않는 값을 지정해야 한다.</p>
@@ -775,7 +775,7 @@ th{background:var(--accent-soft); font-weight:700}
 <h3 id="093-mariadb-리플리케이션-완성-및-복제-동작-확인">093. MariaDB 리플리케이션 완성 및 복제 동작 확인</h3>
 <p>동작 확인</p>
 <h4 id="1-리플리케이션-계정-생성-위치-정정">1. 리플리케이션 계정 생성 위치 정정</h4>
-<p>복제 전용 계정( GRANT REPLICATION SLAVE )은 마스터 DB 서버에서 생성해야 한다. 슬레이브가 마스터에 접속하여 복제를 수행하는 구조이므로, 복제 권한이 있는 계정은 마스터에 존재해 야 한다.</p>
+<p>복제 전용 계정( GRANT REPLICATION SLAVE )은 마스터 DB 서버에서 생성해야 한다. 슬레이브가 마스터에 접속하여 복제를 수행하는 구조이므로, 복제 권한이 있는 계정은 마스터에 존재해야 한다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -824,21 +824,21 @@ th{background:var(--accent-soft); font-weight:700}
 <h4 id="2-슬레이브-db에서-show-databases-또는-show-tables-를-실행하여-마스터에서-생성한">2. 슬레이브 DB에서 SHOW DATABASES;  또는 SHOW TABLES; 를 실행하여 마스터에서 생성한</h4>
 <p>내용이 자동으로 나타나는지 확인한다.</p>
 <h4 id="3-슬레이브에서-자동으로-동일한-내용이-나타나면-복제가-정상-동작하는-것이다">3. 슬레이브에서 자동으로 동일한 내용이 나타나면 복제가 정상 동작하는 것이다.</h4>
-<p>복제 확인 시, 기존에 존재하던 데이터베이스가 아닌 마스터에서 새로 생성한 데이터베이 스를 기준으로 확인해야 한다.</p>
+<p>복제 확인 시, 기존에 존재하던 데이터베이스가 아닌 마스터에서 새로 생성한 데이터베이스를 기준으로 확인해야 한다.</p>
 <h4 id="5-바이너리-로그-좌표값position-개념">5. 바이너리 로그 좌표값(Position) 개념</h4>
 <p>마스터 DB에 변경이 발생하면 바이너리 로그 파일에 해당 변경 내용과 위치(좌표값, Position)가 기록된다. 슬레이브는 이 좌표값을 기준으로 어느 지점부터 복제할지 결정한다.</p>
 <p>바이너리 로그 파일은 mysql-bin.000001 , mysql-bin.000002  등으로 순차 생성된다.</p>
 <p>파일 크기가 max_binlog_size 를 초과하거나 서비스 재시작 시 새 파일이 생성된다.</p>
 <p>MASTER_LOG_POS  값이 마스터의 실제 포지션 값과 다를 경우 복제가 정상 동작하지 않을 수 있다.</p>
 <h4 id="6-패키지-삭제-명령어--dnf-remove">6. 패키지 삭제 명령어 — dnf remove</h4>
-<p>리플리케이션 재설정 등을 위해 MariaDB를 완전히 제거하고 처음부터 다시 설치할 때 사용 한다.</p>
+<p>리플리케이션 재설정 등을 위해 MariaDB를 완전히 제거하고 처음부터 다시 설치할 때 사용한다.</p>
 <p>dnf remove mariadb-server   ← MariaDB 서버 패키지 완전 삭제 삭제 후 다시 설치하면 초기 상태로 시작할 수 있다.</p>
 <hr />
 <h3 id="094-mariadb-리플리케이션복제-개념-및-마스터-서버-설정">094. MariaDB 리플리케이션(복제) 개념 및 마스터 서버 설정</h3>
 <p>및 마스터 서버 설정</p>
 <h4 id="1-db-리플리케이션replication-개념">1. DB 리플리케이션(Replication) 개념</h4>
-<p>리플리케이션(Replication)은 두 대 이상의 DB 서버 사이에서 한쪽의 변경 내용을 자동으 로 동기화하는 복제 기능이다.</p>
-<p>DB 안에 중요한 데이터가 저장된 경우, 단일 서버에 장애가 발생하면 데이터 손실 또는 서비 스 중단이 발생할 수 있다. 리플리케이션은 이러한 상황에 대비하기 위해 사용한다.</p>
+<p>리플리케이션(Replication)은 두 대 이상의 DB 서버 사이에서 한쪽의 변경 내용을 자동으로 동기화하는 복제 기능이다.</p>
+<p>DB 안에 중요한 데이터가 저장된 경우, 단일 서버에 장애가 발생하면 데이터 손실 또는 서비스 중단이 발생할 수 있다. 리플리케이션은 이러한 상황에 대비하기 위해 사용한다.</p>
 <h5 id="1-1-">1-1. 마스터-슬레이브 구조</h5>
 <div class="tablewrap"><table>
 <thead>
@@ -858,7 +858,7 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>⚠️ 실제 운영 환경에서 DB 리플리케이션을 적용하려면 마스터·슬레이브 서버 모두 고성 능 하드웨어가 요구된다. 복제 동기화 과정에서 상당한 컴퓨팅 자원을 소모하기 때문이 다.</p>
+<p>⚠️ 실제 운영 환경에서 DB 리플리케이션을 적용하려면 마스터·슬레이브 서버 모두 고성 능 하드웨어가 요구된다. 복제 동기화 과정에서 상당한 컴퓨팅 자원을 소모하기 때문이다.</p>
 <h4 id="2-리플리케이션-사전-준비-조건">2. 리플리케이션 사전 준비 조건</h4>
 <p>두 DB 서버 간 리플리케이션이 동작하려면 아래 조건이 모두 충족되어야 한다.</p>
 <div class="tablewrap"><table>
@@ -889,8 +889,8 @@ th{background:var(--accent-soft); font-weight:700}
 </table></div>
 <h4 id="3-mariadb-환경-설정-파일">3. MariaDB 환경 설정 파일</h4>
 <p>MariaDB의 서버 환경 설정 파일 위치는 다음과 같다.</p>
-<p>/etc/my.cnf.d/mariadb-server.cnf   ← MariaDB 서버 환경 설정 파일 설정 파일 내부는 섹션으로 구분되며, [mysqld]  섹션 아래에 서버 관련 파라미터를 추가한 다.</p>
-<p>환경 설정 파일은 자체적인 문법을 따르므로 대소문자, 철자, 들여쓰기 등을 정확히 입력 해야 한다. 오류 발생 시 MariaDB 서비스가 재시작되지 않는다.</p>
+<p>/etc/my.cnf.d/mariadb-server.cnf   ← MariaDB 서버 환경 설정 파일 설정 파일 내부는 섹션으로 구분되며, [mysqld]  섹션 아래에 서버 관련 파라미터를 추가한다.</p>
+<p>환경 설정 파일은 자체적인 문법을 따르므로 대소문자, 철자, 들여쓰기 등을 정확히 입력해야 한다. 오류 발생 시 MariaDB 서비스가 재시작되지 않는다.</p>
 <h4 id="4-마스터-db-환경-설정-파라미터">4. 마스터 DB 환경 설정 파라미터</h4>
 <p>마스터 역할을 하는 DB 서버의 [mysqld]  섹션에 아래 파라미터를 추가한다.</p>
 <p>[mysqld] server-id = 1                          ← 서버 고유 식별자 (마스터와 슬레이브는 서로 다른 ID 사용) log_bin = /var/log/mariadb/mariadb-bin ← 바이너리 로그 파일 경로 및 이름 expire_logs_days = 10                  ← 바이너리 로그 보관 기간 (10일 경과 시 자동 삭제) max_binlog_size = 10M                  ← 바이너리 로그 파일 최대 크기 (초과 시 새 파일 생성)</p>
@@ -970,7 +970,7 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>DB에서 만든 계정으로는 시스템에 로그인할 수 없으며, 반대로 시스템 계정으로 DB에 접속 하는 것도 아니다.</p>
+<p>DB에서 만든 계정으로는 시스템에 로그인할 수 없으며, 반대로 시스템 계정으로 DB에 접속하는 것도 아니다.</p>
 <h4 id="2-데이터베이스-계층-구조">2. 데이터베이스 계층 구조</h4>
 <p>MariaDB(MySQL 계열)의 데이터베이스 계층 구조는 다음과 같다.</p>
 <p>데이터베이스(Database)</p>
@@ -980,10 +980,10 @@ th{background:var(--accent-soft); font-weight:700}
 <h4 id="3-db-사용자-계정-생성">3. DB 사용자 계정 생성</h4>
 <p>DB 사용자 계정을 생성하는 방법은 두 가지가 있다.</p>
 <h5 id="3-1-create-user">3-1. CREATE USER 명령으로 생성</h5>
-<p>CREATE USER '사용자명'@'접속허용호스트' IDENTIFIED BY '패스워 드';</p>
+<p>CREATE USER '사용자명'@'접속허용호스트' IDENTIFIED BY '패스워드';</p>
 <h5 id="3-2-grant">3-2. GRANT 명령으로 생성과 권한 부여를 동시에 처리</h5>
-<p>GRANT ALL PRIVILEGES ON <em>.</em> TO '사용자명'@'접속허용호스트' IDE NTIFIED BY '패스워드';</p>
-<p>두 방법은 결과가 동일하며, GRANT 명령은 CREATE USER와 권한 부여를 한 번에 처리한 다.</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO '사용자명'@'접속허용호스트' IDENTIFIED BY '패스워드';</p>
+<p>두 방법은 결과가 동일하며, GRANT 명령은 CREATE USER와 권한 부여를 한 번에 처리한다.</p>
 <h4 id="4-접속-허용-호스트host-설정">4. 접속 허용 호스트(Host) 설정</h4>
 <p>사용자 생성 시 @  뒤에 지정하는 호스트는 <strong>해당 사용자가 DB에 접속할 수 있는 위치(IP 또는 범위)</strong>를 의미한다.</p>
 <div class="tablewrap"><table>
@@ -1076,7 +1076,7 @@ th{background:var(--accent-soft); font-weight:700}
 </table></div>
 <p>관리자 계정 외의 일반 사용자 계정에는 필요한 최소 권한만 부여해야 한다. 모든 계정이 모든 DB에 모든 권한을 가지는 것은 보안상 위험하다.</p>
 <h5 id="5-2-flush-privileges">5-2. 권한 적용 — FLUSH PRIVILEGES</h5>
-<p>권한을 추가하거나 제거한 후에는 반드시 FLUSH PRIVILEGES 를 실행하여 변경사항을 즉시 적 용해야 한다.</p>
+<p>권한을 추가하거나 제거한 후에는 반드시 FLUSH PRIVILEGES 를 실행하여 변경사항을 즉시 적용해야 한다.</p>
 <p>FLUSH PRIVILEGES;</p>
 <h4 id="6-권한-조회--show-grants">6. 권한 조회 — SHOW GRANTS</h4>
 <p>SHOW GRANTS;                              ← 현재 접속 계정의 권한 조회 SHOW GRANTS FOR '사용자명'@'호스트';      ← 특정 사용자의 권한 조회</p>
@@ -1084,7 +1084,7 @@ th{background:var(--accent-soft); font-weight:700}
 <p>REVOKE 권한목록 ON DB명.테이블명 FROM '사용자명'@'호스트';</p>
 <p>권한 부여: GRANT ... TO 권한 회수: REVOKE ... FROM 권한 회수 후에도 FLUSH PRIVILEGES 로 적용해야 한다.</p>
 <h4 id="8-사용자-계정-삭제--drop-user">8. 사용자 계정 삭제 — DROP USER</h4>
-<p>DROP USER '사용자명';               ← 사용자명만으로 삭제 (버전 에 따라 가능) DROP USER '사용자명'@'호스트';      ← 호스트 정보 포함 삭제 (오류 발생 시 이 방법 사용)</p>
+<p>DROP USER '사용자명';               ← 사용자명만으로 삭제 (버전에 따라 가능) DROP USER '사용자명'@'호스트';      ← 호스트 정보 포함 삭제 (오류 발생 시 이 방법 사용)</p>
 <p>삭제 오류 발생 시 메시지에 호스트 정보까지 포함하라는 안내가 출력되므로 오류 메시지를 확인하고 호스트를 추가하면 된다.</p>
 <h4 id="9-데이터베이스-생성-시-문자셋-지정">9. 데이터베이스 생성 시 문자셋 지정</h4>
 <p>데이터베이스 생성 시 기본 문자셋을 지정하지 않으면 시스템 기본값이 적용된다. 한글 지원 이 필요한 경우 UTF-8 문자셋을 명시적으로 지정해야 한다.</p>
@@ -1096,7 +1096,7 @@ th{background:var(--accent-soft); font-weight:700}
 <h3 id="096-데이터베이스-보안-개요-및-시스템-하드웨어-점검-명령어">096. 데이터베이스 보안 개요 및 시스템 하드웨어 점검 명령어</h3>
 <p>드웨어 점검 명령어</p>
 <h4 id="1-데이터베이스db-보안-개요">1. 데이터베이스(DB) 보안 개요</h4>
-<p>데이터베이스 보안은 일반적인 시스템 보안과 동일한 구조를 가진다. 데이터베이스도 하나 의 시스템이기 때문에 아래의 보안 영역이 동일하게 적용된다.</p>
+<p>데이터베이스 보안은 일반적인 시스템 보안과 동일한 구조를 가진다. 데이터베이스도 하나의 시스템이기 때문에 아래의 보안 영역이 동일하게 적용된다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -1123,11 +1123,11 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>데이터베이스를 시스템에 구축하기 전에는 해당 시스템의 저장 공간, 메모리, CPU 등 하드 웨어 사양이 충분한지 반드시 사전 점검해야 한다.</p>
+<p>데이터베이스를 시스템에 구축하기 전에는 해당 시스템의 저장 공간, 메모리, CPU 등 하드웨어 사양이 충분한지 반드시 사전 점검해야 한다.</p>
 <h4 id="2-커널kernel-개념">2. 커널(Kernel) 개념</h4>
-<p>커널은 리눅스 운영체제에서 하드웨어와 소프트웨어를 연결하는 핵심 계층이다. 사용자가 터 미널(셸)에서 내린 명령을 받아 하드웨어와의 통신을 담당한다.</p>
+<p>커널은 리눅스 운영체제에서 하드웨어와 소프트웨어를 연결하는 핵심 계층이다. 사용자가 터미널(셸)에서 내린 명령을 받아 하드웨어와의 통신을 담당한다.</p>
 <p>[사용자] → [셸(Shell)] → [커널(Kernel)] → [하드웨어(Hardware)]</p>
-<p>⚠️ 커널 파라미터를 임의로 변경하면 하드웨어와의 통신 이상 또는 시스템 동작 불능 상 태가 발생할 수 있다. 커널 설정 변경은 반드시 신중하게 수행해야 한다.</p>
+<p>⚠️ 커널 파라미터를 임의로 변경하면 하드웨어와의 통신 이상 또는 시스템 동작 불능 상태가 발생할 수 있다. 커널 설정 변경은 반드시 신중하게 수행해야 한다.</p>
 <h4 id="3-시스템-하드웨어-점검-명령어">3. 시스템 하드웨어 점검 명령어</h4>
 <h5 id="3-1-sysctl">3-1. 커널 파라미터 조회 및 변경 — sysctl</h5>
 <p>sysctl 은 현재 실행 중인 커널의 파라미터 값을 조회하거나 변경할 수 있는 명령어이다.</p>
@@ -1151,9 +1151,9 @@ th{background:var(--accent-soft); font-weight:700}
 </table></div>
 <p>변경된 커널 파라미터를 영구 적용하려면 설정 파일을 직접 수정해야 한다.</p>
 <p>vi /etc/sysctl.conf   ← 커널 파라미터 영구 설정 파일 파일 내에 적용할 파라미터를 직접 입력하면 재부팅 후에도 유지된다.</p>
-<p>⚠️ 커널 파라미터 파일은 하드웨어 동작과 직결되므로, 내용을 잘 이해하지 않은 상태에 서 변경하거나 저장하면 안 된다.</p>
+<p>⚠️ 커널 파라미터 파일은 하드웨어 동작과 직결되므로, 내용을 잘 이해하지 않은 상태에서 변경하거나 저장하면 안 된다.</p>
 <h5 id="3-2-free-procmeminfo">3-2. 메모리 확인 — free  및 /proc/meminfo</h5>
-<p>free            ← 메모리 사용량 기본 출력 free -g         ← 기가 단위로 출력 free -m         ← 메가 단위로 출력 free -h         ← 사람이 읽기 편한 단위로 출력 cat /proc/meminfo       ← 메모리 상세 정보 파일 출력 grep MemTotal /proc/meminfo   ← 전체 메모리 용량만 검색 /proc/meminfo 는 전체 메모리, 사용 가능 메모리, 활성화된 메모리 등 메모리에 대한 세부 정 보를 담고 있는 파일이다.</p>
+<p>free            ← 메모리 사용량 기본 출력 free -g         ← 기가 단위로 출력 free -m         ← 메가 단위로 출력 free -h         ← 사람이 읽기 편한 단위로 출력 cat /proc/meminfo       ← 메모리 상세 정보 파일 출력 grep MemTotal /proc/meminfo   ← 전체 메모리 용량만 검색 /proc/meminfo 는 전체 메모리, 사용 가능 메모리, 활성화된 메모리 등 메모리에 대한 세부 정보를 담고 있는 파일이다.</p>
 <h5 id="3-3-cpu">3-3. CPU 및 운영체제 버전 확인</h5>
 <p>cat /proc/version       ← 운영체제 및 리눅스 커널 버전 확인 cat /proc/cpuinfo       ← CPU 모델, 코어 수, 클럭 등 상세 정보 확인 /proc/version 에 표시되는 버전은 로키 리눅스(Rocky Linux)의 배포판 버전이 아니라 리눅스 커널 버전이다.</p>
 <h4 id="4-패키지명서비스명방화벽-키워드의-구분">4. 패키지명·서비스명·방화벽 키워드의 구분</h4>
@@ -1188,7 +1188,7 @@ th{background:var(--accent-soft); font-weight:700}
 </tr>
 </tbody>
 </table></div>
-<p>systemctl  명령에서 .service 는 통상 생략하여 사용하며, 전체 이름과 동일하게 동작한 다.</p>
+<p>systemctl  명령에서 .service 는 통상 생략하여 사용하며, 전체 이름과 동일하게 동작한다.</p>
 <h4 id="5-mariadb-초기-보안-설치-2">5. MariaDB 초기 보안 설치</h4>
 <p>MariaDB 설치 후에는 초기 보안 설정 작업을 반드시 수행해야 보안성을 높일 수 있다.</p>
 <p>mysql_secure_installation   ← DB 초기 보안 설치 명령어 이 명령을 실행하면 아래 항목들을 순서대로 설정하게 된다.</p>

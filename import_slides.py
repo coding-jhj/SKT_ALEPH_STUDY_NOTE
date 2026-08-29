@@ -21,7 +21,13 @@ import zipfile
 
 import fitz  # PyMuPDF
 
-from pdf_blocks import merge_payloads, page_blocks, table_to_markdown, text_to_markdown
+from pdf_blocks import (
+    build_vocab,
+    merge_payloads,
+    page_blocks,
+    table_to_markdown,
+    text_to_markdown,
+)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR = os.path.join(ROOT, "slides")
@@ -79,6 +85,16 @@ def main(zip_path: str) -> int:
         print("PDF가 없습니다", file=sys.stderr)
         return 1
 
+    # 1차: 전체 본문을 한 번 읽어 낱말 사전을 만듭니다.
+    #      줄 끝에서 잘린 어절을 붙일지 띄울지 판단하는 근거입니다.
+    raw_texts: dict[str, str] = {}
+    for name in names:
+        doc = fitz.open(stream=z.read(name), filetype="pdf")
+        raw_texts[name] = chr(10).join(page.get_text() for page in doc)
+        doc.close()
+    vocab = build_vocab(list(raw_texts.values()))
+    print(f"낱말 사전 {len(vocab):,}개")
+
     buckets: dict[str, list[tuple[str, str, list[str]]]] = {p: [] for p in PART_ORDER}
 
     for name in names:
@@ -92,7 +108,7 @@ def main(zip_path: str) -> int:
 
         def flush_text() -> None:
             if pending:
-                body.extend(text_to_markdown(merge_payloads(pending), title))
+                body.extend(text_to_markdown(merge_payloads(pending), title, vocab))
                 pending.clear()
 
         for page in doc:

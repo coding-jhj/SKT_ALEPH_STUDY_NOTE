@@ -4,15 +4,18 @@
 PyMuPDF의 `find_tables()`가 표의 칸 구조를 그대로 돌려줍니다.
 표 영역에 걸친 글자는 본문에서 빼야 같은 내용이 두 번 나오지 않습니다.
 
-PDF는 글자의 위치만 담고 있어서, 원래 어디가 문단이고 어디가 단순 줄바꿈이었는지는
-남아 있지 않습니다. 아래 두 규칙으로 복원합니다.
+PDF는 글자의 위치만 담고 있어서 원래 어디가 문단이고 어디가 단순 줄바꿈이었는지,
+줄바꿈 자리에 공백이 있었는지는 남아 있지 않습니다. 세 규칙으로 복원합니다.
 
-  - 문장 부호로 끝나지 않은 채 덩어리가 끊기면(대개 페이지가 넘어간 것) 이어 붙인다
-  - 줄바꿈 자리는 공백으로 잇는다 (한글 조판은 대부분 띄어쓰기에서 줄을 바꾼다)
+  1. 문장 부호로 끝나지 않은 채 덩어리가 끊기면(대개 페이지 넘김) 이어 붙인다
+  2. 줄이 잘린 자리는 **문서 전체 어휘**로 판단한다
+     — 붙여 만든 낱말이 문서 어딘가에 온전히 나오면 붙이고, 아니면 공백을 넣는다
+  3. 영문 하이픈 분철은 붙인다
 """
 from __future__ import annotations
 
 import re
+from collections import Counter
 
 import fitz  # PyMuPDF
 
@@ -20,6 +23,9 @@ H2 = re.compile(r"^(\d{1,2})\.\s+(.+)$")          # 1. 제목
 H3 = re.compile(r"^(\d{1,2}-\d{1,2})\.\s+(.+)$")  # 1-1. 제목
 
 SENTENCE_END = ("다.", "요.", "다", ".", ":", "!", "?", ")", "]", ";")
+
+# 어휘 사전을 만들 때 낱말 양끝에서 떼어 낼 문자
+STRIP = " \t·,.:;!?()[]{}<>\"'`“”‘’/|"
 
 
 def cell(value) -> str:
@@ -68,10 +74,25 @@ def page_blocks(page) -> list[tuple[float, str, object]]:
     return items
 
 
+def build_vocab(texts: list[str], min_count: int = 2) -> set[str]:
+    """문서 전체에서 낱말 사전을 만듭니다.
+
+    줄 끝에서 잘린 낱말인지 판단하는 근거가 됩니다. 한 번만 나온 낱말은
+    그 자체가 잘린 조각일 수 있으므로 기본 2회 이상만 담습니다.
+    """
+    counter: Counter[str] = Counter()
+    for text in texts:
+        for raw in text.split():
+            word = raw.strip(STRIP)
+            if len(word) >= 2:
+                counter[word] += 1
+    return {w for w, c in counter.items() if c >= min_count}
+
+
 def merge_payloads(blocks: list[str]) -> str:
     """텍스트 덩어리들을 하나의 본문으로 잇습니다.
 
-    덩어리는 대개 문단 하나지만, 페이지가 바뀌면 문장 도중에도 끊깁니다.
+    덩어리는 대개 문단 하나지만 페이지가 바뀌면 문장 도중에도 끊깁니다.
     앞 덩어리가 문장 부호로 끝나지 않으면 같은 문단으로 이어 붙입니다.
     """
     paragraphs: list[str] = []
@@ -86,14 +107,47 @@ def merge_payloads(blocks: list[str]) -> str:
     return (chr(10) * 2).join(paragraphs)
 
 
-def join_wrapped(lines: list[str]) -> str:
-    """PDF가 잘라 놓은 줄을 한 문단으로 되붙입니다.
+HANGUL_RUN = re.compile(r"^[가-힣]+")
 
-    줄바꿈 자리에 원래 공백이 있었는지는 PDF에 남아 있지 않습니다. 한글 조판은
-    대부분 띄어쓰기에서 줄을 바꾸므로 공백을 넣어 잇는 쪽을 기본으로 둡니다.
-    긴 어절이 통째로 잘린 드문 경우에는 공백이 하나 더 들어갑니다.
-    영문 하이픈 분철만 붙여서 잇습니다.
+# 낱말 첫머리에 올 수 없는 어미·조사. 줄이 여기서 잘렸다면 앞말에 붙여야 합니다.
+ENDINGS = (
+    "이다", "입니다", "이며", "이고", "이라", "이란", "인다", "한다", "합니다", "하는", "하고",
+    "하여", "되어", "된다", "됩니다", "되는", "에서", "에게", "으로", "까지", "부터", "이나",
+    "라도", "지만", "면서", "므로", "처럼", "보다", "마다", "밖에",
+)
+
+
+def _glue(tail: str, head: str, vocab: set[str]) -> bool:
+    """줄이 잘린 자리를 붙여야 하는지 판단합니다.
+
+    근거 두 가지입니다.
+      1. 붙여 만든 낱말이 문서 어휘에 있으면 붙인다
+      2. 뒷조각이 낱말 첫머리에 올 수 없는 어미·조사면 붙인다
     """
+    tail_parts, head_parts = tail.split(), head.split()
+    if not tail_parts or not head_parts:
+        return False
+    last = tail_parts[-1].strip(STRIP)
+    first = head_parts[0].strip(STRIP)
+    if not last or not first:
+        return False
+
+    lead = HANGUL_RUN.match(first)
+    lead_text = lead.group(0) if lead else first
+
+    if lead_text in ENDINGS:
+        return True
+
+    for candidate in (last + first, last + lead_text):
+        if candidate in vocab:
+            # 앞뒤 모두 홀로 쓰이는 낱말이고 앞이 한 글자면 띄웁니다 ("수 있다")
+            return not (len(last) <= 1 and last in vocab and first in vocab)
+    return False
+
+
+def join_wrapped(lines: list[str], vocab: set[str] | None = None) -> str:
+    """PDF가 잘라 놓은 줄을 한 문단으로 되붙입니다."""
+    vocab = vocab or set()
     out = ""
     for raw in lines:
         piece = raw.strip()
@@ -101,8 +155,10 @@ def join_wrapped(lines: list[str]) -> str:
             continue
         if not out:
             out = piece
-        elif out.endswith("-"):
+        elif out.endswith("-"):                 # 영문 하이픈 분철
             out = out[:-1] + piece
+        elif _glue(out, piece, vocab):          # 어절이 통째로 잘린 자리
+            out += piece
         else:
             out += " " + piece
     return out
@@ -127,14 +183,14 @@ def clean_lines(text: str, doc_title: str) -> list[str]:
     return out
 
 
-def text_to_markdown(text: str, doc_title: str) -> list[str]:
+def text_to_markdown(text: str, doc_title: str, vocab: set[str] | None = None) -> list[str]:
     """본문을 제목과 문단으로 나눕니다. 글자는 바꾸지 않습니다."""
     out: list[str] = []
     buf: list[str] = []
 
     def flush() -> None:
         if buf:
-            joined = join_wrapped(buf)
+            joined = join_wrapped(buf, vocab)
             if joined:
                 out.append(joined)
                 out.append("")
