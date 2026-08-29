@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>중복과 상충 정리 · SKT ALEPH 학습 노트</title>
+<title>핵심키워드 · 네트워크 (1/3) · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -108,246 +108,3329 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="cur" href="ch09.html">09. 중복과 상충 정리</a><div class="inchap"><a class="lv3" href="#주제가-걸쳐-있는-노트">주제가 걸쳐 있는 노트</a><a class="lv3" href="#주제별로-어느-노트를-볼-것인가">주제별로 어느 노트를 볼 것인가</a><a class="lv4" href="#mariadb--다섯-노트에-나뉘어-있음">MariaDB — 다섯 노트에 나뉘어 있음</a><a class="lv4" href="#apache--php--세-노트">Apache / PHP — 세 노트</a><a class="lv4" href="#selinux--두-노트-접근-방식이-다름">SELinux — 두 노트, 접근 방식이 다름</a><a class="lv4" href="#firewalld--세-노트에-조각으로">firewalld — 세 노트에 조각으로</a><a class="lv3" href="#확인이-필요한-지점">확인이 필요한 지점</a><a class="lv3" href="#아직-노트가-없는-큰-구간">아직 노트가 없는 큰 구간</a></div><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="cur" href="ch09.html">09. 핵심키워드 · 네트워크 (1/3)</a><div class="inchap"><a class="lv3" href="#001-ipv6-네트워크-관리-모델">001. IPv6 네트워크 관리 모델</a><a class="lv4" href="#1-서브네팅-subnetting-개요">1. 서브네팅 (Subnetting) 개요</a><a class="lv4" href="#2-네트워크-관리-모델--fcaps">2. 네트워크 관리 모델 — FCAPS</a><a class="lv4" href="#3-네트워크-시뮬레이터-툴">3. 네트워크 시뮬레이터 툴</a><a class="lv4" href="#4-packet-tracer-화면-구성">4. Packet Tracer 화면 구성</a><a class="lv4" href="#5-시스코-장비를-사용하는-이유">5. 시스코 장비를 사용하는 이유</a><a class="lv4" href="#6-토폴로지-구성-실습">6. 토폴로지 구성 실습</a><a class="lv4" href="#1-좌측-하단-패널에서-원하는-장비-선택">1. 좌측 하단 패널에서 원하는 장비 선택</a><a class="lv4" href="#2-드래그-앤-드롭-또는-클릭-후-작업-영역-클릭으로-배치">2. 드래그 앤 드롭 또는 클릭 후 작업 영역 클릭으로 배치</a><a class="lv4" href="#7-packet-tracer-환경-설정">7. Packet Tracer 환경 설정</a><a class="lv3" href="#002-it-인프라-보안-과정-소개-it-인프라-기초">002. IT 인프라 보안 과정 소개 IT 인프라 기초</a><a class="lv4" href="#1-과정-구성-3개-교과목">1. 과정 구성 (3개 교과목)</a><a class="lv4" href="#2-과제-및-프로젝트">2. 과제 및 프로젝트</a><a class="lv4" href="#3-취업-관련-안내">3. 취업 관련 안내</a><a class="lv4" href="#4-it-인프라란">4. IT 인프라란?</a><a class="lv4" href="#5-수강-안내-및-마음가짐">5. 수강 안내 및 마음가짐</a><a class="lv3" href="#003-tcp-udp-비교-및-ip-주소-체계">003. TCP UDP 비교 및 IP 주소 체계</a><a class="lv4" href="#1-tcp-vs-udp-비교">1. TCP vs UDP 비교</a><a class="lv4" href="#1-송신-측에서-데이터패킷를-전송">1. 송신 측에서 데이터(패킷)를 전송</a><a class="lv4" href="#2-수신-측에서-미수신-패킷-발생-시--아직-안-왔어-메시지-전송">2. 수신 측에서 미수신 패킷 발생 시 → &quot;아직 안 왔어&quot; 메시지 전송</a><a class="lv4" href="#3-송신-측에서-해당-패킷-재전송">3. 송신 측에서 해당 패킷 재전송</a><a class="lv4" href="#4-모든-데이터가-정확히-수신될-때까지-반복">4. 모든 데이터가 정확히 수신될 때까지 반복</a><a class="lv4" href="#2-포트-번호-port-number">2. 포트 번호 (Port Number)</a><a class="lv4" href="#3-네트워크-계층-프로토콜">3. 네트워크 계층 프로토콜</a><a class="lv4" href="#4-ipxspx-프로토콜">4. IPX/SPX 프로토콜</a><a class="lv4" href="#5-계층별-데이터-표현-단위">5. 계층별 데이터 표현 단위</a><a class="lv4" href="#6-ip-버전-4-ipv4-주소-체계">6. IP 버전 4 (IPv4) 주소 체계</a><a class="lv4" href="#7-ip-버전-6-ipv6-주소-체계">7. IP 버전 6 (IPv6) 주소 체계</a><a class="lv4" href="#8-mac-주소-물리적-주소">8. MAC 주소 (물리적 주소)</a><a class="lv4" href="#9-주소-관련-참고-기관">9. 주소 관련 참고 기관</a><a class="lv3" href="#004-네트워크-보안-기초">004. 네트워크 보안 기초</a><a class="lv4" href="#1-정보보안의-3대-요소-cia">1. 정보보안의 3대 요소 (CIA)</a><a class="lv4" href="#2-정보보안의-5대-요소">2. 정보보안의 5대 요소</a><a class="lv4" href="#3-정보보안의-3대-분류">3. 정보보안의 3대 분류</a><a class="lv4" href="#4-isms-p-정보보호-관리체계-인증">4. ISMS-P (정보보호 관리체계 인증)</a><a class="lv4" href="#5-osi-표준-모델">5. OSI 표준 모델</a><a class="lv4" href="#6-캡슐화와-역캡슐화">6. 캡슐화와 역캡슐화</a><a class="lv4" href="#7-tcpip-모델">7. TCP/IP 모델</a><a class="lv3" href="#005-시스코-장비-cli-기본-설정">005. 시스코 장비 CLI 기본 설정</a><a class="lv4" href="#1-cli-command-line-interface-개요">1. CLI (Command Line Interface) 개요</a><a class="lv4" href="#2-장비-모드-구조">2. 장비 모드 구조</a><a class="lv4" href="#3-모드-이동-명령어">3. 모드 이동 명령어</a><a class="lv4" href="#4-자주-쓰는-기본-명령어">4. 자주 쓰는 기본 명령어</a><a class="lv4" href="#5-보안-설정--패스워드">5. 보안 설정 — 패스워드</a><a class="lv4" href="#6-원격-접속vty-패스워드-설정">6. 원격 접속(VTY) 패스워드 설정</a><a class="lv4" href="#7-콘솔-포트-console-port-개념">7. 콘솔 포트 (Console Port) 개념</a><a class="lv4" href="#8-실습-전체-흐름-요약">8. 실습 전체 흐름 요약</a><a class="lv4" href="#1-packet-tracer에서-장비-클릭--cli-탭-진입">1. Packet Tracer에서 장비 클릭 → CLI 탭 진입</a><a class="lv4" href="#2-enter-눌러-사용자-모드-진입-switchgt">2. Enter 눌러 사용자 모드 진입 (Switch&amp;gt;)</a><a class="lv4" href="#3-enable--이네이블-모드-진입-switch">3. enable → 이네이블 모드 진입 (Switch#)</a><a class="lv4" href="#4-configure-terminal--전역-설정-모드-진입-switchconfig">4. configure terminal → 전역 설정 모드 진입 (Switch(config)#)</a><a class="lv4" href="#5-hostname-이름--장비-이름-변경">5. hostname [이름] → 장비 이름 변경</a><a class="lv4" href="#6-line-console-0--콘솔-패스워드-설정-password--login">6. line console 0 → 콘솔 패스워드 설정 (password / login)</a><a class="lv4" href="#7-exit--전역-설정-모드로-복귀">7. exit → 전역 설정 모드로 복귀</a><a class="lv4" href="#8-enable-password-패스워드--이네이블-패스워드-설정">8. enable password [패스워드] → 이네이블 패스워드 설정</a><a class="lv4" href="#9-service-password-encryption--패스워드-암호화">9. service password-encryption → 패스워드 암호화</a><a class="lv4" href="#10-end-또는-ctrlz--이네이블-모드로-이동">10. end 또는 Ctrl+Z → 이네이블 모드로 이동</a><a class="lv4" href="#11-show-running-config--설정-내용-확인">11. show running-config → 설정 내용 확인</a><a class="lv4" href="#12-file--save-as--pkt-파일로-저장">12. File → Save As → .pkt 파일로 저장</a><a class="lv4" href="#9-파일-저장-방법">9. 파일 저장 방법</a><a class="lv3" href="#006-vtp">006. VTP</a><a class="lv4" href="#1-트러블슈팅troubleshooting-마인드셋">1. 트러블슈팅(Troubleshooting) 마인드셋</a><a class="lv4" href="#2-vtp-vlan-trunking-protocol-개요">2. VTP (VLAN Trunking Protocol) 개요</a><a class="lv4" href="#3-vtp-동작-모드-3가지">3. VTP 동작 모드 (3가지)</a><a class="lv4" href="#4-revision-number-리비전-넘버">4. Revision Number (리비전 넘버)</a><a class="lv4" href="#5-vtp-설정-과정">5. VTP 설정 과정</a><a class="lv4" href="#6-동기화-안-될-때-체크리스트">6. 동기화 안 될 때 체크리스트</a><a class="lv4" href="#7-유용한-cli-팁">7. 유용한 CLI 팁</a><a class="lv3" href="#007-vtp-트러블슈팅">007. VTP 트러블슈팅</a><a class="lv4" href="#1-vtp-트러블슈팅-체크리스트">1. VTP 트러블슈팅 체크리스트</a><a class="lv4" href="#2-시스코-장비-모델-번호-이해">2. 시스코 장비 모델 번호 이해</a><a class="lv4" href="#3-종합-예제--3개-vlan-전체-설정">3. 종합 예제 — 3개 VLAN 전체 설정</a><a class="lv4" href="#5-설정-확인-명령어-모음">5. 설정 확인 명령어 모음</a><a class="lv3" href="#008-라우터-심화---enable-secret-인터페이스-ip-저장-구조">008. 라우터 심화 - enable secret 인터페이스 IP 저장 구조</a><a class="lv4" href="#1-enable-password-vs-enable-secret">1. enable password vs enable secret</a><a class="lv4" href="#2-라우터-인터페이스-ip-설정">2. 라우터 인터페이스 IP 설정</a><a class="lv4" href="#3-게이트웨이gateway-개념">3. 게이트웨이(Gateway) 개념</a><a class="lv4" href="#4-장비-운영체제ios-확인">4. 장비 운영체제(IOS) 확인</a><a class="lv4" href="#5-ram-vs-rom-저장-구조">5. RAM vs ROM (저장 구조)</a><a class="lv4" href="#6-설정-확인-명령어-비교">6. 설정 확인 명령어 비교</a><a class="lv3" href="#009-서브넷-마스크-상세-서브네팅-공식">009. 서브넷 마스크 상세 서브네팅 공식</a><a class="lv4" href="#1-프리픽스-표기법-숫자의-의미">1. 프리픽스 표기법 (/숫자)의 의미</a><a class="lv4" href="#2-네트워크-id--호스트-id">2. 네트워크 ID / 호스트 ID</a><a class="lv4" href="#3-예약-주소">3. 예약 주소</a><a class="lv4" href="#4-서브네팅-공식">4. 서브네팅 공식</a><a class="lv4" href="#5-서브네팅의-목적">5. 서브네팅의 목적</a><a class="lv4" href="#1-pc1에-ip-192168100100--서브넷-2552552550-24-설정">1. PC1에 IP 192.168.100.100 , 서브넷 255.255.255.0  (/24) 설정</a><a class="lv4" href="#2-pc2에-ip-192168100200--서브넷-2552552550-24-설정">2. PC2에 IP 192.168.100.200 , 서브넷 255.255.255.0  (/24) 설정</a><a class="lv4" href="#3-pc2에서-pc1으로-ping-192168100100--통신-성공-reply">3. PC2에서 PC1으로 ping 192.168.100.100  → 통신 성공 (Reply)</a><a class="lv4" href="#4-두-pc-모두-서브넷을-255255255128-25으로-변경">4. 두 PC 모두 서브넷을 255.255.255.128  (/25)으로 변경</a><a class="lv4" href="#5-동일하게-핑--request-time-out--통신-실패">5. 동일하게 핑 → Request time out  — 통신 실패</a><a class="lv3" href="#010-설정-저장-cli-팁-vlan-서브넷">010. 설정 저장 CLI 팁 VLAN 서브넷</a><a class="lv4" href="#1-설정-저장-방법">1. 설정 저장 방법</a><a class="lv4" href="#2-cli-유용한-팁">2. CLI 유용한 팁</a><a class="lv4" href="#3-vlan-virtual-lan-개념">3. VLAN (Virtual LAN) 개념</a><a class="lv4" href="#4-서브넷-기초--이진수-변환">4. 서브넷 기초 — 이진수 변환</a><a class="lv4" href="#5-서브넷-마스크-기초">5. 서브넷 마스크 기초</a><a class="lv3" href="#011-자주-받는-질문---vlan-설정-오류-해결-트러블슈팅">011. 자주 받는 질문 - VLAN 설정 오류 해결 트러블슈팅</a><a class="lv4" href="#1-서브인터페이스-번호-규칙">1. 서브인터페이스 번호 규칙</a><a class="lv4" href="#2-트렁크-설정-위치-정리">2. 트렁크 설정 위치 정리</a><a class="lv4" href="#3-l2-스위치-vs-l3-스위치-비교">3. L2 스위치 vs L3 스위치 비교</a><a class="lv4" href="#4-vlan-설정-전체-순서-재정리">4. VLAN 설정 전체 순서 재정리</a><a class="lv4" href="#1-vlan-생성-해당-스위치에-연결된-vlan이-없어도-전체-생성-필요">1. VLAN 생성 (해당 스위치에 연결된 VLAN이 없어도 전체 생성 필요)</a><a class="lv4" href="#2-포트별-vlan-할당-pc서버-연결-포트--access-모드">2. 포트별 VLAN 할당 (PC/서버 연결 포트 → Access 모드)</a><a class="lv4" href="#3-트렁크-포트-설정-스위치스위치-스위치라우터">3. 트렁크 포트 설정 (스위치↔스위치, 스위치↔라우터)</a><a class="lv4" href="#5-서브인터페이스-설정--순서-주의사항">5. 서브인터페이스 설정 — 순서 주의사항</a><a class="lv4" href="#6-자주-발생하는-오류-및-해결-방법">6. 자주 발생하는 오류 및 해결 방법</a><a class="lv4" href="#7-주요-오류-메시지-해석">7. 주요 오류 메시지 해석</a><a class="lv4" href="#8-잘못된-설정-수정-방법">8. 잘못된 설정 수정 방법</a><a class="lv4" href="#9-설정-명령어-전체-참고-show-run-활용">9. 설정 명령어 전체 참고 (show run 활용)</a><a class="lv4" href="#10-통신-테스트-방법-정리">10. 통신 테스트 방법 정리</a><a class="lv3" href="#012-트렁킹-서브인터페이스-다른-vlan-간-통신">012. 트렁킹 서브인터페이스 다른 VLAN 간 통신</a><a class="lv4" href="#1-트렁킹-trunking-개념">1. 트렁킹 (Trunking) 개념</a><a class="lv4" href="#2-트렁킹-확인-명령어">2. 트렁킹 확인 명령어</a><a class="lv4" href="#3-동일-vlan-통신-vs-다른-vlan-통신">3. 동일 VLAN 통신 vs 다른 VLAN 통신</a><a class="lv4" href="#4-서브인터페이스-sub-interface-설정">4. 서브인터페이스 (Sub-interface) 설정</a><a class="lv4" href="#5-게이트웨이-설정-각-pc">5. 게이트웨이 설정 (각 PC)</a><a class="lv4" href="#6-통신-테스트-결과">6. 통신 테스트 결과</a><a class="lv4" href="#7-전체-통신-구조-정리">7. 전체 통신 구조 정리</a><a class="lv4" href="#8-설정-확인">8. 설정 확인</a><a class="lv3" href="#013-포트-기반-vlan-트렁크">013. 포트 기반 VLAN 트렁크</a><a class="lv4" href="#1-ip-주소-설계-vlan-구성-전-선행-작업">1. IP 주소 설계 (VLAN 구성 전 선행 작업)</a><a class="lv4" href="#2-포트-기반-vlan-port-based-vlan">2. 포트 기반 VLAN (Port-based VLAN)</a><a class="lv4" href="#3-vlan-설정-명령어-스위치">3. VLAN 설정 명령어 (스위치)</a><a class="lv4" href="#4-vlan-설정-확인">4. VLAN 설정 확인</a><a class="lv4" href="#5-ab-두-스위치-설정-시-주의사항">5. A/B 두 스위치 설정 시 주의사항</a><a class="lv3" href="#014-eigrp-as-도메인-분리와-재분배-설정">014. EIGRP AS 도메인 분리와 재분배 설정</a><a class="lv4" href="#1-eigrp-다중-as-도메인-구성">1. EIGRP 다중 AS 도메인 구성</a><a class="lv4" href="#2-다중-as-도메인-환경의-문제점">2. 다중 AS 도메인 환경의 문제점</a><a class="lv4" href="#3-라우터-e의-eigrp-as-20-설정">3. 라우터 E의 EIGRP AS 20 설정</a><a class="lv4" href="#4-as-도메인-분리와-재분배redistribution">4. AS 도메인 분리와 재분배(Redistribution)</a><a class="lv4" href="#5-eigrp-재분배-설정">5. EIGRP 재분배 설정</a><a class="lv4" href="#6-eigrp-프로토콜-정보-확인">6. EIGRP 프로토콜 정보 확인</a><a class="lv3" href="#015-eigrp-설정과-기본-구조">015. EIGRP 설정과 기본 구조</a><a class="lv4" href="#1-eigrp의-개념-및-역할">1. EIGRP의 개념 및 역할</a><a class="lv4" href="#2-eigrp-설정-필수-요소">2. EIGRP 설정 필수 요소</a><a class="lv4" href="#3-eigrp-설정-단계별-절차">3. EIGRP 설정 단계별 절차</a><a class="lv4" href="#4-eigrp-설정-구성-예시">4. EIGRP 설정 구성 예시</a><a class="lv4" href="#5-eigrp-이웃-라우터-관계-형성">5. EIGRP 이웃 라우터 관계 형성</a><a class="lv4" href="#1-동일한-as-number">1. 동일한 AS Number</a><a class="lv4" href="#2-직접-연결된-인터페이">2. 직접 연결된 인터페이</a><a class="lv4" href="#3-네트워크-광고">3. 네트워크 광고</a><a class="lv4" href="#4-인터페이스-활성화">4. 인터페이스 활성화</a><a class="lv4" href="#6-eigrp의-다중-메트릭metric-시스템">6. EIGRP의 다중 메트릭(Metric) 시스템</a><a class="lv4" href="#1-bw-bandwidth--대역폭-링크-최저-속도">1. BW (Bandwidth)     ← 대역폭 (링크 최저 속도)</a><a class="lv4" href="#2-d-delay--지연시간-누적-지연">2. D (Delay)          ← 지연시간 (누적 지연)</a><a class="lv4" href="#3-r-reliability--신뢰도-링크-안정성">3. R (Reliability)    ← 신뢰도 (링크 안정성)</a><a class="lv4" href="#4-l-load--부하량-현재-사용률">4. L (Load)           ← 부하량 (현재 사용률)</a><a class="lv4" href="#5-m-mtu--최대-전송-단위">5. M (MTU)            ← 최대 전송 단위</a><a class="lv4" href="#7-eigrp의-장점과-특징">7. EIGRP의 장점과 특징</a><a class="lv3" href="#016-rip-버전-1과-버전-2의-차이점-및-호환성-검증">016. RIP 버전 1과 버전 2의 차이점 및 호환성 검증</a><a class="lv4" href="#1-rip-버전별-특성-비교">1. RIP 버전별 특성 비교</a><a class="lv4" href="#2-rip-version-2의-개선된-특성">2. RIP Version 2의 개선된 특성</a><a class="lv4" href="#3-rip-버전-간-호환성-문제">3. RIP 버전 간 호환성 문제</a><a class="lv4" href="#4-다이나믹-라우팅-프로토콜-신뢰도-비교">4. 다이나믹 라우팅 프로토콜 신뢰도 비교</a><a class="lv4" href="#5-라우팅-테이블-최적화와-성능">5. 라우팅 테이블 최적화와 성능</a><a class="lv4" href="#6-rip의-한계와-eigrp-필요성">6. RIP의 한계와 EIGRP 필요성</a><a class="lv3" href="#017-rip-설정과-동적-라우팅의-기초">017. RIP 설정과 동적 라우팅의 기초</a><a class="lv4" href="#1-rip-다이나믹-라우팅-프로토콜-개요">1. RIP 다이나믹 라우팅 프로토콜 개요</a><a class="lv4" href="#2-rip-라우팅-프로토콜-설정">2. RIP 라우팅 프로토콜 설정</a><a class="lv4" href="#3-라우터별-네트워크-광고-설정">3. 라우터별 네트워크 광고 설정</a><a class="lv4" href="#4-rip-설정-결과-확인">4. RIP 설정 결과 확인</a><a class="lv4" href="#5-rip의-한계와-제약사항">5. RIP의 한계와 제약사항</a><a class="lv4" href="#6-rip-설정-통신-검증">6. RIP 설정 통신 검증</a><a class="lv3" href="#018-라우터-기본-설정---라우터-간-시리얼-연결-ip-주소-설정-다중-인터페이스-구성">018. 라우터 기본 설정 - 라우터 간 시리얼 연결, IP 주소 설정, 다중 인터페이스 구성</a><a class="lv4" href="#1-라우터-간-연결-기본">1. 라우터 간 연결 기본</a><a class="lv4" href="#1-전원-종료--장비의-전원을-완전히-끔">1. 전원 종료 ← 장비의 전원을 완전히 끔</a><a class="lv4" href="#2-모듈-설치--physical-섹션에서-비어있는-슬롯에-모듈-삽입">2. 모듈 설치 ← Physical 섹션에서 비어있는 슬롯에 모듈 삽입</a><a class="lv4" href="#3-전원-재시작--전원을-다시-켬">3. 전원 재시작 ← 전원을 다시 켬</a><a class="lv4" href="#2-라우터-기본-설정">2. 라우터 기본 설정</a><a class="lv4" href="#3-ip-주소-설정">3. IP 주소 설정</a><a class="lv4" href="#4-다중-인터페이스-설정">4. 다중 인터페이스 설정</a><a class="lv4" href="#5-네트워크-주소-대역-관리">5. 네트워크 주소 대역 관리</a><a class="lv4" href="#6-설정-확인">6. 설정 확인</a><a class="lv3" href="#019-라우팅의-개념과-스태틱-다이나믹-라우팅">019. 라우팅의 개념과 스태틱 다이나믹 라우팅</a><a class="lv4" href="#1-라우팅routing-개념">1. 라우팅(Routing) 개념</a><a class="lv4" href="#2-snmp-프로토콜-정정-사항">2. SNMP 프로토콜 정정 사항</a><a class="lv3" href="#020-스태틱-라우팅-설정---라우팅-테이블-경로-지정-네트워크-통신-검증">020. 스태틱 라우팅 설정 - 라우팅 테이블, 경로 지정, 네트워크 통신 검증</a><a class="lv4" href="#1-라우팅-테이블-분석">1. 라우팅 테이블 분석</a><a class="lv4" href="#2-스태틱-라우팅static-routing">2. 스태틱 라우팅(Static Routing)</a><a class="lv4" href="#3-라우팅-테이블-확인">3. 라우팅 테이블 확인</a><a class="lv4" href="#4-스태틱-라우팅의-사용-사례">4. 스태틱 라우팅의 사용 사례</a><a class="lv4" href="#5-다이나믹-라우팅의-필요성">5. 다이나믹 라우팅의 필요성</a><a class="lv4" href="#6-네트워크-통신-검증">6. 네트워크 통신 검증</a><a class="lv4" href="#7-라우팅-설정의-중요성">7. 라우팅 설정의 중요성</a></div><a class="" href="ch10.html">10. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch11.html">11. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch12.html">12. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch13.html">13. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch14.html">14. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch15.html">15. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch16.html">16. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch17.html">17. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch18.html">18. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch19.html">19. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch20.html">20. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch22.html">22. 중복과 상충 정리</a><a class="" href="ch23.html">23. 명령어 색인</a><a class="" href="ch24.html">24. 용어집</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 09</div><h1>중복과 상충 정리</h1><p>같은 주제가 여러 노트에 흩어져 있습니다. 지우지 않고 <strong>어디에 무엇이 있는지</strong>를 여기 모읍니다.
-같은 명령이라도 노트마다 환경이 달라서, 합쳐 버리면 어느 환경의 이야기인지 잃어버리기 때문입니다.</p>
-<p>아래 숫자는 각 노트에서 해당 키워드가 등장한 <strong>횟수</strong>입니다. 문서를 기계로 세어 얻은 값이며,
-중요도가 아니라 <strong>분산 정도</strong>를 보는 용도입니다.</p>
-<h3 id="주제가-걸쳐-있는-노트">주제가 걸쳐 있는 노트</h3>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>주제</th>
-<th style="text-align: right;">8/18 라우팅</th>
-<th style="text-align: right;">Rocky 서버랩</th>
-<th style="text-align: right;">8/25 NFS·Samba</th>
-<th style="text-align: right;">8/27 MariaDB</th>
-<th style="text-align: right;">8/28 메모리·계정</th>
-<th style="text-align: right;">8/28 팀웹</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MariaDB / SQL</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">81</td>
-<td style="text-align: right;">120</td>
-<td style="text-align: right;">242</td>
-<td style="text-align: right;">183</td>
-<td style="text-align: right;">357</td>
-</tr>
-<tr>
-<td>Apache / PHP</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">170</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">165</td>
-</tr>
-<tr>
-<td>DNS / BIND</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">90</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr>
-<td>firewalld</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">51</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr>
-<td>systemctl</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">57</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">20</td>
-</tr>
-<tr>
-<td>파일 권한 / umask</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">29</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">14</td>
-</tr>
-<tr>
-<td>NFS</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">282</td>
-<td style="text-align: right;">69</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr>
-<td>Samba</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">99</td>
-<td style="text-align: right;">184</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr>
-<td>SELinux</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">93</td>
-<td style="text-align: right;">63</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr>
-<td>rsyslog</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">91</td>
-<td style="text-align: right;">241</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr>
-<td>Kali</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">104</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr>
-<td>ACL / NAT / OSPF / VPN</td>
-<td style="text-align: right;">152</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table></div>
-<p>네트워크(1부)는 다른 노트와 겹치지 않습니다. 겹침은 전부 리눅스 서버·DB 쪽입니다.</p>
-<h3 id="주제별로-어느-노트를-볼-것인가">주제별로 어느 노트를 볼 것인가</h3>
-<h4 id="mariadb--다섯-노트에-나뉘어-있음">MariaDB — 다섯 노트에 나뉘어 있음</h4>
-<p>가장 심하게 흩어진 주제입니다. 목적에 따라 갈라 보십시오.</p>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>알고 싶은 것</th>
-<th>볼 노트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SQL 문법, 문자셋(한글 깨짐), 논리 백업·복원, 복제</td>
-<td><strong>8/27 MariaDB</strong></td>
-</tr>
-<tr>
-<td>계정이 <code>이름@호스트</code>인 이유, GRANT/REVOKE, VIEW 오류</td>
-<td><strong>8/28 메모리·계정</strong> 4~6장</td>
-</tr>
-<tr>
-<td>PHP PDO로 원격 DB 붙이기, 호스트별 권한 설계, prepared statement</td>
-<td><strong>8/28 팀웹</strong></td>
-</tr>
-<tr>
-<td>서버랩에서 MariaDB를 처음 세우는 절차, <code>mariadb-secure-installation</code></td>
-<td><strong>Rocky 서버랩</strong> 16장</td>
-</tr>
-<tr>
-<td>rsyslog 로그를 MariaDB에 적재</td>
-<td><strong>8/25 NFS·Samba</strong> 후반부</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>중복이지만 남겨 둔 이유</strong>: 같은 <code>GRANT</code> 문이라도 8/27은 복제 계정, 8/28 팀웹은 웹 애플리케이션
-계정입니다. 권한 범위와 접속 호스트가 완전히 다릅니다.</p>
-<h4 id="apache--php--세-노트">Apache / PHP — 세 노트</h4>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>알고 싶은 것</th>
-<th>볼 노트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>설치·기동·문서 루트·HTTPS 인증서·php-fpm 구조</td>
-<td><strong>Rocky 서버랩</strong> 12~15장</td>
-</tr>
-<tr>
-<td>팀 프로젝트용 가상호스트, DB 설정 파일을 문서 루트 밖에 두는 이유</td>
-<td><strong>8/28 팀웹</strong></td>
-</tr>
-<tr>
-<td>LogAnalyzer 웹 설치 과정에서의 SELinux 문제</td>
-<td><strong>8/25 NFS·Samba</strong></td>
-</tr>
-</tbody>
-</table></div>
-<h4 id="selinux--두-노트-접근-방식이-다름">SELinux — 두 노트, 접근 방식이 다름</h4>
+<main><div class="chapter-no">CHAPTER 09</div><h1>핵심키워드 · 네트워크 (1/3)</h1><p>강사 배포 「핵심키워드」 슬라이드 중 <strong>001~020강 20편</strong>입니다.
+원문을 그대로 옮겼습니다. 요약하거나 문장을 바꾸지 않았습니다.</p>
+<blockquote>
+<p>PDF에서 뽑은 텍스트라 원문의 <strong>표는 칸 구분이 풀려</strong> 항목이 줄마다 나열됩니다.
+내용은 빠지지 않았으나 표 모양은 복원하지 못했습니다.</p>
+</blockquote>
+<h3 id="001-ipv6-네트워크-관리-모델">001. IPv6 네트워크 관리 모델</h3>
+<p>IPv6/네트워크 관리 모델</p>
+<h4 id="1-서브네팅-subnetting-개요">1. 서브네팅 (Subnetting) 개요</h4>
+<p>상세 실습은 추후 별도 진행 예정
+서브넷 마스크 값을 조정하여 네트워크 부분을 나누는 작업
+서브넷 마스크 값에 따라 네트워크 범위가 달라짐
+효율적인 IP 주소 할당, 보안 구역 분리 등의 장점이 생김
+CMD에서 ipconfig 로 확인 가능한 Subnet Mask 값과 연관</p>
+<h4 id="2-네트워크-관리-모델--fcaps">2. 네트워크 관리 모델 — FCAPS</h4>
 <ul>
-<li><strong>8/25 NFS·Samba</strong>: 왜 막혔는지 메커니즘부터 보고 <strong>끄지 않고 해결</strong>하는 방법(<code>semanage</code>, <code>setsebool</code>)</li>
-<li><strong>Rocky 서버랩</strong>: DNS zone 파일 권한, 웹 디렉터리 컨텍스트 등 개별 상황별 대응</li>
+<li>ISO(국제표준협회)가 제정한 통신 관리망 모델로, 네트워크 관리의 5가지 영역을 나타낸다.</li>
+<li>각 영역의 앞 글자를 시계 방향으로 따서 FCAPS 라고 줄여 부른다.</li>
+<li>약자</li>
+<li>영역</li>
+<li>설명</li>
+<li>F</li>
+<li>Fault Management (장애 관리)</li>
+<li>네트워크 장애를 탐지·복구하는 관리</li>
+<li>C</li>
+<li>Configuration Management (구성</li>
+<li>관리)</li>
+<li>네트워크 설정 및 구성 정보를 관리</li>
+<li>A</li>
+<li>Accounting Management (계정/과금</li>
+<li>관리)</li>
+<li>계정 정책, 과금 정보 확인 및 설정</li>
+<li>P</li>
+<li>Performance Management (성능 관</li>
+<li>리)</li>
+<li>네트워크 성능(퍼포먼스) 모니터링 및</li>
+<li>관리</li>
+<li>S</li>
+<li>Security Management (보안 관리)</li>
+<li>네트워크 장비의 보안 설정으로 보안</li>
+<li>성 향상</li>
+<li>이 과목(IT 인프라)에서는 장애 관리부터 보안 관리까지 전반적인 내용을 다룬다</li>
 </ul>
-<p>먼저 8/25의 메커니즘 설명을 읽고, 서버랩은 사례집으로 쓰는 것이 빠릅니다.</p>
-<h4 id="firewalld--세-노트에-조각으로">firewalld — 세 노트에 조각으로</h4>
-<p>세 노트 모두 <code>firewall-cmd --permanent --add-service=... &amp;&amp; firewall-cmd --reload</code> 형태입니다.
-서비스 이름만 다릅니다. 부록 <strong>명령어 색인</strong>에서 <code>firewall-cmd</code>로 찾으면 전부 모여 나옵니다.</p>
-<h3 id="확인이-필요한-지점">확인이 필요한 지점</h3>
-<p>아래는 이 책을 엮으면서 발견한, <strong>하나로 정리하기 전에 사실 확인이 필요한</strong> 항목입니다.
-추측으로 통일하지 않고 남겨 둡니다.</p>
-<ol>
-<li><strong>서버 노트 네 편이 전부 같은 <code>192.168.16.0/24</code> 대역인데 호스트 번호가 제각각입니다.</strong>
-   문서를 기계로 세어 확인한 실제 사용 주소는 다음과 같습니다.</li>
-</ol>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>노트</th>
-<th>주로 쓰인 호스트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Rocky 서버랩</td>
-<td><code>.131</code>, <code>.77</code>, <code>.137</code>, <code>.136</code></td>
-</tr>
-<tr>
-<td>8/25 NFS·Samba</td>
-<td><code>.81</code>, <code>.92</code>, <code>.40</code></td>
-</tr>
-<tr>
-<td>8/28 팀웹</td>
-<td><code>.117</code>(DB), <code>.46</code>(클라이언트), <code>.111</code>(WEB)</td>
-</tr>
-<tr>
-<td>8/28 메모리·계정</td>
-<td><code>.100</code></td>
-</tr>
-</tbody>
-</table></div>
-<p>같은 대역을 여러 실습이 나눠 쓴 것이라, <strong>노트를 넘나들 때 IP를 그대로 따라 치면 다른 장비를
-   건드립니다.</strong> 자기 환경의 주소로 바꿔서 실행하십시오. 어느 실습이 어느 호스트를 점유했는지는
-   확인이 필요합니다(같은 VM을 재사용했는지 기록이 없습니다).
-2. <strong><code>it인프라의이해</code> 슬라이드 4개는 본문이 비어 있습니다.</strong> 이미지 슬라이드라 대조하지 못했습니다.
-3. <strong>커리큘럼 지도의 분류는 파일명 기준</strong>입니다. 한 강의가 두 주제에 걸치면 앞 규칙으로 갔습니다.
-   예: 038~040번은 번호상 네트워크 구간에 있지만 내용은 Rocky Linux 설치라 리눅스 서버로 분류했습니다.</p>
-<h3 id="아직-노트가-없는-큰-구간">아직 노트가 없는 큰 구간</h3>
-<p>커리큘럼 지도 기준으로 <strong>보안 실습·모의해킹 74강</strong>이 슬라이드 제목만 있습니다.
-과정 후반부의 가장 큰 덩어리이므로, 해당 수업이 진행되면 이 부를 먼저 채우는 것이 좋습니다.</p><div class="nav"><a href="ch08.html"><span class="lbl">이전</span>2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><a href="ch10.html"><span class="lbl">다음</span>명령어 색인</a></div></main>
+<h4 id="3-네트워크-시뮬레이터-툴">3. 네트워크 시뮬레이터 툴</h4>
+<h5 id="3-1">3-1. 사용 툴 소개</h5>
+<p>IPv6/네트워크 관리 모델</p>
+<ul>
+<li>툴</li>
+<li>활용 과목</li>
+<li>주요 실습 내용</li>
+<li>Cisco Packet Tracer</li>
+<li>IT 인프라 (현재 과목)</li>
+<li>스위칭, 라우팅, 기본 보안 설정</li>
+<li>GNS3</li>
+<li>보안 인프라 운영 관리</li>
+<li>방화벽, VPN 설정 등</li>
+</ul>
+<h5 id="3-2-packet-tracer">3-2. Packet Tracer 설치</h5>
+<p>다운로드 경로: Cisco Networking Academy 또는 Skills for All 사이트
+최신 버전은 시스코 사이트 회원 가입 + 이메일 인증 필요
+실습에는 이전 버전으로도 충분히 가능
+확장자: .exe  설치 파일
+설치 과정: Next → 라이선스 동의(Accept) → 경로 지정 → Next → Install → Finish
+설치 후 팝업창이 여러 개 뜰 수 있음 → 모두 확인/OK 클릭
+버전이 달라도 기본 명령어는 동일, 장비 모델 모양이나 메뉴가 약간 다를 수 있음</p>
+<h4 id="4-packet-tracer-화면-구성">4. Packet Tracer 화면 구성</h4>
+<h5 id="4-1">4-1. 주요 영역</h5>
+<ul>
+<li>영역</li>
+<li>설명</li>
+<li>메뉴 표시줄</li>
+<li>상단, 파일 저장·환경설정 등</li>
+<li>토폴로지 영역</li>
+<li>중앙, 네트워크 구성도를 그리는 작업 공간</li>
+<li>장비 패널</li>
+<li>좌측 하단, 삽입 가능한 장비·모델 목록</li>
+<li>도구 모음</li>
+<li>우측, 선택·이동·삭제·메모 등 편집 도구</li>
+</ul>
+<h5 id="4-2">4-2. 장비 종류</h5>
+<ul>
+<li>심볼 모양</li>
+<li>장비 종류</li>
+<li>설명</li>
+<li>신발(원형) 모양</li>
+<li>라우터</li>
+<li>네트워크 간 경로 설정 장비</li>
+<li>사각형 모양</li>
+<li>스위치</li>
+<li>내부 네트워크 연결 장비</li>
+<li>다리 모양</li>
+<li>브리지</li>
+<li>과거 사용 장비, 현재는 거의 미사용</li>
+<li>PC/모니터</li>
+<li>PC (엔드 디바이스)</li>
+<li>일반 사용자 단말</li>
+<li>길쭉한 사각형</li>
+<li>서버 (엔드 디바이스)</li>
+<li>서비스 제공 단말</li>
+</ul>
+<h5 id="4-3">4-3. 스위치 모델별 특징</h5>
+<p>IPv6/네트워크 관리 모델</p>
+<ul>
+<li>모델</li>
+<li>계층</li>
+<li>설명</li>
+<li>2950, 2960</li>
+<li>L2 스위치</li>
+<li>내부 네트워크 연결 전용</li>
+<li>3560</li>
+<li>L3 스위치</li>
+<li>설정에 따라 라우터 역할도 수행 가능</li>
+<li>L2, L3, L4~L7 앞의 숫자는 OSI 7계층의 계층 번호를 나타냄</li>
+</ul>
+<h4 id="5-시스코-장비를-사용하는-이유">5. 시스코 장비를 사용하는 이유</h4>
+<p>과거부터 압도적인 시장 점유율
+현재는 주니퍼(Juniper), HP, 알카텔, 화웨이 등 다양한 제조사 존재
+장비 제조사마다 내부 운영체제(OS)가 다름 → 사용 명령어가 일부 다름
+하지만 구현하는 기술·개념 자체는 동일
+예) Windows: ipconfig  / Mac: ifconfig  → 명령어는 다르지만 결과(IP 확인)는
+같음</p>
+<h4 id="6-토폴로지-구성-실습">6. 토폴로지 구성 실습</h4>
+<h5 id="6-1">6-1. 장비 배치</h5>
+<h4 id="1-좌측-하단-패널에서-원하는-장비-선택">1. 좌측 하단 패널에서 원하는 장비 선택</h4>
+<h4 id="2-드래그-앤-드롭-또는-클릭-후-작업-영역-클릭으로-배치">2. 드래그 앤 드롭 또는 클릭 후 작업 영역 클릭으로 배치</h4>
+<h5 id="6-2">6-2. 장비 연결 — 케이블 종류</h5>
+<ul>
+<li>케이블 종류</li>
+<li>사용 상황</li>
+<li>Packet Tracer 메</li>
+<li>뉴</li>
+<li>다이렉트(Straight-</li>
+<li>through)</li>
+<li>이종 장비 간 연결 (예: 스위치 ↔ PC, 스위치</li>
+<li>↔ 서버)</li>
+<li>세 번째 아이콘</li>
+<li>크로스오버(Crossover)</li>
+<li>동종 장비 간 연결 (예: 스위치 ↔ 스위치)</li>
+<li>네 번째 아이콘</li>
+<li>오토(Auto)</li>
+<li>자동으로 케이블 타입 선택</li>
+<li>첫 번째 아이콘</li>
+<li>실무에서는 장비의 업링크 포트가 자동 변환해 주므로 케이블 종류를 크게 신경 쓰지 않아</li>
+<li>도 됨</li>
+<li>하지만 네트워크 관리사 2급 실기 시험 1번 문제가 UTP 케이블링이므로 반드시 숙지 필</li>
+<li>요</li>
+<li>IPv6/네트워크 관리 모델</li>
+</ul>
+<h5 id="6-3">6-3. 연결 방법</h5>
+<p>번개 모양(연결 도구) 클릭
+→ 케이블 종류 선택
+→ 첫 번째 장비 클릭 → 연결할 포트 선택 (예: Fa0/1)
+→ 두 번째 장비 클릭 → 연결할 포트 선택 (예: LAN 또는 Fa0)</p>
+<h5 id="6-4">6-4. 선 삭제</h5>
+<p>우측 도구 모음에서 X(Delete) 버튼 클릭
+→ 삭제할 장비 또는 연결선 클릭
+→ ESC 키로 삭제 모드 종료</p>
+<h4 id="7-packet-tracer-환경-설정">7. Packet Tracer 환경 설정</h4>
+<ul>
+<li>메뉴 표시줄 → Options → Preferences → Interface 탭</li>
+<li>항목</li>
+<li>권장 설정</li>
+<li>Show Device Model Label</li>
+<li>체크 해제 (구성도 간소화)</li>
+<li>Show Device Name Label</li>
+<li>체크 해제 (구성도 간소화)</li>
+<li>Always Show Port Labels</li>
+<li>체크 (연결된 포트 이름 항상 표시)</li>
+<li>IPv6/네트워크 관리 모델</li>
+</ul>
+<hr />
+<h3 id="002-it-인프라-보안-과정-소개-it-인프라-기초">002. IT 인프라 보안 과정 소개 IT 인프라 기초</h3>
+<p>IT 인프라 보안 과정 소개/IT 인프라
+기초</p>
+<h4 id="1-과정-구성-3개-교과목">1. 과정 구성 (3개 교과목)</h4>
+<ul>
+<li>교과목</li>
+<li>시간</li>
+<li>주요 학습 내용</li>
+<li>IT 인프라 이해</li>
+<li>117시간</li>
+<li>네트워크·서버 기본, 클라우드 개념 및 서비스 구현</li>
+<li>보안 인프라 운영</li>
+<li>—</li>
+<li>IDS/IPS(침입탐지·방지), 방화벽, 로그 시스템, SIEM 등</li>
+<li>보안 인프라 구축 및 룰 설정</li>
+<li>기업 정보 보호 관</li>
+<li>리</li>
+<li>—</li>
+<li>ISMS-P 인증 계획 수립, 모의해킹, CTF 워게임, 취약점</li>
+<li>분석</li>
+<li>1일 8교시 기준 → 1주 40시간 → 교과목 하나당 약 3주 소요</li>
+</ul>
+<h4 id="2-과제-및-프로젝트">2. 과제 및 프로젝트</h4>
+<h5 id="2-1">2-1. 개인 과제</h5>
+<p>매 주차별로 개인 과제 부여
+과제를 통해 미비하거나 이해 부족한 부분 확인 → 강사·멘토 피드백 진행</p>
+<h5 id="2-2">2-2. 팀별 프로젝트</h5>
+<p>각 교과목 종료 후 단원 평가 → 팀 프로젝트 진행
+팀 구성: 약 5명 내외 (강사진이 균형 있게 편성 후 개인 의견 반영)
+과목별 프로젝트 주제 예시:
+서버·네트워크 구축
+보안 인프라 구축
+취약점이 있는 웹 서버 제작 → 모의해킹 → 대응 방안 적용 → 검증</p>
+<h5 id="2-3">2-3. 포트폴리오</h5>
+<p>IT 인프라 보안 과정 소개/IT 인프라 기초</p>
+<p>작업 결과물과 수업 내용을 노션 개인 페이지에 기록
+취업 시 경쟁력 있는 포트폴리오로 활용 가능
+⚠️ 남의 결과물을 그대로 가져오는 것은 의미 없음 — 반드시 직접 이해하고 작업할 것</p>
+<h4 id="3-취업-관련-안내">3. 취업 관련 안내</h4>
+<h5 id="3-1_1">3-1. 주요 직무군</h5>
+<ul>
+<li>보안 관제</li>
+<li>보안 엔지니어</li>
+<li>취약점 분석</li>
+<li>모의해킹</li>
+<li>컨설팅</li>
+<li>방화벽 / 헬프데스크</li>
+<li>악성코드 분석 등</li>
+<li>보안관제 취업자가 많은 이유는 쉬워서가 아니라 일자리 수 자체가 많기 때문</li>
+<li>본인이 원하는 직무에 맞게 집중하면 다른 직무로도 충분히 취업 가능</li>
+</ul>
+<h5 id="3-2">3-2. 국내 관련 자격증</h5>
+<ul>
+<li>자격증</li>
+<li>비고</li>
+<li>네트워크 관리사 2급</li>
+<li>실기 1번: UTP 케이블링</li>
+<li>리눅스 마스터 2급</li>
+<li>—</li>
+<li>SQLD / SQLP</li>
+<li>—</li>
+<li>정보처리 산업기사 / 기사</li>
+<li>4월 20일부터 제2회 필기 접수 예정</li>
+<li>정보보안 산업기사 / 기사</li>
+<li>—</li>
+<li>빅데이터 분석 기사</li>
+<li>AI 활용 수요 증가로 관심도 상승</li>
+<li>자격증은 취업 필수 조건은 아니지만, 이력서 제출 가능 범위(폭)를 넓혀주는 역할</li>
+<li>응시 자격 확인: q-net.or.kr → 응시 자격 자가진단 버튼</li>
+<li>기출 문제: CBT 사이트에서 최신 기출 무료 제공</li>
+<li>군 경력(통신병, 보안병 등)도 응시 경력으로 인정 가능</li>
+<li>IT 인프라 보안 과정 소개/IT 인프라 기초</li>
+</ul>
+<h5 id="3-3">3-3. 국제 자격증</h5>
+<ul>
+<li>자격증</li>
+<li>설명</li>
+<li>CCNA / CCNP /</li>
+<li>CCIE</li>
+<li>시스코 네트워크 자격증</li>
+<li>OSCP</li>
+<li>모의해킹 실무 자격증 (해외에서 높이 평가), 비용이 높아 취업 후 기업 지원</li>
+<li>권장</li>
+</ul>
+<h5 id="3-4">3-4. 경력 로드맵 (장기)</h5>
+<ul>
+<li>자격</li>
+<li>응시 조건</li>
+<li>비고</li>
+<li>정보처리 기사</li>
+<li>학사 졸업 또는 관</li>
+<li>련 경력</li>
+<li>가장 기본</li>
+<li>정보관리 기술사 / 컴퓨터시스템응용 기술</li>
+<li>사</li>
+<li>학사 기준 경력 4</li>
+<li>년 이상</li>
+<li>최상위 자격</li>
+<li>정보시스템 감리사</li>
+<li>경력 6년 이상</li>
+<li>기술사 취득 시 연수만으로 자동 취</li>
+<li>득</li>
+<li>ISMS-P 인증심사원</li>
+<li>경력 6년 이상</li>
+<li>(KISA 기준)</li>
+<li>기업의 ISMS-P 인증 평가 수행</li>
+</ul>
+<h4 id="4-it-인프라란">4. IT 인프라란?</h4>
+<h5 id="4-1-it-3">4-1. IT 인프라의 3대 구성 요소</h5>
+<ul>
+<li>구성 요소</li>
+<li>예시</li>
+<li>하드웨어</li>
+<li>서버, PC, 노트북, 스마트폰, 태블릿, 스위치, 라우터, 보안 장비</li>
+<li>등</li>
+<li>소프트웨어</li>
+<li>운영체제(OS), CRM, ERP 등 기업용 소프트웨어</li>
+<li>네트워크</li>
+<li>스위치·라우터 장비, 네트워크 보안 장비 등</li>
+<li>데이터센터까지 포함하여 IT 인프라 라고 통칭</li>
+</ul>
+<h5 id="4-2-vs">4-2. 온프레미스 vs 클라우드</h5>
+<ul>
+<li>구분</li>
+<li>온프레미스 (On-</li>
+<li>Premise)</li>
+<li>클라우드 (Cloud)</li>
+<li>위치</li>
+<li>기업 내부에 물리</li>
+<li>적 시설 구축·운영</li>
+<li>기업 외부 클라우드 서비스 활용</li>
+<li>
+<p>IT 인프라 보안 과정 소개/IT 인프라 기초</p>
+</li>
+<li>
+<p>구분</p>
+</li>
+<li>온프레미스 (On-</li>
+<li>Premise)</li>
+<li>클라우드 (Cloud)</li>
+<li>장점</li>
+<li>내부 통제·보안 요</li>
+<li>구 충족</li>
+<li>비용 효율성, 유연한 확장성</li>
+<li>대표 서비스</li>
+<li>—</li>
+<li>AWS (Amazon), Google Cloud, MS Azure, Naver</li>
+<li>Cloud 등</li>
+<li>현재는 온프레미스와 클라우드를 함께 운용하는 방식이 일반적</li>
+</ul>
+<h5 id="4-3_1">4-3. 이 과정에서 다루는 주요 도구</h5>
+<ul>
+<li>분야</li>
+<li>도구</li>
+<li>운영체제</li>
+<li>Windows Server, Rocky Linux (RedHat 계열), Ubuntu Linux, Kali</li>
+<li>Linux</li>
+<li>클라우드</li>
+<li>AWS 서비스 실습</li>
+<li>네트워크</li>
+<li>스위치·라우터 장비 설정 및 보안 실습</li>
+</ul>
+<h4 id="5-수강-안내-및-마음가짐">5. 수강 안내 및 마음가짐</h4>
+<p>출석이 가장 중요: 초반 결석이 잦아지면 진도를 따라가기 어려워짐
+비전공자도 걱정 없음: 처음엔 용어가 낯설어 어렵게 느껴지지만, 반복하다 보면 자연스
+럽게 이해도가 높아짐
+포기하지 않으면 누구나 가능: 정보보안이 다른 분야보다 특별히 더 어려운 것이 아님
+교재 활용: 실습 중심 과정이므로 교재는 참고용 / 필요한 부분은 별도 공지
+멘토 활용: 멘토와 함께 궁금한 점 언제든 질문 가능
+IT 인프라 보안 과정 소개/IT 인프라 기초</p>
+<hr />
+<h3 id="003-tcp-udp-비교-및-ip-주소-체계">003. TCP UDP 비교 및 IP 주소 체계</h3>
+<p>TCP/UDP 비교 및 IP 주소 체계</p>
+<h4 id="1-tcp-vs-udp-비교">1. TCP vs UDP 비교</h4>
+<ul>
+<li>TCP와 UDP 모두 OSI 4계층(전송 계층)에서 동작하는 전송 프로토콜이다.</li>
+<li>좋고 나쁨의 문제가 아니라, 상황에 따라 적합한 프로토콜을 선택하는 것이 핵심이다.</li>
+<li>구분</li>
+<li>TCP</li>
+<li>UDP</li>
+<li>정식 명칭</li>
+<li>Transmission Control Protocol</li>
+<li>User Datagram Protocol</li>
+<li>전송 제어</li>
+<li>있음 (확인 응답, 재전송)</li>
+<li>없음 (그냥 전송)</li>
+<li>신뢰도</li>
+<li>높음</li>
+<li>낮음</li>
+<li>속도</li>
+<li>상대적으로 느림</li>
+<li>빠름</li>
+<li>주요 사용 예</li>
+<li>웹(HTTP), FTP, 원격 접속</li>
+<li>스트리밍, 멀티미디어, 실시간 영상 전</li>
+<li>송</li>
+<li>TCP의 전송 제어 과정</li>
+</ul>
+<h4 id="1-송신-측에서-데이터패킷를-전송">1. 송신 측에서 데이터(패킷)를 전송</h4>
+<h4 id="2-수신-측에서-미수신-패킷-발생-시--아직-안-왔어-메시지-전송">2. 수신 측에서 미수신 패킷 발생 시 → "아직 안 왔어" 메시지 전송</h4>
+<h4 id="3-송신-측에서-해당-패킷-재전송">3. 송신 측에서 해당 패킷 재전송</h4>
+<h4 id="4-모든-데이터가-정확히-수신될-때까지-반복">4. 모든 데이터가 정확히 수신될 때까지 반복</h4>
+<p>고용량 스트리밍 데이터를 TCP로 보내면 "갔니? 못 갔니?" 확인 과정 때문에 속도가 매
+우 느려진다 → 이런 경우엔 UDP가 적합</p>
+<h4 id="2-포트-번호-port-number">2. 포트 번호 (Port Number)</h4>
+<p>각 서비스(애플리케이션)에 접근하기 위한 최종 관문
+서비스 구축과 모든 설정이 완료되어도, 포트가 방화벽 등에 의해 막혀 있으면 접근 불가
+TCP/IP 모델 애플리케이션 계층의 각 서비스마다 고유한 포트 번호를 가짐
+TCP/UDP 비교 및 IP 주소 체계</p>
+<h4 id="3-네트워크-계층-프로토콜">3. 네트워크 계층 프로토콜</h4>
+<ul>
+<li>프로토콜</li>
+<li>설명</li>
+<li>IP</li>
+<li>인터넷 주소 통신 규약, 3계층에서 동작</li>
+<li>ICMP</li>
+<li>Internet Control Message Protocol, 인터넷 제어 메시지 프로토콜</li>
+<li>IGMP</li>
+<li>Internet Group Message Protocol, 그룹(멀티캐스트) 대상에게 메시지를</li>
+<li>전달</li>
+<li>ICMP는 단일 시스템, IGMP는 그룹 대상에게 전달한다는 차이가 있음</li>
+</ul>
+<h4 id="4-ipxspx-프로토콜">4. IPX/SPX 프로토콜</h4>
+<p>TCP/IP와 유사하게 주소 + 전송을 담당하는 프로토콜 조합
+IPX: 주소 담당 (IP와 동일한 역할)
+SPX: 전송 담당 (TCP와 동일한 역할)
+IPX = InterPacket eXchange (패킷 교환 프로토콜)
+과거 게임방 내부 네트워크(예: 스타크래프트 IPX 연결) 등에 활용
+현재는 TCP/IP의 빠른 발전으로 사용 범위가 점차 축소되는 추세</p>
+<h4 id="5-계층별-데이터-표현-단위">5. 계층별 데이터 표현 단위</h4>
+<ul>
+<li>계층</li>
+<li>데이터 단위</li>
+<li>1계층 (물리)</li>
+<li>비트 (Bit) — 0과 1의 전기적 신호</li>
+<li>2계층 (데이터링크)</li>
+<li>프레임 (Frame)</li>
+<li>3계층 (네트워크)</li>
+<li>패킷 (Packet)</li>
+<li>4계층 (전송)</li>
+<li>세그먼트 (Segment)</li>
+<li>5~7계층 (상위)</li>
+<li>데이터 (Data)</li>
+<li>실무에서는 계층 구분 없이 대부분 "패킷" 이라고 통칭하는 경우가 많음</li>
+</ul>
+<h4 id="6-ip-버전-4-ipv4-주소-체계">6. IP 버전 4 (IPv4) 주소 체계</h4>
+<h5 id="6-1_1">6-1. 기본 구조</h5>
+<p>32비트 구조
+TCP/UDP 비교 및 IP 주소 체계</p>
+<p>4개의 옥텟(Octet) 으로 구성 (예: 192.168.0.1 )
+옥텟 1개 = 8비트 → 2⁸ = 256가지 경우의 수 → 범위: 0 ~ 255
+점( . )을 초과하는 256, 300 같은 값은 입력 불가 → 통신 안 됨
+비트와 경우의 수 공식
+경우의 수 = 2ⁿ  (n = 비트 수)
+예) 1비트 → 2¹ = 2가지 (0, 1)
+    2비트 → 2² = 4가지 (00, 01, 10, 11)
+    3비트 → 2³ = 8가지
+    8비트 → 2⁸ = 256가지 (0 ~ 255)</p>
+<h5 id="6-2-ip">6-2. IP 클래스 구분 (시작 옥텟 기준)</h5>
+<ul>
+<li>클래스</li>
+<li>시작 옥텟 범위</li>
+<li>용도</li>
+<li>A</li>
+<li>1 ~ 126</li>
+<li>일반 사용</li>
+<li>B</li>
+<li>128 ~ 191</li>
+<li>일반 사용</li>
+<li>C</li>
+<li>192 ~ 223</li>
+<li>일반 사용</li>
+<li>D</li>
+<li>224 ~ 239</li>
+<li>멀티캐스팅 용도 예약</li>
+<li>E</li>
+<li>240 ~ 255</li>
+<li>실험·연구 용도 예약</li>
+<li>D, E 클래스는 일반 시스템에서 사용 불가</li>
+<li>실무 현장에서는 클래스를 엄격히 구분하지 않음 (클래스리스 방식)</li>
+<li>내 IP 클래스 확인 방법 (Windows)</li>
+<li>CMD 창 → ipconfig 입력 → IPv4 주소 확인 → 시작 옥텟으로 클래스 판별</li>
+</ul>
+<h5 id="6-3_1">6-3. 예약 주소</h5>
+<ul>
+<li>주소</li>
+<li>용도</li>
+<li>127.x.x.x</li>
+<li>루프백(Loopback) — 자기 자신과의 통신 테스트용 예약 주소</li>
+<li>169.254.x.x</li>
+<li>APIPA — DHCP 서버로부터 IP를 제대로 할당받지 못했을 때 자동 부여 → 인터</li>
+<li>넷 불가</li>
+<li>각 대역의 첫 번째</li>
+<li>주소</li>
+<li>네트워크 주소 (대역 식별용, 시스템 할당 불가)</li>
+<li>
+<p>TCP/UDP 비교 및 IP 주소 체계</p>
+</li>
+<li>
+<p>주소</p>
+</li>
+<li>용도</li>
+<li>각 대역의 마지막</li>
+<li>주소</li>
+<li>브로드캐스트 주소 (같은 네트워크 내 전체 전송용, 시스템 할당 불가)</li>
+<li>루프백 테스트 실습</li>
+<li>CMD 창 → ping 127.0.0.1</li>
+<li>응답 있음 → 내 시스템 네트워크 설정 정상</li>
+<li>Request Timed Out  등의 오류 → 내 시스템 네트워크 문제 가능성</li>
+</ul>
+<h5 id="6-4-ip-vs-ip">6-4. 공인 IP vs 사설 IP</h5>
+<ul>
+<li>구분</li>
+<li>공인 IP</li>
+<li>사설 IP (비공인 IP)</li>
+<li>의미</li>
+<li>비용을 지불하고 구매하는 주소</li>
+<li>허가 없이 누구나 자유롭게 사용 가능한 주소</li>
+<li>인터넷</li>
+<li>가능</li>
+<li>직접 불가 (NAT 필요)</li>
+<li>사설 IP 대역 (Private Address)</li>
+<li>클래스</li>
+<li>사설 대역</li>
+<li>실제 사용 범위</li>
+<li>A</li>
+<li>10.0.0.0/8</li>
+<li>10.0.0.1  ~ 10.255.255.254</li>
+<li>B</li>
+<li>172.16.0.0/12</li>
+<li>172.16.0.1  ~ 172.31.255.254</li>
+<li>C</li>
+<li>192.168.0.0/16</li>
+<li>192.168.0.1  ~ 192.168.255.254</li>
+<li>가정에서 사용하는 공유기(IP 062 등)가 사설 IP를 자동 배포</li>
+<li>공인 IP 1개로 여러 기기(노트북, 스마트폰, TV 등)를 연결하기 위해 공유기 사용</li>
+</ul>
+<h4 id="7-ip-버전-6-ipv6-주소-체계">7. IP 버전 6 (IPv6) 주소 체계</h4>
+<h5 id="7-1">7-1. 등장 배경</h5>
+<ul>
+<li>IPv4 주소 부족 문제 해결</li>
+<li>IoT (사물인터넷) 확산 → 자동차, TV, 조명, 세탁기 등 모든 사물에 IP 필요</li>
+<li>효율성·보안성 향상 목적</li>
+<li>IPv5는 개발 중 빠르게 IPv6로 넘어감</li>
+<li>TCP/UDP 비교 및 IP 주소 체계</li>
+</ul>
+<h5 id="7-2">7-2. 주요 특징</h5>
+<ul>
+<li>항목</li>
+<li>IPv4</li>
+<li>IPv6</li>
+<li>비트 수</li>
+<li>32비트</li>
+<li>128비트</li>
+<li>주소 수</li>
+<li>2³²</li>
+<li>2¹²⁸ (훨씬 많음)</li>
+<li>표기 방식</li>
+<li>10진수, 점( . ) 구분</li>
+<li>16진수, 콜론( : ) 구분</li>
+</ul>
+<h5 id="7-3-ipv6">7-3. IPv6 주소 종류</h5>
+<ul>
+<li>종류</li>
+<li>설명</li>
+<li>링크 로컬</li>
+<li>같은 네트워크 내부 시스템 간 통신용, 자동 생</li>
+<li>성</li>
+<li>사이트 로컬</li>
+<li>사이트 내부 통신용</li>
+<li>글로벌</li>
+<li>외부 인터넷 통신용</li>
+</ul>
+<h5 id="7-4-ipv6">7-4. IPv6 장점</h5>
+<ul>
+<li>장점</li>
+<li>설명</li>
+<li>보안성 (IPSec 내장)</li>
+<li>IP Security(IPSec) 기능이 기본으로 내장 → IPv4보다 보안성이 훨씬 뛰</li>
+<li>어남</li>
+<li>자동 구성 (Auto</li>
+<li>Configuration)</li>
+<li>수동 설정 없이 자동으로 IP 주소를 구성하는 기능 → 관리 편의성 향상</li>
+<li>주소 확장성</li>
+<li>128비트 구조로 사실상 무한에 가까운 주소 제공</li>
+<li>IPv6 주소 확인 실습</li>
+<li>CMD 창 → ipconfig /all</li>
+<li>→ "링크-로컬 IPv6 주소" 항목 확인 (16진수로 표기됨)</li>
+</ul>
+<h5 id="7-5">7-5. 현재 운용 방식</h5>
+<ul>
+<li>IPv4와 IPv6 혼용 중</li>
+<li>외부 통신 → IPv4 주로 사용</li>
+<li>내부 통신 또는 IPv6 전용 네트워크 연결 시 → IPv6 사용</li>
+<li>IPv6 전환이 느린 이유</li>
+<li>IPv6를 지원하는 장비·소프트웨어로의 교체 비용 발생</li>
+<li>
+<p>TCP/UDP 비교 및 IP 주소 체계</p>
+</li>
+<li>
+<p>네트워크 단 설정 변경 필요</p>
+</li>
+<li>IPv4와 IPv6는 주소 체계가 달라 직접 호환 불가</li>
+<li>두 버전을 함께 쓰려면 터널링(Tunneling) 기술 등을 사용해야 함</li>
+<li>→ 한 번에 전환하지 못하고 점진적으로 확대 중</li>
+</ul>
+<h4 id="8-mac-주소-물리적-주소">8. MAC 주소 (물리적 주소)</h4>
+<p>정식 명칭: MAC (Media Access Control) Address
+다른 이름: 물리적 주소 (Physical Address), 하드웨어 주소
+제조 단계에서 하드웨어에 마킹되어 나오는 고유 주소
+16진수 표기 (예: 00-1A-2B-3C-4D-5E )
+일반적인 방법으로는 변경 불가 (IP 주소와 다른 점)
+MAC 주소 확인 방법
+CMD 창 → ipconfig /all → "물리적 주소" 항목 확인</p>
+<h4 id="9-주소-관련-참고-기관">9. 주소 관련 참고 기관</h4>
+<ul>
+<li>기관</li>
+<li>역할</li>
+<li>KISA (한국인터넷진흥원)</li>
+<li>국내 인터넷 주소 관리</li>
+<li>IANA (iana.org)</li>
+<li>국제 IP 주소·도메인 표준 관리 기관</li>
+<li>TCP/UDP 비교 및 IP 주소 체계</li>
+</ul>
+<hr />
+<h3 id="004-네트워크-보안-기초">004. 네트워크 보안 기초</h3>
+<h4 id="1-정보보안의-3대-요소-cia">1. 정보보안의 3대 요소 (CIA)</h4>
+<ul>
+<li>정보보안을 공부할 때 가장 기본이 되는 세 가지 요소로, 흔히 기·무·가 또는 영어 약자 CIA</li>
+<li>로 부른다.</li>
+<li>요소</li>
+<li>영문</li>
+<li>설명</li>
+<li>기밀성</li>
+<li>(Confidentiality)</li>
+<li>Confidentiality</li>
+<li>비인가자가 시스템의 정보를 열람하거나 접근하지 못하</li>
+<li>도록 하는 것</li>
+<li>무결성 (Integrity)</li>
+<li>Integrity</li>
+<li>데이터나 정보가 훼손·변조·삭제되지 않아야 하는 것</li>
+<li>가용성 (Availability)</li>
+<li>Availability</li>
+<li>사용이 가능한 시점에 언제든지 시스템이 사용 가능한</li>
+<li>상태로 존재해야 하는 것</li>
+</ul>
+<h4 id="2-정보보안의-5대-요소">2. 정보보안의 5대 요소</h4>
+<p>3대 요소(CIA)에 아래 두 가지를 추가하면 5대 요소가 된다.
+부인 방지 (Non-repudiation)
+어떤 행위를 했음에도 "나는 하지 않았다"고 부인하는 것을 방지
+예: 이메일 발신자가 전자서명을 통해 보낸 사실을 증명 → 수신자가 "받지 않았
+다"고 부인 불가
+인증 (Authentication)
+허가된 사용자만이 사용하고자 하는 시스템에 접근할 수 있도록 하는 것</p>
+<h4 id="3-정보보안의-3대-분류">3. 정보보안의 3대 분류</h4>
+<p>정보보안은 크게 아래 세 가지가 톱니바퀴처럼 유기적으로 맞물려야 완전한 보안이 이루어
+진다.</p>
+<h5 id="3-1_2">3-1. 물리적 보안</h5>
+<p>자산을 물리적으로 보호하는 모든 수단
+예: 공항 보안검색대, 스피드게이트, 휴대용 금속탐지기, 담장, 아파트 주차 차단기 등</p>
+<h5 id="3-2_1">3-2. 관리적 보안</h5>
+<p>인적 보안을 포함한 문서 기반의 보안 체계
+책임자 지정, 퇴사자 관리, 신규 직원 권한 부여 기준 등 모든 지침을 문서화
+시스템 구현 과정·문제점·개선 내역 등의 기록이 해당</p>
+<h5 id="3-3_2">3-3. 기술적 보안</h5>
+<ul>
+<li>실습을 통해 직접 배우는 영역</li>
+<li>주요 분야:</li>
+<li>시스템(서버) 보안</li>
+<li>웹 보안 (애플리케이션 보안의 일종)</li>
+<li>애플리케이션 보안 — FTP, 메일 서버(SMTP) 등 다양한 서비스 포함</li>
+<li>웹 보안이 특히 자주 다루어지는 이유: 현재 서비스 중 웹 애플리케이션이 가장 많은 비중</li>
+<li>을 차지하기 때문</li>
+</ul>
+<h4 id="4-isms-p-정보보호-관리체계-인증">4. ISMS-P (정보보호 관리체계 인증)</h4>
+<p>ISMS: 정보보호 관리체계
+PIMS: 개인정보보호 관리체계
+현재는 두 인증을 통합한 ISMS-P로 운영
+법령으로 지정된 의무 인증 대상: 네이버, 다음 등 대규모 개인정보를 보유한 기업
+인증 심사는 ISMS-P 인증심사원이 물리적·관리적·기술적 보안 체크리스트를 점검 후
+평가위원회에서 최종 결정
+인증 취득 시 기업의 신뢰도 향상 (KS 인증 마크와 유사한 개념)
+경력 6년 이상이면 ISMS 인증심사원 응시 자격 취득 가능</p>
+<h4 id="5-osi-표준-모델">5. OSI 표준 모델</h4>
+<h5 id="5-1">5-1. 개요</h5>
+<p>OSI: Open Systems Interconnection (개방형 시스템 간의 유기적 연결)</p>
+<p>제정 기관: ISO (International Standards Organization, 국제표준협회)
+1970년대 초반 제정, 현재까지도 7계층 구조로 동작
+제정 배경: 서로 다른 환경(장비·소프트웨어·프로토콜)을 가진 기관들 간의 연결이 어려
+워 표준 필요성 대두
+표준 제정 이후 소프트웨어·하드웨어·네트워크 모든 분야가 비약적으로 발전 → 각 개발
+분야의 선택과 집중이 가능해졌기 때문</p>
+<h5 id="5-2-osi-7">5-2. OSI 7계층 구조</h5>
+<ul>
+<li>계층 번호</li>
+<li>계층 이름</li>
+<li>주요 역할</li>
+<li>관련 장비/프로토콜 예</li>
+<li>시</li>
+<li>애플리케이션 계</li>
+<li>층</li>
+<li>사용자에게 인터페이스 제공</li>
+<li>HTTP, FTP, SMTP 등</li>
+<li>프레젠테이션 계</li>
+<li>층</li>
+<li>데이터 압축·암호화·변환</li>
+<li>—</li>
+<li>세션 계층</li>
+<li>통신 연결(세션) 관리</li>
+<li>—</li>
+<li>전송 계층</li>
+<li>실제 데이터 전송 제어</li>
+<li>TCP, UDP</li>
+<li>네트워크 계층</li>
+<li>경로 설정 (라우팅)</li>
+<li>라우터, L3 스위치</li>
+<li>데이터링크 계층</li>
+<li>내부 네트워크 전송, 흐름 제어</li>
+<li>L2 스위치</li>
+<li>물리 계층</li>
+<li>전송 매체의 물리적 인터페이스</li>
+<li>규정</li>
+<li>UTP 케이블, 잭</li>
+<li>상위 계층 (5~7층): 사용자 지원 계층 (어퍼 레이어)</li>
+<li>하위 계층 (1~3층): 실제 전송 및 경로 처리</li>
+</ul>
+<h4 id="6-캡슐화와-역캡슐화">6. 캡슐화와 역캡슐화</h4>
+<h5 id="6-1-encapsulation">6-1. 캡슐화 (Encapsulation) — 송신 측</h5>
+<p>데이터가 상위 계층 → 하위 계층으로 이동할 때, 각 계층마다 헤더(Header) 정보가 추
+가됨
+원본 데이터보다 실제 전송되는 데이터의 크기가 더 커짐
+비유: 알약 캡슐 — 약효 분말(원본 데이터)을 캡슐(헤더)로 감싸는 과정, 또는 포장이사
+시 그릇을 신문지·뽁뽁이로 겹겹이 싸는 것</p>
+<h5 id="6-2-decapsulation">6-2. 역캡슐화 (Decapsulation) — 수신 측</h5>
+<p>수신 측에서는 하위 계층 → 상위 계층으로 이동하며, 각 계층의 헤더를 하나씩 제거
+최종적으로 원본 데이터를 복원
+비유: 이사한 집에서 신문지·뽁뽁이를 벗겨내고 원래 그릇을 꺼내는 것</p>
+<h5 id="6-3_2">6-3. 통신 예시 (이메일 송수신)</h5>
+<ul>
+<li>[송신 측] 네이버 메일 사용자</li>
+<li>└─ 메일 작성 → 보내기 클릭 (7계층: 애플리케이션)</li>
+<li>└─ 파일 압축/암호화 (6계층: 프레젠테이션)</li>
+<li>└─ 세션 생성 (5계층: 세션)</li>
+<li>└─ TCP 전송 제어 (4계층: 전송)</li>
+<li>└─ 경로 설정 (3계층: 네트워크)</li>
+<li>└─ 내부 전송 (2계층: 데이터링크)</li>
+<li>└─ UTP 케이블 → ISP(KT, LG U+ 등) 전송 (1계층: 물리)</li>
+<li>[수신 측] 다음 메일 사용자</li>
+<li>└─ 1계층부터 수신 → 각 계층에서 헤더 제거</li>
+<li>└─ 압축 해제 / 암호 복호화</li>
+<li>└─ 원본 메일 수신</li>
+</ul>
+<h4 id="7-tcpip-모델">7. TCP/IP 모델</h4>
+<ul>
+<li>OSI 모델과 대응 관계를 이루는 실용 모델</li>
+<li>인터넷 및 데이터 전송에 실제로 사용되는 프로토콜 체계</li>
+<li>TCP/IP 계층</li>
+<li>대응 OSI 계층</li>
+<li>애플리케이션 계층</li>
+<li>5, 6, 7계층</li>
+<li>전송 계층</li>
+<li>4계층</li>
+<li>인터넷 계층</li>
+<li>3계층</li>
+<li>네트워크 액세스 계층</li>
+<li>1, 2계층</li>
+<li>주요 프로토콜 정리</li>
+<li>프로토콜</li>
+<li>풀네임</li>
+<li>의미</li>
+<li>TCP</li>
+<li>Transmission Control Protocol</li>
+<li>전송 제어 통신 규약</li>
+<li>IP</li>
+<li>Internet Protocol</li>
+<li>인터넷 주소 통신 규약</li>
+<li>UDP</li>
+<li>User Datagram Protocol</li>
+<li>비연결형 전송 프로토콜</li>
+<li>FTP</li>
+<li>File Transfer Protocol</li>
+<li>파일 전송 통신 규약</li>
+<li>SMTP</li>
+<li>Simple Mail Transfer Protocol</li>
+<li>메일 전송 통신 규약</li>
+</ul>
+<p>프로토콜
+풀네임
+의미
+HTTP
+HyperText Transfer Protocol
+웹 통신 규약
+P (Protocol) = 통신 규약. 대부분의 통신 관련 약자 끝에 붙는 P는 Protocol의 약자
+TCP/IP에서 TCP가 대표로 쓰이는 이유: 대부분의 데이터 전송이 TCP를 사용하기 때
+문
+전송 계층에서는 TCP 외에 UDP도 사용 (차이점은 추후 설명)
+IP 주소 예시: 192.168.100.1 , 210.100.100.100</p>
+<hr />
+<h3 id="005-시스코-장비-cli-기본-설정">005. 시스코 장비 CLI 기본 설정</h3>
+<h4 id="1-cli-command-line-interface-개요">1. CLI (Command Line Interface) 개요</h4>
+<p>CLI: Command Line Interface — 명령어를 직접 입력하여 장비를 설정하는 환경
+Packet Tracer에서 장비 클릭 → CLI 탭 선택하여 진입
+Config 탭(GUI 설정)은 사용하지 않고, CLI로만 설정
+네트워크·리눅스·모의해킹 등 대부분의 수업이 영어 명령어 기반 → 영타 연습 권장
+장비 간 연결선이 처음에 빨간 불로 표시되며, 시간이 지나면 녹색으로 바뀜
+일정 시간 후에도 녹색이 안 되면 선을 삭제하고 자동 연결로 다시 연결</p>
+<h4 id="2-장비-모드-구조">2. 장비 모드 구조</h4>
+<p>시스코 장비는 4가지 기본 모드로 구성되며, 순서대로 진입/이탈한다.
+[사용자 모드] → enable → [이네이블 모드(관리자 모드)] → conf t → [전역 설정 모드] → line/inter
+face → [하위 설정 모드]</p>
+<h5 id="2-1_1">2-1. 모드별 상세 설명</h5>
+<ul>
+<li>모드</li>
+<li>프롬프트 표시</li>
+<li>진입 명령어</li>
+<li>주요 용도</li>
+<li>사용자 모드</li>
+<li>(User Mode)</li>
+<li>Switch&gt;</li>
+<li>장비 부팅 후 기본 진입</li>
+<li>제한적 명령어만</li>
+<li>사용 가능</li>
+<li>이네이블 모드</li>
+<li>(Privileged</li>
+<li>Mode)</li>
+<li>Switch#</li>
+<li>enable</li>
+<li>설정 내용 확인,</li>
+<li>디버깅, 테스트</li>
+<li>전역 설정 모드</li>
+<li>(Global Config</li>
+<li>Mode)</li>
+<li>Switch(config)#</li>
+<li>configure terminal</li>
+<li>( conf t )</li>
+<li>장비 전체에 영향</li>
+<li>을 주는 설정</li>
+<li>하위 설정 모드</li>
+<li>(Sub-config</li>
+<li>Mode)</li>
+<li>Switch(config-line)#</li>
+<li>또는 Switch(config-</li>
+<li>if)#</li>
+<li>line  또는 interface</li>
+<li>특정 포트·회선에</li>
+<li>만 적용되는 세부</li>
+<li>설정</li>
+</ul>
+<h5 id="2-2_1">2-2. 기타 모드</h5>
+<ul>
+<li>모드</li>
+<li>설명</li>
+<li>셋업 모드</li>
+<li>이네이블 모드에서 setup  명령어로 진입, 초기 설정용</li>
+<li>ROMMON 모드</li>
+<li>OS 로딩 실패 시 수정하는 모드</li>
+<li>RXBoot 모드</li>
+<li>이미지 복구, 패스워드 복구용</li>
+</ul>
+<h4 id="3-모드-이동-명령어">3. 모드 이동 명령어</h4>
+<ul>
+<li>명령어</li>
+<li>기능</li>
+<li>enable</li>
+<li>사용자 모드 → 이네이블 모드</li>
+<li>configure terminal  ( conf t )</li>
+<li>이네이블 모드 → 전역 설정 모드</li>
+<li>exit</li>
+<li>현재 모드 → 이전 모드로 한 단계 이탈</li>
+<li>end  또는 Ctrl + Z</li>
+<li>어느 모드에서든 → 이네이블 모드로 바로 이동</li>
+<li>exit  vs end : exit 는 한 단계씩 이탈, end (또는 Ctrl+Z)는 이네이블 모드로 즉시 이동</li>
+</ul>
+<h4 id="4-자주-쓰는-기본-명령어">4. 자주 쓰는 기본 명령어</h4>
+<h5 id="4-1_1">4-1. 설정 내용 확인</h5>
+<p>Switch# show running-config
+현재 실행 중인 설정 내용을 화면에 출력
+-More--  표시 시: Enter = 한 줄씩, Space = 한 화면씩 이동</p>
+<h5 id="4-2_1">4-2. 장비 이름 변경</h5>
+<p>Switch(config)# hostname [변경할 이름]
+예) hostname SwitchA  → 프롬프트가 SwitchA(config)# 으로 변경됨</p>
+<h5 id="4-3_2">4-3. 오류 메시지</h5>
+<p>% Invalid input detected at '^' marker
+명령어 철자가 틀렸을 때 출력
+^  표시 위치 근처에 오타가 있음 → 수정 후 재입력</p>
+<h4 id="5-보안-설정--패스워드">5. 보안 설정 — 패스워드</h4>
+<h5 id="5-1_1">5-1. 콘솔 포트 패스워드 설정</h5>
+<p>장비에 직접 콘솔 케이블로 접속할 때 요구되는 패스워드
+Switch(config)# line console 0
+Switch(config-line)# password [패스워드]
+Switch(config-line)# login
+line console 0  → 하위 설정 모드 진입 → 이 모드에서 내리는 명령은 콘솔 0번 포트에
+만 적용</p>
+<h5 id="5-2">5-2. 이네이블 모드 패스워드 설정</h5>
+<p>사용자 모드에서 enable  명령어 입력 시 요구되는 패스워드
+Switch(config)# enable password [패스워드]</p>
+<h5 id="5-3">5-3. 패스워드 암호화</h5>
+<p>show running-config  실행 시 패스워드가 평문으로 노출되는 문제 해결
+Switch(config)# service password-encryption
+설정 후 show running-config 로 확인하면 패스워드가 암호화된 문자열로 표시됨
+⚠️ Packet Tracer 시뮬레이터에서는 패스워드를 분실하면 패스워드 복구 모드가 없으
+므로 장비를 삭제하고 처음부터 다시 해야 함. 너무 복잡하지 않은 패스워드 설정 권장</p>
+<h4 id="6-원격-접속vty-패스워드-설정">6. 원격 접속(VTY) 패스워드 설정</h4>
+<p>Switch(config)# line vty 0 4
+Switch(config-line)# password [패스워드]
+Switch(config-line)# login
+vty 0 4 : 가상 터미널 회선 0번~4번 (원격 접속용 회선)
+여기서 내리는 명령은 VTY 회선에만 적용</p>
+<h4 id="7-콘솔-포트-console-port-개념">7. 콘솔 포트 (Console Port) 개념</h4>
+<p>장비 초기 설정 시 원격 접속이 불가하므로 콘솔 케이블로 직접 연결하여 설정
+연결 경로: 장비 콘솔 포트 ↔ 콘솔 케이블 ↔ 노트북/PC
+연결 후 CLI 화면이 열리면 명령어 입력 가능
+시뮬레이터 상에서 Connected to … con 0  메시지 = 콘솔 0번 포트에 연결된 상태</p>
+<h4 id="8-실습-전체-흐름-요약">8. 실습 전체 흐름 요약</h4>
+<h4 id="1-packet-tracer에서-장비-클릭--cli-탭-진입">1. Packet Tracer에서 장비 클릭 → CLI 탭 진입</h4>
+<h4 id="2-enter-눌러-사용자-모드-진입-switchgt">2. Enter 눌러 사용자 모드 진입 (Switch&gt;)</h4>
+<h4 id="3-enable--이네이블-모드-진입-switch">3. enable → 이네이블 모드 진입 (Switch#)</h4>
+<h4 id="4-configure-terminal--전역-설정-모드-진입-switchconfig">4. configure terminal → 전역 설정 모드 진입 (Switch(config)#)</h4>
+<h4 id="5-hostname-이름--장비-이름-변경">5. hostname [이름] → 장비 이름 변경</h4>
+<h4 id="6-line-console-0--콘솔-패스워드-설정-password--login">6. line console 0 → 콘솔 패스워드 설정 (password / login)</h4>
+<h4 id="7-exit--전역-설정-모드로-복귀">7. exit → 전역 설정 모드로 복귀</h4>
+<h4 id="8-enable-password-패스워드--이네이블-패스워드-설정">8. enable password [패스워드] → 이네이블 패스워드 설정</h4>
+<h4 id="9-service-password-encryption--패스워드-암호화">9. service password-encryption → 패스워드 암호화</h4>
+<h4 id="10-end-또는-ctrlz--이네이블-모드로-이동">10. end 또는 Ctrl+Z → 이네이블 모드로 이동</h4>
+<h4 id="11-show-running-config--설정-내용-확인">11. show running-config → 설정 내용 확인</h4>
+<h4 id="12-file--save-as--pkt-파일로-저장">12. File → Save As → .pkt 파일로 저장</h4>
+<h4 id="9-파일-저장-방법">9. 파일 저장 방법</h4>
+<p>Packet Tracer 상단 메뉴: File → Save As
+확장자: .pkt</p>
+<hr />
+<h3 id="006-vtp">006. VTP</h3>
+<h4 id="1-트러블슈팅troubleshooting-마인드셋">1. 트러블슈팅(Troubleshooting) 마인드셋</h4>
+<p>통신이 안 될 때 → "왜 안 되지?" 를 찾는 과정이 곧 실제 필드의 장애 처리
+show running-config  명령어로 설정 내용을 확인하며 구성도와 비교
+안 됐을 때를 스킬을 키울 기회로 생각할 것</p>
+<h4 id="2-vtp-vlan-trunking-protocol-개요">2. VTP (VLAN Trunking Protocol) 개요</h4>
+<h5 id="2-1_2">2-1. 등장 배경</h5>
+<p>스위치가 여러 대(예: 10대)인 환경에서 VLAN이 변경될 때마다 모든 스위치에 일일이
+접속해서 동기화해야 하는 문제
+부서 신설·폐지·통폐합 등 VLAN 구성은 수시로 변경됨
+→ VLAN 정보를 자동으로 동기화해주는 프로토콜이 필요 → VTP</p>
+<h5 id="2-2-vtp">2-2. VTP 동작 조건</h5>
+<ul>
+<li>조건</li>
+<li>설명</li>
+<li>VTP 도메인 이름 동일</li>
+<li>같은 도메인 이름을 가진 스위치끼리만 정보를 동기화</li>
+<li>VTP 패스워드 동일</li>
+<li>패스워드가 일치할 때만 동기화 허용</li>
+<li>스위치 간 연결 포트가</li>
+<li>Trunk</li>
+<li>VLAN 정보가 트렁크 포트를 통해 전달됨</li>
+</ul>
+<h4 id="3-vtp-동작-모드-3가지">3. VTP 동작 모드 (3가지)</h4>
+<ul>
+<li>모드</li>
+<li>역할</li>
+<li>VLAN 생성/삭제/</li>
+<li>변경</li>
+<li>정보 동기화</li>
+<li>Server (서버)</li>
+<li>VLAN 정보를 생성·관리·제공</li>
+<li>가능</li>
+<li>정보를 전송</li>
+<li>Client (클라이언트)</li>
+<li>서버로부터 VLAN 정보를 수</li>
+<li>신</li>
+<li>불가</li>
+<li>
+<p>정보를 수신</p>
+</li>
+<li>
+<p>모드</p>
+</li>
+<li>역할</li>
+<li>VLAN 생성/삭제/</li>
+<li>변경</li>
+<li>정보 동기화</li>
+<li>Transparent (투</li>
+<li>명)</li>
+<li>독립적으로 동작</li>
+<li>가능</li>
+<li>영향을 받지도 주지도</li>
+<li>않음, 단 연결된 스위치</li>
+<li>에 정보는 전달</li>
+<li>기본값은 Server 모드</li>
+<li>Transparent 모드를 사용하는 이유</li>
+<li>특정 부서의 VLAN이 다른 VLAN과 공유·통신되면 안 되는 경우</li>
+<li>보안성 확보를 위해 독립적으로 운용할 때 사용</li>
+</ul>
+<h4 id="4-revision-number-리비전-넘버">4. Revision Number (리비전 넘버)</h4>
+<p>VTP 동기화에 사용되는 버전 번호
+VLAN 관련 명령어를 내릴 때마다 1씩 증가
+클라이언트는 서버의 Revision Number가 자신보다 높으면 → 최신 정보를 요청하여
+동기화
+장비 전원을 껐다 켜면 Revision Number가 초기화됨
+예시:
+A 스위치(서버): vlan 100 → Revision 1
+               name test  → Revision 2
+B 스위치(클라이언트): Revision 0 → 서버의 2를 받아 동기화 → Revision 2</p>
+<h4 id="5-vtp-설정-과정">5. VTP 설정 과정</h4>
+<h5 id="5-1_2">5-1. 토폴로지 구성</h5>
+<p>[Switch A] ── [Switch B] ── [Switch C] ── [Switch D]
+  Server       Client      Transparent     Client
+2960 스위치 4대 사용
+스위치 간 연결 포트는 모두 Trunk 설정 필요</p>
+<h5 id="5-2-vtp">5-2. VTP 상태 확인 (이네이블 모드)</h5>
+<p>Switch# show vtp status
+현재 동작 모드, 도메인 이름, Revision Number 확인 가능
+Config 모드에서 실행하려면: do show vtp status</p>
+<h5 id="5-3-vtp-config">5-3. VTP 설정 명령어 (Config 모드)</h5>
+<p>Switch(config)# vtp domain [도메인이름]
+Switch(config)# vtp password [패스워드]
+Switch(config)# vtp mode [server | client | transparent]
+실습 예시
+! A 스위치 (Server)
+Switch(config)# vtp domain test
+Switch(config)# vtp password 1234
+Switch(config)# vtp mode server       ← 기본값이므로 생략 가능
+! B 스위치 (Client)
+Switch(config)# vtp domain test
+Switch(config)# vtp password 1234
+Switch(config)# vtp mode client
+! C 스위치 (Transparent)
+Switch(config)# vtp domain test
+Switch(config)# vtp password 1234
+Switch(config)# vtp mode transparent
+! D 스위치 (Client)
+Switch(config)# vtp domain test
+Switch(config)# vtp password 1234
+Switch(config)# vtp mode client</p>
+<h5 id="5-4">5-4. 트렁크 포트 설정 (스위치 간 연결 포트 전체)</h5>
+<p>Switch(config)# interface fa0/1
+Switch(config-if)# switchport mode trunk
+Switch(config)# interface fa0/2        ← 연결된 포트가 2개인 경우
+Switch(config-if)# switchport mode trunk
+⚠️ 포트 이름은 구성도에서 직접 확인 후 입력 (장비·버전마다 다를 수 있음)</p>
+<h5 id="5-5-vtp">5-5. VTP 동기화 확인</h5>
+<p>! 서버에서 VLAN 생성
+Switch(config)# vlan 100
+Switch(config-vlan)# name test
+! 서버에서 Revision Number 확인
+Switch# show vtp status          ← Revision이 2로 증가했는지 확인
+! 클라이언트에서 동기화 확인
+Switch# show vtp status          ← Revision이 서버와 동일한지 확인
+Switch# show vlan                ← VLAN 100이 자동으로 생성됐는지 확인</p>
+<h4 id="6-동기화-안-될-때-체크리스트">6. 동기화 안 될 때 체크리스트</h4>
+<ul>
+<li>항목</li>
+<li>확인 방법</li>
+<li>트렁크 포트 설정 여부</li>
+<li>show interfaces [포트명] switchport</li>
+<li>VTP 도메인 이름 일치 여부</li>
+<li>show vtp status  → VTP Domain Name 확인</li>
+<li>VTP 패스워드 일치 여부</li>
+<li>show vtp password</li>
+<li>포트 이름이 구성도와 일치하는지</li>
+<li>구성도와 직접 비교</li>
+</ul>
+<h4 id="7-유용한-cli-팁">7. 유용한 CLI 팁</h4>
+<ul>
+<li>팁</li>
+<li>방법</li>
+<li>명령어 자동완성</li>
+<li>Tab  키</li>
+<li>다음에 올 수 있는 명령어 보기</li>
+<li>명령어 일부 입력 후 ?</li>
+<li>Config 모드에서 Show 명령어 사용</li>
+<li>do show [명령어]</li>
+<li>VLAN 목록 확인</li>
+<li>show vlan</li>
+<li>VTP 상태 확인</li>
+<li>show vtp status</li>
+</ul>
+<hr />
+<h3 id="007-vtp-트러블슈팅">007. VTP 트러블슈팅</h3>
+<h4 id="1-vtp-트러블슈팅-체크리스트">1. VTP 트러블슈팅 체크리스트</h4>
+<ul>
+<li>동기화가 안 될 때 아래 순서로 하나씩 확인한다.</li>
+<li>순서</li>
+<li>확인 항목</li>
+<li>확인 명령어</li>
+<li>스위치 간 연결 포트가 트렁크 모드로 동작 중인</li>
+<li>지</li>
+<li>show interfaces</li>
+<li>trunk</li>
+<li>VTP 도메인 이름이 모든 스위치에서 동일한지</li>
+<li>show vtp status</li>
+<li>VTP 패스워드가 일치하는지</li>
+<li>show vtp password</li>
+<li>Revision Number가 동기화되었는지</li>
+<li>show vtp status</li>
+<li>동기화 확인 방법: 서버 스위치에서 VLAN을 생성한 뒤 클라이언트 스위치에서 show</li>
+<li>vlan 으로 자동 반영 여부 확인</li>
+</ul>
+<h4 id="2-시스코-장비-모델-번호-이해">2. 시스코 장비 모델 번호 이해</h4>
+<p>모델 번호가 높을수록 → 운영체제(IOS) 버전이 높고, 지원 명령어·기능이 더 많음
+가격도 높아지는 것이 일반적
+실습에서는 라우터: 2901, 스위치: 2960 모델 사용 (다른 모델도 기본 명령어는 동일)</p>
+<h4 id="3-종합-예제--3개-vlan-전체-설정">3. 종합 예제 — 3개 VLAN 전체 설정</h4>
+<h5 id="3-1_3">3-1. 토폴로지 구성</h5>
+<ul>
+<li>[라우터 2901]</li>
+<li>│</li>
+<li>[A 스위치 2960] ── [B 스위치 2960]</li>
+<li>│        │              │</li>
+<li>PC1      PC2            PC3</li>
+<li>(VLAN 100) (VLAN 300)  (VLAN 200)</li>
+<li>VLAN 100: CCNA 그룹</li>
+</ul>
+<p>VLAN 200: CCNP 그룹
+VLAN 300: CCIE 그룹
+할당받은 네트워크: 192.168.200.0/24</p>
+<h5 id="3-2-step-1">3-2. Step 1 — 서브네팅 (주소 설계)</h5>
+<ul>
+<li>조건: 3개 VLAN 필요 → 2² = 4 네트워크로 분할 (비트 2개 변경)</li>
+<li>변경 전: /24 → 255.255.255.0    (마지막 옥텟: 00000000)</li>
+<li>변경 후: /26 → 255.255.255.192  (마지막 옥텟: 11000000)</li>
+<li>→ 128 + 64 = 192</li>
+<li>네트워크 수:  2² = 4개 (3개 사용 + 1개 예비)</li>
+<li>할당 가능 IP: 2⁶ - 2 = 62개 (각 네트워크당)</li>
+<li>4개 네트워크 대역 범위:</li>
+<li>네트워크</li>
+<li>전체 범위</li>
+<li>할당 가능 범위</li>
+<li>용도</li>
+<li>1번</li>
+<li>200.0 ~ 200.63</li>
+<li>200.1 ~ 200.62</li>
+<li>VLAN 100 (CCNA)</li>
+<li>2번</li>
+<li>200.64 ~ 200.127</li>
+<li>200.65 ~ 200.126</li>
+<li>VLAN 200 (CCNP)</li>
+<li>3번</li>
+<li>200.128 ~ 200.191</li>
+<li>200.129 ~ 200.190</li>
+<li>VLAN 300 (CCIE)</li>
+<li>4번</li>
+<li>200.192 ~ 200.255</li>
+<li>200.193 ~ 200.254</li>
+<li>예비 (여유분)</li>
+<li>각 대역의 마지막 할당 가능 IP(62번, 126번, 190번)를 게이트웨이로 사용</li>
+</ul>
+<h5 id="3-3-step-2-pc-ip">3-3. Step 2 — PC(엔드 디바이스) IP 설정</h5>
+<ul>
+<li>설정 순서: PC → 스위치 → 라우터 순서로 진행 권장</li>
+<li>장비</li>
+<li>IP</li>
+<li>서브넷 마스크</li>
+<li>게이트웨이</li>
+<li>VLAN</li>
+<li>PC1</li>
+<li>192.168.200.10</li>
+<li>255.255.255.192</li>
+<li>192.168.200.62</li>
+<li>PC2</li>
+<li>192.168.200.130</li>
+<li>255.255.255.192</li>
+<li>192.168.200.190</li>
+<li>PC3</li>
+<li>192.168.200.70</li>
+<li>255.255.255.192</li>
+<li>192.168.200.126</li>
+<li>IP는 각 대역 내에서 자유롭게 지정 가능 (게이트웨이로 쓸 마지막 IP는 제외)</li>
+</ul>
+<h5 id="3-4-step-3-a-b">3-4. Step 3 — 스위치 설정 (A, B 스위치 동일하게)</h5>
+<p>VLAN 생성</p>
+<ul>
+<li>Switch(config)# vlan 100</li>
+<li>Switch(config-vlan)# name CCNA</li>
+<li>Switch(config)# vlan 200</li>
+<li>Switch(config-vlan)# name CCNP</li>
+<li>Switch(config)# vlan 300</li>
+<li>Switch(config-vlan)# name CCIE</li>
+<li>포트 설정 (구성도에서 본인 포트 번호 확인 후 진행)</li>
+<li>포트 연결 대상</li>
+<li>모드</li>
+<li>명령어 예시</li>
+<li>PC (엔드 디바이</li>
+<li>스)</li>
+<li>Access</li>
+<li>switchport mode access  + switchport access</li>
+<li>vlan [번호]</li>
+<li>스위치↔스위치</li>
+<li>Trunk</li>
+<li>switchport mode trunk</li>
+<li>스위치↔라우터</li>
+<li>Trunk</li>
+<li>switchport mode trunk</li>
+<li>! PC가 연결된 포트 예시 (포트 번호는 구성도 확인)</li>
+<li>Switch(config)# interface fa0/2</li>
+<li>Switch(config-if)# switchport mode access</li>
+<li>Switch(config-if)# switchport access vlan 100</li>
+<li>! 스위치 간 연결 포트 예시</li>
+<li>Switch(config)# interface fa0/1</li>
+<li>Switch(config-if)# switchport mode trunk</li>
+<li>VLAN 설정 확인</li>
+<li>Switch# show vlan brief</li>
+<li>VLAN 100·200·300이 생성되었는지 확인</li>
+<li>각 포트가 올바른 VLAN에 등록되었는지 확인</li>
+<li>트렁크 포트는 목록에서 빠져 있어야 정상</li>
+</ul>
+<h5 id="3-5-step-4-vlan">3-5. Step 4 — 동일 VLAN 통신 테스트</h5>
+<p>스위치 설정 완료 후 → 같은 VLAN끼리 핑(ping) 테스트로 중간 검증
+PC1(VLAN 100)에서 같은 VLAN 100의 다른 PC로 ping → 성공이면 스위치 설정 OK</p>
+<h5 id="3-6-step-5">3-6. Step 5 — 라우터 서브인터페이스 설정</h5>
+<p>물리 인터페이스 활성화 (IP 없이)
+Router(config)# interface gi0/0         ← 본인 인터페이스 이름 확인
+Router(config-if)# no shutdown
+VLAN별 서브인터페이스 생성
+! VLAN 100 게이트웨이
+Router(config)# interface gi0/0.100
+Router(config-subif)# encapsulation dot1q 100
+Router(config-subif)# ip address 192.168.200.62 255.255.255.192
+! VLAN 200 게이트웨이
+Router(config)# interface gi0/0.200
+Router(config-subif)# encapsulation dot1q 200
+Router(config-subif)# ip address 192.168.200.126 255.255.255.192
+! VLAN 300 게이트웨이
+Router(config)# interface gi0/0.300
+Router(config-subif)# encapsulation dot1q 300
+Router(config-subif)# ip address 192.168.200.190 255.255.255.192</p>
+<h5 id="3-7-step-6-vlan">3-7. Step 6 — 다른 VLAN 간 통신 테스트</h5>
+<p>PC1(VLAN 100)에서 PC3(VLAN 200)으로 ping 192.168.200.70 → 성공이면 전체 설정 완료
+첫 번째 패킷은 로스(loss)가 날 수 있음 — 두 번째부터 응답이 오면 정상</p>
+<h4 id="5-설정-확인-명령어-모음">5. 설정 확인 명령어 모음</h4>
+<ul>
+<li>명령어</li>
+<li>설명</li>
+<li>show vlan brief</li>
+<li>VLAN 목록 및 포트 할당 요약 확인</li>
+<li>show interfaces trunk</li>
+<li>트렁크 동작 중인 포트 확인</li>
+<li>show vtp status</li>
+<li>VTP 모드, 도메인, Revision Number 확</li>
+<li>인</li>
+<li>show running-config</li>
+<li>전체 설정 내용 확인 (문제 발생 시 검토)</li>
+</ul>
+<hr />
+<h3 id="008-라우터-심화---enable-secret-인터페이스-ip-저장-구조">008. 라우터 심화 - enable secret 인터페이스 IP 저장 구조</h3>
+<p>라우터 심화 - enable secret/인터
+페이스 IP/저장 구조</p>
+<h4 id="1-enable-password-vs-enable-secret">1. enable password vs enable secret</h4>
+<p>두 명령어 모두 enable  명령어 입력 시 요구하는 패스워드를 설정하지만 차이가 있다.
+구분
+enable password
+enable secret
+암호화
+service password-encryption  필요
+자동 암호화
+우선순위
+낮음
+높음 (우선 적용)
+두 개가 동시에 설정된 경우 → enable secret 패스워드가 우선 적용
+show running-config 에서 secret은 이미 코드화된 상태로 표시됨
+Router(config)# enable password 1234
+Router(config)# enable secret 12345</p>
+<h4 id="2-라우터-인터페이스-ip-설정">2. 라우터 인터페이스 IP 설정</h4>
+<h5 id="2-1_3">2-1. 이더넷 종류와 전송 속도</h5>
+<ul>
+<li>종류</li>
+<li>속도</li>
+<li>이더넷 (Ethernet)</li>
+<li>최대 10Mbps</li>
+<li>패스트 이더넷 (Fast Ethernet, FA)</li>
+<li>최대 100Mbps</li>
+<li>기가비트 이더넷 (Gigabit Ethernet,</li>
+<li>GI)</li>
+<li>최대 1Gbps</li>
+</ul>
+<h5 id="2-2-ip">2-2. 인터페이스 IP 설정 절차</h5>
+<p>Router# configure terminal
+Router(config)# interface gi0/0          ← 인터페이스 이름 확인 후 입력
+라우터 심화 - enable secret/인터페이스 IP/저장 구조</p>
+<p>Router(config-if)# ip address 192.168.100.100 255.255.255.0
+Router(config-if)# no shutdown           ← 반드시 활성화!
+⚠️ 라우터 인터페이스는 기본값이 shutdown(비활성화) 상태
+→ no shutdown  명령어로 반드시 활성화해야 링크가 올라옴</p>
+<h5 id="2-3_1">2-3. 명령어 삭제 방법</h5>
+<p>Router(config)# no [삭제할 명령어]
+예) no service password-encryption
+예) no shutdown  → shutdown 명령 삭제 (인터페이스 활성화)</p>
+<h4 id="3-게이트웨이gateway-개념">3. 게이트웨이(Gateway) 개념</h4>
+<p>외부 네트워크로 나가거나, 외부에서 들어올 때 반드시 통과해야 하는 관문
+게이트웨이가 없거나 잘못 설정되면 → 인터넷(외부 통신) 불가
+라우터 인터페이스 IP = 해당 네트워크의 게이트웨이 주소
+같은 장비라도 물리적으로 인터페이스가 다르면 다른 네트워크 → 주소 대역도 달라야
+함</p>
+<h4 id="4-장비-운영체제ios-확인">4. 장비 운영체제(IOS) 확인</h4>
+<p>Router# show version
+탑재된 IOS 소프트웨어 이름과 버전 확인 가능
+예) c2900-universalk9-mz, Version 15.1
+하드웨어 호환 범위 내에서 IOS 업그레이드/다운그레이드 가능</p>
+<h4 id="5-ram-vs-rom-저장-구조">5. RAM vs ROM (저장 구조)</h4>
+<ul>
+<li>메모리</li>
+<li>특성</li>
+<li>용도</li>
+<li>RAM</li>
+<li>휘발성 — 전원 차단 시 삭제</li>
+<li>현재 실행 중인 설정 ( running-config ) 저장</li>
+<li>ROM (Flash)</li>
+<li>비휘발성 — 전원 차단 후에</li>
+<li>도 유지</li>
+<li>부팅 설정 ( startup-config ) 및 IOS 이미지 저</li>
+<li>장</li>
+<li>라우터 심화 - enable secret/인터페이스 IP/저장 구조</li>
+</ul>
+<p>관리자가 설정한 내용은 RAM에만 저장 → 전원이 꺼지면 사라짐
+반드시 ROM에 저장해야 재부팅 후에도 설정 유지
+실제 필드에서도 설정 후 저장을 빠뜨려 부팅 시 설정이 날아가는 사고가 발생함
+→ 설정 변경 후 항상 저장하는 습관 필수</p>
+<h4 id="6-설정-확인-명령어-비교">6. 설정 확인 명령어 비교</h4>
+<ul>
+<li>명령어</li>
+<li>설명</li>
+<li>show running-config</li>
+<li>현재 RAM에 있는 실행 중인 설정 확인</li>
+<li>show startup-config</li>
+<li>ROM에 저장된 부팅용 설정 확인</li>
+<li>show version</li>
+<li>장비 IOS 버전 및 하드웨어 정보 확인</li>
+<li>라우터 심화 - enable secret/인터페이스 IP/저장 구조</li>
+</ul>
+<hr />
+<h3 id="009-서브넷-마스크-상세-서브네팅-공식">009. 서브넷 마스크 상세 서브네팅 공식</h3>
+<p>서브넷 마스크 상세/서브네팅 공식</p>
+<h4 id="1-프리픽스-표기법-숫자의-의미">1. 프리픽스 표기법 (/숫자)의 의미</h4>
+<p>/24  처럼 슬래시 뒤에 숫자로 서브넷 마스크를 간략하게 표기
+숫자 = 서브넷 마스크를 2진수로 변환했을 때 비트 1의 개수
+/24 → 1의 비트 24개 → 11111111.11111111.11111111.00000000 → 255.255.255.0
+/16 → 1의 비트 16개 → 11111111.11111111.00000000.00000000 → 255.255.0.0
+/26 → 1의 비트 26개 → 11111111.11111111.11111111.11000000 → 255.255.255.192
+/26 계산 예시
+마지막 옥텟: 11000000
+→ 128 + 64 = 192
+→ 서브넷 마스크: 255.255.255.192
+서브넷 마스크는 반드시 1이 연속으로 나오고 그 뒤에 0이 이어짐
+중간에 0과 1이 섞이는 경우는 없음</p>
+<h4 id="2-네트워크-id--호스트-id">2. 네트워크 ID / 호스트 ID</h4>
+<ul>
+<li>서브넷 마스크를 2진수로 표현했을 때:</li>
+<li>비트 구간</li>
+<li>의미</li>
+<li>1로 시작 ~ 1로 끝나는</li>
+<li>부분</li>
+<li>네트워크 ID — 같은 집(네트워크)임을 나타내는 부분, 집 안 모든 장비가 동</li>
+<li>일</li>
+<li>0으로 시작 ~ 0으로 끝</li>
+<li>나는 부분</li>
+<li>호스트 ID — 장비에 할당 가능한 주소 범위</li>
+</ul>
+<h4 id="3-예약-주소">3. 예약 주소</h4>
+<p>하나의 네트워크 대역에서 첫 번째와 마지막 주소는 시스템에 할당 불가
+서브넷 마스크 상세/서브네팅 공식</p>
+<ul>
+<li>위치</li>
+<li>이름</li>
+<li>용도</li>
+<li>대역의 첫 번째 주소</li>
+<li>네트워크 주소</li>
+<li>대역 전체를 나타내는 식별 주소</li>
+<li>대역의 마지막 주소</li>
+<li>브로드캐스트 주소</li>
+<li>같은 네트워크 내 전체 전송(1:N 통신)용 예약 주</li>
+<li>소</li>
+<li>예) 192.168.100.0/24 대역 → 100.0(네트워크), 100.255(브로드캐스트)</li>
+<li>실제 할당 가능 범위: 100.1 ~ 100.254 (총 254개)</li>
+</ul>
+<h4 id="4-서브네팅-공식">4. 서브네팅 공식</h4>
+<ul>
+<li>서브넷 마스크의 0 비트를 1 비트로 변경하여 네트워크를 분할하는 작업</li>
+<li>공식 1 — 생성되는 네트워크(집)의 수</li>
+<li>네트워크 수 = 2ⁿ     (n = 변경된 비트 1의 개수)</li>
+<li>공식 2 — 각 네트워크에서 할당 가능한 IP 수</li>
+<li>할당 가능한 IP 수 = 2ⁿ - 2     (n = 남아 있는 비트 0의 개수)</li>
+<li>(- 2 = 네트워크 주소 + 브로드캐스트 주소 제외)</li>
+<li>서브네팅 예제 — /24를 /26으로 분할</li>
+<li>원본 네트워크: 192.168.100.0/24</li>
+<li>변경 전: 11111111.11111111.11111111.00000000  (/24)</li>
+<li>변경 후: 11111111.11111111.11111111.11000000  (/26)</li>
+<li>→ 변경된 비트: 2개 → 네트워크 수 = 2² = 4개</li>
+<li>→ 남은 0 비트: 6개 → 할당 가능 IP = 2⁶ - 2 = 62개</li>
+<li>4개 네트워크 대역 범위:</li>
+<li>네트워크</li>
+<li>전체 범위</li>
+<li>할당 가능 범위</li>
+<li>1번</li>
+<li>100.0 ~ 100.63</li>
+<li>100.1 ~ 100.62</li>
+<li>2번</li>
+<li>100.64 ~ 100.127</li>
+<li>100.65 ~ 100.126</li>
+<li>3번</li>
+<li>100.128 ~ 100.191</li>
+<li>100.129 ~ 100.190</li>
+<li>서브넷 마스크 상세/서브네팅 공식</li>
+</ul>
+<p>네트워크
+전체 범위
+할당 가능 범위
+4번
+100.192 ~ 100.255
+100.193 ~ 100.254
+각 대역의 범위는 할당 가능 IP 수(64)씩 더해가면 구할 수 있음
+실습 예제 — 7개 부서 서브네팅
+조건: 192.168.150.0/24 네트워크를 7개 부서용 VLAN으로 서브네팅
+풀이 과정:
+1단계: 필요한 네트워크 수 = 7 → 2ⁿ ≥ 7 → 2³ = 8 (n=3)
+2단계: 서브넷 마스크 마지막 옥텟: 11100000 → 128+64+32 = 224
+       → 서브넷 마스크: 255.255.255.224
+3단계: 남은 0 비트 = 5개 → 할당 가능 IP = 2⁵ - 2 = 30개
+각 네트워크 범위 (32씩 증가):
+ ① 150.0   ~ 150.31  (할당: 150.1  ~ 150.30)
+ ② 150.32  ~ 150.63  (할당: 150.33 ~ 150.62)
+ ③ 150.64  ~ 150.95  (할당: 150.65 ~ 150.94)
+ ④ 150.96  ~ 150.127 (할당: 150.97 ~ 150.126)
+ ⑤ 150.128 ~ 150.159 (할당: 150.129 ~ 150.158)
+ ⑥ 150.160 ~ 150.191 (할당: 150.161 ~ 150.190)
+ ⑦ 150.192 ~ 150.223 (할당: 150.193 ~ 150.222)
+ ⑧ (여유분으로 보관)</p>
+<h4 id="5-서브네팅의-목적">5. 서브네팅의 목적</h4>
+<p>제한된 IP 주소를 효율적으로 분할 사용 → 주소 낭비 방지
+주소 부족 해결 → 추가 비용 없이 남아 있는 IP 대역을 나눠 사용
+공인 IP를 사용하는 경우 서브네팅으로 비용 절감 효과
+C클래스(/24)는 기본만으로도 최대 254개이므로 서브네팅을 자주 하지 않음
+B클래스 이상에서 서브네팅 활용 빈도가 높음
+서브넷 변경 시 통신 영향 확인 (실습)
+목적: 서브넷 마스크 값을 변경하면 같은 IP 대역이라도 서로 다른 네트워크가 됨을 확인
+실습 절차:</p>
+<h4 id="1-pc1에-ip-192168100100--서브넷-2552552550-24-설정">1. PC1에 IP 192.168.100.100 , 서브넷 255.255.255.0  (/24) 설정</h4>
+<p>서브넷 마스크 상세/서브네팅 공식</p>
+<h4 id="2-pc2에-ip-192168100200--서브넷-2552552550-24-설정">2. PC2에 IP 192.168.100.200 , 서브넷 255.255.255.0  (/24) 설정</h4>
+<h4 id="3-pc2에서-pc1으로-ping-192168100100--통신-성공-reply">3. PC2에서 PC1으로 ping 192.168.100.100  → 통신 성공 (Reply)</h4>
+<h4 id="4-두-pc-모두-서브넷을-255255255128-25으로-변경">4. 두 PC 모두 서브넷을 255.255.255.128  (/25)으로 변경</h4>
+<h4 id="5-동일하게-핑--request-time-out--통신-실패">5. 동일하게 핑 → Request time out  — 통신 실패</h4>
+<p>원인: /25로 서브네팅 시 100번과 200번은 서로 다른 네트워크에 속하게 됨
+Request time out  = 목적지로 핑 패킷을 보냈으나 응답 시간 초과 = 통신 불가
+서브넷 마스크 상세/서브네팅 공식</p>
+<hr />
+<h3 id="010-설정-저장-cli-팁-vlan-서브넷">010. 설정 저장 CLI 팁 VLAN 서브넷</h3>
+<p>설정 저장/CLI 팁/VLAN/서브넷</p>
+<h4 id="1-설정-저장-방법">1. 설정 저장 방법</h4>
+<p>RAM에 있는 설정( running-config )을 ROM( startup-config )으로 저장하는 두 가지 방법 —
+결과는 동일, 운영체제 버전에 따라 사용 가능한 명령어가 다를 수 있다.
+! 방법 1 — copy 명령어
+Router# copy running-config startup-config
+(엔터 → 목적지 파일명 묻는 메시지 → 엔터)
+! 방법 2 — write memory (축약: wr)
+Router# write memory
+저장 후 재부팅하면 startup-config를 불러와 설정이 유지됨</p>
+<h4 id="2-cli-유용한-팁">2. CLI 유용한 팁</h4>
+<ul>
+<li>기능</li>
+<li>방법</li>
+<li>명령어 자동완성</li>
+<li>일부 입력 후 Tab  키</li>
+<li>다음에 올 명령어 보기</li>
+<li>명령어 뒤에 ?  입력</li>
+<li>명령어 축약</li>
+<li>conf t  (configure terminal), en  (enable), wr  (write</li>
+<li>memory) 등</li>
+<li>이전 명령어 불러오기</li>
+<li>키보드 ↑ ↓ 화살표 키</li>
+<li>도메인 서버 조회 취소</li>
+<li>Ctrl + Shift + 6</li>
+<li>주요 에러 메시지</li>
+<li>메시지</li>
+<li>의미</li>
+<li>% Invalid input detected at '^'</li>
+<li>marker</li>
+<li>명령어 철자 오류 — ^  근처 확인</li>
+<li>% Incomplete command</li>
+<li>명령어가 완성되지 않음 — ? 로 다음 입력 확인</li>
+<li>Translating "..."  무한 대기</li>
+<li>잘못된 명령어로 도메인 서버 조회 중 — Ctrl + Shift +</li>
+<li>6  으로 취소</li>
+<li>설정 저장/CLI 팁/VLAN/서브넷</li>
+</ul>
+<h4 id="3-vlan-virtual-lan-개념">3. VLAN (Virtual LAN) 개념</h4>
+<h5 id="3-1-lan">3-1. LAN이란?</h5>
+<p>LAN (Local Area Network): 근거리 네트워크 — 하나의 건물·사무실 안의 네트워크
+VLAN (Virtual LAN): 물리적 구성과 별도로 논리적(가상)으로 만든 LAN</p>
+<h5 id="3-2-vlan">3-2. VLAN이 필요한 이유</h5>
+<ul>
+<li>문제 상황 예시 (학내망)</li>
+<li>같은 스위치에 선생님 PC + 학생 PC가 연결된 경우</li>
+<li>같은 네트워크에 있으면 학생이 선생님 PC에 접근하기 쉬움 → 보안 취약</li>
+<li>물리적 분리 vs VLAN</li>
+<li>방법</li>
+<li>장점</li>
+<li>단점</li>
+<li>물리적 분리 (별도 인터페이스)</li>
+<li>보안성 최고</li>
+<li>추가 인터페이스·회선 비용 발생</li>
+<li>VLAN 설정</li>
+<li>비용 없이 논리적으로 분리</li>
+<li>라우터(L3 장비) 설정 필요</li>
+<li>VLAN의 효과</li>
+<li>물리적으로 같은 스위치에 있어도 논리적으로 완전히 다른 네트워크처럼 동작</li>
+<li>다른 VLAN끼리 통신하려면 반드시 L3 장비(라우터) 를 거쳐야 함 → 보안성 향상</li>
+<li>비용 증가 없이 보안성·관리성 모두 향상</li>
+</ul>
+<h4 id="4-서브넷-기초--이진수-변환">4. 서브넷 기초 — 이진수 변환</h4>
+<h5 id="4-1-10-2">4-1. 10진수 → 2진수</h5>
+<ul>
+<li>14를 2진수로 변환:</li>
+<li>14 ÷ 2 = 7 나머지 0</li>
+<li>7 ÷ 2 = 3 나머지 1</li>
+<li>3 ÷ 2 = 1 나머지 1</li>
+<li>1 ÷ 2 = 0 나머지 1</li>
+<li>→ 역순으로 읽기: 1110</li>
+</ul>
+<h5 id="4-2-2-10">4-2. 2진수 → 10진수</h5>
+<p>각 자릿수의 값: 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1
+설정 저장/CLI 팁/VLAN/서브넷</p>
+<ul>
+<li>1110 0000 → 128 + 64 + 32 = 224</li>
+<li>1000 0000 → 128</li>
+<li>1111 1111 → 255 (모든 비트가 1)</li>
+<li>0000 0000 → 0   (모든 비트가 0)</li>
+</ul>
+<h5 id="4-3_3">4-3. 경우의 수 공식</h5>
+<p>n비트로 나올 수 있는 경우의 수 = 2ⁿ
+예) 1비트 → 2¹ = 2가지 (0, 1)
+    8비트 → 2⁸ = 256가지 (0 ~ 255)</p>
+<h4 id="5-서브넷-마스크-기초">5. 서브넷 마스크 기초</h4>
+<p>하나의 옥텟 = 8비트 → 2⁸ = 256가지 → 범위 0 ~ 255
+IP 주소 입력 시 256, 300 등 255를 초과하는 값은 사용 불가
+주소를 할당할 때 서브넷 마스크가 반드시 필요 → 어떤 네트워크에 속하는지 구분
+설정 저장/CLI 팁/VLAN/서브넷</p>
+<hr />
+<h3 id="011-자주-받는-질문---vlan-설정-오류-해결-트러블슈팅">011. 자주 받는 질문 - VLAN 설정 오류 해결 트러블슈팅</h3>
+<p>자주 받는 질문 - VLAN 설정/오류 해
+결/트러블슈팅</p>
+<h4 id="1-서브인터페이스-번호-규칙">1. 서브인터페이스 번호 규칙</h4>
+<p>서브인터페이스를 만들 때 점( . ) 뒤에 오는 번호는 인터페이스의 이름일 뿐 — 범위 내
+에서 자유롭게 지정 가능
+단, VLAN 번호와 동일하게 맞춰주는 것을 권장 → show run  확인 시 어느 VLAN용 게
+이트웨이인지 한눈에 파악 가능
+! 예시
+interface gi0/0.100    ← 이름이 100 = VLAN 100용임을 직관적으로 알 수 있음
+interface gi0/0.200    ← VLAN 200용
+interface gi0/0.300    ← VLAN 300용
+실제 어느 VLAN에 속하는지는 이름이 아니라 encapsulation dot1q [번호] 명령어로
+결정됨</p>
+<h4 id="2-트렁크-설정-위치-정리">2. 트렁크 설정 위치 정리</h4>
+<p>장비
+설정 내용
+스위치
+switchport mode trunk  — 트렁크 포트 지정
+라우터 서브인터
+페이스
+encapsulation dot1q [VLAN번호]  — 캡슐화 방식 일치만 맞추면 됨
+라우터에서는 따로 트렁크 명령어를 줄 필요 없음 — encapsulation dot1q 로 스위치의
+802.1q와 방식을 맞추는 것으로 충분</p>
+<h4 id="3-l2-스위치-vs-l3-스위치-비교">3. L2 스위치 vs L3 스위치 비교</h4>
+<ul>
+<li>구분</li>
+<li>L2 스위치 (예: 2960)</li>
+<li>L3 스위치 (예: 3560)</li>
+<li>기본 동작</li>
+<li>L2 스위칭만 가능</li>
+<li>기본은 L2와 동일</li>
+<li>
+<p>자주 받는 질문 - VLAN 설정/오류 해결/트러블슈팅</p>
+</li>
+<li>
+<p>구분</p>
+</li>
+<li>L2 스위치 (예: 2960)</li>
+<li>L3 스위치 (예: 3560)</li>
+<li>라우팅 가능 여부</li>
+<li>불가</li>
+<li>추가 설정 시 라우터 역할 가능</li>
+<li>경로 설정</li>
+<li>불가</li>
+<li>설정에 따라 가능</li>
+<li>L2 스위치는 라우팅 명령어 자체가 활성화되지 않음</li>
+<li>L3 스위치를 라우터처럼 동작시키는 방법은 추후 학습 예정</li>
+</ul>
+<h4 id="4-vlan-설정-전체-순서-재정리">4. VLAN 설정 전체 순서 재정리</h4>
+<h5 id="4-1_2">4-1. 스위치 설정 절차</h5>
+<h4 id="1-vlan-생성-해당-스위치에-연결된-vlan이-없어도-전체-생성-필요">1. VLAN 생성 (해당 스위치에 연결된 VLAN이 없어도 전체 생성 필요)</h4>
+<ul>
+<li>Switch(config)# vlan 100</li>
+<li>Switch(config-vlan)# name CCNA</li>
+<li>Switch(config)# vlan 200</li>
+<li>Switch(config-vlan)# name CCNP</li>
+<li>Switch(config)# vlan 300</li>
+<li>Switch(config-vlan)# name CCIE</li>
+</ul>
+<h4 id="2-포트별-vlan-할당-pc서버-연결-포트--access-모드">2. 포트별 VLAN 할당 (PC/서버 연결 포트 → Access 모드)</h4>
+<p>Switch(config)# interface fa0/2
+   Switch(config-if)# switchport mode access
+   Switch(config-if)# switchport access vlan 100
+   Switch(config)# interface fa0/3
+   Switch(config-if)# switchport mode access
+   Switch(config-if)# switchport access vlan 300</p>
+<h4 id="3-트렁크-포트-설정-스위치스위치-스위치라우터">3. 트렁크 포트 설정 (스위치↔스위치, 스위치↔라우터)</h4>
+<p>Switch(config)# interface fa0/1       ← 라우터 연결 포트
+   Switch(config-if)# switchport mode trunk
+   Switch(config)# interface fa0/4       ← 다른 스위치 연결 포트
+   Switch(config-if)# switchport mode trunk</p>
+<h5 id="4-2_2">4-2. 설정 확인</h5>
+<p>Switch# show vlan
+→ VLAN 목록, 각 포트 할당 현황 확인
+→ 트렁크 포트는 목록에서 빠져야 정상 (단, 라우터 링크가 죽어 있으면 목록에 남아 있을 수 있음)
+Switch# show interfaces trunk
+→ 트렁크 동작 중인 포트, encapsulation 방식(802.1q) 확인
+자주 받는 질문 - VLAN 설정/오류 해결/트러블슈팅</p>
+<h4 id="5-서브인터페이스-설정--순서-주의사항">5. 서브인터페이스 설정 — 순서 주의사항</h4>
+<p>⚠️ encapsulation을 반드시 ip address보다 먼저 입력해야 함
+! 올바른 순서
+Router(config)# interface gi0/0.100
+Router(config-subif)# encapsulation dot1q 100    ← 먼저!
+Router(config-subif)# ip address 192.168.200.62 255.255.255.192
+! 잘못된 순서 (오류 발생)
+Router(config-subif)# ip address 192.168.200.62 255.255.255.192
+Router(config-subif)# encapsulation dot1q 100    ← 나중에 주면 에러 메시지
+물리 인터페이스에는 IP 불필요 — no shutdown 으로 활성화만 하면 됨</p>
+<h4 id="6-자주-발생하는-오류-및-해결-방법">6. 자주 발생하는 오류 및 해결 방법</h4>
+<h5 id="6-1-vlan">6-1. 다른 VLAN 간 통신이 안 될 때 체크리스트</h5>
+<ul>
+<li>확인 항목</li>
+<li>확인 방법</li>
+<li>라우터 물리 인터페이스 활성화 여부</li>
+<li>show run  → no shutdown  확인</li>
+<li>서브인터페이스 encapsulation 설정 여부</li>
+<li>show run  → encapsulation dot1q  확인</li>
+<li>서브인터페이스 IP와 PC 게이트웨이 일치 여부</li>
+<li>PC 설정 및 show run  비교</li>
+<li>스위치↔라우터 트렁크 포트 설정 여부</li>
+<li>show interfaces trunk  확인</li>
+<li>가장 많이 발생하는 오류: IP 주소, 서브넷, 게이트웨이 설정 불일치</li>
+</ul>
+<h5 id="6-2-vlan">6-2. 동일 VLAN 간 통신이 안 될 때 체크리스트</h5>
+<ul>
+<li>확인 항목</li>
+<li>확인 방법</li>
+<li>포트 VLAN 할당 정확한지</li>
+<li>show vlan  → 포트 번호 확인</li>
+<li>PC IP/서브넷 설정이 같은 대역인지</li>
+<li>PC 설정 메뉴에서 확인</li>
+<li>포트 이름이 실제 구성도와 일치하는지</li>
+<li>구성도 포트 레이블 확인</li>
+</ul>
+<h4 id="7-주요-오류-메시지-해석">7. 주요 오류 메시지 해석</h4>
+<p>자주 받는 질문 - VLAN 설정/오류 해결/트러블슈팅</p>
+<ul>
+<li>오류 메시지</li>
+<li>원인</li>
+<li>해결 방법</li>
+<li>Invalid IP address</li>
+<li>IP 주소/서브넷 불일치 또는 형식</li>
+<li>오류</li>
+<li>IP와 서브넷 값 재확인</li>
+<li>% Invalid input</li>
+<li>detected</li>
+<li>명령어 철자 오류 or 잘못된 모드</li>
+<li>모드 확인, 물음표로 사용 가능 명령</li>
+<li>어 확인</li>
+<li>encapsulation not</li>
+<li>set</li>
+<li>encapsulation 전에 IP 입력 시</li>
+<li>도</li>
+<li>encapsulation 먼저 입력 후 IP 설</li>
+<li>정</li>
+<li>VLAN not found</li>
+<li>존재하지 않는 VLAN에 포트 할</li>
+<li>당 시도</li>
+<li>VLAN 먼저 생성 후 포트 할당</li>
+<li>Request time out</li>
+<li>목적지와 통신 불가</li>
+<li>게이트웨이/서브넷/트렁크 설정 확</li>
+<li>인</li>
+</ul>
+<h4 id="8-잘못된-설정-수정-방법">8. 잘못된 설정 수정 방법</h4>
+<p>! 잘못된 명령어 삭제 — 명령어 앞에 'no' 추가
+Router(config-if)# no ip address      ← IP 설정 삭제
+Switch(config-if)# no switchport access vlan 100   ← VLAN 할당 삭제
+! 잘못된 인터페이스에 들어갔을 때
+Switch(config-if)# exit               ← 현재 모드 빠져나오기
+Switch(config)# interface fa0/1       ← 올바른 인터페이스로 다시 진입</p>
+<h4 id="9-설정-명령어-전체-참고-show-run-활용">9. 설정 명령어 전체 참고 (show run 활용)</h4>
+<p>show running-config  결과에 나오는 내용이 곧 현재 적용된 명령어 목록
+→ 잘 안 될 때 show run 으로 설정 내용을 전체적으로 검토하는 습관 필요
+Router# show running-config
+→ interface gi0/0     : no shutdown만 있는지 확인
+→ interface gi0/0.100 : encapsulation dot1q 100 + IP 주소 확인
+→ interface gi0/0.200 : encapsulation dot1q 200 + IP 주소 확인
+→ interface gi0/0.300 : encapsulation dot1q 300 + IP 주소 확인</p>
+<h4 id="10-통신-테스트-방법-정리">10. 통신 테스트 방법 정리</h4>
+<p>PC 클릭 → [Desktop] 탭 → [Command Prompt] → ping [목적지 IP]
+자주 받는 질문 - VLAN 설정/오류 해결/트러블슈팅</p>
+<ul>
+<li>테스트</li>
+<li>기대 결과</li>
+<li>동일 VLAN PC → 동일 VLAN PC</li>
+<li>성공 (Reply)</li>
+<li>동일 VLAN PC → 다른 VLAN PC (라우터 설정 전)</li>
+<li>실패</li>
+<li>동일 VLAN PC → 다른 VLAN PC (라우터 설정 후)</li>
+<li>성공 (Reply) — 첫 패킷 로스 가능</li>
+<li>첫 번째 패킷 로스는 정상 — 두 번째부터 Reply가 오면 설정 완료</li>
+<li>자주 받는 질문 - VLAN 설정/오류 해결/트러블슈팅</li>
+</ul>
+<hr />
+<h3 id="012-트렁킹-서브인터페이스-다른-vlan-간-통신">012. 트렁킹 서브인터페이스 다른 VLAN 간 통신</h3>
+<p>트렁킹/서브인터페이스/다른 VLAN
+간 통신</p>
+<h4 id="1-트렁킹-trunking-개념">1. 트렁킹 (Trunking) 개념</h4>
+<p>트렁킹: VLAN 정보가 포함된 데이터들이 다닐 수 있는 전용 통로를 만드는 것
+스위치↔스위치, 스위치↔라우터 구간에 설정
+트렁킹이 없으면 VLAN 정보가 전달되지 않아 다른 스위치의 동일 VLAN끼리도 통신
+불가
+VLAN 태깅 (802.1q)
+트렁크 구간에서 데이터에 VLAN 번호를 식별하는 태그를 붙여 전송
+받는 쪽에서 태그를 확인하여 어느 VLAN에서 온 데이터인지 구분
+캡슐화 방식: IEEE 802.1q (dot1q)
+비유: 옷에 붙은 태그처럼, 각 VLAN 데이터에 식별 정보를 마킹
+네이티브 VLAN (Native VLAN)
+태그가 없는 데이터가 속하는 VLAN
+기본값: VLAN 1
+A 스위치와 B 스위치의 네이티브 VLAN은 반드시 일치해야 함 (불일치 시 통신 오류)
+기본값 1로 맞춰져 있으므로 별도 설정하지 않아도 됨</p>
+<h4 id="2-트렁킹-확인-명령어">2. 트렁킹 확인 명령어</h4>
+<ul>
+<li>Switch# show interfaces trunk</li>
+<li>트렁크로 동작 중인 포트 목록 확인</li>
+<li>캡슐화 방식(802.1q), 상태(trunking) 확인</li>
+<li>트렁킹/서브인터페이스/다른 VLAN 간 통신</li>
+</ul>
+<p>트렁크 설정한 포트가 show vlan 에서 빠져 있어야 정상
+링크가 죽어 있으면(빨간 불) 트렁크 포트로 인식 안 됨</p>
+<h4 id="3-동일-vlan-통신-vs-다른-vlan-통신">3. 동일 VLAN 통신 vs 다른 VLAN 통신</h4>
+<ul>
+<li>구분</li>
+<li>통신 여부</li>
+<li>필요 장비</li>
+<li>동일 VLAN</li>
+<li>가능</li>
+<li>L2 스위치만으로 통신</li>
+<li>다른 VLAN</li>
+<li>불가</li>
+<li>반드시 L3 장비(라우터) 필요</li>
+<li>물리적으로 같은 스위치에 있어도 VLAN이 다르면 → 다른 집(네트워크) = 통신 불가</li>
+<li>다른 VLAN 간 통신을 원하면 라우터에서 서브인터페이스 설정 필요</li>
+</ul>
+<h4 id="4-서브인터페이스-sub-interface-설정">4. 서브인터페이스 (Sub-interface) 설정</h4>
+<p>물리적 인터페이스 하나를 논리적으로 여러 개로 분할하여 각 VLAN의 게이트웨이 역할을
+하도록 설정</p>
+<h5 id="4-1-ip-no-shutdown">4-1. 물리 인터페이스 활성화 (IP 없이 no shutdown만)</h5>
+<p>Router(config)# interface gi0/0          ← 실제 물리 인터페이스
+Router(config-if)# no shutdown           ← IP 없이 활성화만 필요
+Router(config-if)# exit</p>
+<h5 id="4-2-vlan">4-2. VLAN별 서브인터페이스 생성</h5>
+<p>! VLAN 10용 서브인터페이스
+Router(config)# interface gi0/0.10       ← 물리인터페이스명.브랜번호 (점으로 구분)
+Router(config-subif)# encapsulation dot1q 10        ← 캡슐화 방식 + VLAN 번호 지정
+Router(config-subif)# ip address 192.168.100.1 255.255.255.128   ← 게이트웨이 IP
+! VLAN 20용 서브인터페이스
+Router(config)# interface gi0/0.20
+Router(config-subif)# encapsulation dot1q 20
+Router(config-subif)# ip address 192.168.100.129 255.255.255.128
+명령어 요약:
+트렁킹/서브인터페이스/다른 VLAN 간 통신</p>
+<ul>
+<li>명령어</li>
+<li>설명</li>
+<li>interface [인터페이스명].[번</li>
+<li>호]</li>
+<li>서브인터페이스 생성 (번호는 VLAN 번호와 일치 권장)</li>
+<li>encapsulation dot1q [VLAN번</li>
+<li>호]</li>
+<li>802.1q 캡슐화 방식 및 담당 VLAN 지정 ( encap 으로 축약 가</li>
+<li>능)</li>
+<li>ip address [IP] [서브넷]</li>
+<li>해당 VLAN의 게이트웨이 IP 할당</li>
+<li>서브인터페이스 번호는 범위 내 자유롭게 지정 가능 (약 42억 개)</li>
+<li>VLAN 번호와 맞추면 관리하기 쉬움</li>
+</ul>
+<h4 id="5-게이트웨이-설정-각-pc">5. 게이트웨이 설정 (각 PC)</h4>
+<ul>
+<li>서브인터페이스 설정 후 각 PC에도 게이트웨이를 지정해야 다른 VLAN과 통신 가능</li>
+<li>PC</li>
+<li>VLAN</li>
+<li>게이트웨이</li>
+<li>VLAN 10 PC들</li>
+<li>192.168.100.1</li>
+<li>VLAN 20 PC들</li>
+<li>192.168.100.129</li>
+<li>게이트웨이 미설정 또는 오설정 시 → 다른 네트워크와 통신 불가</li>
+<li>대부분 첫 번째 또는 마지막 IP를 게이트웨이로 사용 (관리 편의상)</li>
+</ul>
+<h4 id="6-통신-테스트-결과">6. 통신 테스트 결과</h4>
+<p>! VLAN 10 PC에서 같은 VLAN 10 서버로 핑
+ping 192.168.100.110 → 성공 ✓
+! VLAN 10 PC에서 다른 VLAN 20 PC로 핑 (라우터 설정 전)
+ping 192.168.100.200 → 실패 ✗
+! 서브인터페이스 + 게이트웨이 설정 완료 후
+ping 192.168.100.200 → 성공 ✓ (첫 번째 패킷은 로스 날 수 있음)
+첫 번째 패킷이 로스 나도 바로 단정 짓지 말 것 — 두 번째부터 정상이면 설정 완료</p>
+<h4 id="7-전체-통신-구조-정리">7. 전체 통신 구조 정리</h4>
+<p>트렁킹/서브인터페이스/다른 VLAN 간 통신</p>
+<p>[VLAN 10 PC] ──access── [A 스위치] ──trunk── [B 스위치] ──access── [VLAN 20 PC]
+                               │
+                            trunk
+                               │
+                         [라우터 gi0/0]
+                         ├── gi0/0.10 → VLAN 10 게이트웨이 (100.1)
+                         └── gi0/0.20 → VLAN 20 게이트웨이 (100.129)
+같은 VLAN 내 통신: 스위치만으로 처리
+다른 VLAN 통신: 스위치 → 라우터 서브인터페이스 → 다시 스위치로 전달</p>
+<h4 id="8-설정-확인">8. 설정 확인</h4>
+<p>Router# show running-config
+물리 인터페이스: IP 없음, shutdown 없음 (no shutdown 상태)
+서브인터페이스 0.10: encapsulation dot1q 10, IP 100.1
+서브인터페이스 0.20: encapsulation dot1q 20, IP 100.129
+트렁킹/서브인터페이스/다른 VLAN 간 통신</p>
+<hr />
+<h3 id="013-포트-기반-vlan-트렁크">013. 포트 기반 VLAN 트렁크</h3>
+<p>포트 기반 VLAN/트렁크</p>
+<h4 id="1-ip-주소-설계-vlan-구성-전-선행-작업">1. IP 주소 설계 (VLAN 구성 전 선행 작업)</h4>
+<ul>
+<li>예제 조건: 192.168.100.0/24를 교사용(VLAN 10) / 학생용(VLAN 20)으로 분할</li>
+<li>서브네팅: /24 → /25 (비트 1개 변경)</li>
+<li>→ 네트워크 수 = 2¹ = 2개</li>
+<li>→ 할당 가능 IP = 2⁷ - 2 = 126개</li>
+<li>대역 1 (VLAN 10, 교사용): 100.0 ~ 100.127 → 할당: 100.1 ~ 100.126</li>
+<li>대역 2 (VLAN 20, 학생용): 100.128 ~ 100.255 → 할당: 100.129 ~ 100.254</li>
+<li>PC IP 설정 예시:</li>
+<li>장비</li>
+<li>IP</li>
+<li>서브넷</li>
+<li>VLAN</li>
+<li>PC1</li>
+<li>192.168.100.100</li>
+<li>255.255.255.128</li>
+<li>10 (교사)</li>
+<li>PC2 (서버)</li>
+<li>192.168.100.110</li>
+<li>255.255.255.128</li>
+<li>10 (교사)</li>
+<li>PC3</li>
+<li>192.168.100.200</li>
+<li>255.255.255.128</li>
+<li>20 (학생)</li>
+<li>PC4</li>
+<li>192.168.100.210</li>
+<li>255.255.255.128</li>
+<li>20 (학생)</li>
+<li>서브넷을 0 그대로 두면 분할의 의미가 없어짐 → 반드시 128로 변경</li>
+</ul>
+<h4 id="2-포트-기반-vlan-port-based-vlan">2. 포트 기반 VLAN (Port-based VLAN)</h4>
+<h5 id="2-1-vlan">2-1. 기본 VLAN 확인</h5>
+<p>Switch# show vlan
+아무 설정 없어도 모든 포트는 기본적으로 VLAN 1 (Default) 에 속함
+→ 같은 IP 대역이면 설정 없이도 통신되는 이유</p>
+<h5 id="2-2-vlan">2-2. VLAN 종류별 비교</h5>
+<p>포트 기반 VLAN/트렁크</p>
+<ul>
+<li>방식</li>
+<li>기준</li>
+<li>단점</li>
+<li>포트 기반 (Port-based)</li>
+<li>스위치 포트 번호</li>
+<li>없음 (가장 많이 사용)</li>
+<li>IP 기반</li>
+<li>IP 주소</li>
+<li>IP 변경 시 재설정 필요</li>
+<li>MAC 기반</li>
+<li>MAC 주소</li>
+<li>장비 교체 시 재설정 필요</li>
+<li>포트 기반이 가장 안정적이고 현장에서 가장 많이 사용됨</li>
+</ul>
+<h5 id="2-3-vlan">2-3. VLAN 번호 범위</h5>
+<p>사용 가능: 2 ~ 1001번 (이론상 1000개 이상)
+예약 번호: 1번(기본), 1002~1005번 (특수 용도)</p>
+<h4 id="3-vlan-설정-명령어-스위치">3. VLAN 설정 명령어 (스위치)</h4>
+<h5 id="3-1-vlan">3-1. VLAN 생성</h5>
+<p>Switch(config)# vlan 10
+Switch(config-vlan)# name teacher        ← 이름 지정 (선택, 미지정 시 vlan10)
+Switch(config-vlan)# exit
+Switch(config)# vlan 20
+Switch(config-vlan)# name student</p>
+<h5 id="3-2-vlan-access">3-2. 포트에 VLAN 할당 (Access 모드)</h5>
+<p>엔드 디바이스(PC, 서버)가 연결된 포트 → Access 모드
+Switch(config)# interface fa0/1           ← 구성도에서 포트 번호 확인 필수
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# exit
+Switch(config)# interface fa0/2
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 20</p>
+<h5 id="3-3-trunk">3-3. 스위치 간 연결 포트 (Trunk 모드)</h5>
+<p>스위치↔스위치, 스위치↔라우터 연결 포트 → Trunk 모드
+Switch(config)# interface fa0/3           ← 스위치 간 연결 포트
+포트 기반 VLAN/트렁크</p>
+<p>Switch(config-if)# switchport mode trunk</p>
+<h5 id="3-4_1">3-4. 포트 모드 종류</h5>
+<ul>
+<li>모드</li>
+<li>설명</li>
+<li>사용 대상</li>
+<li>access</li>
+<li>일반 단말 연결, 단일 VLAN 전송</li>
+<li>PC, 서버</li>
+<li>trunk</li>
+<li>VLAN 정보를 포함한 다중 VLAN 전송</li>
+<li>스위치↔스위치, 스위치↔라우터</li>
+<li>dynamic</li>
+<li>협상으로 자동 결정 (보안상 비권장)</li>
+<li>—</li>
+<li>⚠️ dynamic 모드는 보안 취약점 존재 → 수동으로 access/trunk 명령 권장</li>
+</ul>
+<h4 id="4-vlan-설정-확인">4. VLAN 설정 확인</h4>
+<p>Switch# show vlan
+Switch# show vlan brief       ← 요약 형태로 보기
+정상 설정 확인 포인트:
+VLAN 10에 해당 포트(예: fa0/1)가 등록되어 있는지
+VLAN 20에 해당 포트(예: fa0/2)가 등록되어 있는지
+트렁크 포트(예: fa0/3)는 VLAN 목록에서 빠져 있어야 정상
+Switch# show interfaces trunk     ← 트렁크 설정된 포트 확인</p>
+<h4 id="5-ab-두-스위치-설정-시-주의사항">5. A/B 두 스위치 설정 시 주의사항</h4>
+<p>두 스위치 모두에서 동일하게 VLAN 생성 및 이름 지정 필요
+VLAN 이름 대소문자 불일치 시 오작동 가능
+각 스위치의 포트 번호는 구성도를 보고 직접 확인 — 강사 화면과 다를 수 있음
+B 스위치에서 VLAN 생성 전에 포트 할당 시 오류 발생 → VLAN 먼저 생성 후 포트 할
+당
+포트 기반 VLAN/트렁크</p>
+<hr />
+<h3 id="014-eigrp-as-도메인-분리와-재분배-설정">014. EIGRP AS 도메인 분리와 재분배 설정</h3>
+<p>정</p>
+<h4 id="1-eigrp-다중-as-도메인-구성">1. EIGRP 다중 AS 도메인 구성</h4>
+<h5 id="1-1-as-number">1-1. 별도 AS Number를 가진 라우터 추가</h5>
+<p>네 번째 라우터(E)를 새로운 AS Number 20으로 구성하여, AS 10(라우터 A, B, C)과 물리
+적으로 연결하되 별도 도메인으로 운영한다. 이를 통해 AS Number의 역할과 도메인 분리
+의 필요성을 검증한다.</p>
+<h4 id="2-다중-as-도메인-환경의-문제점">2. 다중 AS 도메인 환경의 문제점</h4>
+<h5 id="2-1-as-number">2-1. AS Number 불일치로 인한 이웃 관계 형성 실패</h5>
+<ul>
+<li>구성: 라우터 C (AS 10) ↔ 라우터 E (AS 20)</li>
+<li>항목</li>
+<li>상태</li>
+<li>결과</li>
+<li>AS Number</li>
+<li>불일치 (10 vs 20)</li>
+<li>이웃 관계 형성 불가</li>
+<li>물리적 연결</li>
+<li>연결됨</li>
+<li>해당 없음</li>
+<li>Hello 패킷 교환</li>
+<li>안 됨</li>
+<li>광고 정보 전달 불가</li>
+<li>라우팅 테이블</li>
+<li>경로 미학습</li>
+<li>D 코드 미표시</li>
+<li>증상:</li>
+<li>show ip eigrp neighbors : 이웃 목록 비어있음</li>
+<li>show ip route : D 코드 경로 없음 (C 코드만 표시)</li>
+<li>라우터 간 통신 불가능</li>
+</ul>
+<h5 id="2-2_2">2-2. 이웃 관계 형성 실패 원인 분석</h5>
+<p>이웃 관계가 형성되지 않는 4가지 확인 사항:</p>
+<ul>
+<li>확인 순서</li>
+<li>확인 항목</li>
+<li>확인 명령어</li>
+<li>내용</li>
+<li>AS Number 일치</li>
+<li>show ip protocols</li>
+<li>같은 AS Number 필수</li>
+<li>물리적 연결</li>
+<li>네트워크 다이어그램</li>
+<li>인터페이스 직접 연결</li>
+<li>인터페이스 활성</li>
+<li>화</li>
+<li>show ip interface brief</li>
+<li>양쪽 모두 no</li>
+<li>shutdown</li>
+<li>네트워크 광고</li>
+<li>show run  / show ip</li>
+<li>protocols</li>
+<li>해당 네트워크를 광고했</li>
+<li>는가</li>
+</ul>
+<h4 id="3-라우터-e의-eigrp-as-20-설정">3. 라우터 E의 EIGRP AS 20 설정</h4>
+<h5 id="3-1-e">3-1. 라우터 E의 네트워크 구성</h5>
+<p>추가된 네트워크:
+라우터 인터페이스: Gigabit 0/0
+네트워크 1: 40.40.40.0/24 (라우터 간 연결)
+네트워크 2: 192.168.250.0/24 (클라이언트 네트워크)
+PC 추가: 192.168.250.100 (게이트웨이: 192.168.250.254)</p>
+<h5 id="3-2-e-eigrp">3-2. 라우터 E EIGRP 설정</h5>
+<p>router eigrp 20              ← AS Number 20으로 별도 도메인 정의
+network 40.40.40.0 0.0.0.255       ← C 라우터와 연결된 네트워크
+network 192.168.250.0 0.0.0.255    ← 클라이언트 네트워크
+no auto-summary              ← 자동축약 비활성화
+Wildcard Bit 계산:
+서브넷마스크
+계산
+결과
+255.255.255.0
+255-255, 255-255, 255-255, 255-0
+0.0.0.255</p>
+<h4 id="4-as-도메인-분리와-재분배redistribution">4. AS 도메인 분리와 재분배(Redistribution)</h4>
+<h5 id="4-1_3">4-1. 도메인 분리의 의미</h5>
+<ul>
+<li>시나리오</li>
+<li>AS 10</li>
+<li>AS 20</li>
+<li>결과</li>
+<li>도메인 미분리</li>
+<li>모든 라우터 AS</li>
+<li>-</li>
+<li>경로 정보 모두 공유 (이웃 관계 형성)</li>
+<li>도메인 분리</li>
+<li>A, B, C (AS 10)</li>
+<li>E (AS 20)</li>
+<li>경로 정보 미공유 (이웃 관계 형성 안</li>
+<li>함)</li>
+<li>의도: 대규모 네트워크를 여러 도메인으로 분할하여 관리 효율성 증대</li>
+</ul>
+<h5 id="4-2_3">4-2. 이웃 라우터 현황 확인</h5>
+<ul>
+<li>show ip eigrp neighbors</li>
+<li>각 라우터의 이웃 목록:</li>
+<li>라우터</li>
+<li>이웃 라우터</li>
+<li>AS Number</li>
+<li>상태</li>
+<li>A</li>
+<li>B, C</li>
+<li>10, 10</li>
+<li>이웃 형성</li>
+<li>B</li>
+<li>A, C</li>
+<li>10, 10</li>
+<li>이웃 형성</li>
+<li>C</li>
+<li>A, B (E 제외)</li>
+<li>10, 10</li>
+<li>이웃 형성 (E는 AS 20이므로 제외)</li>
+<li>E</li>
+<li>없음</li>
+<li>-</li>
+<li>이웃 관계 미형성</li>
+</ul>
+<h4 id="5-eigrp-재분배-설정">5. EIGRP 재분배 설정</h4>
+<h5 id="5-1_3">5-1. 재분배의 정의와 목적</h5>
+<p>서로 다른 라우팅 도메인(AS) 간에 경로 정보를 공유하는 기술
+필요 이유:
+AS 10과 AS 20이 별도 도메인이지만 통신이 필요할 경우
+도메인 간 경계에 위치한 라우터(Border Router, BR)에서만 설정</p>
+<h5 id="5-2-border-router-br">5-2. 경계 라우터(Border Router, BR) 역할</h5>
+<p>정의: 두 개 이상의 AS 도메인에 동시에 속한 라우터
+라우터 C 또는 라우터 E 중 하나를 BR로 선택
+→ 해당 BR에서만 재분배 설정</p>
+<p>BR의 조건:
+두 개 이상의 AS Number로 설정된 라우팅 프로토콜 구성
+다른 AS 도메인의 경로 정보를 받아들일 준비</p>
+<h5 id="5-3-c">5-3. 라우터 C에서의 재분배 설정</h5>
+<p>라우터 C를 BR로 선택한 경우:
+라우터 C 설정:
+┌─────────────────────────────────────────┐
+│ router eigrp 10                         │
+│ network 20.20.20.0 0.0.0.255           │
+│ network 192.168.200.0 0.0.0.255        │
+│ redistribute eigrp 20                  │ ← AS 20 경로 재분배
+│ no auto-summary                        │
+│                                        │
+│ router eigrp 20                        │
+│ network 40.40.40.0 0.0.0.255          │
+│ redistribute eigrp 10                  │ ← AS 10 경로 재분배
+│ network 192.168.250.0 0.0.0.255       │
+│ no auto-summary                        │
+└─────────────────────────────────────────┘
+경계 대역 광고 (AS 10, AS 20 양쪽에서 공용):
+라우터 C의 AS 10 설정에 추가:
+network 40.40.40.0 0.0.0.255
+라우터 C의 AS 20 설정에 추가:
+network 20.20.20.0 0.0.0.255
+경계 대역은 양쪽 AS에서 모두 광고하여 양방향 통신 확보</p>
+<h5 id="5-4_1">5-4. 재분배 설정 효과</h5>
+<p>설정 완료 후 변화:
+이전: 라우터 E에서 show ip eigrp neighbors → 이웃 없음
+이후: 라우터 E에서 show ip eigrp neighbors → C 라우터 나타남
+메시지 예시:
+Neighbor Change: Neighbor 40.40.40.40 UP
+통신 가능 네트워크:</p>
+<p>라우터 E(192.168.250.100)에서:
+ping 192.168.100.10 (라우터 A 네트워크) → 성공
+ping 192.168.150.10 (라우터 B 네트워크) → 성공
+ping 192.168.200.10 (라우터 C 네트워크) → 성공</p>
+<h4 id="6-eigrp-프로토콜-정보-확인">6. EIGRP 프로토콜 정보 확인</h4>
+<h5 id="6-1-eigrp">6-1. EIGRP 설정 내용 조회</h5>
+<ul>
+<li>show ip protocols</li>
+<li>확인 항목:</li>
+<li>항목</li>
+<li>설명</li>
+<li>Routing Protocol</li>
+<li>EIGRP 설정 확인</li>
+<li>Sending Updates</li>
+<li>경로 광고 형식</li>
+<li>Receiving Updates</li>
+<li>경로 수신 형식</li>
+<li>AS Number</li>
+<li>현재 설정된 AS 번호</li>
+<li>Maximum Path</li>
+<li>최대 경로 수 (기본값 4)</li>
+<li>Metrics</li>
+<li>K1~K5 상수값 (기본값: K1=1, K3=1, K2=0, K4=0, K5=0)</li>
+<li>Auto-summary</li>
+<li>자동축약 상태 (Not in effect 또는 적용됨)</li>
+<li>Maximum hopcount</li>
+<li>최대 홉 수 (기본값 100, 최대 255)</li>
+<li>Administrative Distance</li>
+<li>AD 값 (내부: 90, 외부: 170)</li>
+<li>Redistributed Route</li>
+<li>재분배된 경로 정보</li>
+<li>Default Metric</li>
+<li>기본 메트릭 값</li>
+</ul>
+<hr />
+<h3 id="015-eigrp-설정과-기본-구조">015. EIGRP 설정과 기본 구조</h3>
+<h4 id="1-eigrp의-개념-및-역할">1. EIGRP의 개념 및 역할</h4>
+<h5 id="1-1-eigrp">1-1. EIGRP 프로토콜 개요</h5>
+<p>Enhanced Interior Gateway Routing Protocol
+EIGRP는 IGRP의 개선된 버전으로, RIP의 단순한 홉 카운트 기반 메트릭을 극복하고 대역
+폭, 지연, 신뢰성 등 다중 요소를 고려하여 더 정확한 경로 선택이 가능한 다이나믹 라우팅 프
+로토콜이다. 대규모 네트워크 환경에서 효율적으로 동작한다.</p>
+<h4 id="2-eigrp-설정-필수-요소">2. EIGRP 설정 필수 요소</h4>
+<h5 id="2-1-asautonomous-system-number">2-1. AS(Autonomous System) Number의 정의</h5>
+<ul>
+<li>EIGRP 설정의 핵심은 AS Number라는 식별자이다:</li>
+<li>router eigrp <AS_NUMBER></li>
+<li>AS Number의 특성:</li>
+<li>특성</li>
+<li>설명</li>
+<li>범위</li>
+<li>1~65,535</li>
+<li>역할</li>
+<li>같은 AS Number를 가진 라우터들만 라우팅 정보 교환</li>
+<li>중요성</li>
+<li>모든 EIGRP 라우터는 동일한 AS Number 사용 필수</li>
+<li>네트워크 정의</li>
+<li>하나의 라우팅 도메인을 정의</li>
+<li>AS Number의 의미:</li>
+<li>하나의 네트워크 도메인 정의</li>
+<li>같은 AS Number가 아니면 이웃 라우터 관계(Neighbor Relationship) 형성 불가</li>
+<li>내부 테스트 네트워크에서는 임의로 설정 가능</li>
+</ul>
+<p>⚠️ 이웃 라우터 관계 형성의 필수 조건: 동일한 AS Number</p>
+<h4 id="3-eigrp-설정-단계별-절차">3. EIGRP 설정 단계별 절차</h4>
+<h5 id="3-1-eigrp">3-1. EIGRP 라우팅 프로토콜 진입</h5>
+<p>router eigrp 10      ← AS Number 10 지정
+AS Number 선택 원칙:
+같은 도메인의 모든 라우터는 동일한 AS Number 사용
+예: 라우터 A, B, C 모두 AS 10</p>
+<h5 id="3-2-wildcard-bit">3-2. 네트워크 광고 설정: Wildcard Bit 사용</h5>
+<ul>
+<li>RIP과의 가장 큰 차이점은 Wildcard Bit 필수:</li>
+<li>network &lt;네트워크주소&gt; &lt;와일드카드비트&gt;</li>
+<li>Wildcard Bit 계산 공식:</li>
+<li>와일드카드 비트 = 255 - 서브넷마스크의 각 옥테트</li>
+<li>계산 예시:</li>
+<li>서브넷마스크</li>
+<li>계산 과정</li>
+<li>와일드카드 비트</li>
+<li>255.255.255.0</li>
+<li>255-255, 255-255, 255-255, 255-0</li>
+<li>0.0.0.255</li>
+<li>255.255.0.0</li>
+<li>255-255, 255-255, 255-0, 255-0</li>
+<li>0.0.255.255</li>
+<li>255.0.0.0</li>
+<li>255-255, 255-0, 255-0, 255-0</li>
+<li>0.255.255.255</li>
+</ul>
+<h5 id="3-3_3">3-3. 자동축약 비활성화</h5>
+<p>no auto-summary      ← 세분화된 경로 광고를 위해 필수
+RIP v2와 마찬가지로 자동축약을 비활성화하여 세분화된 서브넷 정보 광고 가능</p>
+<h4 id="4-eigrp-설정-구성-예시">4. EIGRP 설정 구성 예시</h4>
+<h5 id="4-1_4">4-1. 라우터별 설정 내용</h5>
+<ul>
+<li>라우터 A 설정 (AS 10):</li>
+<li>router eigrp 10</li>
+<li>network 10.0.0.0 0.0.0.255</li>
+<li>network 30.0.0.0 0.0.0.255</li>
+<li>network 192.168.100.0 0.0.0.255</li>
+<li>no auto-summary</li>
+<li>라우터 B 설정 (AS 10):</li>
+<li>router eigrp 10</li>
+<li>network 10.0.0.0 0.0.0.255</li>
+<li>network 20.0.0.0 0.0.0.255</li>
+<li>network 30.0.0.0 0.0.0.255</li>
+<li>network 192.168.150.0 0.0.0.255</li>
+<li>no auto-summary</li>
+<li>라우터 C 설정 (AS 10):</li>
+<li>router eigrp 10</li>
+<li>network 20.0.0.0 0.0.0.255</li>
+<li>network 192.168.200.0 0.0.0.255</li>
+<li>no auto-summary</li>
+</ul>
+<h5 id="4-2-rip-eigrp">4-2. RIP과 EIGRP 설정 비교</h5>
+<ul>
+<li>설정 항목</li>
+<li>RIP</li>
+<li>라우팅 프로토콜 진입</li>
+<li>router rip</li>
+<li>router eigrp <AS_Number></li>
+<li>네트워크 광고 형식</li>
+<li>network 10.0.0.0</li>
+<li>network 10.0.0.0 0.0.0.255</li>
+<li>필수 정보</li>
+<li>네트워크 주소만</li>
+<li>네트워크 + Wildcard Bit</li>
+<li>자동축약 제어</li>
+<li>RIP v2에서만 지원</li>
+<li>모든 EIGRP 버전에서 지원</li>
+<li>도메인 정의</li>
+<li>없음</li>
+<li>AS Number 필수</li>
+<li>AD (신뢰도)</li>
+</ul>
+<h4 id="5-eigrp-이웃-라우터-관계-형성">5. EIGRP 이웃 라우터 관계 형성</h4>
+<h5 id="5-1-neighbor">5-1. 이웃 라우터(Neighbor) 형성 필수 조건</h5>
+<ul>
+<li>EIGRP에서 두 라우터가 이웃 관계를 형성하기 위한 필수 조건:</li>
+<li>조건</li>
+<li>설명</li>
+<li>확인 방법</li>
+</ul>
+<h4 id="1-동일한-as-number">1. 동일한 AS Number</h4>
+<p>반드시 같아야 함
+show ip protocols</p>
+<h4 id="2-직접-연결된-인터페이">2. 직접 연결된 인터페이</h4>
+<p>스
+물리적 연결 필요
+네트워크 다이어그램</p>
+<h4 id="3-네트워크-광고">3. 네트워크 광고</h4>
+<p>해당 네트워크를 network  명령어로 광
+고
+show run</p>
+<h4 id="4-인터페이스-활성화">4. 인터페이스 활성화</h4>
+<p>양쪽 인터페이스 모두 no shutdown
+show ip interface
+brief</p>
+<h5 id="5-2_1">5-2. 이웃 라우터 상태 확인</h5>
+<ul>
+<li>show ip eigrp neighbors</li>
+<li>출력 정보:</li>
+<li>이웃 IP 주소: 연결된 이웃 라우터의 인터페이스 IP</li>
+<li>상태: 이웃 관계 수립 여부 (UP/DOWN)</li>
+<li>홀드 타임(Hold Time): 이웃 라우터 응답 대기 시간</li>
+<li>시퀀스 번호: 업데이트 순서 추적</li>
+<li>⚠️ 이웃 목록이 비어있으면 4가지 조건 중 하나 이상을 확인하지 않음</li>
+</ul>
+<h4 id="6-eigrp의-다중-메트릭metric-시스템">6. EIGRP의 다중 메트릭(Metric) 시스템</h4>
+<h5 id="6-1-rip-eigrp">6-1. RIP과 EIGRP의 메트릭 차이</h5>
+<ul>
+<li>구분</li>
+<li>RIP</li>
+<li>메트릭 기준</li>
+<li>홉 카운트만 사용</li>
+<li>다중 요소 종합 계산</li>
+<li>회선 속도 반영</li>
+<li>불가능</li>
+<li>대역폭(Bandwidth)으로 반영</li>
+<li>지연시간 반영</li>
+<li>불가능</li>
+<li>지연(Delay)으로 반영</li>
+<li>신뢰성 반영</li>
+<li>불가능</li>
+<li>신뢰성(Reliability)으로 반영</li>
+<li>현재 사용률</li>
+<li>불가능</li>
+<li>
+<p>부하(Load)로 반영</p>
+</li>
+<li>
+<p>구분</p>
+</li>
+<li>RIP</li>
+<li>최적성</li>
+<li>부정확</li>
+<li>더욱 정확함</li>
+</ul>
+<h5 id="6-2-eigrp">6-2. EIGRP 메트릭 구성 요소</h5>
+<p>메트릭 계산에 참고되는 5가지 요소 (K1~K5 상수로 조절):</p>
+<h4 id="1-bw-bandwidth--대역폭-링크-최저-속도">1. BW (Bandwidth)     ← 대역폭 (링크 최저 속도)</h4>
+<h4 id="2-d-delay--지연시간-누적-지연">2. D (Delay)          ← 지연시간 (누적 지연)</h4>
+<h4 id="3-r-reliability--신뢰도-링크-안정성">3. R (Reliability)    ← 신뢰도 (링크 안정성)</h4>
+<h4 id="4-l-load--부하량-현재-사용률">4. L (Load)           ← 부하량 (현재 사용률)</h4>
+<h4 id="5-m-mtu--최대-전송-단위">5. M (MTU)            ← 최대 전송 단위</h4>
+<ul>
+<li>기본 설정에서 적용되는 메트릭:</li>
+<li>BW (대역폭): 경로상 최저 대역폭 사용</li>
+<li>D (지연): 경로상 모든 링크의 지연 누적</li>
+<li>R, L, M: 기본 설정에서 미적용</li>
+</ul>
+<h4 id="7-eigrp의-장점과-특징">7. EIGRP의 장점과 특징</h4>
+<h5 id="7-1-rip-eigrp">7-1. RIP과 비교한 EIGRP의 개선 사항</h5>
+<ul>
+<li>특징</li>
+<li>RIP</li>
+<li>개선도</li>
+<li>경로 선택 정확도</li>
+<li>낮음 (홉 카운트만)</li>
+<li>높음 (다중 메트릭)</li>
+<li>큼</li>
+<li>네트워크 변화 반응 시</li>
+<li>간</li>
+<li>느림 (30초~3분)</li>
+<li>빠름 (수 초)</li>
+<li>큼</li>
+<li>대역폭 효율성</li>
+<li>낮음 (주기적 전체 테이</li>
+<li>블)</li>
+<li>높음 (변화 기반 업데이</li>
+<li>트)</li>
+<li>큼</li>
+<li>확장성</li>
+<li>소규모만 가능</li>
+<li>중대형 네트워크 지원</li>
+<li>큼</li>
+<li>설정 복잡도</li>
+<li>낮음</li>
+<li>중간~높음</li>
+<li>소</li>
+<li>신뢰도(AD)</li>
+<li>높음</li>
+</ul>
+<h5 id="7-2-eigrp">7-2. EIGRP 라우팅 테이블 확인</h5>
+<p>show ip route
+EIGRP 학습 경로 식별:</p>
+<p>경로 코드: D  (D = EIGRP)
+메트릭 값: RIP의 단순한 홉 수와 달리 복잡한 계산값 표시
+AD 값: 120(RIP)과 달리 90으로 표시 (더 높은 우선순위)
+라우팅 테이블 예시:
+D  10.0.0.0/8 [90/156160] via 10.10.10.10, 00:05:23, FastEthernet0/0
+   AD값: 90, 메트릭값: 156160, 이웃: 10.10.10.10</p>
+<hr />
+<h3 id="016-rip-버전-1과-버전-2의-차이점-및-호환성-검증">016. RIP 버전 1과 버전 2의 차이점 및 호환성 검증</h3>
+<p>환성 검증</p>
+<h4 id="1-rip-버전별-특성-비교">1. RIP 버전별 특성 비교</h4>
+<h5 id="1-1-rip-version-1">1-1. RIP Version 1의 송수신 특성</h5>
+<h5 id="1-2-rip-version-1">1-2. RIP Version 1의 동작 방식</h5>
+<ul>
+<li>Hello 패킷 송수신:</li>
+<li>동작</li>
+<li>설정값</li>
+<li>설명</li>
+<li>송신 포맷</li>
+<li>RIP v1</li>
+<li>RIP version 1 포맷으로 Hello 패킷 전송</li>
+<li>수신 포맷</li>
+<li>Any Version</li>
+<li>모든 버전의 패킷 수신 가능</li>
+<li>메이저 네트워크 자동축약(Auto Summary):</li>
+<li>클래스풀(Classful) 방식으로만 동작</li>
+<li>관리자가 서브네팅으로 세분화한 네트워크도 메이저 네트워크로 자동 축약</li>
+<li>세분화된 경로 정보 광고 불가능</li>
+<li>입력 명령어: network 20.20.20.0</li>
+<li>실제 광고: 20.0.0.0/8 (클래스 A 범위로 자동 축약)</li>
+<li>⚠️ 관리자가 아무리 서브네팅으로 네트워크를 쪼개도 RIP v1은 클래스 기반의 메이저 네</li>
+<li>트워크로 축약하여 광고한다.</li>
+</ul>
+<h4 id="2-rip-version-2의-개선된-특성">2. RIP Version 2의 개선된 특성</h4>
+<h5 id="2-1-rip-v2">2-1. RIP v2의 송수신 방식</h5>
+<ul>
+<li>동작</li>
+<li>설정값</li>
+<li>설명</li>
+<li>송신 포맷</li>
+<li>RIP v2</li>
+<li>
+<p>RIP version 2 포맷으로만 Hello 패킷 전송</p>
+</li>
+<li>
+<p>동작</p>
+</li>
+<li>설정값</li>
+<li>설명</li>
+<li>수신 포맷</li>
+<li>v2 버전만</li>
+<li>v2 포맷의 패킷만 수신, v1 패킷 수신 불가</li>
+</ul>
+<h5 id="2-2-auto-summary">2-2. 자동축약(Auto Summary) 제어</h5>
+<ul>
+<li>RIP v1 vs RIP v2 비교:</li>
+<li>특성</li>
+<li>RIP v1</li>
+<li>RIP v2</li>
+<li>자동축약</li>
+<li>강제 (비활성화 불가)</li>
+<li>선택적 (비활성화 가능)</li>
+<li>제어 명령어</li>
+<li>없음</li>
+<li>no auto-summary</li>
+<li>광고 정보</li>
+<li>메이저 네트워크만</li>
+<li>세분화된 서브넷 가능</li>
+<li>RIP v2 설정 예시:</li>
+<li>router rip</li>
+<li>version 2</li>
+<li>no auto-summary          ← 자동축약 기능 비활성화</li>
+<li>network 20.20.20.0</li>
+<li>network 40.40.40.0</li>
+</ul>
+<h4 id="3-rip-버전-간-호환성-문제">3. RIP 버전 간 호환성 문제</h4>
+<h5 id="3-1_4">3-1. 버전 불일치로 인한 통신 실패</h5>
+<ul>
+<li>테스트 구성: C 라우터 (RIP v1) ↔ E 라우터 (RIP v2)</li>
+<li>방향</li>
+<li>송신 형식</li>
+<li>수신 결과</li>
+<li>설명</li>
+<li>C → E</li>
+<li>v1 포맷</li>
+<li>수신 불가</li>
+<li>E는 v2만 수신하므로 v1 패킷 거부</li>
+<li>E → C</li>
+<li>v2 포맷</li>
+<li>수신 가능</li>
+<li>C는 Any Version 수신하므로 v2 패킷</li>
+<li>수락</li>
+<li>결과</li>
+<li>-</li>
+<li>단방향만 통신</li>
+<li>양방향 통신 불가로 경로 학습 실패</li>
+</ul>
+<h5 id="3-2_2">3-2. 라우팅 테이블에서의 확인</h5>
+<ul>
+<li>C 라우터 (v1) 관점:</li>
+<li>show ip route</li>
+<li>E로부터 받은 v2 패킷 정보로 40.0.0.0 경로 인식 (R 코드 표시)</li>
+<li>
+<p>E 라우터 (v2) 관점:</p>
+</li>
+<li>
+<p>show ip route</p>
+</li>
+<li>C로부터 v1 패킷 미수신으로 C의 경로 정보 부재</li>
+<li>R 코드가 나타나지 않음</li>
+<li>⚠️ C 라우터의 v1 패킷을 E가 수신하지 않으므로, E는 C를 이웃 라우터로 인식하지 못한</li>
+<li>다.</li>
+</ul>
+<h4 id="4-다이나믹-라우팅-프로토콜-신뢰도-비교">4. 다이나믹 라우팅 프로토콜 신뢰도 비교</h4>
+<h5 id="4-1_5">4-1. 라우팅 프로토콜별 코드 표기</h5>
+<ul>
+<li>show ip route  명령어에서 사용되는 프로토콜 코드:</li>
+<li>코드</li>
+<li>프로토콜명</li>
+<li>경로 타입</li>
+<li>S</li>
+<li>Static</li>
+<li>정적 라우팅</li>
+<li>R</li>
+<li>RIP</li>
+<li>RIP 프로토콜</li>
+<li>D</li>
+<li>EIGRP</li>
+<li>EIGRP 프로토콜</li>
+<li>O</li>
+<li>OSPF</li>
+<li>OSPF 프로토콜</li>
+<li>B</li>
+<li>BGP</li>
+<li>BGP 프로토콜</li>
+</ul>
+<h5 id="4-2-administrative-distancead">4-2. Administrative Distance(AD) 신뢰도 등급</h5>
+<ul>
+<li>라우팅 프로토콜의 신뢰도를 수치로 나타낸 값 (낮을수록 신뢰도 높음):</li>
+<li>프로토콜/경로 타입</li>
+<li>AD 값</li>
+<li>신뢰도 평가</li>
+<li>Static Route</li>
+<li>가장 신뢰도 높음</li>
+<li>EIGRP Internal</li>
+<li>신뢰도 높음</li>
+<li>IGRP</li>
+<li>신뢰도 중간</li>
+<li>RIP v1, v2</li>
+<li>신뢰도 낮음</li>
+<li>EIGRP External</li>
+<li>신뢰도 매우 낮음</li>
+<li>Unknown Protocol</li>
+<li>신뢰 불가</li>
+<li>AD가 낮은 라우팅 프로토콜이 높은 것보다 우선 적용된다.</li>
+</ul>
+<h4 id="5-라우팅-테이블-최적화와-성능">5. 라우팅 테이블 최적화와 성능</h4>
+<h5 id="5-1_4">5-1. 라우팅 테이블 크기의 성능 영향</h5>
+<ul>
+<li>문제 상황 분석:</li>
+<li>라우팅 테이블 규모</li>
+<li>경로 검색 시간</li>
+<li>라우터 부하</li>
+<li>영향도</li>
+<li>100줄</li>
+<li>빠름</li>
+<li>낮음</li>
+<li>기준값</li>
+<li>1000줄</li>
+<li>느림</li>
+<li>높음</li>
+<li>약 10배 느려짐</li>
+<li>10000줄</li>
+<li>매우 느림</li>
+<li>매우 높음</li>
+<li>라우터 응답성 급격히 하락</li>
+</ul>
+<h5 id="5-2-rip-v2">5-2. RIP v2 자동축약 비활성화의 효과</h5>
+<ul>
+<li>효과:</li>
+<li>세분화된 경로 정보 광고로 불필요한 중복 경로 제거</li>
+<li>동일한 통신 성능 유지 시 테이블 크기 감소</li>
+<li>라우터의 경로 검색 시간 단축</li>
+<li>시스템 부하 감소</li>
+</ul>
+<h4 id="6-rip의-한계와-eigrp-필요성">6. RIP의 한계와 EIGRP 필요성</h4>
+<h5 id="6-1-rip">6-1. RIP 프로토콜의 근본적 한계</h5>
+<ul>
+<li>한계 사항</li>
+<li>구체적 문제</li>
+<li>영향</li>
+<li>홉 카운트만 사용</li>
+<li>회선 대역폭 무시</li>
+<li>느린 회선이 우선될 수 있음</li>
+<li>인터페이스 타입 미반영</li>
+<li>Gigabit과 Fast Ethernet 구분 없음</li>
+<li>부정확한 경로 선택</li>
+<li>최대 15홉 제한</li>
+<li>16홉 이상 경로 불가능</li>
+<li>대규모 네트워크 확장성 제한</li>
+<li>높은 대역폭 오버헤드</li>
+<li>주기적으로 전체 라우팅 테이블 전송</li>
+<li>네트워크 트래픽 증가</li>
+</ul>
+<h5 id="6-2-eigrp_1">6-2. EIGRP 도입의 필요성</h5>
+<ul>
+<li>RIP의 단순성을 극복하기 위해 EIGRP 또는 OSPF 같은 고급 라우팅 프로토콜 필요:</li>
+<li>EIGRP의 개선 사항:</li>
+<li>
+<ul>
+<li>IGRP의 Enhanced(개선) 버전</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>회선 속도, 지연, 신뢰성 등 다중 메트릭 반영</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>대규모 네트워크 환경 지원</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>네트워크 변화에 빠른 수렴</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>AD 90으로 RIP보다 높은 신뢰도</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="017-rip-설정과-동적-라우팅의-기초">017. RIP 설정과 동적 라우팅의 기초</h3>
+<h4 id="1-rip-다이나믹-라우팅-프로토콜-개요">1. RIP 다이나믹 라우팅 프로토콜 개요</h4>
+<h5 id="1-1-riprouting-information-protocol">1-1. RIP(Routing Information Protocol)의 정의와 역할</h5>
+<p>정적 라우팅 설정을 모두 삭제한 후, 다이나믹 라우팅 프로토콜인 RIP을 사용하여 라우터 간
+자동 경로 학습을 구성한다. RIP은 각 라우터가 자신의 직접 연결 네트워크 정보를 이웃 라
+우터에게 주기적으로 광고하여 전체 네트워크 경로를 동적으로 구성한다.</p>
+<h5 id="1-2">1-2. 정적 라우팅 삭제 후 라우팅 테이블 상태</h5>
+<ul>
+<li>네트워크 대역</li>
+<li>상태 표시</li>
+<li>설명</li>
+<li>10.0.0.0, 30.0.0.0, 100.0.0.0</li>
+<li>C (Connected)</li>
+<li>직접 연결된 네트워크만 인식</li>
+<li>150.0.0.0, 200.0.0.0</li>
+<li>미표시</li>
+<li>경로 정보 부재로 통신 불가</li>
+<li>경로 정보가 없으면 해당 네트워크로의 Ping 통신은 실패하며, 패킷이 목적지에 도달할</li>
+<li>수 없다.</li>
+</ul>
+<h4 id="2-rip-라우팅-프로토콜-설정">2. RIP 라우팅 프로토콜 설정</h4>
+<h5 id="2-1-rip">2-1. RIP 설정 모드 진입</h5>
+<p>router rip          ← RIP 라우팅 프로토콜 설정 모드 진입
+router ?  명령어로 사용 가능한 다이나믹 라우팅 프로토콜 확인:
+router ?
+  bgp          Border Gateway Protocol (BGP)
+  eigrp        EIGRP
+  ospf         Open Shortest Path First (OSPF)
+  rip          Routing Information Protocol</p>
+<h5 id="2-2-rip">2-2. RIP 설정 모드의 주요 명령어</h5>
+<ul>
+<li>RIP 설정 모드에서 ?  명령어 입력 시 사용 가능한 명령어:</li>
+<li>명령어</li>
+<li>기능 설명</li>
+<li>network</li>
+<li>광고할 네트워크 대역 지정</li>
+<li>version</li>
+<li>RIP 버전 선택 (1 또는 2)</li>
+<li>auto-summary</li>
+<li>자동축약 설정 (RIP v2 관련)</li>
+<li>distance</li>
+<li>Administrative Distance 설정</li>
+<li>redistribute</li>
+<li>다른 라우팅 프로토콜 경로 재배포</li>
+<li>timer</li>
+<li>타이머 값 조정 (Hello Time, Update 등)</li>
+</ul>
+<h4 id="3-라우터별-네트워크-광고-설정">3. 라우터별 네트워크 광고 설정</h4>
+<h5 id="3-1_5">3-1. 광고 대상 네트워크 선정 기준</h5>
+<p>show ip route  명령어에서 C (Connected) 코드로 표시된 직접 연결 네트워크만 광고한다.
+이는 각 라우터가 자신에게 직접 연결된 인터페이스의 네트워크만 신뢰할 수 있기 때문이다.</p>
+<h5 id="3-2_3">3-2. 라우터별 설정 구성</h5>
+<ul>
+<li>라우터 A 설정:</li>
+<li>router rip</li>
+<li>version 1</li>
+<li>network 10.10.10.0</li>
+<li>network 30.30.30.0</li>
+<li>network 192.168.100.0</li>
+<li>라우터 B 설정:</li>
+<li>router rip</li>
+<li>version 1</li>
+<li>network 10.10.10.0</li>
+<li>network 20.20.20.0</li>
+<li>network 30.30.30.0</li>
+<li>network 192.168.150.0</li>
+<li>라우터 C 설정:</li>
+<li>router rip</li>
+<li>version 1</li>
+</ul>
+<p>network 20.20.20.0
+network 192.168.200.0</p>
+<h4 id="4-rip-설정-결과-확인">4. RIP 설정 결과 확인</h4>
+<h5 id="4-1_6">4-1. 라우팅 테이블 조회</h5>
+<ul>
+<li>show ip route</li>
+<li>라우팅 테이블의 코드 표기:</li>
+<li>코드</li>
+<li>의미</li>
+<li>설명</li>
+<li>C</li>
+<li>Connected</li>
+<li>직접 연결된 네트워크</li>
+<li>R</li>
+<li>RIP</li>
+<li>RIP으로 학습된 경로</li>
+</ul>
+<h5 id="4-2-hop-count">4-2. 최적 경로 결정 기준: 홉 카운트(Hop Count)</h5>
+<ul>
+<li>RIP은 목적지까지 거쳐가는 라우터 장비 개수를 유일한 메트릭으로 사용한다:</li>
+<li>직접 연결: 비용 1</li>
+<li>한 라우터 거침: 비용 2</li>
+<li>두 라우터 거침: 비용 3</li>
+</ul>
+<h5 id="4-3_4">4-3. 라우팅 테이블의 메트릭 값 해석</h5>
+<ul>
+<li>항목</li>
+<li>값</li>
+<li>의미</li>
+<li>AD (Administrative</li>
+<li>Distance)</li>
+<li>RIP의 신뢰도 (프로토콜별 신뢰도 비교 시 낮을</li>
+<li>수록 우선)</li>
+<li>메트릭 (Cost)</li>
+<li>1~15</li>
+<li>홉 카운트 값</li>
+<li>경로 예시:</li>
+<li>150.0.0.0 목적지: AD 120 [1] ← 비용 1 (한 라우터 거침)</li>
+<li>200.0.0.0 목적지: AD 120 [2] ← 비용 2 (두 라우터 거침)</li>
+<li>대역폭이 높아도 홉 수가 많으면 낮은 홉의 경로를 선택하므로 회선 속도를 반영하지 못한</li>
+<li>다.</li>
+</ul>
+<h4 id="5-rip의-한계와-제약사항">5. RIP의 한계와 제약사항</h4>
+<h5 id="5-1_5">5-1. 메트릭의 단순성으로 인한 비효율</h5>
+<p>문제점
+영향
+회선 속도 미반영
+Gigabit과 저속 회선(1.544Mbps) 구분 불가
+인터페이스 타입 무시
+Fast Ethernet과 Gigabit 속도 차이 무시
+대규모 네트워크 비효율
+라우터 수 증가 시 성능 저하
+구체적 예:
+경로 1: 저속 회선(1.544Mbps) 2홉 → RIP은 비용 2로 선택
+경로 2: 고속 회선(Gigabit) 3홉 → RIP은 비용 3으로 배제
+실제 성능: 경로 2가 훨씬 빠르지만 RIP은 인식 불가</p>
+<h5 id="5-2_2">5-2. 홉 카운트 제한</h5>
+<ul>
+<li>최대 15홉 제한</li>
+<li>15홉까지만 경로 인식 가능</li>
+<li>16홉 이상: 도달 불가능한 네트워크로 간주</li>
+<li>대규모 네트워크 확장성 제한</li>
+</ul>
+<h4 id="6-rip-설정-통신-검증">6. RIP 설정 통신 검증</h4>
+<h5 id="6-1-ping">6-1. Ping 통신 테스트</h5>
+<ul>
+<li>ping 192.168.200.10</li>
+<li>정상 응답 패턴:</li>
+<li>순서</li>
+<li>상태</li>
+<li>설명</li>
+<li>첫 번째 ping</li>
+<li>.  (타임아웃)</li>
+<li>정상 (첫 ping에서 ARP 학습 시간)</li>
+<li>이후 ping</li>
+<li>!  (응답 성공)</li>
+<li>완전 정상 상태</li>
+<li>의미: 모든 라우터 간 경로 설정이 완료되고 통신 가능 상태임을 확인</li>
+</ul>
+<hr />
+<h3 id="018-라우터-기본-설정---라우터-간-시리얼-연결-ip-주소-설정-다중-인터페이스-구성">018. 라우터 기본 설정 - 라우터 간 시리얼 연결, IP 주소 설정, 다중 인터페이스 구성</h3>
+<p>연결, IP 주소 설정, 다중 인터페이스
+구성</p>
+<h4 id="1-라우터-간-연결-기본">1. 라우터 간 연결 기본</h4>
+<h5 id="1-1">1-1. 라우터 연결 방식</h5>
+<p>라우터를 연결할 때 선택할 수 있는 방식:
+항목
+설명
+DC 선택
+Data Circuit 방식, 어느 것을 선택해도 상관없음
+DT 선택
+Data Transmission 방식, 어느 것을 선택해도 상관없
+음
+두 개 중 하나를 선택한 후 원하는 라우터와 시리얼(Serial) 인터페이스에 연결한다.</p>
+<h5 id="1-2_1">1-2. 시리얼 인터페이스 추가 (모듈 설치)</h5>
+<p>시리얼 인터페이스를 장비에 설치하기 위한 순서:</p>
+<h4 id="1-전원-종료--장비의-전원을-완전히-끔">1. 전원 종료 ← 장비의 전원을 완전히 끔</h4>
+<h4 id="2-모듈-설치--physical-섹션에서-비어있는-슬롯에-모듈-삽입">2. 모듈 설치 ← Physical 섹션에서 비어있는 슬롯에 모듈 삽입</h4>
+<h4 id="3-전원-재시작--전원을-다시-켬">3. 전원 재시작 ← 전원을 다시 켬</h4>
+<p>모듈을 설치한 후 전원을 다시 시작해야 인터페이스가 인식된다.</p>
+<h4 id="2-라우터-기본-설정">2. 라우터 기본 설정</h4>
+<h5 id="2-1_4">2-1. 포트 라벨 표시 설정</h5>
+<p>포트 이름이 보이지 않을 경우 다음과 같이 설정한다.
+설정 경로:</p>
+<ul>
+<li>Option → Preference → Always show port labels 체크</li>
+<li>라벨 표시 옵션:</li>
+<li>항목</li>
+<li>설정</li>
+<li>장비 이름 표시</li>
+<li>체크 해제 (불필요)</li>
+<li>모델 이름 표시</li>
+<li>체크 해제 (복잡함)</li>
+<li>포트 라벨 표시</li>
+<li>체크 (필수)</li>
+</ul>
+<h5 id="2-2_3">2-2. 포트 표시의 중요성</h5>
+<ul>
+<li>포트 표시 옵션 설정으로 다음이 가능하다.</li>
+<li>현재 어떤 장비인지 명확히 파악 가능</li>
+<li>어떻게 연결되어 있는지 시각적으로 확인 가능</li>
+<li>여러 라우터 간의 연결 구조 파악 용이</li>
+</ul>
+<h4 id="3-ip-주소-설정">3. IP 주소 설정</h4>
+<h5 id="3-1_6">3-1. 설정의 기본 원칙</h5>
+<p>모든 네트워크 장비 설정에서 첫 번째 단계는 IP 주소 설정이다.</p>
+<h5 id="3-2_4">3-2. 설정 명령어 구조</h5>
+<p>configure terminal ← 설정 모드 진입
+interface [인터페이스명] ← 특정 인터페이스 선택
+ip address [IP주소] [서브넷마스크] ← IP 주소와 서브넷마스크 설정
+no shutdown ← 해당 인터페이스 활성화
+exit ← 현재 모드 종료</p>
+<h5 id="3-3_4">3-3. 라우터 간 연결 인터페이스 설정 예시</h5>
+<ul>
+<li>A 라우터와 연결된 B 라우터의 시리얼 인터페이스:</li>
+<li>configure terminal</li>
+<li>interface serial 0/3/0</li>
+<li>
+<p>ip address 10.10.10.20 255.255.255.0</p>
+</li>
+<li>
+<p>no shutdown</p>
+</li>
+<li>exit</li>
+<li>항목</li>
+<li>값</li>
+<li>인터페이스</li>
+<li>serial 0/3/0 (A 라우터와의 연결 인터페이</li>
+<li>스)</li>
+<li>IP 주소</li>
+<li>10.10.10.20</li>
+<li>서브넷마스크</li>
+<li>255.255.255.0 (/24)</li>
+</ul>
+<h5 id="3-4_2">3-4. 링크 상태 확인</h5>
+<ul>
+<li>설정 완료 후:</li>
+<li>항목</li>
+<li>설명</li>
+<li>링크 상태</li>
+<li>초록색 링크 표시 (정상 연결)</li>
+<li>메시지</li>
+<li>"업(Up)"으로 설정 완료 표시</li>
+<li>통신 준비</li>
+<li>링크 상태 확인 후 통신 가능</li>
+</ul>
+<h4 id="4-다중-인터페이스-설정">4. 다중 인터페이스 설정</h4>
+<h5 id="4-1_7">4-1. 라우터의 다중 인터페이스 구성</h5>
+<ul>
+<li>라우터에서 일반적으로 다음과 같은 여러 인터페이스 설정이 필요하다.</li>
+<li>인터페이스</li>
+<li>용도</li>
+<li>타입</li>
+<li>인터페이스 1</li>
+<li>다른 라우터와의 연결</li>
+<li>Serial</li>
+<li>인터페이스 2</li>
+<li>또 다른 라우터와의 연결</li>
+<li>Serial</li>
+<li>인터페이스 3</li>
+<li>내부 네트워크 게이트웨이</li>
+<li>GigabitEthernet</li>
+</ul>
+<h5 id="4-2_4">4-2. 각 인터페이스별 설정 순서</h5>
+<ul>
+<li>각 인터페이스마다 동일한 절차로 설정한다.</li>
+<li>configure terminal</li>
+<li>interface [해당 인터페이스명]</li>
+<li>ip address [해당 IP] [해당 서브넷마스크]</li>
+<li>no shutdown</li>
+<li>exit</li>
+</ul>
+<h5 id="4-3_5">4-3. 내부 네트워크 게이트웨이 설정 예시</h5>
+<ul>
+<li>GigabitEthernet 인터페이스 (내부 게이트웨이):</li>
+<li>configure terminal</li>
+<li>interface gi 0/0</li>
+<li>ip address 192.168.150.254 255.255.255.0</li>
+<li>no shutdown</li>
+<li>exit</li>
+<li>항목</li>
+<li>값</li>
+<li>인터페이스</li>
+<li>GigabitEthernet 0/0</li>
+<li>IP 주소</li>
+<li>192.168.150.254</li>
+<li>서브넷마스크</li>
+<li>255.255.255.0 (/24)</li>
+<li>역할</li>
+<li>내부 네트워크의 기본 게이트웨이</li>
+</ul>
+<h5 id="4-4">4-4. 라우터 호스트명 설정</h5>
+<ul>
+<li>각 라우터를 구분하기 위해 호스트명을 설정한다.</li>
+<li>configure terminal</li>
+<li>hostname [라우터명] ← 라우터 이름 설정</li>
+<li>exit</li>
+<li>호스트명 예시:</li>
+<li>R-A (A 라우터)</li>
+<li>R-B (B 라우터)</li>
+<li>R-C (C 라우터)</li>
+</ul>
+<h4 id="5-네트워크-주소-대역-관리">5. 네트워크 주소 대역 관리</h4>
+<h5 id="5-1_6">5-1. 네트워크 간 주소 대역 분리</h5>
+<ul>
+<li>다중 라우터 구성에서는 각 네트워크에 다른 주소 대역을 할당한다.</li>
+<li>네트워크</li>
+<li>IP 대역</li>
+<li>용도</li>
+<li>라우터 A-B 간</li>
+<li>10.10.10.0/24</li>
+<li>라우터 간 시리얼 연결</li>
+<li>라우터 B-C 간</li>
+<li>20.20.20.0/24</li>
+<li>
+<p>라우터 간 시리얼 연결</p>
+</li>
+<li>
+<p>네트워크</p>
+</li>
+<li>IP 대역</li>
+<li>용도</li>
+<li>라우터 A 내부</li>
+<li>192.168.100.0/24</li>
+<li>A 라우터 네트워크</li>
+<li>라우터 B 내부</li>
+<li>192.168.150.0/24</li>
+<li>B 라우터 네트워크</li>
+<li>라우터 C 내부</li>
+<li>192.168.200.0/24</li>
+<li>C 라우터 네트워크</li>
+</ul>
+<h5 id="5-2_3">5-2. 주소 대역 분리의 필요성</h5>
+<p>같은 네트워크 내에서 중복된 주소 대역을 사용하면 주소 충돌(overlap)이 발생한다.</p>
+<h4 id="6-설정-확인">6. 설정 확인</h4>
+<h5 id="6-1_2">6-1. 인터페이스 상태 확인</h5>
+<p>show running-config ← 현재 실행 중인 모든 설정 확인
+show ip interface brief ← 모든 인터페이스의 상태 확인</p>
+<h5 id="6-2_1">6-2. 주의 사항</h5>
+<ul>
+<li>항목</li>
+<li>설명</li>
+<li>인터페이스 확인</li>
+<li>다중 인터페이스 설정 시 현재 작업 중인 인터페이스 확인 필</li>
+<li>수</li>
+<li>주소 혼동 방지</li>
+<li>잘못된 인터페이스에 IP를 설정하면 전체 구성이 틀어짐</li>
+<li>확인의 습관화</li>
+<li>항상 현재 작업 위치를 확인하는 습관 필수</li>
+</ul>
+<hr />
+<h3 id="019-라우팅의-개념과-스태틱-다이나믹-라우팅">019. 라우팅의 개념과 스태틱 다이나믹 라우팅</h3>
+<p>라우팅의 개념과 스태틱/다이나믹 라
+우팅</p>
+<h4 id="1-라우팅routing-개념">1. 라우팅(Routing) 개념</h4>
+<h5 id="1-1_1">1-1. 라우팅의 정의</h5>
+<p>라우팅은 데이터가 출발지에서 목적지까지 도달할 수 있도록 경로를 설정하는 프로세스이
+다.</p>
+<h5 id="1-2_2">1-2. 라우팅의 필요성</h5>
+<ul>
+<li>라우팅이 없는 경우:</li>
+<li>경로 부재: 다른 네트워크 간의 통신 불가능</li>
+<li>통신 단절: 인터넷 접속 및 다른 곳으로의 접속 불가능</li>
+<li>라우팅이 설정된 경우:</li>
+<li>서로 다른 네트워크 간의 데이터 이동 가능</li>
+<li>인터넷을 통한 원격 접속 실현</li>
+</ul>
+<h5 id="1-3_1">1-3. 라우팅 프로토콜의 분류</h5>
+<ul>
+<li>라우팅 방식은 두 가지 주요 유형으로 나뉜다.</li>
+<li>유형</li>
+<li>스태틱(Static)</li>
+<li>다이나믹(Dynamic)</li>
+<li>정의</li>
+<li>관리자가 직접 경로를 설정</li>
+<li>프로토콜이 자동으로 경로 학습</li>
+<li>특징</li>
+<li>수동 경로 입력</li>
+<li>자동 경로 설정</li>
+<li>알고리즘</li>
+<li>작동하지 않음</li>
+<li>프로토콜 알고리즘 작동</li>
+<li>자원 소비</li>
+<li>최소화</li>
+<li>프로토콜 오버헤드 발생</li>
+<li>경로 결정</li>
+<li>고정적</li>
+<li>프로토콜 기준에 따른 최적 경로</li>
+</ul>
+<h5 id="1-4">1-4. 스태틱 라우팅의 특징</h5>
+<p>스태틱(Static) 라우팅은 관리자가 직접 경로를 설정하는 방식이다.
+라우팅의 개념과 스태틱/다이나믹 라우팅</p>
+<ul>
+<li>특징</li>
+<li>설명</li>
+<li>정의</li>
+<li>관리자가 직접 라우팅 경로를 입력</li>
+<li>수동 설정</li>
+<li>경로를 명시적으로 지정</li>
+<li>알고리즘 미적용</li>
+<li>라우팅 프로토콜의 알고리즘이 작동하지 않음</li>
+<li>자원 효율성</li>
+<li>라우터 자원 소비 최소화</li>
+<li>경로 계산 불필요</li>
+<li>미리 정해진 경로만 사용</li>
+</ul>
+<h5 id="1-5">1-5. 다이나믹 라우팅의 특징</h5>
+<ul>
+<li>다이나믹(Dynamic) 라우팅은 라우팅 프로토콜을 사용하여 자동으로 경로를 학습하는 방식</li>
+<li>이다.</li>
+<li>특징</li>
+<li>설명</li>
+<li>자동 경로 학습</li>
+<li>프로토콜이 경로를 자동으로 설정</li>
+<li>프로토콜 지정</li>
+<li>관리자는 프로토콜만 지정</li>
+<li>최적 경로 결정</li>
+<li>각 프로토콜의 기준에 따라 최적 경로 결정</li>
+<li>프로토콜 오버헤드</li>
+<li>라우팅 프로토콜 작동으로 인한 자원 소비</li>
+</ul>
+<h5 id="1-6">1-6. 라우팅 프로토콜 주요 요소</h5>
+<ul>
+<li>라우팅 프로토콜 관련 주요 개념들:</li>
+<li>요소</li>
+<li>설명</li>
+<li>RIP(Routing Information Protocol)</li>
+<li>거리와 방향 기반 프로토콜</li>
+<li>Distance Factor</li>
+<li>거리와 방향을 나타내는 지표</li>
+<li>Classful/Classless</li>
+<li>주소 분류 방식</li>
+<li>확장성</li>
+<li>네트워크 확장 가능성</li>
+<li>각 프로토콜의 실제 동작 방식은 실습을 통해 확인할 수 있다.</li>
+</ul>
+<h4 id="2-snmp-프로토콜-정정-사항">2. SNMP 프로토콜 정정 사항</h4>
+<h5 id="2-1_5">2-1. 포트 번호 오류 수정</h5>
+<ul>
+<li>강의 교안 5페이지의 SNMP 프로토콜 관련 내용 수정:</li>
+<li>항목</li>
+<li>오류</li>
+<li>정정</li>
+<li>SNMP 포트 번호</li>
+<li>161(기본), 162(트랩)</li>
+<li>라우팅의 개념과 스태틱/다이나믹 라우팅</li>
+</ul>
+<h5 id="2-2-snmp">2-2. SNMP 프로토콜 정보</h5>
+<ul>
+<li>항목</li>
+<li>설명</li>
+<li>프로토콜명</li>
+<li>SNMP(Simple Network Management</li>
+<li>Protocol)</li>
+<li>용도</li>
+<li>네트워크 관리 프로토콜</li>
+<li>포트 번호</li>
+<li>161(기본), 162(트랩)</li>
+<li>라우팅의 개념과 스태틱/다이나믹 라우팅</li>
+</ul>
+<hr />
+<h3 id="020-스태틱-라우팅-설정---라우팅-테이블-경로-지정-네트워크-통신-검증">020. 스태틱 라우팅 설정 - 라우팅 테이블, 경로 지정, 네트워크 통신 검증</h3>
+<p>경로 지정, 네트워크 통신 검증</p>
+<h4 id="1-라우팅-테이블-분석">1. 라우팅 테이블 분석</h4>
+<h5 id="1-1_2">1-1. 라우팅 테이블의 개념</h5>
+<p><em>라우팅 테이블(Routing Table)</em>*은 각 네트워크 주소에 대한 경로 정보를 저장하는
+테이블이다.</p>
+<h5 id="1-2_3">1-2. 주소 표기법 분석</h5>
+<ul>
+<li>CIDR 표기법의 의미</li>
+<li>표기</li>
+<li>의미</li>
+<li>설명</li>
+<li>/32</li>
+<li>32비트 일치</li>
+<li>자기 자신(단일 호스트)</li>
+<li>/24</li>
+<li>24비트 일치</li>
+<li>네트워크 주소</li>
+<li>/16</li>
+<li>16비트 일치</li>
+<li>더 큰 네트워크</li>
+<li>/32 표기의 의미</li>
+<li>/32 = 32비트가 일치하는 주소 = 자기 자신</li>
+<li>특징:</li>
+<li>항목</li>
+<li>설명</li>
+<li>32비트 전체 일치</li>
+<li>개별 호스트 주소</li>
+<li>단일 IP</li>
+<li>네트워크 주소가 아닌 단일 호스트</li>
+<li>로컬(Local) 표시</li>
+<li>로컬 인터페이스를 나타냄</li>
+<li>
+<p>/24 표기와의 비교</p>
+</li>
+<li>
+<p>표기</p>
+</li>
+<li>일치 범위</li>
+<li>타입</li>
+<li>/24</li>
+<li>24비트 일치</li>
+<li>네트워크 주소</li>
+<li>/32</li>
+<li>32비트 일치</li>
+<li>단일 호스트</li>
+<li>예시:</li>
+<li>/24 : 192.168.100.0/24 (192.168.100.0 ~ 192.168.100.255)</li>
+<li>/32 : 192.168.100.1/32 (192.168.100.1 하나만)</li>
+</ul>
+<h4 id="2-스태틱-라우팅static-routing">2. 스태틱 라우팅(Static Routing)</h4>
+<h5 id="2-1_6">2-1. 스태틱 라우팅의 기본</h5>
+<p>정의: 관리자가 직접 라우팅 경로를 설정하는 방식이다.</p>
+<h5 id="2-2_4">2-2. 라우팅 경로 설정 명령어</h5>
+<p>configure terminal ← 설정 모드 진입
+ip route [목적지네트워크] [서브넷마스크] [경유지] ← 경로 설정
+exit ← 설정 모드 종료
+설정 예시:
+ip route 192.168.100.0 255.255.255.0 10.10.10.10
+← 192.168.100.0/24 네트워크로는 10.10.10.10으로 보낸다</p>
+<h5 id="2-3_2">2-3. 라우팅 설정의 핵심 개념</h5>
+<ul>
+<li>목적지 네트워크 지정</li>
+<li>항목</li>
+<li>설명</li>
+<li>네트워크 주소 사용</li>
+<li>개별 호스트가 아닌 전체 네트워크 주소</li>
+<li>예시</li>
+<li>192.168.100.0 (192.168.100.0/24 대역 모든 호스트 포함)</li>
+<li>포함 범위</li>
+<li>192.168.100.1 ~ 192.168.100.254</li>
+<li>경유지(Next Hop) 지정</li>
+<li>경유지의 정의: 목적지로 가기 위해 패킷을 보낼 다음 장비의 IP 주소</li>
+<li>
+<p>설정 원칙:</p>
+</li>
+<li>
+<p>목적지 방향으로의 다음 장비 = 경유지로 지정</p>
+</li>
+<li>최종 목적지의 IP를 경유지로 지정하면 안 된다. 바로 연결된 다음 라우터의 IP를 경유지</li>
+<li>로 지정해야 한다.</li>
+<li>올바른 설정 예:</li>
+<li>상황</li>
+<li>경유지</li>
+<li>이유</li>
+<li>A → B → C</li>
+<li>B의 IP</li>
+<li>B가 다음 장비이므로</li>
+<li>B에서 C로</li>
+<li>C의 IP</li>
+<li>C가 다음 장비이므로</li>
+</ul>
+<h5 id="2-4">2-4. 라우팅 과정의 이해</h5>
+<ul>
+<li>패킷의 이동 흐름:</li>
+<li>출발지 라우터</li>
+<li>↓</li>
+<li>자신의 라우팅 테이블 확인</li>
+<li>↓</li>
+<li>경유지로 패킷 전송</li>
+<li>↓</li>
+<li>다음 라우터에서 다시 자신의 라우팅 테이블 확인</li>
+<li>↓</li>
+<li>경유지로 패킷 전송</li>
+<li>↓</li>
+<li>(반복...)</li>
+<li>↓</li>
+<li>목적지 도달</li>
+<li>핵심 원칙:</li>
+<li>항목</li>
+<li>설명</li>
+<li>각 라우터의 책임</li>
+<li>다음 장비까지만 관심</li>
+<li>다음 일의 책임</li>
+<li>다음 라우터가 담당</li>
+<li>경로 설정</li>
+<li>모든 라우터에서 정확해야 함</li>
+</ul>
+<h5 id="2-5_1">2-5. 라우팅 설정 실패의 예</h5>
+<p>경로가 중간에 끊긴 경우:
+상황: A → B → C 경로에서 B 라우터가 경로를 모를 때</p>
+<ul>
+<li>A 라우터: C로 가려면 B로 보낸다 (정상)</li>
+<li>B 라우터: C로 가는 경로를 모른다 (문제!)</li>
+<li>결과: C로 도달 불가</li>
+<li>결론: 모든 라우터에서 정확한 경로 설정이 필수이다.</li>
+</ul>
+<h4 id="3-라우팅-테이블-확인">3. 라우팅 테이블 확인</h4>
+<h5 id="3-1_7">3-1. 라우팅 테이블 조회 명령어</h5>
+<p>show ip route ← 현재 라우팅 테이블 표시</p>
+<h5 id="3-2_5">3-2. 라우팅 테이블 읽기</h5>
+<ul>
+<li>라우팅 테이블 출력 예:</li>
+<li>S 192.168.100.0/24 [1/0] via 10.10.10.10</li>
+<li>항목별 의미:</li>
+<li>항목</li>
+<li>의미</li>
+<li>설명</li>
+<li>S</li>
+<li>Static</li>
+<li>192.168.100.0/24</li>
+<li>목적지 네트워크</li>
+<li>가는 네트워크 대역</li>
+<li>[1/0]</li>
+<li>신뢰도/메트릭</li>
+<li>경로 우선순위</li>
+<li>via 10.10.10.10</li>
+<li>경유지 주소</li>
+<li>다음 장비의 IP</li>
+</ul>
+<h5 id="3-3_5">3-3. 새 경로 추가 확인</h5>
+<ul>
+<li>라우팅 설정 후 show ip route 로 확인:</li>
+<li>이전에 없던 네트워크가 추가됨</li>
+<li>S (Static) 표시로 스태틱 경로 확인 가능</li>
+<li>경유지 정보로 경로 설정 검증</li>
+</ul>
+<h4 id="4-스태틱-라우팅의-사용-사례">4. 스태틱 라우팅의 사용 사례</h4>
+<h5 id="4-1_8">4-1. 스태틱 라우팅 사용 시점</h5>
+<ul>
+<li>단일 경로(Single Path) 구조</li>
+<li>예시: 게임방 → KT 인터넷 장비</li>
+<li>특징:</li>
+<li>항목</li>
+<li>설명</li>
+<li>갈 수 있는 경로</li>
+<li>오직 하나</li>
+<li>패킷 이동</li>
+<li>모든 패킷이 같은 곳으로만 나감</li>
+<li>다른 경로</li>
+<li>상대방 장비에서 관리</li>
+<li>적용 사례:</li>
+<li>소규모 게임방</li>
+<li>중소 규모 사무실 건물</li>
+<li>전용선 서비스 받는 소규모 네트워크</li>
+</ul>
+<h5 id="4-2_5">4-2. 스태틱 라우팅의 장점</h5>
+<ul>
+<li>자원 효율성:</li>
+<li>항목</li>
+<li>효과</li>
+<li>라우팅 계산</li>
+<li>알고리즘 미실행</li>
+<li>라우터 부하</li>
+<li>최소화</li>
+<li>시스템 자원</li>
+<li>절약</li>
+<li>성능:</li>
+<li>경로가 이미 정해짐</li>
+<li>빠른 전달</li>
+<li>예측 가능한 성능</li>
+</ul>
+<h5 id="4-3_6">4-3. 스태틱 라우팅의 단점</h5>
+<ul>
+<li>확장성 부족:</li>
+<li>문제</li>
+<li>설명</li>
+<li>경로 설정</li>
+<li>
+<p>네트워크가 많으면 일일이 설정 필요</p>
+</li>
+<li>
+<p>문제</p>
+</li>
+<li>설명</li>
+<li>오류 영향</li>
+<li>경로 오류 시 라우팅 전체 손상 가능</li>
+<li>관리 복잡성</li>
+<li>관리 난이도 증가</li>
+<li>네트워크가 많으면 관리자가 일일이 경로를 설정하기 어렵다.</li>
+</ul>
+<h4 id="5-다이나믹-라우팅의-필요성">5. 다이나믹 라우팅의 필요성</h4>
+<h5 id="5-1-vs">5-1. 스태틱 vs 다이나믹 선택 기준</h5>
+<ul>
+<li>특성</li>
+<li>스태틱</li>
+<li>다이나믹</li>
+<li>경로 설정</li>
+<li>수동</li>
+<li>자동</li>
+<li>적용 규모</li>
+<li>소규모</li>
+<li>중·대규모</li>
+<li>리소스 소비</li>
+<li>낮음</li>
+<li>높음</li>
+<li>설정 복잡도</li>
+<li>낮음</li>
+<li>높음</li>
+<li>확장성</li>
+<li>낮음</li>
+<li>높음</li>
+</ul>
+<h5 id="5-2_4">5-2. 다이나믹 라우팅 사용 시점</h5>
+<ul>
+<li>대규모 네트워크 구조:</li>
+<li>네트워크</li>
+<li>특징</li>
+<li>대학교 캠퍼스 네트워크</li>
+<li>다수의 건물, 많은 라우터</li>
+<li>기업 전체 네트워크</li>
+<li>여러 부서, 복잡한 구조</li>
+<li>다수 라우터 존재</li>
+<li>경로 설정이 복잡함</li>
+<li>사용 이유:</li>
+<li>라우터 개수가 많으면 스태틱으로 일일이 설정 불가능</li>
+<li>자동 경로 학습으로 효율성 극대화</li>
+<li>네트워크 변화에 자동 대응</li>
+</ul>
+<h4 id="6-네트워크-통신-검증">6. 네트워크 통신 검증</h4>
+<h5 id="6-1-ping_1">6-1. 핑(Ping) 테스트</h5>
+<ul>
+<li>ping [목적지IP주소] ← 목적지 주소로 핑 전송</li>
+<li>핑의 목적:</li>
+<li>네트워크 경로 확인</li>
+<li>목적지 도달 가능 여부 확인</li>
+<li>라우팅 경로 검증</li>
+</ul>
+<h5 id="6-2_2">6-2. 통신 성공 조건</h5>
+<ul>
+<li>2개 라우터 간 통신 (A ↔ B)</li>
+<li>A 라우터 하위 PC → B 라우터 하위 PC</li>
+<li>필요 경로 설정:</li>
+<li>라우터</li>
+<li>설정 필요 사항</li>
+<li>A 라우터</li>
+<li>B 네트워크로의 경로 설정</li>
+<li>B 라우터</li>
+<li>A 네트워크로의 경로 설정</li>
+<li>3개 라우터 간 통신 (A ↔ B ↔ C)</li>
+<li>추가 경로 설정:</li>
+<li>라우터</li>
+<li>설정 필요 사항</li>
+<li>A 라우터</li>
+<li>C 네트워크로의 경로 설정</li>
+<li>B 라우터</li>
+<li>C 네트워크로의 경로 설정 (중간 라우터 역할)</li>
+<li>C 라우터</li>
+<li>A, B 네트워크로의 경로 설정</li>
+</ul>
+<h5 id="6-3-loss">6-3. 첫 번째 패킷 손실(Loss)</h5>
+<ul>
+<li>현상: 첫 번째 핑은 실패, 이후는 성공</li>
+<li>원인: ARP(Address Resolution Protocol) 요청</li>
+<li>단계</li>
+<li>설명</li>
+<li>1차 통신</li>
+<li>MAC 주소를 모르므로 ARP 요청 소요</li>
+<li>이후 통신</li>
+<li>캐시에 저장되어 정상 통신</li>
+<li>첫 번째 패킷이 손실되는 것은 정상이다. ARP 요청을 위해 시간이 필요하기 때문이다.</li>
+</ul>
+<h4 id="7-라우팅-설정의-중요성">7. 라우팅 설정의 중요성</h4>
+<h5 id="7-1_1">7-1. 통신 가능의 필수 조건</h5>
+<ul>
+<li>통신이 성공하려면 다음 모든 조건이 만족되어야 한다.</li>
+<li>조건</li>
+<li>내용</li>
+<li>주소 설정 정확성</li>
+<li>IP 주소와 서브넷마스크 정확</li>
+<li>경로 설정 정확성</li>
+<li>모든 라우터에서 올바른 경로 설정</li>
+<li>인터페이스 활성화</li>
+<li>no shutdown 설정</li>
+<li>하나라도 틀리면 통신이 불가능하다.</li>
+</ul>
+<h5 id="7-2_1">7-2. 설정 오류 확인 방법</h5>
+<ul>
+<li>주소 설정 오류 확인:</li>
+<li>show running-config ← 현재 실행 중인 설정 전체 표시</li>
+<li>확인 사항:</li>
+<li>각 인터페이스의 IP 주소 확인</li>
+<li>서브넷마스크 정확성 확인</li>
+<li>no shutdown 설정 여부 확인</li>
+</ul>
+<h5 id="7-3">7-3. 경로 설정 확인 방법</h5>
+<ul>
+<li>경로 설정 확인:</li>
+<li>show ip route ← 라우팅 테이블 표시</li>
+<li>확인 사항:</li>
+<li>목적지 네트워크가 테이블에 추가되었는지 확인</li>
+<li>경유지 주소가 정확한지 확인</li>
+<li>Static(S) 표시로 스태틱 경로 확인</li>
+</ul>
+<hr /><div class="nav"><a href="ch08.html"><span class="lbl">이전</span>2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><a href="ch10.html"><span class="lbl">다음</span>핵심키워드 · 네트워크 (2/3)</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
 <script>
