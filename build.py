@@ -51,6 +51,7 @@ ORDER: list[tuple[str, str | None]] = [
     ("slides/7-보안모의해킹-3.md", None),
     ("slides/7-보안모의해킹-4.md", None),
     ("book/90-중복과-상충-정리.md", "부록"),
+    ("book/92-공식문서-보강.md", None),
     ("book/91-명령어-색인.md", None),
     ("book/99-용어집.md", None),
 ]
