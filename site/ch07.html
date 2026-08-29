@@ -1,0 +1,1792 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MariaDB 실습 학습 노트 · SKT ALEPH 학습 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
+  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
+    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+}
+.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+aside{
+  position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
+}
+aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
+aside .brand a{color:inherit; text-decoration:none}
+aside .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+#q{width:100%; padding:7px 9px; font:inherit; margin-bottom:12px;
+   border:1px solid var(--rule); border-radius:6px; background:var(--paper); color:var(--ink)}
+aside a{display:block; color:inherit; text-decoration:none; padding:3px 6px; border-radius:5px}
+aside a:hover{background:var(--accent-soft)}
+aside a.cur{background:var(--accent-soft); color:var(--accent); font-weight:700}
+aside a.on{color:var(--accent); font-weight:700}
+aside .part{margin:16px 0 6px; font-size:10px; letter-spacing:.16em; color:var(--muted); font-weight:700}
+aside .lv3{padding-left:16px; color:var(--muted)}
+aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
+aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
+
+main{padding:40px 40px 120px; max-width:860px}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h1{font-size:30px; margin:0 0 8px}
+h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
+h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
+h4{font-size:15px; margin:22px 0 6px}
+.chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin:3px 0}
+a{color:var(--accent)}
+blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+blockquote p:last-child{margin:0}
+hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+mark{background:var(--mark); color:inherit}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
+pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+pre code{background:none; padding:0; font-size:inherit}
+.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
+.codehilite pre{border:0; margin:0; background:none}
+.tablewrap{overflow-x:auto; margin:0 0 18px}
+table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+.admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
+.admonition-title{font-weight:700; margin:0 0 6px !important}
+.nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
+     font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px}
+.nav a{display:block; max-width:46%; text-decoration:none; padding:10px 14px; border:1px solid var(--rule); border-radius:8px}
+.nav a:hover{background:var(--accent-soft)}
+.nav .lbl{display:block; color:var(--muted); font-size:11px; letter-spacing:.1em}
+.cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
+.cover h1{font-size:34px; margin:0 0 6px}
+.cover p{margin:0; color:var(--muted)}
+.toclist{list-style:none; padding:0; margin:0}
+.toclist li{margin:0 0 6px}
+.toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
+               font-family:ui-sans-serif,system-ui,sans-serif}
+.toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
+.toclist a:hover{background:var(--accent-soft)}
+.toclist .t{display:block; font-weight:700; margin-bottom:2px}
+.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+#top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
+     background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
+     font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
+  main{padding:26px 18px 90px}
+}
+@media print{
+  aside,#top,.nav{display:none}
+  .layout{display:block}
+  main{max-width:none; padding:0}
+  pre,table,.admonition{break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
+  <div class="sub">IT 인프라 · 보안 과정</div>
+  <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="cur" href="ch07.html">07. MariaDB 실습 학습 노트</a><div class="inchap"><a class="lv3" href="#sql-기초--문자셋--논리-백업복원--표준-복제">SQL 기초 → 문자셋 → 논리 백업·복원 → 표준 복제</a><a class="lv3" href="#목차">목차</a><a class="lv2" href="#1-이번-수업의-전체-구조">1. 이번 수업의 전체 구조</a><a class="lv3" href="#원문에서-확인되는-사실">원문에서 확인되는 사실</a><a class="lv3" href="#원문만으로-확인할-수-없는-사실">원문만으로 확인할 수 없는 사실</a><a class="lv2" href="#2-터미널과-mariadb-프롬프트">2. 터미널과 MariaDB 프롬프트</a><a class="lv3" href="#21-linux-셸">2.1 Linux 셸</a><a class="lv3" href="#22-mariadb-클라이언트">2.2 MariaDB 클라이언트</a><a class="lv3" href="#23-세미콜론과-화살표-프롬프트">2.3 세미콜론과 화살표 프롬프트</a><a class="lv2" href="#3-mariadb-서비스와-클라이언트">3. MariaDB 서비스와 클라이언트</a><a class="lv3" href="#31-역할-구분">3.1 역할 구분</a><a class="lv3" href="#32-서비스-명령">3.2 서비스 명령</a><a class="lv3" href="#33-접속-명령">3.3 접속 명령</a><a class="lv3" href="#34-셸-리다이렉션">3.4 셸 리다이렉션</a><a class="lv2" href="#4-데이터베이스와-테이블">4. 데이터베이스와 테이블</a><a class="lv3" href="#41-데이터베이스-생성선택">4.1 데이터베이스 생성·선택</a><a class="lv3" href="#42-테이블-생성">4.2 테이블 생성</a><a class="lv3" href="#43-열-정의">4.3 열 정의</a><a class="lv3" href="#44-첫-번째-오류">4.4 첫 번째 오류</a><a class="lv3" href="#45-구조-확인">4.5 구조 확인</a><a class="lv2" href="#5-문자셋과-한글-입력-오류">5. 문자셋과 한글 입력 오류</a><a class="lv3" href="#51-문자셋과-콜레이션">5.1 문자셋과 콜레이션</a><a class="lv3" href="#52-문자가-지나가는-층">5.2 문자가 지나가는 층</a><a class="lv3" href="#53-한글-insert-오류의-원인">5.3 한글 INSERT 오류의 원인</a><a class="lv3" href="#54-현재-상태-확인">5.4 현재 상태 확인</a><a class="lv3" href="#55-새로-만드는-경우">5.5 새로 만드는 경우</a><a class="lv3" href="#56-이미-만든-객체를-수정하는-경우">5.6 이미 만든 객체를 수정하는 경우</a><a class="lv3" href="#57-dump-안의-set-names를-오해하지-않기">5.7 dump 안의 SET NAMES를 오해하지 않기</a><a class="lv2" href="#6-insert와-select">6. INSERT와 SELECT</a><a class="lv3" href="#61-insert">6.1 INSERT</a><a class="lv3" href="#62-select-기본">6.2 SELECT 기본</a><a class="lv3" href="#63-수업-결과">6.3 수업 결과</a><a class="lv2" href="#7-조건-검색정렬집계">7. 조건 검색·정렬·집계</a><a class="lv3" href="#71-where와-비교-연산자">7.1 WHERE와 비교 연산자</a><a class="lv3" href="#72-and와-or">7.2 AND와 OR</a><a class="lv3" href="#73-between">7.3 BETWEEN</a><a class="lv3" href="#74-like">7.4 LIKE</a><a class="lv3" href="#75-null">7.5 NULL</a><a class="lv3" href="#76-order-by">7.6 ORDER BY</a><a class="lv3" href="#77-limit">7.7 LIMIT</a><a class="lv3" href="#78-오타로-인한-오류">7.8 오타로 인한 오류</a><a class="lv3" href="#79-집계-함수">7.9 집계 함수</a><a class="lv2" href="#8-백업과-복원">8. 백업과 복원</a><a class="lv3" href="#81-백업과-복제의-차이">8.1 백업과 복제의 차이</a><a class="lv3" href="#82-mariadb-dump">8.2 mariadb-dump</a><a class="lv3" href="#83-데이터베이스-하나">8.3 데이터베이스 하나</a><a class="lv3" href="#84-전체-데이터베이스">8.4 전체 데이터베이스</a><a class="lv3" href="#85-특정-테이블">8.5 특정 테이블</a><a class="lv3" href="#86-수업에서-한-복원의-정확한-의미">8.6 수업에서 한 복원의 정확한 의미</a><a class="lv3" href="#87-복제용-일관된-dump">8.7 복제용 일관된 dump</a><a class="lv2" href="#9-firewalld와-원격-접속">9. firewalld와 원격 접속</a><a class="lv3" href="#91-필요한-네-가지">9.1 필요한 네 가지</a><a class="lv3" href="#92-수업-명령">9.2 수업 명령</a><a class="lv3" href="#93-특정-replica만-허용">9.3 특정 replica만 허용</a><a class="lv3" href="#94-실제-수신-여부">9.4 실제 수신 여부</a><a class="lv3" href="#95-원격-계정-테스트">9.5 원격 계정 테스트</a><a class="lv2" href="#10-migration과-replication">10. migration과 replication</a><a class="lv3" href="#101-migration">10.1 migration</a><a class="lv3" href="#102-replication">10.2 replication</a><a class="lv3" href="#103-비동기반동기동기">10.3 비동기·반동기·동기</a><a class="lv3" href="#104-여러-replica와-백업">10.4 여러 replica와 백업</a><a class="lv3" href="#105-과거-데이터는-자동-backfill되지-않는다">10.5 과거 데이터는 자동 backfill되지 않는다</a><a class="lv2" href="#11-binary-log와-복제-설정값">11. binary log와 복제 설정값</a><a class="lv3" href="#111-binary-log">11.1 binary log</a><a class="lv3" href="#112-primary-설정-파일">11.2 primary 설정 파일</a><a class="lv3" href="#113-설정값">11.3 설정값</a><a class="lv4" href="#server-id">server-id</a><a class="lv4" href="#logbin">log_bin</a><a class="lv4" href="#expirelogsdays">expire_logs_days</a><a class="lv4" href="#maxbinlogsize">max_binlog_size</a><a class="lv4" href="#binlogformat">binlog_format</a><a class="lv4" href="#syncbinlog">sync_binlog</a><a class="lv3" href="#114-binary-log-디렉터리-권한">11.4 binary log 디렉터리 권한</a><a class="lv3" href="#115-replica-설정">11.5 replica 설정</a><a class="lv2" href="#12-표준-복제-실습의-올바른-순서">12. 표준 복제 실습의 올바른 순서</a><a class="lv3" href="#121-primary-준비">12.1 primary 준비</a><a class="lv3" href="#122-복제-계정">12.2 복제 계정</a><a class="lv3" href="#123-방화벽과-원격-계정-확인">12.3 방화벽과 원격 계정 확인</a><a class="lv3" href="#124-방법-a-기존-데이터가-없는-새-변경-테스트">12.4 방법 A: 기존 데이터가 없는 새 변경 테스트</a><a class="lv4" href="#primary에서-현재-좌표-확인">primary에서 현재 좌표 확인</a><a class="lv4" href="#replica-server-id-설정">replica server-id 설정</a><a class="lv4" href="#replica-연결-설정">replica 연결 설정</a><a class="lv4" href="#replica-시작">replica 시작</a><a class="lv4" href="#primary에서만-새-변경">primary에서만 새 변경</a><a class="lv4" href="#replica에서-확인">replica에서 확인</a><a class="lv3" href="#125-방법-b-기존-library-초기-복사">12.5 방법 B: 기존 library 초기 복사</a><a class="lv4" href="#primary에서-dump">primary에서 dump</a><a class="lv4" href="#replica로-복사복원">replica로 복사·복원</a><a class="lv4" href="#dump에-기록된-좌표-사용">dump에 기록된 좌표 사용</a><a class="lv4" href="#replica에서-연결">replica에서 연결</a><a class="lv2" href="#13-복제-상태-확인과-성공-판정">13. 복제 상태 확인과 성공 판정</a><a class="lv3" href="#131-상태-명령">13.1 상태 명령</a><a class="lv3" href="#132-핵심-필드">13.2 핵심 필드</a><a class="lv3" href="#133-원문에서-성공을-확정할-수-없는-이유">13.3 원문에서 성공을 확정할 수 없는 이유</a><a class="lv3" href="#134-show-master-status의-위치">13.4 SHOW MASTER STATUS의 위치</a><a class="lv3" href="#135-검증-시나리오">13.5 검증 시나리오</a><a class="lv2" href="#14-필기-오류누락혼동-정리">14. 필기 오류·누락·혼동 정리</a><a class="lv3" href="#가장-중요한-세-가지-구분">가장 중요한 세 가지 구분</a><a class="lv4" href="#계정과-방화벽">계정과 방화벽</a><a class="lv4" href="#dump와-binary-log">dump와 binary log</a><a class="lv4" href="#명령-입력과-성공-판정">명령 입력과 성공 판정</a><a class="lv2" href="#15-오류-진단-순서">15. 오류 진단 순서</a><a class="lv3" href="#151-서버-확인">15.1 서버 확인</a><a class="lv3" href="#152-서비스-확인">15.2 서비스 확인</a><a class="lv3" href="#153-구조-확인">15.3 구조 확인</a><a class="lv4" href="#unknown-database">Unknown database</a><a class="lv4" href="#table-doesnt-exist">Table doesn&#x27;t exist</a><a class="lv4" href="#unknown-column">Unknown column</a><a class="lv3" href="#154-문자셋-확인">15.4 문자셋 확인</a><a class="lv3" href="#155-원격-3306-확인">15.5 원격 3306 확인</a><a class="lv3" href="#156-replication-상태-확인">15.6 replication 상태 확인</a><a class="lv4" href="#상태가-빈-결과">상태가 빈 결과</a><a class="lv4" href="#slaveiorunning이-connecting-또는-no">Slave_IO_Running이 Connecting 또는 No</a><a class="lv4" href="#slavesqlrunning이-no">Slave_SQL_Running이 No</a><a class="lv2" href="#16-최종-체크리스트와-공식-자료">16. 최종 체크리스트와 공식 자료</a><a class="lv3" href="#161-sql">16.1 SQL</a><a class="lv3" href="#162-백업">16.2 백업</a><a class="lv3" href="#163-primary">16.3 primary</a><a class="lv3" href="#164-replica">16.4 replica</a><a class="lv3" href="#165-성공-판정">16.5 성공 판정</a><a class="lv3" href="#166-공식-자료">16.6 공식 자료</a><a class="lv4" href="#sql문자셋">SQL·문자셋</a><a class="lv4" href="#백업복원">백업·복원</a><a class="lv4" href="#복제binary-log">복제·binary log</a><a class="lv4" href="#firewalld">firewalld</a><a class="lv3" href="#한-문장-최종-정리">한 문장 최종 정리</a></div><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="" href="ch09.html">09. 중복과 상충 정리</a><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+</aside>
+<main><div class="chapter-no">CHAPTER 07</div><h1>MariaDB 실습 학습 노트</h1><h3 id="sql-기초--문자셋--논리-백업복원--표준-복제">SQL 기초 → 문자셋 → 논리 백업·복원 → 표준 복제</h3>
+<p><strong>작성 기준일:</strong> 2026-08-27<br />
+<strong>기반 자료:</strong> 2026-08-27 오전 수업 필기 260827-정환주.txt<br />
+<strong>실습 환경 기록:</strong> Rocky Linux, MariaDB 10.5.29, firewalld</p>
+<p>이 노트는 원문 필기의 중복을 제거하고 오타·누락·잘못된 성공 판정을 바로잡은 학습용 교재다. 최신 MariaDB와 firewalld 공식 문서를 대조했지만, 실습 명령은 필기에 기록된 MariaDB 10.5.29 환경과 수업에서 사용한 legacy 명령을 기준으로 설명한다.</p>
+<hr />
+<h3 id="목차">목차</h3>
+<ol>
+<li><a href="#1-이번-수업의-전체-구조">이번 수업의 전체 구조</a></li>
+<li><a href="#2-터미널과-mariadb-프롬프트">터미널과 MariaDB 프롬프트</a></li>
+<li><a href="#3-mariadb-서비스와-클라이언트">MariaDB 서비스와 클라이언트</a></li>
+<li><a href="#4-데이터베이스와-테이블">데이터베이스와 테이블</a></li>
+<li><a href="#5-문자셋과-한글-입력-오류">문자셋과 한글 입력 오류</a></li>
+<li><a href="#6-insert와-select">INSERT와 SELECT</a></li>
+<li><a href="#7-조건-검색정렬집계">조건 검색·정렬·집계</a></li>
+<li><a href="#8-백업과-복원">백업과 복원</a></li>
+<li><a href="#9-firewalld와-원격-접속">firewalld와 원격 접속</a></li>
+<li><a href="#10-migration과-replication">migration과 replication</a></li>
+<li><a href="#11-binary-log와-복제-설정값">binary log와 복제 설정값</a></li>
+<li><a href="#12-표준-복제-실습의-올바른-순서">표준 복제 실습의 올바른 순서</a></li>
+<li><a href="#13-복제-상태-확인과-성공-판정">복제 상태 확인과 성공 판정</a></li>
+<li><a href="#14-필기-오류누락혼동-정리">필기 오류·누락·혼동 정리</a></li>
+<li><a href="#15-오류-진단-순서">오류 진단 순서</a></li>
+<li><a href="#16-최종-체크리스트와-공식-자료">최종 체크리스트와 공식 자료</a></li>
+</ol>
+<hr />
+<h2 id="1-이번-수업의-전체-구조">1. 이번 수업의 전체 구조</h2>
+<p>이번 수업은 다음 네 단계가 연결된 내용이다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>배운 내용</th>
+<th>핵심 질문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SQL 기초</td>
+<td>데이터베이스·테이블을 만들고 데이터를 어떻게 다루는가?</td>
+</tr>
+<tr>
+<td>2</td>
+<td>문자셋</td>
+<td>왜 한글 INSERT가 실패했고, 어디를 utf8mb4로 바꿔야 하는가?</td>
+</tr>
+<tr>
+<td>3</td>
+<td>백업·복원</td>
+<td>데이터베이스와 테이블을 SQL 파일로 저장하고 되살리는 방법은 무엇인가?</td>
+</tr>
+<tr>
+<td>4</td>
+<td>표준 복제</td>
+<td>한 서버의 변경을 다른 서버가 어떻게 계속 따라가는가?</td>
+</tr>
+</tbody>
+</table></div>
+<p>학습 흐름은 다음과 같다.</p>
+<ol>
+<li>문자셋을 명시하여 데이터베이스와 테이블을 만든다.</li>
+<li>INSERT로 데이터를 넣고 SELECT·WHERE·ORDER BY·LIMIT로 조회한다.</li>
+<li>COUNT·SUM·AVG·MIN·MAX로 집계한다.</li>
+<li>mariadb-dump로 논리 백업을 만들고 복원한다.</li>
+<li>primary의 binary log를 활성화한다.</li>
+<li>복제 계정과 TCP 3306 통신을 준비한다.</li>
+<li>replica를 초기 데이터로 맞춘다.</li>
+<li>dump 시점에 대응하는 binary log 파일·위치로 연결한다.</li>
+<li>I/O thread와 SQL thread가 모두 실행 중인지 확인한다.</li>
+<li>primary에서만 새 데이터를 생성하고 replica에서 자동 반영을 확인한다.</li>
+</ol>
+<h3 id="원문에서-확인되는-사실">원문에서 확인되는 사실</h3>
+<ul>
+<li>library 데이터베이스와 books 테이블을 만들었다.</li>
+<li>AUTO_INCREAMENT 오타로 첫 CREATE TABLE이 실패했고 AUTO_INCREMENT로 다시 실행하여 성공했다.</li>
+<li>데미안 한글 INSERT가 Incorrect string value로 실패했다.</li>
+<li>영문 책 데이터 세 건은 INSERT되었다.</li>
+<li>데이터베이스 하나, 전체 데이터베이스, 특정 테이블의 dump 파일을 만들었다.</li>
+<li>binary log 관련 설정, 복제 계정, 방화벽 3306, CHANGE MASTER TO, START SLAVE를 실습했다.</li>
+</ul>
+<h3 id="원문만으로-확인할-수-없는-사실">원문만으로 확인할 수 없는 사실</h3>
+<ul>
+<li>SHOW SLAVE STATUS의 실제 출력이 기록되어 있지 않다.</li>
+<li>Slave_IO_Running과 Slave_SQL_Running이 Yes였는지 확인할 수 없다.</li>
+<li>replica에서 나중에 직접 만든 replitest가 복제로 생성되었다고 볼 수 없다.</li>
+<li>MASTER_HOST와 MASTER_LOG_FILE·MASTER_LOG_POS가 기록 구간마다 서로 다르다.</li>
+</ul>
+<p>따라서 “명령을 입력했다”와 “복제가 성공했다”를 반드시 구분해야 한다.</p>
+<hr />
+<h2 id="2-터미널과-mariadb-프롬프트">2. 터미널과 MariaDB 프롬프트</h2>
+<h3 id="21-linux-셸">2.1 Linux 셸</h3>
+<div class="codehilite"><pre><span></span><code>[root@web ~]#
+</code></pre></div>
+
+<p>이 화면에서는 운영체제 명령을 입력한다.</p>
+<div class="codehilite"><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+ls
+ls<span class="w"> </span>-l
+vi<span class="w"> </span>/etc/my.cnf.d/mariadb-server.cnf
+firewall-cmd<span class="w"> </span>--reload
+mysqldump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<p>프롬프트의 첫 root는 Linux 사용자이고 web은 Linux 호스트 이름이다.</p>
+<h3 id="22-mariadb-클라이언트">2.2 MariaDB 클라이언트</h3>
+<div class="codehilite"><pre><span></span><code>MariaDB [(none)]&gt;
+</code></pre></div>
+
+<p>이 화면에서는 SQL을 입력한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<p>none은 아직 현재 데이터베이스를 선택하지 않았다는 의미다.</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [library]&gt;
+</code></pre></div>
+
+<p>USE library를 실행하여 현재 세션의 데이터베이스가 library가 된 상태다.</p>
+<h3 id="23-세미콜론과-화살표-프롬프트">2.3 세미콜론과 화살표 프롬프트</h3>
+<div class="codehilite"><pre><span></span><code>MariaDB [library]&gt; SELECT *
+    -&gt; FROM books
+    -&gt; WHERE available = TRUE
+    -&gt; ;
+</code></pre></div>
+
+<p>화살표가 나오는 것은 SQL 문장이 아직 끝나지 않았다는 뜻이다. 세미콜론 또는 역슬래시 g를 입력하면 실행되고, 잘못 입력했다면 역슬래시 c로 현재 문장을 취소할 수 있다.</p>
+<hr />
+<h2 id="3-mariadb-서비스와-클라이언트">3. MariaDB 서비스와 클라이언트</h2>
+<h3 id="31-역할-구분">3.1 역할 구분</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB 서버 서비스</td>
+<td>데이터 파일을 관리하고 SQL을 실행하며 네트워크 포트를 수신</td>
+</tr>
+<tr>
+<td>MariaDB 클라이언트</td>
+<td>서버에 접속하여 SQL을 전달하고 결과를 표시</td>
+</tr>
+<tr>
+<td>mariadb-dump</td>
+<td>구조와 데이터를 SQL 텍스트로 추출하는 논리 백업 도구</td>
+</tr>
+<tr>
+<td>firewalld</td>
+<td>운영체제 수준에서 네트워크 연결을 허용·차단하는 방화벽</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="32-서비스-명령">3.2 서비스 명령</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">## 현재 한 번 시작</span>
+systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+
+<span class="c1">## 부팅 시 자동 시작 등록</span>
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mariadb
+
+<span class="c1">## 지금 시작하고 부팅 시 자동 시작</span>
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mariadb
+
+<span class="c1">## 상태 확인</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
+systemctl<span class="w"> </span>is-active<span class="w"> </span>mariadb
+
+<span class="c1">## 설정 변경 후 재시작</span>
+systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
+</code></pre></div>
+
+<p>start와 enable은 다른 기능이다. start만 하면 현재 부팅에서 실행되지만 다음 부팅 때 자동 시작된다는 보장은 없다.</p>
+<p>재시작 실패 시:</p>
+<div class="codehilite"><pre><span></span><code>journalctl<span class="w"> </span>-u<span class="w"> </span>mariadb<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--no-pager
+</code></pre></div>
+
+<h3 id="33-접속-명령">3.3 접속 명령</h3>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+
+<p>수업에서 사용한 다음 이름도 Linux에서 호환 이름으로 동작할 수 있다.</p>
+<div class="codehilite"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+
+<p>현재 MariaDB 공식 문서는 mariadb와 mariadb-dump를 중심으로 설명하며, mysql과 mysqldump는 기존 호환 명칭으로 남아 있다.</p>
+<h3 id="34-셸-리다이렉션">3.4 셸 리다이렉션</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기호</th>
+<th>의미</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>명령 출력을 파일로 새로 만들거나 덮어씀</td>
+<td>mariadb-dump ... &gt; backup.sql</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>파일 끝에 출력 추가</td>
+<td>로그 추가</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>파일을 명령의 입력으로 전달</td>
+<td>mariadb ... &lt; backup.sql</td>
+</tr>
+</tbody>
+</table></div>
+<p>리다이렉션은 SQL 문법이 아니라 Linux 셸 문법이다.</p>
+<hr />
+<h2 id="4-데이터베이스와-테이블">4. 데이터베이스와 테이블</h2>
+<h3 id="41-데이터베이스-생성선택">4.1 데이터베이스 생성·선택</h3>
+<p>수업의 기본 명령:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">();</span>
+</code></pre></div>
+
+<p>한글 데이터가 들어갈 데이터베이스는 처음부터 문자셋과 콜레이션을 지정한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<p>이미 존재할 수 있다면 IF NOT EXISTS를 사용한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">library</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<p>데이터베이스의 문자셋은 새 테이블에 물려주는 기본값이다. 이미 만들어진 테이블의 문자셋까지 자동으로 바꾸지는 않는다.</p>
+<h3 id="42-테이블-생성">4.2 테이블 생성</h3>
+<p>수업에서 의도한 구조:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">author</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">published_year</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">available</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p>한글 저장을 명시한 권장 형태:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">author</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">published_year</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">available</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="43-열-정의">4.3 열 정의</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>요소</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>행을 구별할 열</td>
+</tr>
+<tr>
+<td>INT</td>
+<td>정수형</td>
+</tr>
+<tr>
+<td>AUTO_INCREMENT</td>
+<td>새 행의 id를 자동 증가</td>
+</tr>
+<tr>
+<td>PRIMARY KEY</td>
+<td>행을 유일하게 식별하는 키</td>
+</tr>
+<tr>
+<td>VARCHAR(100)</td>
+<td>최대 길이 100의 가변 문자열</td>
+</tr>
+<tr>
+<td>NOT NULL</td>
+<td>반드시 값이 있어야 함</td>
+</tr>
+<tr>
+<td>DEFAULT TRUE</td>
+<td>값을 생략하면 TRUE 사용</td>
+</tr>
+<tr>
+<td>BOOLEAN</td>
+<td>MariaDB에서는 TINYINT(1)의 별칭</td>
+</tr>
+</tbody>
+</table></div>
+<p>AUTO_INCREMENT와 PRIMARY KEY를 함께 쓰면 사용자가 id를 매번 직접 정하지 않아도 되고, 각 행을 유일하게 식별할 수 있다.</p>
+<h3 id="44-첫-번째-오류">4.4 첫 번째 오류</h3>
+<p>잘못된 표현:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREAMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
+</code></pre></div>
+
+<p>올바른 표현:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
+</code></pre></div>
+
+<p>AUTO_INCREAMENT는 존재하지 않는 키워드이므로 데이터 문제가 아니라 SQL 구문 오류가 발생한다.</p>
+<h3 id="45-구조-확인">4.5 구조 확인</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
+<span class="k">DESC</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">DESCRIBE</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<p>DESC는 열의 큰 구조를 보여 주고, SHOW CREATE TABLE은 엔진·문자셋·콜레이션·제약조건까지 확인하기 좋다.</p>
+<p>BOOLEAN이 DESC에서 tinyint(1)로 보이는 것은 정상이다. TRUE는 보통 1, FALSE는 0으로 저장되고 조회된다.</p>
+<hr />
+<h2 id="5-문자셋과-한글-입력-오류">5. 문자셋과 한글 입력 오류</h2>
+<h3 id="51-문자셋과-콜레이션">5.1 문자셋과 콜레이션</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>개념</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>문자셋</td>
+<td>문자를 어떤 바이트 표현으로 저장·전달할지 결정</td>
+</tr>
+<tr>
+<td>콜레이션</td>
+<td>같은 문자셋의 문자열을 비교·정렬하는 규칙</td>
+</tr>
+</tbody>
+</table></div>
+<p>utf8mb4는 유니코드 문자를 최대 4바이트로 저장할 수 있어 한국어와 이모지를 함께 고려할 수 있다. utf8을 막연히 사용하기보다 utf8mb4를 명시하는 것이 안전하다.</p>
+<h3 id="52-문자가-지나가는-층">5.2 문자가 지나가는 층</h3>
+<ol>
+<li>클라이언트: 터미널이 보내는 문자열 인코딩</li>
+<li>연결: 현재 MariaDB 세션이 쿼리를 해석하는 문자셋</li>
+<li>데이터베이스 기본값: 새 객체가 물려받는 기본 문자셋</li>
+<li>테이블·열: 실제 문자열을 저장하는 문자셋</li>
+</ol>
+<p>테이블·열이 latin1이면 연결을 utf8mb4로 바꿔도 한국어 저장은 실패할 수 있다.</p>
+<h3 id="53-한글-insert-오류의-원인">5.3 한글 INSERT 오류의 원인</h3>
+<p>필기의 오류:</p>
+<div class="codehilite"><pre><span></span><code>ERROR 1366 (22007): Incorrect string value: &#39;\xEB\x8D\xB0\xEB\xAF\xB8...&#39; for column library.books.title
+</code></pre></div>
+
+<p>dump의 테이블 정의:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">4</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">latin1</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">latin1_swedish_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<p>이 기록을 보면 UTF-8로 입력된 한글을 latin1 열에 저장하려고 한 것이 주요 원인이다. 연결 문자셋 문제도 함께 확인해야 하지만, 테이블이 latin1인 것은 확실한 문제다.</p>
+<h3 id="54-현재-상태-확인">5.4 현재 상태 확인</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;character_set%&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;collation%&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>특히 다음을 구분한다.</p>
+<ul>
+<li>character_set_client: 클라이언트가 보내는 쿼리</li>
+<li>character_set_connection: 서버가 쿼리를 해석하는 연결</li>
+<li>테이블의 DEFAULT CHARSET: 저장 공간</li>
+</ul>
+<h3 id="55-새로-만드는-경우">5.5 새로 만드는 경우</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">author</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">published_year</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">available</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="56-이미-만든-객체를-수정하는-경우">5.6 이미 만든 객체를 수정하는 경우</h3>
+<p>데이터베이스 기본값:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<p>기존 테이블:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span>
+<span class="w">  </span><span class="k">CONVERT</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+</code></pre></div>
+
+<p>ALTER DATABASE는 앞으로 새로 만드는 객체의 기본값을 바꾸고, ALTER TABLE CONVERT는 기존 테이블 열을 변환한다. 중요한 데이터가 있으면 먼저 백업한다.</p>
+<p>현재 접속 설정:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="k">NAMES</span><span class="w"> </span><span class="n">utf8mb4</span><span class="p">;</span>
+</code></pre></div>
+
+<p>또는:</p>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>--default-character-set<span class="o">=</span>utf8mb4<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+
+<p>SET NAMES는 현재 연결의 client·connection·result 문자셋을 설정한다. latin1 테이블을 자동으로 utf8mb4로 변환하는 명령은 아니다.</p>
+<h3 id="57-dump-안의-set-names를-오해하지-않기">5.7 dump 안의 SET NAMES를 오해하지 않기</h3>
+<p>dump에 다음 문장이 있어도:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="k">NAMES</span><span class="w"> </span><span class="n">utf8mb4</span><span class="p">;</span>
+</code></pre></div>
+
+<p>뒤의 CREATE TABLE이 DEFAULT CHARSET=latin1이면 테이블은 latin1으로 생성될 수 있다. 복원 연결의 문자셋과 테이블 저장 문자셋은 별도로 확인해야 한다.</p>
+<hr />
+<h2 id="6-insert와-select">6. INSERT와 SELECT</h2>
+<h3 id="61-insert">6.1 INSERT</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span>
+<span class="w">    </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">&#39;demian&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;herman&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1919</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">);</span>
+</code></pre></div>
+
+<p>문자열은 작은따옴표, 숫자는 보통 따옴표 없이 입력한다. 열 목록을 명시하면 열 순서 변경이나 새 열 추가에 안전하다.</p>
+<p>수업 데이터:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;demian&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;herman&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1919</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;young prince&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;juiperi&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1943</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;database essential&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gil dong&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="k">FALSE</span><span class="p">);</span>
+</code></pre></div>
+
+<p>여러 행을 한 번에 입력할 수도 있다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;demian&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;herman&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1919</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;young prince&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;juiperi&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1943</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;database essential&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gil dong&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="k">FALSE</span><span class="p">);</span>
+</code></pre></div>
+
+<p>id를 생략했으므로 AUTO_INCREMENT가 1, 2, 3을 자동 생성했다.</p>
+<h3 id="62-select-기본">6.2 SELECT 기본</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="err">열</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">열</span><span class="mi">2</span>
+<span class="k">FROM</span><span class="w"> </span><span class="err">테이블</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="err">조건</span><span class="p">;</span>
+</code></pre></div>
+
+<p>모든 열:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<p>실제 프로그램에서는 필요한 열을 명시하면 결과 구조를 예측하기 쉽다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">available</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="63-수업-결과">6.3 수업 결과</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th>title</th>
+<th>author</th>
+<th style="text-align: right;">published_year</th>
+<th style="text-align: right;">available</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>demian</td>
+<td>herman</td>
+<td style="text-align: right;">1919</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>young prince</td>
+<td>juiperi</td>
+<td style="text-align: right;">1943</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>database essential</td>
+<td>gil dong</td>
+<td style="text-align: right;">2026</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>한글 demian 입력은 실패했으므로 성공한 영문 데이터만 표에 남아 있다.</p>
+<hr />
+<h2 id="7-조건-검색정렬집계">7. 조건 검색·정렬·집계</h2>
+<h3 id="71-where와-비교-연산자">7.1 WHERE와 비교 연산자</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
+</code></pre></div>
+
+<p>결과는 2026년 행 하나다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;gil dong&#39;</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">FALSE</span><span class="p">;</span>
+</code></pre></div>
+
+<p>결과는 database essential 하나다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>연산자</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>같다</td>
+</tr>
+<tr>
+<td>&lt;&gt; 또는 !=</td>
+<td>같지 않다</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>크다</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>크거나 같다</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>작다</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>작거나 같다</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="72-and와-or">7.2 AND와 OR</h3>
+<p>AND는 모든 조건이 참이어야 하고 OR는 하나라도 참이면 된다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;gil dong&#39;</span>
+<span class="w">   </span><span class="k">OR</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="p">;</span>
+</code></pre></div>
+
+<p>이 쿼리는 세 행 모두를 반환한다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">행</th>
+<th style="text-align: right;">저자가 gil dong</th>
+<th style="text-align: right;">available이 TRUE</th>
+<th style="text-align: right;">OR 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">아니오</td>
+<td style="text-align: right;">예</td>
+<td style="text-align: right;">참</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">아니오</td>
+<td style="text-align: right;">예</td>
+<td style="text-align: right;">참</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">예</td>
+<td style="text-align: right;">아니오</td>
+<td style="text-align: right;">참</td>
+</tr>
+</tbody>
+</table></div>
+<p>AND가 OR보다 먼저 평가되는 우선순위에 의존하지 말고 괄호를 명시한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;gil dong&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;herman&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="73-between">7.3 BETWEEN</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">1900</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
+</code></pre></div>
+
+<p>BETWEEN은 양 끝값을 포함한다. 위 조건은 다음과 같은 의미다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">WHERE</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1900</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2000</span>
+</code></pre></div>
+
+<p>결과는 1919와 1943년 행이다.</p>
+<h3 id="74-like">7.4 LIKE</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%data%&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>퍼센트는 0개 이상의 임의 문자열, 밑줄은 정확히 한 문자를 뜻한다. 콜레이션에 따라 대소문자 구분 여부가 달라질 수 있다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;data%&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%essential&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;d_ta&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="75-null">7.5 NULL</h3>
+<p>NULL은 0이나 빈 문자열이 아니라 값이 없거나 알 수 없는 상태다.</p>
+<p>잘못된 비교:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span>
+</code></pre></div>
+
+<p>올바른 비교:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div>
+
+<p>title이 NOT NULL로 정의되어 있으므로 title IS NULL은 빈 결과가 되고, 현재 세 행은 모두 IS NOT NULL이다.</p>
+<h3 id="76-order-by">7.6 ORDER BY</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</code></pre></div>
+
+<p>ASC는 오름차순, DESC는 내림차순이며 ASC가 기본값이다. ORDER BY가 없으면 결과 순서를 보장한다고 가정하지 않는다.</p>
+<h3 id="77-limit">7.7 LIMIT</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+
+<p>정렬 후 첫 행 하나를 가져오므로 가장 최신 연도의 책이 나온다. LIMIT만 쓰면 어떤 행이 선택될지 명확하지 않다.</p>
+<p>오프셋:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">OFFSET</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="78-오타로-인한-오류">7.8 오타로 인한 오류</h3>
+<p>잘못된 열 이름:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">pubished_year</span><span class="w"> </span><span class="k">DESC</span>
+</code></pre></div>
+
+<p>실제 열은 published_year이다.</p>
+<div class="codehilite"><pre><span></span><code>ERROR 1054 (42S22): Unknown column &#39;pubished_year&#39; in &#39;order clause&#39;
+</code></pre></div>
+
+<p>DESC books 또는 SHOW CREATE TABLE books로 실제 식별자를 확인한다.</p>
+<h3 id="79-집계-함수">7.9 집계 함수</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_books</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">published_year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_year</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">published_year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">avg_year</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="n">published_year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">oldest_year</span><span class="p">,</span>
+<span class="w">       </span><span class="k">MAX</span><span class="p">(</span><span class="n">published_year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">newest_year</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<p>수업 결과:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>함수</th>
+<th style="text-align: right;">결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COUNT(*)</td>
+<td style="text-align: right;">3</td>
+<td>행 세 개</td>
+</tr>
+<tr>
+<td>SUM(published_year)</td>
+<td style="text-align: right;">5888</td>
+<td>1919+1943+2026</td>
+</tr>
+<tr>
+<td>AVG(published_year)</td>
+<td style="text-align: right;">1962.6667</td>
+<td>세 연도의 산술평균</td>
+</tr>
+<tr>
+<td>MIN(published_year)</td>
+<td style="text-align: right;">1919</td>
+<td>가장 작은 연도</td>
+</tr>
+<tr>
+<td>MAX(published_year)</td>
+<td style="text-align: right;">2026</td>
+<td>가장 큰 연도</td>
+</tr>
+</tbody>
+</table></div>
+<p>COUNT(*)는 행 전체를 세고 COUNT(author)는 author가 NULL이 아닌 행만 센다. SUM·AVG·MIN·MAX는 일반적으로 NULL을 계산에서 제외한다. 5888은 SQL 계산으로는 맞지만 “책의 총 연도”가 업무상 유용한 지표라는 뜻은 아니다.</p>
+<p>논리적 처리 순서는 대략 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT로 이해하면 된다.</p>
+<hr />
+<h2 id="8-백업과-복원">8. 백업과 복원</h2>
+<h3 id="81-백업과-복제의-차이">8.1 백업과 복제의 차이</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>백업·복원</th>
+<th>복제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>목적</td>
+<td>특정 시점 보관·복구·이전</td>
+<td>변경 사항의 지속 전달</td>
+</tr>
+<tr>
+<td>산출물</td>
+<td>SQL dump 또는 물리 백업</td>
+<td>binary log와 replica 상태</td>
+</tr>
+<tr>
+<td>성격</td>
+<td>일회성</td>
+<td>지속적</td>
+</tr>
+<tr>
+<td>오류 보호</td>
+<td>과거 시점으로 복구 가능</td>
+<td>원본의 실수도 전달될 수 있음</td>
+</tr>
+</tbody>
+</table></div>
+<p>복제는 백업을 대신하지 않는다. 원본에서 잘못 실행한 DELETE가 replica에도 적용될 수 있다.</p>
+<h3 id="82-mariadb-dump">8.2 mariadb-dump</h3>
+<p>현재 공식 명칭:</p>
+<div class="codehilite"><pre><span></span><code>mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<p>수업에서 사용한 호환 명칭:</p>
+<div class="codehilite"><pre><span></span><code>mysqldump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<p>u는 사용자, p는 비밀번호 입력, library는 데이터베이스다.</p>
+<h3 id="83-데이터베이스-하나">8.3 데이터베이스 하나</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+ls<span class="w"> </span>-l<span class="w"> </span>backup.sql
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>backup.sql
+</code></pre></div>
+
+<p>dump는 다음을 포함한다.</p>
+<ul>
+<li>DROP TABLE IF EXISTS</li>
+<li>CREATE TABLE</li>
+<li>INSERT</li>
+<li>SQL 모드와 문자셋 설정</li>
+</ul>
+<p>필기의 backup.sql이 world-readable인 rw-r--r-- 상태였다면 다른 사용자가 읽을 수 있다. 실제 데이터가 들어 있는 dump는 600처럼 제한된 권한으로 보관한다.</p>
+<h3 id="84-전체-데이터베이스">8.4 전체 데이터베이스</h3>
+<div class="codehilite"><pre><span></span><code>mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--all-databases<span class="w"> </span>&gt;<span class="w"> </span>all_backup.sql
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>all_backup.sql
+</code></pre></div>
+
+<p>복원:</p>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>&lt;<span class="w"> </span>all_backup.sql
+</code></pre></div>
+
+<p>전체 백업에는 시스템 데이터베이스와 모든 사용자 데이터가 포함될 수 있으므로 복원 전 대상 상태를 확인한다.</p>
+<h3 id="85-특정-테이블">8.5 특정 테이블</h3>
+<div class="codehilite"><pre><span></span><code>mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>books<span class="w"> </span>&gt;<span class="w"> </span>table_backup.sql
+mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&lt;<span class="w"> </span>table_backup.sql
+</code></pre></div>
+
+<p>첫 번째 library는 데이터베이스, 두 번째 books는 테이블이다. 이 dump는 library 데이터베이스가 이미 존재해야 한다.</p>
+<p>데이터베이스 생성 문장까지 포함하려면:</p>
+<div class="codehilite"><pre><span></span><code>mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--databases<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>library_with_create.sql
+</code></pre></div>
+
+<h3 id="86-수업에서-한-복원의-정확한-의미">8.6 수업에서 한 복원의 정확한 의미</h3>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&lt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<p>이는 library에 접속하여 SQL 파일을 차례로 실행한다는 뜻이다. 같은 서버의 library에서 dump하고 같은 library로 복원했다면 dump·restore 왕복 테스트이지, 다른 서버로의 migration이나 replication 성공 증명은 아니다.</p>
+<h3 id="87-복제용-일관된-dump">8.7 복제용 일관된 dump</h3>
+<p>기존 데이터가 있는 상태에서 replica를 초기화할 때:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--default-character-set<span class="o">=</span>utf8mb4<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--single-transaction<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--master-data<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--databases<span class="w"> </span>library<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>&gt;<span class="w"> </span>/root/library_for_replication.sql
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/root/library_for_replication.sql
+</code></pre></div>
+
+<p>옵션:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default-character-set=utf8mb4</td>
+<td>dump 클라이언트의 문자셋</td>
+</tr>
+<tr>
+<td>single-transaction</td>
+<td>InnoDB 중심에서 일관된 스냅샷을 만들 때 유용</td>
+</tr>
+<tr>
+<td>master-data=2</td>
+<td>dump 시점의 binary log 파일·위치를 주석으로 기록</td>
+</tr>
+<tr>
+<td>databases library</td>
+<td>CREATE DATABASE·USE 문장까지 포함</td>
+</tr>
+</tbody>
+</table></div>
+<p>master-data=2가 중요한 이유는 dump 데이터의 시점과 복제를 시작할 위치를 연결하기 때문이다. dump가 끝난 뒤 나중에 본 현재 위치를 무조건 사용하면 dump와 좌표가 어긋날 수 있다.</p>
+<p>저장 프로시저·이벤트·트리거까지 필요하면 환경에 따라 routines·events·triggers 옵션도 고려한다.</p>
+<hr />
+<h2 id="9-firewalld와-원격-접속">9. firewalld와 원격 접속</h2>
+<h3 id="91-필요한-네-가지">9.1 필요한 네 가지</h3>
+<p>replica가 primary MariaDB에 접속하려면 모두 충족해야 한다.</p>
+<ol>
+<li>primary의 MariaDB 서비스 실행</li>
+<li>primary가 LAN 인터페이스의 TCP 3306 수신</li>
+<li>firewalld가 3306/TCP 허용</li>
+<li>복제 계정의 사용자·Host·비밀번호 일치</li>
+</ol>
+<h3 id="92-수업-명령">9.2 수업 명령</h3>
+<div class="codehilite"><pre><span></span><code>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">=</span><span class="m">3306</span>/tcp
+firewall-cmd<span class="w"> </span>--reload
+firewall-cmd<span class="w"> </span>--list-all
+</code></pre></div>
+
+<p>permanent는 영구 설정을 바꾸고 reload는 그 설정을 현재 런타임에 적용한다. permanent만 입력하고 reload하지 않으면 현재 실행 중인 규칙에 바로 반영되지 않을 수 있다.</p>
+<div class="codehilite"><pre><span></span><code>firewall-cmd<span class="w"> </span>--list-ports
+firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--list-ports
+firewall-cmd<span class="w"> </span>--get-active-zones
+</code></pre></div>
+
+<p>list-all은 zone의 인터페이스·서비스·포트를 함께 보여 준다.</p>
+<h3 id="93-특정-replica만-허용">9.3 특정 replica만 허용</h3>
+<p>실습망에서 전체를 열 수는 있지만, 운영 환경에서는 replica IP만 허용하는 편이 안전하다.</p>
+<div class="codehilite"><pre><span></span><code>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--zone<span class="o">=</span>public<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--add-rich-rule<span class="o">=</span><span class="s1">&#39;rule family=&quot;ipv4&quot; source address=&quot;&lt;REPLICA_IP&gt;/32&quot; port port=&quot;3306&quot; protocol=&quot;tcp&quot; accept&#39;</span>
+firewall-cmd<span class="w"> </span>--reload
+</code></pre></div>
+
+<p>이미 전체 3306을 열었다면:</p>
+<div class="codehilite"><pre><span></span><code>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--zone<span class="o">=</span>public<span class="w"> </span>--remove-port<span class="o">=</span><span class="m">3306</span>/tcp
+firewall-cmd<span class="w"> </span>--reload
+</code></pre></div>
+
+<h3 id="94-실제-수신-여부">9.4 실제 수신 여부</h3>
+<div class="codehilite"><pre><span></span><code>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">3306</span>
+</code></pre></div>
+
+<p>0.0.0.0:3306 또는 primary LAN IP가 보이면 외부 IPv4 수신이 가능하다. 127.0.0.1:3306만 보이면 외부에서 접속할 수 없다.</p>
+<p>MariaDB가 3306을 수신하고 있는지와 firewalld가 허용하는 것은 별개의 문제다.</p>
+<h3 id="95-원격-계정-테스트">9.5 원격 계정 테스트</h3>
+<p>replica에서 복제 전에 직접 접속한다.</p>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-h<span class="w"> </span>&lt;PRIMARY_IP&gt;<span class="w"> </span>-P<span class="w"> </span><span class="m">3306</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-u<span class="w"> </span>repl<span class="w"> </span>-p<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;SELECT 1;&quot;</span>
+</code></pre></div>
+
+<p>이 테스트가 실패한 상태에서 CHANGE MASTER TO만 반복해도 복제는 성공하지 않는다.</p>
+<hr />
+<h2 id="10-migration과-replication">10. migration과 replication</h2>
+<h3 id="101-migration">10.1 migration</h3>
+<p>Migration은 서비스와 데이터를 다른 시스템으로 옮기는 작업이다. 트래픽이 많거나 중단이 어려우면 다음처럼 진행할 수 있다.</p>
+<ol>
+<li>원본의 초기 복사본을 만든다.</li>
+<li>새 서버에 복원한다.</li>
+<li>원본의 이후 변경을 새 서버가 따라가게 한다.</li>
+<li>차이가 작아지면 트래픽을 새 서버로 전환한다.</li>
+</ol>
+<p>2번은 백업·복원이고 3번은 replication이다.</p>
+<h3 id="102-replication">10.2 replication</h3>
+<p>현재 문서 용어:</p>
+<ul>
+<li>primary: 변경을 실행하고 binary log를 기록하는 원본</li>
+<li>replica: binary log를 받아 적용하는 대상</li>
+</ul>
+<p>수업의 master는 primary, slave는 replica에 해당한다. MariaDB 문서에는 legacy 명령과 새 명칭이 함께 존재한다.</p>
+<p>복제 흐름:</p>
+<div class="codehilite"><pre><span></span><code>flowchart LR
+    P[&quot;Primary&lt;br/&gt;변경 실행&quot;] --&gt; B[&quot;Binary log&lt;br/&gt;이벤트 기록&quot;]
+    B --&gt; I[&quot;Replica I/O thread&lt;br/&gt;relay log 기록&quot;]
+    I --&gt; S[&quot;Replica SQL thread&lt;br/&gt;변경 적용&quot;]
+</code></pre></div>
+
+<p>replica는 원본 데이터 파일을 공유하는 것이 아니라, 원본의 변경 이벤트를 받아 자기 서버에서 실행한다.</p>
+<h3 id="103-비동기반동기동기">10.3 비동기·반동기·동기</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방식</th>
+<th>커밋 시 대상 확인</th>
+<th>장점</th>
+<th>대가</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비동기</td>
+<td>기다리지 않음</td>
+<td>지연 작음·구성 단순</td>
+<td>장애 시 전달 전 최근 변경 유실 가능</td>
+</tr>
+<tr>
+<td>반동기</td>
+<td>최소 한 replica의 수신 확인을 기다리는 방식</td>
+<td>유실 위험 감소</td>
+<td>네트워크·replica 상태가 지연에 영향</td>
+</tr>
+<tr>
+<td>동기</td>
+<td>대상 적용까지 더 강하게 맞추는 개념</td>
+<td>일관성 강화</td>
+<td>지연·가용성 비용 증가</td>
+</tr>
+</tbody>
+</table></div>
+<p>이번 실습은 MariaDB 표준 비동기 replication이다. semisync나 Galera 동기 클러스터를 설정한 것이 아니다.</p>
+<h3 id="104-여러-replica와-백업">10.4 여러 replica와 백업</h3>
+<p>하나의 primary에 여러 replica를 둘 수 있지만 표준 replication이 자동으로 쓰기를 분산해 주는 것은 아니다. 또한 replica에도 원본의 DELETE·오류가 전달될 수 있으므로 별도의 시점별 backup이 필요하다.</p>
+<h3 id="105-과거-데이터는-자동-backfill되지-않는다">10.5 과거 데이터는 자동 backfill되지 않는다</h3>
+<p>replica가 시작한 binary log 좌표 이후의 이벤트만 적용된다. primary에 이미 존재하지만 replica에 없는 library를 초기 dump 없이 복제만 시작하면 과거의 CREATE DATABASE와 INSERT가 자동으로 채워지지 않는다.</p>
+<hr />
+<h2 id="11-binary-log와-복제-설정값">11. binary log와 복제 설정값</h2>
+<h3 id="111-binary-log">11.1 binary log</h3>
+<p>binary log는 데이터 파일 복사본이 아니라 데이터·구조 변경 이벤트를 기록하는 로그다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="nb">BINARY</span><span class="w"> </span><span class="n">LOGS</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+</code></pre></div>
+
+<p>SHOW MASTER STATUS는 현재 접속한 서버의 binary log 상태다. replica 설정에 사용할 파일·위치는 반드시 primary에서 확인해야 한다.</p>
+<h3 id="112-primary-설정-파일">11.2 primary 설정 파일</h3>
+<p>수업 파일:</p>
+<div class="codehilite"><pre><span></span><code>vi<span class="w"> </span>/etc/my.cnf.d/mariadb-server.cnf
+</code></pre></div>
+
+<p>예시:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">1</span>
+<span class="na">log_bin</span><span class="o">=</span><span class="s">/var/log/mysql/mysql-bin</span>
+<span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
+<span class="na">sync_binlog</span><span class="o">=</span><span class="s">1</span>
+<span class="na">expire_logs_days</span><span class="o">=</span><span class="s">10</span>
+<span class="na">max_binlog_size</span><span class="o">=</span><span class="s">100M</span>
+</code></pre></div>
+
+<h3 id="113-설정값">11.3 설정값</h3>
+<h4 id="server-id">server-id</h4>
+<p>복제 토폴로지에서 서버를 구별하는 숫자다. primary와 모든 replica가 서로 달라야 한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;server_id&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>필기의 show variable like는 잘못된 표현이며 VARIABLES 복수형을 사용한다.</p>
+<h4 id="logbin">log_bin</h4>
+<p>binary log를 켜고 파일 basename 또는 경로를 지정한다. 위 설정이면 mysql-bin.000001, mysql-bin.000002처럼 번호가 붙을 수 있다.</p>
+<h4 id="expirelogsdays">expire_logs_days</h4>
+<p>binary log 보존 기간을 일 단위로 지정한다. replica가 아직 읽지 않은 로그가 삭제되면 복제가 끊길 수 있으므로 무조건 10일이 안전하다는 뜻은 아니다. 최신 문서에는 binlog_expire_logs_seconds도 있다.</p>
+<h4 id="maxbinlogsize">max_binlog_size</h4>
+<p>binary log 파일 회전의 대략적인 기준이다. 하나의 큰 트랜잭션을 이 값보다 작게 자동 분할하는 한계값은 아니다.</p>
+<h4 id="binlogformat">binlog_format</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>형식</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STATEMENT</td>
+<td>SQL 문장 중심, 비결정적 문장에서 주의</td>
+</tr>
+<tr>
+<td>ROW</td>
+<td>행 변경 중심, 결과 예측이 쉽지만 로그가 커질 수 있음</td>
+</tr>
+<tr>
+<td>MIXED</td>
+<td>상황에 따라 혼합</td>
+</tr>
+</tbody>
+</table></div>
+<p>기본값은 버전과 설정에 따라 다를 수 있으므로 확인한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;binlog_format&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h4 id="syncbinlog">sync_binlog</h4>
+<p>binary log를 디스크에 동기화하는 빈도와 관련된다. 0은 운영체제 flush에 의존하고 1은 커밋마다 디스크 동기화를 강화하는 방향이며, 큰 값은 성능과 내구성을 절충한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;sync_binlog&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="114-binary-log-디렉터리-권한">11.4 binary log 디렉터리 권한</h3>
+<p>필기의 chmod 777:</p>
+<div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>/var/log/mysql
+chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/log/mysql
+</code></pre></div>
+
+<p>동작할 수는 있지만 누구나 읽고 쓸 수 있는 과도한 권한이다. MariaDB 프로세스가 접근하도록 최소 권한을 사용한다.</p>
+<div class="codehilite"><pre><span></span><code>install<span class="w"> </span>-d<span class="w"> </span>-o<span class="w"> </span>mysql<span class="w"> </span>-g<span class="w"> </span>mysql<span class="w"> </span>-m<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/log/mysql
+</code></pre></div>
+
+<p>재시작에 실패하면:</p>
+<div class="codehilite"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
+journalctl<span class="w"> </span>-u<span class="w"> </span>mariadb<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--no-pager
+ls<span class="w"> </span>-ld<span class="w"> </span>/var/log/mysql
+</code></pre></div>
+
+<h3 id="115-replica-설정">11.5 replica 설정</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">2</span>
+</code></pre></div>
+
+<p>선택적으로 직접 쓰기를 줄이기 위해:</p>
+<div class="codehilite"><pre><span></span><code><span class="na">read_only</span><span class="o">=</span><span class="s">ON</span>
+</code></pre></div>
+
+<p>read_only는 관리자와 replication thread까지 모두 막는 절대적인 보안 장치가 아니다. 단일 primary·replica에서 replica 자체가 downstream source가 되지 않는다면 replica의 log_bin은 필수는 아니다. cascading replication에는 필요할 수 있다.</p>
+<hr />
+<h2 id="12-표준-복제-실습의-올바른-순서">12. 표준 복제 실습의 올바른 순서</h2>
+<p>주소와 좌표는 기록을 외워 쓰지 말고 현재 화면에서 확인한다.</p>
+<ul>
+<li>PRIMARY_IP: binary log를 기록하는 원본 IP</li>
+<li>REPLICA_IP: 원본을 따라가는 대상 IP</li>
+<li>REPL_PASSWORD: 복제 계정 비밀번호</li>
+</ul>
+<p>필기에는 192.168.16.131과 192.168.16.21이 모두 MASTER_HOST로 등장한다. 같은 실습에서 둘을 동시에 쓸 수 없으므로 실제 primary에서 다음을 실행하여 하나를 확정한다.</p>
+<div class="codehilite"><pre><span></span><code>hostname
+ip<span class="w"> </span>-br<span class="w"> </span>address
+hostname<span class="w"> </span>-I
+</code></pre></div>
+
+<h3 id="121-primary-준비">12.1 primary 준비</h3>
+<div class="codehilite"><pre><span></span><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mariadb
+install<span class="w"> </span>-d<span class="w"> </span>-o<span class="w"> </span>mysql<span class="w"> </span>-g<span class="w"> </span>mysql<span class="w"> </span>-m<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/log/mysql
+vi<span class="w"> </span>/etc/my.cnf.d/mariadb-server.cnf
+systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
+</code></pre></div>
+
+<p>설정:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">1</span>
+<span class="na">log_bin</span><span class="o">=</span><span class="s">/var/log/mysql/mysql-bin</span>
+<span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
+<span class="na">expire_logs_days</span><span class="o">=</span><span class="s">10</span>
+<span class="na">max_binlog_size</span><span class="o">=</span><span class="s">100M</span>
+</code></pre></div>
+
+<p>확인:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;server_id&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;binlog_format&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+</code></pre></div>
+
+<p>SHOW MASTER STATUS가 비어 있으면 binary log가 켜지지 않았거나 현재 서버가 기대한 primary가 아닐 수 있다.</p>
+<h3 id="122-복제-계정">12.2 복제 계정</h3>
+<p>가능하면 replica IP를 제한한다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;&lt;REPLICA_IP&gt;&#39;</span>
+<span class="w">  </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;REPL_PASSWORD&gt;&#39;</span><span class="p">;</span>
+
+<span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span>
+<span class="w">  </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;&lt;REPLICA_IP&gt;&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>수업 형태:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span>
+<span class="w">  </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;slave_db&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span>
+<span class="w">  </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;slave_password&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>퍼센트는 Host 부분의 와일드카드다. 외부 접속을 자동으로 여는 것은 아니지만, 네트워크와 비밀번호가 허용되면 여러 출발지에서 매칭될 수 있어 운영 환경에는 넓은 권한이다.</p>
+<p>GRANT와 CREATE USER는 즉시 반영되므로 보통 FLUSH PRIVILEGES가 필수는 아니다.</p>
+<h3 id="123-방화벽과-원격-계정-확인">12.3 방화벽과 원격 계정 확인</h3>
+<p>primary:</p>
+<div class="codehilite"><pre><span></span><code>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--zone<span class="o">=</span>public<span class="w"> </span>--add-port<span class="o">=</span><span class="m">3306</span>/tcp
+firewall-cmd<span class="w"> </span>--reload
+ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">3306</span>
+</code></pre></div>
+
+<p>replica:</p>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-h<span class="w"> </span>&lt;PRIMARY_IP&gt;<span class="w"> </span>-P<span class="w"> </span><span class="m">3306</span><span class="w"> </span>-u<span class="w"> </span>repl<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SELECT 1;&quot;</span>
+</code></pre></div>
+
+<p>이 직접 접속이 먼저 성공해야 한다.</p>
+<h3 id="124-방법-a-기존-데이터가-없는-새-변경-테스트">12.4 방법 A: 기존 데이터가 없는 새 변경 테스트</h3>
+<h4 id="primary에서-현재-좌표-확인">primary에서 현재 좌표 확인</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+</code></pre></div>
+
+<p>예시:</p>
+<div class="codehilite"><pre><span></span><code>File: mysql-bin.000001
+Position: 328
+</code></pre></div>
+
+<p>이 숫자는 예시다. 실제 값으로 바꾼다.</p>
+<h4 id="replica-server-id-설정">replica server-id 설정</h4>
+<div class="codehilite"><pre><span></span><code>vi<span class="w"> </span>/etc/my.cnf.d/mariadb-server.cnf
+systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">2</span>
+</code></pre></div>
+
+<p>확인:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;server_id&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h4 id="replica-연결-설정">replica 연결 설정</h4>
+<p>수업 환경에서 사용하는 명령:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span>
+<span class="w">  </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;&lt;PRIMARY_IP&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;repl&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&lt;REPL_PASSWORD&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PORT</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">&#39;mysql-bin.000001&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_POS</span><span class="o">=</span><span class="mi">328</span><span class="p">;</span>
+</code></pre></div>
+
+<p>파일과 위치는 primary에서 확인한 실제 값으로 바꾼다.</p>
+<h4 id="replica-시작">replica 시작</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">START</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span>
+</code></pre></div>
+
+<p>중지·초기화는 별도 명령이다.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">STOP</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span>
+<span class="k">RESET</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ALL</span><span class="p">;</span>
+</code></pre></div>
+
+<p>최신 MariaDB 문서에서는 START REPLICA·STOP REPLICA·SHOW REPLICA STATUS 명칭도 사용한다. 수업 버전에서는 START SLAVE·SHOW SLAVE STATUS를 우선 사용한다.</p>
+<h4 id="primary에서만-새-변경">primary에서만 새 변경</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">repl_test</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+
+<span class="n">USE</span><span class="w"> </span><span class="n">repl_test</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hong&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;lee&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h4 id="replica에서-확인">replica에서 확인</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">repl_test</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+
+<p>replica에서 직접 CREATE DATABASE나 INSERT를 실행하면 복제 검증이 아니다.</p>
+<h3 id="125-방법-b-기존-library-초기-복사">12.5 방법 B: 기존 library 초기 복사</h3>
+<p>primary에 이미 library가 있고 replica에는 없을 때:</p>
+<h4 id="primary에서-dump">primary에서 dump</h4>
+<div class="codehilite"><pre><span></span><code><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--default-character-set<span class="o">=</span>utf8mb4<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--single-transaction<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--master-data<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--databases<span class="w"> </span>library<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>&gt;<span class="w"> </span>/root/library_for_replication.sql
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/root/library_for_replication.sql
+grep<span class="w"> </span>-n<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;CHANGE MASTER&quot;</span><span class="w"> </span>/root/library_for_replication.sql
+</code></pre></div>
+
+<h4 id="replica로-복사복원">replica로 복사·복원</h4>
+<div class="codehilite"><pre><span></span><code>scp<span class="w"> </span>/root/library_for_replication.sql<span class="w"> </span>root@&lt;REPLICA_IP&gt;:/root/
+mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>&lt;<span class="w"> </span>/root/library_for_replication.sql
+</code></pre></div>
+
+<p>실제 작업에서는 복제 연결 상태와 대상 데이터가 실습용인지 먼저 확인한다.</p>
+<h4 id="dump에-기록된-좌표-사용">dump에 기록된 좌표 사용</h4>
+<p>dump 안의 주석 예:</p>
+<div class="codehilite"><pre><span></span><code>-- CHANGE MASTER TO MASTER_LOG_FILE=&#39;mysql-bin.000001&#39;, MASTER_LOG_POS=328;
+</code></pre></div>
+
+<p>필기의 mysql-bin.000002 / 342, mysql-bin.000001 / 328, mysql-bin.000001 / 1105를 서로 섞어 쓰면 안 된다. 같은 snapshot에 대응하는 파일·위치 쌍을 사용한다.</p>
+<h4 id="replica에서-연결">replica에서 연결</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span>
+<span class="w">  </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;&lt;PRIMARY_IP&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;repl&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&lt;REPL_PASSWORD&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PORT</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">&#39;&lt;FILE_FROM_DUMP&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_POS</span><span class="o">=&lt;</span><span class="n">POSITION_FROM_DUMP</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">START</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="13-복제-상태-확인과-성공-판정">13. 복제 상태 확인과 성공 판정</h2>
+<h3 id="131-상태-명령">13.1 상태 명령</h3>
+<p>replica에서:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+</code></pre></div>
+
+<p>가로 출력이 길면:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<p>최신 문서 명칭:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">REPLICA</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<h3 id="132-핵심-필드">13.2 핵심 필드</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>정상 기대값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master_Host</td>
+<td>실제 primary IP</td>
+<td>연결 대상</td>
+</tr>
+<tr>
+<td>Master_Port</td>
+<td>3306</td>
+<td>TCP 포트</td>
+</tr>
+<tr>
+<td>Slave_IO_Running</td>
+<td>Yes</td>
+<td>primary binary log를 읽는 thread 실행</td>
+</tr>
+<tr>
+<td>Slave_SQL_Running</td>
+<td>Yes</td>
+<td>relay log를 적용하는 thread 실행</td>
+</tr>
+<tr>
+<td>Last_IO_Error</td>
+<td>비어 있음</td>
+<td>I/O 연결 오류 없음</td>
+</tr>
+<tr>
+<td>Last_SQL_Error</td>
+<td>비어 있음</td>
+<td>SQL 적용 오류 없음</td>
+</tr>
+<tr>
+<td>Seconds_Behind_Master</td>
+<td>0 또는 작은 값</td>
+<td>지연 추정치</td>
+</tr>
+</tbody>
+</table></div>
+<p>Seconds_Behind_Master만 0이라고 성공을 확정하지 않는다. 두 thread가 모두 Yes이고 오류가 없으며 primary에서만 만든 테스트 행이 replica에 있어야 한다.</p>
+<h3 id="133-원문에서-성공을-확정할-수-없는-이유">13.3 원문에서 성공을 확정할 수 없는 이유</h3>
+<p>원문에는 SHOW SLAVE STATUS 명령은 있지만 결과 필드가 없다. replica에서 information_schema·mysql·performance_schema만 보였고, 이후 replitest를 대상 서버에서 직접 CREATE DATABASE했다. 이 기록만으로는 replication 성공의 증거가 없다.</p>
+<h3 id="134-show-master-status의-위치">13.4 SHOW MASTER STATUS의 위치</h3>
+<p>현재 서버의 상태를 보여 준다.</p>
+<ul>
+<li>primary에서 실행: replica가 읽어야 할 source 좌표</li>
+<li>replica에서 실행: replica 자신의 binary log 좌표일 수 있음</li>
+</ul>
+<p>replica에서 나온 좌표를 primary 좌표로 착각하지 않는다.</p>
+<h3 id="135-검증-시나리오">13.5 검증 시나리오</h3>
+<p>primary에서만:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">repl_verify</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+
+<span class="n">USE</span><span class="w"> </span><span class="n">repl_verify</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hong&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;lee&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>replica에서:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">repl_verify</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+
+<p>기대 행:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>hong</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>lee</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="14-필기-오류누락혼동-정리">14. 필기 오류·누락·혼동 정리</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필기 기록</th>
+<th>정확한 해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUTO_INCREAMENT</td>
+<td>AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td>Incorrect string value</td>
+<td>테이블 dump가 latin1이므로 utf8mb4 저장이 필요. 연결 문자셋도 확인</td>
+</tr>
+<tr>
+<td>show variable like server_id</td>
+<td>SHOW VARIABLES LIKE 'server_id'</td>
+</tr>
+<tr>
+<td>pubished_year</td>
+<td>published_year</td>
+</tr>
+<tr>
+<td>MASTER_HOST 192.168.16.131와 192.168.16.21</td>
+<td>실제 primary IP를 확인하여 하나만 사용</td>
+</tr>
+<tr>
+<td>binlog 000002/342와 000001/328</td>
+<td>같은 snapshot의 파일·위치 쌍만 사용</td>
+</tr>
+<tr>
+<td>000001/1105</td>
+<td>다른 시점의 좌표일 수 있으므로 앞 dump와 임의로 조합하지 않음</td>
+</tr>
+<tr>
+<td>slave_db@%</td>
+<td>Host 와일드카드. 실습 외에는 replica IP 제한</td>
+</tr>
+<tr>
+<td>FLUSH PRIVILEGES 필수</td>
+<td>GRANT·CREATE USER 후 일반적으로 필수 아님</td>
+</tr>
+<tr>
+<td>chmod 777</td>
+<td>동작은 가능하나 과도한 권한. mysql 소유와 최소 권한 사용</td>
+</tr>
+<tr>
+<td>replica에서 SHOW MASTER STATUS</td>
+<td>자기 binary log일 수 있음. 연결 좌표는 primary에서 가져옴</td>
+</tr>
+<tr>
+<td>replica에 library가 없음</td>
+<td>초기 dump 복원이 빠졌거나 과거 데이터가 자동 backfill되지 않은 상태 가능</td>
+</tr>
+<tr>
+<td>replica에서 replitest 생성</td>
+<td>직접 생성한 것이므로 복제 검증이 아님</td>
+</tr>
+<tr>
+<td>start(stop/reset) slave</td>
+<td>START, STOP, RESET은 각각 다른 명령</td>
+</tr>
+<tr>
+<td>dump 후 같은 DB로 restore</td>
+<td>왕복 테스트이지 migration·replication 성공 증명 아님</td>
+</tr>
+<tr>
+<td>dump의 SET NAMES utf8mb4</td>
+<td>연결 문자셋이지 테이블 latin1을 자동 변경하지 않음</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="가장-중요한-세-가지-구분">가장 중요한 세 가지 구분</h3>
+<h4 id="계정과-방화벽">계정과 방화벽</h4>
+<p>slave_db@%는 MariaDB 내부 계정의 Host 조건이고 3306 허용은 운영체제 방화벽 규칙이다. 둘은 서로 다른 층이며 둘 다 맞아야 한다.</p>
+<h4 id="dump와-binary-log">dump와 binary log</h4>
+<p>dump는 특정 시점의 구조·데이터이고 binary log는 그 이후의 변경 이벤트다. 초기 dump와 그 시점의 좌표가 연결되어야 replica가 빠진 변경 없이 이어진다.</p>
+<h4 id="명령-입력과-성공-판정">명령 입력과 성공 판정</h4>
+<p>CHANGE MASTER TO와 START SLAVE를 입력한 것만으로 성공이 아니다. status에서 I/O·SQL thread와 오류 필드를 확인하고 primary에서만 만든 행을 replica에서 확인해야 한다.</p>
+<hr />
+<h2 id="15-오류-진단-순서">15. 오류 진단 순서</h2>
+<p>문제 발생 시 SQL 문법 → 데이터 구조 → 문자셋 → 서비스·포트 → 계정 → replication 상태 순서로 확인한다.</p>
+<h3 id="151-서버-확인">15.1 서버 확인</h3>
+<div class="codehilite"><pre><span></span><code>hostname
+ip<span class="w"> </span>-br<span class="w"> </span>address
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">@@</span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="o">@@</span><span class="n">server_id</span><span class="p">,</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="152-서비스-확인">15.2 서비스 확인</h3>
+<div class="codehilite"><pre><span></span><code>systemctl<span class="w"> </span>is-active<span class="w"> </span>mariadb
+systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
+journalctl<span class="w"> </span>-u<span class="w"> </span>mariadb<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--no-pager
+</code></pre></div>
+
+<h3 id="153-구조-확인">15.3 구조 확인</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
+<span class="k">DESC</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<h4 id="unknown-database">Unknown database</h4>
+<p>DB가 없는데 USE를 먼저 실행한 경우:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">replitest</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">replitest</span><span class="p">;</span>
+</code></pre></div>
+
+<p>단, replica 검증 중에는 primary에서 먼저 생성했는지 확인한다.</p>
+<h4 id="table-doesnt-exist">Table doesn't exist</h4>
+<p>데이터베이스만 만들고 테이블을 만들지 않은 경우:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h4 id="unknown-column">Unknown column</h4>
+<p>DESC로 실제 열 이름을 확인한다. pubished_year는 오타다.</p>
+<h3 id="154-문자셋-확인">15.4 문자셋 확인</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;character_set%&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+</code></pre></div>
+
+<p>테이블을 utf8mb4로 변환하고 새 세션에서 SET NAMES 또는 default-character-set 옵션을 적용한다.</p>
+<h3 id="155-원격-3306-확인">15.5 원격 3306 확인</h3>
+<p>primary:</p>
+<div class="codehilite"><pre><span></span><code>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">3306</span>
+firewall-cmd<span class="w"> </span>--get-active-zones
+firewall-cmd<span class="w"> </span>--list-all
+</code></pre></div>
+
+<p>replica:</p>
+<div class="codehilite"><pre><span></span><code>mariadb<span class="w"> </span>-h<span class="w"> </span>&lt;PRIMARY_IP&gt;<span class="w"> </span>-P<span class="w"> </span><span class="m">3306</span><span class="w"> </span>-u<span class="w"> </span>repl<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SELECT 1;&quot;</span>
+</code></pre></div>
+
+<h3 id="156-replication-상태-확인">15.6 replication 상태 확인</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<h4 id="상태가-빈-결과">상태가 빈 결과</h4>
+<ul>
+<li>CHANGE MASTER TO가 실행되지 않음</li>
+<li>다른 connection을 확인함</li>
+<li>RESET SLAVE ALL로 연결 정보가 지워짐</li>
+<li>현재 서버가 replica가 아님</li>
+</ul>
+<h4 id="slaveiorunning이-connecting-또는-no">Slave_IO_Running이 Connecting 또는 No</h4>
+<p>Last_IO_Error를 본다.</p>
+<ul>
+<li>Access denied: 사용자·비밀번호·Host 권한</li>
+<li>Can't connect: IP·포트·firewalld·bind-address·서비스</li>
+<li>Could not find first log file: primary 로그가 삭제되었거나 좌표가 잘못됨</li>
+</ul>
+<h4 id="slavesqlrunning이-no">Slave_SQL_Running이 No</h4>
+<p>Last_SQL_Error를 본다. 초기 dump와 replica 데이터가 불일치하거나 좌표가 잘못되었거나 replica에 직접 데이터를 만들어 중복이 생긴 경우가 많다. 원인 확인 없이 SQL_SLAVE_SKIP_COUNTER로 건너뛰면 데이터가 더 불일치할 수 있다.</p>
+<p>재설정이 필요할 때:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">STOP</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span>
+<span class="k">RESET</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ALL</span><span class="p">;</span>
+</code></pre></div>
+
+<p>RESET SLAVE ALL은 relay log와 복제 메타데이터를 초기화한다. primary의 데이터베이스를 지우는 명령은 아니지만 replica의 진행 상태를 잃으므로 실습용 대상인지 확인한다.</p>
+<hr />
+<h2 id="16-최종-체크리스트와-공식-자료">16. 최종 체크리스트와 공식 자료</h2>
+<h3 id="161-sql">16.1 SQL</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">library</span>
+<span class="w">  </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">author</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">published_year</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">available</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
+<span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="n">published_year</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;데미안&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;헤르만 헤세&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1919</span><span class="p">,</span><span class="w"> </span><span class="k">TRUE</span><span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">1900</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%data%&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">published_year</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="162-백업">16.2 백업</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>backup.sql
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--all-databases<span class="w"> </span>&gt;<span class="w"> </span>all_backup.sql
+mariadb-dump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>books<span class="w"> </span>&gt;<span class="w"> </span>table_backup.sql
+mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>library<span class="w"> </span>&lt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<h3 id="163-primary">16.3 primary</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">1</span>
+<span class="na">log_bin</span><span class="o">=</span><span class="s">/var/log/mysql/mysql-bin</span>
+<span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
+<span class="na">expire_logs_days</span><span class="o">=</span><span class="s">10</span>
+<span class="na">max_binlog_size</span><span class="o">=</span><span class="s">100M</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;server_id&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="n">STATUS</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;&lt;REPLICA_IP&gt;&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;REPL_PASSWORD&gt;&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;&lt;REPLICA_IP&gt;&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="164-replica">16.4 replica</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">server-id</span><span class="o">=</span><span class="s">2</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span>
+<span class="w">  </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;&lt;PRIMARY_IP&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;repl&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&lt;REPL_PASSWORD&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_PORT</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">&#39;&lt;FILE_FROM_PRIMARY_OR_DUMP&gt;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MASTER_LOG_POS</span><span class="o">=&lt;</span><span class="n">POSITION_FROM_PRIMARY_OR_DUMP</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">START</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<h3 id="165-성공-판정">16.5 성공 판정</h3>
+<ul>
+<li>Master_Host가 실제 primary IP다.</li>
+<li>Slave_IO_Running이 Yes다.</li>
+<li>Slave_SQL_Running이 Yes다.</li>
+<li>Last_IO_Error와 Last_SQL_Error가 비어 있다.</li>
+<li>primary에서만 만든 DB·테이블·행이 replica에서 조회된다.</li>
+</ul>
+<h3 id="166-공식-자료">16.6 공식 자료</h3>
+<p>최신 공식 문서는 2026-08-27에 확인했다. 문서의 최신 용어와 MariaDB 10.5.29의 legacy 명령을 함께 비교한다.</p>
+<h4 id="sql문자셋">SQL·문자셋</h4>
+<ul>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/data-definition/create/create-database">CREATE DATABASE</a></li>
+<li><a href="https://mariadb.com/docs/server/server-usage/tables/create-table">CREATE TABLE</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/data-types/string-data-types/character-sets/setting-character-sets-and-collations">Setting Character Sets and Collations</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/set-commands/set-names">SET NAMES</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/data-types/numeric-data-types/boolean">BOOLEAN</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-functions/string-functions/like">LIKE</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and">BETWEEN AND</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/is-null">IS NULL</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-structure/operators/operator-precedence">Operator Precedence</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/select">SELECT</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/order-by">ORDER BY</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/limit">LIMIT</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-functions/aggregate-functions">Aggregate Functions</a></li>
+</ul>
+<h4 id="백업복원">백업·복원</h4>
+<ul>
+<li><a href="https://mariadb.com/docs/server/clients-and-utilities/backup-restore-and-import-clients/mariadb-dump">mariadb-dump</a></li>
+<li><a href="https://mariadb.com/docs/server/mariadb-quickstart-guides/mariadb-backup-guide">Making Backups with mariadb-dump</a></li>
+<li><a href="https://mariadb.com/docs/server/mariadb-quickstart-guides/mariadb-restore-guide">Restoring Data from Dump Files</a></li>
+<li><a href="https://mariadb.com/docs/server/server-usage/backup-and-restore/backup-and-restore-overview">Backup and Restore Overview</a></li>
+<li><a href="https://mariadb.com/docs/server/server-usage/backup-and-restore/mariadb-backup/full-backup-and-restore-with-mariadb-backup">Full Backup and Restore with mariadb-backup</a></li>
+</ul>
+<h4 id="복제binary-log">복제·binary log</h4>
+<ul>
+<li><a href="https://mariadb.com/docs/server/ha-and-performance/standard-replication">Replication</a></li>
+<li><a href="https://mariadb.com/docs/server/ha-and-performance/standard-replication/setting-up-replication">Setting Up Replication</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/replication-statements/change-master-to">CHANGE MASTER TO</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/replication-statements/start-replica">START REPLICA</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-replica-status">SHOW REPLICA STATUS</a></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/replication-statements/legacy-replication-statements">Legacy Replication Statements</a></li>
+<li><a href="https://mariadb.com/docs/server/ha-and-performance/standard-replication/replication-and-binary-log-system-variables">Replication and Binary Log System Variables</a></li>
+<li><a href="https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/activating-the-binary-log">Activating the Binary Log</a></li>
+<li><a href="https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/binary-log-formats">Binary Log Formats</a></li>
+<li><a href="https://mariadb.com/docs/server/ha-and-performance/standard-replication/semisynchronous-replication">Semisynchronous Replication</a></li>
+<li><a href="https://mariadb.com/docs/server/ha-and-performance/standard-replication/gtid">Global Transaction ID</a></li>
+</ul>
+<h4 id="firewalld">firewalld</h4>
+<ul>
+<li><a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a></li>
+<li><a href="https://firewalld.org/documentation/man-pages/firewall-cmd.html">firewall-cmd Manual Page</a></li>
+<li><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/using-and-configuring-firewalld_firewall-packet-filters">Using and Configuring firewalld on RHEL 9</a></li>
+</ul>
+<hr />
+<h3 id="한-문장-최종-정리">한 문장 최종 정리</h3>
+<p>utf8mb4로 올바른 테이블을 만들고 SQL로 데이터를 다룬 뒤, 일관된 dump로 replica를 초기화하고, primary의 binary log 좌표를 사용해 CHANGE MASTER TO를 구성하여 I/O thread·SQL thread와 실제 데이터 반영을 모두 확인하는 것이 이번 수업의 핵심이다.</p><div class="nav"><a href="ch06.html"><span class="lbl">이전</span>2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><a href="ch08.html"><span class="lbl">다음</span>2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a></div></main>
+</div>
+<a id="top" href="#">▲ 맨 위</a>
+<script>
+const q=document.getElementById('q');
+if(q){
+  const links=[...document.querySelectorAll('aside a')];
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();
+    links.forEach(a=>{a.style.display = !v || a.textContent.toLowerCase().includes(v) ? '' : 'none';});
+    document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
+  });
+}
+const inchap=[...document.querySelectorAll('aside .inchap a')];
+if(inchap.length){
+  const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(!e.isIntersecting) return;
+      inchap.forEach(a=>a.classList.remove('on'));
+      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
+    });
+  },{rootMargin:'0px 0px -80% 0px'});
+  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+}
+</script>
+</body></html>

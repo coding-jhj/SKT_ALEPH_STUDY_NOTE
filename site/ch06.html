@@ -1,0 +1,2947 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정 · SKT ALEPH 학습 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
+  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
+    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+}
+.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+aside{
+  position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
+}
+aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
+aside .brand a{color:inherit; text-decoration:none}
+aside .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+#q{width:100%; padding:7px 9px; font:inherit; margin-bottom:12px;
+   border:1px solid var(--rule); border-radius:6px; background:var(--paper); color:var(--ink)}
+aside a{display:block; color:inherit; text-decoration:none; padding:3px 6px; border-radius:5px}
+aside a:hover{background:var(--accent-soft)}
+aside a.cur{background:var(--accent-soft); color:var(--accent); font-weight:700}
+aside a.on{color:var(--accent); font-weight:700}
+aside .part{margin:16px 0 6px; font-size:10px; letter-spacing:.16em; color:var(--muted); font-weight:700}
+aside .lv3{padding-left:16px; color:var(--muted)}
+aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
+aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
+
+main{padding:40px 40px 120px; max-width:860px}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h1{font-size:30px; margin:0 0 8px}
+h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
+h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
+h4{font-size:15px; margin:22px 0 6px}
+.chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin:3px 0}
+a{color:var(--accent)}
+blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+blockquote p:last-child{margin:0}
+hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+mark{background:var(--mark); color:inherit}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
+pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+pre code{background:none; padding:0; font-size:inherit}
+.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
+.codehilite pre{border:0; margin:0; background:none}
+.tablewrap{overflow-x:auto; margin:0 0 18px}
+table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+.admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
+.admonition-title{font-weight:700; margin:0 0 6px !important}
+.nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
+     font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px}
+.nav a{display:block; max-width:46%; text-decoration:none; padding:10px 14px; border:1px solid var(--rule); border-radius:8px}
+.nav a:hover{background:var(--accent-soft)}
+.nav .lbl{display:block; color:var(--muted); font-size:11px; letter-spacing:.1em}
+.cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
+.cover h1{font-size:34px; margin:0 0 6px}
+.cover p{margin:0; color:var(--muted)}
+.toclist{list-style:none; padding:0; margin:0}
+.toclist li{margin:0 0 6px}
+.toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
+               font-family:ui-sans-serif,system-ui,sans-serif}
+.toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
+.toclist a:hover{background:var(--accent-soft)}
+.toclist .t{display:block; font-weight:700; margin-bottom:2px}
+.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+#top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
+     background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
+     font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
+  main{padding:26px 18px 90px}
+}
+@media print{
+  aside,#top,.nav{display:none}
+  .layout{display:block}
+  main{max-width:none; padding:0}
+  pre,table,.admonition{break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
+  <div class="sub">IT 인프라 · 보안 과정</div>
+  <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="cur" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="inchap"><a class="lv3" href="#0-오늘의-큰-그림">0. 오늘의 큰 그림</a><a class="lv4" href="#오늘-반복해서-나온-공통-패턴-3가지">오늘 반복해서 나온 공통 패턴 3가지</a><a class="lv3" href="#1-free--메모리-현황-읽기">1. free — 메모리 현황 읽기</a><a class="lv4" href="#1-1-실습-출력">1-1. 실습 출력</a><a class="lv4" href="#1-2-열별-정확한-정의-man-1-free-기준">1-2. 열별 정확한 정의 (man 1 free 기준)</a><a class="lv3" href="#free가-94-mb인데-왜-메모리-부족이-아닌가">⚠️ free가 94 MB인데 왜 &quot;메모리 부족&quot;이 아닌가</a><a class="lv4" href="#1-3-실제-숫자-검산">1-3. 실제 숫자 검산</a><a class="lv4" href="#1-4-free--g가-쓸모없었던-이유-메모-수정-포인트">1-4. free -g가 쓸모없었던 이유 (메모 수정 포인트 ①)</a><a class="lv3" href="#2-sysctl--커널-파라미터-확인과-변경">2. sysctl — 커널 파라미터 확인과 변경</a><a class="lv4" href="#2-1-인자-없이-실행하면-사용법이-나온다">2-1. 인자 없이 실행하면 사용법이 나온다</a><a class="lv4" href="#2-2-sysctl의-정체--procsys의-얇은-껍데기">2-2. sysctl의 정체 — /proc/sys의 얇은 껍데기</a><a class="lv4" href="#2-3-주요-옵션-man-8-sysctl-기준">2-3. 주요 옵션 (man 8 sysctl 기준)</a><a class="lv4" href="#2-4-sysctl--a-출력을-분류해서-읽기">2-4. sysctl -a 출력을 분류해서 읽기</a><a class="lv4" href="#2-5-vm--오늘의-주인공">2-5. vm.* — 오늘의 주인공</a><a class="lv4" href="#2-6-vmswappiness-실습--변경과-그-수명">2-6. vm.swappiness 실습 — 변경과 그 수명</a><a class="lv3" href="#3-proc--커널이-노출하는-가상-파일시스템">3. /proc — 커널이 노출하는 가상 파일시스템</a><a class="lv4" href="#3-1-procmeminfo-완전-해부">3-1. /proc/meminfo 완전 해부</a><a class="lv3" href="#swappiness가-조절하는-것이-바로-이-두-축이다">swappiness가 조절하는 것이 바로 이 두 축이다</a><a class="lv4" href="#3-2-필요한-한-줄만-뽑기">3-2. 필요한 한 줄만 뽑기</a><a class="lv4" href="#3-3-procversion--커널-신원-확인">3-3. /proc/version — 커널 신원 확인</a><a class="lv4" href="#3-4-proccpuinfo--cpu-신원과-취약점-목록">3-4. /proc/cpuinfo — CPU 신원과 취약점 목록</a><a class="lv4" href="#3-5-df--디스크-사용량-그리고-이-서버의-실제-위험">3-5. df — 디스크 사용량, 그리고 이 서버의 실제 위험</a><a class="lv3" href="#96일-때의-대응-순서">/ 96%일 때의 대응 순서</a><a class="lv3" href="#4-mariadb-계정-관리--사용자는-이름이-아니라-이름호스트다">4. MariaDB 계정 관리 — 사용자는 &quot;이름&quot;이 아니라 &quot;이름@호스트&quot;다</a><a class="lv4" href="#4-1-접속과-서버-버전">4-1. 접속과 서버 버전</a><a class="lv4" href="#4-2-계정-생성--같은-이름-세-개의-다른-계정">4-2. 계정 생성 — 같은 이름, 세 개의 다른 계정</a><a class="lv3" href="#호스트를-생략하면-가-붙는다--오늘-실습의-핵심">호스트를 생략하면 &#x27;%&#x27;가 붙는다 — 오늘 실습의 핵심</a><a class="lv4" href="#4-3-mysql-데이터베이스--권한-정보가-사는-곳">4-3. mysql 데이터베이스 — 권한 정보가 사는 곳</a><a class="lv4" href="#4-4-계정-목록-조회">4-4. 계정 목록 조회</a><a class="lv4" href="#4-5--drop-user-test가-지운-것은-testlocalhost가-아니었다-메모-수정-포인트">4-5. ★ DROP USER test가 지운 것은 test@localhost가 아니었다 (메모 수정 포인트 ⑥)</a><a class="lv3" href="#실무-규칙-계정-조작에는-항상-호스트를-명시한다">실무 규칙: 계정 조작에는 항상 호스트를 명시한다</a><a class="lv4" href="#4-6-메모-보강-접속-시-어떤-계정-행이-선택되는가--정렬-규칙">4-6. (메모 보강) 접속 시 어떤 계정 행이 선택되는가 — 정렬 규칙</a><a class="lv3" href="#5-mariadb-권한-관리--grant--revoke--show-grants">5. MariaDB 권한 관리 — GRANT / REVOKE / SHOW GRANTS</a><a class="lv4" href="#5-1-권한-부여">5-1. 권한 부여</a><a class="lv4" href="#5-2-show-grants-출력-해부">5-2. SHOW GRANTS 출력 해부</a><a class="lv3" href="#grant-usage-on-가-항상-첫-줄에-나오는-이유">GRANT USAGE ON *.*가 항상 첫 줄에 나오는 이유</a><a class="lv4" href="#5-3-revoke--권한만-뺀다-계정은-남는다-메모-보강-포인트">5-3. REVOKE — 권한만 뺀다, 계정은 남는다 (메모 보강 포인트 ⑦)</a><a class="lv4" href="#5-4-오늘-만든-계정의-보안-문제-정리">5-4. 오늘 만든 계정의 보안 문제 정리</a><a class="lv3" href="#6-뷰view-실습에서-난-에러--error-1146">6. 뷰(VIEW) 실습에서 난 에러 — ERROR 1146</a><a class="lv4" href="#6-1-에러-메시지가-이미-원인을-말하고-있다">6-1. 에러 메시지가 이미 원인을 말하고 있다</a><a class="lv4" href="#6-2-세-가지가-동시에-틀렸다-메모-수정-포인트">6-2. 세 가지가 동시에 틀렸다 (메모 수정 포인트 ⑧)</a><a class="lv4" href="#6-3-drop-view-if-exists의-1-warning">6-3. DROP VIEW IF EXISTS의 &quot;1 warning&quot;</a><a class="lv3" href="#7-kali-linux-초기-설정">7. Kali Linux 초기 설정</a><a class="lv4" href="#7-1-프롬프트-색으로-계정-구분하기-메모-수정-포인트">7-1. 프롬프트 색으로 계정 구분하기 (메모 수정 포인트 ⑨)</a><a class="lv4" href="#7-2-ip-수동-설정-전-중복-확인-메모-보강-포인트">7-2. IP 수동 설정 전 중복 확인 (메모 보강 포인트 ⑩)</a><a class="lv4" href="#7-3-네트워크-인터페이스-확인">7-3. 네트워크 인터페이스 확인</a><a class="lv4" href="#7-4-패키지-갱신-순서-메모-수정-포인트">7-4. 패키지 갱신 순서 (메모 수정 포인트 ⑪)</a><a class="lv4" href="#7-5--apt-lock-문제--원인과-올바른-해결-메모-수정-포인트">7-5. ★ apt lock 문제 — 원인과 올바른 해결 (메모 수정 포인트 ⑫)</a><a class="lv3" href="#dpkg-동작-중에-잠금-파일을-지우면-패키지-db가-깨진다">⚠️ dpkg 동작 중에 잠금 파일을 지우면 패키지 DB가 깨진다</a><a class="lv4" href="#7-6-chrome-설치-메모-수정-포인트">7-6. Chrome 설치 (메모 수정 포인트 ⑬)</a><a class="lv4" href="#7-7-한글-입력과-폰트-메모-수정-포인트">7-7. 한글 입력과 폰트 (메모 수정 포인트 ⑭)</a><a class="lv3" href="#fcitx4버전는-debian에서-제거되었습니다">⚠️ fcitx(4버전)는 Debian에서 제거되었습니다</a><a class="lv4" href="#7-8-ping--출력-완전-해석">7-8. ping — 출력 완전 해석</a><a class="lv3" href="#ttl108로-홉-수-추정하기">ttl=108로 홉 수 추정하기</a><a class="lv3" href="#ping이-안-될-때-원인을-좁히는-순서">ping이 안 될 때 원인을 좁히는 순서</a><a class="lv3" href="#8-전체-실습-명령-시트">8. 전체 실습 명령 시트</a><a class="lv4" href="#8-1-메모리커널시스템-정보">8-1. 메모리·커널·시스템 정보</a><a class="lv4" href="#8-2-mariadb-계정권한">8-2. MariaDB 계정·권한</a><a class="lv4" href="#8-3-kali-초기-설정">8-3. Kali 초기 설정</a><a class="lv4" href="#8-4-장애-진단-순서-요약">8-4. 장애 진단 순서 요약</a><a class="lv4" href="#8-5-오늘-만난-에러-번호">8-5. 오늘 만난 에러 번호</a><a class="lv3" href="#9-메모-수정보강-총정리">9. 메모 수정·보강 총정리</a><a class="lv3" href="#10-출처">10. 출처</a><a class="lv4" href="#리눅스-커널--메모리--시스템">리눅스 커널 · 메모리 · 시스템</a><a class="lv4" href="#mariadb">MariaDB</a><a class="lv4" href="#debian--kali--apt">Debian / Kali / apt</a><a class="lv4" href="#검증하지-못한-항목-추측으로-채우지-않음">검증하지 못한 항목 (추측으로 채우지 않음)</a></div><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="" href="ch09.html">09. 중복과 상충 정리</a><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+</aside>
+<main><div class="chapter-no">CHAPTER 06</div><h1>2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</h1><blockquote>
+<p><strong>실습 환경</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+<th>근거 (실습 출력)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>서버 호스트명</td>
+<td><code>userver</code></td>
+<td><code>kernel.hostname = userver</code></td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Ubuntu 24.04 LTS</td>
+<td><code>Ubuntu 13.3.0-6ubuntu2~24.04.1</code>, <code>#138-Ubuntu</code></td>
+</tr>
+<tr>
+<td>커널</td>
+<td><code>6.8.0-138-generic</code> (x86_64)</td>
+<td><code>kernel.osrelease</code>, <code>/proc/version</code></td>
+</tr>
+<tr>
+<td>커널 빌드일</td>
+<td>2026-07-31</td>
+<td><code>#138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026</code></td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Intel Core i7-8700 @ 3.20GHz, <strong>VM에 1코어 할당</strong></td>
+<td><code>cpu cores : 1</code>, <code>flags</code>에 <code>hypervisor</code></td>
+</tr>
+<tr>
+<td>RAM / Swap</td>
+<td>약 1.9 GiB / 약 1.9 GiB</td>
+<td><code>free -m</code> = 1968 / 1986</td>
+</tr>
+<tr>
+<td>루트 파일시스템</td>
+<td>LVM (<code>/dev/mapper/ubuntu--vg-ubuntu--lv</code>) <strong>사용률 96%</strong></td>
+<td><code>df</code></td>
+</tr>
+<tr>
+<td>DB</td>
+<td>MariaDB <strong>10.11.14</strong> (Ubuntu 24.04 패키지)</td>
+<td><code>Server version: 10.11.14-MariaDB-0ubuntu0.24.04.1</code></td>
+</tr>
+<tr>
+<td>컨테이너</td>
+<td>Docker 실행 중</td>
+<td><code>docker0</code>, <code>br-bc099e94d7ca</code>, <code>veth6ca8f1c</code> 인터페이스 존재</td>
+</tr>
+<tr>
+<td>모니터링</td>
+<td>PMM 계정 잔존</td>
+<td><code>mysql.user</code>에 <code>pmm@localhost</code></td>
+</tr>
+<tr>
+<td>공격자 VM</td>
+<td>Kali Linux (<code>kali@kali-Attacker</code>), 기본 셸 zsh</td>
+<td>프롬프트 <code>┌──(kali㉿kali-Attacker)-[~]</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>이 노트의 기술적 사실은 커널 공식 문서(docs.kernel.org), man7.org man 페이지, MariaDB 공식 문서, Debian/Kali 공식 자료로 <strong>재검증한 뒤</strong> 작성했습니다. 검증하지 못한 항목은 11절에 따로 적었습니다.</p>
+</blockquote>
+<hr />
+<h3 id="0-오늘의-큰-그림">0. 오늘의 큰 그림</h3>
+<p>오늘 수업은 겉보기에 세 덩어리지만, <strong>"시스템 상태를 어디서 읽고, 어디를 고치고, 그 변경이 얼마나 오래 사는가"</strong> 라는 하나의 질문으로 꿰어집니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>블록</th>
+<th>다룬 것</th>
+<th>핵심 질문</th>
+<th>오늘의 답</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 메모리·커널</td>
+<td><code>free</code>, <code>sysctl</code>, <code>/proc/meminfo</code>, <code>/proc/version</code>, <code>/proc/cpuinfo</code>, <code>df</code></td>
+<td>커널 상태를 <strong>어디서 읽나</strong></td>
+<td><code>/proc</code> 가상 파일시스템. <code>free</code>도 결국 <code>/proc/meminfo</code>를 읽어 계산한 것</td>
+</tr>
+<tr>
+<td>② 커널 튜닝</td>
+<td><code>sysctl -a</code>, <code>sysctl -w vm.swappiness=40</code></td>
+<td>커널 동작을 <strong>어떻게 바꾸나</strong>, 그 변경은 <strong>살아남나</strong></td>
+<td><code>/proc/sys</code>에 써서 즉시 반영. <strong>재부팅하면 사라짐</strong> → <code>/etc/sysctl.d/</code>에 적어야 영구</td>
+</tr>
+<tr>
+<td>③ MariaDB 계정</td>
+<td><code>CREATE USER</code>, <code>DROP USER</code>, <code>GRANT</code>, <code>REVOKE</code>, <code>SHOW GRANTS</code></td>
+<td>DB에서 <strong>"누가"는 무엇으로 결정되나</strong></td>
+<td><strong><code>사용자@호스트</code> 쌍 전체가 하나의 계정</strong>. 이름만 같아도 서로 다른 계정</td>
+</tr>
+<tr>
+<td>④ Kali 초기 설정</td>
+<td>프롬프트, <code>ifconfig</code>/<code>ip ad</code>, apt lock, Chrome 설치, 한글 입력, <code>ping</code></td>
+<td>새 시스템을 <strong>쓸 수 있는 상태로 만드는 절차</strong></td>
+<td>네트워크 확인 → 패키지 갱신 → 필요한 소프트웨어 설치</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="오늘-반복해서-나온-공통-패턴-3가지">오늘 반복해서 나온 공통 패턴 3가지</h4>
+<ol>
+<li>
+<p><strong>"읽기 전용 상태 파일"과 "쓰기 가능한 설정 파일"은 다른 곳에 있다.</strong>
+   <code>/proc/meminfo</code>·<code>/proc/cpuinfo</code>는 읽기 전용 상태 스냅샷, <code>/proc/sys/*</code>는 쓰면 커널 동작이 바뀌는 설정 손잡이입니다. 같은 <code>/proc</code> 아래 있지만 성격이 정반대입니다.</p>
+</li>
+<li>
+<p><strong>런타임 변경은 휘발성이다.</strong>
+   <code>sysctl -w</code>도, 메모리 상에 올라간 MariaDB 권한 캐시도 마찬가지입니다. 영속화 위치(<code>/etc/sysctl.d/</code>, <code>mysql.global_priv</code> 테이블)를 항상 같이 기억해야 합니다.</p>
+</li>
+<li>
+<p><strong>"이름"만으로 대상을 지정하면 기본값이 몰래 끼어든다.</strong>
+   <code>DROP USER test</code>가 실제로 지운 것은 <code>test@'%'</code> 였습니다. 호스트를 생략하면 <code>'%'</code>가 자동으로 붙기 때문입니다. 오늘 실습 출력이 이 사실을 그대로 보여줬습니다.</p>
+</li>
+</ol>
+<hr />
+<h3 id="1-free--메모리-현황-읽기">1. <code>free</code> — 메모리 현황 읽기</h3>
+<h4 id="1-1-실습-출력">1-1. 실습 출력</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-m
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">            </span><span class="m">1968</span><span class="w">        </span><span class="m">1045</span><span class="w">          </span><span class="m">94</span><span class="w">          </span><span class="m">37</span><span class="w">        </span><span class="m">1045</span><span class="w">         </span><span class="m">922</span>
+Swap:<span class="w">           </span><span class="m">1986</span><span class="w">         </span><span class="m">208</span><span class="w">        </span><span class="m">1778</span>
+</code></pre></div>
+
+<h4 id="1-2-열별-정확한-정의-man-1-free-기준">1-2. 열별 정확한 정의 (man 1 free 기준)</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>열</th>
+<th>정의</th>
+<th><code>/proc/meminfo</code> 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>total</code></td>
+<td>사용 가능한 전체 메모리</td>
+<td><code>MemTotal</code> / <code>SwapTotal</code></td>
+</tr>
+<tr>
+<td><code>used</code></td>
+<td><strong><code>total - available</code></strong> 로 계산된 값</td>
+<td>(계산값)</td>
+</tr>
+<tr>
+<td><code>free</code></td>
+<td>아무도 안 쓰는 완전히 빈 메모리</td>
+<td><code>MemFree</code> / <code>SwapFree</code></td>
+</tr>
+<tr>
+<td><code>shared</code></td>
+<td>주로 tmpfs가 쓰는 공유 메모리</td>
+<td><code>Shmem</code></td>
+</tr>
+<tr>
+<td><code>buff/cache</code></td>
+<td>버퍼 + 페이지 캐시 + 회수 가능 슬랩의 합</td>
+<td><code>Buffers</code> + <code>Cached</code> + <code>SReclaimable</code></td>
+</tr>
+<tr>
+<td><code>available</code></td>
+<td><strong>스왑 없이 새 프로그램에 내줄 수 있다고 커널이 추정한 양</strong></td>
+<td><code>MemAvailable</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="free가-94-mb인데-왜-메모리-부족이-아닌가">⚠️ <code>free</code>가 94 MB인데 왜 "메모리 부족"이 아닌가</h3>
+<p>이 표에서 가장 많이 오해되는 지점입니다.</p>
+<ul>
+<li><code>free</code>(94 MB)는 <strong>놀고 있는 메모리</strong>입니다. 리눅스는 남는 RAM을 전부 디스크 캐시로 채우는 것이 정상 설계이므로, <code>free</code>가 작은 것은 <strong>건강한 상태</strong>입니다.</li>
+<li>실제로 봐야 하는 값은 <strong><code>available</code>(922 MB)</strong> 입니다. 캐시(1045 MB) 중 상당량은 필요하면 즉시 회수되므로, 지금 새 프로그램에 약 922 MB를 줄 수 있다는 뜻입니다.</li>
+<li><code>used</code>가 <code>total - available</code>로 계산된다는 점도 중요합니다. 즉 <code>used</code>는 "프로세스가 잡아먹은 양"이 아니라 <strong>"내줄 수 없는 양"</strong> 에 가깝습니다.</li>
+</ul>
+<p>정리하면 <strong><code>free</code> 열이 아니라 <code>available</code> 열로 판단합니다.</strong></p>
+</blockquote>
+<h4 id="1-3-실제-숫자-검산">1-3. 실제 숫자 검산</h4>
+<p><code>total(1968) - available(922) = 1046 ≈ used(1045)</code> — 반올림 오차 범위 안에서 정확히 맞습니다. 이 검산이 맞아떨어지는지 보는 것만으로 열의 의미를 확인할 수 있습니다.</p>
+<p>Swap 쪽 <code>used = 208 MB</code>는 "지금 메모리가 부족하다"는 뜻이 아닙니다. <strong>과거 어느 시점에 밀려나간 페이지가 아직 스왑에 남아 있는 것</strong>이며, <code>/proc/meminfo</code>의 <code>SwapCached: 13512 kB</code>가 그중 일부는 이미 RAM으로 돌아왔지만 스왑 사본도 유지 중임을 보여줍니다(다시 밀어낼 때 쓰기를 생략할 수 있어 이득).</p>
+<h4 id="1-4-free--g가-쓸모없었던-이유-메모-수정-포인트">1-4. <code>free -g</code>가 쓸모없었던 이유 (메모 수정 포인트 ①)</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-g
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">               </span><span class="m">1</span><span class="w">           </span><span class="m">1</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">1</span><span class="w">           </span><span class="m">0</span>
+Swap:<span class="w">              </span><span class="m">1</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">1</span>
+</code></pre></div>
+
+<p><code>available</code>이 <strong>0</strong>으로 나옵니다. 922 MB는 1 GiB 미만이라 정수 GiB 단위에서 잘려나간 것입니다. 메모리가 2 GiB인 장비에서 <code>-g</code>는 정보를 전부 파괴합니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>언제 쓰나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-m</code> (MiB)</td>
+<td>수 GB급 서버의 기본 선택</td>
+</tr>
+<tr>
+<td><code>-h</code></td>
+<td>사람이 읽기 좋게 자동 단위 (<code>Mi</code>, <code>Gi</code>) — <strong>가장 무난</strong></td>
+</tr>
+<tr>
+<td><code>-g</code> (GiB)</td>
+<td>수십~수백 GB 장비에서만 의미 있음</td>
+</tr>
+<tr>
+<td><code>-s N</code></td>
+<td>N초 간격 반복 출력 (추세 관찰)</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>합계(Mem+Swap) 행 추가</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>buffers와 cache를 분리 표시</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong><code>sudo</code>는 필요 없습니다.</strong> <code>free</code>는 <code>/proc/meminfo</code>를 읽을 뿐이고 이 파일은 모든 사용자에게 읽기 권한이 있습니다. 습관적으로 <code>sudo</code>를 붙이면, 정말로 권한이 필요한 명령과 구분이 흐려집니다.</p>
+</blockquote>
+<hr />
+<h3 id="2-sysctl--커널-파라미터-확인과-변경">2. <code>sysctl</code> — 커널 파라미터 확인과 변경</h3>
+<h4 id="2-1-인자-없이-실행하면-사용법이-나온다">2-1. 인자 없이 실행하면 사용법이 나온다</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl
+Usage:
+<span class="w"> </span>sysctl<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>variable<span class="o">[=</span>value<span class="o">]</span><span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+
+<p>메모에는 <code>=&gt; 커널에 있는 다양한 값들 확인하는 명령어</code>라고 적혀 있습니다. <strong>절반만 맞습니다</strong> (메모 수정 포인트 ②).
+<code>sysctl</code>은 <strong>확인(read) + 변경(write)</strong> 을 모두 하는 명령입니다. <code>sysctl -w</code>가 변경이고, 오늘 실습에서도 <code>vm.swappiness</code>를 실제로 바꿨습니다.</p>
+<h4 id="2-2-sysctl의-정체--procsys의-얇은-껍데기">2-2. sysctl의 정체 — <code>/proc/sys</code>의 얇은 껍데기</h4>
+<p><code>sysctl</code>이 다루는 모든 값은 <strong><code>/proc/sys/</code> 아래의 파일</strong>입니다. 변수 이름의 점(<code>.</code>)이 디렉터리 구분자(<code>/</code>)에 대응합니다.</p>
+<div class="codehilite"><pre><span></span><code>vm.swappiness      ↔  /proc/sys/vm/swappiness
+net.ipv4.ip_forward ↔  /proc/sys/net/ipv4/ip_forward
+kernel.hostname    ↔  /proc/sys/kernel/hostname
+</code></pre></div>
+
+<p>따라서 아래 세 줄은 <strong>완전히 같은 일</strong>을 합니다.</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">40</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/proc/sys/vm/swappiness
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span><span class="w">          </span><span class="c1"># -w 없이 대입만 해도 동작</span>
+</code></pre></div>
+
+<h4 id="2-3-주요-옵션-man-8-sysctl-기준">2-3. 주요 옵션 (man 8 sysctl 기준)</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>의미</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code>, <code>--all</code></td>
+<td>사용 가능한 모든 파라미터 출력</td>
+<td><strong>deprecated·금지 파라미터는 제외</strong></td>
+</tr>
+<tr>
+<td><code>--deprecated</code></td>
+<td><code>-a</code>에 deprecated 항목까지 포함</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-w</code>, <code>--write</code></td>
+<td>모든 인자를 쓰기로 강제하고, 파싱 실패 시 에러</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-p[FILE]</code>, <code>--load</code></td>
+<td>파일에서 설정 읽어 적용. 파일 생략 시 <code>/etc/sysctl.conf</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--system</code></td>
+<td><strong>모든 시스템 설정 디렉터리</strong>에서 읽어 적용</td>
+<td>부팅 시 systemd가 하는 일과 동일</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--values</code></td>
+<td>키 이름 없이 값만 출력</td>
+<td>스크립트에서 유용</td>
+</tr>
+<tr>
+<td><code>-N</code>, <code>--names</code></td>
+<td>값 없이 키 이름만 출력</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-r &lt;정규식&gt;</code></td>
+<td>확장 정규식과 일치하는 항목만</td>
+<td><code>grep</code> 대신 쓸 수 있음</td>
+</tr>
+<tr>
+<td><code>-e</code>, <code>--ignore</code></td>
+<td>모르는 변수 에러 무시</td>
+<td>배포용 스크립트에 유용</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td>키·값을 출력만 하고 <strong>쓰지 않음</strong></td>
+<td>적용 전 확인</td>
+</tr>
+<tr>
+<td><code>-b</code>, <code>--binary</code></td>
+<td>개행 없이 값 출력</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><code>-A</code>, <code>-X</code>는 <code>-a</code>의 별칭이고, <code>-d</code>는 <code>-h</code>의 별칭입니다. <code>-o</code>, <code>-x</code>는 <strong>아무 일도 하지 않습니다</strong>(하위 호환용 더미). 실습 출력의 <code>does nothing</code>이 그 뜻입니다.</p>
+</blockquote>
+<h4 id="2-4-sysctl--a-출력을-분류해서-읽기">2-4. <code>sysctl -a</code> 출력을 분류해서 읽기</h4>
+<p>출력이 수천 줄이므로 <strong>최상위 네임스페이스(접두어)</strong> 단위로 감을 잡는 것이 요령입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>접두어</th>
+<th>영역</th>
+<th>오늘 출력에서 눈에 띈 값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abi.*</code></td>
+<td>바이너리 호환성</td>
+<td><code>abi.vsyscall32 = 1</code></td>
+</tr>
+<tr>
+<td><code>debug.*</code></td>
+<td>디버깅</td>
+<td><code>debug.exception-trace = 1</code></td>
+</tr>
+<tr>
+<td><code>dev.*</code></td>
+<td>장치별 설정</td>
+<td><code>dev.cdrom.info</code>(CD-ROM 능력 목록), <code>dev.raid.speed_limit_*</code></td>
+</tr>
+<tr>
+<td><code>fs.*</code></td>
+<td>파일시스템·파일 디스크립터</td>
+<td><code>fs.file-max</code>, <code>fs.inotify.max_user_watches = 14720</code></td>
+</tr>
+<tr>
+<td><code>kernel.*</code></td>
+<td>커널 코어</td>
+<td><code>kernel.hostname = userver</code>, <code>kernel.pid_max = 4194304</code>, <code>kernel.threads-max = 15095</code></td>
+</tr>
+<tr>
+<td><code>net.*</code></td>
+<td>네트워크 스택</td>
+<td><code>net.ipv4.ip_forward = 1</code>, <code>net.core.somaxconn = 4096</code></td>
+</tr>
+<tr>
+<td><code>vm.*</code></td>
+<td>가상 메모리</td>
+<td><code>vm.swappiness</code>, <code>vm.overcommit_memory</code>, <code>vm.dirty_ratio</code></td>
+</tr>
+<tr>
+<td><code>user.*</code> / <code>fs.quota.*</code></td>
+<td>네임스페이스 한계, 쿼터 통계</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="kernel"><code>kernel.*</code> 중 오늘 출력에서 실무상 의미 있는 값</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kernel.hostname</code></td>
+<td><code>userver</code></td>
+<td><code>hostnamectl set-hostname</code>이 결국 이 값을 바꿉니다</td>
+</tr>
+<tr>
+<td><code>kernel.osrelease</code></td>
+<td><code>6.8.0-138-generic</code></td>
+<td><code>uname -r</code>의 원천</td>
+</tr>
+<tr>
+<td><code>kernel.pid_max</code></td>
+<td><code>4194304</code></td>
+<td>PID 최댓값. 이 값을 넘으면 1부터 순환</td>
+</tr>
+<tr>
+<td><code>kernel.threads-max</code></td>
+<td><code>15095</code></td>
+<td>시스템 전체 스레드 상한. <strong>RAM이 작아서 낮게 잡힌 값</strong></td>
+</tr>
+<tr>
+<td><code>kernel.randomize_va_space</code></td>
+<td><code>2</code></td>
+<td>ASLR 최대 강도(스택·힙·mmap·브k 모두 랜덤화). 보안 기본값</td>
+</tr>
+<tr>
+<td><code>kernel.dmesg_restrict</code></td>
+<td><code>1</code></td>
+<td>비특권 사용자의 <code>dmesg</code> 열람 차단</td>
+</tr>
+<tr>
+<td><code>kernel.kptr_restrict</code></td>
+<td><code>1</code></td>
+<td>커널 포인터 주소 노출 제한</td>
+</tr>
+<tr>
+<td><code>kernel.yama.ptrace_scope</code></td>
+<td><code>1</code></td>
+<td>부모-자식 관계가 아닌 프로세스 추적(ptrace) 금지</td>
+</tr>
+<tr>
+<td><code>kernel.unprivileged_bpf_disabled</code></td>
+<td><code>2</code></td>
+<td>비특권 BPF 금지</td>
+</tr>
+<tr>
+<td><code>kernel.core_pattern</code></td>
+<td><code>\|/usr/share/apport/...</code></td>
+<td>코어 덤프를 파일이 아니라 <strong>Ubuntu의 apport 프로그램에 파이프</strong>로 넘김</td>
+</tr>
+<tr>
+<td><code>kernel.sysrq</code></td>
+<td><code>176</code></td>
+<td>매직 SysRq 키 중 일부만 허용(비트마스크)</td>
+</tr>
+<tr>
+<td><code>kernel.panic</code></td>
+<td><code>0</code></td>
+<td>패닉 후 <strong>자동 재부팅 안 함</strong>(0=무한 대기). 서버라면 <code>10</code>(10초 후 재부팅)을 흔히 씀</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="net"><code>net.*</code> 중 오늘 출력에서 의미 있는 값</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.ipv4.ip_forward</code></td>
+<td><code>1</code></td>
+<td><strong>IP 포워딩 켜짐.</strong> Docker가 켠 것입니다(컨테이너 NAT에 필요)</td>
+</tr>
+<tr>
+<td><code>net.ipv4.conf.all.rp_filter</code></td>
+<td><code>2</code></td>
+<td>역경로 필터 <strong>느슨한 모드</strong>. 비대칭 라우팅 허용</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_syncookies</code></td>
+<td><code>1</code></td>
+<td>SYN 플러딩 방어</td>
+</tr>
+<tr>
+<td><code>net.ipv4.ip_local_port_range</code></td>
+<td><code>32768 60999</code></td>
+<td>클라이언트 소켓이 쓰는 임시 포트 범위(약 28,000개)</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_fin_timeout</code></td>
+<td><code>60</code></td>
+<td>FIN_WAIT2 대기 시간(초)</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_keepalive_time</code></td>
+<td><code>7200</code></td>
+<td>유휴 2시간 후 keepalive 시작</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_congestion_control</code></td>
+<td><code>cubic</code></td>
+<td>혼잡 제어 알고리즘</td>
+</tr>
+<tr>
+<td><code>net.core.default_qdisc</code></td>
+<td><code>fq_codel</code></td>
+<td>기본 큐잉 규율</td>
+</tr>
+<tr>
+<td><code>net.core.somaxconn</code></td>
+<td><code>4096</code></td>
+<td>listen 백로그 상한</td>
+</tr>
+<tr>
+<td><code>net.ipv4.icmp_echo_ignore_all</code></td>
+<td><code>0</code></td>
+<td><strong>ping 응답함.</strong> 1로 바꾸면 ping 무응답</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>인터페이스 목록이 그대로 드러납니다: <code>lo</code>, <code>enp0s3</code>(실 NIC), <code>docker0</code>(도커 기본 브리지), <code>br-bc099e94d7ca</code>(사용자 정의 도커 네트워크), <code>veth6ca8f1c</code>(컨테이너 한쪽 끝). <strong><code>sysctl -a</code>만 봐도 이 서버에 Docker가 돌고 컨테이너가 최소 1개 붙어 있다</strong>는 것을 알 수 있습니다.</p>
+</blockquote>
+<h4 id="2-5-vm--오늘의-주인공">2-5. <code>vm.*</code> — 오늘의 주인공</h4>
+<p>실습에서 나온 <code>vm.*</code> 전체 중 시험·실무에서 반복해서 나오는 것만 정리합니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>키</th>
+<th>이 서버 값</th>
+<th>커널 문서 기준 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vm.swappiness</code></td>
+<td>60 → 40</td>
+<td>스왑과 파일 캐시 회수 중 <strong>어느 쪽에 더 압력을 줄지의 비율</strong>. 범위 <strong>0~200</strong>, 기본 <strong>60</strong></td>
+</tr>
+<tr>
+<td><code>vm.overcommit_memory</code></td>
+<td><code>0</code></td>
+<td>0 = 휴리스틱(명백한 과할당만 거부), 1 = 무조건 허용, 2 = 절대 오버커밋 금지</td>
+</tr>
+<tr>
+<td><code>vm.overcommit_ratio</code></td>
+<td><code>50</code></td>
+<td>모드 2일 때 "swap + RAM의 이 %"까지만 커밋 허용</td>
+</tr>
+<tr>
+<td><code>vm.dirty_ratio</code></td>
+<td><code>20</code></td>
+<td>더티 페이지가 이 %를 넘으면 <strong>쓰는 프로세스가 직접</strong> 플러시(멈춤 발생)</td>
+</tr>
+<tr>
+<td><code>vm.dirty_background_ratio</code></td>
+<td><code>10</code></td>
+<td>이 %를 넘으면 커널 플러시 스레드가 <strong>백그라운드로</strong> 기록 시작</td>
+</tr>
+<tr>
+<td><code>vm.dirty_expire_centisecs</code></td>
+<td><code>3000</code></td>
+<td>30초 지난 더티 페이지는 기록 대상</td>
+</tr>
+<tr>
+<td><code>vm.dirty_writeback_centisecs</code></td>
+<td><code>500</code></td>
+<td>5초마다 플러시 스레드 깨어남</td>
+</tr>
+<tr>
+<td><code>vm.min_free_kbytes</code></td>
+<td><code>45056</code></td>
+<td>항상 비워둘 최소 메모리(약 44 MiB). <strong>1024 KB 미만으로 낮추면 시스템이 교착에 빠질 수 있다</strong>고 커널 문서가 경고</td>
+</tr>
+<tr>
+<td><code>vm.vfs_cache_pressure</code></td>
+<td><code>100</code></td>
+<td>dentry/inode 캐시 회수 성향. 100이 기준값, 낮추면 캐시 오래 유지</td>
+</tr>
+<tr>
+<td><code>vm.page-cluster</code></td>
+<td><code>3</code></td>
+<td>스왑 인 시 한 번에 읽는 페이지 수의 <strong>로그값</strong> → 2³ = <strong>8페이지</strong>. 0이면 1페이지</td>
+</tr>
+<tr>
+<td><code>vm.panic_on_oom</code></td>
+<td><code>0</code></td>
+<td>0 = OOM 킬러가 프로세스를 죽임, 1 = 커널 패닉, 2 = cgroup OOM에도 강제 패닉</td>
+</tr>
+<tr>
+<td><code>vm.oom_kill_allocating_task</code></td>
+<td><code>0</code></td>
+<td>0 = 휴리스틱으로 희생자 선정, 1 = <strong>할당을 요청한 그 프로세스</strong>를 죽임</td>
+</tr>
+<tr>
+<td><code>vm.watermark_scale_factor</code></td>
+<td><code>10</code></td>
+<td>kswapd가 깨고 자는 워터마크 간격. 10 = 가용 메모리의 0.1%, 최대 3000</td>
+</tr>
+<tr>
+<td><code>vm.max_map_count</code></td>
+<td><code>1048576</code></td>
+<td>프로세스당 메모리 맵 최대 개수. Elasticsearch 등이 상향을 요구하는 값</td>
+</tr>
+<tr>
+<td><code>vm.zone_reclaim_mode</code></td>
+<td><code>0</code></td>
+<td>NUMA 지역 회수 비활성(단일 노드라 무의미)</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="2-6-vmswappiness-실습--변경과-그-수명">2-6. <code>vm.swappiness</code> 실습 — 변경과 그 수명</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap
+vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span>
+happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span>
+vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span>
+happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap
+vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span>
+</code></pre></div>
+
+<h5 id="swappiness">swappiness 값의 실제 의미 (커널 공식 문서)</h5>
+<p>흔히 "스왑을 얼마나 적극적으로 쓰는지의 백분율"로 설명되지만, 정확한 정의는 다릅니다.</p>
+<blockquote>
+<p>커널 문서 원문 요지: swappiness는 <strong>스왑 I/O와 파일시스템 페이징 I/O의 상대적 비용 비율</strong>을 제어합니다. <strong>100</strong>이면 두 경로에 <strong>같은 압력</strong>을 가하고, 낮으면 페이지 캐시를 유지(=익명 페이지 스왑을 덜)하며, 높으면 스왑을 더 씁니다. <strong>0</strong>이면 "해당 존의 free + 파일 기반 페이지가 high watermark 아래로 내려가기 전까지는 스왑을 시작하지 않습니다."</p>
+</blockquote>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>값</th>
+<th>동작 경향</th>
+<th>쓰는 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>거의 스왑 안 함 (완전히 금지는 아님 — OOM 직전에는 씁니다)</td>
+<td>예전 DB 서버 관행</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>최소한만 스왑</td>
+<td>지연에 민감한 DB/캐시 서버</td>
+</tr>
+<tr>
+<td><code>10</code></td>
+<td>스왑 억제</td>
+<td>일반적인 DB 튜닝 값</td>
+</tr>
+<tr>
+<td><code>60</code></td>
+<td><strong>커널 기본값</strong></td>
+<td>데스크톱·범용 서버</td>
+</tr>
+<tr>
+<td><code>100</code></td>
+<td>스왑과 캐시에 동일 압력</td>
+<td></td>
+</tr>
+<tr>
+<td><code>~200</code></td>
+<td>스왑 매우 적극적</td>
+<td>컨테이너 밀집 등 특수 상황</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ <strong>"swappiness=0이면 스왑을 안 쓴다"는 흔한 오해입니다.</strong> 0은 "가능한 마지막까지 미룬다"이지 금지가 아닙니다. 진짜로 끄려면 <code>swapoff -a</code> + <code>/etc/fstab</code>에서 swap 항목 제거이며, 그 경우 메모리 압박 시 <strong>OOM 킬러가 바로 발동</strong>합니다.</p>
+</blockquote>
+<h5 id="_1">(메모 보강) 이 변경은 재부팅하면 사라집니다 — 영구 적용법</h5>
+<p>이 부분이 메모에서 완전히 빠져 있습니다 (메모 보강 포인트 ③). <code>sysctl -w</code>는 <code>/proc/sys</code>에 쓰는 것이고 <code>/proc</code>은 <strong>메모리 위에만 존재하는 가상 파일시스템</strong>이므로 부팅과 함께 초기화됩니다.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1) 설정 파일로 남긴다 (파일명 숫자가 클수록 나중에 적용 = 우선)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.swappiness = 40&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/99-swappiness.conf
+
+<span class="c1"># 2) 재부팅 없이 즉시 반영</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>--system<span class="w">            </span><span class="c1"># 모든 시스템 디렉터리 재적용</span>
+<span class="c1"># 또는</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-p<span class="w"> </span>/etc/sysctl.d/99-swappiness.conf<span class="w">   </span><span class="c1"># 그 파일만</span>
+
+<span class="c1"># 3) 확인</span>
+sysctl<span class="w"> </span>vm.swappiness
+</code></pre></div>
+
+<p><code>--system</code>의 <strong>읽는 순서</strong>는 man 페이지에 명시되어 있습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>경로</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>/etc/sysctl.d/*.conf</code></td>
+<td>관리자 설정</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>/run/sysctl.d/*.conf</code></td>
+<td>런타임 생성</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>/usr/local/lib/sysctl.d/*.conf</code></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>/usr/lib/sysctl.d/*.conf</code></td>
+<td>패키지 제공</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>/lib/sysctl.d/*.conf</code></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>/etc/sysctl.conf</code></td>
+<td><strong>마지막에 적용 → 최종 승자</strong></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>각 디렉터리 안에서는 <strong>파일명 사전순</strong>으로 적용되므로 <code>10-…</code>보다 <code>99-…</code>가 나중에, 즉 더 강하게 적용됩니다.</li>
+<li><strong>같은 이름의 파일</strong>이 여러 디렉터리에 있으면 <strong>먼저 읽힌 것만</strong> 쓰이고 이후 디렉터리의 동명 파일은 무시됩니다. 이 규칙을 이용해 <code>/etc/sysctl.d/</code>에 같은 이름의 빈 파일을 두어 패키지 설정을 <strong>무력화</strong>할 수 있습니다.</li>
+</ul>
+<h5 id="4-grep-swap">(메모 수정 포인트 ④) <code>grep swap</code>은 스왑 설정 전체가 아니다</h5>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap<span class="w">      </span><span class="c1"># → vm.swappiness 한 줄만 나옴</span>
+</code></pre></div>
+
+<p><code>vm.page-cluster</code>(스왑 인 단위), <code>vm.vfs_cache_pressure</code>, <code>/proc/swaps</code>의 실제 스왑 장치는 이 grep에 걸리지 않습니다. 스왑 상태를 볼 때는 아래를 같이 씁니다.</p>
+<div class="codehilite"><pre><span></span><code>swapon<span class="w"> </span>--show<span class="w">          </span><span class="c1"># 활성 스왑 장치/파일, 크기, 사용량, 우선순위</span>
+cat<span class="w"> </span>/proc/swaps<span class="w">        </span><span class="c1"># 같은 정보의 원본</span>
+free<span class="w"> </span>-h<span class="w">                </span><span class="c1"># 총량/사용량</span>
+sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">&#39;swap|page-cluster&#39;</span>
+</code></pre></div>
+
+<p>또 실습에서 <code>sudo sysctl -a | grep swap</code>을 <strong>연속 두 번</strong> 실행했는데 결과는 당연히 같습니다. 값은 다시 바꾸기 전까지 유지됩니다.</p>
+<hr />
+<h3 id="3-proc--커널이-노출하는-가상-파일시스템">3. <code>/proc</code> — 커널이 노출하는 가상 파일시스템</h3>
+<p><code>/proc</code>는 디스크에 존재하지 않습니다. <strong>커널이 요청 시점에 즉석에서 생성하는 텍스트</strong>이며, 그래서 <code>cat</code>으로 읽을 수 있고 <code>ls -l</code> 상 크기가 0으로 보입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>경로</th>
+<th>성격</th>
+<th>오늘 실습</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/proc/meminfo</code></td>
+<td>읽기 전용 상태</td>
+<td><code>cat /proc/meminfo</code></td>
+</tr>
+<tr>
+<td><code>/proc/version</code></td>
+<td>읽기 전용 상태</td>
+<td><code>cat /proc/version</code></td>
+</tr>
+<tr>
+<td><code>/proc/cpuinfo</code></td>
+<td>읽기 전용 상태</td>
+<td><code>cat /proc/cpuinfo</code></td>
+</tr>
+<tr>
+<td><code>/proc/sys/**</code></td>
+<td><strong>쓰기 가능 설정</strong></td>
+<td><code>sysctl -w</code></td>
+</tr>
+<tr>
+<td><code>/proc/&lt;PID&gt;/*</code></td>
+<td>프로세스별 정보</td>
+<td>(오늘 미실습)</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-1-procmeminfo-완전-해부">3-1. <code>/proc/meminfo</code> 완전 해부</h4>
+<div class="codehilite"><pre><span></span><code>MemTotal:        2015300 kB      SwapTotal:       2034684 kB
+MemFree:          128176 kB      SwapFree:        1821492 kB
+MemAvailable:     922684 kB      SwapCached:        13512 kB
+Buffers:           58744 kB      Cached:           869432 kB
+</code></pre></div>
+
+<h5 id="4">기본 4형제</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>man 5 proc 정의</th>
+<th>이 서버 값의 해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MemTotal</code></td>
+<td>물리 RAM에서 예약 영역과 커널 코드를 뺀 <strong>사용 가능한 총 RAM</strong></td>
+<td>2015300 kB ≈ 1.92 GiB. <code>free -m</code>의 1968과 동일한 값</td>
+</tr>
+<tr>
+<td><code>MemFree</code></td>
+<td>완전히 놀고 있는 메모리</td>
+<td>128176 kB ≈ 125 MiB</td>
+</tr>
+<tr>
+<td><code>MemAvailable</code></td>
+<td><strong>스왑 없이 새 프로그램을 시작할 수 있는 추정치</strong> (Linux 3.14+)</td>
+<td>922684 kB ≈ 878 MiB</td>
+</tr>
+<tr>
+<td><code>Buffers</code></td>
+<td>원시 디스크 블록용 임시 저장. "20 MB 정도를 넘게 커지지 않아야 정상"</td>
+<td>58744 kB</td>
+</tr>
+<tr>
+<td><code>Cached</code></td>
+<td><strong>파일 페이지 캐시.</strong> SwapCached는 미포함</td>
+<td>869432 kB — 이 서버 메모리의 최대 소비처</td>
+</tr>
+<tr>
+<td><code>SwapCached</code></td>
+<td>스왑 아웃됐다가 다시 읽혔지만 <strong>스왑 파일에도 사본이 남은</strong> 메모리</td>
+<td>13512 kB</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="active-inactive-lru">Active / Inactive — LRU 두 리스트</h5>
+<div class="codehilite"><pre><span></span><code>Active:           942460 kB     Inactive:         659040 kB
+Active(anon):     532748 kB     Inactive(anon):   187684 kB
+Active(file):     409712 kB     Inactive(file):   471356 kB
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Active</code></td>
+<td>최근에 쓰였고 <strong>꼭 필요하기 전엔 회수하지 않는</strong> 메모리</td>
+</tr>
+<tr>
+<td><code>Inactive</code></td>
+<td>덜 최근에 쓰인 메모리 — <strong>회수 후보 1순위</strong></td>
+</tr>
+<tr>
+<td><code>(anon)</code></td>
+<td><strong>익명 페이지</strong> = 파일 뒷받침이 없는 메모리(힙, 스택). 회수하려면 <strong>스왑에 써야 함</strong></td>
+</tr>
+<tr>
+<td><code>(file)</code></td>
+<td><strong>파일 기반 페이지</strong> = 페이지 캐시. 깨끗하면 <strong>그냥 버리면 됨</strong>(디스크에 원본 존재)</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="swappiness가-조절하는-것이-바로-이-두-축이다">swappiness가 조절하는 것이 바로 이 두 축이다</h3>
+<p>메모리가 부족해지면 커널은 회수할 페이지를 골라야 합니다.
+- <code>Inactive(file)</code> 회수 → 디스크 쓰기 없이 버리면 끝(깨끗한 페이지인 경우). <strong>싸다.</strong>
+- <code>Inactive(anon)</code> 회수 → <strong>반드시 스왑에 써야</strong> 함. <strong>비싸다.</strong></p>
+<p><code>vm.swappiness</code>는 이 둘 중 어디에 압력을 얼마나 배분할지의 비율입니다. 이 서버는 <code>Active(anon)</code> 532 MB, <code>Active(file)</code> 409 MB로 익명 페이지가 더 많아 스왑 사용이 이미 208 MB 발생한 상태입니다.</p>
+</blockquote>
+<h5 id="_2">커널이 쓰는 메모리</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Slab</code></td>
+<td>152712 kB</td>
+<td>커널 내부 자료구조 캐시 총합</td>
+</tr>
+<tr>
+<td><code>SReclaimable</code></td>
+<td>90528 kB</td>
+<td>슬랩 중 <strong>회수 가능한</strong> 부분(dentry·inode 캐시 등)</td>
+</tr>
+<tr>
+<td><code>SUnreclaim</code></td>
+<td>62184 kB</td>
+<td>슬랩 중 <strong>회수 불가</strong> 부분</td>
+</tr>
+<tr>
+<td><code>KReclaimable</code></td>
+<td>90528 kB</td>
+<td>압박 시 커널이 회수를 시도할 할당 (4.20+)</td>
+</tr>
+<tr>
+<td><code>KernelStack</code></td>
+<td>15196 kB</td>
+<td>커널 스택용 메모리</td>
+</tr>
+<tr>
+<td><code>PageTables</code></td>
+<td>18156 kB</td>
+<td>페이지 테이블 최하위 레벨이 차지하는 메모리</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>SReclaimable</code>(90528)이 <code>buff/cache</code> 합계에 포함된다는 점이 <code>free</code>와의 연결 고리입니다.
+<code>Buffers(58744) + Cached(869432) + SReclaimable(90528) = 1018704 kB ≈ 995 MiB</code> → <code>free -m</code>의 <code>buff/cache = 1045</code>와 근사합니다(측정 시점 차이).</p>
+<h5 id="_3">오버커밋 — 이 서버에서 가장 눈에 띄는 숫자</h5>
+<div class="codehilite"><pre><span></span><code>CommitLimit:     3042332 kB
+Committed_AS:    9054516 kB
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CommitLimit</code></td>
+<td><code>overcommit_memory=2</code>일 때 <strong>허용되는 총 커밋량 상한</strong></td>
+</tr>
+<tr>
+<td><code>Committed_AS</code></td>
+<td>프로세스들이 <strong>약속받은(요청한) 주소 공간의 총합</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>Committed_AS</code>(약 8.6 GiB)가 <code>CommitLimit</code>(약 2.9 GiB)의 <strong>3배</strong>입니다. 그래도 문제가 없는 이유는 <code>vm.overcommit_memory = 0</code>(휴리스틱 모드)이기 때문입니다. 이 모드에서 커널은 "명백히 말이 안 되는 요청"만 거부하고, 프로그램들이 요청만 하고 실제로는 안 쓰는 메모리가 대부분이라는 통계적 사실에 기댑니다.</p>
+<blockquote>
+<p>⚠️ 만약 <code>vm.overcommit_memory=2</code>로 바꾸면 <code>CommitLimit = swap + RAM × overcommit_ratio(50%)</code> 계산이 적용되어, 이 서버에서는 <strong>지금 돌아가는 프로세스 상당수가 메모리 할당에 실패</strong>합니다. 오버커밋 모드를 함부로 바꾸면 안 되는 이유입니다.</p>
+</blockquote>
+<h5 id="_4">나머지 관찰</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>값</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dirty</code></td>
+<td>388 kB</td>
+<td>디스크에 아직 안 쓰인 변경분. 매우 적음 = I/O 부하 없음</td>
+</tr>
+<tr>
+<td><code>Writeback</code></td>
+<td>0 kB</td>
+<td>지금 기록 중인 것 없음</td>
+</tr>
+<tr>
+<td><code>AnonPages</code></td>
+<td>695756 kB</td>
+<td>파일 뒷받침 없이 유저 공간에 매핑된 페이지</td>
+</tr>
+<tr>
+<td><code>Mapped</code></td>
+<td>404904 kB</td>
+<td><code>mmap()</code>으로 매핑된 파일(주로 공유 라이브러리)</td>
+</tr>
+<tr>
+<td><code>Shmem</code></td>
+<td>38356 kB</td>
+<td>tmpfs·System V·POSIX 공유 메모리. <code>free</code>의 <code>shared(37)</code>와 일치</td>
+</tr>
+<tr>
+<td><code>Unevictable</code>/<code>Mlocked</code></td>
+<td>27444 kB</td>
+<td><code>mlock()</code>으로 잠긴, 절대 스왑되지 않는 메모리</td>
+</tr>
+<tr>
+<td><code>HugePages_Total</code></td>
+<td>0</td>
+<td>대형 페이지 미사용. <code>Hugepagesize: 2048 kB</code> = 2 MiB</td>
+</tr>
+<tr>
+<td><code>VmallocTotal</code></td>
+<td>34359738367 kB</td>
+<td>가상 주소 공간 크기(32 TiB). <strong>물리 메모리와 무관</strong></td>
+</tr>
+<tr>
+<td><code>DirectMap4k</code> / <code>DirectMap2M</code></td>
+<td>112576 / 1984512 kB</td>
+<td>커널이 4 KiB/2 MiB 페이지로 선형 매핑한 RAM 양. 합이 MemTotal 근처</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="3-2-필요한-한-줄만-뽑기">3-2. 필요한 한 줄만 뽑기</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>grep<span class="w"> </span>MemTotal<span class="w"> </span>/proc/meminfo
+MemTotal:<span class="w">        </span><span class="m">2015300</span><span class="w"> </span>kB
+</code></pre></div>
+
+<p><code>/proc/meminfo</code>는 50줄이 넘으므로 스크립트에서는 이렇게 씁니다.</p>
+<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^(MemTotal|MemAvailable|SwapTotal|SwapFree):&#39;</span><span class="w"> </span>/proc/meminfo
+awk<span class="w"> </span><span class="s1">&#39;/^MemAvailable:/ {print $2/1024 &quot; MiB&quot;}&#39;</span><span class="w"> </span>/proc/meminfo
+</code></pre></div>
+
+<h4 id="3-3-procversion--커널-신원-확인">3-3. <code>/proc/version</code> — 커널 신원 확인</h4>
+<div class="codehilite"><pre><span></span><code>Linux version 6.8.0-138-generic (buildd@lcy02-amd64-023)
+(x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42)
+#138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>6.8.0</code></td>
+<td>커널 메이저.마이너.패치</td>
+</tr>
+<tr>
+<td><code>-138-generic</code></td>
+<td><strong>Ubuntu ABI 번호 138</strong> + <code>generic</code> 플레이버(다른 플레이버: <code>lowlatency</code>, <code>kvm</code>, <code>aws</code>)</td>
+</tr>
+<tr>
+<td><code>buildd@lcy02-amd64-023</code></td>
+<td>Ubuntu 공식 빌드 서버에서 빌드됨</td>
+</tr>
+<tr>
+<td><code>gcc-13 ... 13.3.0</code></td>
+<td>컴파일러 버전</td>
+</tr>
+<tr>
+<td><code>#138-Ubuntu</code></td>
+<td>빌드 횟수 표시</td>
+</tr>
+<tr>
+<td><code>SMP</code></td>
+<td>대칭형 멀티프로세싱 지원</td>
+</tr>
+<tr>
+<td><code>PREEMPT_DYNAMIC</code></td>
+<td>선점 모델을 <strong>부팅 파라미터로 전환 가능</strong>하게 빌드됨 (<code>preempt=none/voluntary/full</code>)</td>
+</tr>
+<tr>
+<td><code>Fri Jul 31 ... 2026</code></td>
+<td>커널 빌드 시각</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><code>sudo</code>는 필요 없습니다(메모 수정 포인트 ①). 더 짧게는 <code>uname -a</code> 또는 <code>uname -r</code>, 배포판 정보는 <code>lsb_release -a</code> / <code>cat /etc/os-release</code> 입니다.</p>
+</blockquote>
+<h4 id="3-4-proccpuinfo--cpu-신원과-취약점-목록">3-4. <code>/proc/cpuinfo</code> — CPU 신원과 취약점 목록</h4>
+<div class="codehilite"><pre><span></span><code>processor       : 0
+model name      : Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+cpu MHz         : 3192.002
+cache size      : 12288 KB
+siblings        : 1
+cpu cores       : 1
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>값</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>processor</code></td>
+<td><code>0</code></td>
+<td><strong>논리 CPU 번호. 0 하나뿐 = 이 VM에 vCPU 1개만 할당됨</strong></td>
+</tr>
+<tr>
+<td><code>model name</code></td>
+<td>i7-8700</td>
+<td>호스트의 물리 CPU 모델(게스트에 그대로 노출)</td>
+</tr>
+<tr>
+<td><code>cpu family / model / stepping</code></td>
+<td>6 / 158 / 10</td>
+<td>Coffee Lake 세대 식별자</td>
+</tr>
+<tr>
+<td><code>microcode</code></td>
+<td><code>0xde</code></td>
+<td>마이크로코드 리비전 — 투기적 실행 취약점 완화의 핵심</td>
+</tr>
+<tr>
+<td><code>cache size</code></td>
+<td>12288 KB</td>
+<td>L3 캐시 12 MiB (물리 CPU 값)</td>
+</tr>
+<tr>
+<td><code>siblings</code> / <code>cpu cores</code></td>
+<td>1 / 1</td>
+<td>같으면 <strong>하이퍼스레딩 미노출</strong></td>
+</tr>
+<tr>
+<td><code>bogomips</code></td>
+<td>6384.00</td>
+<td>부팅 시 측정한 대략적 지표. <strong>성능 벤치마크가 아님</strong></td>
+</tr>
+<tr>
+<td><code>address sizes</code></td>
+<td>39 bits physical, 48 bits virtual</td>
+<td>물리 512 GiB, 가상 256 TiB 주소 공간</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="flags"><code>flags</code>에서 반드시 봐야 할 것</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>플래그</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>hypervisor</code></strong></td>
+<td><strong>가상 머신 안에서 돌고 있다는 결정적 증거</strong></td>
+</tr>
+<tr>
+<td><code>vmx</code></td>
+<td>Intel VT-x 중첩 가상화 노출</td>
+</tr>
+<tr>
+<td><code>aes</code></td>
+<td>AES-NI 하드웨어 암호 가속 (TLS·디스크 암호화 성능)</td>
+</tr>
+<tr>
+<td><code>avx</code>, <code>avx2</code>, <code>fma</code></td>
+<td>벡터 연산 확장</td>
+</tr>
+<tr>
+<td><code>pti</code></td>
+<td>Page Table Isolation — <strong>Meltdown 완화가 켜져 있음</strong></td>
+</tr>
+<tr>
+<td><code>nx</code></td>
+<td>No-eXecute 비트 (스택 실행 방지)</td>
+</tr>
+<tr>
+<td><code>rdrand</code>, <code>rdseed</code></td>
+<td>하드웨어 난수 생성기</td>
+</tr>
+<tr>
+<td><code>constant_tsc</code>, <code>nonstop_tsc</code></td>
+<td>주파수·절전 상태와 무관하게 일정한 TSC → 신뢰할 수 있는 시간 측정</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="bugs-cpu"><code>bugs</code> 줄 — 이 CPU가 가진 알려진 취약점</h5>
+<div class="codehilite"><pre><span></span><code>bugs : cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds
+       swapgs itlb_multihit srbds mmio_stale_data retbleed gds bhi its
+</code></pre></div>
+
+<p>Coffee Lake 세대가 투기적 실행 취약점 계열에 광범위하게 노출되어 있음을 보여줍니다. <strong>"취약점이 있다"이지 "무방비"는 아닙니다.</strong> 실제 완화 적용 여부는 아래로 확인합니다.</p>
+<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/vulnerabilities/*
+lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iA20<span class="w"> </span>vulnerab
+</code></pre></div>
+
+<blockquote>
+<p><strong>더 나은 대안:</strong> <code>/proc/cpuinfo</code>는 논리 CPU마다 30줄씩 반복되어 읽기 힘듭니다.
+- <code>lscpu</code> — 소켓/코어/스레드 구조, 캐시 계층, 취약점 완화 상태를 한 화면에 요약
+- <code>nproc</code> — 논리 CPU 개수만 숫자로
+- <code>lscpu -e</code> — CPU별 토폴로지 표</p>
+</blockquote>
+<h4 id="3-5-df--디스크-사용량-그리고-이-서버의-실제-위험">3-5. <code>df</code> — 디스크 사용량, 그리고 이 서버의 실제 위험</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>df
+Filesystem<span class="w">                        </span>1K-blocks<span class="w">    </span>Used<span class="w"> </span>Available<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+tmpfs<span class="w">                                </span><span class="m">201532</span><span class="w">     </span><span class="m">892</span><span class="w">    </span><span class="m">200640</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run
+/dev/mapper/ubuntu--vg-ubuntu--lv<span class="w">  </span><span class="m">10218772</span><span class="w"> </span><span class="m">9269668</span><span class="w">    </span><span class="m">408432</span><span class="w">  </span><span class="m">96</span>%<span class="w"> </span>/
+tmpfs<span class="w">                               </span><span class="m">1007648</span><span class="w">       </span><span class="m">0</span><span class="w">   </span><span class="m">1007648</span><span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev/shm
+tmpfs<span class="w">                                  </span><span class="m">5120</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">5120</span><span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/run/lock
+/dev/sda2<span class="w">                           </span><span class="m">1790136</span><span class="w">  </span><span class="m">105416</span><span class="w">   </span><span class="m">1575460</span><span class="w">   </span><span class="m">7</span>%<span class="w"> </span>/boot
+tmpfs<span class="w">                                </span><span class="m">201528</span><span class="w">      </span><span class="m">12</span><span class="w">    </span><span class="m">201516</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run/user/1000
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>관찰</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dev/mapper/ubuntu--vg-ubuntu--lv</code></td>
+<td><strong>LVM 논리 볼륨</strong>. 이름 규칙은 <code>VG명-LV명</code>이고 하이픈이 <code>--</code>로 이스케이프되어 있음 → VG=<code>ubuntu-vg</code>, LV=<code>ubuntu-lv</code></td>
+</tr>
+<tr>
+<td><strong><code>/</code>가 96%, 남은 공간 400 MB</strong></td>
+<td>⚠️ <strong>오늘 출력에서 가장 위험한 신호.</strong> 로그·DB·Docker 이미지가 조금만 늘어도 즉시 꽉 참</td>
+</tr>
+<tr>
+<td><code>/boot</code>이 별도 파티션(<code>/dev/sda2</code>)</td>
+<td>커널 업데이트가 여기 쌓임. 7%면 여유 있음</td>
+</tr>
+<tr>
+<td><code>tmpfs</code> 4종</td>
+<td><strong>RAM 기반 파일시스템</strong>이라 재부팅 시 소멸. <code>/dev/shm</code>은 RAM의 절반(1 GiB)이 기본</td>
+</tr>
+<tr>
+<td><code>/run/user/1000</code></td>
+<td>로그인한 UID 1000 사용자 전용 런타임 디렉터리</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="96일-때의-대응-순서"><code>/</code> 96%일 때의 대응 순서</h3>
+<p><code>bash
+df -h                                  # 사람이 읽기 좋게
+df -i                                  # inode 고갈도 같은 증상을 냄 — 반드시 함께 확인
+sudo du -xh / --max-depth=1 | sort -h  # -x: 다른 파일시스템으로 안 넘어감
+sudo journalctl --disk-usage
+sudo journalctl --vacuum-size=200M     # systemd 저널 정리
+sudo apt clean                         # /var/cache/apt/archives 비우기
+docker system df                       # 도커가 쓰는 용량 확인
+docker system prune -a                 # ⚠️ 안 쓰는 이미지/컨테이너 전부 삭제 — 확인 후 실행
+sudo lvextend -r -L +5G /dev/ubuntu-vg/ubuntu-lv   # VG에 여유가 있으면 온라인 확장</code></p>
+<p><strong>LVM은 확장이 온라인으로 가능</strong>하다는 것이 이 구성의 장점입니다. <code>-r</code> 옵션이 파일시스템 크기까지 같이 늘려줍니다.
+Ubuntu 설치 시 LVM을 고르면 기본적으로 VG 전체를 LV에 주지 않으므로, <code>sudo vgs</code>로 여유 공간(<code>VFree</code>)이 있는지 먼저 봅니다.</p>
+</blockquote>
+<p><code>df</code> 기본 단위는 <strong>1K 블록</strong>입니다. <code>df -h</code>(사람 단위), <code>df -T</code>(파일시스템 종류 표시), <code>df -i</code>(inode)를 함께 기억합니다.</p>
+<hr />
+<h3 id="4-mariadb-계정-관리--사용자는-이름이-아니라-이름호스트다">4. MariaDB 계정 관리 — 사용자는 "이름"이 아니라 "이름@호스트"다</h3>
+<h4 id="4-1-접속과-서버-버전">4-1. 접속과 서버 버전</h4>
+<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+Enter<span class="w"> </span>password:
+Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10</span>.11.14-MariaDB-0ubuntu0.24.04.1<span class="w"> </span>Ubuntu<span class="w"> </span><span class="m">24</span>.04
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>10.11</code></td>
+<td><strong>MariaDB 10.11 LTS</strong>. 2023-02-16 GA, 커뮤니티 지원 <strong>2028-02-16까지</strong></td>
+</tr>
+<tr>
+<td><code>.14</code></td>
+<td>패치 릴리스</td>
+</tr>
+<tr>
+<td><code>0ubuntu0.24.04.1</code></td>
+<td>Ubuntu가 패키징한 리비전</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>MariaDB 10.4부터 <code>root@localhost</code>는 <code>unix_socket</code> 인증이 기본</strong>입니다. OS의 root 권한으로 접속하면 비밀번호 없이 들어갈 수 있어서, 실무에서는 <code>sudo mariadb</code> 한 줄이면 됩니다. 오늘 <code>sudo mysql -u root -p</code>로 비밀번호까지 물은 것은 이 서버에 <code>mysql_native_password</code>가 함께 설정되어 있기 때문입니다(<code>mysql.user</code>의 root 행에 해시가 있음).</p>
+<p>또 MariaDB 10.5부터 <code>mysql*</code> 명령은 전부 <code>mariadb*</code>로 개명되었고 <code>mysql</code>은 <strong>심볼릭 링크</strong>입니다. 새 스크립트는 <code>mariadb</code>, <code>mariadb-dump</code>를 쓰는 편이 안전합니다.</p>
+</blockquote>
+<h4 id="4-2-계정-생성--같은-이름-세-개의-다른-계정">4-2. 계정 생성 — 같은 이름, 세 개의 다른 계정</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w">      </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w">              </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.100&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>세 문장 모두 <code>Query OK, 0 rows affected</code> — <strong>셋은 완전히 별개의 계정</strong>입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>호스트 표기</th>
+<th>매칭되는 접속</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'localhost'</code></td>
+<td><strong>유닉스 소켓 접속만</strong></td>
+<td>리눅스에서 <code>127.0.0.1</code>은 여기 매칭되지 <strong>않음</strong></td>
+</tr>
+<tr>
+<td><code>'127.0.0.1'</code></td>
+<td>TCP 루프백</td>
+<td><code>localhost</code>와 별개</td>
+</tr>
+<tr>
+<td><code>'%'</code></td>
+<td><strong>모든 호스트</strong></td>
+<td>원격 어디서든 접속 가능</td>
+</tr>
+<tr>
+<td><code>'192.168.16.100'</code></td>
+<td>해당 IP에서만</td>
+<td>가장 안전한 형태</td>
+</tr>
+<tr>
+<td><code>'192.168.16.%'</code></td>
+<td>해당 대역</td>
+<td><code>%</code>는 여러 글자, <code>_</code>는 한 글자 (LIKE 규칙)</td>
+</tr>
+<tr>
+<td><code>'192.168.16.0/255.255.255.0'</code></td>
+<td>넷마스크 표기</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="호스트를-생략하면-가-붙는다--오늘-실습의-핵심">호스트를 생략하면 <code>'%'</code>가 붙는다 — 오늘 실습의 핵심</h3>
+<p>MariaDB 공식 문서: <strong>계정명에서 호스트를 생략하면 <code>'%'</code>로 간주</strong>됩니다.
+즉 <code>CREATE USER test</code>는 <code>CREATE USER 'test'@'%'</code>이고, <code>DROP USER test</code>는 <code>DROP USER 'test'@'%'</code> 입니다. 4-5절에서 이 규칙이 실제 출력으로 드러납니다.</p>
+</blockquote>
+<h5 id="identified-by-vs-identified-by-password"><code>IDENTIFIED BY</code> vs <code>IDENTIFIED BY PASSWORD</code></h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>구문</th>
+<th>인자</th>
+<th>서버가 하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IDENTIFIED BY '1234'</code></td>
+<td><strong>평문 비밀번호</strong></td>
+<td>서버가 해시로 변환해 저장</td>
+</tr>
+<tr>
+<td><code>IDENTIFIED BY PASSWORD '*A4B6...'</code></td>
+<td><strong>이미 계산된 해시</strong></td>
+<td>그대로 저장</td>
+</tr>
+</tbody>
+</table></div>
+<p>둘 다 <code>mysql_native_password</code> / <code>mysql_old_password</code> 플러그인에서만 동작합니다.</p>
+<blockquote>
+<p>⚠️ <strong><code>1234</code>는 실습에서만.</strong> 평문 비밀번호는 <code>~/.mysql_history</code>와 서버의 general log에 남을 수 있습니다. 실무에서는 접속 계정에 <code>unix_socket</code>(로컬) 또는 <code>ed25519</code>(강한 해시) 플러그인을 씁니다.</p>
+</blockquote>
+<h4 id="4-3-mysql-데이터베이스--권한-정보가-사는-곳">4-3. <code>mysql</code> 데이터베이스 — 권한 정보가 사는 곳</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mysql</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span><span class="w">   </span><span class="c1">-- 31 rows</span>
+</code></pre></div>
+
+<p>31개 시스템 테이블을 성격별로 나누면 이렇습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>그룹</th>
+<th>테이블</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>계정·권한</strong></td>
+<td><code>global_priv</code>, <code>user</code>, <code>db</code>, <code>tables_priv</code>, <code>columns_priv</code>, <code>procs_priv</code>, <code>proxies_priv</code>, <code>roles_mapping</code></td>
+<td>권한 계층별 저장소</td>
+</tr>
+<tr>
+<td><strong>플러그인·루틴</strong></td>
+<td><code>plugin</code>, <code>func</code>, <code>proc</code>, <code>event</code>, <code>servers</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>통계(옵티마이저)</strong></td>
+<td><code>column_stats</code>, <code>index_stats</code>, <code>table_stats</code>, <code>innodb_index_stats</code>, <code>innodb_table_stats</code></td>
+<td>실행 계획 수립용</td>
+</tr>
+<tr>
+<td><strong>로그</strong></td>
+<td><code>general_log</code>, <code>slow_log</code></td>
+<td><code>log_output=TABLE</code>일 때 사용</td>
+</tr>
+<tr>
+<td><strong>복제</strong></td>
+<td><code>gtid_slave_pos</code></td>
+<td>GTID 기반 복제 위치</td>
+</tr>
+<tr>
+<td><strong>시간대</strong></td>
+<td><code>time_zone</code>, <code>time_zone_name</code>, <code>time_zone_transition</code>, <code>time_zone_transition_type</code>, <code>time_zone_leap_second</code></td>
+<td><code>mariadb-tzinfo-to-sql</code>로 채움</td>
+</tr>
+<tr>
+<td><strong>도움말</strong></td>
+<td><code>help_topic</code>, <code>help_category</code>, <code>help_keyword</code>, <code>help_relation</code></td>
+<td>클라이언트의 <code>help</code> 명령용</td>
+</tr>
+<tr>
+<td><strong>시스템 버저닝</strong></td>
+<td><code>transaction_registry</code></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="mysqluser-5">★ <code>mysql.user</code>는 테이블이 아니라 <strong>뷰</strong>다 (메모 보강 포인트 ⑤)</h5>
+<p><strong>MariaDB 10.4부터</strong> 모든 계정·비밀번호·전역 권한은 <strong><code>mysql.global_priv</code></strong> 테이블에 저장됩니다. <code>mysql.user</code>는 옛 애플리케이션과 모니터링 스크립트 호환을 위해 <strong>그 위에 만들어 둔 뷰</strong>입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>10.3 이하</th>
+<th>10.4 이상 (=오늘 서버)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실제 저장소</td>
+<td><code>mysql.user</code> 테이블</td>
+<td><strong><code>mysql.global_priv</code> 테이블</strong></td>
+</tr>
+<tr>
+<td><code>mysql.user</code></td>
+<td>테이블</td>
+<td><strong>뷰</strong></td>
+</tr>
+<tr>
+<td>저장 형식</td>
+<td>컬럼 나열</td>
+<td><strong>JSON</strong> (<code>Priv</code> 컬럼)</td>
+</tr>
+<tr>
+<td>뷰 정의자</td>
+<td>root</td>
+<td><strong><code>mariadb.sys</code></strong> (root 이름을 바꿔도 깨지지 않게)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="n">JSON_DETAILED</span><span class="p">(</span><span class="n">Priv</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">global_priv</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">User</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<p>이렇게 보면 인증 플러그인, 해시, 리소스 제한이 JSON 하나에 들어 있는 것이 보입니다. 인증 방식이 계정마다 복수로 존재할 수 있어 <strong>관계형 컬럼으로는 표현이 불가능</strong>해진 것이 구조 변경의 이유입니다.</p>
+<p><code>mysql.user</code> 목록에 있던 <code>mariadb.sys@localhost</code>가 바로 그 뷰의 정의자 계정이며, <strong>비밀번호가 비어 있지만 로그인 불가</strong>로 잠겨 있습니다.</p>
+<h4 id="4-4-계정-목록-조회">4-4. 계정 목록 조회</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="k">Host</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">User</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Password</span><span class="w">                                  </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">mariadb</span><span class="p">.</span><span class="n">sys</span><span class="w"> </span><span class="o">|</span><span class="w">                                           </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">root</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">invalid</span><span class="w">                                   </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">pmm</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="mi">8</span><span class="n">CBBE670408EA63553597AA7B53E33620C92A14D</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">test</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="n">test</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">16</span><span class="p">.</span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">test</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
+</code></pre></div>
+
+<p>이 한 장의 표에서 읽어야 할 것이 많습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>관찰</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code> 계정이 <strong>3행</strong></td>
+<td>이름이 같아도 호스트가 다르면 별개 계정</td>
+</tr>
+<tr>
+<td><code>test</code> 3개의 해시가 <strong>모두 동일</strong></td>
+<td>같은 비밀번호(<code>1234</code>)를 넣었기 때문. <strong>해시가 같으면 비밀번호가 같다</strong></td>
+</tr>
+<tr>
+<td><code>root</code>의 해시가 <code>test</code>와 <strong>동일</strong></td>
+<td>⚠️ <strong>root 비밀번호도 <code>1234</code>라는 뜻.</strong> 실습 환경이라도 매우 위험한 상태</td>
+</tr>
+<tr>
+<td><code>mysql@localhost</code>의 값이 <code>invalid</code></td>
+<td>진짜 해시가 아닌 <strong>로그인 불가 표식</strong>. <code>mysql</code> 계정은 <code>unix_socket</code> 전용이며 비밀번호 로그인이 봉인된 상태</td>
+</tr>
+<tr>
+<td><code>mariadb.sys</code>가 빈 문자열</td>
+<td>시스템 내부용 계정, 로그인 불가</td>
+</tr>
+<tr>
+<td><code>pmm@localhost</code></td>
+<td>8/27 실습에서 만든 Percona PMM 모니터링 계정이 그대로 남음</td>
+</tr>
+<tr>
+<td>해시가 <code>*</code>로 시작하고 41자</td>
+<td><code>mysql_native_password</code> 형식(SHA1 이중 해시). 16자 형식이면 구식 <code>mysql_old_password</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ <strong><code>Password</code> 컬럼은 뷰가 만들어주는 호환용 표시</strong>입니다. 실제 값은 <code>global_priv</code>의 JSON 안에 있고, 인증 플러그인이 <code>ed25519</code>면 이 컬럼이 비어 보일 수 있습니다. 계정 점검 시에는 아래를 씁니다.</p>
+<p><code>sql
+SELECT Host, User, plugin, authentication_string FROM mysql.user;</code></p>
+</blockquote>
+<h4 id="4-5--drop-user-test가-지운-것은-testlocalhost가-아니었다-메모-수정-포인트">4-5. ★ <code>DROP USER test</code>가 지운 것은 <code>test@localhost</code>가 아니었다 (메모 수정 포인트 ⑥)</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">                 </span><span class="c1">-- Query OK</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span>
+<span class="c1">-- → &#39;%&#39; | test 행이 사라짐. localhost·192.168.16.100은 그대로 남음</span>
+</code></pre></div>
+
+<p>메모만 보면 "<code>drop user test</code>로 test를 지웠다"로 읽히지만, 실제로 지워진 것은 <strong><code>test@'%'</code> 한 개뿐</strong>입니다. 이유는 4-2절의 규칙 그대로 — <strong>호스트 생략 시 <code>'%'</code>가 기본</strong>이기 때문입니다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="o">@</span><span class="n">localhost</span><span class="p">;</span><span class="w">       </span><span class="c1">-- 그다음 localhost 행이 사라짐</span>
+<span class="c1">-- 남은 것: 192.168.16.100 | test</span>
+</code></pre></div>
+
+<p>출력이 6행 → 5행으로 줄어드는 것이 그 증거입니다.</p>
+<blockquote>
+<h3 id="실무-규칙-계정-조작에는-항상-호스트를-명시한다">실무 규칙: 계정 조작에는 <strong>항상 호스트를 명시</strong>한다</h3>
+<p><code>sql
+DROP USER IF EXISTS 'test'@'%';
+DROP USER IF EXISTS 'test'@'localhost';
+DROP USER IF EXISTS 'test'@'192.168.16.100';</code></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>문법</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DROP USER [IF EXISTS] user [, user] ...</code></td>
+<td>여러 계정 동시 삭제</td>
+</tr>
+<tr>
+<td><code>IF EXISTS</code></td>
+<td>없는 계정이면 에러 대신 <strong>note</strong> 반환</td>
+</tr>
+<tr>
+<td>필요 권한</td>
+<td>전역 <code>CREATE USER</code> 또는 <code>mysql</code> DB의 <code>DELETE</code></td>
+</tr>
+<tr>
+<td>접속 중인 계정을 지우면</td>
+<td>경고와 함께 삭제되지만 <strong>기존 세션은 끊기지 않음</strong>. <code>FORCE</code>로 강제 종료 가능(Community 판에는 없음)</td>
+</tr>
+</tbody>
+</table></div>
+<p>삭제 후 <strong>기존 세션이 살아 있다</strong>는 점이 중요합니다. 유출 계정을 지웠다면 <code>SHOW PROCESSLIST</code> → <code>KILL &lt;id&gt;</code>까지 해야 실제로 끊깁니다.</p>
+</blockquote>
+<h4 id="4-6-메모-보강-접속-시-어떤-계정-행이-선택되는가--정렬-규칙">4-6. (메모 보강) 접속 시 어떤 계정 행이 선택되는가 — 정렬 규칙</h4>
+<p><code>test@'%'</code>와 <code>test@'192.168.16.100'</code>이 동시에 존재하면, <code>192.168.16.100</code>에서 접속했을 때 어느 쪽 권한이 적용될까요? <strong>더 구체적인 쪽</strong>입니다.</p>
+<p>서버는 기동 시 계정 목록을 메모리에 올리면서 <strong>구체적인 것이 앞에 오도록 정렬</strong>합니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>Host 형태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 (가장 구체적)</td>
+<td>리터럴 IP 주소, 리터럴 호스트명 (<code>192.168.16.100</code>, <code>localhost</code>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CIDR 표기 IP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>넷마스크 표기 IP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>와일드카드 패턴 (<code>%</code>, <code>192.168.%</code>)</td>
+</tr>
+<tr>
+<td>5 (가장 느슨)</td>
+<td>빈 문자열 <code>''</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>User 쪽도 <strong>이름이 있는 계정 → 익명 계정(빈 이름)</strong> 순입니다.</p>
+<blockquote>
+<p>⚠️ <strong>익명 계정의 함정</strong>: 빈 User 행이 먼저 매칭되면, 실제로 어떤 이름으로 접속했든 <strong>익명 사용자로 취급</strong>되어 그 세션 내내 권한이 익명 계정 기준으로 적용됩니다. "분명 권한을 줬는데 없다고 나온다"의 대표 원인입니다.</p>
+<p>진단은 한 줄이면 끝납니다.</p>
+<p><code>sql
+SELECT USER(), CURRENT_USER();</code></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>함수</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER()</code></td>
+<td>클라이언트가 <strong>주장한</strong> 사용자@접속호스트</td>
+</tr>
+<tr>
+<td><code>CURRENT_USER()</code></td>
+<td>서버가 <strong>실제로 매칭한</strong> 계정 행</td>
+</tr>
+</tbody>
+</table></div>
+<p>둘이 다르면 의도와 다른 계정 행을 탄 것입니다.</p>
+</blockquote>
+<hr />
+<h3 id="5-mariadb-권한-관리--grant--revoke--show-grants">5. MariaDB 권한 관리 — GRANT / REVOKE / SHOW GRANTS</h3>
+<h4 id="5-1-권한-부여">5-1. 권한 부여</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h5 id="on">권한 계층 — <code>ON</code> 뒤에 무엇을 쓰느냐가 범위를 정한다</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>표기</th>
+<th>범위</th>
+<th>저장 위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ON *.*</code></td>
+<td><strong>전역</strong> — 모든 DB의 모든 객체 + 관리 권한</td>
+<td><code>mysql.global_priv</code></td>
+</tr>
+<tr>
+<td><code>ON test.*</code></td>
+<td><strong>데이터베이스</strong> <code>test</code> 전체</td>
+<td><code>mysql.db</code></td>
+</tr>
+<tr>
+<td><code>ON test.books</code></td>
+<td><strong>테이블</strong> 하나</td>
+<td><code>mysql.tables_priv</code></td>
+</tr>
+<tr>
+<td><code>ON test.books(title)</code></td>
+<td><strong>컬럼</strong></td>
+<td><code>mysql.columns_priv</code></td>
+</tr>
+<tr>
+<td><code>ON PROCEDURE test.p1</code></td>
+<td><strong>저장 루틴</strong></td>
+<td><code>mysql.procs_priv</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>오늘 쓴 <code>ON test.*</code>는 데이터베이스 레벨이므로 <code>mysql.db</code>에 기록됩니다. <strong>전역 권한이 아닙니다.</strong></p>
+<h4 id="5-2-show-grants-출력-해부">5-2. <code>SHOW GRANTS</code> 출력 해부</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="p">;</span>
+<span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">root</span><span class="o">`@`</span><span class="n">localhost</span><span class="o">`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="n">PROXY</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w">                                        </span><span class="o">|</span>
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>줄</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GRANT ALL PRIVILEGES ON *.*</code></td>
+<td>root는 전역 최고 권한</td>
+</tr>
+<tr>
+<td><code>WITH GRANT OPTION</code></td>
+<td><strong>자기가 가진 권한을 남에게 넘겨줄 수 있음.</strong> 이것이 없으면 권한 위임 불가</td>
+</tr>
+<tr>
+<td><code>IDENTIFIED BY PASSWORD '*A4B6...'</code></td>
+<td>출력에 <strong>해시가 그대로 노출됨</strong> — 화면 공유·로그 캡처 시 주의</td>
+</tr>
+<tr>
+<td><code>GRANT PROXY ON ''@'%' TO root@localhost</code></td>
+<td>root가 <strong>아무 계정으로나 프록시 인증</strong>할 수 있다는 뜻. root의 만능 권한 중 하나</td>
+</tr>
+</tbody>
+</table></div>
+<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+
+<blockquote>
+<h3 id="grant-usage-on-가-항상-첫-줄에-나오는-이유"><code>GRANT USAGE ON *.*</code>가 항상 첫 줄에 나오는 이유</h3>
+<p><strong><code>USAGE</code>는 "아무 권한도 없음"을 뜻하는 자리표시자</strong>입니다. MariaDB 공식 문서의 표현 그대로 "USAGE 권한은 실질적 권한을 전혀 부여하지 않습니다."</p>
+<p>계정이 존재하면 최소한 <strong>서버에 접속할 자격</strong>은 있어야 하므로, 모든 계정은 전역 레벨에 USAGE 한 줄을 가집니다. 그래서 <code>SHOW GRANTS</code> 첫 줄은 사실상 <strong>"이 계정이 존재한다"는 선언</strong>이고, 그 뒤에 붙는 줄들이 진짜 권한입니다.</p>
+<p>USAGE 줄은 리소스 제한(<code>MAX_QUERIES_PER_HOUR</code> 등)이나 <code>REQUIRE SSL</code> 같은 계정 속성을 표시하는 자리이기도 합니다.</p>
+</blockquote>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>문법</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SHOW GRANTS;</code></td>
+<td>내 권한</td>
+</tr>
+<tr>
+<td><code>SHOW GRANTS FOR CURRENT_USER;</code></td>
+<td>위와 동일(명시적)</td>
+</tr>
+<tr>
+<td><code>SHOW GRANTS FOR 'hong'@'%';</code></td>
+<td>특정 계정 — <strong>호스트 생략 시 <code>'%'</code></strong></td>
+</tr>
+<tr>
+<td><code>SHOW GRANTS FOR 역할명;</code></td>
+<td>역할(role)의 권한</td>
+</tr>
+</tbody>
+</table></div>
+<p>남의 권한을 보려면 <code>mysql</code> DB에 대한 <code>SELECT</code> 권한이 필요합니다.</p>
+<h4 id="5-3-revoke--권한만-뺀다-계정은-남는다-메모-보강-포인트">5-3. <code>REVOKE</code> — 권한만 뺀다, 계정은 남는다 (메모 보강 포인트 ⑦)</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+
+<span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="o">|</span>
+<span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span>
+</code></pre></div>
+
+<p>두 줄이던 것이 <strong>한 줄로 줄었고, USAGE만 남았습니다.</strong> 이 출력이 REVOKE의 성격을 정확히 보여줍니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REVOKE ... ON test.* FROM ...</code></td>
+<td>해당 범위 권한만 제거. <strong>계정과 비밀번호는 그대로</strong></td>
+</tr>
+<tr>
+<td><code>REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'hong'@'%';</code></td>
+<td>전역·DB·테이블·컬럼·루틴 권한을 <strong>전부</strong> 제거. 그래도 <strong>USAGE는 남아 접속은 됨</strong></td>
+</tr>
+<tr>
+<td><code>DROP USER 'hong'@'%';</code></td>
+<td><strong>계정 자체를 삭제</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ <strong>"권한을 다 뺐으니 안전하다"는 착각.</strong> REVOKE만 하면 계정은 살아 있어 <strong>로그인은 계속 됩니다.</strong> 접속 자체를 막으려면 <code>DROP USER</code>, 또는 잠시 막을 거라면 <code>ALTER USER 'hong'@'%' ACCOUNT LOCK;</code> 을 씁니다.</p>
+<p><code>REVOKE ALL PRIVILEGES, GRANT OPTION FROM user</code> 구문에는 <strong><code>ON *.*</code>를 쓰면 에러</strong>입니다. 문법이 다릅니다.</p>
+</blockquote>
+<h4 id="5-4-오늘-만든-계정의-보안-문제-정리">5-4. 오늘 만든 계정의 보안 문제 정리</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>문제</th>
+<th>왜 위험한가</th>
+<th>실무 대안</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'test'@'%'</code>, <code>'hong'@'%'</code></td>
+<td><strong>인터넷 어디서든</strong> 접속 시도 가능. 3306이 열려 있으면 자동화 봇의 표적</td>
+<td><code>'app'@'10.0.1.%'</code>처럼 <strong>대역을 좁힘</strong>. 서버는 <code>bind-address</code>로 청취 대상 제한</td>
+</tr>
+<tr>
+<td>비밀번호 <code>1234</code></td>
+<td>사전 공격 즉시 뚫림. root도 같은 해시</td>
+<td>20자 이상 랜덤. 로컬 관리자는 <code>unix_socket</code></td>
+</tr>
+<tr>
+<td><code>GRANT ALL PRIVILEGES ON test.*</code></td>
+<td>애플리케이션 계정에 <code>DROP</code>, <code>ALTER</code>, <code>CREATE</code>까지 부여됨</td>
+<td>앱 계정은 <code>SELECT, INSERT, UPDATE, DELETE</code>만</td>
+</tr>
+<tr>
+<td><code>mysql_native_password</code></td>
+<td>SHA1 이중 해시 — 현대 기준으로 약함</td>
+<td><code>ed25519</code> 플러그인</td>
+</tr>
+<tr>
+<td>root 비밀번호가 test와 동일</td>
+<td>실습 계정 하나가 뚫리면 root까지 추측됨</td>
+<td>계정별로 다른 비밀번호</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3 id="6-뷰view-실습에서-난-에러--error-1146">6. 뷰(VIEW) 실습에서 난 에러 — <code>ERROR 1146</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">MariaDB</span><span class="w"> </span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ava</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="n">ERROR</span><span class="w"> </span><span class="mi">1146</span><span class="w"> </span><span class="p">(</span><span class="mi">42</span><span class="n">S02</span><span class="p">):</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="s1">&#39;mysql.books&#39;</span><span class="w"> </span><span class="n">doesn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">exist</span>
+
+<span class="n">MariaDB</span><span class="w"> </span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
+<span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="n">affected</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
+</code></pre></div>
+
+<h4 id="6-1-에러-메시지가-이미-원인을-말하고-있다">6-1. 에러 메시지가 이미 원인을 말하고 있다</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ERROR 1146</code></td>
+<td>MariaDB 에러 번호 — 테이블 없음</td>
+</tr>
+<tr>
+<td><code>(42S02)</code></td>
+<td>SQLSTATE 표준 코드. <code>42S02</code> = 기본 테이블/뷰 없음</td>
+</tr>
+<tr>
+<td><strong><code>Table 'mysql.books'</code></strong></td>
+<td>★ <strong><code>mysql</code> 데이터베이스에서 <code>books</code>를 찾았다</strong>는 뜻</td>
+</tr>
+</tbody>
+</table></div>
+<p>원인은 <strong>현재 접속 DB가 <code>mysql</code>이었기 때문</strong>입니다. 앞에서 <code>USE mysql;</code>을 했고 그대로 뷰를 만들려 했으므로, 스키마를 안 쓴 <code>books</code>가 <code>mysql.books</code>로 해석된 것입니다.</p>
+<h4 id="6-2-세-가지가-동시에-틀렸다-메모-수정-포인트">6-2. 세 가지가 동시에 틀렸다 (메모 수정 포인트 ⑧)</h4>
+<p><code>books</code> 테이블은 <strong>8/27 실습에서 <code>library</code> 데이터베이스에 만든 것</strong>이고, 컬럼은 <code>id, title, author, published_year, available</code> 이었습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>틀린 곳</th>
+<th>메모</th>
+<th>올바른 값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데이터베이스</td>
+<td><code>mysql</code>에 접속한 상태</td>
+<td><code>library</code></td>
+</tr>
+<tr>
+<td>컬럼</td>
+<td><code>name</code></td>
+<td><code>title</code></td>
+</tr>
+<tr>
+<td>컬럼</td>
+<td><code>ava</code></td>
+<td><code>available</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>따라서 의도한 문장은 이것입니다.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+
+<span class="c1">-- 또는 DB를 바꾸지 않고 스키마를 명시</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">library</span><span class="p">.</span><span class="n">v_books</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">library</span><span class="p">.</span><span class="n">books</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+
+<blockquote>
+<p>컬럼명 확인은 <code>DESC books;</code> 또는 <code>SHOW COLUMNS FROM books;</code> 한 줄이면 됩니다. <strong>뷰를 만들기 전에 원본 테이블 구조를 먼저 보는 것</strong>이 순서입니다.</p>
+</blockquote>
+<h4 id="6-3-drop-view-if-exists의-1-warning">6-3. <code>DROP VIEW IF EXISTS</code>의 "1 warning"</h4>
+<div class="codehilite"><pre><span></span><code>Query OK, 0 rows affected, 1 warning (0.000 sec)
+</code></pre></div>
+
+<p><code>v_books</code>는 만들어진 적이 없으므로 지울 것이 없습니다. <code>IF EXISTS</code>가 있어 <strong>에러 대신 note</strong>가 발생했고, 그것이 <code>1 warning</code>으로 집계된 것입니다. 내용은 <code>SHOW WARNINGS;</code>로 볼 수 있습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DROP VIEW [IF EXISTS] v1 [, v2] ...</code></td>
+<td>여러 뷰 동시 삭제</td>
+</tr>
+<tr>
+<td><code>IF EXISTS</code> 없을 때</td>
+<td>없는 뷰를 지정하면 <strong>에러</strong>. 단 목록의 나머지 존재하는 뷰는 삭제됨</td>
+</tr>
+<tr>
+<td><code>IF EXISTS</code> 있을 때</td>
+<td>없는 뷰마다 <strong>NOTE</strong> 발생</td>
+</tr>
+<tr>
+<td>필요 권한</td>
+<td>각 뷰에 대한 <code>DROP</code> 권한</td>
+</tr>
+<tr>
+<td>원자성</td>
+<td>MariaDB 10.6.1+에서 뷰 1개 삭제는 원자적, 여러 개는 크래시 세이프</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>뷰를 고칠 때는 지우고 다시 만들 필요 없이 <strong><code>CREATE OR REPLACE VIEW</code></strong> 를 씁니다. 참조 중인 다른 뷰가 있을 때 원본을 지우면, 남은 뷰는 다음 조회 시 "invalid table(s) or column(s)" 에러를 냅니다.</p>
+</blockquote>
+<hr />
+<h3 id="7-kali-linux-초기-설정">7. Kali Linux 초기 설정</h3>
+<h4 id="7-1-프롬프트-색으로-계정-구분하기-메모-수정-포인트">7-1. 프롬프트 색으로 계정 구분하기 (메모 수정 포인트 ⑨)</h4>
+<p>메모: <code>빨간 터미널 -&gt; rootShell</code>, <code>파란 터미널 -&gt; PowerShell</code></p>
+<ul>
+<li><strong>빨강 = root 셸</strong>: 맞습니다.</li>
+<li><strong>파랑 = PowerShell</strong>: <strong>틀렸습니다.</strong> 파란색은 <strong>일반 사용자(kali) 셸</strong>입니다.</li>
+</ul>
+<p>Kali는 2020.3 릴리스에서 <strong>비 root 사용자 프롬프트 색을 빨강에서 파랑으로 변경</strong>했고, 2020.4부터 <strong>기본 셸이 zsh</strong>입니다. 오늘 실습 출력의 프롬프트가 그 zsh 프롬프트입니다.</p>
+<div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
+└─$
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kali</code></td>
+<td>사용자명</td>
+</tr>
+<tr>
+<td><code>㉿</code></td>
+<td>Kali 로고 문자 (<code>@</code> 자리)</td>
+</tr>
+<tr>
+<td><code>kali-Attacker</code></td>
+<td>호스트명 — 이 VM의 역할이 "공격자"임을 드러냄</td>
+</tr>
+<tr>
+<td><code>[~]</code></td>
+<td>현재 디렉터리 (홈)</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td><strong>일반 사용자.</strong> root면 <code>#</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>가장 확실한 판별은 색이 아니라 기호와 명령입니다.</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>일반 사용자</th>
+<th>root</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>프롬프트 끝 기호</td>
+<td><code>$</code></td>
+<td><code>#</code></td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td><code>kali</code></td>
+<td><code>root</code></td>
+</tr>
+<tr>
+<td><code>id -u</code></td>
+<td><code>1000</code></td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>색상은 <code>.zshrc</code>/<code>.bashrc</code>로 얼마든지 바뀌므로 신뢰할 근거가 아닙니다. <code>kali-tweaks</code>로도 프롬프트를 변경할 수 있습니다.</p>
+</blockquote>
+<p>메모의 <code>계정명: kali / 비번 1234</code> — Kali 공식 이미지의 기본 자격증명은 <code>kali:kali</code>이며, <code>1234</code>는 이 실습 VM에서 바꾼 값으로 보입니다. <strong>실습 VM 한정 정보</strong>로 기록합니다.</p>
+<h4 id="7-2-ip-수동-설정-전-중복-확인-메모-보강-포인트">7-2. IP 수동 설정 전 중복 확인 (메모 보강 포인트 ⑩)</h4>
+<p>메모: <code>ping을 해서 응답이 없는 IP를 할당해야한다.</code></p>
+<p>방향은 맞지만 <strong>ping 무응답은 "비어 있다"의 충분조건이 아닙니다.</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>왜 불충분한가</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>방화벽이 ICMP를 차단하면 살아 있어도 무응답 (<code>net.ipv4.icmp_echo_ignore_all=1</code>이면 바로 그런 상태)</td>
+</tr>
+<tr>
+<td>잠시 꺼져 있는 장비의 IP를 뺏으면, 그 장비가 켜질 때 <strong>IP 충돌</strong></td>
+</tr>
+<tr>
+<td>DHCP 풀 범위 안의 주소를 고정으로 쓰면 나중에 충돌</td>
+</tr>
+</tbody>
+</table></div>
+<p>더 확실한 확인 방법:</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">192</span>.168.16.50<span class="w">   </span><span class="c1"># -D: 중복 주소 탐지(ARP 기반, ICMP 차단과 무관)</span>
+sudo<span class="w"> </span>nmap<span class="w"> </span>-sn<span class="w"> </span><span class="m">192</span>.168.16.0/24<span class="w">               </span><span class="c1"># 대역 전체 살아있는 호스트 스캔</span>
+ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w">                                </span><span class="c1"># ARP 캐시에 이미 보이는 이웃</span>
+arp<span class="w"> </span>-a
+</code></pre></div>
+
+<blockquote>
+<p>가장 안전한 것은 <strong>네트워크 관리자에게 할당 가능 대역을 확인</strong>하거나, 라우터의 <strong>DHCP 예약(고정 할당)</strong> 을 쓰는 것입니다. ARP는 L2에서 동작해 방화벽 정책의 영향을 거의 받지 않으므로 ping보다 신뢰도가 높습니다.</p>
+</blockquote>
+<h4 id="7-3-네트워크-인터페이스-확인">7-3. 네트워크 인터페이스 확인</h4>
+<div class="codehilite"><pre><span></span><code>ifconfig
+ip<span class="w"> </span>ad<span class="w">          </span><span class="c1"># = ip addr = ip address show</span>
+</code></pre></div>
+
+<p>메모: <code>eth0 &gt; 랜카드 이름</code></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eth0</code></td>
+<td>Kali의 NIC 이름. <strong>VM 환경에서 흔한 전통적 이름</strong></td>
+</tr>
+<tr>
+<td>Ubuntu 서버의 <code>enp0s3</code></td>
+<td>systemd의 <strong>예측 가능한 인터페이스 이름</strong>(Predictable Network Interface Names) 규칙: <code>en</code>(ethernet) + <code>p0</code>(PCI 버스 0) + <code>s3</code>(슬롯 3)</td>
+</tr>
+<tr>
+<td>두 방식의 차이</td>
+<td><code>eth0</code>은 부팅마다 순서가 바뀔 수 있고, <code>enp0s3</code>은 하드웨어 위치 기반이라 고정</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ <strong><code>ifconfig</code>는 유지보수가 끝난 도구</strong>입니다(net-tools 패키지). 최신 배포판에는 기본 설치조차 안 되어 있는 경우가 많고, 여러 IP·정책 라우팅·VRF 등 현대 기능을 표시하지 못합니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옛 명령 (net-tools)</th>
+<th>현재 표준 (iproute2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ifconfig</code></td>
+<td><code>ip addr</code> / <code>ip a</code></td>
+</tr>
+<tr>
+<td><code>ifconfig eth0 up/down</code></td>
+<td><code>ip link set eth0 up/down</code></td>
+</tr>
+<tr>
+<td><code>route -n</code></td>
+<td><code>ip route</code> / <code>ip r</code></td>
+</tr>
+<tr>
+<td><code>arp -a</code></td>
+<td><code>ip neigh</code></td>
+</tr>
+<tr>
+<td><code>netstat -tulpn</code></td>
+<td><code>ss -tulpn</code></td>
+</tr>
+<tr>
+<td><code>netstat -i</code></td>
+<td><code>ip -s link</code></td>
+</tr>
+</tbody>
+</table></div>
+</blockquote>
+<h4 id="7-4-패키지-갱신-순서-메모-수정-포인트">7-4. 패키지 갱신 순서 (메모 수정 포인트 ⑪)</h4>
+<p>메모에는 이 순서로 적혀 있습니다.</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul<span class="w">     </span><span class="c1"># ← 먼저 install</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+</code></pre></div>
+
+<p><strong>순서가 뒤바뀌었습니다.</strong> <code>apt update</code>로 패키지 목록을 먼저 받아야 설치가 최신 버전을 찾습니다. 특히 Kali는 <strong>롤링 릴리스</strong>라 목록이 며칠만 지나도 404를 냅니다.</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w">           </span><span class="c1"># 저장소 목록 갱신 → /var/lib/apt/lists/</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade<span class="w">     </span><span class="c1"># Kali 공식 권장. 의존성 변화까지 처리</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>&lt;패키지&gt;
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apt update</code></td>
+<td>소스 목록에서 <strong>패키지 색인만</strong> 다시 받음. 설치·업그레이드는 안 함</td>
+</tr>
+<tr>
+<td><code>apt upgrade</code></td>
+<td>이미 설치된 패키지를 최신으로. <strong>패키지 제거·신규 설치는 하지 않음</strong></td>
+</tr>
+<tr>
+<td><code>apt full-upgrade</code> (= <code>dist-upgrade</code>)</td>
+<td>의존성이 바뀌면 <strong>필요 시 제거·설치까지 수행</strong>. 롤링 배포판에 적합</td>
+</tr>
+<tr>
+<td><code>apt install ./file.deb</code></td>
+<td><strong>로컬 .deb 파일 설치.</strong> 경로에 <code>./</code>가 필요</td>
+</tr>
+<tr>
+<td><code>apt clean</code></td>
+<td><code>/var/cache/apt/archives/</code>와 <code>partial/</code>의 받아둔 .deb 삭제</td>
+</tr>
+<tr>
+<td><code>apt autoclean</code></td>
+<td>더 이상 받을 수 없는 낡은 .deb만 삭제</td>
+</tr>
+<tr>
+<td><code>apt autoremove</code></td>
+<td>자동 설치됐다가 이제 필요 없어진 의존 패키지 제거</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="7-5--apt-lock-문제--원인과-올바른-해결-메모-수정-포인트">7-5. ★ apt lock 문제 — 원인과 올바른 해결 (메모 수정 포인트 ⑫)</h4>
+<p>메모: <code>다운로드 중 lock이 걸리면 캐시 삭제하기 / 백그라운드에서 apt가 돌고있거나 중간에 중단하면 lock이 걸림</code></p>
+<p><strong>원인 진단은 정확합니다.</strong> 다만 해결 순서와 명령이 위험합니다.</p>
+<h5 id="4-2_1">잠금 파일은 4개이며, 메모에는 핵심 2개가 빠져 있다</h5>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>잠금 파일</th>
+<th>누가 잡나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/var/lib/dpkg/lock-frontend</code></td>
+<td><strong>dpkg 프런트엔드 — 실무에서 가장 자주 걸리는 것</strong></td>
+</tr>
+<tr>
+<td><code>/var/lib/dpkg/lock</code></td>
+<td>dpkg 데이터베이스</td>
+</tr>
+<tr>
+<td><code>/var/lib/apt/lists/lock</code></td>
+<td><code>apt update</code> 중 색인 갱신</td>
+</tr>
+<tr>
+<td><code>/var/cache/apt/archives/lock</code></td>
+<td>.deb 다운로드 중</td>
+</tr>
+</tbody>
+</table></div>
+<p>메모가 지운 것은 뒤의 두 개뿐이라, <code>lock-frontend</code>가 걸린 상황(가장 흔한 경우)은 해결되지 않습니다.</p>
+<h5 id="sudo-kill-apt-apt-get"><code>sudo kill apt apt-get</code>은 동작하지 않는다</h5>
+<p><code>kill</code>은 <strong>PID(숫자)</strong> 를 받습니다. 이름을 주면 <code>kill: apt: arguments must be process or job IDs</code> 에러입니다. 프로세스 이름으로 죽이려면 <code>pkill</code> 또는 <code>killall</code>입니다.</p>
+<h5 id="_7">올바른 순서 — 무작정 지우기 전에 "정말 아무도 안 쓰는지" 확인</h5>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1) 누가 잡고 있는지 먼저 본다 (가장 중요)</span>
+sudo<span class="w"> </span>lsof<span class="w"> </span>/var/lib/dpkg/lock-frontend
+sudo<span class="w"> </span>fuser<span class="w"> </span>-v<span class="w"> </span>/var/lib/dpkg/lock-frontend
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;apt|dpkg|unattended&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
+
+<span class="c1"># 2) 자동 업데이트라면 그냥 기다린다 (Kali/Ubuntu의 unattended-upgrades)</span>
+<span class="c1">#    보통 1~2분 안에 끝남</span>
+
+<span class="c1"># 3) 그래도 남아 있고, 확실히 유령 프로세스라면 종료</span>
+sudo<span class="w"> </span>pkill<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;apt|apt-get&#39;</span><span class="w">          </span><span class="c1"># 우선 TERM</span>
+sudo<span class="w"> </span>pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;apt|apt-get&#39;</span><span class="w">       </span><span class="c1"># 그래도 안 죽으면 KILL</span>
+
+<span class="c1"># 4) 잠금 파일 제거 (3번 이후에만!)</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/dpkg/lock-frontend
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/dpkg/lock
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/apt/lists/lock
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/cache/apt/archives/lock
+
+<span class="c1"># 5) 중단된 설치가 있으면 복구 — 이 단계를 빼먹으면 안 됨</span>
+sudo<span class="w"> </span>dpkg<span class="w"> </span>--configure<span class="w"> </span>-a
+sudo<span class="w"> </span>apt<span class="w"> </span>--fix-broken<span class="w"> </span>install
+
+<span class="c1"># 6) 다시 시도</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+</code></pre></div>
+
+<blockquote>
+<h3 id="dpkg-동작-중에-잠금-파일을-지우면-패키지-db가-깨진다">⚠️ dpkg 동작 <strong>중</strong>에 잠금 파일을 지우면 패키지 DB가 깨진다</h3>
+<p>잠금은 버그가 아니라 <strong>동시 실행을 막는 안전장치</strong>입니다. dpkg가 파일을 설치하는 도중에 죽이고 잠금을 지우면 <code>/var/lib/dpkg/status</code>가 반쯤 갱신된 상태로 남아, 이후 모든 apt 작업이 실패할 수 있습니다.</p>
+<p>그래서 순서가 <strong>① 확인 → ② 대기 → ③ 종료 → ④ 잠금 삭제 → ⑤ <code>dpkg --configure -a</code> 복구</strong> 여야 합니다. 메모처럼 곧바로 ④로 가면 안 됩니다.</p>
+</blockquote>
+<p>메모의 <code>sudo apt clean</code>은 <strong>잠금 해제와는 무관</strong>합니다. <code>apt clean</code>은 받아둔 .deb 캐시를 지우는 명령이며(디스크 확보에는 유용), 잠금 파일은 건드리지 않습니다. <code>sudo ls /var/lib/apt/lists</code>는 색인 파일 목록을 눈으로 확인한 것으로, 진단 단계로는 타당합니다.</p>
+<h4 id="7-6-chrome-설치-메모-수정-포인트">7-6. Chrome 설치 (메모 수정 포인트 ⑬)</h4>
+<p>메모:</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google.com/linux/direct/google-chrome-stable_current_amd64.deb
+</code></pre></div>
+
+<p>두 줄 다 손볼 곳이 있습니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>문제</th>
+<th>설명</th>
+<th>수정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sudo wget</code></td>
+<td>홈 디렉터리에 받는 데 root 권한이 <strong>불필요</strong>. root 소유 파일이 생겨 나중에 지우기 번거로움</td>
+<td><code>wget</code> (sudo 없이)</td>
+</tr>
+<tr>
+<td>설치 경로가 URL 조각</td>
+<td><code>./google.com/linux/direct/...</code> 라는 <strong>로컬 디렉터리는 존재하지 않음.</strong> wget은 현재 디렉터리에 파일명만 저장함</td>
+<td><code>./google-chrome-stable_current_amd64.deb</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>올바른 절차:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/Downloads
+wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google-chrome-stable_current_amd64.deb
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>포인트</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>./</code>가 반드시 필요</strong></td>
+<td>없으면 apt가 이것을 <strong>패키지 이름</strong>으로 해석해 저장소에서 찾다가 실패</td>
+</tr>
+<tr>
+<td><code>apt install</code> (not <code>dpkg -i</code>)</td>
+<td>apt는 <strong>의존성을 자동 해결</strong>. <code>dpkg -i</code>는 의존성이 빠지면 설정 실패 상태로 남고 <code>apt -f install</code>을 또 해야 함</td>
+</tr>
+<tr>
+<td>저장소 자동 등록</td>
+<td>Chrome 패키지는 설치 시 <code>/etc/apt/sources.list.d/google-chrome.list</code>와 서명 키를 등록해, 이후 <code>apt upgrade</code>로 자동 갱신됨</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ <strong>Chrome은 root로 실행되지 않습니다.</strong> Kali에서 root 계정으로 로그인해 chrome을 띄우면 거부됩니다. 일반 사용자(kali)로 실행하거나, 오픈소스 판인 <strong>Chromium</strong>(<code>sudo apt install chromium</code>)을 쓰는 것이 Kali에서는 더 무난합니다.</p>
+<p>Google 리눅스 패키지는 <code>EB4C 1BFD 4F04 2F6D DDCC EC91 7721 F63B D38B 4796</code> 키로 서명되며, 대부분 패키지가 이 키를 자동 등록합니다.</p>
+</blockquote>
+<h4 id="7-7-한글-입력과-폰트-메모-수정-포인트">7-7. 한글 입력과 폰트 (메모 수정 포인트 ⑭)</h4>
+<p>메모:</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-ui-classic
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-libs
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum*
+</code></pre></div>
+
+<blockquote>
+<h3 id="fcitx4버전는-debian에서-제거되었습니다">⚠️ <code>fcitx</code>(4버전)는 Debian에서 제거되었습니다</h3>
+<p>Debian 패키지 추적 기준으로 <strong><code>fcitx-hangul</code>은 2026-07-07에 testing에서 제거</strong>되었고, 현재 개발 저장소에 없습니다. Kali는 Debian testing 기반이므로 <strong><code>sudo apt install fcitx-hangul</code>은 지금 실패할 가능성이 높습니다.</strong></p>
+<p>후속 프로젝트는 <strong>fcitx5</strong>입니다.</p>
+</blockquote>
+<p>현재 기준 올바른 설치:</p>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx5<span class="w"> </span>fcitx5-hangul<span class="w"> </span>fcitx5-config-qt
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum<span class="w"> </span>fonts-nanum-coding<span class="w"> </span>fonts-noto-cjk
+
+<span class="c1"># 입력기 프레임워크를 fcitx5로 지정</span>
+im-config<span class="w"> </span>-n<span class="w"> </span>fcitx5
+<span class="c1"># 로그아웃 후 재로그인 (또는 재부팅) — 환경변수가 다시 읽혀야 적용됨</span>
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fcitx5</code></td>
+<td>입력기 프레임워크 본체</td>
+</tr>
+<tr>
+<td><code>fcitx5-hangul</code></td>
+<td>한글 입력 엔진(libhangul 기반)</td>
+</tr>
+<tr>
+<td><code>fcitx5-config-qt</code></td>
+<td>GUI 설정 도구 — 한/영 전환 키를 여기서 지정</td>
+</tr>
+<tr>
+<td><code>im-config -n fcitx5</code></td>
+<td><code>XMODIFIERS</code>, <code>GTK_IM_MODULE</code> 등 환경변수를 fcitx5로 설정</td>
+</tr>
+<tr>
+<td><code>fonts-nanum*</code></td>
+<td>셸이 <code>*</code>를 <strong>파일 glob으로 먼저 해석</strong>하려 시도하므로, 안전하게는 따옴표(<code>'fonts-nanum*'</code>)를 쓰거나 패키지를 명시적으로 나열</td>
+</tr>
+<tr>
+<td><code>fonts-noto-cjk</code></td>
+<td>한중일 통합 폰트. 한글 렌더링 누락이 가장 적음</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>한글이 깨져 보이는 것(폰트)과 한글을 못 치는 것(입력기)은 다른 문제</strong>입니다. 폰트만 깔면 표시는 되지만 입력은 안 되고, 입력기만 깔면 입력은 되지만 글자가 □로 보일 수 있습니다. 둘 다 필요합니다.</p>
+</blockquote>
+<h4 id="7-8-ping--출력-완전-해석">7-8. <code>ping</code> — 출력 완전 해석</h4>
+<div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
+└─$ ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=108 time=69.7 ms
+...
+^C
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 68.620/69.005/69.740/0.450 ms
+</code></pre></div>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>56(84) bytes</code></td>
+<td>ICMP 데이터 <strong>56바이트</strong> + ICMP 헤더 8 = 64, + IP 헤더 20 = <strong>84바이트</strong>. <code>-s</code>의 기본값이 56</td>
+</tr>
+<tr>
+<td><code>64 bytes from</code></td>
+<td>돌아온 ICMP 페이로드+헤더 크기</td>
+</tr>
+<tr>
+<td><code>icmp_seq=1</code></td>
+<td>순번. <strong>건너뛴 번호가 있으면 그 패킷이 유실된 것</strong></td>
+</tr>
+<tr>
+<td><code>ttl=108</code></td>
+<td><strong>응답 패킷에 남은 TTL.</strong> 아래 설명 참조</td>
+</tr>
+<tr>
+<td><code>time=69.7 ms</code></td>
+<td>왕복 시간(RTT)</td>
+</tr>
+<tr>
+<td><code>time 3004ms</code></td>
+<td>첫 패킷부터 마지막까지 걸린 전체 시간. 기본 간격 1초 × 3 = 약 3초</td>
+</tr>
+<tr>
+<td><code>rtt min/avg/max/mdev</code></td>
+<td>최소/평균/최대/<strong>편차</strong>. mdev는 각 RTT가 평균에서 떨어진 정도의 평균</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="ttl108로-홉-수-추정하기"><code>ttl=108</code>로 홉 수 추정하기</h3>
+<p>TTL은 라우터를 지날 때마다 1씩 줄어듭니다. 출발지 OS의 초기 TTL은 관례적으로 <strong>Linux/macOS 64, Windows 128, 일부 네트워크 장비 255</strong> 입니다.</p>
+<p><code>108</code>은 128에서 20 줄어든 값에 가까우므로 <strong>약 20홉을 거쳐 왔다</strong>고 추정할 수 있습니다. 정확한 경로는 <code>traceroute 8.8.8.8</code>(또는 <code>mtr 8.8.8.8</code>)로 확인합니다.</p>
+<p>⚠️ 추정일 뿐입니다. 중간 장비가 TTL을 조작하거나 터널을 쓰면 어긋납니다.</p>
+</blockquote>
+<h5 id="-c-4"><code>-c 4</code>의 의미와 자주 쓰는 옵션</h5>
+<p>메모의 두 실행은 결과가 사실상 같지만 <strong>끝나는 방식이 다릅니다.</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>실행</th>
+<th>종료 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ping 8.8.8.8</code></td>
+<td><strong>무한 반복.</strong> <code>Ctrl+C</code>(출력의 <code>^C</code>)로 직접 중단</td>
+</tr>
+<tr>
+<td><code>ping -c 4 8.8.8.8</code></td>
+<td>4개 보내고 <strong>자동 종료</strong>. 스크립트·자동화에 필수</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-c N</code></td>
+<td>N개 보내고 종료</td>
+</tr>
+<tr>
+<td><code>-i N</code></td>
+<td>전송 간격(초). 기본 1초. <strong>2ms 미만은 root만</strong></td>
+</tr>
+<tr>
+<td><code>-s N</code></td>
+<td>데이터 크기(기본 56). MTU 문제 진단에 사용</td>
+</tr>
+<tr>
+<td><code>-W N</code></td>
+<td>응답 대기 시간(초)</td>
+</tr>
+<tr>
+<td><code>-t N</code></td>
+<td>보내는 패킷의 TTL 설정</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>이름 해석 안 함(DNS 지연 배제)</td>
+</tr>
+<tr>
+<td><code>-D</code></td>
+<td>각 줄에 타임스탬프 출력</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<h3 id="ping이-안-될-때-원인을-좁히는-순서">ping이 안 될 때 원인을 좁히는 순서</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>8.8.8.8</code>은 되는데 도메인은 안 됨</td>
+<td><strong>DNS 문제</strong> — <code>/etc/resolv.conf</code> 확인</td>
+</tr>
+<tr>
+<td>게이트웨이는 되는데 <code>8.8.8.8</code>은 안 됨</td>
+<td>라우팅/NAT/외부 방화벽</td>
+</tr>
+<tr>
+<td>게이트웨이도 안 됨</td>
+<td>L2 문제 — 케이블/VM 네트워크 어댑터 모드/IP·넷마스크</td>
+</tr>
+<tr>
+<td>전부 무응답인데 실제로는 통신됨</td>
+<td>상대가 ICMP 차단(<code>icmp_echo_ignore_all=1</code>) — <strong>ping 실패 = 호스트 다운이 아님</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>진단 순서: <code>ip a</code>(내 IP) → <code>ip r</code>(기본 게이트웨이) → <code>ping &lt;게이트웨이&gt;</code> → <code>ping 8.8.8.8</code> → <code>ping google.com</code> → <code>cat /etc/resolv.conf</code></p>
+</blockquote>
+<hr />
+<h3 id="8-전체-실습-명령-시트">8. 전체 실습 명령 시트</h3>
+<h4 id="8-1-메모리커널시스템-정보">8-1. 메모리·커널·시스템 정보</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 메모리</span>
+free<span class="w"> </span>-h<span class="w">                    </span><span class="c1"># 권장 (사람 단위)</span>
+free<span class="w"> </span>-m<span class="w">                    </span><span class="c1"># MiB</span>
+free<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span><span class="m">2</span><span class="w">               </span><span class="c1"># 2초 간격 반복</span>
+cat<span class="w"> </span>/proc/meminfo
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^(MemTotal|MemAvailable|SwapTotal|SwapFree):&#39;</span><span class="w"> </span>/proc/meminfo
+swapon<span class="w"> </span>--show<span class="w">              </span><span class="c1"># 스왑 장치 목록</span>
+
+<span class="c1"># 커널 파라미터</span>
+sysctl<span class="w"> </span>-a<span class="w">                          </span><span class="c1"># 전체</span>
+sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>swap
+sysctl<span class="w"> </span>vm.swappiness<span class="w">               </span><span class="c1"># 하나만 조회</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span><span class="w">    </span><span class="c1"># 임시 변경 (재부팅 시 소실)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.swappiness = 40&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/99-swappiness.conf
+sudo<span class="w"> </span>sysctl<span class="w"> </span>--system<span class="w">               </span><span class="c1"># 영구 설정 즉시 반영</span>
+sysctl<span class="w"> </span>--dry-run<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">10</span><span class="w">   </span><span class="c1"># 적용 전 확인</span>
+
+<span class="c1"># 시스템 정보</span>
+cat<span class="w"> </span>/proc/version
+uname<span class="w"> </span>-a<span class="w"> </span><span class="p">;</span><span class="w"> </span>uname<span class="w"> </span>-r
+cat<span class="w"> </span>/etc/os-release
+cat<span class="w"> </span>/proc/cpuinfo
+lscpu<span class="w"> </span><span class="p">;</span><span class="w"> </span>nproc<span class="w">              </span><span class="c1"># 권장</span>
+grep<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/vulnerabilities/*
+
+<span class="c1"># 디스크</span>
+df<span class="w"> </span>-h<span class="w"> </span><span class="p">;</span><span class="w"> </span>df<span class="w"> </span>-i<span class="w"> </span><span class="p">;</span><span class="w"> </span>df<span class="w"> </span>-T
+sudo<span class="w"> </span>du<span class="w"> </span>-xh<span class="w"> </span>/<span class="w"> </span>--max-depth<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+sudo<span class="w"> </span>vgs<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>lvs<span class="w">        </span><span class="c1"># LVM 여유 공간</span>
+</code></pre></div>
+
+<h4 id="8-2-mariadb-계정권한">8-2. MariaDB 계정·권한</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- 접속</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">mariadb</span><span class="w">                      </span><span class="c1">-- unix_socket (권장)</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="n">p</span>
+
+<span class="c1">-- 계정 생성 (호스트를 반드시 명시)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w">      </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;강한비밀번호&#39;</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.100&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;강한비밀번호&#39;</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;app&#39;</span><span class="o">@</span><span class="s1">&#39;10.0.1.%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;...&#39;</span><span class="p">;</span>
+
+<span class="c1">-- 조회</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="n">plugin</span><span class="p">,</span><span class="w"> </span><span class="n">authentication_string</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="n">JSON_DETAILED</span><span class="p">(</span><span class="n">Priv</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">global_priv</span><span class="err">\</span><span class="k">G</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">(),</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="p">();</span>
+
+<span class="c1">-- 권한</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">app_db</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;app&#39;</span><span class="o">@</span><span class="s1">&#39;10.0.1.%&#39;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 실무형</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">,</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span><span class="w">   </span><span class="c1">-- ON *.* 쓰면 에러</span>
+
+<span class="c1">-- 계정 잠금 / 삭제</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">ACCOUNT</span><span class="w"> </span><span class="k">LOCK</span><span class="p">;</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">PROCESSLIST</span><span class="p">;</span><span class="w">  </span><span class="n">KILL</span><span class="w"> </span><span class="o">&lt;</span><span class="n">id</span><span class="o">&gt;</span><span class="p">;</span><span class="w">      </span><span class="c1">-- 살아있는 세션 정리</span>
+
+<span class="c1">-- 뷰</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<span class="k">DESC</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="err">\</span><span class="k">G</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">WARNINGS</span><span class="p">;</span>
+</code></pre></div>
+
+<h4 id="8-3-kali-초기-설정">8-3. Kali 초기 설정</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 신원·네트워크</span>
+whoami<span class="w"> </span><span class="p">;</span><span class="w"> </span>id<span class="w"> </span>-u
+ip<span class="w"> </span>a<span class="w"> </span><span class="p">;</span><span class="w"> </span>ip<span class="w"> </span>r<span class="w"> </span><span class="p">;</span><span class="w"> </span>ip<span class="w"> </span>neigh
+sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>&lt;후보IP&gt;<span class="w">      </span><span class="c1"># IP 중복 확인</span>
+ping<span class="w"> </span>-c<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">8</span>.8.8.8
+traceroute<span class="w"> </span><span class="m">8</span>.8.8.8
+
+<span class="c1"># 패키지</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>&lt;패키지&gt;
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./local.deb<span class="w">              </span><span class="c1"># ./ 필수</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>clean<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>autoremove
+
+<span class="c1"># lock 해결 (순서 준수)</span>
+sudo<span class="w"> </span>lsof<span class="w"> </span>/var/lib/dpkg/lock-frontend
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;apt|dpkg&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
+sudo<span class="w"> </span>pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;apt|apt-get&#39;</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/dpkg/lock-frontend<span class="w"> </span>/var/lib/dpkg/lock<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>/var/lib/apt/lists/lock<span class="w"> </span>/var/cache/apt/archives/lock
+sudo<span class="w"> </span>dpkg<span class="w"> </span>--configure<span class="w"> </span>-a
+sudo<span class="w"> </span>apt<span class="w"> </span>--fix-broken<span class="w"> </span>install
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+
+<span class="c1"># 브라우저</span>
+wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google-chrome-stable_current_amd64.deb
+
+<span class="c1"># 한글</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx5<span class="w"> </span>fcitx5-hangul<span class="w"> </span>fcitx5-config-qt
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum<span class="w"> </span>fonts-nanum-coding<span class="w"> </span>fonts-noto-cjk
+im-config<span class="w"> </span>-n<span class="w"> </span>fcitx5
+</code></pre></div>
+
+<h4 id="8-4-장애-진단-순서-요약">8-4. 장애 진단 순서 요약</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>증상</th>
+<th>확인 순서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"메모리가 부족한 것 같다"</td>
+<td><code>free -h</code>의 <strong>available</strong> → <code>/proc/meminfo</code>의 <code>MemAvailable</code>·<code>SwapFree</code> → <code>ps aux --sort=-%mem \| head</code> → <code>dmesg -T \| grep -i oom</code></td>
+</tr>
+<tr>
+<td>"시스템이 느리고 디스크가 계속 돈다"</td>
+<td><code>free -h</code>(Swap used 증가) → <code>vmstat 1</code>의 <code>si/so</code> 열 → <code>vm.swappiness</code> 확인 → 메모리 증설 검토</td>
+</tr>
+<tr>
+<td>"디스크가 꽉 찼다"</td>
+<td><code>df -h</code> → <strong><code>df -i</code>(inode)</strong> → <code>du -xh / --max-depth=1 \| sort -h</code> → <code>journalctl --vacuum-size=</code>, <code>apt clean</code>, <code>docker system prune</code></td>
+</tr>
+<tr>
+<td>"DB 접속이 거부된다"</td>
+<td><code>SELECT USER(), CURRENT_USER();</code> → <code>SELECT Host,User FROM mysql.user;</code>에서 <strong>호스트 매칭</strong> 확인 → <code>SHOW GRANTS FOR ...</code> → 방화벽 3306 → <code>bind-address</code></td>
+</tr>
+<tr>
+<td>"분명 권한을 줬는데 없다"</td>
+<td><code>CURRENT_USER()</code>가 의도한 계정인지 → 익명 계정/<code>%</code> 행이 먼저 매칭됐는지 → <code>FLUSH PRIVILEGES</code>(테이블 직접 수정한 경우)</td>
+</tr>
+<tr>
+<td>"apt가 잠겼다"</td>
+<td><code>lsof /var/lib/dpkg/lock-frontend</code> → 자동 업데이트면 대기 → <code>pkill</code> → 잠금 삭제 → <strong><code>dpkg --configure -a</code></strong></td>
+</tr>
+<tr>
+<td>"ping이 안 된다"</td>
+<td><code>ip a</code> → <code>ip r</code> → 게이트웨이 ping → <code>8.8.8.8</code> ping → 도메인 ping → <code>/etc/resolv.conf</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="8-5-오늘-만난-에러-번호">8-5. 오늘 만난 에러 번호</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>번호</th>
+<th>SQLSTATE</th>
+<th>의미</th>
+<th>오늘의 원인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1146</code></td>
+<td><code>42S02</code></td>
+<td>테이블/뷰가 없음</td>
+<td>현재 DB가 <code>mysql</code>이라 <code>mysql.books</code>를 찾음. 실제 위치는 <code>library.books</code></td>
+</tr>
+<tr>
+<td>(warning)</td>
+<td>—</td>
+<td><code>DROP ... IF EXISTS</code>의 note</td>
+<td>존재하지 않는 뷰를 삭제 시도</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>참고로 8/27 실습의 에러도 같은 방식으로 읽습니다: <code>1064</code>(문법 오류, <code>near</code> 직전 토큰을 의심), <code>1054</code>(없는 컬럼), <code>1366</code>(문자셋 불일치).</p>
+</blockquote>
+<hr />
+<h3 id="9-메모-수정보강-총정리">9. 메모 수정·보강 총정리</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>메모 원문</th>
+<th>수정·보강 내용</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td><code>sudo free -m</code>, <code>sudo cat /proc/version</code>, <code>sudo cat /proc/cpuinfo</code></td>
+<td><strong><code>sudo</code> 불필요.</strong> <code>/proc</code>의 상태 파일은 일반 사용자도 읽을 수 있음. 또 <code>free -g</code>는 2 GiB 장비에서 <code>available</code>이 0으로 잘려 무의미 → <code>-h</code>/<code>-m</code> 사용</td>
+<td>man 1 free</td>
+</tr>
+<tr>
+<td>②</td>
+<td><code>=&gt; 커널에 있는 다양한 값들 확인하는 명령어</code> (sysctl)</td>
+<td>확인<strong>과 변경</strong>을 모두 하는 명령. 실습에서도 <code>-w</code>로 실제 변경함</td>
+<td>man 8 sysctl</td>
+</tr>
+<tr>
+<td>③</td>
+<td><code>sudo sysctl -w vm.swappiness=40</code> 만 기록</td>
+<td><strong>재부팅하면 60으로 돌아감.</strong> <code>/etc/sysctl.d/99-*.conf</code> + <code>sysctl --system</code>으로 영구화해야 함. 적용 순서(디렉터리 6단계, 사전순, 동명 파일 무시 규칙)도 보강</td>
+<td>man 8 sysctl</td>
+</tr>
+<tr>
+<td>④</td>
+<td><code>sudo sysctl -a \| grep swap</code></td>
+<td>이 grep은 <code>vm.swappiness</code> 한 줄만 잡음. 스왑 상태는 <code>swapon --show</code>, <code>/proc/swaps</code>, <code>grep -i swap</code>을 함께 봐야 함</td>
+<td>man 8 swapon</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td><code>select host, user, password from user;</code></td>
+<td><strong>10.4부터 <code>mysql.user</code>는 뷰</strong>이고 실제 저장소는 <code>mysql.global_priv</code>(JSON). <code>Password</code> 열은 호환용 표시이며 ed25519 계정은 비어 보임. <code>mysql@localhost</code>의 <code>invalid</code>는 로그인 불가 표식</td>
+<td>MariaDB 10.4 인증 문서</td>
+</tr>
+<tr>
+<td>⑥</td>
+<td><code>drop user test;</code> → "test 삭제"</td>
+<td>실제로 지워진 것은 <strong><code>test@'%'</code></strong>. 계정명에서 <strong>호스트 생략 시 <code>'%'</code>가 기본</strong>. 이어서 <code>drop user test@localhost</code>가 필요했던 이유가 이것</td>
+<td>MariaDB DROP USER / CREATE USER 문서</td>
+</tr>
+<tr>
+<td>⑦</td>
+<td><code>revoke all privileges on test.* from 'hong'@'%';</code></td>
+<td>REVOKE는 <strong>계정을 지우지 않음.</strong> <code>USAGE</code>가 남아 <strong>접속은 계속 가능</strong>. 차단하려면 <code>ACCOUNT LOCK</code> 또는 <code>DROP USER</code></td>
+<td>MariaDB REVOKE 문서</td>
+</tr>
+<tr>
+<td>⑧</td>
+<td><code>create view v_books as select name, ava from books;</code></td>
+<td><strong>세 곳이 틀림</strong> — ① 현재 DB가 <code>mysql</code>(→<code>library</code>), ② <code>name</code>(→<code>title</code>), ③ <code>ava</code>(→<code>available</code>). 에러 <code>1146</code>의 <code>'mysql.books'</code>가 원인을 그대로 지목</td>
+<td>8/27 노트의 <code>books</code> 스키마</td>
+</tr>
+<tr>
+<td>⑨</td>
+<td><code>파란 터미널 -&gt; PowerShell</code></td>
+<td><strong>틀림.</strong> 파랑은 <strong>일반 사용자 셸</strong>. Kali 2020.3에서 비 root 프롬프트 색을 빨강→파랑으로 변경, 2020.4부터 기본 셸이 zsh. 확실한 판별은 <code>$</code>/<code>#</code>, <code>whoami</code>, <code>id -u</code></td>
+<td>Kali 2020.4 릴리스 공지</td>
+</tr>
+<tr>
+<td>⑩</td>
+<td><code>ping을 해서 응답이 없는 IP를 할당해야한다</code></td>
+<td>방향은 맞지만 <strong>불충분</strong>. ICMP 차단·전원 꺼짐·DHCP 풀 충돌 가능. <code>arping -D</code>, <code>nmap -sn</code>, <code>ip neigh</code>를 함께 사용</td>
+<td>man 8 arping / ping</td>
+</tr>
+<tr>
+<td>⑪</td>
+<td><code>apt install fcitx-hangul</code> → <code>apt update</code> → <code>apt upgrade</code> 순서</td>
+<td><strong>순서 반대.</strong> <code>update</code> → <code>full-upgrade</code> → <code>install</code>. Kali는 롤링이라 목록이 오래되면 404</td>
+<td>apt-get(8)</td>
+</tr>
+<tr>
+<td>⑫</td>
+<td><code>sudo kill apt apt-get</code> / <code>sudo apt clean</code> / lock 파일 2개 삭제</td>
+<td>ⓐ <code>kill</code>은 <strong>PID만</strong> 받음 → <code>pkill</code>. ⓑ <code>apt clean</code>은 잠금과 무관. ⓒ 잠금 파일은 <strong>4개</strong>이며 <code>/var/lib/dpkg/lock-frontend</code>가 가장 흔함. ⓓ 삭제 전 <code>lsof</code>/<code>ps</code>로 확인, 삭제 후 <strong><code>dpkg --configure -a</code></strong> 필수</td>
+<td>apt-get(8), dpkg(1)</td>
+</tr>
+<tr>
+<td>⑬</td>
+<td><code>sudo apt install ./google.com/linux/direct/google-chrome-stable_current_amd64.deb</code></td>
+<td><strong>존재하지 않는 경로.</strong> wget은 현재 디렉터리에 파일명만 저장 → <code>sudo apt install ./google-chrome-stable_current_amd64.deb</code>. <code>sudo wget</code>도 불필요</td>
+<td>apt-get(8)</td>
+</tr>
+<tr>
+<td>⑭</td>
+<td><code>sudo apt install -y fcitx-hangul</code> 등 fcitx4 계열</td>
+<td><strong><code>fcitx-hangul</code>은 Debian testing에서 2026-07-07 제거됨</strong> → <code>fcitx5</code> + <code>fcitx5-hangul</code> + <code>im-config -n fcitx5</code>. <code>fonts-nanum*</code>의 <code>*</code>는 셸 glob과 충돌하므로 따옴표 처리</td>
+<td>Debian 패키지 추적</td>
+</tr>
+<tr>
+<td>⑮</td>
+<td>(기록 없음)</td>
+<td><strong><code>/</code> 파일시스템 96% 사용, 여유 400 MB</strong> — 오늘 출력에서 가장 시급한 문제. 정리·LVM 확장 절차 보강</td>
+<td>실습 <code>df</code> 출력</td>
+</tr>
+<tr>
+<td>⑯</td>
+<td>(기록 없음)</td>
+<td><code>root</code>와 <code>test</code>의 비밀번호 해시가 <strong>동일</strong> → root 비밀번호도 <code>1234</code>. <code>'test'@'%'</code>·<code>'hong'@'%'</code>는 원격 무제한 허용. 보안 대안 표 보강</td>
+<td>실습 <code>mysql.user</code> 출력</td>
+</tr>
+<tr>
+<td>⑰</td>
+<td>(기록 없음)</td>
+<td>접속 시 계정 행 <strong>정렬·매칭 규칙</strong>(구체적 호스트 우선, 익명 계정 함정)과 <code>USER()</code>/<code>CURRENT_USER()</code> 진단법 보강</td>
+<td>MySQL 8.4 접속 검증 문서</td>
+</tr>
+<tr>
+<td>⑱</td>
+<td><code>ifconfig</code>, <code>ip ad</code> 병기</td>
+<td><code>ifconfig</code>(net-tools)는 유지보수 종료. iproute2 대체 명령 대응표 보강. <code>eth0</code> vs <code>enp0s3</code> 명명 규칙 차이 설명 추가</td>
+<td>실습 출력 + 명명 규칙</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3 id="10-출처">10. 출처</h3>
+<h4 id="리눅스-커널--메모리--시스템">리눅스 커널 · 메모리 · 시스템</h4>
+<ul>
+<li><a href="https://docs.kernel.org/admin-guide/sysctl/vm.html">Documentation for /proc/sys/vm/ — The Linux Kernel documentation</a> — <code>swappiness</code> 기본 60·범위 0~200, <code>overcommit_memory</code> 3가지 모드, <code>page-cluster</code> 로그값, <code>panic_on_oom</code>, <code>watermark_scale_factor</code>, <code>min_free_kbytes</code> 경고</li>
+<li><a href="https://man7.org/linux/man-pages/man1/free.1.html">free(1) — man7.org</a> — <code>used = total - available</code>, <code>buff/cache</code> 구성, <code>-m/-g/-h/-s/-t</code> 옵션</li>
+<li><a href="https://man7.org/linux/man-pages/man8/sysctl.8.html">sysctl(8) — man7.org</a> — 옵션 전체, <code>--system</code>의 6단계 읽기 순서와 동명 파일 무시 규칙</li>
+<li><a href="https://man7.org/linux/man-pages/man5/proc_meminfo.5.html">proc_meminfo(5) — man7.org</a> — <code>MemAvailable</code>(3.14+), <code>Buffers</code>/<code>Cached</code>/<code>SwapCached</code>, <code>CommitLimit</code>/<code>Committed_AS</code>, <code>KReclaimable</code>(4.20+), <code>DirectMap*</code></li>
+<li><a href="https://man7.org/linux/man-pages/man8/ping.8.html">ping(8) — man7.org</a> — <code>-c/-i/-s/-W/-t</code>, 56(84)바이트 계산, <code>mdev</code> 정의</li>
+</ul>
+<h4 id="mariadb">MariaDB</h4>
+<ul>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/drop-user">DROP USER — MariaDB Documentation</a> — <strong>호스트 생략 시 <code>'%'</code></strong>, <code>IF EXISTS</code>, 필요 권한, 접속 중 계정 삭제 동작</li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/create-user">CREATE USER — MariaDB Documentation</a> — 호스트 표기 형태, <code>IDENTIFIED BY</code> vs <code>IDENTIFIED BY PASSWORD</code>, <strong><code>localhost</code> ≠ <code>127.0.0.1</code> ≠ <code>%</code></strong></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/grant">GRANT — MariaDB Documentation</a> — <code>USAGE</code>는 실질 권한 없음, 권한 계층별 저장 테이블, <code>WITH GRANT OPTION</code></li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/revoke">REVOKE — MariaDB Documentation</a> — 계정은 남고 <strong>USAGE 유지</strong>, <code>REVOKE ALL PRIVILEGES, GRANT OPTION FROM</code>에 <code>ON *.*</code> 금지</li>
+<li><a href="https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-grants.md">SHOW GRANTS — MariaDB Documentation</a> — 출력 형식, <code>FOR CURRENT_USER</code>, USAGE 줄이 늘 나오는 이유</li>
+<li><a href="https://mariadb.com/docs/server/reference/system-tables/the-mysql-database-tables/mysql-user-table">mysql.user Table — MariaDB Documentation</a> — <strong><code>mysql.user</code>는 <code>global_priv</code>에 대한 뷰</strong>, 정의자 <code>mariadb.sys</code>, Password 해시 형식</li>
+<li><a href="https://mariadb.com/docs/server/security/user-account-management/authentication-from-mariadb-10-4">Authentication from MariaDB 10.4 — MariaDB Documentation</a> — 10.4의 <code>global_priv</code> 도입, <code>root@localhost</code>의 <code>unix_socket</code> 기본화</li>
+<li><a href="https://mariadb.com/docs/server/server-usage/views/drop-view">DROP VIEW — MariaDB Documentation</a> — <code>IF EXISTS</code>가 에러 대신 NOTE, 필요 권한, 10.6.1+ 원자성</li>
+<li><a href="https://dev.mysql.com/doc/refman/8.4/en/connection-access.html">MySQL 8.4 Reference Manual — Access Control, Stage 1: Connection Verification</a> — 계정 행 <strong>정렬 규칙</strong>(리터럴 → CIDR → 넷마스크 → 와일드카드 → 빈 문자열)과 익명 계정 함정</li>
+<li><a href="https://endoflife.date/mariadb">MariaDB — endoflife.date</a> — <strong>10.11 LTS: 2023-02-16 릴리스, 커뮤니티 지원 2028-02-16까지</strong></li>
+</ul>
+<h4 id="debian--kali--apt">Debian / Kali / apt</h4>
+<ul>
+<li><a href="https://manpages.debian.org/testing/apt/apt-get.8.en.html">apt-get(8) — Debian Manpages</a> — <code>update</code>/<code>upgrade</code>/<code>dist-upgrade</code>/<code>install</code>/<code>clean</code>/<code>autoclean</code> 정의, 캐시 <code>/var/cache/apt/archives/</code>, 목록 <code>/var/lib/apt/lists/</code></li>
+<li><a href="https://tracker.debian.org/pkg/fcitx-hangul">fcitx-hangul — Debian Package Tracker</a> — <strong>2026-07-07 testing에서 제거</strong>, 개발 저장소에 없음</li>
+<li><a href="https://packages.debian.org/bookworm/fcitx5-hangul">fcitx5-hangul — Debian bookworm</a> — 후속 패키지</li>
+<li><a href="https://pkg.kali.org/pkg/fcitx5-hangul">fcitx5-hangul — Kali Linux Package Tracker</a> — Kali에서의 제공 여부</li>
+<li><a href="https://www.kali.org/blog/kali-linux-2020-4-release/">Kali Linux 2020.4 Release — Kali Linux Blog</a> — <strong>기본 셸 zsh</strong>, <code>┌──(kali㉿kali)-[~]</code> 프롬프트, 2020.3에서 <strong>비 root 프롬프트 색 빨강→파랑</strong></li>
+<li><a href="https://www.google.com/linuxrepositories/">Google Linux Software Repositories</a> — Chrome 패키지 서명 키(<code>D38B4796</code>)와 저장소 자동 등록</li>
+</ul>
+<h4 id="검증하지-못한-항목-추측으로-채우지-않음">검증하지 못한 항목 (추측으로 채우지 않음)</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kali 실습 VM의 <code>kali/1234</code> 자격증명</td>
+<td><strong>강사가 변경한 실습 환경 값</strong>으로 판단. Kali 공식 이미지 기본값은 <code>kali/kali</code>. 이 노트에서는 실습 한정 정보로만 기록</td>
+</tr>
+<tr>
+<td>메모의 <code>[1번 사진]</code>~<code>[5번 사진]</code></td>
+<td>이미지가 첨부되지 않아 내용 확인 불가. 텍스트 메모에서 유추 가능한 범위(프롬프트 색, <code>ifconfig</code>/<code>ip ad</code>, apt lock 화면, <code>/var/lib/apt/lists</code> 목록, Chrome 설치 과정)까지만 서술</td>
+</tr>
+<tr>
+<td><code>파란 터미널 -&gt; PowerShell</code></td>
+<td>Kali에 PowerShell 패키지가 존재하기는 하나(<code>powershell</code>), 기본 설치는 아님. 실습 화면의 파란 프롬프트는 zsh 형식(<code>┌──(kali㉿…)-[~]</code>)이므로 <strong>일반 사용자 zsh로 판단</strong>. 화면을 직접 보지 못했으므로 단정은 피함</td>
+</tr>
+<tr>
+<td><code>sudo sysctl -a \| grep swap</code>을 두 번 실행한 이유</td>
+<td>메모에 설명 없음. 값 유지 확인 목적으로 추정되나 확인 불가</td>
+</tr>
+<tr>
+<td><code>/</code> 96% 사용의 실제 원인</td>
+<td><code>du</code> 출력이 메모에 없어 어느 디렉터리가 차지하는지 확인 불가. 8/27 실습에서 Docker·PMM을 설치했으므로 컨테이너 이미지가 유력하나 <strong>미확인</strong></td>
+</tr>
+</tbody>
+</table></div><div class="nav"><a href="ch05.html"><span class="lbl">이전</span>2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a href="ch07.html"><span class="lbl">다음</span>MariaDB 실습 학습 노트</a></div></main>
+</div>
+<a id="top" href="#">▲ 맨 위</a>
+<script>
+const q=document.getElementById('q');
+if(q){
+  const links=[...document.querySelectorAll('aside a')];
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();
+    links.forEach(a=>{a.style.display = !v || a.textContent.toLowerCase().includes(v) ? '' : 'none';});
+    document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
+  });
+}
+const inchap=[...document.querySelectorAll('aside .inchap a')];
+if(inchap.length){
+  const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(!e.isIntersecting) return;
+      inchap.forEach(a=>a.classList.remove('on'));
+      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
+    });
+  },{rootMargin:'0px 0px -80% 0px'});
+  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+}
+</script>
+</body></html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>목차 · SKT ALEPH 학습 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
+  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
+    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+}
+.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+aside{
+  position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
+}
+aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
+aside .brand a{color:inherit; text-decoration:none}
+aside .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+#q{width:100%; padding:7px 9px; font:inherit; margin-bottom:12px;
+   border:1px solid var(--rule); border-radius:6px; background:var(--paper); color:var(--ink)}
+aside a{display:block; color:inherit; text-decoration:none; padding:3px 6px; border-radius:5px}
+aside a:hover{background:var(--accent-soft)}
+aside a.cur{background:var(--accent-soft); color:var(--accent); font-weight:700}
+aside a.on{color:var(--accent); font-weight:700}
+aside .part{margin:16px 0 6px; font-size:10px; letter-spacing:.16em; color:var(--muted); font-weight:700}
+aside .lv3{padding-left:16px; color:var(--muted)}
+aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
+aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
+
+main{padding:40px 40px 120px; max-width:860px}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h1{font-size:30px; margin:0 0 8px}
+h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
+h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
+h4{font-size:15px; margin:22px 0 6px}
+.chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin:3px 0}
+a{color:var(--accent)}
+blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+blockquote p:last-child{margin:0}
+hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+mark{background:var(--mark); color:inherit}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
+pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+pre code{background:none; padding:0; font-size:inherit}
+.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
+.codehilite pre{border:0; margin:0; background:none}
+.tablewrap{overflow-x:auto; margin:0 0 18px}
+table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+.admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
+.admonition-title{font-weight:700; margin:0 0 6px !important}
+.nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
+     font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px}
+.nav a{display:block; max-width:46%; text-decoration:none; padding:10px 14px; border:1px solid var(--rule); border-radius:8px}
+.nav a:hover{background:var(--accent-soft)}
+.nav .lbl{display:block; color:var(--muted); font-size:11px; letter-spacing:.1em}
+.cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
+.cover h1{font-size:34px; margin:0 0 6px}
+.cover p{margin:0; color:var(--muted)}
+.toclist{list-style:none; padding:0; margin:0}
+.toclist li{margin:0 0 6px}
+.toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
+               font-family:ui-sans-serif,system-ui,sans-serif}
+.toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
+.toclist a:hover{background:var(--accent-soft)}
+.toclist .t{display:block; font-weight:700; margin-bottom:2px}
+.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+#top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
+     background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
+     font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
+  main{padding:26px 18px 90px}
+}
+@media print{
+  aside,#top,.nav{display:none}
+  .layout{display:block}
+  main{max-width:none; padding:0}
+  pre,table,.admonition{break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
+  <div class="sub">IT 인프라 · 보안 과정</div>
+  <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="" href="ch09.html">09. 중복과 상충 정리</a><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+</aside>
+<main><div class="cover"><h1>SKT ALEPH 학습 노트</h1><p>IT 인프라 · 보안 과정 · 수업이 진행되는 대로 장을 추가합니다</p></div><ul class="toclist"><li class="part">들어가기</li><li><a href="ch01.html"><span class="t">01. 이 책의 사용법</span><span class="m">소제목 6개 · 1,788자</span></a></li><li><a href="ch02.html"><span class="t">02. 커리큘럼 지도</span><span class="m">소제목 8개 · 8,511자</span></a></li><li class="part">1부 · 네트워크</li><li><a href="ch03.html"><span class="t">03. 260818 Cisco Packet Tracer 실습 정리</span><span class="m">소제목 130개 · 37,049자</span></a></li><li class="part">2부 · 리눅스 서버</li><li><a href="ch04.html"><span class="t">04. Rocky Linux 9 개인 서버랩 학습 노트</span><span class="m">소제목 171개 · 115,664자</span></a></li><li><a href="ch05.html"><span class="t">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</span><span class="m">소제목 113개 · 84,066자</span></a></li><li><a href="ch06.html"><span class="t">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</span><span class="m">소제목 67개 · 55,296자</span></a></li><li class="part">3부 · 데이터베이스</li><li><a href="ch07.html"><span class="t">07. MariaDB 실습 학습 노트</span><span class="m">소제목 126개 · 34,616자</span></a></li><li><a href="ch08.html"><span class="t">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</span><span class="m">소제목 94개 · 80,869자</span></a></li><li class="part">부록</li><li><a href="ch09.html"><span class="t">09. 중복과 상충 정리</span><span class="m">소제목 8개 · 2,948자</span></a></li><li><a href="ch10.html"><span class="t">10. 명령어 색인</span><span class="m">소제목 2개 · 5,440자</span></a></li><li><a href="ch11.html"><span class="t">11. 용어집</span><span class="m">소제목 4개 · 5,100자</span></a></li></ul></main>
+</div>
+<a id="top" href="#">▲ 맨 위</a>
+<script>
+const q=document.getElementById('q');
+if(q){
+  const links=[...document.querySelectorAll('aside a')];
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();
+    links.forEach(a=>{a.style.display = !v || a.textContent.toLowerCase().includes(v) ? '' : 'none';});
+    document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
+  });
+}
+const inchap=[...document.querySelectorAll('aside .inchap a')];
+if(inchap.length){
+  const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(!e.isIntersecting) return;
+      inchap.forEach(a=>a.classList.remove('on'));
+      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
+    });
+  },{rootMargin:'0px 0px -80% 0px'});
+  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+}
+</script>
+</body></html>

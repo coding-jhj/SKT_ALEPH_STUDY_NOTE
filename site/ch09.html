@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>중복과 상충 정리 · SKT ALEPH 학습 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
+  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
+    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+}
+.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+aside{
+  position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
+}
+aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
+aside .brand a{color:inherit; text-decoration:none}
+aside .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+#q{width:100%; padding:7px 9px; font:inherit; margin-bottom:12px;
+   border:1px solid var(--rule); border-radius:6px; background:var(--paper); color:var(--ink)}
+aside a{display:block; color:inherit; text-decoration:none; padding:3px 6px; border-radius:5px}
+aside a:hover{background:var(--accent-soft)}
+aside a.cur{background:var(--accent-soft); color:var(--accent); font-weight:700}
+aside a.on{color:var(--accent); font-weight:700}
+aside .part{margin:16px 0 6px; font-size:10px; letter-spacing:.16em; color:var(--muted); font-weight:700}
+aside .lv3{padding-left:16px; color:var(--muted)}
+aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
+aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
+
+main{padding:40px 40px 120px; max-width:860px}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h1{font-size:30px; margin:0 0 8px}
+h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
+h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
+h4{font-size:15px; margin:22px 0 6px}
+.chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin:3px 0}
+a{color:var(--accent)}
+blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+blockquote p:last-child{margin:0}
+hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+mark{background:var(--mark); color:inherit}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
+pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+pre code{background:none; padding:0; font-size:inherit}
+.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
+.codehilite pre{border:0; margin:0; background:none}
+.tablewrap{overflow-x:auto; margin:0 0 18px}
+table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+.admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
+.admonition-title{font-weight:700; margin:0 0 6px !important}
+.nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
+     font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px}
+.nav a{display:block; max-width:46%; text-decoration:none; padding:10px 14px; border:1px solid var(--rule); border-radius:8px}
+.nav a:hover{background:var(--accent-soft)}
+.nav .lbl{display:block; color:var(--muted); font-size:11px; letter-spacing:.1em}
+.cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
+.cover h1{font-size:34px; margin:0 0 6px}
+.cover p{margin:0; color:var(--muted)}
+.toclist{list-style:none; padding:0; margin:0}
+.toclist li{margin:0 0 6px}
+.toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
+               font-family:ui-sans-serif,system-ui,sans-serif}
+.toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
+.toclist a:hover{background:var(--accent-soft)}
+.toclist .t{display:block; font-weight:700; margin-bottom:2px}
+.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+#top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
+     background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
+     font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
+  main{padding:26px 18px 90px}
+}
+@media print{
+  aside,#top,.nav{display:none}
+  .layout{display:block}
+  main{max-width:none; padding:0}
+  pre,table,.admonition{break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
+  <div class="sub">IT 인프라 · 보안 과정</div>
+  <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="cur" href="ch09.html">09. 중복과 상충 정리</a><div class="inchap"><a class="lv3" href="#주제가-걸쳐-있는-노트">주제가 걸쳐 있는 노트</a><a class="lv3" href="#주제별로-어느-노트를-볼-것인가">주제별로 어느 노트를 볼 것인가</a><a class="lv4" href="#mariadb--다섯-노트에-나뉘어-있음">MariaDB — 다섯 노트에 나뉘어 있음</a><a class="lv4" href="#apache--php--세-노트">Apache / PHP — 세 노트</a><a class="lv4" href="#selinux--두-노트-접근-방식이-다름">SELinux — 두 노트, 접근 방식이 다름</a><a class="lv4" href="#firewalld--세-노트에-조각으로">firewalld — 세 노트에 조각으로</a><a class="lv3" href="#확인이-필요한-지점">확인이 필요한 지점</a><a class="lv3" href="#아직-노트가-없는-큰-구간">아직 노트가 없는 큰 구간</a></div><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+</aside>
+<main><div class="chapter-no">CHAPTER 09</div><h1>중복과 상충 정리</h1><p>같은 주제가 여러 노트에 흩어져 있습니다. 지우지 않고 <strong>어디에 무엇이 있는지</strong>를 여기 모읍니다.
+같은 명령이라도 노트마다 환경이 달라서, 합쳐 버리면 어느 환경의 이야기인지 잃어버리기 때문입니다.</p>
+<p>아래 숫자는 각 노트에서 해당 키워드가 등장한 <strong>횟수</strong>입니다. 문서를 기계로 세어 얻은 값이며,
+중요도가 아니라 <strong>분산 정도</strong>를 보는 용도입니다.</p>
+<h3 id="주제가-걸쳐-있는-노트">주제가 걸쳐 있는 노트</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>주제</th>
+<th style="text-align: right;">8/18 라우팅</th>
+<th style="text-align: right;">Rocky 서버랩</th>
+<th style="text-align: right;">8/25 NFS·Samba</th>
+<th style="text-align: right;">8/27 MariaDB</th>
+<th style="text-align: right;">8/28 메모리·계정</th>
+<th style="text-align: right;">8/28 팀웹</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB / SQL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">357</td>
+</tr>
+<tr>
+<td>Apache / PHP</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">165</td>
+</tr>
+<tr>
+<td>DNS / BIND</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>firewalld</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>systemctl</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td>파일 권한 / umask</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Samba</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>SELinux</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>rsyslog</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">241</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Kali</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td>ACL / NAT / OSPF / VPN</td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>네트워크(1부)는 다른 노트와 겹치지 않습니다. 겹침은 전부 리눅스 서버·DB 쪽입니다.</p>
+<h3 id="주제별로-어느-노트를-볼-것인가">주제별로 어느 노트를 볼 것인가</h3>
+<h4 id="mariadb--다섯-노트에-나뉘어-있음">MariaDB — 다섯 노트에 나뉘어 있음</h4>
+<p>가장 심하게 흩어진 주제입니다. 목적에 따라 갈라 보십시오.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>알고 싶은 것</th>
+<th>볼 노트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQL 문법, 문자셋(한글 깨짐), 논리 백업·복원, 복제</td>
+<td><strong>8/27 MariaDB</strong></td>
+</tr>
+<tr>
+<td>계정이 <code>이름@호스트</code>인 이유, GRANT/REVOKE, VIEW 오류</td>
+<td><strong>8/28 메모리·계정</strong> 4~6장</td>
+</tr>
+<tr>
+<td>PHP PDO로 원격 DB 붙이기, 호스트별 권한 설계, prepared statement</td>
+<td><strong>8/28 팀웹</strong></td>
+</tr>
+<tr>
+<td>서버랩에서 MariaDB를 처음 세우는 절차, <code>mariadb-secure-installation</code></td>
+<td><strong>Rocky 서버랩</strong> 16장</td>
+</tr>
+<tr>
+<td>rsyslog 로그를 MariaDB에 적재</td>
+<td><strong>8/25 NFS·Samba</strong> 후반부</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>중복이지만 남겨 둔 이유</strong>: 같은 <code>GRANT</code> 문이라도 8/27은 복제 계정, 8/28 팀웹은 웹 애플리케이션
+계정입니다. 권한 범위와 접속 호스트가 완전히 다릅니다.</p>
+<h4 id="apache--php--세-노트">Apache / PHP — 세 노트</h4>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>알고 싶은 것</th>
+<th>볼 노트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>설치·기동·문서 루트·HTTPS 인증서·php-fpm 구조</td>
+<td><strong>Rocky 서버랩</strong> 12~15장</td>
+</tr>
+<tr>
+<td>팀 프로젝트용 가상호스트, DB 설정 파일을 문서 루트 밖에 두는 이유</td>
+<td><strong>8/28 팀웹</strong></td>
+</tr>
+<tr>
+<td>LogAnalyzer 웹 설치 과정에서의 SELinux 문제</td>
+<td><strong>8/25 NFS·Samba</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="selinux--두-노트-접근-방식이-다름">SELinux — 두 노트, 접근 방식이 다름</h4>
+<ul>
+<li><strong>8/25 NFS·Samba</strong>: 왜 막혔는지 메커니즘부터 보고 <strong>끄지 않고 해결</strong>하는 방법(<code>semanage</code>, <code>setsebool</code>)</li>
+<li><strong>Rocky 서버랩</strong>: DNS zone 파일 권한, 웹 디렉터리 컨텍스트 등 개별 상황별 대응</li>
+</ul>
+<p>먼저 8/25의 메커니즘 설명을 읽고, 서버랩은 사례집으로 쓰는 것이 빠릅니다.</p>
+<h4 id="firewalld--세-노트에-조각으로">firewalld — 세 노트에 조각으로</h4>
+<p>세 노트 모두 <code>firewall-cmd --permanent --add-service=... &amp;&amp; firewall-cmd --reload</code> 형태입니다.
+서비스 이름만 다릅니다. 부록 <strong>명령어 색인</strong>에서 <code>firewall-cmd</code>로 찾으면 전부 모여 나옵니다.</p>
+<h3 id="확인이-필요한-지점">확인이 필요한 지점</h3>
+<p>아래는 이 책을 엮으면서 발견한, <strong>하나로 정리하기 전에 사실 확인이 필요한</strong> 항목입니다.
+추측으로 통일하지 않고 남겨 둡니다.</p>
+<ol>
+<li><strong>서버 노트 네 편이 전부 같은 <code>192.168.16.0/24</code> 대역인데 호스트 번호가 제각각입니다.</strong>
+   문서를 기계로 세어 확인한 실제 사용 주소는 다음과 같습니다.</li>
+</ol>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>노트</th>
+<th>주로 쓰인 호스트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rocky 서버랩</td>
+<td><code>.131</code>, <code>.77</code>, <code>.137</code>, <code>.136</code></td>
+</tr>
+<tr>
+<td>8/25 NFS·Samba</td>
+<td><code>.81</code>, <code>.92</code>, <code>.40</code></td>
+</tr>
+<tr>
+<td>8/28 팀웹</td>
+<td><code>.117</code>(DB), <code>.46</code>(클라이언트), <code>.111</code>(WEB)</td>
+</tr>
+<tr>
+<td>8/28 메모리·계정</td>
+<td><code>.100</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>같은 대역을 여러 실습이 나눠 쓴 것이라, <strong>노트를 넘나들 때 IP를 그대로 따라 치면 다른 장비를
+   건드립니다.</strong> 자기 환경의 주소로 바꿔서 실행하십시오. 어느 실습이 어느 호스트를 점유했는지는
+   확인이 필요합니다(같은 VM을 재사용했는지 기록이 없습니다).
+2. <strong><code>it인프라의이해</code> 슬라이드 4개는 본문이 비어 있습니다.</strong> 이미지 슬라이드라 대조하지 못했습니다.
+3. <strong>커리큘럼 지도의 분류는 파일명 기준</strong>입니다. 한 강의가 두 주제에 걸치면 앞 규칙으로 갔습니다.
+   예: 038~040번은 번호상 네트워크 구간에 있지만 내용은 Rocky Linux 설치라 리눅스 서버로 분류했습니다.</p>
+<h3 id="아직-노트가-없는-큰-구간">아직 노트가 없는 큰 구간</h3>
+<p>커리큘럼 지도 기준으로 <strong>보안 실습·모의해킹 74강</strong>이 슬라이드 제목만 있습니다.
+과정 후반부의 가장 큰 덩어리이므로, 해당 수업이 진행되면 이 부를 먼저 채우는 것이 좋습니다.</p><div class="nav"><a href="ch08.html"><span class="lbl">이전</span>2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><a href="ch10.html"><span class="lbl">다음</span>명령어 색인</a></div></main>
+</div>
+<a id="top" href="#">▲ 맨 위</a>
+<script>
+const q=document.getElementById('q');
+if(q){
+  const links=[...document.querySelectorAll('aside a')];
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();
+    links.forEach(a=>{a.style.display = !v || a.textContent.toLowerCase().includes(v) ? '' : 'none';});
+    document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
+  });
+}
+const inchap=[...document.querySelectorAll('aside .inchap a')];
+if(inchap.length){
+  const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(!e.isIntersecting) return;
+      inchap.forEach(a=>a.classList.remove('on'));
+      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
+    });
+  },{rootMargin:'0px 0px -80% 0px'});
+  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+}
+</script>
+</body></html>

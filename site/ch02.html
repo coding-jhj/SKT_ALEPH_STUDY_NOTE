@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>커리큘럼 지도 · SKT ALEPH 학습 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
+  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
+    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+}
+.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+aside{
+  position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
+}
+aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
+aside .brand a{color:inherit; text-decoration:none}
+aside .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+#q{width:100%; padding:7px 9px; font:inherit; margin-bottom:12px;
+   border:1px solid var(--rule); border-radius:6px; background:var(--paper); color:var(--ink)}
+aside a{display:block; color:inherit; text-decoration:none; padding:3px 6px; border-radius:5px}
+aside a:hover{background:var(--accent-soft)}
+aside a.cur{background:var(--accent-soft); color:var(--accent); font-weight:700}
+aside a.on{color:var(--accent); font-weight:700}
+aside .part{margin:16px 0 6px; font-size:10px; letter-spacing:.16em; color:var(--muted); font-weight:700}
+aside .lv3{padding-left:16px; color:var(--muted)}
+aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
+aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
+
+main{padding:40px 40px 120px; max-width:860px}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h1{font-size:30px; margin:0 0 8px}
+h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
+h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
+h4{font-size:15px; margin:22px 0 6px}
+.chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin:3px 0}
+a{color:var(--accent)}
+blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+blockquote p:last-child{margin:0}
+hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+mark{background:var(--mark); color:inherit}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
+pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+pre code{background:none; padding:0; font-size:inherit}
+.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
+.codehilite pre{border:0; margin:0; background:none}
+.tablewrap{overflow-x:auto; margin:0 0 18px}
+table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+.admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
+.admonition-title{font-weight:700; margin:0 0 6px !important}
+.nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
+     font-family:ui-sans-serif,system-ui,sans-serif; font-size:13px}
+.nav a{display:block; max-width:46%; text-decoration:none; padding:10px 14px; border:1px solid var(--rule); border-radius:8px}
+.nav a:hover{background:var(--accent-soft)}
+.nav .lbl{display:block; color:var(--muted); font-size:11px; letter-spacing:.1em}
+.cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
+.cover h1{font-size:34px; margin:0 0 6px}
+.cover p{margin:0; color:var(--muted)}
+.toclist{list-style:none; padding:0; margin:0}
+.toclist li{margin:0 0 6px}
+.toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
+               font-family:ui-sans-serif,system-ui,sans-serif}
+.toclist a{display:block; padding:11px 15px; border:1px solid var(--rule); border-radius:8px; text-decoration:none; background:var(--paper)}
+.toclist a:hover{background:var(--accent-soft)}
+.toclist .t{display:block; font-weight:700; margin-bottom:2px}
+.toclist .m{color:var(--muted); font-size:12.5px; font-family:ui-sans-serif,system-ui,sans-serif}
+#top{position:fixed; right:22px; bottom:22px; padding:9px 13px; border:1px solid var(--rule); border-radius:999px;
+     background:var(--side); color:var(--ink); text-decoration:none; font-size:12px;
+     font-family:ui-sans-serif,system-ui,sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
+  main{padding:26px 18px 90px}
+}
+@media print{
+  aside,#top,.nav{display:none}
+  .layout{display:block}
+  main{max-width:none; padding:0}
+  pre,table,.admonition{break-inside:avoid}
+  h2,h3{break-after:avoid}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
+  <div class="sub">IT 인프라 · 보안 과정</div>
+  <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
+  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="cur" href="ch02.html">02. 커리큘럼 지도</a><div class="inchap"><a class="lv3" href="#한눈에-보기">한눈에 보기</a><a class="lv3" href="#네트워크-52강">네트워크 (52강)</a><a class="lv3" href="#리눅스-서버-35강">리눅스 서버 (35강)</a><a class="lv3" href="#윈도우-서버-6강">윈도우 서버 (6강)</a><a class="lv3" href="#데이터베이스-9강">데이터베이스 (9강)</a><a class="lv3" href="#모니터링--운영--클라우드-8강">모니터링 · 운영 · 클라우드 (8강)</a><a class="lv3" href="#파이썬--자동화-4강">파이썬 · 자동화 (4강)</a><a class="lv3" href="#보안-실습--모의해킹-74강">보안 실습 · 모의해킹 (74강)</a></div><div class="part">1부 · 네트워크</div><a class="" href="ch03.html">03. 260818 Cisco Packet Tracer 실습 정리</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch04.html">04. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch05.html">05. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch06.html">06. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch07.html">07. MariaDB 실습 학습 노트</a><a class="" href="ch08.html">08. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">부록</div><a class="" href="ch09.html">09. 중복과 상충 정리</a><a class="" href="ch10.html">10. 명령어 색인</a><a class="" href="ch11.html">11. 용어집</a></nav>
+</aside>
+<main><div class="chapter-no">CHAPTER 02</div><h1>커리큘럼 지도</h1><p>강사 배포 「핵심키워드」 슬라이드 <strong>188강</strong>을 주제별로 묶고, 이 책의 노트와 연결한 표입니다.
+강의 번호는 배포 파일명 그대로이며 시간 순서입니다. 분류는 파일명을 규칙으로 나눈 것이라
+한 강의가 두 주제에 걸치는 경우 앞 규칙이 이깁니다.</p>
+<h3 id="한눈에-보기">한눈에 보기</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>부</th>
+<th style="text-align: right;">강의 수</th>
+<th>이 책의 노트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>네트워크</td>
+<td style="text-align: right;">52</td>
+<td><code>2026-08-18_라우팅-ACL-NAT-VPN.md</code> — OSPF·EIGRP 재분배, ACL, NAT, IPSec VPN 실습</td>
+</tr>
+<tr>
+<td>리눅스 서버</td>
+<td style="text-align: right;">35</td>
+<td><code>RockyLinux9_개인서버랩.md</code> — DNS·Apache·HTTPS·PHP·FTP 구축 전 과정<br><code>2026-08-25_NFS-Samba-SELinux-rsyslog.md</code> — 공유·SELinux·로그 중앙수집</td>
+</tr>
+<tr>
+<td>윈도우 서버</td>
+<td style="text-align: right;">6</td>
+<td><strong>노트 없음</strong> — 키워드만 있음</td>
+</tr>
+<tr>
+<td>데이터베이스</td>
+<td style="text-align: right;">9</td>
+<td><code>2026-08-27_MariaDB-SQL-백업-복제.md</code> — SQL 기초·문자셋·논리 백업·복제<br><code>2026-08-28_팀웹-원격MariaDB연동.md</code> — PHP PDO 원격 연동·호스트별 권한<br><code>2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md</code> — 계정·권한·VIEW</td>
+</tr>
+<tr>
+<td>모니터링 · 운영 · 클라우드</td>
+<td style="text-align: right;">8</td>
+<td><strong>노트 없음</strong> — 키워드만 있음</td>
+</tr>
+<tr>
+<td>파이썬 · 자동화</td>
+<td style="text-align: right;">4</td>
+<td><strong>노트 없음</strong> — 키워드만 있음</td>
+</tr>
+<tr>
+<td>보안 실습 · 모의해킹</td>
+<td style="text-align: right;">74</td>
+<td><code>2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md</code> — Kali 초기 설정 부분만</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>노트가 없는 구간은 슬라이드 제목만 남아 있습니다. 수업이 진행되는 대로 <code>notes/</code>에 채우고
+<code>build.py</code>의 <code>ORDER</code>에 추가하면 이 책에 자동으로 편입됩니다.</p>
+</blockquote>
+<h3 id="네트워크-52강">네트워크 (52강)</h3>
+<ul>
+<li>연결 노트: <code>2026-08-18_라우팅-ACL-NAT-VPN.md</code> — OSPF·EIGRP 재분배, ACL, NAT, IPSec VPN 실습</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>001</td>
+<td>IPv6 네트워크 관리 모델</td>
+</tr>
+<tr>
+<td>002</td>
+<td>IT 인프라 보안 과정 소개 IT 인프라 기초</td>
+</tr>
+<tr>
+<td>003</td>
+<td>TCP UDP 비교 및 IP 주소 체계</td>
+</tr>
+<tr>
+<td>004</td>
+<td>네트워크 보안 기초</td>
+</tr>
+<tr>
+<td>005</td>
+<td>시스코 장비 CLI 기본 설정</td>
+</tr>
+<tr>
+<td>006</td>
+<td>VTP</td>
+</tr>
+<tr>
+<td>007</td>
+<td>VTP 트러블슈팅</td>
+</tr>
+<tr>
+<td>008</td>
+<td>라우터 심화 - enable secret 인터페이스 IP 저장 구조</td>
+</tr>
+<tr>
+<td>009</td>
+<td>서브넷 마스크 상세 서브네팅 공식</td>
+</tr>
+<tr>
+<td>010</td>
+<td>설정 저장 CLI 팁 VLAN 서브넷</td>
+</tr>
+<tr>
+<td>011</td>
+<td>자주 받는 질문 - VLAN 설정 오류 해결 트러블슈팅</td>
+</tr>
+<tr>
+<td>012</td>
+<td>트렁킹 서브인터페이스 다른 VLAN 간 통신</td>
+</tr>
+<tr>
+<td>013</td>
+<td>포트 기반 VLAN 트렁크</td>
+</tr>
+<tr>
+<td>014</td>
+<td>EIGRP AS 도메인 분리와 재분배 설정</td>
+</tr>
+<tr>
+<td>015</td>
+<td>EIGRP 설정과 기본 구조</td>
+</tr>
+<tr>
+<td>016</td>
+<td>RIP 버전 1과 버전 2의 차이점 및 호환성 검증</td>
+</tr>
+<tr>
+<td>017</td>
+<td>RIP 설정과 동적 라우팅의 기초</td>
+</tr>
+<tr>
+<td>018</td>
+<td>라우터 기본 설정 - 라우터 간 시리얼 연결, IP 주소 설정, 다중 인터페이스 구성</td>
+</tr>
+<tr>
+<td>019</td>
+<td>라우팅의 개념과 스태틱 다이나믹 라우팅</td>
+</tr>
+<tr>
+<td>020</td>
+<td>스태틱 라우팅 설정 - 라우팅 테이블, 경로 지정, 네트워크 통신 검증</td>
+</tr>
+<tr>
+<td>021</td>
+<td>이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</td>
+</tr>
+<tr>
+<td>022</td>
+<td>DHCP 동적 호스트 주소 할당 프로토콜의 개념과 설정</td>
+</tr>
+<tr>
+<td>023</td>
+<td>DHCP 릴레이 개념과 OSPF 기초 에어리어 구조 및 설정</td>
+</tr>
+<tr>
+<td>024</td>
+<td>OSPF Virtual Link와 FHRP HSRP 게이트웨이 이중화</td>
+</tr>
+<tr>
+<td>025</td>
+<td>VLAN 기반 서브네팅과 L3 스위치 설정</td>
+</tr>
+<tr>
+<td>026</td>
+<td>라우터 ID, Loopback 인터페이스, DR BDR 개념</td>
+</tr>
+<tr>
+<td>027</td>
+<td>ACL 규칙의 순서와 정책 관리</td>
+</tr>
+<tr>
+<td>028</td>
+<td>ACL 및 NAT 개념과 역할 이해</td>
+</tr>
+<tr>
+<td>029</td>
+<td>ACL의 개념 및 필터링 원리</td>
+</tr>
+<tr>
+<td>030</td>
+<td>ACL의 유형별 특징 및 필터링 기준</td>
+</tr>
+<tr>
+<td>031</td>
+<td>IPv6 주소 체계 이해 및 듀얼 스택 개념, 라우팅</td>
+</tr>
+<tr>
+<td>032</td>
+<td>VPN 개념</td>
+</tr>
+<tr>
+<td>033</td>
+<td>동적 NAT 및 PAT 설정의 원리와 동작 메커니즘 이해</td>
+</tr>
+<tr>
+<td>034</td>
+<td>확장 ACL 포트와 프로토콜 기반 세밀한 필터링</td>
+</tr>
+<tr>
+<td>035</td>
+<td>ACL·NAT·VPN 통합 실습 보조 개념 정리</td>
+</tr>
+<tr>
+<td>037</td>
+<td>NAT 개념 정리 및 가상화 환경 소개</td>
+</tr>
+<tr>
+<td>041</td>
+<td>VPN 개념과 GRE 터널링</td>
+</tr>
+<tr>
+<td>042</td>
+<td>네트워크 기본 내용 복습 및 핵심 개념 정리</td>
+</tr>
+<tr>
+<td>082</td>
+<td>ACL 심화</td>
+</tr>
+<tr>
+<td>083</td>
+<td>GNS3</td>
+</tr>
+<tr>
+<td>085</td>
+<td>ZFW</td>
+</tr>
+<tr>
+<td>086</td>
+<td>firewalld와 iptables</td>
+</tr>
+<tr>
+<td>087</td>
+<td>GNS3 VPCS 활용</td>
+</tr>
+<tr>
+<td>088</td>
+<td>Wireshark</td>
+</tr>
+<tr>
+<td>128</td>
+<td>ASAv 기본 설정과 보안 레벨 기반 트래픽 제어</td>
+</tr>
+<tr>
+<td>129</td>
+<td>ASAv 방화벽 ACL 정책 설정, 호스트-GNS3 장비 연결, ASDM</td>
+</tr>
+<tr>
+<td>130</td>
+<td>ASAv·WebTerm 및 GNS3 토폴로지 구성</td>
+</tr>
+<tr>
+<td>131</td>
+<td>GNS3 가상화 환경 구축</td>
+</tr>
+<tr>
+<td>132</td>
+<td>PFSense OpenVPN 서버 구축</td>
+</tr>
+<tr>
+<td>133</td>
+<td>PFSense 개요 및 설치</td>
+</tr>
+<tr>
+<td>134</td>
+<td>GNS3에 PFSense 등록 및 설치</td>
+</tr>
+<tr>
+<td>135</td>
+<td>PFSense 라우팅 설정 및 방화벽 룰</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="리눅스-서버-35강">리눅스 서버 (35강)</h3>
+<ul>
+<li>연결 노트: <code>RockyLinux9_개인서버랩.md</code> — DNS·Apache·HTTPS·PHP·FTP 구축 전 과정</li>
+<li>연결 노트: <code>2026-08-25_NFS-Samba-SELinux-rsyslog.md</code> — 공유·SELinux·로그 중앙수집</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>038</td>
+<td>Rocky Linux IP 주소 수동 설정 및 원격 접속 도구(PuTTY) 소개</td>
+</tr>
+<tr>
+<td>039</td>
+<td>Rocky Linux 로그인 및 기본 명령어 사용</td>
+</tr>
+<tr>
+<td>040</td>
+<td>VirtualBox 가상 머신 생성 및 Rocky Linux 설치</td>
+</tr>
+<tr>
+<td>044</td>
+<td>APM 패키지 설치, systemctl 서비스 관리, 방화벽 설정</td>
+</tr>
+<tr>
+<td>047</td>
+<td>VirtualBox 복제, 홈 디렉토리, 파일 유형과 권한 체계</td>
+</tr>
+<tr>
+<td>048</td>
+<td>리눅스 패키지 관리와 기본 명령어</td>
+</tr>
+<tr>
+<td>049</td>
+<td>웹 Document Root, PHP 연동 테스트, Apache 환경 설정 파일</td>
+</tr>
+<tr>
+<td>050</td>
+<td>파일 기본 권한과 VIM 편집기 사용법</td>
+</tr>
+<tr>
+<td>051</td>
+<td>DNS 네임서버 패키지 구성 및 존 파일 개념</td>
+</tr>
+<tr>
+<td>052</td>
+<td>DNS 서버 개념과 구축 환경 준비</td>
+</tr>
+<tr>
+<td>053</td>
+<td>FTP 기본 구조, 동작 방식, vsftpd 설정 파일 이해</td>
+</tr>
+<tr>
+<td>054</td>
+<td>FTPS 구축과 패시브 모드</td>
+</tr>
+<tr>
+<td>055</td>
+<td>HTTP와 HTTPS의 차이, 서버 인증서의 개념과 구조</td>
+</tr>
+<tr>
+<td>056</td>
+<td>VirtualBox 가상머신 설정 복습</td>
+</tr>
+<tr>
+<td>057</td>
+<td>vsftpd 세부 설정과 서비스 운용</td>
+</tr>
+<tr>
+<td>058</td>
+<td>존 파일 작성과 DNS 서비스 완성</td>
+</tr>
+<tr>
+<td>059</td>
+<td>NFS 서버 구축</td>
+</tr>
+<tr>
+<td>060</td>
+<td>NFS 클라이언트 설정, 마운트 및 Samba 서버 구축 준비</td>
+</tr>
+<tr>
+<td>061</td>
+<td>Samba 설정 파일 구성, 서비스 운영 및 윈도우 접속 테스트</td>
+</tr>
+<tr>
+<td>062</td>
+<td>리눅스 서비스 구축 흐름과 DNS 레코드 체계</td>
+</tr>
+<tr>
+<td>063</td>
+<td>LogAnalyzer 웹 설치, HTTP 오류 코드와 SELinux 파일 권한</td>
+</tr>
+<tr>
+<td>064</td>
+<td>LogAnalyzer, wget 명령어, 압축 파일 형식, 쉘 스크립트 개념</td>
+</tr>
+<tr>
+<td>066</td>
+<td>rsyslog-mysql 패키지(DB 설정)</td>
+</tr>
+<tr>
+<td>067</td>
+<td>rsyslog를 활용한 로그 전송</td>
+</tr>
+<tr>
+<td>068</td>
+<td>Syslog Facility Priority의 개념, 로그 레벨 이해</td>
+</tr>
+<tr>
+<td>069</td>
+<td>시스템 로그 관리 및 분석(리눅스 웹 서버)</td>
+</tr>
+<tr>
+<td>074</td>
+<td>리눅스 계정 파일 구조, Salt, 파일 권한과 umask</td>
+</tr>
+<tr>
+<td>075</td>
+<td>리눅스 기본 명령어, 도움말·시스템·탐색 명령어</td>
+</tr>
+<tr>
+<td>089</td>
+<td>Linux 패스워드 정책 파라미터 설정</td>
+</tr>
+<tr>
+<td>090</td>
+<td>PAM 인증 설정 및 auth-select 명령어</td>
+</tr>
+<tr>
+<td>097</td>
+<td>우분투 서버 개요 및 VirtualBox 설치 준비</td>
+</tr>
+<tr>
+<td>098</td>
+<td>우분투 서버 기본 명령 환경 및 네트워크 설정</td>
+</tr>
+<tr>
+<td>103</td>
+<td>칼리 리눅스 개요</td>
+</tr>
+<tr>
+<td>115</td>
+<td>셸 스크립트 기본 문법 및 AWK·SED 텍스트 처리 도구</td>
+</tr>
+<tr>
+<td>077</td>
+<td>파일 조작·검색·출력 명령어, 표준 입출력과 리디렉션</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="윈도우-서버-6강">윈도우 서버 (6강)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>070</td>
+<td>IIS 웹·FTP 사이트 구성, 주요 설정 항목, 에러 코드 및 보안 설정</td>
+</tr>
+<tr>
+<td>071</td>
+<td>Windows FTP 방화벽 허용 및 접속 테스트</td>
+</tr>
+<tr>
+<td>072</td>
+<td>Windows Server 소개, 설치 버전 구분, Administrator 계정</td>
+</tr>
+<tr>
+<td>073</td>
+<td>Windows Server 초기 네트워크 설정, 서버 관리자, IIS·DNS 역할 추가</td>
+</tr>
+<tr>
+<td>076</td>
+<td>이벤트 뷰어 보안 로그, 컴퓨터 관리, 로컬 보안 정책</td>
+</tr>
+<tr>
+<td>091</td>
+<td>Windows Server DNS 서버 구축</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="데이터베이스-9강">데이터베이스 (9강)</h3>
+<ul>
+<li>연결 노트: <code>2026-08-27_MariaDB-SQL-백업-복제.md</code> — SQL 기초·문자셋·논리 백업·복제</li>
+<li>연결 노트: <code>2026-08-28_팀웹-원격MariaDB연동.md</code> — PHP PDO 원격 연동·호스트별 권한</li>
+<li>연결 노트: <code>2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md</code> — 계정·권한·VIEW</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>043</td>
+<td>Apache 설정 적용과 재시작, 웹 문서 구조, MariaDB 초기 보안 설정</td>
+</tr>
+<tr>
+<td>045</td>
+<td>MariaDB SQL 기초 CRUD 개념, 데이터베이스·테이블 생성, 필드 추가</td>
+</tr>
+<tr>
+<td>046</td>
+<td>MariaDB 필드 수정·삭제, 데이터 삽입·수정·삭제 SQL</td>
+</tr>
+<tr>
+<td>065</td>
+<td>rsyslog 연결 확인과 MariaDB 연동 준비</td>
+</tr>
+<tr>
+<td>092</td>
+<td>MariaDB 리플리케이션 슬레이브 설정 및 복제 동작 확인</td>
+</tr>
+<tr>
+<td>093</td>
+<td>MariaDB 리플리케이션 완성 및 복제 동작 확인</td>
+</tr>
+<tr>
+<td>094</td>
+<td>MariaDB 리플리케이션(복제) 개념 및 마스터 서버 설정</td>
+</tr>
+<tr>
+<td>095</td>
+<td>MariaDB 사용자 계정 관리 및 권한 설계</td>
+</tr>
+<tr>
+<td>096</td>
+<td>데이터베이스 보안 개요 및 시스템 하드웨어 점검 명령어</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="모니터링--운영--클라우드-8강">모니터링 · 운영 · 클라우드 (8강)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>078</td>
+<td>Docker 컨테이너 기술과 Linux 패키지 저장소(Repository) 개념</td>
+</tr>
+<tr>
+<td>079</td>
+<td>NMS(Zabbix)를 활용한 네트워크 관리 시스템 구축</td>
+</tr>
+<tr>
+<td>080</td>
+<td>PMM을 활용한 DB 모니터링</td>
+</tr>
+<tr>
+<td>081</td>
+<td>보안 솔루션의 종류와 역할, 구축 전략</td>
+</tr>
+<tr>
+<td>084</td>
+<td>Zabbix</td>
+</tr>
+<tr>
+<td>099</td>
+<td>클라우드 서비스의 개념과 유형, 클라우드 보안 및 AI 보안</td>
+</tr>
+<tr>
+<td>113</td>
+<td>GoAccess를 활용한 웹서버 전용 실시간 로그 분석</td>
+</tr>
+<tr>
+<td>114</td>
+<td>나기오스(Nagios) 설치 및 웹 인터페이스 구성</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="파이썬--자동화-4강">파이썬 · 자동화 (4강)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>121</td>
+<td>실전 예제 코드를 활용한 파이썬 자동화 활용 이해</td>
+</tr>
+<tr>
+<td>122</td>
+<td>파이썬 GUI 프로그래밍 (Tkinter)</td>
+</tr>
+<tr>
+<td>123</td>
+<td>파이썬 가상 환경 설정 및 기초 개념</td>
+</tr>
+<tr>
+<td>124</td>
+<td>파이썬 설치 가이드</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="보안-실습--모의해킹-74강">보안 실습 · 모의해킹 (74강)</h3>
+<ul>
+<li>연결 노트: <code>2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md</code> — Kali 초기 설정 부분만</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>강</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>036</td>
+<td>IPSec 암호화 정책과 VPN 장비 개념</td>
+</tr>
+<tr>
+<td>100</td>
+<td>DDoS 공격 기법과 Hping3 활용</td>
+</tr>
+<tr>
+<td>101</td>
+<td>IDS IPS 개념, Snort3 설치</td>
+</tr>
+<tr>
+<td>102</td>
+<td>모의 해킹 프로세스 이해 및 Nmap 스캐닝</td>
+</tr>
+<tr>
+<td>104</td>
+<td>CTF 머신 풀이 입문 (Earth 머신)</td>
+</tr>
+<tr>
+<td>105</td>
+<td>Snort3 룰 탐지 테스트 및 Suricata 구축</td>
+</tr>
+<tr>
+<td>106</td>
+<td>CTF 워크스루 Empire Breakout 머신</td>
+</tr>
+<tr>
+<td>107</td>
+<td>HIDS(OSSEC) 구축</td>
+</tr>
+<tr>
+<td>108</td>
+<td>IDS와 IPS</td>
+</tr>
+<tr>
+<td>109</td>
+<td>Set UID GID 개념 및 CTF 머신(Lupin One) 권한</td>
+</tr>
+<tr>
+<td>110</td>
+<td>CTF 머신 풀이 복습 및 CTF 대회 준비 방법</td>
+</tr>
+<tr>
+<td>111</td>
+<td>정보 수집·취약점 분석, 파라미터 퍼징을 활용한 웹 취약점 탐색</td>
+</tr>
+<tr>
+<td>112</td>
+<td>CTF 모멘텀 1, Redis 서버</td>
+</tr>
+<tr>
+<td>116</td>
+<td>CTF 머신 모멘텀2</td>
+</tr>
+<tr>
+<td>117</td>
+<td>Graylog SIEM 구축</td>
+</tr>
+<tr>
+<td>118</td>
+<td>웹 프록시 도구 버프 스위트와 ZAP Proxy</td>
+</tr>
+<tr>
+<td>119</td>
+<td>msf 개념 및 Webmin 로그 분석</td>
+</tr>
+<tr>
+<td>120</td>
+<td>Wazuh 환경 구축 및 구성 요소 이해</td>
+</tr>
+<tr>
+<td>125</td>
+<td>CTF 머신 Double Trouble</td>
+</tr>
+<tr>
+<td>126</td>
+<td>버퍼 오버플로우(BOF)</td>
+</tr>
+<tr>
+<td>127</td>
+<td>포맷 스트링 취약점 개념</td>
+</tr>
+<tr>
+<td>136</td>
+<td>Brute Force</td>
+</tr>
+<tr>
+<td>137</td>
+<td>Captcha 개요 및 XSS Reflected</td>
+</tr>
+<tr>
+<td>138</td>
+<td>Command Injection 취약점</td>
+</tr>
+<tr>
+<td>139</td>
+<td>DVWA 환경 구축</td>
+</tr>
+<tr>
+<td>140</td>
+<td>File Inclusion 취약점</td>
+</tr>
+<tr>
+<td>141</td>
+<td>File Upload 취약점</td>
+</tr>
+<tr>
+<td>142</td>
+<td>ISMS-P 정보보호인증제도</td>
+</tr>
+<tr>
+<td>143</td>
+<td>XSS Stored</td>
+</tr>
+<tr>
+<td>144</td>
+<td>웹해킹 기초이론</td>
+</tr>
+<tr>
+<td>145</td>
+<td>CSRF</td>
+</tr>
+<tr>
+<td>146</td>
+<td>DVWA</td>
+</tr>
+<tr>
+<td>147</td>
+<td>SQL Injection 수동 점검</td>
+</tr>
+<tr>
+<td>148</td>
+<td>SQL Injection 자동화 및 Blind</td>
+</tr>
+<tr>
+<td>149</td>
+<td>세션 취약점과 스크립트 공격 분석</td>
+</tr>
+<tr>
+<td>150</td>
+<td>인가 우회, 리디렉트 취약점, 암호학, API 취약점 분석</td>
+</tr>
+<tr>
+<td>151</td>
+<td>A2 인증 및 세션 관리 취약점</td>
+</tr>
+<tr>
+<td>152</td>
+<td>beebox 실습 환경 구성</td>
+</tr>
+<tr>
+<td>153</td>
+<td>SQL Injection 심화 실습</td>
+</tr>
+<tr>
+<td>154</td>
+<td>OWASP Juice Shop과 웹 취약점</td>
+</tr>
+<tr>
+<td>155</td>
+<td>XSS(Cross-Site Scripting) 취약점 유형별 실습</td>
+</tr>
+<tr>
+<td>156</td>
+<td>b374k 웹셸 업로드부터 ARP 스푸핑</td>
+</tr>
+<tr>
+<td>157</td>
+<td>Base64 및 SSL 취약점</td>
+</tr>
+<tr>
+<td>158</td>
+<td>BEAST CRIME BREACH Heartbleed POODLE 취약점 분석</td>
+</tr>
+<tr>
+<td>159</td>
+<td>Samba 취약점 분석</td>
+</tr>
+<tr>
+<td>160</td>
+<td>SNMP 보안 설정 미비 취약점 및 WebDAV 설정 미비 취약점</td>
+</tr>
+<tr>
+<td>161</td>
+<td>XST(Cross-Site Tracing), DDoS 공격 기법, FTP 보안 취약점</td>
+</tr>
+<tr>
+<td>162</td>
+<td>Heartbleed, PHP-CGI RCE, eval 함수, phpMyAdmin XSS,</td>
+</tr>
+<tr>
+<td>163</td>
+<td>Shell Shock 실습, Unvalidated Redirect Forward, bWAP</td>
+</tr>
+<tr>
+<td>164</td>
+<td>SSRF·XXE, CSRF, 그리고 Drupal SQL Injection</td>
+</tr>
+<tr>
+<td>165</td>
+<td>민감 데이터 노출(A6) 취약점</td>
+</tr>
+<tr>
+<td>166</td>
+<td>장치·폴더 접근 제한 취약점 실습</td>
+</tr>
+<tr>
+<td>167</td>
+<td>Metasploitable2 머신 Nmap 포트 스캐닝, MSF 콘솔을 이용한 FTP·We</td>
+</tr>
+<tr>
+<td>168</td>
+<td>Samba(SMB) 서비스 스캐닝·열거·취약점 공격 및 버전 탐지</td>
+</tr>
+<tr>
+<td>169</td>
+<td>SSH 브루트포싱, NFS·VNC·SMTP·PostgreSQL 취약점 공격, Armitag</td>
+</tr>
+<tr>
+<td>170</td>
+<td>DLL 파일의 역할과 PE 실행 파일 구조</td>
+</tr>
+<tr>
+<td>171</td>
+<td>악성코드 분석 개요 및 FLARE VM 기반 분석 환경 구성</td>
+</tr>
+<tr>
+<td>172</td>
+<td>PE 분석 도구 활용 및 디스어셈블러·디버거 입문</td>
+</tr>
+<tr>
+<td>173</td>
+<td>악성코드 분석 환경 설정 및 바이러스토탈을 이용한 기초 정적 분석</td>
+</tr>
+<tr>
+<td>174</td>
+<td>ModSecurity 커스텀 룰, XSS SQL Injection IP 차단 룰과 OWAS</td>
+</tr>
+<tr>
+<td>175</td>
+<td>WAF(웹 방화벽)</td>
+</tr>
+<tr>
+<td>176</td>
+<td>WebGoat SQL Injection 취약점</td>
+</tr>
+<tr>
+<td>177</td>
+<td>WebGoat XSS 취약점 및 피싱 페이지 제작 실습</td>
+</tr>
+<tr>
+<td>178</td>
+<td>WebGoat 경로 조작 취약점</td>
+</tr>
+<tr>
+<td>179</td>
+<td>bbs_add php의 XSS 취약점을 이용한 Deface 공격 실습</td>
+</tr>
+<tr>
+<td>180</td>
+<td>Command Injection 취약점</td>
+</tr>
+<tr>
+<td>181</td>
+<td>Deface 머신 정보 수집 및 게시글 등록 페이지 추론</td>
+</tr>
+<tr>
+<td>182</td>
+<td>Nmap 스캔 및 업로드 취약점 실습</td>
+</tr>
+<tr>
+<td>183</td>
+<td>웹 취약점(자바스크립트 제어, 쿠키 조작, 인코딩, XSS 우회, SQL 인젝션, 레이스</td>
+</tr>
+<tr>
+<td>184</td>
+<td>워드프레스 취약한 머신을 대상으로 한 정찰, 계정 탈취, 플러그인 웹쉘 삽입 실습</td>
+</tr>
+<tr>
+<td>185</td>
+<td>파일 업로드, SQL 인젝션, XSS, 쿠키 변조 취약점 실습</td>
+</tr>
+<tr>
+<td>186</td>
+<td>MisAuth 해킹머신 실습을 통한 인증 우회 및 응답 변조 기법</td>
+</tr>
+<tr>
+<td>187</td>
+<td>OverTheWire Natas 웹 해킹 기법 실습</td>
+</tr>
+<tr>
+<td>188</td>
+<td>OverTheWire Natas 실습 파일 시그니처 우회와 웹 에디터 공략</td>
+</tr>
+</tbody>
+</table></div><div class="nav"><a href="ch01.html"><span class="lbl">이전</span>이 책의 사용법</a><a href="ch03.html"><span class="lbl">다음</span>260818 Cisco Packet Tracer 실습 정리</a></div></main>
+</div>
+<a id="top" href="#">▲ 맨 위</a>
+<script>
+const q=document.getElementById('q');
+if(q){
+  const links=[...document.querySelectorAll('aside a')];
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();
+    links.forEach(a=>{a.style.display = !v || a.textContent.toLowerCase().includes(v) ? '' : 'none';});
+    document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
+  });
+}
+const inchap=[...document.querySelectorAll('aside .inchap a')];
+if(inchap.length){
+  const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(!e.isIntersecting) return;
+      inchap.forEach(a=>a.classList.remove('on'));
+      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
+    });
+  },{rootMargin:'0px 0px -80% 0px'});
+  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+}
+</script>
+</body></html>
