@@ -129,28 +129,104 @@ def anchor_headings(html_text: str) -> tuple[str, list[tuple[int, str, str]]]:
     return html_text, items
 
 
+def code_block_labels(md_text: str) -> list[str]:
+    """Fenced code를 읽어 HTML/Notion에서 보여 줄 언어 라벨을 추론합니다."""
+    blocks: list[tuple[str, str]] = []
+    in_fence = False
+    language = ""
+    body: list[str] = []
+    for line in md_text.splitlines():
+        if line.lstrip().startswith("```"):
+            if in_fence:
+                blocks.append((language, "\n".join(body)))
+                language = ""
+                body = []
+            else:
+                language = line.lstrip()[3:].strip()
+            in_fence = not in_fence
+        elif in_fence:
+            body.append(line)
+
+    labels: list[str] = []
+    cisco = re.compile(
+        r"(^|\n)\s*(?:Router(?:\([^)]*\))?[>#]|conf t|configure terminal|interface |"
+        r"router (?:ospf|eigrp|rip)|show (?:ip |ipv6 |interfaces|running|startup|access|crypto|standby|vlan|spanning)|"
+        r"(?:no )?(?:shutdown|router |ip address|network |access-list|vlan )|"
+        r"(?:permit|deny) (?:ip|tcp|udp|icmp))",
+        re.I,
+    )
+    shell = re.compile(
+        r"(^|\n)\s*(?:\$|#|sudo |dnf |yum |systemctl |firewall-cmd |nmcli |semanage |"
+        r"chmod |chown |cp |mv |mkdir |grep |awk |sed |cat |journalctl |ssh |scp |curl |wget )",
+        re.I,
+    )
+    sql = re.compile(r"\b(?:SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|GRANT|SHOW)\b", re.I)
+    for raw, body_text in blocks:
+        key = raw.lower().replace("_", " ").strip()
+        if cisco.search(body_text):
+            labels.append("Cisco IOS")
+        elif key in {"bash", "sh", "shell", "zsh", "console"} or shell.search(body_text):
+            labels.append("Shell")
+        elif key in {"sql", "mysql", "mariadb"} or sql.search(body_text):
+            labels.append("SQL")
+        elif key in {"python", "py"}:
+            labels.append("Python")
+        elif key in {"javascript", "js"}:
+            labels.append("JavaScript")
+        elif key in {"c", "c++", "cpp"}:
+            labels.append("C")
+        elif key in {"plain text", "plaintext", "text", "txt", "output", ""}:
+            labels.append("Text")
+        else:
+            labels.append(raw.strip().replace("-", " ").title() or "Code")
+    return labels
+
+
+def decorate_code_blocks(html_text: str, labels: list[str]) -> str:
+    """codehilite 출력을 Notion식 코드 카드로 감싸고 복사 버튼을 붙입니다."""
+    block_re = re.compile(r'<div class="codehilite">.*?</div>', re.S)
+    index = 0
+
+    def repl(match: re.Match) -> str:
+        nonlocal index
+        label = labels[index] if index < len(labels) else "Code"
+        index += 1
+        safe_label = html.escape(label)
+        return (
+            f'<div class="code-shell" data-language="{safe_label}">'
+            f'<div class="code-toolbar"><span class="code-mark">⌘</span>'
+            f'<span class="code-label">{safe_label}</span>'
+            '<button class="code-copy" type="button">복사</button></div>'
+            f'{match.group(0)}</div>'
+        )
+
+    return block_re.sub(repl, html_text)
+
+
 CSS = """
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -167,30 +243,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -201,6 +298,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -214,13 +312,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 """
@@ -235,6 +333,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
@@ -257,7 +371,7 @@ def page(title: str, sidebar: str, body: str) -> str:
 <title>{html.escape(title)} · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>{CSS}</style>
 </head><body>
 <div class="layout">
@@ -305,6 +419,7 @@ def main() -> int:
         rendered, items = anchor_headings(rendered)
         rendered = rendered.replace("<table>", '<div class="tablewrap"><table>')
         rendered = rendered.replace("</table>", "</table></div>")
+        rendered = decorate_code_blocks(rendered, code_block_labels(combined))
         no = len(chapters) + 1
         chapters.append({
             "no": no,
@@ -346,6 +461,7 @@ def main() -> int:
         rendered, items = anchor_headings(rendered)
         rendered = rendered.replace("<table>", '<div class="tablewrap"><table>')
         rendered = rendered.replace("</table>", "</table></div>")
+        rendered = decorate_code_blocks(rendered, code_block_labels(demoted))
         archives.append({
             "no": index,
             "file": entry.get("file", f"archive-{index:02d}.html"),
@@ -402,8 +518,8 @@ def main() -> int:
             nav.append(f'<a href="{n["file"]}"><span class="lbl">다음</span>{html.escape(n["title"])}</a>')
         nav.append("</div>")
         body = (
-            f'<div class="chapter-no">CHAPTER {c["no"]:02d}</div>'
-            f'<h1>{html.escape(c["title"])}</h1>{c["html"]}{"".join(nav)}'
+            f'<header class="chapter-head"><div class="chapter-no">CHAPTER {c["no"]:02d}</div>'
+            f'<h1>{html.escape(c["title"])}</h1></header>{c["html"]}{"".join(nav)}'
         )
         with io.open(os.path.join(site, c["file"]), "w", encoding="utf-8", newline="\n") as f:
             f.write(page(c["title"], chapter_list(c["no"]) + archive_list(None), body))
@@ -422,8 +538,8 @@ def main() -> int:
             nav.append('<a href="index.html"><span class="lbl">목차</span>전체 목차</a>')
         nav.append("</div>")
         body = (
-            f'<div class="chapter-no">ORIGINAL {a["no"]:02d}</div>'
-            f'<h1>{html.escape(a["title"])}</h1>{a["html"]}{"".join(nav)}'
+            f'<header class="chapter-head"><div class="chapter-no">ORIGINAL {a["no"]:02d}</div>'
+            f'<h1>{html.escape(a["title"])}</h1></header>{a["html"]}{"".join(nav)}'
         )
         with io.open(os.path.join(site, a["file"]), "w", encoding="utf-8", newline="\n") as f:
             f.write(page(a["title"], chapter_list(None) + archive_list(a["no"]), body))

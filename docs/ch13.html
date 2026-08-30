@@ -5,29 +5,31 @@
 <title>네트워크 핵심키워드 2 · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -44,30 +46,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -78,6 +101,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -91,13 +115,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 </style>
@@ -109,7 +133,7 @@ th{background:var(--accent-soft); font-weight:700}
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
   <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="part">1부 · 네트워크</div><a class="" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="part">1부 · 네트워크</div><a class="cur" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="inchap"><a class="lv3" href="#021-이중화-회선-구성---부하-분산-장애-대비-다중-경로-라우팅">021. 이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</a><a class="lv4" href="#1-이중화-회선-구성">1. 이중화 회선 구성</a><a class="lv4" href="#2-라우팅-테이블의-변화">2. 라우팅 테이블의 변화</a><a class="lv4" href="#3-부하-분산load-balancing">3. 부하 분산(Load Balancing)</a><a class="lv4" href="#4-이중화-설정의-실행">4. 이중화 설정의 실행</a><a class="lv4" href="#5-다중-회선의-라우팅-복잡성">5. 다중 회선의 라우팅 복잡성</a><a class="lv4" href="#6-라우팅-정보-저장">6. 라우팅 정보 저장</a><a class="lv4" href="#7-이중화-라우팅의-고급-개념">7. 이중화 라우팅의 고급 개념</a><a class="lv4" href="#8-네트워크-설정의-실제-적용">8. 네트워크 설정의 실제 적용</a><a class="lv3" href="#022-dhcp-동적-호스트-주소-할당-프로토콜의-개념과-설정">022. DHCP 동적 호스트 주소 할당 프로토콜의 개념과 설정</a><a class="lv4" href="#1-dhcp-개요">1. DHCP 개요</a><a class="lv4" href="#2-dhcp-설정-명령어">2. DHCP 설정 명령어</a><a class="lv4" href="#3-dhcp-동작-원리">3. DHCP 동작 원리</a><a class="lv4" href="#4-dhcp-테이블-확인">4. DHCP 테이블 확인</a><a class="lv4" href="#5-고정-ip와-동적-ip">5. 고정 IP와 동적 IP</a><a class="lv3" href="#023-dhcp-릴레이-개념과-ospf-기초-에어리어-구조-및-설정">023. DHCP 릴레이 개념과 OSPF 기초 에어리어 구조 및 설정</a><a class="lv4" href="#1-dhcp-릴레이">1. DHCP 릴레이</a><a class="lv4" href="#2-기존-라우팅-프로토콜-설정-삭제">2. 기존 라우팅 프로토콜 설정 삭제</a><a class="lv4" href="#3-ospf-기초">3. OSPF 기초</a><a class="lv4" href="#4-ospf-에어리어-미스매치">4. OSPF 에어리어 미스매치</a><a class="lv4" href="#5-라우터-아이디router-id">5. 라우터 아이디(Router ID)</a><a class="lv3" href="#024-ospf-virtual-link와-fhrp-hsrp-게이트웨이-이중화">024. OSPF Virtual Link와 FHRP HSRP 게이트웨이 이중화</a><a class="lv4" href="#1-virtual-link와-라우터-id">1. Virtual Link와 라우터 ID</a><a class="lv4" href="#2-fhrp-first-hop-redundancy-protocol">2. FHRP (First Hop Redundancy Protocol)</a><a class="lv4" href="#3-hsrp-hot-standby-router-protocol">3. HSRP (Hot Standby Router Protocol)</a><a class="lv3" href="#025-vlan-기반-서브네팅과-l3-스위치-설정">025. VLAN 기반 서브네팅과 L3 스위치 설정</a><a class="lv4" href="#1-vlan과-서브네팅">1. VLAN과 서브네팅</a><a class="lv4" href="#2-l3-스위치">2. L3 스위치</a><a class="lv4" href="#3-라우터-서브-인터페이스와-encapsulation-dot1q">3. 라우터 서브 인터페이스와 Encapsulation DOT1Q</a><a class="lv4" href="#4-라우터와-스위치의-역할-구분">4. 라우터와 스위치의 역할 구분</a><a class="lv3" href="#026-라우터-id-loopback-인터페이스-dr-bdr-개념">026. 라우터 ID, Loopback 인터페이스, DR BDR 개념</a><a class="lv4" href="#1-라우터-아이디router-id-심화">1. 라우터 아이디(Router ID) 심화</a><a class="lv4" href="#2-loopback-인터페이스">2. Loopback 인터페이스</a><a class="lv4" href="#3-확장형-핑-extended-ping">3. 확장형 핑 (Extended Ping)</a><a class="lv4" href="#4-dr--bdr-designated-router--backup-designated">4. DR / BDR (Designated Router / Backup Designated</a><a class="lv4" href="#router">Router)</a><a class="lv3" href="#027-acl-규칙의-순서와-정책-관리">027. ACL 규칙의 순서와 정책 관리</a><a class="lv4" href="#1-acl-규칙의-순서-중요성">1. ACL 규칙의 순서 중요성</a><a class="lv4" href="#2-acl-규칙-추가와-라인-번호">2. ACL 규칙 추가와 라인 번호</a><a class="lv4" href="#3-실무에서의-acl-관리-방법">3. 실무에서의 ACL 관리 방법</a><a class="lv4" href="#4-라인-번호를-이용한-규칙-관리">4. 라인 번호를 이용한 규칙 관리</a><a class="lv4" href="#5-acl-설정의-best-practice">5. ACL 설정의 Best Practice</a><a class="lv4" href="#6-acl-다음-단계-nat의-필요성">6. ACL 다음 단계: NAT의 필요성</a><a class="lv3" href="#028-acl-및-nat-개념과-역할-이해">028. ACL 및 NAT 개념과 역할 이해</a><a class="lv4" href="#1-acl접근-제어-목록-access-control-list-개요">1. ACL(접근 제어 목록; Access Control List) 개요</a><a class="lv4" href="#2-acl의-분류">2. ACL의 분류</a><a class="lv4" href="#3-acl-설정의-기본-개념">3. ACL 설정의 기본 개념</a><a class="lv4" href="#4-acl의-동작-원리">4. ACL의 동작 원리</a><a class="lv4" href="#5-named-acl">5. Named ACL</a><a class="lv4" href="#6-natnetwork-address-translation-개요">6. NAT(Network Address Translation) 개요</a><a class="lv4" href="#7-ip-주소의-분류">7. IP 주소의 분류</a><a class="lv4" href="#8-nat의-종류">8. NAT의 종류</a><a class="lv4" href="#9-patport-address-translation">9. PAT(Port Address Translation)</a><a class="lv4" href="#10-가정용-공유기의-natpat">10. 가정용 공유기의 NAT/PAT</a><a class="lv4" href="#11-acl과-nat의-관계">11. ACL과 NAT의 관계</a><a class="lv4" href="#12-nat의-보안-측면">12. NAT의 보안 측면</a><a class="lv3" href="#029-acl의-개념-및-필터링-원리">029. ACL의 개념 및 필터링 원리</a><a class="lv4" href="#1-acl접근-제어-목록-개요">1. ACL(접근 제어 목록) 개요</a><a class="lv4" href="#3-환경-세팅">3. 환경 세팅</a><a class="lv3" href="#030-acl의-유형별-특징-및-필터링-기준">030. ACL의 유형별 특징 및 필터링 기준</a><a class="lv4" href="#1-스탠다드-aclstandard-acl">1. 스탠다드 ACL(Standard ACL)</a><a class="lv4" href="#2-확장-aclextended-acl">2. 확장 ACL(Extended ACL)</a><a class="lv4" href="#3-acl의-분류-비교">3. ACL의 분류 비교</a><a class="lv4" href="#4-acl-번호-체계">4. ACL 번호 체계</a><a class="lv4" href="#5-필터링의-동작-원리">5. 필터링의 동작 원리</a><a class="lv4" href="#6-프로토콜과-포트의-이해">6. 프로토콜과 포트의 이해</a><a class="lv4" href="#7-packet-tracer의-서버-시스템">7. Packet Tracer의 서버 시스템</a><a class="lv3" href="#031-ipv6-주소-체계-이해-및-듀얼-스택-개념-라우팅">031. IPv6 주소 체계 이해 및 듀얼 스택 개념, 라우팅</a><a class="lv4" href="#1-ipv4와-ipv6의-차이">1. IPv4와 IPv6의 차이</a><a class="lv4" href="#2-ipv6-주소의-구조">2. IPv6 주소의 구조</a><a class="lv4" href="#3-ipv6-주소-축약-표기법">3. IPv6 주소 축약 표기법</a><a class="lv4" href="#4-ipv6-주소의-분류">4. IPv6 주소의 분류</a><a class="lv4" href="#5-ipv6-주소-통신-범위">5. IPv6 주소 통신 범위</a><a class="lv4" href="#6-ipv4와-ipv6-혼용-듀얼-스택">6. IPv4와 IPv6 혼용: 듀얼 스택</a><a class="lv4" href="#7-ipv4와-ipv6-간-변환-터널링">7. IPv4와 IPv6 간 변환: 터널링</a><a class="lv4" href="#8-ipv6의-장점">8. IPv6의 장점</a><a class="lv4" href="#9-ipv6-주소-설정">9. IPv6 주소 설정</a><a class="lv4" href="#10-ipv6-라우팅-듀얼-스택-환경">10. IPv6 라우팅: 듀얼 스택 환경</a><a class="lv4" href="#11-ipv6의-라우팅-프로토콜-지원">11. IPv6의 라우팅 프로토콜 지원</a><a class="lv4" href="#12-현재와-미래">12. 현재와 미래</a><a class="lv4" href="#1-ipv6-라우팅">1. IPv6 라우팅</a><a class="lv4" href="#2-ipv6-라우팅-테이블-확인">2. IPv6 라우팅 테이블 확인</a><a class="lv4" href="#3-ipv6-라우팅의-특징">3. IPv6 라우팅의 특징</a><a class="lv4" href="#4-ipv6-통신-테스트">4. IPv6 통신 테스트</a><a class="lv4" href="#5-ospf-상태-확인">5. OSPF 상태 확인</a><a class="lv4" href="#6-설정-확인">6. 설정 확인</a><a class="lv3" href="#032-vpn-개념">032. VPN 개념</a><a class="lv4" href="#7-vpnvirtual-private-network-개요">7. VPN(Virtual Private Network) 개요</a><a class="lv4" href="#8-vpn의-분류">8. VPN의 분류</a><a class="lv4" href="#9-vpn-설정-전-필수-조건">9. VPN 설정 전 필수 조건</a><a class="lv4" href="#10-vpn-구축을-위한-네트워크-설계">10. VPN 구축을 위한 네트워크 설계</a><a class="lv4" href="#11-vpn-설정-준비">11. VPN 설정 준비</a><a class="lv4" href="#12-vpn-설정의-다음-단계">12. VPN 설정의 다음 단계</a><a class="lv4" href="#13-vpn-설정-시-주의사항">13. VPN 설정 시 주의사항</a><a class="lv3" href="#033-동적-nat-및-pat-설정의-원리와-동작-메커니즘-이해">033. 동적 NAT 및 PAT 설정의 원리와 동작 메커니즘 이해</a><a class="lv4" href="#1-동적-nat-설정의-기본-구조">1. 동적 NAT 설정의 기본 구조</a><a class="lv4" href="#2-nat-설정-전-준비">2. NAT 설정 전 준비</a><a class="lv4" href="#3-동적-nat-설정-과정">3. 동적 NAT 설정 과정</a><a class="lv4" href="#4-인터페이스에-nat-적용">4. 인터페이스에 NAT 적용</a><a class="lv4" href="#5-nat-동작-확인">5. NAT 동작 확인</a><a class="lv4" href="#6-동적-nat의-한계">6. 동적 NAT의 한계</a><a class="lv4" href="#7-patport-address-translation">7. PAT(Port Address Translation)</a><a class="lv4" href="#8-가정용-공유기의-natpat">8. 가정용 공유기의 NAT/PAT</a><a class="lv4" href="#9-nat가-필요-없는-상황">9. NAT가 필요 없는 상황</a><a class="lv4" href="#10-nat와-보안">10. NAT와 보안</a><a class="lv4" href="#11-nat-삭제-및-초기화">11. NAT 삭제 및 초기화</a><a class="lv4" href="#12-ipv6-주소-소개">12. IPv6 주소 소개</a><a class="lv3" href="#034-확장-acl-포트와-프로토콜-기반-세밀한-필터링">034. 확장 ACL 포트와 프로토콜 기반 세밀한 필터링</a><a class="lv4" href="#1-확장-acl의-실전-구성">1. 확장 ACL의 실전 구성</a><a class="lv4" href="#2-포트-번호와-서비스-매핑">2. 포트 번호와 서비스 매핑</a><a class="lv4" href="#3-포트-필터링의-실전-예제">3. 포트 필터링의 실전 예제</a><a class="lv4" href="#4-acl-규칙-작성의-best-practice">4. ACL 규칙 작성의 Best Practice</a><a class="lv4" href="#5-실습-준비">5. 실습 준비</a><a class="lv4" href="#6-복잡한-필터링-정책의-관리">6. 복잡한 필터링 정책의 관리</a><a class="lv3" href="#035-aclnatvpn-통합-실습-보조-개념-정리">035. ACL·NAT·VPN 통합 실습 보조 개념 정리</a><a class="lv4" href="#1-실습-진행-순서-원칙">1. 실습 진행 순서 원칙</a><a class="lv4" href="#2-acl-관련-주요-사항">2. ACL 관련 주요 사항</a><a class="lv4" href="#3-nat와-acl의-상호작용">3. NAT와 ACL의 상호작용</a><a class="lv4" href="#4-l2-스위치-동작-원리">4. L2 스위치 동작 원리</a><a class="lv3" href="#037-nat-개념-정리-및-가상화-환경-소개">037. NAT 개념 정리 및 가상화 환경 소개</a><a class="lv4" href="#1-natnetwork-address-translation-개념-정리">1. NAT(Network Address Translation) 개념 정리</a><a class="lv4" href="#2-클라이언트-서버-네트워크">2. 클라이언트-서버 네트워크</a><a class="lv4" href="#3-가상화virtualization-개념">3. 가상화(Virtualization) 개념</a><a class="lv4" href="#4-rocky-linux-소개">4. Rocky Linux 소개</a><a class="lv3" href="#041-vpn-개념과-gre-터널링">041. VPN 개념과 GRE 터널링</a><a class="lv4" href="#1-수업-개요">1. 수업 개요</a><a class="lv4" href="#2-vpnvirtual-private-network-개념">2. VPN(Virtual Private Network) 개념</a><a class="lv4" href="#3-vpn-터널링">3. VPN 터널링</a><a class="lv4" href="#4-gre-터널링">4. GRE 터널링</a><a class="lv4" href="#5-vpn-라우팅-설정">5. VPN 라우팅 설정</a><a class="lv4" href="#6-ip-securityipsec-개요">6. IP Security(IPSec) 개요</a><a class="lv3" href="#042-네트워크-기본-내용-복습-및-핵심-개념-정리">042. 네트워크 기본 내용 복습 및 핵심 개념 정리</a><a class="lv4" href="#1-osi-7계층-모델">1. OSI 7계층 모델</a><a class="lv4" href="#2-정보보안의-3요소와-5대-요소">2. 정보보안의 3요소와 5대 요소</a><a class="lv4" href="#3-fcaps--iso-네트워크-관리-모델">3. FCAPS — ISO 네트워크 관리 모델</a><a class="lv4" href="#4-이때까지-다룬-네트워크-주요-기능-정리">4. 이때까지 다룬 네트워크 주요 기능 정리</a><a class="lv4" href="#5-서브네팅subnetting">5. 서브네팅(Subnetting)</a><a class="lv3" href="#082-acl-심화">082. ACL 심화</a><a class="lv4" href="#1-acl-기본-적용-방향">1. ACL 기본 적용 방향</a><a class="lv4" href="#2-tcp-established-옵션">2. TCP Established 옵션</a><a class="lv4" href="#3-reflected-acl-racl">3. Reflected ACL (RACL)</a><a class="lv4" href="#4-dynamic-acl-dacl">4. Dynamic ACL (DACL)</a><a class="lv4" href="#5-racl-vs-dacl-비교">5. RACL vs DACL 비교</a><a class="lv4" href="#6-정책-삭제-방법">6. 정책 삭제 방법</a><a class="lv3" href="#083-gns3">083. GNS3</a><a class="lv4" href="#1-gns3-개요">1. GNS3 개요</a><a class="lv4" href="#2-gns3-인터페이스-구성">2. GNS3 인터페이스 구성</a><a class="lv4" href="#3-장비-등록-ios-이미지">3. 장비 등록 (IOS 이미지)</a><a class="lv4" href="#4-장비-시작과-인터페이스-활성화">4. 장비 시작과 인터페이스 활성화</a><a class="lv4" href="#5-디버깅-기능">5. 디버깅 기능</a><a class="lv4" href="#6-프로젝트-저장-방법">6. 프로젝트 저장 방법</a><a class="lv4" href="#7-기본-토폴로지-구성-요건">7. 기본 토폴로지 구성 요건</a></div><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch22.html">22. 보안·모의해킹 2</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 06</div><h1>네트워크 핵심키워드 2</h1><h3 id="021-이중화-회선-구성---부하-분산-장애-대비-다중-경로-라우팅">021. 이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</h3>
+<main><header class="chapter-head"><div class="chapter-no">CHAPTER 06</div><h1>네트워크 핵심키워드 2</h1></header><h3 id="021-이중화-회선-구성---부하-분산-장애-대비-다중-경로-라우팅">021. 이중화 회선 구성 - 부하 분산, 장애 대비, 다중 경로 라우팅</h3>
 <h4 id="1-이중화-회선-구성">1. 이중화 회선 구성</h4>
 <h5 id="1-1">1-1. 이중화의 정의</h5>
 <p>이중화(Redundancy): 네트워크 장애에 대비하기 위해 동일한 기능을 하는 회선이나 장비를 중복으로 구성하는 방식이다.</p>
@@ -159,71 +183,71 @@ th{background:var(--accent-soft); font-weight:700}
 </table></div>
 <h5 id="1-4">1-4. 추가 회선 설치</h5>
 <h5 id="_1">물리적 모듈 추가 절차</h5>
-<div class="codehilite"><pre><span></span><code>1. 저장 ← 반드시 먼저 설정 저장
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. 저장 ← 반드시 먼저 설정 저장
 2. 전원 차단 ← 장비 전원 끔
 3. 모듈 설치 ← Physical 섹션에서 시리얼 모듈 추가
 4. 전원 재시동 ← 장비 전원 켬
-</code></pre></div>
+</code></pre></div></div>
 
 <p>설정 저장 명령어:</p>
-<div class="codehilite"><pre><span></span><code>write memory ← 간단한 방식
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>write memory ← 간단한 방식
+</code></pre></div></div>
 
 <p>또는</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 copy running-config startup-config ← 표준 방식
-</code></pre></div>
+</code></pre></div></div>
 
 <p>저장 후 전원을 끄지 않으면 모든 설정이 손실된다.</p>
 <h5 id="_2">설정 미저장의 위험</h5>
-<div class="codehilite"><pre><span></span><code>설정 미저장 → 전원 차단 → 모든 설정 초기화
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>설정 미저장 → 전원 차단 → 모든 설정 초기화
+</code></pre></div></div>
 
 <p>결론: 물리적 작업 전에 반드시 저장이 필수이다.</p>
 <h5 id="1-5">1-5. 라우터별 추가 인터페이스 설정</h5>
 <p>새로운 회선에 대한 IP 주소 설정:</p>
 <p>네트워크 주소: 30.30.30.0/24</p>
 <p>A 라우터 설정:</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 interface serial 0/3/1 ← 새로운 시리얼 인터페이스
 ip address 30.30.30.30 255.255.255.0
 no shutdown
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <p>B 라우터 설정:</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 interface serial 0/2/0 ← 새로운 시리얼 인터페이스
 ip address 30.30.30.60 255.255.255.0
 no shutdown
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="1-6">1-6. 새 회선을 통한 라우팅 설정</h5>
 <h5 id="_3">스태틱 라우팅에 경유지 추가</h5>
 <p>기존 라우팅 설정에 새로운 경유지를 추가한다.</p>
 <p>A 라우터 - 150.0 네트워크로의 경로:</p>
 <p>기존 경로:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 10.10.10.20
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 10.10.10.20
 ← 기존 고속 회선
-</code></pre></div>
+</code></pre></div></div>
 
 <p>추가 경로:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 30.30.30.60
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 30.30.30.60
 ← 이중화 회선 추가
-</code></pre></div>
+</code></pre></div></div>
 
 <p>결과: 동일한 목적지에 두 개의 경유지 존재</p>
 <p>A 라우터 - 100.0 네트워크로의 경로:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 30.30.30.60
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 30.30.30.60
 ← 이중화 회선으로도 도달 가능
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="2-라우팅-테이블의-변화">2. 라우팅 테이블의 변화</h4>
 <h5 id="2-1">2-1. 이중화 설정 전</h5>
-<div class="codehilite"><pre><span></span><code>S 192.168.150.0/24 [1/0] via 10.10.10.20
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>S 192.168.150.0/24 [1/0] via 10.10.10.20
 S 192.168.100.0/24 [1/0] via 10.10.10.20
-</code></pre></div>
+</code></pre></div></div>
 
 <p>특징:</p>
 <div class="tablewrap"><table>
@@ -249,11 +273,11 @@ S 192.168.100.0/24 [1/0] via 10.10.10.20
 </tbody>
 </table></div>
 <h5 id="2-2">2-2. 이중화 설정 후</h5>
-<div class="codehilite"><pre><span></span><code>S 192.168.150.0/24 [1/0] via 10.10.10.20
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>S 192.168.150.0/24 [1/0] via 10.10.10.20
 S 192.168.150.0/24 [1/0] via 30.30.30.60
 S 192.168.100.0/24 [1/0] via 10.10.10.20
 S 192.168.100.0/24 [1/0] via 30.30.30.60
-</code></pre></div>
+</code></pre></div></div>
 
 <p>변화:</p>
 <div class="tablewrap"><table>
@@ -283,9 +307,9 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 <p>로드 밸런싱(Load Balancing): 네트워크 트래픽을 여러 경로에 분산시키는 기법이다.</p>
 <h5 id="3-2">3-2. 동작 원리</h5>
 <p>동일 목적지로의 네트워크 트래픽이 여러 경로로 분산된다.</p>
-<div class="codehilite"><pre><span></span><code>일부 데이터: 아래쪽 회선 (10.10.10.20 경유)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>일부 데이터: 아래쪽 회선 (10.10.10.20 경유)
 일부 데이터: 위쪽 회선 (30.30.30.60 경유)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>예시: A 라우터 → B 라우터 간 데이터 이동 시</p>
 <p>패킷 1, 3, 5... → 10.10.10.20으로 전송</p>
@@ -367,14 +391,14 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 <h5 id="4-1-b">4-1. B 라우터의 추가 경로 설정</h5>
 <p>B 라우터에서도 동일하게 이중화 경로를 설정한다.</p>
 <p>100.0 네트워크로의 경로:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 30.30.30.30
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 30.30.30.30
 ← 새로운 이중화 회선으로도 도달 가능
-</code></pre></div>
+</code></pre></div></div>
 
 <p>150.0 네트워크로의 경로:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 30.30.30.30
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.150.0 255.255.255.0 30.30.30.30
 ← 이중화 회선 추가
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2">4-2. 설정의 대칭성</h5>
 <p>원칙:</p>
@@ -483,12 +507,12 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 <p>물리적 작업(모듈 추가 등) 전에 반드시 저장해야 한다.</p>
 <h5 id="6-2">6-2. 저장 방법</h5>
 <p>방법 1: Write Memory (간단):</p>
-<div class="codehilite"><pre><span></span><code>write memory
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>write memory
+</code></pre></div></div>
 
 <p>방법 2: Copy 명령어 (표준):</p>
-<div class="codehilite"><pre><span></span><code>copy running-config startup-config
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>copy running-config startup-config
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -538,19 +562,19 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 <h4 id="7-이중화-라우팅의-고급-개념">7. 이중화 라우팅의 고급 개념</h4>
 <h5 id="7-1">7-1. 다양한 이중화 전략</h5>
 <h5 id="_4">부하 분산 목적의 이중화</h5>
-<div class="codehilite"><pre><span></span><code>설정: 두 경로 모두 활성화
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>설정: 두 경로 모두 활성화
 동작: 트래픽 분산
 효과: 대역폭 극대화, 성능 향상
-</code></pre></div>
+</code></pre></div></div>
 
 <p>사용 시나리오:</p>
 <p>두 회선의 속도가 동일할 때</p>
 <p>대역폭 극대화가 목표일 때</p>
 <h5 id="floating-static-routing">장애 대비 목적의 이중화 (Floating Static Routing)</h5>
-<div class="codehilite"><pre><span></span><code>설정: 주 경로와 백업 경로 구분
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>설정: 주 경로와 백업 경로 구분
 동작: 주 경로 장애 시 자동 전환
 효과: 가용성 극대화
-</code></pre></div>
+</code></pre></div></div>
 
 <p>사용 시나리오:</p>
 <p>두 회선의 속도가 다를 때</p>
@@ -560,12 +584,12 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 <h4 id="8-네트워크-설정의-실제-적용">8. 네트워크 설정의 실제 적용</h4>
 <h5 id="8-1">8-1. 설정 순서의 중요성</h5>
 <p>네트워크 설정은 다음 순서를 따라야 한다.</p>
-<div class="codehilite"><pre><span></span><code>1. 주소 설정 ← 모든 인터페이스에 IP 주소 할당
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. 주소 설정 ← 모든 인터페이스에 IP 주소 할당
 2. 인터페이스 활성화 ← no shutdown 설정
 3. 라우팅 설정 ← 경로 정보 입력
 4. 라우팅 테이블 확인 ← show ip route
 5. 통신 테스트 ← ping 명령어로 검증
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="8-2">8-2. 설정 검증 명령어</h5>
 <p>설정을 검증하기 위한 주요 명령어들:</p>
@@ -631,12 +655,12 @@ S 192.168.100.0/24 [1/0] via 30.30.30.60
 </table></div>
 <h5 id="2-2_1">2-2. 설정 순서 및 예시</h5>
 <p>DHCP 설정 시 service DHCP 를 먼저 입력하고, 이후 풀 설정을 진행한다.</p>
-<div class="codehilite"><pre><span></span><code>service DHCP                              ← DHCP 서비스 시작
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>service DHCP                              ← DHCP 서비스 시작
 ip dhcp pool [풀이름]                     ← 풀(정책) 이름 지정 (임의)
   network 192.168.100.0 255.255.255.0     ← IP 할당 범위
   default-router 192.168.100.254          ← 게이트웨이 주소
 ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ default-router 는 게이트웨이 주소를 클라이언트에게 할당해 주기 위한 명령어이다. 예를 들어 게이트웨이가 192.168.100.254라면 해당 값을 입력한다.</p>
 <h5 id="2-3-excluded-address">2-3. Excluded Address (할당 제외)</h5>
@@ -680,8 +704,8 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <h4 id="4-dhcp-테이블-확인">4. DHCP 테이블 확인</h4>
 <h5 id="4-1-binding">4-1. Binding 테이블 (임대 현황)</h5>
 <p>DHCP 서버에서 현재 임대 중인 IP 주소 목록을 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>show ip dhcp binding    ← 서버에서 어떤 IP가 임대되고 있는지 확인
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip dhcp binding    ← 서버에서 어떤 IP가 임대되고 있는지 확인
+</code></pre></div></div>
 
 <h5 id="4-2-conflict">4-2. Conflict 테이블 (충돌 현황)</h5>
 <p>서로 다른 클라이언트가 동일한 IP 주소를 할당 받을 경우 충돌이 발생한다.</p>
@@ -701,8 +725,8 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <p>OSPF를 새로 설정하기 전에 기존의 라우팅 프로토콜(RIP, EIGRP 등) 설정을 삭제해야 한다. 기존 설정을 삭제하지 않고 새로운 프로토콜을 추가하면 라우팅 테이블 확인 시 문제가 발생할 수 있다.</p>
 <p>예시: A 라우터에 EIGRP 10, EIGRP 30이 설정되어 있는 경우 2개를 삭제한다.</p>
 <p>설정이 남아 있는지 확인하는 방법:</p>
-<div class="codehilite"><pre><span></span><code>do show run    ← Config 모드에서 설정 내용 확인
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>do show run    ← Config 모드에서 설정 내용 확인
+</code></pre></div></div>
 
 <h4 id="3-ospf-기초">3. OSPF 기초</h4>
 <h5 id="3-1-ospf">3-1. OSPF 에어리어 구조</h5>
@@ -730,14 +754,14 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <p>D 구간 → Area 1</p>
 <p>AB 구간은 이미 Area 0에 속해 있으므로 별도 에어리어 지정 없이 동일하게 처리한다.</p>
 <h5 id="3-2-ospf">3-2. OSPF 설정 명령어</h5>
-<div class="codehilite"><pre><span></span><code>router ospf [프로세스ID]                       ← OSPF 시작, 프로세스 ID는 임의
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router ospf [프로세스ID]                       ← OSPF 시작, 프로세스 ID는 임의
   network [네트워크주소] [와일드카드] area [번호]  ← 네트워크 광고 및 에어리어 지정
-</code></pre></div>
+</code></pre></div></div>
 
 <p>예시:</p>
-<div class="codehilite"><pre><span></span><code>router ospf 10
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router ospf 10
   network 40.40.40.0 0.0.0.255 area 1    ← 40.40.40.0 네트워크를 Area 1로 광고
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-3_1">3-3. 라우팅 정보 확인 명령어</h5>
 <div class="tablewrap"><table>
@@ -769,8 +793,8 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <h4 id="4-ospf-에어리어-미스매치">4. OSPF 에어리어 미스매치</h4>
 <h5 id="4-1">4-1. 에어리어 미스매치 발생과 처리</h5>
 <p>서로 연결된 라우터 간 Area ID가 일치하지 않으면 인접(Neighbor) 관계가 형성되지 않고, 미스매치 로그 메시지가 반복적으로 출력된다.</p>
-<div class="codehilite"><pre><span></span><code>← Area Mismatch 메시지 예시: 연결 구간의 Area 번호가 서로 다름
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>← Area Mismatch 메시지 예시: 연결 구간의 Area 번호가 서로 다름
+</code></pre></div></div>
 
 <p>처리 방법: 연결된 인터페이스의 Area 번호를 동일하게 맞추어 재설정한다.</p>
 <p>미스매치 메시지가 표시되는 중에도 명령어 입력은 계속 가능하다. 메시지를 무시하고 올바른 명령어를 그대로 입력하면 된다.</p>
@@ -785,12 +809,12 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <p>OSPF에서 Area 0(백본)에 물리적으로 직접 연결되지 않은 Area가 존재할 경우, 해당 Area의 라우터들은 정상적인 통신이 불가능하다.</p>
 <p>에어리어 2에 있는 장비들이 물리적으로 에어리어 1을 통해 연결되어 있으나 에어리어 0과 직접 연결되지 않은 경우, 통신이 되지 않는다.</p>
 <p>이러한 상황에서 Virtual Link를 사용하면 물리적으로 연결할 수 없는 경우에도 Area 0에 논리적으로 연결하여 통신이 가능하도록 할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>show ip ospf    ← Virtual Link 정보 포함한 OSPF 전반 확인
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip ospf    ← Virtual Link 정보 포함한 OSPF 전반 확인
+</code></pre></div></div>
 
 <h5 id="1-2-ospf-id">1-2. OSPF 라우터 ID 관련 인터페이스 정보 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip ospf interface    ← 인터페이스별 OSPF 정보 및 라우터 ID 확인
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip ospf interface    ← 인터페이스별 OSPF 정보 및 라우터 ID 확인
+</code></pre></div></div>
 
 <p>이 명령어에서 라우터 아이디와 관련된 정보를 확인할 수 있다. Loopback 인터페이스를 설정한 경우 해당 주소가 라우터 아이디에 반영된다.</p>
 <h4 id="2-fhrp-first-hop-redundancy-protocol">2. FHRP (First Hop Redundancy Protocol)</h4>
@@ -852,10 +876,10 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 </tbody>
 </table></div>
 <p>설정 예시:</p>
-<div class="codehilite"><pre><span></span><code>interface gi0/0/1
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface gi0/0/1
   standby 1 ip 192.168.100.254      ← 1번 그룹의 가상 게이트웨이 IP 설정
   standby 1 priority 105             ← 우선순위 105 설정
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-4-hsrp">3-4. HSRP 상태 확인</h5>
 <p>HSRP 설정 후 확인 결과에서 아래 정보를 확인할 수 있다.</p>
@@ -940,24 +964,24 @@ ip dhcp excluded-address [제외할 주소]    ← 할당 제외 범위
 <p>관리자가 L3 스위치에 특정 설정을 하면 라우터와 동일한 역할을 할 수 있다.</p>
 <h5 id="2-2-l3-ip">2-2. L3 스위치 IP 설정 방법</h5>
 <p>L3 스위치에서 인터페이스에 IP 주소를 설정하려면 먼저 no switchport  명령어를 입력해야한다.</p>
-<div class="codehilite"><pre><span></span><code>no switchport        ← IP 주소 설정 전 필수 입력
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>no switchport        ← IP 주소 설정 전 필수 입력
 ip address [주소] [마스크]   ← IP 주소 설정
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라우팅 기능을 활성화하려면 Config 모드에서 ip routing  명령어를 입력한다.</p>
-<div class="codehilite"><pre><span></span><code>ip routing    ← L3 스위치에서 라우팅 기능 활성화
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip routing    ← L3 스위치에서 라우팅 기능 활성화
+</code></pre></div></div>
 
 <h4 id="3-라우터-서브-인터페이스와-encapsulation-dot1q">3. 라우터 서브 인터페이스와 Encapsulation DOT1Q</h4>
 <h5 id="3-1_1">3-1. 서브 인터페이스 개념</h5>
 <p>하나의 물리적 인터페이스를 여러 VLAN에 대응시키기 위해 서브 인터페이스를 사용한다. 서브 인터페이스 번호는 VLAN 번호와 맞추는 것이 인터페이스 이름만 보고도 어떤 VLAN 을 위한 것인지 알 수 있어 관리에 유리하다.</p>
 <h5 id="3-2-encapsulation-dot1q">3-2. Encapsulation DOT1Q 설정</h5>
 <p>encapsulation dot1q 는 라우터의 서브 인터페이스에서 사용하는 명령어이다.</p>
-<div class="codehilite"><pre><span></span><code>interface gi0/0.100              ← 서브 인터페이스 (VLAN 100에 대응)
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface gi0/0.100              ← 서브 인터페이스 (VLAN 100에 대응)
   encapsulation dot1q 100         ← DOT1Q 캡슐화, VLAN 번호 지정
   ip address [게이트웨이IP] [마스크]  ← 해당 VLAN의 게이트웨이 IP 설정
   no shutdown
-</code></pre></div>
+</code></pre></div></div>
 
 <p>IP를 설정하기 전에 encapsulation dot1q [VLAN번호] 를 먼저 입력해야 한다. 순서를 지키지 않으면 정상적으로 입력되지 않는다.</p>
 <h5 id="3-3_2">3-3. 스위치와 라우터 간 연결</h5>
@@ -995,30 +1019,30 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>Loopback은 논리적 인터페이스이지만, 명령어는 물리적 인터페이스와 동일하게</p>
 <p>interface 로 시작한다.</p>
 <h5 id="2-2-loopback">2-2. Loopback 인터페이스 생성 및 설정</h5>
-<div class="codehilite"><pre><span></span><code>interface loopback 0            ← Loopback 인터페이스 생성
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface loopback 0            ← Loopback 인터페이스 생성
   ip address [IP주소] [서브넷마스크]  ← IP 주소 할당
-</code></pre></div>
+</code></pre></div></div>
 
 <p>설정 예시:</p>
-<div class="codehilite"><pre><span></span><code>interface loopback 0
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface loopback 0
   ip address 150.100.100.1 255.255.255.0
-</code></pre></div>
+</code></pre></div></div>
 
 <p>주소만 설정하면 별도로 no shutdown  없이도 해당 네트워크가 존재하는 것으로 인식된다.</p>
 <h5 id="2-3-ospf-loopback">2-3. OSPF에 Loopback 네트워크 광고</h5>
 <p>Loopback 인터페이스의 네트워크도 OSPF에 참여시키려면 network  명령어로 광고해야한다.</p>
-<div class="codehilite"><pre><span></span><code>router ospf 10
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router ospf 10
   network 100.100.100.0 0.0.0.255 area 1    ← Loopback 네트워크를 Area 1로 광고
-</code></pre></div>
+</code></pre></div></div>
 
 <p>광고 후 시간이 경과하면 다른 라우터의 라우팅 테이블에 해당 네트워크가 반영된다.</p>
 <h4 id="3-확장형-핑-extended-ping">3. 확장형 핑 (Extended Ping)</h4>
 <h5 id="3-1_2">3-1. 개념 및 사용법</h5>
 <p>라우터 장비에서는 일반 핑과 달리 확장형 핑을 사용할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>ping          ← ping 입력 후 엔터
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping          ← ping 입력 후 엔터
 [Target 주소 입력]    ← 대상 IP 입력
 [반복 횟수 입력]      ← 기본값 5회
-</code></pre></div>
+</code></pre></div></div>
 
 <p>장비에서의 기본 핑 횟수: 5회 (윈도우는 기본 4회, 리눅스는 관리자가 종료할 때까지)</p>
 <p>통신이 가능한지 확인할 때 사용한다.</p>
@@ -1055,8 +1079,8 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>시리얼 등 1:1(Point-to-Point) 연결 구간에서는 DR/BDR이 필요하지 않다.</p>
 <p>1대1 연결에서는 굳이 대장, 부대장을 선출할 필요가 없다.</p>
 <h5 id="4-4-drbdr">4-4. DR/BDR 확인 명령어</h5>
-<div class="codehilite"><pre><span></span><code>show ip ospf interface    ← 인터페이스별 OSPF 정보 확인 (DR/BDR 포함)
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip ospf interface    ← 인터페이스별 OSPF 정보 확인 (DR/BDR 포함)
+</code></pre></div></div>
 
 <p>이더넷 구간: DR, BDR 정보 표시됨</p>
 <p>Point-to-Point 구간: DR/BDR 없음으로 표시됨</p>
@@ -1092,11 +1116,11 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>라인 번호: ACL 내 각 규칙의 순서 번호 (예: 10, 20, 30...)</p>
 <h5 id="2-2_2">2-2. 라인 번호 간격의 설정</h5>
 <p>일반적으로 라인 번호는 10단위로 설정된다:</p>
-<div class="codehilite"><pre><span></span><code>10  permit ...
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>10  permit ...
 20  permit ...
 30  deny ...
 40  permit ...
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이렇게 간격을 두는 이유는 중간에 새로운 규칙을 삽입할 여유를 남기기 위함이다.</p>
 <h5 id="2-3">2-3. 새로운 규칙의 삽입</h5>
@@ -1104,12 +1128,12 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>기존 방식: 새 규칙은 항상 맨 마지막에 추가된다</p>
 <p>라인 번호를 이용한 삽입: 특정 라인 번호를 지정하여 원하는 위치에 규칙을 삽입할 수 있다</p>
 <p>예) 10번 규칙과 20번 규칙 사이에 새로운 규칙을 삽입하려면:</p>
-<div class="codehilite"><pre><span></span><code>(새로운 규칙을 15번으로 삽입)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>(새로운 규칙을 15번으로 삽입)
 10  permit ...
 15  permit ... (새로 추가)
 20  permit ...
 30  deny ...
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-실무에서의-acl-관리-방법">3. 실무에서의 ACL 관리 방법</h4>
 <h5 id="3-1_3">3-1. 문서화의 중요성</h5>
@@ -1143,15 +1167,15 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>현재: 라인 번호를 명시하여 원하는 위치에 삽입 가능</p>
 <h5 id="4-2_1">4-2. 예시 시나리오</h5>
 <p>초기 ACL 설정:</p>
-<div class="codehilite"><pre><span></span><code>10  permit 10.0.0.0 0.0.0.255   ← 10.0.0.0/24 허용
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>10  permit 10.0.0.0 0.0.0.255   ← 10.0.0.0/24 허용
 20  deny 10.0.0.0 0.0.0.255     ← (나중에 추가, 충돌 가능)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라인 번호를 사용한 수정:</p>
-<div class="codehilite"><pre><span></span><code>10  permit 10.0.0.1              ← 특정 IP만 허용
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>10  permit 10.0.0.1              ← 특정 IP만 허용
 15  deny 10.0.0.10               ← 새로 삽입: 특정 IP 차단
 20  permit 10.0.0.0 0.0.0.255    ← 나머지 네트워크 허용
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-acl-설정의-best-practice">5. ACL 설정의 Best Practice</h4>
 <p>주의사항: 운영 환경에서 ACL을 변경할 때는 다음 원칙을 따르자</p>
@@ -1242,12 +1266,12 @@ ip address [주소] [마스크]   ← IP 주소 설정
 <p>표준 또는 확장 중 선택 가능하다</p>
 <p>가독성이 높고 관리하기 용이하다</p>
 <h5 id="5-2-named-acl">5-2. Named ACL 설정 형태</h5>
-<div class="codehilite"><pre><span></span><code>ip access-list extended [정책이름]
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip access-list extended [정책이름]
 permit tcp 192.168.1.100 192.168.0.200 eq 21 ← FTP(포트 21)
 permit icmp 192.168.1.100 192.168.0.200 echo echo-reply
 deny icmp 192.168.1.200 192.168.0.10 echo echo-reply
 permit ip any any ← 나머지 트래픽 허용
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-natnetwork-address-translation-개요">6. NAT(Network Address Translation) 개요</h4>
 <h5 id="6-1-nat">6-1. NAT의 정의</h5>
@@ -1569,8 +1593,8 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="2-ipv6-주소의-구조">2. IPv6 주소의 구조</h4>
 <h5 id="2-1_4">2-1. 기본 표기법</h5>
 <p>IPv6 주소는 128비트를 16비트씩 8개 부분으로 나누어 표기한다.</p>
-<div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0000:0000:0000:1111:2222
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0000:0000:0000:1111:2222
+</code></pre></div></div>
 
 <p>각 부분: 16비트 (16진수 4자리)</p>
 <p>구분자: 콜론(:)</p>
@@ -1578,21 +1602,21 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="3-ipv6-주소-축약-표기법">3. IPv6 주소 축약 표기법</h4>
 <h5 id="3-1-0">3-1. 선행 0 제거</h5>
 <p>16진수 각 부분의 맨 앞 0은 생략 가능하다.</p>
-<div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0001  →  2001:DB8:0:1
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0001  →  2001:DB8:0:1
 ↑                          ↑
 선행 0 제거됨
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-2-0-double-colon">3-2. 연속된 0 제거 (double colon)</h5>
 <p>연속되는 0만으로 이루어진 부분은 ::  으로 표기 가능하다.</p>
-<div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0000:0000:0000:0000:0001
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:0DB8:0000:0000:0000:0000:0000:0001
+</code></pre></div></div>
 
 <p>축약하면:</p>
-<div class="codehilite"><pre><span></span><code>2001:DB8::1
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:DB8::1
 또는
 2001:DB8::0001
-</code></pre></div>
+</code></pre></div></div>
 
 <p>규칙:</p>
 <p>::  은 주소 내에서 한 번만 사용 가능</p>
@@ -1611,8 +1635,8 @@ permit ip any any ← 나머지 트래픽 허용
 <p>특징: 동일 네트워크(서브넷) 내에서만 통신 가능</p>
 <p>설정: 자동으로 할당됨</p>
 <p>예시:</p>
-<div class="codehilite"><pre><span></span><code>FE80::1 (자동 생성)
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>FE80::1 (자동 생성)
+</code></pre></div></div>
 
 <h5 id="4-3-site-local-address">4-3. 사이트 로컬 주소 (Site Local Address)</h5>
 <p>역할: IPv4의 사설 IP에 유사</p>
@@ -1656,10 +1680,10 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="6-ipv4와-ipv6-혼용-듀얼-스택">6. IPv4와 IPv6 혼용: 듀얼 스택</h4>
 <h5 id="6-1_2">6-1. 듀얼 스택의 개념</h5>
 <p>하나의 인터페이스에 IPv4 주소와 IPv6 주소를 동시에 설정하는 방식이다.</p>
-<div class="codehilite"><pre><span></span><code>인터페이스 GigabitEthernet 0/0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>인터페이스 GigabitEthernet 0/0
   IPv4: 192.168.1.1
   IPv6: 2001:DB8:1::1/64
-</code></pre></div>
+</code></pre></div></div>
 
 <p>장점:</p>
 <p>레거시 IPv4와 새로운 IPv6 동시 지원</p>
@@ -1736,33 +1760,33 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="9-ipv6-주소-설정">9. IPv6 주소 설정</h4>
 <h5 id="9-1">9-1. 프리픽스 개념</h5>
 <p>IPv6는 프리픽스를 통해 네트워크 부분과 호스트 부분을 구분한다.</p>
-<div class="codehilite"><pre><span></span><code>2001:DB8:1::1/64
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:DB8:1::1/64
                  ↑
             프리픽스 길이
-</code></pre></div>
+</code></pre></div></div>
 
 <p>/64 : 처음 64비트가 네트워크, 나머지 64비트가 호스트</p>
 <h5 id="9-2">9-2. 같은 네트워크 판별</h5>
 <p>프리픽스 길이가 같아야 같은 네트워크로 간주된다.</p>
-<div class="codehilite"><pre><span></span><code>2001:DB8:1::1/64   ✓ 같은 네트워크
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:DB8:1::1/64   ✓ 같은 네트워크
 2001:DB8:1::100/64 ✓
 2001:DB8:2::1/64   ✗ 다른 네트워크 (두 번째 부분이 다름)
 2001:DB8:1::1/48   ✗ 프리픽스가 다름
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="10-ipv6-라우팅-듀얼-스택-환경">10. IPv6 라우팅: 듀얼 스택 환경</h4>
 <h5 id="10-1_1">10-1. 라우팅 활성화</h5>
 <p>IPv6 라우팅을 사용하려면 먼저 활성화해야 한다.</p>
-<div class="codehilite"><pre><span></span><code>ipv6 unicast-routing
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ipv6 unicast-routing
 ← IPv6 유니캐스트 라우팅 활성화
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="10-2_1">10-2. 인터페이스 라우팅 설정</h5>
 <p>IPv4와 달리, IPv6 라우팅은 인터페이스 내에서 설정된다.</p>
-<div class="codehilite"><pre><span></span><code>interface GigabitEthernet 0/0
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface GigabitEthernet 0/0
   ipv6 ospf 1 area 0
   ← 이 인터페이스를 OSPF로 라우팅
-</code></pre></div>
+</code></pre></div></div>
 
 <p>특징:</p>
 <p>IPv4: 라우터 서브모드에서 설정</p>
@@ -1791,22 +1815,22 @@ permit ip any any ← 나머지 트래픽 허용
 <p>이전 시간의 첫 번째, 두 번째 라우터 설정을 바탕으로 세 번째 라우터도 동일한 방식으로 구성한다.</p>
 <h5 id="1-2-ipv6_1">1-2. IPv6 주소 설정 방식</h5>
 <p>각 인터페이스에 IPv6 주소를 할당하되, 프리픽스 길이는 일관되게 유지해야 한다.</p>
-<div class="codehilite"><pre><span></span><code>인터페이스 GigabitEthernet 0/0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>인터페이스 GigabitEthernet 0/0
   ipv6 address 2001:DB8:4::1/64
   ← 각 라우터마다 다른 주소 할당
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="1-3-ospf">1-3. OSPF 라우팅 설정</h5>
 <p>IPv6 OSPF는 각 인터페이스 내에서 프로세스 ID와 에어리어를 지정한다.</p>
-<div class="codehilite"><pre><span></span><code>interface 인터페이스명
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface 인터페이스명
   ipv6 ospf 1 area 0
   ← 프로세스 ID: 1, 에어리어: 0 (백본 에어리어)
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="2-ipv6-라우팅-테이블-확인">2. IPv6 라우팅 테이블 확인</h4>
 <h5 id="2-1_5">2-1. 라우팅 테이블 조회</h5>
-<div class="codehilite"><pre><span></span><code>show ipv6 route
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ipv6 route
+</code></pre></div></div>
 
 <p>출력 정보:</p>
 <p>목적지: 대상 네트워크 주소</p>
@@ -1814,9 +1838,9 @@ permit ip any any ← 나머지 트래픽 허용
 <p>게이트웨이: 링크 로컬 주소 (경유 라우터)</p>
 <p>메트릭: 경로의 비용 (기본값은 OSPF 디스턴스 110)</p>
 <h5 id="2-2_4">2-2. 경로 정보 해석</h5>
-<div class="codehilite"><pre><span></span><code>2001:DB8:1::/64 via FE80::260 (링크 로컬 주소)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2001:DB8:1::/64 via FE80::260 (링크 로컬 주소)
   ← 2001:DB8:1::로 가려면 FE80::260 주소를 가진 라우터를 경유
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-ipv6-라우팅의-특징">3. IPv6 라우팅의 특징</h4>
 <h5 id="3-1-ipv4">3-1. IPv4와의 유사성</h5>
@@ -1831,8 +1855,8 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="4-ipv6-통신-테스트">4. IPv6 통신 테스트</h4>
 <h5 id="4-1-ping">4-1. PING 명령</h5>
 <p>특정 IPv6 주소로 통신 가능 여부를 테스트한다.</p>
-<div class="codehilite"><pre><span></span><code>ping 2001:DB8:1::1
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping 2001:DB8:1::1
+</code></pre></div></div>
 
 <p>결과 해석:</p>
 <p>느낌표(!): 정상 응답 (통신 성공)</p>
@@ -1843,16 +1867,16 @@ permit ip any any ← 나머지 트래픽 허용
 <p>양방향 모두 테스트하여 통신 확인</p>
 <h4 id="5-ospf-상태-확인">5. OSPF 상태 확인</h4>
 <h5 id="5-1-ospf">5-1. OSPF 이웃 정보 조회</h5>
-<div class="codehilite"><pre><span></span><code>show ipv6 ospf neighbor
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ipv6 ospf neighbor
+</code></pre></div></div>
 
 <p>확인 사항:</p>
 <p>이웃 라우터 목록</p>
 <p>인접 상태</p>
 <p>최근 통신 시간</p>
 <h5 id="5-2-ospf">5-2. OSPF 토폴로지 테이블</h5>
-<div class="codehilite"><pre><span></span><code>show ipv6 ospf topology
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ipv6 ospf topology
+</code></pre></div></div>
 
 <p>정보:</p>
 <p>OSPF가 알고 있는 모든 경로</p>
@@ -1860,8 +1884,8 @@ permit ip any any ← 나머지 트래픽 허용
 <p>최적 경로(routing table에 반영됨)</p>
 <h4 id="6-설정-확인">6. 설정 확인</h4>
 <h5 id="6-1_3">6-1. 전체 설정 조회</h5>
-<div class="codehilite"><pre><span></span><code>show running-config
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show running-config
+</code></pre></div></div>
 
 <p>확인 내용:</p>
 <p>IPv4와 IPv6 주소 동시 설정 (듀얼 스택)</p>
@@ -1892,10 +1916,10 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="9-vpn-설정-전-필수-조건">9. VPN 설정 전 필수 조건</h4>
 <h5 id="9-1_1">9-1. 기본 네트워크 구성</h5>
 <p>VPN 설정 전에 반드시 다음이 확보되어야 한다:</p>
-<div class="codehilite"><pre><span></span><code>1. IP 주소 설정: 모든 장비와 호스트에 IP 할당
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. IP 주소 설정: 모든 장비와 호스트에 IP 할당
 2. 라우팅 설정: 모든 구간에서 기본 통신 가능
 3. 통신 확인: ping 등으로 통신 검증
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="9-2_1">9-2. 통신 가능 상태</h5>
 <p>VPN은 기존 통신 경로 위에 추가 보안 기능을 더하는 것이다:</p>
@@ -1905,7 +1929,7 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="10-vpn-구축을-위한-네트워크-설계">10. VPN 구축을 위한 네트워크 설계</h4>
 <h5 id="10-1_2">10-1. 네트워크 구성 예시</h5>
 <p>토폴로지:</p>
-<div class="codehilite"><pre><span></span><code>[192.168.100.0/24]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[192.168.100.0/24]
         |
    라우터1(100.1)
         |
@@ -1914,7 +1938,7 @@ permit ip any any ← 나머지 트래픽 허용
    라우터2(172.16.1.0/24)
         |
 [172.16.0.0/24]
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="10-2-ip">10-2. IP 주소 할당 전략</h5>
 <p>각 네트워크 대역을 구분하여 할당:</p>
@@ -1927,18 +1951,18 @@ permit ip any any ← 나머지 트래픽 허용
 <h4 id="11-vpn-설정-준비">11. VPN 설정 준비</h4>
 <h5 id="11-1_1">11-1. 라우팅 프로토콜 선택</h5>
 <p>OSPF 또는 EIGRP 등의 라우팅 프로토콜로 통신을 활성화:</p>
-<div class="codehilite"><pre><span></span><code>라우터 ospf 프로세스ID
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>라우터 ospf 프로세스ID
   network 광고할_네트워크 영역 에어리어_ID
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="11-2_2">11-2. 모든 구간의 통신 확인</h5>
 <p>라우터 간 ping</p>
 <p>PC에서 원격 네트워크 ping</p>
 <p>양방향 모두 성공 확인</p>
 <h5 id="11-3">11-3. 라우팅 테이블 검증</h5>
-<div class="codehilite"><pre><span></span><code>show ip route
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
 show ipv6 route
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="12-vpn-설정의-다음-단계">12. VPN 설정의 다음 단계</h4>
 <h5 id="12-1-vpn">12-1. 패킷 트레이스에서의 VPN</h5>
@@ -1956,11 +1980,11 @@ show ipv6 route
 <p>전체 구성: 극히 적은 명령어</p>
 <h5 id="13-2">13-2. 문제 해결 방법</h5>
 <p>설정 후 통신이 안 될 경우:</p>
-<div class="codehilite"><pre><span></span><code>1. traceroute로 경로 확인
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. traceroute로 경로 확인
 2. show ip route로 라우팅 테이블 검증
 3. show running-config로 설정 확인
 4. no 명령으로 문제 부분 삭제 후 재설정
-</code></pre></div>
+</code></pre></div></div>
 
 <hr />
 <h3 id="033-동적-nat-및-pat-설정의-원리와-동작-메커니즘-이해">033. 동적 NAT 및 PAT 설정의 원리와 동작 메커니즘 이해</h3>
@@ -1991,17 +2015,17 @@ show ipv6 route
 <h4 id="3-동적-nat-설정-과정">3. 동적 NAT 설정 과정</h4>
 <h5 id="3-1-1-acl-acl">3-1. 1단계: ACL 정책 정의 (표준 ACL)</h5>
 <p>변환할 사설 IP 범위를 허용(permit)으로 지정한다.</p>
-<div class="codehilite"><pre><span></span><code>access-list 10 permit 192.168.1.0 0.0.0.255
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 10 permit 192.168.1.0 0.0.0.255
 ← 192.168.1.0/24 네트워크의 모든 호스트를 허용
-</code></pre></div>
+</code></pre></div></div>
 
 <p>번호 10: ACL 정책의 이름(1~99는 표준 ACL)</p>
 <p>permit: 이 주소를 NAT 변환 대상으로 지정</p>
 <h5 id="3-2-2-nat">3-2. 2단계: NAT 풀 정의</h5>
 <p>변환될 공인 IP 범위를 지정한다.</p>
-<div class="codehilite"><pre><span></span><code>ip nat pool NAT-TEST 20.0.0.1 20.0.0.254 netmask 255.255.255.0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip nat pool NAT-TEST 20.0.0.1 20.0.0.254 netmask 255.255.255.0
 ← NAT-TEST라는 이름의 풀에 20.0.0.1~254를 할당
-</code></pre></div>
+</code></pre></div></div>
 
 <p>NAT-TEST: 풀의 이름</p>
 <p>시작 IP: 20.0.0.1</p>
@@ -2009,33 +2033,33 @@ show ipv6 route
 <p>netmask: 서브넷 마스크 값</p>
 <h5 id="3-3-3-acl-nat">3-3. 3단계: ACL과 NAT 풀 연결</h5>
 <p>정의된 ACL과 NAT 풀을 연결하여 실제 변환을 수행한다.</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source list 10 pool NAT-TEST
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip nat inside source list 10 pool NAT-TEST
 ← ACL 10에 해당하는 출발지는 NAT-TEST 풀의 IP로 변환
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="4-인터페이스에-nat-적용">4. 인터페이스에 NAT 적용</h4>
 <h5 id="4-1-inside">4-1. inside 인터페이스 설정</h5>
-<div class="codehilite"><pre><span></span><code>interface GigabitEthernet 0/0
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface GigabitEthernet 0/0
  ip nat inside
 ← 이 인터페이스를 NAT의 inside(내부)로 지정
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2-outside">4-2. outside 인터페이스 설정</h5>
-<div class="codehilite"><pre><span></span><code>interface Serial 0/3/1
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>interface Serial 0/3/1
  ip nat outside
 ← 이 인터페이스를 NAT의 outside(외부)로 지정
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-nat-동작-확인">5. NAT 동작 확인</h4>
 <h5 id="5-1-nat">5-1. NAT 설정 상태 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip nat statistics
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip nat statistics
 ← NAT의 설정 상태, inside/outside 인터페이스 정보, 정책 정보 표시
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="5-2-nat">5-2. NAT 변환 테이블 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip nat translations
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip nat translations
 ← 실제로 변환되고 있는 IP 주소의 매핑 테이블 표시
-</code></pre></div>
+</code></pre></div></div>
 
 <p>변환 테이블 해석:</p>
 <p>local: 변환 전 사설 IP (192.168.1.100 등)</p>
@@ -2079,9 +2103,9 @@ show ipv6 route
 </table></div>
 <h5 id="7-3-pat">7-3. PAT 설정</h5>
 <p>동적 NAT 설정에서 마지막 명령에 overload 옵션만 추가한다.</p>
-<div class="codehilite"><pre><span></span><code>ip nat inside source list 10 pool NAT-TEST overload
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip nat inside source list 10 pool NAT-TEST overload
 ← overload 옵션이 PAT를 활성화
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="8-가정용-공유기의-natpat">8. 가정용 공유기의 NAT/PAT</h4>
 <h5 id="8-1-natpat">8-1. 공유기의 NAT/PAT 동작</h5>
@@ -2120,12 +2144,12 @@ show ipv6 route
 <h4 id="11-nat-삭제-및-초기화">11. NAT 삭제 및 초기화</h4>
 <h5 id="11-1-nat_1">11-1. NAT 설정 제거</h5>
 <p>설정된 NAT를 완전히 삭제하려면 NO 명령으로 각 항목을 제거해야 한다.</p>
-<div class="codehilite"><pre><span></span><code>no ip nat inside source list 10 pool NAT-TEST overload
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>no ip nat inside source list 10 pool NAT-TEST overload
 no ip nat pool NAT-TEST
 no access-list 10
 no ip nat inside (인터페이스 설정)
 no ip nat outside (인터페이스 설정)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="11-2_3">11-2. 삭제 순서</h5>
 <ol>
@@ -2156,10 +2180,10 @@ no ip nat outside (인터페이스 설정)
 <h4 id="1-확장-acl의-실전-구성">1. 확장 ACL의 실전 구성</h4>
 <h5 id="1-1_6">1-1. 기본 구조</h5>
 <p>확장 ACL의 명령어 구조:</p>
-<div class="codehilite"><pre><span></span><code>access-list [ACL번호] [permit/deny] [프로토콜]
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list [ACL번호] [permit/deny] [프로토콜]
             [출발지IP] [출발지마스크] [목적지IP] [목적지마스크]
             [포트 조건] [포트번호]
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="1-2_5">1-2. 주요 파라미터</h5>
 <p>ACL번호: 100~199 범위 (확장 ACL)</p>
@@ -2243,15 +2267,15 @@ no ip nat outside (인터페이스 설정)
 <p>ICMP echo: 요청 메시지 (PING 명령)</p>
 <p>ICMP echo reply: 응답 메시지 (라우터 또는 호스트의 응답)</p>
 <p>따라서 양방향 PING이 작동하려면 두 개의 규칙이 필요할 수 있다:</p>
-<div class="codehilite"><pre><span></span><code>permit icmp [출발지] [목적지]      ← echo 허용
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>permit icmp [출발지] [목적지]      ← echo 허용
 permit icmp [목적지] [출발지]      ← echo reply 허용
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-포트-필터링의-실전-예제">3. 포트 필터링의 실전 예제</h4>
 <h5 id="3-1-http">3-1. HTTP(웹) 트래픽 필터링</h5>
 <p>특정 IP(예: 192.168.0.0/24)에서 웹 서버로의 웹 접속을 차단하는 예:</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 deny tcp 192.168.0.0 0.0.0.255 [웹서버IP] eq 80
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 100 deny tcp 192.168.0.0 0.0.0.255 [웹서버IP] eq 80
+</code></pre></div></div>
 
 <p>프로토콜: TCP (HTTP는 TCP 기반)</p>
 <p>출발지: 192.168.0.0/24 (192.168.0.0부터 192.168.0.255까지)</p>
@@ -2261,16 +2285,16 @@ permit icmp [목적지] [출발지]      ← echo reply 허용
 <h5 id="3-2_2">3-2. 특정 호스트와 네트워크 구분</h5>
 <p>ACL 설정 시 호스트와 네트워크를 구분하여 사용:</p>
 <p>단일 호스트: IP 주소 + 와일드카드 마스크 0.0.0.0</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 permit tcp 192.168.1.10 0.0.0.0 ...
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 100 permit tcp 192.168.1.10 0.0.0.0 ...
+</code></pre></div></div>
 
 <p>네트워크 범위: IP 주소 + 와일드카드 마스크 (0이 아닌 부분)</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 permit tcp 192.168.0.0 0.0.0.255 ...
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 100 permit tcp 192.168.0.0 0.0.0.255 ...
+</code></pre></div></div>
 
 <p>host 키워드 (현대 IOS): 호스트를 명시적으로 표시</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 permit tcp host 192.168.1.10 ...
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 100 permit tcp host 192.168.1.10 ...
+</code></pre></div></div>
 
 <h4 id="4-acl-규칙-작성의-best-practice">4. ACL 규칙 작성의 Best Practice</h4>
 <h5 id="4-1_5">4-1. 규칙 확인 및 검증</h5>
@@ -2296,8 +2320,8 @@ permit icmp [목적지] [출발지]      ← echo reply 허용
 <p>조건 입력: eq(같음), gt(크다), lt(작다), range(범위) 등을 상황에 맞게 사용</p>
 <h5 id="4-3">4-3. 매개변수 명시</h5>
 <p>일부 최신 IOS에서는 더 명확한 문법을 지원:</p>
-<div class="codehilite"><pre><span></span><code>access-list 100 deny tcp 192.168.0.0 0.0.0.255 host 10.0.0.1 eq 80
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>access-list 100 deny tcp 192.168.0.0 0.0.0.255 host 10.0.0.1 eq 80
+</code></pre></div></div>
 
 <p>host  키워드: 단일 호스트임을 명시</p>
 <p>eq  조건: 포트 번호와 함께 사용</p>
@@ -3007,9 +3031,9 @@ permit icmp [목적지] [출발지]      ← echo reply 허용
 <p>TCP Established는 TCP 트래픽에만 효과가 있으며, UDP·ICMP에는 동일한 효과를 기 대할 수 없다. 이러한 한계를 보완한 것이 Reflected ACL(RACL)이다.</p>
 <h5 id="2-4-acl">2-4. ACL 정책 설정 확인</h5>
 <p>적용 전·후 상태 비교를 위해 아래 명령어로 정책 및 매치 수를 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>show access-list       ← 전체 ACL 정책 및 매치 수 확인
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show access-list       ← 전체 ACL 정책 및 매치 수 확인
 show ip access-list    ← IP ACL 정책 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-reflected-acl-racl">3. Reflected ACL (RACL)</h4>
 <h5 id="3-1_6">3-1. 개념</h5>
@@ -3067,17 +3091,17 @@ show ip access-list    ← IP ACL 정책 확인
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code>permit tcp any any reflect RACL-test    ← TCP 반사 설정
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>permit tcp any any reflect RACL-test    ← TCP 반사 설정
 permit udp any any reflect RACL-test    ← UDP 반사 설정
 permit icmp any any reflect RACL-test   ← ICMP 반사 설정
 evaluate RACL-test    ← 임시 ACL을 참조하여 점검
-</code></pre></div>
+</code></pre></div></div>
 
 <p>reflect  뒤에 입력하는 이름은 임시 ACL의 이름이 된다. 관리자가 임의로 지정할 수 있다.</p>
 <h5 id="3-4-racl-ospf">3-4. RACL 정책의 OSPF 허용</h5>
 <p>RACL 정책이 적용된 인터페이스에서는 OSPF 헬로 패킷도 영향을 받는다. OSPF 라우팅이 중단되지 않도록 OSPF 트래픽을 명시적으로 허용하는 규칙을 정책의 첫 번째 줄에 작성해야 한다.</p>
-<div class="codehilite"><pre><span></span><code>permit ospf host [R3의 IP] any    ← OSPF 헬로 패킷 허용
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>permit ospf host [R3의 IP] any    ← OSPF 헬로 패킷 허용
+</code></pre></div></div>
 
 <h5 id="3-5">3-5. 동작 결과 비교</h5>
 <div class="tablewrap"><table>
@@ -3155,18 +3179,18 @@ evaluate RACL-test    ← 임시 ACL을 참조하여 점검
 </tbody>
 </table></div>
 <h5 id="4-3-dacl">4-3. DACL 정책의 키워드</h5>
-<div class="codehilite"><pre><span></span><code>permit ip any any dynamic DACL    ← dynamic 키워드로 동적 ACL 지정
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>permit ip any any dynamic DACL    ← dynamic 키워드로 동적 ACL 지정
+</code></pre></div></div>
 
 <p>dynamic  키워드 뒤에 오는 이름은 동적 ACL의 이름이다.</p>
 <p>RACL의 reflect 에 대응하는 역할을 한다.</p>
 <h5 id="4-4-dacl">4-4. DACL에서의 인증 설정</h5>
 <p>별도의 인증 서버 없이 테스트할 경우, 경계 라우터 자체에 텔넷 인증을 설정하여 사용한다.</p>
-<div class="codehilite"><pre><span></span><code>enable password [패스워드]     ← Enable 모드 진입 패스워드 설정
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable password [패스워드]     ← Enable 모드 진입 패스워드 설정
 line vty 0 4
   password [패스워드]          ← 텔넷 접속 시 인증 패스워드 설정
   login
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-5-acl">4-5. 임시 ACL 생성 확인</h5>
 <p>DACL도 RACL과 마찬가지로 인증 성공 후 show access-list  결과에서 임시 ACL이 생성된 것을 확인할 수 있다. 인증 실패 시에는 임시 ACL이 생성되지 않는다.</p>
@@ -3220,13 +3244,13 @@ line vty 0 4
 </table></div>
 <h4 id="6-정책-삭제-방법">6. 정책 삭제 방법</h4>
 <p>ACL 정책 삭제 시에는 인터페이스에 적용된 정책을 먼저 제거한 후 ACL 정책 자체를 삭제해야 한다.</p>
-<div class="codehilite"><pre><span></span><code># 1단계: 인터페이스 적용 제거
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 1단계: 인터페이스 적용 제거
 interface f0/1
   no ip access-group [정책이름] in
   no ip access-group [정책이름] out
 # 2단계: ACL 정책 삭제
 no ip access-list extended [정책이름]
-</code></pre></div>
+</code></pre></div></div>
 
 <p>삭제 후 show access-list 로 정책이 모두 제거되었는지 확인한다.</p>
 <hr />
@@ -3524,6 +3548,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));

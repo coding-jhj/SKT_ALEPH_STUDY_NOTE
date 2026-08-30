@@ -5,29 +5,31 @@
 <title>팀 웹·원격 MariaDB 연동 · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -44,30 +46,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -78,6 +101,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -91,13 +115,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 </style>
@@ -109,7 +133,7 @@ th{background:var(--accent-soft); font-weight:700}
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
   <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="part">1부 · 네트워크</div><a class="" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="part">1부 · 네트워크</div><a class="" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="cur" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="inchap"><a class="lv3" href="#이-노트의-근거와-한계--반드시-먼저-읽으십시오">⚠️ 이 노트의 근거와 한계 — 반드시 먼저 읽으십시오</a><a class="lv4" href="#비밀번호토큰-취급">비밀번호·토큰 취급</a><a class="lv3" href="#0-목차">0. 목차</a><a class="lv3" href="#1장-오늘-과제의-전체-구조">1장. 오늘 과제의 전체 구조</a><a class="lv4" href="#11-과제-목표">1.1 과제 목표</a><a class="lv4" href="#12-서버별-ip와-역할-표">1.2 서버별 IP와 역할 표 ✅</a><a class="lv4" href="#13-각-역할이-하는-일">1.3 각 역할이 하는 일</a><a class="lv4" href="#14-전체-흐름--브라우저에서-db까지">1.4 전체 흐름 — 브라우저에서 DB까지</a><a class="lv4" href="#15-무엇을-확인해야-과제가-완료되는가">1.5 무엇을 확인해야 과제가 완료되는가</a><a class="lv3" href="#2장-web-서버와-db-서버의-차이">2장. WEB 서버와 DB 서버의 차이</a><a class="lv4" href="#21-왜-이-구분이-중요한가">2.1 왜 이 구분이 중요한가</a><a class="lv4" href="#22-web-서버19216816111에서-실행하는-명령">2.2 WEB 서버(192.168.16.111)에서 실행하는 명령</a><a class="lv4" href="#23-db-서버19216816117에서-실행하는-명령">2.3 DB 서버(192.168.16.117)에서 실행하는 명령</a><a class="lv4" href="#24-클라이언트-컴퓨터1921681646에서-실행하는-명령">2.4 클라이언트 컴퓨터(192.168.16.46)에서 실행하는 명령</a><a class="lv4" href="#25-localhost-unix-socket-원격-ip-접속--세-개념-정리">2.5 localhost, Unix socket, 원격 IP 접속 — 세 개념 정리</a><a class="lv4" href="#26-mysql--u-root--p가-기본적으로-로컬-서버에-접속하는-이유">2.6 mysql -u root -p가 기본적으로 로컬 서버에 접속하는 이유</a><a class="lv4" href="#27--web-서버에서-sudo-mariadb가-실패한-이유">2.7 ⚠️ WEB 서버에서 sudo mariadb가 실패한 이유</a><a class="lv3" href="#3장-mariadb-데이터베이스와-테이블">3장. MariaDB 데이터베이스와 테이블</a><a class="lv4" href="#31-데이터베이스-다루기">3.1 데이터베이스 다루기</a><a class="lv4" href="#32-users-테이블">3.2 users 테이블 ✅</a><a class="lv4" href="#33-posts-테이블">3.3 posts 테이블 ✅</a><a class="lv4" href="#34-각-키워드의-의미">3.4 각 키워드의 의미 📘</a><a class="lv4" href="#35-users와-posts의-관계">3.5 users와 posts의 관계</a><a class="lv3" href="#4장-mariadb-사용자와-호스트별-권한">4장. MariaDB 사용자와 호스트별 권한</a><a class="lv4" href="#41-mariadb-계정의-형식-사용자명접속호스트">4.1 MariaDB 계정의 형식: &#x27;사용자명&#x27;@&#x27;접속호스트&#x27; 📘</a><a class="lv4" href="#42-왜-같은-사용자명인데-다른-계정인가">4.2 왜 같은 사용자명인데 다른 계정인가</a><a class="lv4" href="#43-user-vs-currentuser">4.3 USER() vs CURRENT_USER()</a><a class="lv4" href="#44-계정-관리-sql">4.4 계정 관리 SQL</a><a class="lv4" href="#45-오늘-실습의-1921681646-권한-설정-전체">4.5 오늘 실습의 192.168.16.46 권한 설정 (전체)</a><a class="lv3" href="#5장-php와-mariadb-연동">5장. PHP와 MariaDB 연동</a><a class="lv4" href="#51-pdo란-무엇인가">5.1 PDO란 무엇인가 📘</a><a class="lv4" href="#52-dsn이란-무엇인가">5.2 DSN이란 무엇인가 📘</a><a class="lv4" href="#53-db-설정-파일--varwwwteam-alpha-dbphp">5.3 DB 설정 파일 — /var/www/team-alpha-db.php ✅</a><a class="lv4" href="#54-prepared-statement와-sql-injection-방지">5.4 prepared statement와 SQL Injection 방지 📘</a><a class="lv4" href="#55-pdo-예외-처리">5.5 PDO 예외 처리</a><a class="lv4" href="#56-php가-www-data-사용자로-실행되는-이유">5.6 PHP가 www-data 사용자로 실행되는 이유 📘</a><a class="lv4" href="#57-db-설정-파일을-웹-문서-루트-밖에-둔-이유">5.7 DB 설정 파일을 웹 문서 루트 밖에 둔 이유 ✅</a><a class="lv3" href="#6장-db-연동-검사-절차">6장. DB 연동 검사 절차</a><a class="lv4" href="#61-php-문법-검사">6.1 PHP 문법 검사</a><a class="lv4" href="#62-apache-설정-검사">6.2 Apache 설정 검사</a><a class="lv4" href="#63-apache-실행-상태-확인">6.3 Apache 실행 상태 확인</a><a class="lv4" href="#64--www-data-권한으로-php-db-연결-검사">6.4 ★ www-data 권한으로 PHP DB 연결 검사 ★</a><a class="lv4" href="#65-users--posts-테이블-조회-검사">6.5 users / posts 테이블 조회 검사</a><a class="lv4" href="#66-apache-재적용">6.6 Apache 재적용</a><a class="lv4" href="#67-웹-응답-확인">6.7 웹 응답 확인</a><a class="lv4" href="#68--http-200-과-db-연동-성공은-완전히-다른-문제다">6.8 ★★ HTTP 200 과 DB 연동 성공은 완전히 다른 문제다 ★★</a><a class="lv3" href="#7장-회원가입과-로그인-db-저장-확인">7장. 회원가입과 로그인 DB 저장 확인</a><a class="lv4" href="#71-회원가입-확인-절차">7.1 회원가입 확인 절차</a><a class="lv4" href="#72-비밀번호-저장-방식-확인">7.2 비밀번호 저장 방식 확인</a><a class="lv4" href="#73-username-중복-방지-확인">7.3 username 중복 방지 확인</a><a class="lv4" href="#74-로그인-검증-확인">7.4 로그인 검증 확인 📘</a><a class="lv4" href="#75-게시글-저장-확인">7.5 게시글 저장 확인</a><a class="lv4" href="#76-로그인하지-않은-사용자의-글쓰기-제한-확인">7.6 로그인하지 않은 사용자의 글쓰기 제한 확인</a><a class="lv4" href="#77--javascript-데모와-실제-php-db-처리의-차이">7.7 ★ JavaScript 데모와 실제 PHP DB 처리의 차이 ★</a><a class="lv3" href="#8장-오류-원인과-해결">8장. 오류 원인과 해결</a><a class="lv4" href="#81-종합-오류-표">8.1 종합 오류 표</a><a class="lv4" href="#82--mysql--u-root--p-실행-시-socket-오류-상세">8.2 ★ mysql -u root -p 실행 시 socket 오류 상세 ★</a><a class="lv4" href="#83-문제-진단-순서-복습용-플로우">8.3 문제 진단 순서 (복습용 플로우)</a><a class="lv3" href="#9장-pmm-관련-내용">9장. PMM 관련 내용</a><a class="lv4" href="#91-pmm-server와-pmm-client의-차이">9.1 PMM Server와 PMM Client의 차이 📘</a><a class="lv4" href="#92-pmm-agent의-역할">9.2 pmm-agent의 역할</a><a class="lv4" href="#93-pmm-admin-status">9.3 pmm-admin status 📘</a><a class="lv4" href="#94--pmm-agent-is-running-but-not-set-up-의-의미">9.4 ★ pmm-agent is running, but not set up 의 의미 ★ ✅</a><a class="lv4" href="#95-invalid-username-or-password-오류">9.5 Invalid username or password 오류 ✅</a><a class="lv4" href="#96--glsatoken에-대하여--선택적-심화">9.6 🔷 GLSA_TOKEN에 대하여 — 선택적 심화</a><a class="lv4" href="#97-pmm-문제와-db-문제를-구분하는-표">9.7 PMM 문제와 DB 문제를 구분하는 표</a><a class="lv3" href="#10장-보안-주의사항">10장. 보안 주의사항</a><a class="lv4" href="#101-자격증명-관리">10.1 자격증명 관리</a><a class="lv4" href="#102-파일-배치와-권한">10.2 파일 배치와 권한</a><a class="lv4" href="#103-db-권한-관리">10.3 DB 권한 관리</a><a class="lv4" href="#104-비밀번호-저장과-검증">10.4 비밀번호 저장과 검증</a><a class="lv4" href="#105-sql-injection-방지">10.5 SQL Injection 방지</a><a class="lv4" href="#106-기타">10.6 기타</a><a class="lv3" href="#11장-오늘-과제-최종-점검표">11장. 오늘 과제 최종 점검표</a><a class="lv4" href="#인프라-확인">인프라 확인</a><a class="lv4" href="#web-서버-측-검사">WEB 서버 측 검사</a><a class="lv4" href="#연결-확인">연결 확인</a><a class="lv4" href="#원격-클라이언트-권한">원격 클라이언트 권한</a><a class="lv4" href="#애플리케이션-동작--여기가-진짜-완료-판정">애플리케이션 동작 (★ 여기가 진짜 완료 판정)</a><a class="lv4" href="#운영-확인">운영 확인</a><a class="lv3" href="#12장-명령어-요약표">12장. 명령어 요약표</a><a class="lv4" href="#121--web-서버-명령">12.1 🟦 WEB 서버 명령</a><a class="lv4" href="#122--db-서버-명령">12.2 🟥 DB 서버 명령</a><a class="lv4" href="#123--클라이언트-pc-명령-1921681646">12.3 🟩 클라이언트 PC 명령 (192.168.16.46)</a><a class="lv4" href="#124--pmm-명령-db-연동과-별개">12.4 🟪 PMM 명령 (DB 연동과 별개)</a><a class="lv4" href="#125-명령-실행-위치-빠른-판별법">12.5 명령 실행 위치 빠른 판별법</a><a class="lv3" href="#13장-출처-공식-문서">13장. 출처 (공식 문서)</a><a class="lv4" href="#mariadb-공식-문서">MariaDB 공식 문서</a><a class="lv4" href="#php-공식-매뉴얼">PHP 공식 매뉴얼</a><a class="lv4" href="#apache-공식-문서">Apache 공식 문서</a><a class="lv4" href="#ubuntu-공식-문서">Ubuntu 공식 문서</a><a class="lv4" href="#percona-pmm-공식-문서">Percona PMM 공식 문서</a><a class="lv4" href="#이-노트에서-확인하지-못한-항목-정직한-고지">🟡 이 노트에서 확인하지 못한 항목 (정직한 고지)</a><a class="lv3" href="#작성-원칙-재확인-문서-마무리">작성 원칙 재확인 (문서 마무리)</a></div><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch22.html">22. 보안·모의해킹 2</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 17</div><h1>팀 웹·원격 MariaDB 연동</h1><blockquote>
+<main><header class="chapter-head"><div class="chapter-no">CHAPTER 17</div><h1>팀 웹·원격 MariaDB 연동</h1></header><blockquote>
 <p><strong>문서 범위</strong>: WEB 서버(Apache + PHP)와 별도 DB 서버(MariaDB)를 연동하는 실습.
 팀 웹사이트 <code>team-alpha</code>, 데이터베이스 <code>kload</code>, 테이블 <code>users</code>·<code>posts</code>, 호스트별 계정 권한, DB 연동 검사 절차, PMM 상태 확인.</p>
 <p><strong>이 노트에서 제외한 것</strong>: ANIMAL / ANIMAL_INS / ANIMAL_OUTS 관련 SQL 연습 문제. 오늘 과제 범위(팀 웹사이트 ↔ kload 연동)와 다른 주제이므로 뺐습니다.
@@ -281,7 +305,7 @@ Docker, Laravel, 클라우드, 다른 프레임워크도 오늘 과제에 없었
 <li>9장에서 따로 다룬다.</li>
 </ul>
 <h4 id="14-전체-흐름--브라우저에서-db까지">1.4 전체 흐름 — 브라우저에서 DB까지</h4>
-<div class="codehilite"><pre><span></span><code>[사용자 브라우저]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[사용자 브라우저]
         │  ① HTTP 요청  http://192.168.16.111/team-alpha/
         ▼
 [WEB 서버 192.168.16.111]
@@ -306,7 +330,7 @@ Docker, Laravel, 클라우드, 다른 프레임워크도 오늘 과제에 없었
         │
         ▼  ⑧ 결과를 PHP로 반환
    PHP가 HTML 생성 → Apache → 브라우저
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_3">이 흐름에서 각 단계가 실패할 수 있는 지점</h5>
 <div class="tablewrap"><table>
@@ -443,7 +467,7 @@ HTTP 200은 "Apache가 살아 있고 PHP가 죽지 않았다"는 뜻일 뿐입�
 <p>오늘 실습에서 가장 많은 시간을 잡아먹는 오류는 거의 전부 <strong>"명령을 엉뚱한 서버에서 실행"</strong> 해서 생깁니다.
 대표적인 사례가 WEB 서버에서 <code>sudo mariadb</code>를 친 경우입니다. (2.7절)</p>
 <h4 id="22-web-서버19216816111에서-실행하는-명령">2.2 WEB 서버(192.168.16.111)에서 실행하는 명령</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 패키지 설치</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 패키지 설치</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apache2
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>php<span class="w"> </span>libapache2-mod-php
@@ -465,18 +489,18 @@ curl<span class="w"> </span>-sS<span class="w"> </span>-o<span class="w"> </span
 
 <span class="c1"># 로그</span>
 sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/apache2/error.log
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>📘 Ubuntu 공식 문서: Apache2의 기본 <code>DocumentRoot</code>는 <code>/var/www/html</code>이고,
 <code>User</code>/<code>Group</code> 디렉티브의 기본값은 모두 <code>www-data</code>입니다.</p>
 </blockquote>
 <h4 id="23-db-서버19216816117에서-실행하는-명령">2.3 DB 서버(192.168.16.117)에서 실행하는 명령</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 로컬 관리자 접속 (Unix socket 인증)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 로컬 관리자 접속 (Unix socket 인증)</span>
 sudo<span class="w"> </span>mariadb
-</code></pre></div>
+</code></pre></div></div>
 
-<div class="codehilite"><pre><span></span><code><span class="c1">-- 데이터베이스와 테이블</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1">-- 데이터베이스와 테이블</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">kload</span>
 <span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
 <span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_general_ci</span><span class="p">;</span>
@@ -490,20 +514,20 @@ sudo<span class="w"> </span>mariadb
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">kload</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.111&#39;</span><span class="p">;</span>
 <span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.111&#39;</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="24-클라이언트-컴퓨터1921681646에서-실행하는-명령">2.4 클라이언트 컴퓨터(192.168.16.46)에서 실행하는 명령</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 원격 DB 서버에 직접 접속</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 원격 DB 서버에 직접 접속</span>
 mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">192</span>.168.16.117<span class="w"> </span>-u<span class="w"> </span>kload_user<span class="w"> </span>-p
 <span class="c1"># 또는 (구버전 호환 명령명)</span>
 mysql<span class="w"> </span>-h<span class="w"> </span><span class="m">192</span>.168.16.117<span class="w"> </span>-u<span class="w"> </span>kload_user<span class="w"> </span>-p
-</code></pre></div>
+</code></pre></div></div>
 
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">();</span><span class="w">          </span><span class="c1">-- 서버가 본 &quot;내가 요청한&quot; 계정@호스트</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="p">();</span><span class="w">  </span><span class="c1">-- 서버가 실제로 매칭시킨 계정@호스트</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="25-localhost-unix-socket-원격-ip-접속--세-개념-정리">2.5 localhost, Unix socket, 원격 IP 접속 — 세 개념 정리</h4>
 <h5 id="localhost">localhost 📘</h5>
@@ -580,9 +604,9 @@ WEB 서버에서 치면 WEB 서버의 MariaDB를, DB 서버에서 치면 DB 서�
 </table></div>
 <h4 id="27--web-서버에서-sudo-mariadb가-실패한-이유">2.7 ⚠️ WEB 서버에서 <code>sudo mariadb</code>가 실패한 이유</h4>
 <p><strong>실습에서 발생한 오류</strong> ✅ (과제 설명에 명시)</p>
-<div class="codehilite"><pre><span></span><code>ERROR 2002 (HY000): Can&#39;t connect to local server through socket
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ERROR 2002 (HY000): Can&#39;t connect to local server through socket
 &#39;/run/mysqld/mysqld.sock&#39; (2)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_4">오류 메시지를 한 조각씩 해석</h5>
 <div class="tablewrap"><table>
@@ -658,7 +682,7 @@ WEB 서버에서 치면 WEB 서버의 MariaDB를, DB 서버에서 치면 DB 서�
 클라이언트 명령은 원격 접속용으로도 쓰이므로, 명령이 존재하는 것과 데몬이 도는 것은 별개입니다.</p>
 </blockquote>
 <h5 id="3">해결 방법 (3가지, 상황별)</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1"># ① DB 서버에 SSH로 들어가서 로컬 관리자 접속 (권장 — 관리 작업용)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># ① DB 서버에 SSH로 들어가서 로컬 관리자 접속 (권장 — 관리 작업용)</span>
 ssh<span class="w"> </span>&lt;계정&gt;@192.168.16.117
 sudo<span class="w"> </span>mariadb
 
@@ -669,7 +693,7 @@ mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">192</sp
 systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w">        </span><span class="c1"># 없거나 inactive 여야 정상</span>
 ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">3306</span><span class="w">            </span><span class="c1"># 아무것도 안 나와야 정상</span>
 ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span class="w">   </span><span class="c1"># 파일이 없어야 정상</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>⚠️ <strong>하면 안 되는 해결책</strong>: 이 오류를 고치겠다고 WEB 서버에 <code>mariadb-server</code>를 설치하는 것.
@@ -690,10 +714,10 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 </blockquote>
 <h4 id="31-데이터베이스-다루기">3.1 데이터베이스 다루기</h4>
 <h5 id="create-database">CREATE DATABASE</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">kload</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">kload</span>
 <span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
 <span class="w">  </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_general_ci</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -722,18 +746,18 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 </tbody>
 </table></div>
 <h5 id="use">USE</h5>
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>"앞으로 테이블 이름을 쓸 때 <code>kload.</code>를 생략해도 되게 하라"는 뜻입니다.
 현재 세션에만 적용됩니다. 접속이 끊기면 초기화됩니다.</p>
 <p>프롬프트가 <code>MariaDB [(none)]&gt;</code> 에서 <code>MariaDB [kload]&gt;</code> 로 바뀌면 성공입니다.</p>
 <h5 id="show-databases-show-tables-describe">SHOW DATABASES / SHOW TABLES / DESCRIBE</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span><span class="w">      </span><span class="c1">-- 서버에 있는 DB 목록 (내가 볼 권한이 있는 것만)</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span><span class="w">      </span><span class="c1">-- 서버에 있는 DB 목록 (내가 볼 권한이 있는 것만)</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span><span class="w">         </span><span class="c1">-- 현재 USE 중인 DB의 테이블 목록</span>
 <span class="k">DESCRIBE</span><span class="w"> </span><span class="n">users</span><span class="p">;</span><span class="w">      </span><span class="c1">-- users 테이블의 컬럼 구조 (DESC로 줄여도 됨)</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="err">\</span><span class="k">G</span><span class="w">   </span><span class="c1">-- 실제 생성문 전체 (외래키·엔진·문자셋까지 보임)</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p><strong>팁</strong>: <code>DESCRIBE</code>는 컬럼·타입·NULL 허용·키·기본값만 보여줍니다.
@@ -741,7 +765,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 외래키를 확인하려면 <code>SHOW CREATE TABLE posts;</code> 를 쓰십시오. 이건 실습에서 자주 놓치는 부분입니다.</p>
 </blockquote>
 <h4 id="32-users-테이블">3.2 users 테이블 ✅</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w">            </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="n">username</span><span class="w">      </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">  </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -749,7 +773,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 <span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
 <span class="w">  </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">uk_users_username</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
 <span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_general_ci</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -795,7 +819,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 코드 리뷰나 나중의 자신에게 주는 경고 장치입니다.</p>
 </blockquote>
 <h4 id="33-posts-테이블">3.3 posts 테이블 ✅</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w">         </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="n">category</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;자유&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="n">title</span><span class="w">      </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -810,7 +834,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 <span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">RESTRICT</span>
 <span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_general_ci</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1006,7 +1030,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 <li>따라서 <strong>테이블 생성 순서도 <code>users</code> 먼저, <code>posts</code> 나중</strong>입니다. 반대로 하면 참조 대상이 없어 실패합니다.</li>
 </ul>
 <h5 id="er">ER 다이어그램 (텍스트판 — 어디서든 보임)</h5>
-<div class="codehilite"><pre><span></span><code>┌──────────────────────────────┐          ┌────────────────────────────────────┐
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>┌──────────────────────────────┐          ┌────────────────────────────────────┐
 │            users             │          │              posts                 │
 ├──────────────────────────────┤          ├────────────────────────────────────┤
 │ PK  id            INT UNSIGN │◄────┐    │ PK  id            INT UNSIGNED     │
@@ -1022,10 +1046,10 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
   제약: posts.author_id → users.id
         ON UPDATE CASCADE  (부모 id 변경 시 자식도 따라 변경)
         ON DELETE RESTRICT (자식이 있으면 부모 삭제 거부)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="er-mermaid-markdown">ER 다이어그램 (Mermaid 판 — Markdown 뷰어용)</h5>
-<div class="codehilite"><pre><span></span><code>erDiagram
+<div class="code-shell" data-language="Mermaid"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Mermaid</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>erDiagram
     users ||--o{ posts : &quot;writes&quot;
 
     users {
@@ -1044,7 +1068,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
         INT_UNSIGNED views &quot;NOT NULL DEFAULT 0&quot;
         TIMESTAMP created_at &quot;DEFAULT CURRENT_TIMESTAMP&quot;
     }
-</code></pre></div>
+</code></pre></div></div>
 
 <p>관계선 읽는 법: <code>users ||--o{ posts</code> 는 <strong>회원 1명(||)이 게시글 0개 이상(o{)</strong> 을 가진다는 뜻입니다.</p>
 <hr />
@@ -1054,9 +1078,9 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 </blockquote>
 <h4 id="41-mariadb-계정의-형식-사용자명접속호스트">4.1 MariaDB 계정의 형식: <code>'사용자명'@'접속호스트'</code> 📘</h4>
 <p>MariaDB의 계정은 <strong>이름만으로 이루어지지 않습니다.</strong> 이름과 "어디서 접속해 오는가"가 <strong>한 쌍</strong>으로 계정입니다.</p>
-<div class="codehilite"><pre><span></span><code>&#39;kload_user&#39; @ &#39;192.168.16.111&#39;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&#39;kload_user&#39; @ &#39;192.168.16.111&#39;
  └── 사용자명       └── 이 IP에서 접속해 올 때만 유효
-</code></pre></div>
+</code></pre></div></div>
 
 <p>📘 MariaDB 공식 문서: 계정은 <code>'user_name'@'host_name'</code> 형식이며, <strong>호스트를 생략하면 <code>'%'</code> 가 기본값</strong>입니다.
 즉 <code>CREATE USER 'test'</code> 는 <code>CREATE USER 'test'@'%'</code> 와 같습니다.</p>
@@ -1093,9 +1117,9 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 </table></div>
 <h4 id="42-왜-같은-사용자명인데-다른-계정인가">4.2 왜 같은 사용자명인데 다른 계정인가</h4>
 <p>이것이 오늘 실습에서 가장 중요한 개념입니다.</p>
-<div class="codehilite"><pre><span></span><code>&#39;kload_user&#39;@&#39;192.168.16.111&#39;   ← WEB 서버용 계정   (계정 A)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>&#39;kload_user&#39;@&#39;192.168.16.111&#39;   ← WEB 서버용 계정   (계정 A)
 &#39;kload_user&#39;@&#39;192.168.16.46&#39;    ← 클라이언트 PC용 계정 (계정 B)
-</code></pre></div>
+</code></pre></div></div>
 
 <p><strong>이 둘은 완전히 별개의 계정입니다.</strong></p>
 <ul>
@@ -1119,8 +1143,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 <p>이 때문에 <strong>내가 의도한 계정이 아닌 다른 계정으로 로그인되는</strong> 혼란이 생길 수 있습니다.
 그래서 다음 두 함수가 중요합니다.</p>
 <h4 id="43-user-vs-currentuser">4.3 USER() vs CURRENT_USER()</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">(),</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="p">();</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">(),</span><span class="w"> </span><span class="k">CURRENT_USER</span><span class="p">();</span>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1141,17 +1165,17 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock<span
 </tbody>
 </table></div>
 <p>예시 상황:</p>
-<div class="codehilite"><pre><span></span><code>USER()          → kload_user@192.168.16.46
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>USER()          → kload_user@192.168.16.46
 CURRENT_USER()  → kload_user@%
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이 결과는 <strong>"내가 46에서 접속했는데, 서버는 <code>@'%'</code> 계정으로 나를 인식했다"</strong> 는 뜻입니다.
 즉 <code>@'192.168.16.46'</code> 전용 계정이 없어서 <code>@'%'</code> 계정이 대신 잡힌 것입니다.
 권한이 이상하게 동작할 때 <strong>가장 먼저 확인해야 할 두 값</strong>입니다.</p>
 <h4 id="44-계정-관리-sql">4.4 계정 관리 SQL</h4>
 <h5 id="create-user">CREATE USER 📘</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;DB_PASSWORD&gt;&#39;</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;DB_PASSWORD&gt;&#39;</span><span class="p">;</span>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1183,8 +1207,8 @@ CURRENT_USER()  → kload_user@%
 <p>⚠️ <strong>주의</strong>: <code>CREATE USER</code>만 하면 <strong>로그인은 되지만 아무 DB도 못 봅니다.</strong> 반드시 <code>GRANT</code>가 뒤따라야 합니다.</p>
 </blockquote>
 <h5 id="alter-user">ALTER USER</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;DB_PASSWORD&gt;&#39;</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;DB_PASSWORD&gt;&#39;</span><span class="p">;</span>
+</code></pre></div></div>
 
 <ul>
 <li><strong>비밀번호를 바꿀 때</strong> 씁니다.</li>
@@ -1193,8 +1217,8 @@ CURRENT_USER()  → kload_user@%
   <strong>"없으면 만들고, 있든 없든 비밀번호를 확실히 이 값으로 맞춘다"</strong> 는 뜻의 관용적 조합입니다.</li>
 </ul>
 <h5 id="grant">GRANT 📘</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">kload</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">kload</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>권한 범위(레벨)를 정확히 구분해야 합니다.</p>
 <div class="tablewrap"><table>
@@ -1286,8 +1310,8 @@ CURRENT_USER()  → kload_user@%
 "이 계정은 존재하며 로그인할 수 있다"는 표시일 뿐입니다.
 <code>SHOW GRANTS</code> 결과에 <strong>USAGE 한 줄밖에 없다면, 그 계정은 아무 데이터도 못 봅니다.</strong></p>
 <h5 id="flush-privileges">FLUSH PRIVILEGES</h5>
-<div class="codehilite"><pre><span></span><code><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div></div>
 
 <ul>
 <li>디스크의 권한 테이블(<code>mysql.user</code> 등)을 다시 읽어 <strong>메모리 캐시를 갱신</strong>합니다.</li>
@@ -1302,17 +1326,17 @@ CURRENT_USER()  → kload_user@%
 이것이 "GRANT 했는데 왜 안 되지?"의 진짜 원인인 경우가 많습니다.</p>
 </blockquote>
 <h5 id="show-grants">SHOW GRANTS</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="p">;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="p">;</span>
+</code></pre></div></div>
 
 <ul>
 <li>그 계정이 가진 권한을 <code>GRANT</code> 문 형태로 보여줍니다.</li>
 <li>계정을 지정하지 않고 <code>SHOW GRANTS;</code> 만 쓰면 <strong>현재 접속 중인 나 자신</strong>의 권한이 나옵니다.</li>
 <li>기대하는 결과:</li>
 </ul>
-<div class="codehilite"><pre><span></span><code>GRANT USAGE ON *.* TO `kload_user`@`192.168.16.46` IDENTIFIED BY PASSWORD &#39;...&#39;
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>GRANT USAGE ON *.* TO `kload_user`@`192.168.16.46` IDENTIFIED BY PASSWORD &#39;...&#39;
 GRANT ALL PRIVILEGES ON `kload`.* TO `kload_user`@`192.168.16.46`
-</code></pre></div>
+</code></pre></div></div>
 
 <p>두 번째 줄이 없으면 <code>GRANT</code>가 안 된 것입니다.</p>
 <blockquote>
@@ -1321,7 +1345,7 @@ GRANT ALL PRIVILEGES ON `kload`.* TO `kload_user`@`192.168.16.46`
 </blockquote>
 <h4 id="45-오늘-실습의-1921681646-권한-설정-전체">4.5 오늘 실습의 192.168.16.46 권한 설정 (전체)</h4>
 <p><strong>실행 위치: DB 서버 192.168.16.117 / 실행 계정: root 또는 권한 있는 관리자</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- ① 계정 생성 (없을 때만)</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1">-- ① 계정 생성 (없을 때만)</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;&lt;DB_PASSWORD&gt;&#39;</span><span class="p">;</span>
 
 <span class="c1">-- ② 비밀번호를 확실히 맞춤 (이미 있던 계정이어도 덮어씀)</span>
@@ -1335,7 +1359,7 @@ GRANT ALL PRIVILEGES ON `kload`.* TO `kload_user`@`192.168.16.46`
 
 <span class="c1">-- ⑤ 확인</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;kload_user&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.46&#39;</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>🟡 <strong>확인 필요</strong>: 위 5개 문의 실제 실행 출력은 확인되지 않았습니다.
 <code>Query OK</code>가 떴는지, <code>SHOW GRANTS</code>에 <code>GRANT ALL PRIVILEGES ON kload.*</code> 줄이 나왔는지 직접 확인하십시오.</p>
@@ -1408,8 +1432,8 @@ GRANT ALL PRIVILEGES ON `kload`.* TO `kload_user`@`192.168.16.46`
 <p>📘 <em>"Users with the <code>GRANT OPTION</code> privilege can only grant privileges they have."</em></p>
 <p><code>kload_user</code>는 <code>kload.*</code> 권한만 있고 <code>GRANT OPTION</code>이 없습니다.
 따라서 <code>kload_user</code>로 접속해서 다른 계정을 만들거나 권한을 주려 하면 실패합니다.</p>
-<div class="codehilite"><pre><span></span><code>ERROR 1227 (42000): Access denied; you need (at least one of) the CREATE USER privilege(s) for this operation
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ERROR 1227 (42000): Access denied; you need (at least one of) the CREATE USER privilege(s) for this operation
+</code></pre></div></div>
 
 <p><strong>반드시 root 또는 관리자 계정으로 접속해서 실행해야 합니다.</strong></p>
 <hr />
@@ -1421,22 +1445,22 @@ GRANT ALL PRIVILEGES ON `kload`.* TO `kload_user`@`192.168.16.46`
 <li>실제 DB와 대화하는 부분은 <strong>드라이버</strong>가 담당합니다. MariaDB/MySQL용 드라이버가 <strong>PDO_MYSQL</strong>입니다.</li>
 <li>📘 Ubuntu에서는 <code>php-mysql</code> 패키지가 PDO_MYSQL을 포함합니다. 이 패키지가 없으면 <code>could not find driver</code> 예외가 납니다.</li>
 </ul>
-<div class="codehilite"><pre><span></span><code>PHP 코드  →  PDO (공통 인터페이스)  →  PDO_MYSQL 드라이버  →  MariaDB 서버
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PHP 코드  →  PDO (공통 인터페이스)  →  PDO_MYSQL 드라이버  →  MariaDB 서버
                                         ↑ php-mysql 패키지
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_10">드라이버 설치 확인</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1"># WEB 서버에서</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># WEB 서버에서</span>
 php<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>pdo<span class="w">          </span><span class="c1"># pdo_mysql 이 나와야 함</span>
 php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;var_dump(PDO::getAvailableDrivers());&#39;</span><span class="w">   </span><span class="c1"># &#39;mysql&#39; 이 배열에 있어야 함</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="52-dsn이란-무엇인가">5.2 DSN이란 무엇인가 📘</h4>
 <p><strong>DSN(Data Source Name)</strong> = "어느 DB에, 어떻게 붙을지"를 적은 <strong>한 줄짜리 접속 주소 문자열</strong>입니다.</p>
-<div class="codehilite"><pre><span></span><code>mysql:host=192.168.16.117;dbname=kload;charset=utf8mb4
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>mysql:host=192.168.16.117;dbname=kload;charset=utf8mb4
 └─┬─┘ └───────┬────────┘ └─────┬────┘ └───────┬──────┘
 드라이버      호스트           DB 이름       접속 문자셋
-</code></pre></div>
+</code></pre></div></div>
 
 <p>📘 PHP 공식 매뉴얼이 명시하는 PDO_MYSQL DSN 파라미터:</p>
 <div class="tablewrap"><table>
@@ -1484,7 +1508,7 @@ DB에는 utf8mb4로 저장돼 있어도 <strong>화면에서 한글이 <code>???
 DB·테이블이 utf8mb4여도 접속 문자셋이 다르면 소용없습니다.</p>
 </blockquote>
 <h4 id="53-db-설정-파일--varwwwteam-alpha-dbphp">5.3 DB 설정 파일 — <code>/var/www/team-alpha-db.php</code> ✅</h4>
-<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span>
     <span class="s1">&#39;mysql:host=192.168.16.117;dbname=kload;charset=utf8mb4&#39;</span><span class="p">,</span>
     <span class="s1">&#39;&lt;DB_USER&gt;&#39;</span><span class="p">,</span>
@@ -1495,7 +1519,7 @@ DB·테이블이 utf8mb4여도 접속 문자셋이 다르면 소용없습니다.
         <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span>   <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>⚠️ 실제 파일에는 <code>&amp;lt;DB_USER&gt;</code> 자리에 <code>kload_user</code>, <code>&amp;lt;DB_PASSWORD&gt;</code> 자리에 실제 비밀번호가 들어갑니다.
@@ -1596,26 +1620,26 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <p>📘 PHP 공식 매뉴얼의 권장 예제도 <code>ATTR_EMULATE_PREPARES =&gt; false</code> 와 <code>ERRMODE_EXCEPTION</code>을 함께 씁니다.</p>
 <h4 id="54-prepared-statement와-sql-injection-방지">5.4 prepared statement와 SQL Injection 방지 📘</h4>
 <h5 id="_12">절대 이렇게 쓰면 안 되는 코드</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">// ❌ 위험 — 사용자 입력을 SQL 문자열에 직접 붙임</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// ❌ 위험 — 사용자 입력을 SQL 문자열에 직접 붙임</span>
 <span class="x">$sql = &quot;SELECT * FROM users WHERE username = &#39;&quot; . $_POST[&#39;username&#39;] . &quot;&#39;&quot;;</span>
 <span class="x">$stmt = $pdo-&gt;query($sql);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>사용자가 아이디 칸에 <code>' OR '1'='1</code> 을 넣으면 SQL이 이렇게 변합니다.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</code></pre></div></div>
 
 <p>→ <strong>모든 회원이 조회됩니다.</strong> 이것이 SQL Injection입니다.
 더 나쁘게는 <code>'; DROP TABLE users; --</code> 같은 것도 가능합니다.</p>
 <h5 id="_13">반드시 이렇게 씁니다</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">// ✅ 안전 — prepared statement + 바인딩</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// ✅ 안전 — prepared statement + 바인딩</span>
 <span class="x">$stmt = $pdo-&gt;prepare(&#39;SELECT id, password_hash FROM users WHERE username = ?&#39;);</span>
 <span class="x">$stmt-&gt;execute([$_POST[&#39;username&#39;]]);</span>
 <span class="x">$user = $stmt-&gt;fetch();</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>또는 이름 있는 플레이스홀더:</p>
-<div class="codehilite"><pre><span></span><code><span class="x">$stmt = $pdo-&gt;prepare(</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">$stmt = $pdo-&gt;prepare(</span>
 <span class="x">    &#39;INSERT INTO posts (category, title, body, author_id) VALUES (:cat, :title, :body, :author)&#39;</span>
 <span class="x">);</span>
 <span class="x">$stmt-&gt;execute([</span>
@@ -1624,7 +1648,7 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <span class="x">    &#39;:body&#39;   =&gt; $body,</span>
 <span class="x">    &#39;:author&#39; =&gt; $_SESSION[&#39;user_id&#39;],</span>
 <span class="x">]);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_14">왜 안전한가 📘</h5>
 <p>📘 PHP 공식 매뉴얼:
@@ -1635,7 +1659,7 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <h5 id="_15">⚠️ 중요한 한계 📘</h5>
 <p>📘 <em>"however, if other portions of the query are being built up with unescaped input, SQL injection is still possible."</em></p>
 <p><strong>플레이스홀더는 "값"에만 쓸 수 있습니다.</strong> 테이블명·컬럼명·<code>ORDER BY</code> 방향에는 못 씁니다.</p>
-<div class="codehilite"><pre><span></span><code><span class="x">// ❌ 동작하지 않음 (그리고 위험)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// ❌ 동작하지 않음 (그리고 위험)</span>
 <span class="x">$stmt = $pdo-&gt;prepare(&quot;SELECT * FROM users ORDER BY ? ?&quot;);</span>
 
 <span class="x">// ❌ 따옴표 안의 플레이스홀더는 플레이스홀더가 아님 — 공식 매뉴얼이 명시한 오답</span>
@@ -1649,10 +1673,10 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <span class="x">$allowed = [&#39;id&#39;, &#39;created_at&#39;, &#39;views&#39;];</span>
 <span class="x">$col = in_array($_GET[&#39;sort&#39;] ?? &#39;&#39;, $allowed, true) ? $_GET[&#39;sort&#39;] : &#39;id&#39;;</span>
 <span class="x">$stmt = $pdo-&gt;query(&quot;SELECT * FROM posts ORDER BY {$col} DESC&quot;);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="55-pdo-예외-처리">5.5 PDO 예외 처리</h4>
-<div class="codehilite"><pre><span></span><code><span class="x">try {</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">try {</span>
 <span class="x">    $pdo = new PDO($dsn, $user, $pass, $options);</span>
 <span class="x">} catch (PDOException $e) {</span>
 <span class="x">    // ⚠️ 사용자 화면에 $e-&gt;getMessage()를 그대로 출력하지 말 것</span>
@@ -1661,7 +1685,7 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <span class="x">    http_response_code(500);</span>
 <span class="x">    exit(&#39;일시적인 오류가 발생했습니다.&#39;);</span>
 <span class="x">}</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1699,22 +1723,22 @@ DB 연결이 실패했는데 그대로 진행해서 빈 화면만 나오는 상�
 <p><code>www-data</code>는 권한이 거의 없는 계정입니다. 뚫려도 피해가 웹 파일 범위로 제한됩니다.</p>
 <h5 id="_16">실습에서 이것이 중요한 이유</h5>
 <p><strong>당신(happy 등 로그인 계정)이 파일을 읽을 수 있는 것과, www-data가 읽을 수 있는 것은 별개입니다.</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 이 테스트는 반쪽짜리다 — 내 계정 권한으로 실행됨</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 이 테스트는 반쪽짜리다 — 내 계정 권한으로 실행됨</span>
 php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; ...&#39;</span>
 
 <span class="c1"># ✅ 실제 웹에서 돌아가는 것과 같은 조건</span>
 sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; ...&#39;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p><code>sudo -u www-data</code> 는 <strong>"www-data 사용자인 척하고 실행하라"</strong> 는 뜻입니다.
 이걸 써야 "내 계정으로는 되는데 브라우저에서는 안 되는" 현상을 미리 잡을 수 있습니다.</p>
 <h4 id="57-db-설정-파일을-웹-문서-루트-밖에-둔-이유">5.7 DB 설정 파일을 웹 문서 루트 밖에 둔 이유 ✅</h4>
-<div class="codehilite"><pre><span></span><code>/var/www/                      ← 문서 루트 밖
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>/var/www/                      ← 문서 루트 밖
 ├── team-alpha-db.php          ← ✅ DB 설정 파일 (비밀번호 포함)
 └── html/                      ← 여기부터가 문서 루트 (DocumentRoot)
     └── team-alpha/
         └── index.php          ← 브라우저가 접근 가능
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_17">이유</h5>
 <p>Apache는 <strong><code>/var/www/html</code> 아래의 파일만</strong> URL로 제공합니다.
@@ -1745,11 +1769,11 @@ sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> <
 <p><strong>문서 루트 밖에 두면 이 모든 시나리오가 원천 차단됩니다.</strong>
 PHP의 <code>require</code>는 파일시스템 경로로 읽으므로, 문서 루트 밖에 있어도 아무 문제 없이 읽힙니다.</p>
 <h5 id="_18">소유권과 퍼미션</h5>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>root:www-data<span class="w"> </span>/var/www/team-alpha-db.php
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>root:www-data<span class="w"> </span>/var/www/team-alpha-db.php
 sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">640</span><span class="w"> </span>/var/www/team-alpha-db.php
 ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 <span class="c1"># -rw-r----- 1 root www-data ... team-alpha-db.php</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p><code>chmod 640</code> 해석:</p>
 <div class="tablewrap"><table>
@@ -1828,8 +1852,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 <p>이 장의 순서는 <strong>"싸고 빠른 검사부터, 진짜 확인은 마지막에"</strong> 라는 원칙으로 배열돼 있습니다.
 그리고 각 단계가 <strong>무엇을 증명하고 무엇을 증명하지 못하는지</strong>를 반드시 구분해야 합니다.</p>
 <h4 id="61-php-문법-검사">6.1 PHP 문법 검사</h4>
-<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>-l<span class="w"> </span>/var/www/html/team-alpha/index.php
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>php<span class="w"> </span>-l<span class="w"> </span>/var/www/html/team-alpha/index.php
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1893,8 +1917,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 존재하지 않는 함수를 호출하는 코드도 <code>-l</code>은 통과시킵니다.</p>
 </blockquote>
 <h4 id="62-apache-설정-검사">6.2 Apache 설정 검사</h4>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1933,8 +1957,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 그러면 사이트 전체가 죽습니다. 그래서 항상 <code>configtest</code> → <code>reload</code> 순서입니다.</p>
 </blockquote>
 <h4 id="63-apache-실행-상태-확인">6.3 Apache 실행 상태 확인</h4>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>apache2
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>apache2
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1971,8 +1995,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 </blockquote>
 <h4 id="64--www-data-권한으로-php-db-연결-검사">6.4 ★ www-data 권한으로 PHP DB 연결 검사 ★</h4>
 <p><strong>이것이 오늘 과제에서 가장 중요한 검사입니다.</strong></p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; echo &quot;연결 성공\n&quot;; echo &quot;DB: &quot;, $pdo-&gt;query(&quot;SELECT DATABASE()&quot;)-&gt;fetchColumn(), &quot;\n&quot;;&#39;</span>
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; echo &quot;연결 성공\n&quot;; echo &quot;DB: &quot;, $pdo-&gt;query(&quot;SELECT DATABASE()&quot;)-&gt;fetchColumn(), &quot;\n&quot;;&#39;</span>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2133,8 +2157,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 </table></div>
 <p>🟡 <strong>확인 필요</strong>: 이 명령의 실제 실행 결과는 확인되지 않았습니다.</p>
 <h4 id="65-users--posts-테이블-조회-검사">6.5 users / posts 테이블 조회 검사</h4>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; echo &quot;users: &quot;, $pdo-&gt;query(&quot;SELECT COUNT(*) FROM users&quot;)-&gt;fetchColumn(), &quot;\n&quot;; echo &quot;posts: &quot;, $pdo-&gt;query(&quot;SELECT COUNT(*) FROM posts&quot;)-&gt;fetchColumn(), &quot;\n&quot;;&#39;</span>
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;require &quot;/var/www/team-alpha-db.php&quot;; echo &quot;users: &quot;, $pdo-&gt;query(&quot;SELECT COUNT(*) FROM users&quot;)-&gt;fetchColumn(), &quot;\n&quot;; echo &quot;posts: &quot;, $pdo-&gt;query(&quot;SELECT COUNT(*) FROM posts&quot;)-&gt;fetchColumn(), &quot;\n&quot;;&#39;</span>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2192,8 +2216,8 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/www/team-alpha-db.php
 </blockquote>
 <p>🟡 <strong>확인 필요</strong>: 실제 실행 결과 미확인.</p>
 <h4 id="66-apache-재적용">6.6 Apache 재적용</h4>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2259,8 +2283,8 @@ PHP는 요청마다 파일을 새로 읽습니다. <code>.php</code> 수정 후 
 reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 확장 설치</strong> 후입니다.</p>
 </blockquote>
 <h4 id="67-웹-응답-확인">6.7 웹 응답 확인</h4>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;HTTP 상태코드: %{http_code}\n&#39;</span><span class="w"> </span>http://127.0.0.1/team-alpha/
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;HTTP 상태코드: %{http_code}\n&#39;</span><span class="w"> </span>http://127.0.0.1/team-alpha/
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2410,14 +2434,14 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 </tbody>
 </table></div>
 <h5 id="db-200">왜 DB가 안 붙어도 200이 나올 수 있는가</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">// 이런 코드는 DB가 죽어도 HTTP 200을 냅니다</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// 이런 코드는 DB가 죽어도 HTTP 200을 냅니다</span>
 <span class="x">try {</span>
 <span class="x">    $rows = $pdo-&gt;query(&#39;SELECT * FROM posts&#39;)-&gt;fetchAll();</span>
 <span class="x">} catch (PDOException $e) {</span>
 <span class="x">    $rows = [];        // ← 조용히 빈 배열로 대체</span>
 <span class="x">}</span>
 <span class="x">// 이후 정상적으로 HTML을 그림 → 200</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>또는 <strong>아예 DB를 쓰지 않는 화면</strong>일 수도 있습니다.
 로그인 폼, 회원가입 폼, 게시판 UI는 <strong>HTML+JavaScript만으로도 그려집니다.</strong>
@@ -2464,13 +2488,13 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 <li>회원가입 화면에서 <code>&amp;lt;USERNAME&gt;</code> / <code>&amp;lt;PASSWORD&gt;</code> 로 가입 시도</li>
 <li><strong>DB 서버(192.168.16.117) 또는 클라이언트 PC(192.168.16.46)</strong> 에서 아래 SQL 실행</li>
 </ol>
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">users</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span>
 <span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2519,11 +2543,11 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 </table></div>
 <p>🟡 <strong>확인 필요</strong>: 실제 가입 및 조회 결과 미확인.</p>
 <h4 id="72-비밀번호-저장-방식-확인">7.2 비밀번호 저장 방식 확인</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="k">LEFT</span><span class="p">(</span><span class="n">password_hash</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">hash_prefix</span><span class="p">,</span><span class="w"> </span><span class="k">CHAR_LENGTH</span><span class="p">(</span><span class="n">password_hash</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">len</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="k">LEFT</span><span class="p">(</span><span class="n">password_hash</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">hash_prefix</span><span class="p">,</span><span class="w"> </span><span class="k">CHAR_LENGTH</span><span class="p">(</span><span class="n">password_hash</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">len</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">users</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span>
 <span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>해시 전체를 출력하지 않고 <strong>앞부분과 길이만</strong> 봅니다. 전체 해시는 자격증명이므로 문서에 남기지 않습니다.</p>
@@ -2564,11 +2588,11 @@ reload가 필요한 것은 <strong>Apache 설정(<code>*.conf</code>)이나 PHP 
 <em>"The used algorithm, cost and salt are returned as part of the hash. Therefore, all information that's needed to verify the hash is included in it."</em>
 → 그래서 <strong>salt를 따로 저장할 필요가 없습니다.</strong></p>
 <h5 id="_29">올바른 회원가입 코드 형태</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">// 가입</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// 가입</span>
 <span class="x">$hash = password_hash($_POST[&#39;password&#39;], PASSWORD_DEFAULT);</span>
 <span class="x">$stmt = $pdo-&gt;prepare(&#39;INSERT INTO users (username, password_hash) VALUES (?, ?)&#39;);</span>
 <span class="x">$stmt-&gt;execute([$_POST[&#39;username&#39;], $hash]);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>⚠️ <code>md5()</code>, <code>sha1()</code>은 <strong>절대 쓰지 마십시오.</strong>
@@ -2602,11 +2626,11 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </tbody>
 </table></div>
 <h5 id="db_1">DB에서 직접 확인</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cnt</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cnt</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">users</span>
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">username</span>
 <span class="k">HAVING</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>→ <strong>결과가 0행이어야 정상</strong>입니다. 한 행이라도 나오면 UNIQUE 제약이 없는 것입니다.</p>
 <h5 id="_31">두 겹의 방어</h5>
@@ -2636,7 +2660,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 1층의 <code>SELECT</code>는 둘 다 "없음"을 반환할 수 있습니다. 그리고 둘 다 INSERT합니다.
 이때 DB의 UNIQUE 제약만이 두 번째를 막아줍니다. 이 문제를 <strong>경쟁 조건(race condition)</strong> 이라 합니다.</p>
 </blockquote>
-<div class="codehilite"><pre><span></span><code><span class="x">// 권장 형태: UNIQUE 위반을 예외로 잡는다</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">// 권장 형태: UNIQUE 위반을 예외로 잡는다</span>
 <span class="x">try {</span>
 <span class="x">    $stmt = $pdo-&gt;prepare(&#39;INSERT INTO users (username, password_hash) VALUES (?, ?)&#39;);</span>
 <span class="x">    $stmt-&gt;execute([$username, $hash]);</span>
@@ -2647,11 +2671,11 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 <span class="x">        throw $e;</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="74-로그인-검증-확인">7.4 로그인 검증 확인 📘</h4>
 <h5 id="_32">올바른 로그인 코드 형태</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">$stmt = $pdo-&gt;prepare(&#39;SELECT id, password_hash FROM users WHERE username = ?&#39;);</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">$stmt = $pdo-&gt;prepare(&#39;SELECT id, password_hash FROM users WHERE username = ?&#39;);</span>
 <span class="x">$stmt-&gt;execute([$_POST[&#39;username&#39;]]);</span>
 <span class="x">$user = $stmt-&gt;fetch();</span>
 
@@ -2662,7 +2686,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 <span class="x">} else {</span>
 <span class="x">    // 아이디 또는 비밀번호가 틀렸습니다  (어느 쪽이 틀렸는지 알려주지 않는다)</span>
 <span class="x">}</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_33">핵심 포인트</h5>
 <div class="tablewrap"><table>
@@ -2721,13 +2745,13 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 <li>로그인한 상태에서 게시글 작성</li>
 <li>DB에서 확인</li>
 </ol>
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">kload</span><span class="p">;</span>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">views</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">posts</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span>
 <span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_36">판정</h5>
 <div class="tablewrap"><table>
@@ -2757,12 +2781,12 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </tbody>
 </table></div>
 <h5 id="author_id-usersid-join">author_id가 실제 users.id와 연결되는지 확인 — JOIN</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">created_at</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">created_at</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="n">p</span>
 <span class="k">JOIN</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">author_id</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span>
 <span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2788,11 +2812,11 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 이 에러가 났다면 <strong>로그인 세션이 제대로 안 잡혀서 <code>author_id</code>에 0이나 NULL이 들어간 것</strong>입니다.</p>
 </blockquote>
 <h5 id="_37">외래키 동작 직접 확인 (선택)</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- 글을 쓴 회원을 지우려 하면 거부되어야 정상 (ON DELETE RESTRICT)</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1">-- 글을 쓴 회원을 지우려 하면 거부되어야 정상 (ON DELETE RESTRICT)</span>
 <span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="err">글을</span><span class="n">_쓴_회원id</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="c1">-- 기대: ERROR 1451 (23000): Cannot delete or update a parent row:</span>
 <span class="c1">--       a foreign key constraint fails</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>⚠️ 실습 DB에서만 시험하십시오. 이 에러가 나는 것이 <strong>정상이자 성공</strong>입니다.</p>
@@ -2828,12 +2852,12 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </tbody>
 </table></div>
 <h5 id="_39">올바른 서버측 검사</h5>
-<div class="codehilite"><pre><span></span><code><span class="x">session_start();</span>
+<div class="code-shell" data-language="Php"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Php</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="x">session_start();</span>
 <span class="x">if (empty($_SESSION[&#39;user_id&#39;])) {</span>
 <span class="x">    header(&#39;Location: /team-alpha/login.php&#39;);</span>
 <span class="x">    exit;                       // ← exit 없으면 아래 코드가 계속 실행된다</span>
 <span class="x">}</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>⚠️ <strong>화면에서 버튼을 숨기는 것은 보안이 아닙니다.</strong>
@@ -2890,7 +2914,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </tbody>
 </table></div>
 <h5 id="3_1">스스로 판별하는 방법 — 3가지 테스트</h5>
-<div class="codehilite"><pre><span></span><code>① 새로고침(F5) 테스트
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>① 새로고침(F5) 테스트
    글을 쓴 뒤 F5 → 글이 사라지면 JavaScript 데모다.
 
 ② 다른 브라우저 테스트
@@ -2900,7 +2924,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 ③ DB 직접 조회 테스트  ← 가장 확실
    SELECT COUNT(*) FROM posts;
    → 0이면 DB에 저장되지 않은 것이다.
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p><strong>③번이 결정적입니다.</strong> 화면은 얼마든지 속일 수 있지만, DB 테이블은 못 속입니다.
@@ -3036,12 +3060,12 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </table></div>
 <h4 id="82--mysql--u-root--p-실행-시-socket-오류-상세">8.2 ★ <code>mysql -u root -p</code> 실행 시 socket 오류 상세 ★</h4>
 <p><strong>이번 실습에서 실제로 발생한 오류입니다.</strong> ✅</p>
-<div class="codehilite"><pre><span></span><code>ERROR 2002 (HY000): Can&#39;t connect to local server through socket
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ERROR 2002 (HY000): Can&#39;t connect to local server through socket
 &#39;/run/mysqld/mysqld.sock&#39; (2)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="5">왜 이 오류가 났는가 — 5단계 인과</h5>
-<div class="codehilite"><pre><span></span><code>① WEB 서버(192.168.16.111)에서 명령을 실행했다
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>① WEB 서버(192.168.16.111)에서 명령을 실행했다
         ↓
 ② -h 옵션이 없으므로 클라이언트는 호스트를 &#39;localhost&#39;로 가정
         ↓
@@ -3051,7 +3075,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
    (데몬이 있어야 소켓 파일이 생성된다)
         ↓
 ⑤ 소켓 파일이 없으므로 errno 2 (No such file or directory) → ERROR 2002
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4">반드시 이해해야 할 4가지 사실</h5>
 <div class="tablewrap"><table>
@@ -3081,7 +3105,7 @@ bcrypt는 <strong>의도적으로 느리게</strong> 만들어져 있어 대입 
 </tbody>
 </table></div>
 <h5 id="web_1">진단 명령 (WEB 서버에서)</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 서버 데몬이 있는가? (없는 것이 정상)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 서버 데몬이 있는가? (없는 것이 정상)</span>
 systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
 <span class="c1"># → Unit mariadb.service could not be found.  ← 설치 안 됨 (정상)</span>
 <span class="c1"># → inactive (dead)                            ← 설치는 됐으나 정지 (정상)</span>
@@ -3095,7 +3119,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>/run/mysqld/mysqld.sock
 
 <span class="c1"># 클라이언트 명령은 있는가? (있어야 원격 접속 테스트 가능)</span>
 which<span class="w"> </span>mariadb<span class="w"> </span>mysql
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_42">해결 방법 — 목적별</h5>
 <div class="tablewrap"><table>
@@ -3144,7 +3168,7 @@ which<span class="w"> </span>mariadb<span class="w"> </span>mysql
 - MariaDB <code>root</code> 계정에 원격 접속 허용(<code>'root'@'%'</code>) → <strong>심각한 보안 위험.</strong> 10장 참조</p>
 </blockquote>
 <h4 id="83-문제-진단-순서-복습용-플로우">8.3 문제 진단 순서 (복습용 플로우)</h4>
-<div class="codehilite"><pre><span></span><code>웹사이트가 이상하다
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>웹사이트가 이상하다
     │
     ├─ 브라우저가 아예 연결 안 됨 (Connection refused)
     │     → systemctl is-active apache2
@@ -3166,7 +3190,7 @@ which<span class="w"> </span>mariadb<span class="w"> </span>mysql
           → ② sudo -u www-data php -r &#39;... COUNT(*) FROM users&#39; ← 테이블 있나?
           → ③ DB에서 직접 SELECT                                ← 진짜 저장됐나?
           → ④ 셋 다 되는데도 안 나오면 → PHP 코드가 DB를 안 쓰고 있다 (7.7절)
-</code></pre></div>
+</code></pre></div></div>
 
 <hr />
 <h3 id="9장-pmm-관련-내용">9장. PMM 관련 내용</h3>
@@ -3208,13 +3232,13 @@ PMM이 붙지 않아도 팀 웹사이트와 kload 연동은 정상 동작할 수
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code>[MariaDB 192.168.16.117]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[MariaDB 192.168.16.117]
      ↑ 지표 수집
 [pmm-agent (PMM Client)]
      │ 등록 및 전송
      ▼
 [PMM Server 192.168.16.58]  ←  웹 브라우저로 대시보드 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="92-pmm-agent의-역할">9.2 pmm-agent의 역할</h4>
 <ul>
@@ -3223,14 +3247,14 @@ PMM이 붙지 않아도 팀 웹사이트와 kload 연동은 정상 동작할 수
 <li><strong>실행 중인 것</strong>과 <strong>설정(등록)된 것</strong>은 별개의 상태입니다. ← 오늘 발생한 오류의 핵심</li>
 </ul>
 <h4 id="93-pmm-admin-status">9.3 pmm-admin status 📘</h4>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>pmm-admin<span class="w"> </span>status
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>pmm-admin<span class="w"> </span>status
+</code></pre></div></div>
 
 <p>📘 Percona 공식 문서에 따르면 <code>pmm-admin status</code>는 <strong>PMM Client가 PMM Server와 통신할 수 있는지 확인</strong>하며,
 Agent ID, Node ID, PMM Server URL과 버전, <code>Connected</code> 상태, 시간 오차(time drift), 지연(latency),
 pmm-agent 버전과 가동 시간을 보여줍니다.</p>
 <p>정상 출력 형태(📘 공식 문서 예시):</p>
-<div class="codehilite"><pre><span></span><code>Agent ID : &lt;agent-id&gt;
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Agent ID : &lt;agent-id&gt;
 Node ID  : &lt;node-id&gt;
 Node name: &lt;node-name&gt;
 
@@ -3244,7 +3268,7 @@ PMM Client:
     Latency          : ...
     pmm-agent Version: 3.x.x
     pmm-agent Uptime : ...
-</code></pre></div>
+</code></pre></div></div>
 
 <p>📘 <code>Connected: false</code> 이면 <strong>서버 URL과 네트워크 설정을 확인</strong>하라고 문서가 안내합니다.</p>
 <h4 id="94--pmm-agent-is-running-but-not-set-up-의-의미">9.4 ★ <code>pmm-agent is running, but not set up</code> 의 의미 ★ ✅</h4>
@@ -3276,21 +3300,21 @@ PMM Client:
 그 등록을 하기 전까지는 계속 이 상태입니다.</p>
 <h5 id="pmm-server">해결 — PMM Server에 등록 📘</h5>
 <p>📘 공식 문서의 명령 형식:</p>
-<div class="codehilite"><pre><span></span><code>pmm-admin config [&lt;node-address&gt; [&lt;node-type&gt; [&lt;node-name&gt;]]] [FLAGS]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>pmm-admin config [&lt;node-address&gt; [&lt;node-type&gt; [&lt;node-name&gt;]]] [FLAGS]
+</code></pre></div></div>
 
 <p>📘 공식 문서 예시:</p>
-<div class="codehilite"><pre><span></span><code>pmm-admin<span class="w"> </span>config<span class="w"> </span>--server-url<span class="o">=</span>https://admin:password@pmm-server-host:443
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>pmm-admin<span class="w"> </span>config<span class="w"> </span>--server-url<span class="o">=</span>https://admin:password@pmm-server-host:443
+</code></pre></div></div>
 
 <p>자체 서명 인증서를 쓰는 경우 📘:</p>
-<div class="codehilite"><pre><span></span><code>pmm-admin<span class="w"> </span>config<span class="w"> </span><span class="se">\</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>pmm-admin<span class="w"> </span>config<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--server-url<span class="o">=</span>https://admin:password@pmm-server-host:443<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--server-insecure-tls
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이번 실습 환경(PMM Server = 192.168.16.58)에 적용하면:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 실행 위치: PMM Client가 설치된 서버 (감시 대상 DB 서버)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 실행 위치: PMM Client가 설치된 서버 (감시 대상 DB 서버)</span>
 sudo<span class="w"> </span>pmm-admin<span class="w"> </span>config<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--server-url<span class="o">=</span>https://&lt;PMM_ADMIN_USER&gt;:&lt;PMM_ADMIN_PASSWORD&gt;@192.168.16.58:443<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--server-insecure-tls
@@ -3298,7 +3322,7 @@ sudo<span class="w"> </span>pmm-admin<span class="w"> </span>config<span class="
 <span class="c1"># 확인</span>
 sudo<span class="w"> </span>pmm-admin<span class="w"> </span>status
 sudo<span class="w"> </span>pmm-admin<span class="w"> </span>list
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -3364,11 +3388,11 @@ sudo<span class="w"> </span>pmm-admin<span class="w"> </span>list
 PMM 로그인이 안 된다고 <code>kload_user</code> 비밀번호를 바꾸는 것은 <strong>아무 의미가 없습니다.</strong></p>
 </blockquote>
 <h5 id="_47">확인 방법</h5>
-<div class="codehilite"><pre><span></span><code>1. 브라우저로 https://192.168.16.58 접속
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. 브라우저로 https://192.168.16.58 접속
 2. 같은 계정/비밀번호로 웹 UI 로그인 시도
    → 여기서도 실패한다면 자격증명 자체가 틀린 것 (pmm-admin 문제가 아님)
    → 여기서는 되는데 pmm-admin에서만 실패한다면 URL·따옴표·특수문자 문제 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="_48">흔한 원인</h5>
 <div class="tablewrap"><table>
@@ -3441,12 +3465,12 @@ PMM Server의 기본 관리자 자격증명은 배포 방식(Docker/OVF/AMI)과 
 </table></div>
 <h5 id="_50">학습 우선순위</h5>
 <p>오늘 반드시 익혀야 할 것은 다음입니다.</p>
-<div class="codehilite"><pre><span></span><code>PDO / DSN / prepared statement
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PDO / DSN / prepared statement
 CREATE USER / ALTER USER / GRANT / SHOW GRANTS
 &#39;user&#39;@&#39;host&#39; 개념
 socket vs TCP 접속
 DB 연동 검사 절차 (6장)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>PMM 토큰 인증은 <strong>모니터링 시스템을 실제로 운영할 때</strong> 다루면 되는 주제입니다.
 지금 단계에서 이것 때문에 시간을 쓰지 마십시오.</p>
@@ -3542,16 +3566,16 @@ DB 연동 검사 절차 (6장)
 </tbody>
 </table></div>
 <h5 id="gitignore">.gitignore 예시</h5>
-<div class="codehilite"><pre><span></span><code># DB 설정 (자격증명 포함)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code># DB 설정 (자격증명 포함)
 team-alpha-db.php
 *-db.php
 .env
 
 # 샘플만 커밋
 !team-alpha-db.sample.php
-</code></pre></div>
+</code></pre></div></div>
 
-<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 <span class="c1">// team-alpha-db.sample.php  ← 이건 커밋해도 안전</span>
 <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span>
     <span class="s1">&#39;mysql:host=&lt;DB_HOST&gt;;dbname=&lt;DB_NAME&gt;;charset=utf8mb4&#39;</span><span class="p">,</span>
@@ -3563,7 +3587,7 @@ team-alpha-db.php
         <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span>   <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="102-파일-배치와-권한">10.2 파일 배치와 권한</h4>
 <div class="tablewrap"><table>
@@ -3639,10 +3663,10 @@ team-alpha-db.php
 </tbody>
 </table></div>
 <h5 id="root_1">⚠️ root 원격 로그인이 왜 위험한가</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- ❌ 절대 하지 마십시오</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1">-- ❌ 절대 하지 마십시오</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;...&#39;</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -4434,6 +4458,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));

@@ -5,29 +5,31 @@
 <title>네트워크 핵심키워드 1 · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -44,30 +46,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -78,6 +101,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -91,13 +115,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 </style>
@@ -109,7 +133,7 @@ th{background:var(--accent-soft); font-weight:700}
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
   <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="part">1부 · 네트워크</div><a class="cur" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="inchap"><a class="lv3" href="#001-ipv6-네트워크-관리-모델">001. IPv6 네트워크 관리 모델</a><a class="lv4" href="#1-서브네팅-subnetting-개요">1. 서브네팅 (Subnetting) 개요</a><a class="lv4" href="#2-네트워크-관리-모델--fcaps">2. 네트워크 관리 모델 — FCAPS</a><a class="lv4" href="#3-네트워크-시뮬레이터-툴">3. 네트워크 시뮬레이터 툴</a><a class="lv4" href="#4-packet-tracer-화면-구성">4. Packet Tracer 화면 구성</a><a class="lv4" href="#5-시스코-장비를-사용하는-이유">5. 시스코 장비를 사용하는 이유</a><a class="lv4" href="#6-토폴로지-구성-실습">6. 토폴로지 구성 실습</a><a class="lv4" href="#7-packet-tracer-환경-설정">7. Packet Tracer 환경 설정</a><a class="lv3" href="#002-it-인프라-보안-과정-소개-it-인프라-기초">002. IT 인프라 보안 과정 소개 IT 인프라 기초</a><a class="lv4" href="#1-과정-구성-3개-교과목">1. 과정 구성 (3개 교과목)</a><a class="lv4" href="#2-과제-및-프로젝트">2. 과제 및 프로젝트</a><a class="lv4" href="#3-취업-관련-안내">3. 취업 관련 안내</a><a class="lv4" href="#4-it-인프라란">4. IT 인프라란?</a><a class="lv4" href="#5-수강-안내-및-마음가짐">5. 수강 안내 및 마음가짐</a><a class="lv3" href="#003-tcp-udp-비교-및-ip-주소-체계">003. TCP UDP 비교 및 IP 주소 체계</a><a class="lv4" href="#1-tcp-vs-udp-비교">1. TCP vs UDP 비교</a><a class="lv4" href="#2-포트-번호-port-number">2. 포트 번호 (Port Number)</a><a class="lv4" href="#3-네트워크-계층-프로토콜">3. 네트워크 계층 프로토콜</a><a class="lv4" href="#4-ipxspx-프로토콜">4. IPX/SPX 프로토콜</a><a class="lv4" href="#5-계층별-데이터-표현-단위">5. 계층별 데이터 표현 단위</a><a class="lv4" href="#6-ip-버전-4-ipv4-주소-체계">6. IP 버전 4 (IPv4) 주소 체계</a><a class="lv4" href="#7-ip-버전-6-ipv6-주소-체계">7. IP 버전 6 (IPv6) 주소 체계</a><a class="lv4" href="#8-mac-주소-물리적-주소">8. MAC 주소 (물리적 주소)</a><a class="lv4" href="#9-주소-관련-참고-기관">9. 주소 관련 참고 기관</a><a class="lv3" href="#004-네트워크-보안-기초">004. 네트워크 보안 기초</a><a class="lv4" href="#1-정보보안의-3대-요소-cia">1. 정보보안의 3대 요소 (CIA)</a><a class="lv4" href="#2-정보보안의-5대-요소">2. 정보보안의 5대 요소</a><a class="lv4" href="#3-정보보안의-3대-분류">3. 정보보안의 3대 분류</a><a class="lv4" href="#4-isms-p-정보보호-관리체계-인증">4. ISMS-P (정보보호 관리체계 인증)</a><a class="lv4" href="#5-osi-표준-모델">5. OSI 표준 모델</a><a class="lv4" href="#6-캡슐화와-역캡슐화">6. 캡슐화와 역캡슐화</a><a class="lv4" href="#7-tcpip-모델">7. TCP/IP 모델</a><a class="lv3" href="#005-시스코-장비-cli-기본-설정">005. 시스코 장비 CLI 기본 설정</a><a class="lv4" href="#1-cli-command-line-interface-개요">1. CLI (Command Line Interface) 개요</a><a class="lv4" href="#2-장비-모드-구조">2. 장비 모드 구조</a><a class="lv4" href="#3-모드-이동-명령어">3. 모드 이동 명령어</a><a class="lv4" href="#4-자주-쓰는-기본-명령어">4. 자주 쓰는 기본 명령어</a><a class="lv4" href="#5-보안-설정--패스워드">5. 보안 설정 — 패스워드</a><a class="lv4" href="#6-원격-접속vty-패스워드-설정">6. 원격 접속(VTY) 패스워드 설정</a><a class="lv4" href="#7-콘솔-포트-console-port-개념">7. 콘솔 포트 (Console Port) 개념</a><a class="lv4" href="#8-실습-전체-흐름-요약">8. 실습 전체 흐름 요약</a><a class="lv4" href="#9-파일-저장-방법">9. 파일 저장 방법</a><a class="lv3" href="#006-vtp">006. VTP</a><a class="lv4" href="#1-트러블슈팅troubleshooting-마인드셋">1. 트러블슈팅(Troubleshooting) 마인드셋</a><a class="lv4" href="#2-vtp-vlan-trunking-protocol-개요">2. VTP (VLAN Trunking Protocol) 개요</a><a class="lv4" href="#3-vtp-동작-모드-3가지">3. VTP 동작 모드 (3가지)</a><a class="lv4" href="#4-revision-number-리비전-넘버">4. Revision Number (리비전 넘버)</a><a class="lv4" href="#5-vtp-설정-과정">5. VTP 설정 과정</a><a class="lv4" href="#6-동기화-안-될-때-체크리스트">6. 동기화 안 될 때 체크리스트</a><a class="lv4" href="#7-유용한-cli-팁">7. 유용한 CLI 팁</a><a class="lv3" href="#007-vtp-트러블슈팅">007. VTP 트러블슈팅</a><a class="lv4" href="#1-vtp-트러블슈팅-체크리스트">1. VTP 트러블슈팅 체크리스트</a><a class="lv4" href="#2-시스코-장비-모델-번호-이해">2. 시스코 장비 모델 번호 이해</a><a class="lv4" href="#3-종합-예제--3개-vlan-전체-설정">3. 종합 예제 — 3개 VLAN 전체 설정</a><a class="lv4" href="#5-설정-확인-명령어-모음">5. 설정 확인 명령어 모음</a><a class="lv3" href="#008-라우터-심화---enable-secret-인터페이스-ip-저장-구조">008. 라우터 심화 - enable secret 인터페이스 IP 저장 구조</a><a class="lv4" href="#1-enable-password-vs-enable-secret">1. enable password vs enable secret</a><a class="lv4" href="#2-라우터-인터페이스-ip-설정">2. 라우터 인터페이스 IP 설정</a><a class="lv4" href="#3-게이트웨이gateway-개념">3. 게이트웨이(Gateway) 개념</a><a class="lv4" href="#4-장비-운영체제ios-확인">4. 장비 운영체제(IOS) 확인</a><a class="lv4" href="#5-ram-vs-rom-저장-구조">5. RAM vs ROM (저장 구조)</a><a class="lv4" href="#6-설정-확인-명령어-비교">6. 설정 확인 명령어 비교</a><a class="lv3" href="#009-서브넷-마스크-상세-서브네팅-공식">009. 서브넷 마스크 상세 서브네팅 공식</a><a class="lv4" href="#1-프리픽스-표기법-숫자의-의미">1. 프리픽스 표기법 (/숫자)의 의미</a><a class="lv4" href="#2-네트워크-id--호스트-id">2. 네트워크 ID / 호스트 ID</a><a class="lv4" href="#3-예약-주소">3. 예약 주소</a><a class="lv4" href="#4-서브네팅-공식">4. 서브네팅 공식</a><a class="lv4" href="#5-서브네팅의-목적">5. 서브네팅의 목적</a><a class="lv3" href="#010-설정-저장-cli-팁-vlan-서브넷">010. 설정 저장 CLI 팁 VLAN 서브넷</a><a class="lv4" href="#1-설정-저장-방법">1. 설정 저장 방법</a><a class="lv4" href="#2-cli-유용한-팁">2. CLI 유용한 팁</a><a class="lv4" href="#3-vlan-virtual-lan-개념">3. VLAN (Virtual LAN) 개념</a><a class="lv4" href="#4-서브넷-기초--이진수-변환">4. 서브넷 기초 — 이진수 변환</a><a class="lv4" href="#5-서브넷-마스크-기초">5. 서브넷 마스크 기초</a><a class="lv3" href="#011-자주-받는-질문---vlan-설정-오류-해결-트러블슈팅">011. 자주 받는 질문 - VLAN 설정 오류 해결 트러블슈팅</a><a class="lv4" href="#1-서브인터페이스-번호-규칙">1. 서브인터페이스 번호 규칙</a><a class="lv4" href="#2-트렁크-설정-위치-정리">2. 트렁크 설정 위치 정리</a><a class="lv4" href="#3-l2-스위치-vs-l3-스위치-비교">3. L2 스위치 vs L3 스위치 비교</a><a class="lv4" href="#4-vlan-설정-전체-순서-재정리">4. VLAN 설정 전체 순서 재정리</a><a class="lv4" href="#5-서브인터페이스-설정--순서-주의사항">5. 서브인터페이스 설정 — 순서 주의사항</a><a class="lv4" href="#6-자주-발생하는-오류-및-해결-방법">6. 자주 발생하는 오류 및 해결 방법</a><a class="lv4" href="#7-주요-오류-메시지-해석">7. 주요 오류 메시지 해석</a><a class="lv4" href="#8-잘못된-설정-수정-방법">8. 잘못된 설정 수정 방법</a><a class="lv4" href="#9-설정-명령어-전체-참고-show-run-활용">9. 설정 명령어 전체 참고 (show run 활용)</a><a class="lv4" href="#10-통신-테스트-방법-정리">10. 통신 테스트 방법 정리</a><a class="lv3" href="#012-트렁킹-서브인터페이스-다른-vlan-간-통신">012. 트렁킹 서브인터페이스 다른 VLAN 간 통신</a><a class="lv4" href="#1-트렁킹-trunking-개념">1. 트렁킹 (Trunking) 개념</a><a class="lv4" href="#2-트렁킹-확인-명령어">2. 트렁킹 확인 명령어</a><a class="lv4" href="#3-동일-vlan-통신-vs-다른-vlan-통신">3. 동일 VLAN 통신 vs 다른 VLAN 통신</a><a class="lv4" href="#4-서브인터페이스-sub-interface-설정">4. 서브인터페이스 (Sub-interface) 설정</a><a class="lv4" href="#5-게이트웨이-설정-각-pc">5. 게이트웨이 설정 (각 PC)</a><a class="lv4" href="#6-통신-테스트-결과">6. 통신 테스트 결과</a><a class="lv4" href="#7-전체-통신-구조-정리">7. 전체 통신 구조 정리</a><a class="lv4" href="#8-설정-확인">8. 설정 확인</a><a class="lv3" href="#013-포트-기반-vlan-트렁크">013. 포트 기반 VLAN 트렁크</a><a class="lv4" href="#1-ip-주소-설계-vlan-구성-전-선행-작업">1. IP 주소 설계 (VLAN 구성 전 선행 작업)</a><a class="lv4" href="#2-포트-기반-vlan-port-based-vlan">2. 포트 기반 VLAN (Port-based VLAN)</a><a class="lv4" href="#3-vlan-설정-명령어-스위치">3. VLAN 설정 명령어 (스위치)</a><a class="lv4" href="#4-vlan-설정-확인">4. VLAN 설정 확인</a><a class="lv4" href="#5-ab-두-스위치-설정-시-주의사항">5. A/B 두 스위치 설정 시 주의사항</a><a class="lv3" href="#014-eigrp-as-도메인-분리와-재분배-설정">014. EIGRP AS 도메인 분리와 재분배 설정</a><a class="lv4" href="#1-eigrp-다중-as-도메인-구성">1. EIGRP 다중 AS 도메인 구성</a><a class="lv4" href="#2-다중-as-도메인-환경의-문제점">2. 다중 AS 도메인 환경의 문제점</a><a class="lv4" href="#3-라우터-e의-eigrp-as-20-설정">3. 라우터 E의 EIGRP AS 20 설정</a><a class="lv4" href="#4-as-도메인-분리와-재분배redistribution">4. AS 도메인 분리와 재분배(Redistribution)</a><a class="lv4" href="#5-eigrp-재분배-설정">5. EIGRP 재분배 설정</a><a class="lv4" href="#6-eigrp-프로토콜-정보-확인">6. EIGRP 프로토콜 정보 확인</a><a class="lv3" href="#015-eigrp-설정과-기본-구조">015. EIGRP 설정과 기본 구조</a><a class="lv4" href="#1-eigrp의-개념-및-역할">1. EIGRP의 개념 및 역할</a><a class="lv4" href="#2-eigrp-설정-필수-요소">2. EIGRP 설정 필수 요소</a><a class="lv4" href="#3-eigrp-설정-단계별-절차">3. EIGRP 설정 단계별 절차</a><a class="lv4" href="#4-eigrp-설정-구성-예시">4. EIGRP 설정 구성 예시</a><a class="lv4" href="#5-eigrp-이웃-라우터-관계-형성">5. EIGRP 이웃 라우터 관계 형성</a><a class="lv4" href="#6-eigrp의-다중-메트릭metric-시스템">6. EIGRP의 다중 메트릭(Metric) 시스템</a><a class="lv4" href="#7-eigrp의-장점과-특징">7. EIGRP의 장점과 특징</a><a class="lv3" href="#016-rip-버전-1과-버전-2의-차이점-및-호환성-검증">016. RIP 버전 1과 버전 2의 차이점 및 호환성 검증</a><a class="lv4" href="#1-rip-버전별-특성-비교">1. RIP 버전별 특성 비교</a><a class="lv4" href="#2-rip-version-2의-개선된-특성">2. RIP Version 2의 개선된 특성</a><a class="lv4" href="#3-rip-버전-간-호환성-문제">3. RIP 버전 간 호환성 문제</a><a class="lv4" href="#4-다이나믹-라우팅-프로토콜-신뢰도-비교">4. 다이나믹 라우팅 프로토콜 신뢰도 비교</a><a class="lv4" href="#5-라우팅-테이블-최적화와-성능">5. 라우팅 테이블 최적화와 성능</a><a class="lv4" href="#6-rip의-한계와-eigrp-필요성">6. RIP의 한계와 EIGRP 필요성</a><a class="lv3" href="#017-rip-설정과-동적-라우팅의-기초">017. RIP 설정과 동적 라우팅의 기초</a><a class="lv4" href="#1-rip-다이나믹-라우팅-프로토콜-개요">1. RIP 다이나믹 라우팅 프로토콜 개요</a><a class="lv4" href="#2-rip-라우팅-프로토콜-설정">2. RIP 라우팅 프로토콜 설정</a><a class="lv4" href="#3-라우터별-네트워크-광고-설정">3. 라우터별 네트워크 광고 설정</a><a class="lv4" href="#4-rip-설정-결과-확인">4. RIP 설정 결과 확인</a><a class="lv4" href="#5-rip의-한계와-제약사항">5. RIP의 한계와 제약사항</a><a class="lv4" href="#6-rip-설정-통신-검증">6. RIP 설정 통신 검증</a><a class="lv3" href="#018-라우터-기본-설정---라우터-간-시리얼-연결-ip-주소-설정-다중-인터페이스-구성">018. 라우터 기본 설정 - 라우터 간 시리얼 연결, IP 주소 설정, 다중 인터페이스 구성</a><a class="lv4" href="#1-라우터-간-연결-기본">1. 라우터 간 연결 기본</a><a class="lv4" href="#2-라우터-기본-설정">2. 라우터 기본 설정</a><a class="lv4" href="#3-ip-주소-설정">3. IP 주소 설정</a><a class="lv4" href="#4-다중-인터페이스-설정">4. 다중 인터페이스 설정</a><a class="lv4" href="#5-네트워크-주소-대역-관리">5. 네트워크 주소 대역 관리</a><a class="lv4" href="#6-설정-확인">6. 설정 확인</a><a class="lv3" href="#019-라우팅의-개념과-스태틱-다이나믹-라우팅">019. 라우팅의 개념과 스태틱 다이나믹 라우팅</a><a class="lv4" href="#1-라우팅routing-개념">1. 라우팅(Routing) 개념</a><a class="lv4" href="#2-snmp-프로토콜-정정-사항">2. SNMP 프로토콜 정정 사항</a><a class="lv3" href="#020-스태틱-라우팅-설정---라우팅-테이블-경로-지정-네트워크-통신-검증">020. 스태틱 라우팅 설정 - 라우팅 테이블, 경로 지정, 네트워크 통신 검증</a><a class="lv4" href="#1-라우팅-테이블-분석">1. 라우팅 테이블 분석</a><a class="lv4" href="#2-스태틱-라우팅static-routing">2. 스태틱 라우팅(Static Routing)</a><a class="lv4" href="#3-라우팅-테이블-확인">3. 라우팅 테이블 확인</a><a class="lv4" href="#4-스태틱-라우팅의-사용-사례">4. 스태틱 라우팅의 사용 사례</a><a class="lv4" href="#5-다이나믹-라우팅의-필요성">5. 다이나믹 라우팅의 필요성</a><a class="lv4" href="#6-네트워크-통신-검증">6. 네트워크 통신 검증</a><a class="lv4" href="#7-라우팅-설정의-중요성">7. 라우팅 설정의 중요성</a></div><div class="part">1부 · 네트워크</div><a class="" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch22.html">22. 보안·모의해킹 2</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 05</div><h1>네트워크 핵심키워드 1</h1><h3 id="001-ipv6-네트워크-관리-모델">001. IPv6 네트워크 관리 모델</h3>
+<main><header class="chapter-head"><div class="chapter-no">CHAPTER 05</div><h1>네트워크 핵심키워드 1</h1></header><h3 id="001-ipv6-네트워크-관리-모델">001. IPv6 네트워크 관리 모델</h3>
 <h4 id="1-서브네팅-subnetting-개요">1. 서브네팅 (Subnetting) 개요</h4>
 <p>상세 실습은 추후 별도 진행 예정</p>
 <p>서브넷 마스크 값을 조정하여 네트워크 부분을 나누는 작업</p>
@@ -321,17 +345,17 @@ th{background:var(--accent-soft); font-weight:700}
 <p>실무에서는 장비의 업링크 포트가 자동 변환해 주므로 케이블 종류를 크게 신경 쓰지 않아도 됨</p>
 <p>하지만 네트워크 관리사 2급 실기 시험 1번 문제가 UTP 케이블링이므로 반드시 숙지 필요</p>
 <h5 id="6-3">6-3. 연결 방법</h5>
-<div class="codehilite"><pre><span></span><code>번개 모양(연결 도구) 클릭
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>번개 모양(연결 도구) 클릭
 → 케이블 종류 선택
 → 첫 번째 장비 클릭 → 연결할 포트 선택 (예: Fa0/1)
 → 두 번째 장비 클릭 → 연결할 포트 선택 (예: LAN 또는 Fa0)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="6-4">6-4. 선 삭제</h5>
-<div class="codehilite"><pre><span></span><code>우측 도구 모음에서 X(Delete) 버튼 클릭
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>우측 도구 모음에서 X(Delete) 버튼 클릭
 → 삭제할 장비 또는 연결선 클릭
 → ESC 키로 삭제 모드 종료
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="7-packet-tracer-환경-설정">7. Packet Tracer 환경 설정</h4>
 <p>메뉴 표시줄 → Options → Preferences → Interface 탭</p>
@@ -727,12 +751,12 @@ th{background:var(--accent-soft); font-weight:700}
 <p>옥텟 1개 = 8비트 → 2⁸ = 256가지 경우의 수 → 범위: 0 ~ 255</p>
 <p>점( . )을 초과하는 256, 300 같은 값은 입력 불가 → 통신 안 됨</p>
 <h5 id="_1">비트와 경우의 수 공식</h5>
-<div class="codehilite"><pre><span></span><code>경우의 수 = 2ⁿ  (n = 비트 수)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>경우의 수 = 2ⁿ  (n = 비트 수)
 예) 1비트 → 2¹ = 2가지 (0, 1)
     2비트 → 2² = 4가지 (00, 01, 10, 11)
     3비트 → 2³ = 8가지
     8비트 → 2⁸ = 256가지 (0 ~ 255)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="6-2-ip">6-2. IP 클래스 구분 (시작 옥텟 기준)</h5>
 <div class="tablewrap"><table>
@@ -774,8 +798,8 @@ th{background:var(--accent-soft); font-weight:700}
 <p>D, E 클래스는 일반 시스템에서 사용 불가</p>
 <p>실무 현장에서는 클래스를 엄격히 구분하지 않음 (클래스리스 방식)</p>
 <h5 id="ip-windows">내 IP 클래스 확인 방법 (Windows)</h5>
-<div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig 입력 → IPv4 주소 확인 → 시작 옥텟으로 클래스 판별
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig 입력 → IPv4 주소 확인 → 시작 옥텟으로 클래스 판별
+</code></pre></div></div>
 
 <h5 id="6-3_1">6-3. 예약 주소</h5>
 <div class="tablewrap"><table>
@@ -815,8 +839,8 @@ th{background:var(--accent-soft); font-weight:700}
 </tbody>
 </table></div>
 <h5 id="_2">루프백 테스트 실습</h5>
-<div class="codehilite"><pre><span></span><code>CMD 창 → ping 127.0.0.1
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>CMD 창 → ping 127.0.0.1
+</code></pre></div></div>
 
 <p>응답 있음 → 내 시스템 네트워크 설정 정상</p>
 <p>Request Timed Out  등의 오류 → 내 시스템 네트워크 문제 가능성</p>
@@ -951,9 +975,9 @@ th{background:var(--accent-soft); font-weight:700}
 </tbody>
 </table></div>
 <h5 id="ipv6">IPv6 주소 확인 실습</h5>
-<div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig /all
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig /all
 → &quot;링크-로컬 IPv6 주소&quot; 항목 확인 (16진수로 표기됨)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="7-5">7-5. 현재 운용 방식</h5>
 <p>IPv4와 IPv6 혼용 중</p>
@@ -972,8 +996,8 @@ th{background:var(--accent-soft); font-weight:700}
 <p>16진수 표기 (예: 00-1A-2B-3C-4D-5E )</p>
 <p>일반적인 방법으로는 변경 불가 (IP 주소와 다른 점)</p>
 <h5 id="mac">MAC 주소 확인 방법</h5>
-<div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig /all → &quot;물리적 주소&quot; 항목 확인
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>CMD 창 → ipconfig /all → &quot;물리적 주소&quot; 항목 확인
+</code></pre></div></div>
 
 <h4 id="9-주소-관련-참고-기관">9. 주소 관련 참고 기관</h4>
 <div class="tablewrap"><table>
@@ -1130,7 +1154,7 @@ th{background:var(--accent-soft); font-weight:700}
 <p>최종적으로 원본 데이터를 복원</p>
 <p>비유: 이사한 집에서 신문지·뽁뽁이를 벗겨내고 원래 그릇을 꺼내는 것</p>
 <h5 id="6-3_2">6-3. 통신 예시 (이메일 송수신)</h5>
-<div class="codehilite"><pre><span></span><code>[송신 측] 네이버 메일 사용자
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[송신 측] 네이버 메일 사용자
   └─ 메일 작성 → 보내기 클릭 (7계층: 애플리케이션)
   └─ 파일 압축/암호화 (6계층: 프레젠테이션)
   └─ 세션 생성 (5계층: 세션)
@@ -1142,7 +1166,7 @@ th{background:var(--accent-soft); font-weight:700}
   └─ 1계층부터 수신 → 각 계층에서 헤더 제거
   └─ 압축 해제 / 암호 복호화
   └─ 원본 메일 수신
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="7-tcpip-모델">7. TCP/IP 모델</h4>
 <p>OSI 모델과 대응 관계를 이루는 실용 모델</p>
@@ -1241,9 +1265,9 @@ th{background:var(--accent-soft); font-weight:700}
 <p>일정 시간 후에도 녹색이 안 되면 선을 삭제하고 자동 연결로 다시 연결</p>
 <h4 id="2-장비-모드-구조">2. 장비 모드 구조</h4>
 <p>시스코 장비는 4가지 기본 모드로 구성되며, 순서대로 진입/이탈한다.</p>
-<div class="codehilite"><pre><span></span><code>[사용자 모드] → enable → [이네이블 모드(관리자 모드)] → conf t → [전역 설정 모드] → line/inter
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[사용자 모드] → enable → [이네이블 모드(관리자 모드)] → conf t → [전역 설정 모드] → line/inter
 face → [하위 설정 모드]
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="2-1_1">2-1. 모드별 상세 설명</h5>
 <div class="tablewrap"><table>
@@ -1335,48 +1359,48 @@ face → [하위 설정 모드]
 <p>exit  vs end : exit 는 한 단계씩 이탈, end (또는 Ctrl+Z)는 이네이블 모드로 즉시 이동</p>
 <h4 id="4-자주-쓰는-기본-명령어">4. 자주 쓰는 기본 명령어</h4>
 <h5 id="4-1_1">4-1. 설정 내용 확인</h5>
-<div class="codehilite"><pre><span></span><code>Switch# show running-config
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show running-config
+</code></pre></div></div>
 
 <p>현재 실행 중인 설정 내용을 화면에 출력</p>
 <p>-More--  표시 시: Enter = 한 줄씩, Space = 한 화면씩 이동</p>
 <h5 id="4-2_1">4-2. 장비 이름 변경</h5>
-<div class="codehilite"><pre><span></span><code>Switch(config)# hostname [변경할 이름]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# hostname [변경할 이름]
+</code></pre></div></div>
 
 <p>예) hostname SwitchA  → 프롬프트가 SwitchA(config)# 으로 변경됨</p>
 <h5 id="4-3_2">4-3. 오류 메시지</h5>
-<div class="codehilite"><pre><span></span><code>% Invalid input detected at &#39;^&#39; marker
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>% Invalid input detected at &#39;^&#39; marker
+</code></pre></div></div>
 
 <p>명령어 철자가 틀렸을 때 출력</p>
 <p>^  표시 위치 근처에 오타가 있음 → 수정 후 재입력</p>
 <h4 id="5-보안-설정--패스워드">5. 보안 설정 — 패스워드</h4>
 <h5 id="5-1_1">5-1. 콘솔 포트 패스워드 설정</h5>
 <p>장비에 직접 콘솔 케이블로 접속할 때 요구되는 패스워드</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# line console 0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# line console 0
 Switch(config-line)# password [패스워드]
 Switch(config-line)# login
-</code></pre></div>
+</code></pre></div></div>
 
 <p>line console 0  → 하위 설정 모드 진입 → 이 모드에서 내리는 명령은 콘솔 0번 포트에 만 적용</p>
 <h5 id="5-2">5-2. 이네이블 모드 패스워드 설정</h5>
 <p>사용자 모드에서 enable  명령어 입력 시 요구되는 패스워드</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# enable password [패스워드]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# enable password [패스워드]
+</code></pre></div></div>
 
 <h5 id="5-3">5-3. 패스워드 암호화</h5>
 <p>show running-config  실행 시 패스워드가 평문으로 노출되는 문제 해결</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# service password-encryption
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# service password-encryption
+</code></pre></div></div>
 
 <p>설정 후 show running-config 로 확인하면 패스워드가 암호화된 문자열로 표시됨</p>
 <p>⚠️ Packet Tracer 시뮬레이터에서는 패스워드를 분실하면 패스워드 복구 모드가 없으므로 장비를 삭제하고 처음부터 다시 해야 함. 너무 복잡하지 않은 패스워드 설정 권장</p>
 <h4 id="6-원격-접속vty-패스워드-설정">6. 원격 접속(VTY) 패스워드 설정</h4>
-<div class="codehilite"><pre><span></span><code>Switch(config)# line vty 0 4
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# line vty 0 4
 Switch(config-line)# password [패스워드]
 Switch(config-line)# login
-</code></pre></div>
+</code></pre></div></div>
 
 <p>vty 0 4 : 가상 터미널 회선 0번~4번 (원격 접속용 회선)</p>
 <p>여기서 내리는 명령은 VTY 회선에만 적용</p>
@@ -1386,7 +1410,7 @@ Switch(config-line)# login
 <p>연결 후 CLI 화면이 열리면 명령어 입력 가능</p>
 <p>시뮬레이터 상에서 Connected to … con 0  메시지 = 콘솔 0번 포트에 연결된 상태</p>
 <h4 id="8-실습-전체-흐름-요약">8. 실습 전체 흐름 요약</h4>
-<div class="codehilite"><pre><span></span><code>1. Packet Tracer에서 장비 클릭 → CLI 탭 진입
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. Packet Tracer에서 장비 클릭 → CLI 탭 진입
 2. Enter 눌러 사용자 모드 진입 (Switch&gt;)
 3. enable → 이네이블 모드 진입 (Switch#)
 4. configure terminal → 전역 설정 모드 진입 (Switch(config)#)
@@ -1398,7 +1422,7 @@ Switch(config-line)# login
 10. end 또는 Ctrl+Z → 이네이블 모드로 이동
 11. show running-config → 설정 내용 확인
 12. File → Save As → .pkt 파일로 저장
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="9-파일-저장-방법">9. 파일 저장 방법</h4>
 <p>Packet Tracer 상단 메뉴: File → Save As</p>
@@ -1489,34 +1513,34 @@ Switch(config-line)# login
 <p>VLAN 관련 명령어를 내릴 때마다 1씩 증가</p>
 <p>클라이언트는 서버의 Revision Number가 자신보다 높으면 → 최신 정보를 요청하여 동기화</p>
 <p>장비 전원을 껐다 켜면 Revision Number가 초기화됨</p>
-<div class="codehilite"><pre><span></span><code>예시:
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>예시:
 A 스위치(서버): vlan 100 → Revision 1
                name test  → Revision 2
 B 스위치(클라이언트): Revision 0 → 서버의 2를 받아 동기화 → Revision 2
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-vtp-설정-과정">5. VTP 설정 과정</h4>
 <h5 id="5-1_2">5-1. 토폴로지 구성</h5>
-<div class="codehilite"><pre><span></span><code>[Switch A] ── [Switch B] ── [Switch C] ── [Switch D]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[Switch A] ── [Switch B] ── [Switch C] ── [Switch D]
   Server       Client      Transparent     Client
-</code></pre></div>
+</code></pre></div></div>
 
 <p>2960 스위치 4대 사용</p>
 <p>스위치 간 연결 포트는 모두 Trunk 설정 필요</p>
 <h5 id="5-2-vtp">5-2. VTP 상태 확인 (이네이블 모드)</h5>
-<div class="codehilite"><pre><span></span><code>Switch# show vtp status
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show vtp status
+</code></pre></div></div>
 
 <p>현재 동작 모드, 도메인 이름, Revision Number 확인 가능</p>
 <p>Config 모드에서 실행하려면: do show vtp status</p>
 <h5 id="5-3-vtp-config">5-3. VTP 설정 명령어 (Config 모드)</h5>
-<div class="codehilite"><pre><span></span><code>Switch(config)# vtp domain [도메인이름]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# vtp domain [도메인이름]
 Switch(config)# vtp password [패스워드]
 Switch(config)# vtp mode [server | client | transparent]
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실습 예시</p>
-<div class="codehilite"><pre><span></span><code>! A 스위치 (Server)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! A 스위치 (Server)
 Switch(config)# vtp domain test
 Switch(config)# vtp password 1234
 Switch(config)# vtp mode server       ← 기본값이므로 생략 가능
@@ -1532,18 +1556,18 @@ Switch(config)# vtp mode transparent
 Switch(config)# vtp domain test
 Switch(config)# vtp password 1234
 Switch(config)# vtp mode client
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="5-4">5-4. 트렁크 포트 설정 (스위치 간 연결 포트 전체)</h5>
-<div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/1
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/1
 Switch(config-if)# switchport mode trunk
 Switch(config)# interface fa0/2        ← 연결된 포트가 2개인 경우
 Switch(config-if)# switchport mode trunk
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 포트 이름은 구성도에서 직접 확인 후 입력 (장비·버전마다 다를 수 있음)</p>
 <h5 id="5-5-vtp">5-5. VTP 동기화 확인</h5>
-<div class="codehilite"><pre><span></span><code>! 서버에서 VLAN 생성
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! 서버에서 VLAN 생성
 Switch(config)# vlan 100
 Switch(config-vlan)# name test
 ! 서버에서 Revision Number 확인
@@ -1551,7 +1575,7 @@ Switch# show vtp status          ← Revision이 2로 증가했는지 확인
 ! 클라이언트에서 동기화 확인
 Switch# show vtp status          ← Revision이 서버와 동일한지 확인
 Switch# show vlan                ← VLAN 100이 자동으로 생성됐는지 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-동기화-안-될-때-체크리스트">6. 동기화 안 될 때 체크리스트</h4>
 <div class="tablewrap"><table>
@@ -1654,13 +1678,13 @@ Switch# show vlan                ← VLAN 100이 자동으로 생성됐는지 �
 <p>실습에서는 라우터: 2901, 스위치: 2960 모델 사용 (다른 모델도 기본 명령어는 동일)</p>
 <h4 id="3-종합-예제--3개-vlan-전체-설정">3. 종합 예제 — 3개 VLAN 전체 설정</h4>
 <h5 id="3-1_3">3-1. 토폴로지 구성</h5>
-<div class="codehilite"><pre><span></span><code>    [라우터 2901]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>    [라우터 2901]
          │
    [A 스위치 2960] ── [B 스위치 2960]
     │        │              │
    PC1      PC2            PC3
 (VLAN 100) (VLAN 300)  (VLAN 200)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>VLAN 100: CCNA 그룹</p>
 <p>VLAN 200: CCNP 그룹</p>
@@ -1668,12 +1692,12 @@ Switch# show vlan                ← VLAN 100이 자동으로 생성됐는지 �
 <p>할당받은 네트워크: 192.168.200.0/24</p>
 <h5 id="3-2-step-1">3-2. Step 1 — 서브네팅 (주소 설계)</h5>
 <p>조건: 3개 VLAN 필요 → 2² = 4 네트워크로 분할 (비트 2개 변경)</p>
-<div class="codehilite"><pre><span></span><code>변경 전: /24 → 255.255.255.0    (마지막 옥텟: 00000000)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>변경 전: /24 → 255.255.255.0    (마지막 옥텟: 00000000)
 변경 후: /26 → 255.255.255.192  (마지막 옥텟: 11000000)
          → 128 + 64 = 192
 네트워크 수:  2² = 4개 (3개 사용 + 1개 예비)
 할당 가능 IP: 2⁶ - 2 = 62개 (각 네트워크당)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>4개 네트워크 대역 범위:</p>
 <div class="tablewrap"><table>
@@ -1752,13 +1776,13 @@ Switch# show vlan                ← VLAN 100이 자동으로 생성됐는지 �
 <p>IP는 각 대역 내에서 자유롭게 지정 가능 (게이트웨이로 쓸 마지막 IP는 제외)</p>
 <h5 id="3-4-step-3-a-b">3-4. Step 3 — 스위치 설정 (A, B 스위치 동일하게)</h5>
 <p>VLAN 생성</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# vlan 100
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# vlan 100
 Switch(config-vlan)# name CCNA
 Switch(config)# vlan 200
 Switch(config-vlan)# name CCNP
 Switch(config)# vlan 300
 Switch(config-vlan)# name CCIE
-</code></pre></div>
+</code></pre></div></div>
 
 <p>포트 설정 (구성도에서 본인 포트 번호 확인 후 진행)</p>
 <div class="tablewrap"><table>
@@ -1787,35 +1811,35 @@ Switch(config-vlan)# name CCIE
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code>! PC가 연결된 포트 예시 (포트 번호는 구성도 확인)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! PC가 연결된 포트 예시 (포트 번호는 구성도 확인)
 Switch(config)# interface fa0/2
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 100
 ! 스위치 간 연결 포트 예시
 Switch(config)# interface fa0/1
 Switch(config-if)# switchport mode trunk
-</code></pre></div>
+</code></pre></div></div>
 
 <p>VLAN 설정 확인</p>
-<div class="codehilite"><pre><span></span><code>Switch# show vlan brief
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show vlan brief
+</code></pre></div></div>
 
 <p>VLAN 100·200·300이 생성되었는지 확인</p>
 <p>각 포트가 올바른 VLAN에 등록되었는지 확인</p>
 <p>트렁크 포트는 목록에서 빠져 있어야 정상</p>
 <h5 id="3-5-step-4-vlan">3-5. Step 4 — 동일 VLAN 통신 테스트</h5>
 <p>스위치 설정 완료 후 → 같은 VLAN끼리 핑(ping) 테스트로 중간 검증</p>
-<div class="codehilite"><pre><span></span><code>PC1(VLAN 100)에서 같은 VLAN 100의 다른 PC로 ping → 성공이면 스위치 설정 OK
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PC1(VLAN 100)에서 같은 VLAN 100의 다른 PC로 ping → 성공이면 스위치 설정 OK
+</code></pre></div></div>
 
 <h5 id="3-6-step-5">3-6. Step 5 — 라우터 서브인터페이스 설정</h5>
 <p>물리 인터페이스 활성화 (IP 없이)</p>
-<div class="codehilite"><pre><span></span><code>Router(config)# interface gi0/0         ← 본인 인터페이스 이름 확인
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# interface gi0/0         ← 본인 인터페이스 이름 확인
 Router(config-if)# no shutdown
-</code></pre></div>
+</code></pre></div></div>
 
 <p>VLAN별 서브인터페이스 생성</p>
-<div class="codehilite"><pre><span></span><code>! VLAN 100 게이트웨이
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! VLAN 100 게이트웨이
 Router(config)# interface gi0/0.100
 Router(config-subif)# encapsulation dot1q 100
 Router(config-subif)# ip address 192.168.200.62 255.255.255.192
@@ -1827,11 +1851,11 @@ Router(config-subif)# ip address 192.168.200.126 255.255.255.192
 Router(config)# interface gi0/0.300
 Router(config-subif)# encapsulation dot1q 300
 Router(config-subif)# ip address 192.168.200.190 255.255.255.192
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-7-step-6-vlan">3-7. Step 6 — 다른 VLAN 간 통신 테스트</h5>
-<div class="codehilite"><pre><span></span><code>PC1(VLAN 100)에서 PC3(VLAN 200)으로 ping 192.168.200.70 → 성공이면 전체 설정 완료
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PC1(VLAN 100)에서 PC3(VLAN 200)으로 ping 192.168.200.70 → 성공이면 전체 설정 완료
+</code></pre></div></div>
 
 <p>첫 번째 패킷은 로스(loss)가 날 수 있음 — 두 번째부터 응답이 오면 정상</p>
 <h4 id="5-설정-확인-명령어-모음">5. 설정 확인 명령어 모음</h4>
@@ -1888,9 +1912,9 @@ Router(config-subif)# ip address 192.168.200.190 255.255.255.192
 </table></div>
 <p>두 개가 동시에 설정된 경우 → enable secret 패스워드가 우선 적용</p>
 <p>show running-config 에서 secret은 이미 코드화된 상태로 표시됨</p>
-<div class="codehilite"><pre><span></span><code>Router(config)# enable password 1234
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# enable password 1234
 Router(config)# enable secret 12345
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="2-라우터-인터페이스-ip-설정">2. 라우터 인터페이스 IP 설정</h4>
 <h5 id="2-1_3">2-1. 이더넷 종류와 전송 속도</h5>
@@ -1917,19 +1941,19 @@ Router(config)# enable secret 12345
 </tbody>
 </table></div>
 <h5 id="2-2-ip">2-2. 인터페이스 IP 설정 절차</h5>
-<div class="codehilite"><pre><span></span><code>Router# configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router# configure terminal
 Router(config)# interface gi0/0          ← 인터페이스 이름 확인 후 입력
 Router(config-if)# ip address 192.168.100.100 255.255.255.0
 Router(config-if)# no shutdown           ← 반드시 활성화!
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 라우터 인터페이스는 기본값이 shutdown(비활성화) 상태</p>
 <p>→ no shutdown  명령어로 반드시 활성화해야 링크가 올라옴</p>
 <h5 id="2-3_1">2-3. 명령어 삭제 방법</h5>
-<div class="codehilite"><pre><span></span><code>Router(config)# no [삭제할 명령어]
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# no [삭제할 명령어]
 예) no service password-encryption
 예) no shutdown  → shutdown 명령 삭제 (인터페이스 활성화)
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-게이트웨이gateway-개념">3. 게이트웨이(Gateway) 개념</h4>
 <p>외부 네트워크로 나가거나, 외부에서 들어올 때 반드시 통과해야 하는 관문</p>
@@ -1937,8 +1961,8 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
 <p>라우터 인터페이스 IP = 해당 네트워크의 게이트웨이 주소</p>
 <p>같은 장비라도 물리적으로 인터페이스가 다르면 다른 네트워크 → 주소 대역도 달라야 함</p>
 <h4 id="4-장비-운영체제ios-확인">4. 장비 운영체제(IOS) 확인</h4>
-<div class="codehilite"><pre><span></span><code>Router# show version
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router# show version
+</code></pre></div></div>
 
 <p>탑재된 IOS 소프트웨어 이름과 버전 확인 가능</p>
 <p>예) c2900-universalk9-mz, Version 15.1</p>
@@ -1997,16 +2021,16 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
 <h4 id="1-프리픽스-표기법-숫자의-의미">1. 프리픽스 표기법 (/숫자)의 의미</h4>
 <p>/24  처럼 슬래시 뒤에 숫자로 서브넷 마스크를 간략하게 표기</p>
 <p>숫자 = 서브넷 마스크를 2진수로 변환했을 때 비트 1의 개수</p>
-<div class="codehilite"><pre><span></span><code>/24 → 1의 비트 24개 → 11111111.11111111.11111111.00000000 → 255.255.255.0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>/24 → 1의 비트 24개 → 11111111.11111111.11111111.00000000 → 255.255.255.0
 /16 → 1의 비트 16개 → 11111111.11111111.00000000.00000000 → 255.255.0.0
 /26 → 1의 비트 26개 → 11111111.11111111.11111111.11000000 → 255.255.255.192
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="26">/26 계산 예시</h5>
-<div class="codehilite"><pre><span></span><code>마지막 옥텟: 11000000
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>마지막 옥텟: 11000000
 → 128 + 64 = 192
 → 서브넷 마스크: 255.255.255.192
-</code></pre></div>
+</code></pre></div></div>
 
 <p>서브넷 마스크는 반드시 1이 연속으로 나오고 그 뒤에 0이 이어짐</p>
 <p>중간에 0과 1이 섞이는 경우는 없음</p>
@@ -2058,21 +2082,21 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
 <h4 id="4-서브네팅-공식">4. 서브네팅 공식</h4>
 <p>서브넷 마스크의 0 비트를 1 비트로 변경하여 네트워크를 분할하는 작업</p>
 <h5 id="1_1">공식 1 — 생성되는 네트워크(집)의 수</h5>
-<div class="codehilite"><pre><span></span><code>네트워크 수 = 2ⁿ     (n = 변경된 비트 1의 개수)
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>네트워크 수 = 2ⁿ     (n = 변경된 비트 1의 개수)
+</code></pre></div></div>
 
 <h5 id="2-ip_1">공식 2 — 각 네트워크에서 할당 가능한 IP 수</h5>
-<div class="codehilite"><pre><span></span><code>할당 가능한 IP 수 = 2ⁿ - 2     (n = 남아 있는 비트 0의 개수)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>할당 가능한 IP 수 = 2ⁿ - 2     (n = 남아 있는 비트 0의 개수)
                                  (- 2 = 네트워크 주소 + 브로드캐스트 주소 제외)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="24-26">서브네팅 예제 — /24를 /26으로 분할</h5>
 <p>원본 네트워크: 192.168.100.0/24</p>
-<div class="codehilite"><pre><span></span><code>변경 전: 11111111.11111111.11111111.00000000  (/24)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>변경 전: 11111111.11111111.11111111.00000000  (/24)
 변경 후: 11111111.11111111.11111111.11000000  (/26)
 → 변경된 비트: 2개 → 네트워크 수 = 2² = 4개
 → 남은 0 비트: 6개 → 할당 가능 IP = 2⁶ - 2 = 62개
-</code></pre></div>
+</code></pre></div></div>
 
 <p>4개 네트워크 대역 범위:</p>
 <div class="tablewrap"><table>
@@ -2121,7 +2145,7 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
 <h5 id="7">실습 예제 — 7개 부서 서브네팅</h5>
 <p>조건: 192.168.150.0/24 네트워크를 7개 부서용 VLAN으로 서브네팅</p>
 <p>풀이 과정:</p>
-<div class="codehilite"><pre><span></span><code>1단계: 필요한 네트워크 수 = 7 → 2ⁿ ≥ 7 → 2³ = 8 (n=3)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1단계: 필요한 네트워크 수 = 7 → 2ⁿ ≥ 7 → 2³ = 8 (n=3)
 2단계: 서브넷 마스크 마지막 옥텟: 11100000 → 128+64+32 = 224
        → 서브넷 마스크: 255.255.255.224
 3단계: 남은 0 비트 = 5개 → 할당 가능 IP = 2⁵ - 2 = 30개
@@ -2134,7 +2158,7 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
  ⑥ 150.160 ~ 150.191 (할당: 150.161 ~ 150.190)
  ⑦ 150.192 ~ 150.223 (할당: 150.193 ~ 150.222)
  ⑧ (여유분으로 보관)
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-서브네팅의-목적">5. 서브네팅의 목적</h4>
 <p>제한된 IP 주소를 효율적으로 분할 사용 → 주소 낭비 방지</p>
@@ -2168,12 +2192,12 @@ Router(config-if)# no shutdown           ← 반드시 활성화!
 <h3 id="010-설정-저장-cli-팁-vlan-서브넷">010. 설정 저장 CLI 팁 VLAN 서브넷</h3>
 <h4 id="1-설정-저장-방법">1. 설정 저장 방법</h4>
 <p>RAM에 있는 설정( running-config )을 ROM( startup-config )으로 저장하는 두 가지 방법 — 결과는 동일, 운영체제 버전에 따라 사용 가능한 명령어가 다를 수 있다.</p>
-<div class="codehilite"><pre><span></span><code>! 방법 1 — copy 명령어
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! 방법 1 — copy 명령어
 Router# copy running-config startup-config
 (엔터 → 목적지 파일명 묻는 메시지 → 엔터)
 ! 방법 2 — write memory (축약: wr)
 Router# write memory
-</code></pre></div>
+</code></pre></div></div>
 
 <p>저장 후 재부팅하면 startup-config를 불러와 설정이 유지됨</p>
 <h4 id="2-cli-유용한-팁">2. CLI 유용한 팁</h4>
@@ -2266,27 +2290,27 @@ Router# write memory
 <p>비용 증가 없이 보안성·관리성 모두 향상</p>
 <h4 id="4-서브넷-기초--이진수-변환">4. 서브넷 기초 — 이진수 변환</h4>
 <h5 id="4-1-10-2">4-1. 10진수 → 2진수</h5>
-<div class="codehilite"><pre><span></span><code>14를 2진수로 변환:
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>14를 2진수로 변환:
 14 ÷ 2 = 7 나머지 0
  7 ÷ 2 = 3 나머지 1
  3 ÷ 2 = 1 나머지 1
  1 ÷ 2 = 0 나머지 1
 → 역순으로 읽기: 1110
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2-2-10">4-2. 2진수 → 10진수</h5>
 <p>각 자릿수의 값: 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1</p>
-<div class="codehilite"><pre><span></span><code>1110 0000 → 128 + 64 + 32 = 224
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1110 0000 → 128 + 64 + 32 = 224
 1000 0000 → 128
 1111 1111 → 255 (모든 비트가 1)
 0000 0000 → 0   (모든 비트가 0)
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-3_3">4-3. 경우의 수 공식</h5>
-<div class="codehilite"><pre><span></span><code>n비트로 나올 수 있는 경우의 수 = 2ⁿ
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>n비트로 나올 수 있는 경우의 수 = 2ⁿ
 예) 1비트 → 2¹ = 2가지 (0, 1)
     8비트 → 2⁸ = 256가지 (0 ~ 255)
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-서브넷-마스크-기초">5. 서브넷 마스크 기초</h4>
 <p>하나의 옥텟 = 8비트 → 2⁸ = 256가지 → 범위 0 ~ 255</p>
@@ -2297,11 +2321,11 @@ Router# write memory
 <h4 id="1-서브인터페이스-번호-규칙">1. 서브인터페이스 번호 규칙</h4>
 <p>서브인터페이스를 만들 때 점( . ) 뒤에 오는 번호는 인터페이스의 이름일 뿐 — 범위 내에서 자유롭게 지정 가능</p>
 <p>단, VLAN 번호와 동일하게 맞춰주는 것을 권장 → show run  확인 시 어느 VLAN용 게 이트웨이인지 한눈에 파악 가능</p>
-<div class="codehilite"><pre><span></span><code>! 예시
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! 예시
 interface gi0/0.100    ← 이름이 100 = VLAN 100용임을 직관적으로 알 수 있음
 interface gi0/0.200    ← VLAN 200용
 interface gi0/0.300    ← VLAN 300용
-</code></pre></div>
+</code></pre></div></div>
 
 <p>실제 어느 VLAN에 속하는지는 이름이 아니라 encapsulation dot1q [번호] 명령어로 결정됨</p>
 <h4 id="2-트렁크-설정-위치-정리">2. 트렁크 설정 위치 정리</h4>
@@ -2366,7 +2390,7 @@ interface gi0/0.300    ← VLAN 300용
 <p>L3 스위치를 라우터처럼 동작시키는 방법은 추후 학습 예정</p>
 <h4 id="4-vlan-설정-전체-순서-재정리">4. VLAN 설정 전체 순서 재정리</h4>
 <h5 id="4-1_2">4-1. 스위치 설정 절차</h5>
-<div class="codehilite"><pre><span></span><code>1. VLAN 생성 (해당 스위치에 연결된 VLAN이 없어도 전체 생성 필요)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. VLAN 생성 (해당 스위치에 연결된 VLAN이 없어도 전체 생성 필요)
    Switch(config)# vlan 100
    Switch(config-vlan)# name CCNA
    Switch(config)# vlan 200
@@ -2385,26 +2409,26 @@ interface gi0/0.300    ← VLAN 300용
    Switch(config-if)# switchport mode trunk
    Switch(config)# interface fa0/4       ← 다른 스위치 연결 포트
    Switch(config-if)# switchport mode trunk
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2_2">4-2. 설정 확인</h5>
-<div class="codehilite"><pre><span></span><code>Switch# show vlan
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show vlan
 → VLAN 목록, 각 포트 할당 현황 확인
 → 트렁크 포트는 목록에서 빠져야 정상 (단, 라우터 링크가 죽어 있으면 목록에 남아 있을 수 있음)
 Switch# show interfaces trunk
 → 트렁크 동작 중인 포트, encapsulation 방식(802.1q) 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="5-서브인터페이스-설정--순서-주의사항">5. 서브인터페이스 설정 — 순서 주의사항</h4>
 <p>⚠️ encapsulation을 반드시 ip address보다 먼저 입력해야 함</p>
-<div class="codehilite"><pre><span></span><code>! 올바른 순서
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! 올바른 순서
 Router(config)# interface gi0/0.100
 Router(config-subif)# encapsulation dot1q 100    ← 먼저!
 Router(config-subif)# ip address 192.168.200.62 255.255.255.192
 ! 잘못된 순서 (오류 발생)
 Router(config-subif)# ip address 192.168.200.62 255.255.255.192
 Router(config-subif)# encapsulation dot1q 100    ← 나중에 주면 에러 메시지
-</code></pre></div>
+</code></pre></div></div>
 
 <p>물리 인터페이스에는 IP 불필요 — no shutdown 으로 활성화만 하면 됨</p>
 <h4 id="6-자주-발생하는-오류-및-해결-방법">6. 자주 발생하는 오류 및 해결 방법</h4>
@@ -2497,27 +2521,27 @@ Router(config-subif)# encapsulation dot1q 100    ← 나중에 주면 에러 메
 </tbody>
 </table></div>
 <h4 id="8-잘못된-설정-수정-방법">8. 잘못된 설정 수정 방법</h4>
-<div class="codehilite"><pre><span></span><code>! 잘못된 명령어 삭제 — 명령어 앞에 &#39;no&#39; 추가
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! 잘못된 명령어 삭제 — 명령어 앞에 &#39;no&#39; 추가
 Router(config-if)# no ip address      ← IP 설정 삭제
 Switch(config-if)# no switchport access vlan 100   ← VLAN 할당 삭제
 ! 잘못된 인터페이스에 들어갔을 때
 Switch(config-if)# exit               ← 현재 모드 빠져나오기
 Switch(config)# interface fa0/1       ← 올바른 인터페이스로 다시 진입
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="9-설정-명령어-전체-참고-show-run-활용">9. 설정 명령어 전체 참고 (show run 활용)</h4>
 <p>show running-config  결과에 나오는 내용이 곧 현재 적용된 명령어 목록</p>
 <p>→ 잘 안 될 때 show run 으로 설정 내용을 전체적으로 검토하는 습관 필요</p>
-<div class="codehilite"><pre><span></span><code>Router# show running-config
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router# show running-config
 → interface gi0/0     : no shutdown만 있는지 확인
 → interface gi0/0.100 : encapsulation dot1q 100 + IP 주소 확인
 → interface gi0/0.200 : encapsulation dot1q 200 + IP 주소 확인
 → interface gi0/0.300 : encapsulation dot1q 300 + IP 주소 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="10-통신-테스트-방법-정리">10. 통신 테스트 방법 정리</h4>
-<div class="codehilite"><pre><span></span><code>PC 클릭 → [Desktop] 탭 → [Command Prompt] → ping [목적지 IP]
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PC 클릭 → [Desktop] 탭 → [Command Prompt] → ping [목적지 IP]
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2559,8 +2583,8 @@ Switch(config)# interface fa0/1       ← 올바른 인터페이스로 다시 �
 <p>A 스위치와 B 스위치의 네이티브 VLAN은 반드시 일치해야 함 (불일치 시 통신 오류)</p>
 <p>기본값 1로 맞춰져 있으므로 별도 설정하지 않아도 됨</p>
 <h4 id="2-트렁킹-확인-명령어">2. 트렁킹 확인 명령어</h4>
-<div class="codehilite"><pre><span></span><code>Switch# show interfaces trunk
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show interfaces trunk
+</code></pre></div></div>
 
 <p>트렁크로 동작 중인 포트 목록 확인</p>
 <p>캡슐화 방식(802.1q), 상태(trunking) 확인</p>
@@ -2593,13 +2617,13 @@ Switch(config)# interface fa0/1       ← 올바른 인터페이스로 다시 �
 <h4 id="4-서브인터페이스-sub-interface-설정">4. 서브인터페이스 (Sub-interface) 설정</h4>
 <p>물리적 인터페이스 하나를 논리적으로 여러 개로 분할하여 각 VLAN의 게이트웨이 역할을 하도록 설정</p>
 <h5 id="4-1-ip-no-shutdown">4-1. 물리 인터페이스 활성화 (IP 없이 no shutdown만)</h5>
-<div class="codehilite"><pre><span></span><code>Router(config)# interface gi0/0          ← 실제 물리 인터페이스
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# interface gi0/0          ← 실제 물리 인터페이스
 Router(config-if)# no shutdown           ← IP 없이 활성화만 필요
 Router(config-if)# exit
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2-vlan">4-2. VLAN별 서브인터페이스 생성</h5>
-<div class="codehilite"><pre><span></span><code>! VLAN 10용 서브인터페이스
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! VLAN 10용 서브인터페이스
 Router(config)# interface gi0/0.10       ← 물리인터페이스명.브랜번호 (점으로 구분)
 Router(config-subif)# encapsulation dot1q 10        ← 캡슐화 방식 + VLAN 번호 지정
 Router(config-subif)# ip address 192.168.100.1 255.255.255.128   ← 게이트웨이 IP
@@ -2607,7 +2631,7 @@ Router(config-subif)# ip address 192.168.100.1 255.255.255.128   ← 게이트�
 Router(config)# interface gi0/0.20
 Router(config-subif)# encapsulation dot1q 20
 Router(config-subif)# ip address 192.168.100.129 255.255.255.128
-</code></pre></div>
+</code></pre></div></div>
 
 <p>명령어 요약:</p>
 <div class="tablewrap"><table>
@@ -2660,30 +2684,30 @@ Router(config-subif)# ip address 192.168.100.129 255.255.255.128
 <p>게이트웨이 미설정 또는 오설정 시 → 다른 네트워크와 통신 불가</p>
 <p>대부분 첫 번째 또는 마지막 IP를 게이트웨이로 사용 (관리 편의상)</p>
 <h4 id="6-통신-테스트-결과">6. 통신 테스트 결과</h4>
-<div class="codehilite"><pre><span></span><code>! VLAN 10 PC에서 같은 VLAN 10 서버로 핑
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>! VLAN 10 PC에서 같은 VLAN 10 서버로 핑
 ping 192.168.100.110 → 성공 ✓
 ! VLAN 10 PC에서 다른 VLAN 20 PC로 핑 (라우터 설정 전)
 ping 192.168.100.200 → 실패 ✗
 ! 서브인터페이스 + 게이트웨이 설정 완료 후
 ping 192.168.100.200 → 성공 ✓ (첫 번째 패킷은 로스 날 수 있음)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>첫 번째 패킷이 로스 나도 바로 단정 짓지 말 것 — 두 번째부터 정상이면 설정 완료</p>
 <h4 id="7-전체-통신-구조-정리">7. 전체 통신 구조 정리</h4>
-<div class="codehilite"><pre><span></span><code>[VLAN 10 PC] ──access── [A 스위치] ──trunk── [B 스위치] ──access── [VLAN 20 PC]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[VLAN 10 PC] ──access── [A 스위치] ──trunk── [B 스위치] ──access── [VLAN 20 PC]
                                │
                             trunk
                                │
                          [라우터 gi0/0]
                          ├── gi0/0.10 → VLAN 10 게이트웨이 (100.1)
                          └── gi0/0.20 → VLAN 20 게이트웨이 (100.129)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>같은 VLAN 내 통신: 스위치만으로 처리</p>
 <p>다른 VLAN 통신: 스위치 → 라우터 서브인터페이스 → 다시 스위치로 전달</p>
 <h4 id="8-설정-확인">8. 설정 확인</h4>
-<div class="codehilite"><pre><span></span><code>Router# show running-config
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router# show running-config
+</code></pre></div></div>
 
 <p>물리 인터페이스: IP 없음, shutdown 없음 (no shutdown 상태)</p>
 <p>서브인터페이스 0.10: encapsulation dot1q 10, IP 100.1</p>
@@ -2692,12 +2716,12 @@ ping 192.168.100.200 → 성공 ✓ (첫 번째 패킷은 로스 날 수 있음)
 <h3 id="013-포트-기반-vlan-트렁크">013. 포트 기반 VLAN 트렁크</h3>
 <h4 id="1-ip-주소-설계-vlan-구성-전-선행-작업">1. IP 주소 설계 (VLAN 구성 전 선행 작업)</h4>
 <p>예제 조건: 192.168.100.0/24를 교사용(VLAN 10) / 학생용(VLAN 20)으로 분할</p>
-<div class="codehilite"><pre><span></span><code>서브네팅: /24 → /25 (비트 1개 변경)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>서브네팅: /24 → /25 (비트 1개 변경)
 → 네트워크 수 = 2¹ = 2개
 → 할당 가능 IP = 2⁷ - 2 = 126개
 대역 1 (VLAN 10, 교사용): 100.0 ~ 100.127 → 할당: 100.1 ~ 100.126
 대역 2 (VLAN 20, 학생용): 100.128 ~ 100.255 → 할당: 100.129 ~ 100.254
-</code></pre></div>
+</code></pre></div></div>
 
 <p>PC IP 설정 예시:</p>
 <div class="tablewrap"><table>
@@ -2739,8 +2763,8 @@ ping 192.168.100.200 → 성공 ✓ (첫 번째 패킷은 로스 날 수 있음)
 <p>서브넷을 0 그대로 두면 분할의 의미가 없어짐 → 반드시 128로 변경</p>
 <h4 id="2-포트-기반-vlan-port-based-vlan">2. 포트 기반 VLAN (Port-based VLAN)</h4>
 <h5 id="2-1-vlan">2-1. 기본 VLAN 확인</h5>
-<div class="codehilite"><pre><span></span><code>Switch# show vlan
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show vlan
+</code></pre></div></div>
 
 <p>아무 설정 없어도 모든 포트는 기본적으로 VLAN 1 (Default) 에 속함</p>
 <p>→ 같은 IP 대역이면 설정 없이도 통신되는 이유</p>
@@ -2777,29 +2801,29 @@ ping 192.168.100.200 → 성공 ✓ (첫 번째 패킷은 로스 날 수 있음)
 <p>예약 번호: 1번(기본), 1002~1005번 (특수 용도)</p>
 <h4 id="3-vlan-설정-명령어-스위치">3. VLAN 설정 명령어 (스위치)</h4>
 <h5 id="3-1-vlan">3-1. VLAN 생성</h5>
-<div class="codehilite"><pre><span></span><code>Switch(config)# vlan 10
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# vlan 10
 Switch(config-vlan)# name teacher        ← 이름 지정 (선택, 미지정 시 vlan10)
 Switch(config-vlan)# exit
 Switch(config)# vlan 20
 Switch(config-vlan)# name student
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-2-vlan-access">3-2. 포트에 VLAN 할당 (Access 모드)</h5>
 <p>엔드 디바이스(PC, 서버)가 연결된 포트 → Access 모드</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/1           ← 구성도에서 포트 번호 확인 필수
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/1           ← 구성도에서 포트 번호 확인 필수
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 10
 Switch(config-if)# exit
 Switch(config)# interface fa0/2
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 20
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-3-trunk">3-3. 스위치 간 연결 포트 (Trunk 모드)</h5>
 <p>스위치↔스위치, 스위치↔라우터 연결 포트 → Trunk 모드</p>
-<div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/3           ← 스위치 간 연결 포트
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch(config)# interface fa0/3           ← 스위치 간 연결 포트
 Switch(config-if)# switchport mode trunk
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-4_1">3-4. 포트 모드 종류</h5>
 <div class="tablewrap"><table>
@@ -2830,16 +2854,16 @@ Switch(config-if)# switchport mode trunk
 </table></div>
 <p>⚠️ dynamic 모드는 보안 취약점 존재 → 수동으로 access/trunk 명령 권장</p>
 <h4 id="4-vlan-설정-확인">4. VLAN 설정 확인</h4>
-<div class="codehilite"><pre><span></span><code>Switch# show vlan
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show vlan
 Switch# show vlan brief       ← 요약 형태로 보기
-</code></pre></div>
+</code></pre></div></div>
 
 <p>정상 설정 확인 포인트:</p>
 <p>VLAN 10에 해당 포트(예: fa0/1)가 등록되어 있는지</p>
 <p>VLAN 20에 해당 포트(예: fa0/2)가 등록되어 있는지</p>
 <p>트렁크 포트(예: fa0/3)는 VLAN 목록에서 빠져 있어야 정상</p>
-<div class="codehilite"><pre><span></span><code>Switch# show interfaces trunk     ← 트렁크 설정된 포트 확인
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Switch# show interfaces trunk     ← 트렁크 설정된 포트 확인
+</code></pre></div></div>
 
 <h4 id="5-ab-두-스위치-설정-시-주의사항">5. A/B 두 스위치 설정 시 주의사항</h4>
 <p>두 스위치 모두에서 동일하게 VLAN 생성 및 이름 지정 필요</p>
@@ -2935,11 +2959,11 @@ Switch# show vlan brief       ← 요약 형태로 보기
 <p>네트워크 2: 192.168.250.0/24 (클라이언트 네트워크)</p>
 <p>PC 추가: 192.168.250.100 (게이트웨이: 192.168.250.254)</p>
 <h5 id="3-2-e-eigrp">3-2. 라우터 E EIGRP 설정</h5>
-<div class="codehilite"><pre><span></span><code>router eigrp 20              ← AS Number 20으로 별도 도메인 정의
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp 20              ← AS Number 20으로 별도 도메인 정의
 network 40.40.40.0 0.0.0.255       ← C 라우터와 연결된 네트워크
 network 192.168.250.0 0.0.0.255    ← 클라이언트 네트워크
 no auto-summary              ← 자동축약 비활성화
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Wildcard Bit 계산:</p>
 <div class="tablewrap"><table>
@@ -2986,8 +3010,8 @@ no auto-summary              ← 자동축약 비활성화
 </table></div>
 <p>의도: 대규모 네트워크를 여러 도메인으로 분할하여 관리 효율성 증대</p>
 <h5 id="4-2_3">4-2. 이웃 라우터 현황 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip eigrp neighbors
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip eigrp neighbors
+</code></pre></div></div>
 
 <p>각 라우터의 이웃 목록:</p>
 <div class="tablewrap"><table>
@@ -3028,24 +3052,24 @@ no auto-summary              ← 자동축약 비활성화
 </table></div>
 <h4 id="5-eigrp-재분배-설정">5. EIGRP 재분배 설정</h4>
 <h5 id="5-1_3">5-1. 재분배의 정의와 목적</h5>
-<div class="codehilite"><pre><span></span><code>서로 다른 라우팅 도메인(AS) 간에 경로 정보를 공유하는 기술
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>서로 다른 라우팅 도메인(AS) 간에 경로 정보를 공유하는 기술
+</code></pre></div></div>
 
 <p>필요 이유:</p>
 <p>AS 10과 AS 20이 별도 도메인이지만 통신이 필요할 경우</p>
 <p>도메인 간 경계에 위치한 라우터(Border Router, BR)에서만 설정</p>
 <h5 id="5-2-border-router-br">5-2. 경계 라우터(Border Router, BR) 역할</h5>
 <p>정의: 두 개 이상의 AS 도메인에 동시에 속한 라우터</p>
-<div class="codehilite"><pre><span></span><code>라우터 C 또는 라우터 E 중 하나를 BR로 선택
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>라우터 C 또는 라우터 E 중 하나를 BR로 선택
 → 해당 BR에서만 재분배 설정
-</code></pre></div>
+</code></pre></div></div>
 
 <p>BR의 조건:</p>
 <p>두 개 이상의 AS Number로 설정된 라우팅 프로토콜 구성</p>
 <p>다른 AS 도메인의 경로 정보를 받아들일 준비</p>
 <h5 id="5-3-c">5-3. 라우터 C에서의 재분배 설정</h5>
 <p>라우터 C를 BR로 선택한 경우:</p>
-<div class="codehilite"><pre><span></span><code>라우터 C 설정:
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>라우터 C 설정:
 ┌─────────────────────────────────────────┐
 │ router eigrp 10                         │
 │ network 20.20.20.0 0.0.0.255           │
@@ -3059,35 +3083,35 @@ no auto-summary              ← 자동축약 비활성화
 │ network 192.168.250.0 0.0.0.255       │
 │ no auto-summary                        │
 └─────────────────────────────────────────┘
-</code></pre></div>
+</code></pre></div></div>
 
 <p>경계 대역 광고 (AS 10, AS 20 양쪽에서 공용):</p>
-<div class="codehilite"><pre><span></span><code>라우터 C의 AS 10 설정에 추가:
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>라우터 C의 AS 10 설정에 추가:
 network 40.40.40.0 0.0.0.255
 라우터 C의 AS 20 설정에 추가:
 network 20.20.20.0 0.0.0.255
-</code></pre></div>
+</code></pre></div></div>
 
 <p>경계 대역은 양쪽 AS에서 모두 광고하여 양방향 통신 확보</p>
 <h5 id="5-4_1">5-4. 재분배 설정 효과</h5>
 <p>설정 완료 후 변화:</p>
-<div class="codehilite"><pre><span></span><code>이전: 라우터 E에서 show ip eigrp neighbors → 이웃 없음
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>이전: 라우터 E에서 show ip eigrp neighbors → 이웃 없음
 이후: 라우터 E에서 show ip eigrp neighbors → C 라우터 나타남
 메시지 예시:
 Neighbor Change: Neighbor 40.40.40.40 UP
-</code></pre></div>
+</code></pre></div></div>
 
 <p>통신 가능 네트워크:</p>
-<div class="codehilite"><pre><span></span><code>라우터 E(192.168.250.100)에서:
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>라우터 E(192.168.250.100)에서:
 ping 192.168.100.10 (라우터 A 네트워크) → 성공
 ping 192.168.150.10 (라우터 B 네트워크) → 성공
 ping 192.168.200.10 (라우터 C 네트워크) → 성공
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-eigrp-프로토콜-정보-확인">6. EIGRP 프로토콜 정보 확인</h4>
 <h5 id="6-1-eigrp">6-1. EIGRP 설정 내용 조회</h5>
-<div class="codehilite"><pre><span></span><code>show ip protocols
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip protocols
+</code></pre></div></div>
 
 <p>확인 항목:</p>
 <div class="tablewrap"><table>
@@ -3153,8 +3177,8 @@ ping 192.168.200.10 (라우터 C 네트워크) → 성공
 <h4 id="2-eigrp-설정-필수-요소">2. EIGRP 설정 필수 요소</h4>
 <h5 id="2-1-asautonomous-system-number">2-1. AS(Autonomous System) Number의 정의</h5>
 <p>EIGRP 설정의 핵심은 AS Number라는 식별자이다:</p>
-<div class="codehilite"><pre><span></span><code>router eigrp &lt;AS_NUMBER&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp &lt;AS_NUMBER&gt;
+</code></pre></div></div>
 
 <p>AS Number의 특성:</p>
 <div class="tablewrap"><table>
@@ -3190,20 +3214,20 @@ ping 192.168.200.10 (라우터 C 네트워크) → 성공
 <p>⚠️ 이웃 라우터 관계 형성의 필수 조건: 동일한 AS Number</p>
 <h4 id="3-eigrp-설정-단계별-절차">3. EIGRP 설정 단계별 절차</h4>
 <h5 id="3-1-eigrp">3-1. EIGRP 라우팅 프로토콜 진입</h5>
-<div class="codehilite"><pre><span></span><code>router eigrp 10      ← AS Number 10 지정
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp 10      ← AS Number 10 지정
+</code></pre></div></div>
 
 <p>AS Number 선택 원칙:</p>
 <p>같은 도메인의 모든 라우터는 동일한 AS Number 사용</p>
 <p>예: 라우터 A, B, C 모두 AS 10</p>
 <h5 id="3-2-wildcard-bit">3-2. 네트워크 광고 설정: Wildcard Bit 사용</h5>
 <p>RIP과의 가장 큰 차이점은 Wildcard Bit 필수:</p>
-<div class="codehilite"><pre><span></span><code>network &lt;네트워크주소&gt; &lt;와일드카드비트&gt;
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>network &lt;네트워크주소&gt; &lt;와일드카드비트&gt;
+</code></pre></div></div>
 
 <p>Wildcard Bit 계산 공식:</p>
-<div class="codehilite"><pre><span></span><code>와일드카드 비트 = 255 - 서브넷마스크의 각 옥테트
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>와일드카드 비트 = 255 - 서브넷마스크의 각 옥테트
+</code></pre></div></div>
 
 <p>계산 예시:</p>
 <div class="tablewrap"><table>
@@ -3233,35 +3257,35 @@ ping 192.168.200.10 (라우터 C 네트워크) → 성공
 </tbody>
 </table></div>
 <h5 id="3-3_3">3-3. 자동축약 비활성화</h5>
-<div class="codehilite"><pre><span></span><code>no auto-summary      ← 세분화된 경로 광고를 위해 필수
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>no auto-summary      ← 세분화된 경로 광고를 위해 필수
+</code></pre></div></div>
 
 <p>RIP v2와 마찬가지로 자동축약을 비활성화하여 세분화된 서브넷 정보 광고 가능</p>
 <h4 id="4-eigrp-설정-구성-예시">4. EIGRP 설정 구성 예시</h4>
 <h5 id="4-1_4">4-1. 라우터별 설정 내용</h5>
 <p>라우터 A 설정 (AS 10):</p>
-<div class="codehilite"><pre><span></span><code>router eigrp 10
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp 10
 network 10.0.0.0 0.0.0.255
 network 30.0.0.0 0.0.0.255
 network 192.168.100.0 0.0.0.255
 no auto-summary
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라우터 B 설정 (AS 10):</p>
-<div class="codehilite"><pre><span></span><code>router eigrp 10
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp 10
 network 10.0.0.0 0.0.0.255
 network 20.0.0.0 0.0.0.255
 network 30.0.0.0 0.0.0.255
 network 192.168.150.0 0.0.0.255
 no auto-summary
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라우터 C 설정 (AS 10):</p>
-<div class="codehilite"><pre><span></span><code>router eigrp 10
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router eigrp 10
 network 20.0.0.0 0.0.0.255
 network 192.168.200.0 0.0.0.255
 no auto-summary
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-2-rip-eigrp">4-2. RIP과 EIGRP 설정 비교</h5>
 <div class="tablewrap"><table>
@@ -3340,8 +3364,8 @@ no auto-summary
 </tbody>
 </table></div>
 <h5 id="5-2_1">5-2. 이웃 라우터 상태 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip eigrp neighbors
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip eigrp neighbors
+</code></pre></div></div>
 
 <p>출력 정보:</p>
 <p>이웃 IP 주소: 연결된 이웃 라우터의 인터페이스 IP</p>
@@ -3404,13 +3428,13 @@ no auto-summary
 </tbody>
 </table></div>
 <h5 id="6-2-eigrp">6-2. EIGRP 메트릭 구성 요소</h5>
-<div class="codehilite"><pre><span></span><code>메트릭 계산에 참고되는 5가지 요소 (K1~K5 상수로 조절):
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>메트릭 계산에 참고되는 5가지 요소 (K1~K5 상수로 조절):
 1. BW (Bandwidth)     ← 대역폭 (링크 최저 속도)
 2. D (Delay)          ← 지연시간 (누적 지연)
 3. R (Reliability)    ← 신뢰도 (링크 안정성)
 4. L (Load)           ← 부하량 (현재 사용률)
 5. M (MTU)            ← 최대 전송 단위
-</code></pre></div>
+</code></pre></div></div>
 
 <p>기본 설정에서 적용되는 메트릭:</p>
 <p>BW (대역폭): 경로상 최저 대역폭 사용</p>
@@ -3467,17 +3491,17 @@ no auto-summary
 </tbody>
 </table></div>
 <h5 id="7-2-eigrp">7-2. EIGRP 라우팅 테이블 확인</h5>
-<div class="codehilite"><pre><span></span><code>show ip route
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
+</code></pre></div></div>
 
 <p>EIGRP 학습 경로 식별:</p>
 <p>경로 코드: D  (D = EIGRP)</p>
 <p>메트릭 값: RIP의 단순한 홉 수와 달리 복잡한 계산값 표시</p>
 <p>AD 값: 120(RIP)과 달리 90으로 표시 (더 높은 우선순위)</p>
 <p>라우팅 테이블 예시:</p>
-<div class="codehilite"><pre><span></span><code>D  10.0.0.0/8 [90/156160] via 10.10.10.10, 00:05:23, FastEthernet0/0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>D  10.0.0.0/8 [90/156160] via 10.10.10.10, 00:05:23, FastEthernet0/0
    AD값: 90, 메트릭값: 156160, 이웃: 10.10.10.10
-</code></pre></div>
+</code></pre></div></div>
 
 <hr />
 <h3 id="016-rip-버전-1과-버전-2의-차이점-및-호환성-검증">016. RIP 버전 1과 버전 2의 차이점 및 호환성 검증</h3>
@@ -3510,9 +3534,9 @@ no auto-summary
 <p>클래스풀(Classful) 방식으로만 동작</p>
 <p>관리자가 서브네팅으로 세분화한 네트워크도 메이저 네트워크로 자동 축약</p>
 <p>세분화된 경로 정보 광고 불가능</p>
-<div class="codehilite"><pre><span></span><code>입력 명령어: network 20.20.20.0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>입력 명령어: network 20.20.20.0
 실제 광고: 20.0.0.0/8 (클래스 A 범위로 자동 축약)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ 관리자가 아무리 서브네팅으로 네트워크를 쪼개도 RIP v1은 클래스 기반의 메이저 네트워크로 축약하여 광고한다.</p>
 <h4 id="2-rip-version-2의-개선된-특성">2. RIP Version 2의 개선된 특성</h4>
@@ -3578,12 +3602,12 @@ no auto-summary
 </tbody>
 </table></div>
 <p>RIP v2 설정 예시:</p>
-<div class="codehilite"><pre><span></span><code>router rip
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router rip
 version 2
 no auto-summary          ← 자동축약 기능 비활성화
 network 20.20.20.0
 network 40.40.40.0
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-rip-버전-간-호환성-문제">3. RIP 버전 간 호환성 문제</h4>
 <h5 id="3-1_4">3-1. 버전 불일치로 인한 통신 실패</h5>
@@ -3620,15 +3644,15 @@ network 40.40.40.0
 </table></div>
 <h5 id="3-2_2">3-2. 라우팅 테이블에서의 확인</h5>
 <p>C 라우터 (v1) 관점:</p>
-<div class="codehilite"><pre><span></span><code>show ip route
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
 E로부터 받은 v2 패킷 정보로 40.0.0.0 경로 인식 (R 코드 표시)
-</code></pre></div>
+</code></pre></div></div>
 
 <p>E 라우터 (v2) 관점:</p>
-<div class="codehilite"><pre><span></span><code>show ip route
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
 C로부터 v1 패킷 미수신으로 C의 경로 정보 부재
 R 코드가 나타나지 않음
-</code></pre></div>
+</code></pre></div></div>
 
 <p>⚠️ C 라우터의 v1 패킷을 E가 수신하지 않으므로, E는 C를 이웃 라우터로 인식하지 못한 다.</p>
 <h4 id="4-다이나믹-라우팅-프로토콜-신뢰도-비교">4. 다이나믹 라우팅 프로토콜 신뢰도 비교</h4>
@@ -3789,12 +3813,12 @@ R 코드가 나타나지 않음
 <h5 id="6-2-eigrp_1">6-2. EIGRP 도입의 필요성</h5>
 <p>RIP의 단순성을 극복하기 위해 EIGRP 또는 OSPF 같은 고급 라우팅 프로토콜 필요:</p>
 <p>EIGRP의 개선 사항:</p>
-<div class="codehilite"><pre><span></span><code>- IGRP의 Enhanced(개선) 버전
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>- IGRP의 Enhanced(개선) 버전
 - 회선 속도, 지연, 신뢰성 등 다중 메트릭 반영
 - 대규모 네트워크 환경 지원
 - 네트워크 변화에 빠른 수렴
 - AD 90으로 RIP보다 높은 신뢰도
-</code></pre></div>
+</code></pre></div></div>
 
 <hr />
 <h3 id="017-rip-설정과-동적-라우팅의-기초">017. RIP 설정과 동적 라우팅의 기초</h3>
@@ -3827,16 +3851,16 @@ R 코드가 나타나지 않음
 <p>경로 정보가 없으면 해당 네트워크로의 Ping 통신은 실패하며, 패킷이 목적지에 도달할 수 없다.</p>
 <h4 id="2-rip-라우팅-프로토콜-설정">2. RIP 라우팅 프로토콜 설정</h4>
 <h5 id="2-1-rip">2-1. RIP 설정 모드 진입</h5>
-<div class="codehilite"><pre><span></span><code>router rip          ← RIP 라우팅 프로토콜 설정 모드 진입
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router rip          ← RIP 라우팅 프로토콜 설정 모드 진입
+</code></pre></div></div>
 
 <p>router ?  명령어로 사용 가능한 다이나믹 라우팅 프로토콜 확인:</p>
-<div class="codehilite"><pre><span></span><code>router ?
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router ?
   bgp          Border Gateway Protocol (BGP)
   eigrp        EIGRP
   ospf         Open Shortest Path First (OSPF)
   rip          Routing Information Protocol
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="2-2-rip">2-2. RIP 설정 모드의 주요 명령어</h5>
 <p>RIP 설정 모드에서 ?  명령어 입력 시 사용 가능한 명령어:</p>
@@ -3879,33 +3903,33 @@ R 코드가 나타나지 않음
 <p>show ip route  명령어에서 C (Connected) 코드로 표시된 직접 연결 네트워크만 광고한다. 이는 각 라우터가 자신에게 직접 연결된 인터페이스의 네트워크만 신뢰할 수 있기 때문이다.</p>
 <h5 id="3-2_3">3-2. 라우터별 설정 구성</h5>
 <p>라우터 A 설정:</p>
-<div class="codehilite"><pre><span></span><code>router rip
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router rip
 version 1
 network 10.10.10.0
 network 30.30.30.0
 network 192.168.100.0
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라우터 B 설정:</p>
-<div class="codehilite"><pre><span></span><code>router rip
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router rip
 version 1
 network 10.10.10.0
 network 20.20.20.0
 network 30.30.30.0
 network 192.168.150.0
-</code></pre></div>
+</code></pre></div></div>
 
 <p>라우터 C 설정:</p>
-<div class="codehilite"><pre><span></span><code>router rip
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>router rip
 version 1
 network 20.20.20.0
 network 192.168.200.0
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="4-rip-설정-결과-확인">4. RIP 설정 결과 확인</h4>
 <h5 id="4-1_6">4-1. 라우팅 테이블 조회</h5>
-<div class="codehilite"><pre><span></span><code>show ip route
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
+</code></pre></div></div>
 
 <p>라우팅 테이블의 코드 표기:</p>
 <div class="tablewrap"><table>
@@ -3931,10 +3955,10 @@ network 192.168.200.0
 </table></div>
 <h5 id="4-2-hop-count">4-2. 최적 경로 결정 기준: 홉 카운트(Hop Count)</h5>
 <p>RIP은 목적지까지 거쳐가는 라우터 장비 개수를 유일한 메트릭으로 사용한다:</p>
-<div class="codehilite"><pre><span></span><code>직접 연결: 비용 1
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>직접 연결: 비용 1
 한 라우터 거침: 비용 2
 두 라우터 거침: 비용 3
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-3_4">4-3. 라우팅 테이블의 메트릭 값 해석</h5>
 <div class="tablewrap"><table>
@@ -3991,16 +4015,16 @@ network 192.168.200.0
 <p>경로 2: 고속 회선(Gigabit) 3홉 → RIP은 비용 3으로 배제</p>
 <p>실제 성능: 경로 2가 훨씬 빠르지만 RIP은 인식 불가</p>
 <h5 id="5-2_2">5-2. 홉 카운트 제한</h5>
-<div class="codehilite"><pre><span></span><code>최대 15홉 제한
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>최대 15홉 제한
+</code></pre></div></div>
 
 <p>15홉까지만 경로 인식 가능</p>
 <p>16홉 이상: 도달 불가능한 네트워크로 간주</p>
 <p>대규모 네트워크 확장성 제한</p>
 <h4 id="6-rip-설정-통신-검증">6. RIP 설정 통신 검증</h4>
 <h5 id="6-1-ping">6-1. Ping 통신 테스트</h5>
-<div class="codehilite"><pre><span></span><code>ping 192.168.200.10
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping 192.168.200.10
+</code></pre></div></div>
 
 <p>정상 응답 패턴:</p>
 <div class="tablewrap"><table>
@@ -4051,18 +4075,18 @@ network 192.168.200.0
 <p>두 개 중 하나를 선택한 후 원하는 라우터와 시리얼(Serial) 인터페이스에 연결한다.</p>
 <h5 id="1-2_1">1-2. 시리얼 인터페이스 추가 (모듈 설치)</h5>
 <p>시리얼 인터페이스를 장비에 설치하기 위한 순서:</p>
-<div class="codehilite"><pre><span></span><code>1. 전원 종료 ← 장비의 전원을 완전히 끔
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1. 전원 종료 ← 장비의 전원을 완전히 끔
 2. 모듈 설치 ← Physical 섹션에서 비어있는 슬롯에 모듈 삽입
 3. 전원 재시작 ← 전원을 다시 켬
-</code></pre></div>
+</code></pre></div></div>
 
 <p>모듈을 설치한 후 전원을 다시 시작해야 인터페이스가 인식된다.</p>
 <h4 id="2-라우터-기본-설정">2. 라우터 기본 설정</h4>
 <h5 id="2-1_4">2-1. 포트 라벨 표시 설정</h5>
 <p>포트 이름이 보이지 않을 경우 다음과 같이 설정한다.</p>
 <p>설정 경로:</p>
-<div class="codehilite"><pre><span></span><code>Option → Preference → Always show port labels 체크
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Option → Preference → Always show port labels 체크
+</code></pre></div></div>
 
 <p>라벨 표시 옵션:</p>
 <div class="tablewrap"><table>
@@ -4096,21 +4120,21 @@ network 192.168.200.0
 <h5 id="3-1_6">3-1. 설정의 기본 원칙</h5>
 <p>모든 네트워크 장비 설정에서 첫 번째 단계는 IP 주소 설정이다.</p>
 <h5 id="3-2_4">3-2. 설정 명령어 구조</h5>
-<div class="codehilite"><pre><span></span><code>configure terminal ← 설정 모드 진입
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal ← 설정 모드 진입
 interface [인터페이스명] ← 특정 인터페이스 선택
 ip address [IP주소] [서브넷마스크] ← IP 주소와 서브넷마스크 설정
 no shutdown ← 해당 인터페이스 활성화
 exit ← 현재 모드 종료
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="3-3_4">3-3. 라우터 간 연결 인터페이스 설정 예시</h5>
 <p>A 라우터와 연결된 B 라우터의 시리얼 인터페이스:</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 interface serial 0/3/0
 ip address 10.10.10.20 255.255.255.0
 no shutdown
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -4189,21 +4213,21 @@ exit
 </table></div>
 <h5 id="4-2_4">4-2. 각 인터페이스별 설정 순서</h5>
 <p>각 인터페이스마다 동일한 절차로 설정한다.</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 interface [해당 인터페이스명]
 ip address [해당 IP] [해당 서브넷마스크]
 no shutdown
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4-3_5">4-3. 내부 네트워크 게이트웨이 설정 예시</h5>
 <p>GigabitEthernet 인터페이스 (내부 게이트웨이):</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 interface gi 0/0
 ip address 192.168.150.254 255.255.255.0
 no shutdown
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -4233,10 +4257,10 @@ exit
 </table></div>
 <h5 id="4-4">4-4. 라우터 호스트명 설정</h5>
 <p>각 라우터를 구분하기 위해 호스트명을 설정한다.</p>
-<div class="codehilite"><pre><span></span><code>configure terminal
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal
 hostname [라우터명] ← 라우터 이름 설정
 exit
-</code></pre></div>
+</code></pre></div></div>
 
 <p>호스트명 예시:</p>
 <p>R-A (A 라우터)</p>
@@ -4296,9 +4320,9 @@ exit
 <p>같은 네트워크 내에서 중복된 주소 대역을 사용하면 주소 충돌(overlap)이 발생한다.</p>
 <h4 id="6-설정-확인">6. 설정 확인</h4>
 <h5 id="6-1_2">6-1. 인터페이스 상태 확인</h5>
-<div class="codehilite"><pre><span></span><code>show running-config ← 현재 실행 중인 모든 설정 확인
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show running-config ← 현재 실행 중인 모든 설정 확인
 show ip interface brief ← 모든 인터페이스의 상태 확인
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="6-2_1">6-2. 주의 사항</h5>
 <div class="tablewrap"><table>
@@ -4538,8 +4562,8 @@ show ip interface brief ← 모든 인터페이스의 상태 확인
 </tbody>
 </table></div>
 <h5 id="32">/32 표기의 의미</h5>
-<div class="codehilite"><pre><span></span><code>/32 = 32비트가 일치하는 주소 = 자기 자신
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>/32 = 32비트가 일치하는 주소 = 자기 자신
+</code></pre></div></div>
 
 <p>특징:</p>
 <div class="tablewrap"><table>
@@ -4593,15 +4617,15 @@ show ip interface brief ← 모든 인터페이스의 상태 확인
 <h5 id="2-1_6">2-1. 스태틱 라우팅의 기본</h5>
 <p>정의: 관리자가 직접 라우팅 경로를 설정하는 방식이다.</p>
 <h5 id="2-2_4">2-2. 라우팅 경로 설정 명령어</h5>
-<div class="codehilite"><pre><span></span><code>configure terminal ← 설정 모드 진입
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>configure terminal ← 설정 모드 진입
 ip route [목적지네트워크] [서브넷마스크] [경유지] ← 경로 설정
 exit ← 설정 모드 종료
-</code></pre></div>
+</code></pre></div></div>
 
 <p>설정 예시:</p>
-<div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 10.10.10.10
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ip route 192.168.100.0 255.255.255.0 10.10.10.10
 ← 192.168.100.0/24 네트워크로는 10.10.10.10으로 보낸다
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="2-3_2">2-3. 라우팅 설정의 핵심 개념</h5>
 <h5 id="_6">목적지 네트워크 지정</h5>
@@ -4630,8 +4654,8 @@ exit ← 설정 모드 종료
 <h5 id="next-hop">경유지(Next Hop) 지정</h5>
 <p>경유지의 정의: 목적지로 가기 위해 패킷을 보낼 다음 장비의 IP 주소</p>
 <p>설정 원칙:</p>
-<div class="codehilite"><pre><span></span><code>목적지 방향으로의 다음 장비 = 경유지로 지정
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>목적지 방향으로의 다음 장비 = 경유지로 지정
+</code></pre></div></div>
 
 <p>최종 목적지의 IP를 경유지로 지정하면 안 된다. 바로 연결된 다음 라우터의 IP를 경유지로 지정해야 한다.</p>
 <p>올바른 설정 예:</p>
@@ -4658,7 +4682,7 @@ exit ← 설정 모드 종료
 </table></div>
 <h5 id="2-4">2-4. 라우팅 과정의 이해</h5>
 <p>패킷의 이동 흐름:</p>
-<div class="codehilite"><pre><span></span><code>출발지 라우터
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>출발지 라우터
   ↓
 자신의 라우팅 테이블 확인
   ↓
@@ -4671,7 +4695,7 @@ exit ← 설정 모드 종료
 (반복...)
   ↓
 목적지 도달
-</code></pre></div>
+</code></pre></div></div>
 
 <p>핵심 원칙:</p>
 <div class="tablewrap"><table>
@@ -4699,21 +4723,21 @@ exit ← 설정 모드 종료
 <h5 id="2-5_1">2-5. 라우팅 설정 실패의 예</h5>
 <p>경로가 중간에 끊긴 경우:</p>
 <p>상황: A → B → C 경로에서 B 라우터가 경로를 모를 때</p>
-<div class="codehilite"><pre><span></span><code>A 라우터: C로 가려면 B로 보낸다 (정상)
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>A 라우터: C로 가려면 B로 보낸다 (정상)
 B 라우터: C로 가는 경로를 모른다 (문제!)
 결과: C로 도달 불가
-</code></pre></div>
+</code></pre></div></div>
 
 <p>결론: 모든 라우터에서 정확한 경로 설정이 필수이다.</p>
 <h4 id="3-라우팅-테이블-확인">3. 라우팅 테이블 확인</h4>
 <h5 id="3-1_7">3-1. 라우팅 테이블 조회 명령어</h5>
-<div class="codehilite"><pre><span></span><code>show ip route ← 현재 라우팅 테이블 표시
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route ← 현재 라우팅 테이블 표시
+</code></pre></div></div>
 
 <h5 id="3-2_5">3-2. 라우팅 테이블 읽기</h5>
 <p>라우팅 테이블 출력 예:</p>
-<div class="codehilite"><pre><span></span><code>S 192.168.100.0/24 [1/0] via 10.10.10.10
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>S 192.168.100.0/24 [1/0] via 10.10.10.10
+</code></pre></div></div>
 
 <p>항목별 의미:</p>
 <div class="tablewrap"><table>
@@ -4755,8 +4779,8 @@ B 라우터: C로 가는 경로를 모른다 (문제!)
 <h4 id="4-스태틱-라우팅의-사용-사례">4. 스태틱 라우팅의 사용 사례</h4>
 <h5 id="4-1_8">4-1. 스태틱 라우팅 사용 시점</h5>
 <h5 id="single-path">단일 경로(Single Path) 구조</h5>
-<div class="codehilite"><pre><span></span><code>예시: 게임방 → KT 인터넷 장비
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>예시: 게임방 → KT 인터넷 장비
+</code></pre></div></div>
 
 <p>특징:</p>
 <div class="tablewrap"><table>
@@ -4916,8 +4940,8 @@ B 라우터: C로 가는 경로를 모른다 (문제!)
 <p>네트워크 변화에 자동 대응</p>
 <h4 id="6-네트워크-통신-검증">6. 네트워크 통신 검증</h4>
 <h5 id="6-1-ping_1">6-1. 핑(Ping) 테스트</h5>
-<div class="codehilite"><pre><span></span><code>ping [목적지IP주소] ← 목적지 주소로 핑 전송
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping [목적지IP주소] ← 목적지 주소로 핑 전송
+</code></pre></div></div>
 
 <p>핑의 목적:</p>
 <p>네트워크 경로 확인</p>
@@ -5019,8 +5043,8 @@ B 라우터: C로 가는 경로를 모른다 (문제!)
 <p>하나라도 틀리면 통신이 불가능하다.</p>
 <h5 id="7-2_1">7-2. 설정 오류 확인 방법</h5>
 <p>주소 설정 오류 확인:</p>
-<div class="codehilite"><pre><span></span><code>show running-config ← 현재 실행 중인 설정 전체 표시
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show running-config ← 현재 실행 중인 설정 전체 표시
+</code></pre></div></div>
 
 <p>확인 사항:</p>
 <p>각 인터페이스의 IP 주소 확인</p>
@@ -5028,8 +5052,8 @@ B 라우터: C로 가는 경로를 모른다 (문제!)
 <p>no shutdown 설정 여부 확인</p>
 <h5 id="7-3">7-3. 경로 설정 확인 방법</h5>
 <p>경로 설정 확인:</p>
-<div class="codehilite"><pre><span></span><code>show ip route ← 라우팅 테이블 표시
-</code></pre></div>
+<div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route ← 라우팅 테이블 표시
+</code></pre></div></div>
 
 <p>확인 사항:</p>
 <p>목적지 네트워크가 테이블에 추가되었는지 확인</p>
@@ -5048,6 +5072,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));

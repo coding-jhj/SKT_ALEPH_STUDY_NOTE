@@ -5,29 +5,31 @@
 <title>Linux 메모리·커널·MariaDB 계정·Kali · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf8f3; --ink:#23201c; --muted:#6b6459; --rule:#e0d8cb;
-  --accent:#8a5a2b; --accent-soft:#f3e9dc; --code-bg:#f4efe6; --side:#f6f1e8; --mark:#ffe8a3;
+  --paper:#f7f7f5; --paper-strong:#ffffff; --ink:#252525; --muted:#787774; --rule:#e8e8e6;
+  --accent:#3d7188; --accent-soft:#e9f3f6; --code-bg:#1f2937; --code-ink:#e5edf4;
+  --code-border:#334454; --side:#f1f1ef; --mark:#fff0b8; --shadow:0 14px 36px rgba(37,37,37,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#16181c; --ink:#e6e3dd; --muted:#9a958c; --rule:#2c3036;
-    --accent:#d0a06a; --accent-soft:#241f18; --code-bg:#1c1f24; --side:#101215; --mark:#5a4a12;
+    --paper:#191919; --paper-strong:#202020; --ink:#e7e7e5; --muted:#a6a6a0; --rule:#383836;
+    --accent:#8fc1d2; --accent-soft:#213238; --code-bg:#111827; --code-ink:#e5edf4;
+    --code-border:#405466; --side:#141414; --mark:#514614; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:16px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
-  font-size:17px; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere;
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.9; word-break:keep-all; overflow-wrap:anywhere;
 }
-.layout{display:grid; grid-template-columns:288px minmax(0,1fr); min-height:100vh}
+.layout{display:grid; grid-template-columns:276px minmax(0,1fr); min-height:100vh}
 aside{
   position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
-  background:var(--side); border-right:1px solid var(--rule); padding:20px 14px 60px;
+  background:var(--side); border-right:1px solid var(--rule); padding:24px 14px 60px;
   font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; font-size:13px; line-height:1.5;
 }
 aside .brand{font-size:15px; font-weight:700; margin:0 0 2px}
@@ -44,30 +46,51 @@ aside .lv3{padding-left:16px; color:var(--muted)}
 aside .lv4{padding-left:28px; color:var(--muted); font-size:12px}
 aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--rule); border-bottom:1px dashed var(--rule)}
 
-main{padding:40px 40px 120px; max-width:860px}
+main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
+     border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
-h1{font-size:30px; margin:0 0 8px}
-h2{font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--rule)}
-h3{font-size:18px; margin:30px 0 8px; color:var(--accent)}
-h4{font-size:15px; margin:22px 0 6px}
+h1{font-size:32px; margin:0 0 8px}
+h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
+h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
+h3{font-size:18px; margin:34px 0 9px; color:var(--accent)}
+h4{font-size:15px; margin:24px 0 7px; color:var(--muted)}
 .chapter-no{font-family:ui-sans-serif,system-ui,sans-serif; font-size:11px; letter-spacing:.18em; color:var(--muted); font-weight:700}
-p{margin:0 0 14px}
+p{max-width:78ch; margin:0 0 16px}
 ul,ol{margin:0 0 14px; padding-left:22px}
 li{margin:3px 0}
-a{color:var(--accent)}
-blockquote{margin:16px 0; padding:10px 16px; border-left:4px solid var(--accent); background:var(--accent-soft)}
+a{color:var(--accent); text-underline-offset:3px}
+blockquote{margin:20px 0; padding:14px 18px; border:1px solid var(--rule); border-left:5px solid var(--accent);
+           border-radius:8px; background:var(--accent-soft)}
 blockquote p:last-child{margin:0}
 hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
 mark{background:var(--mark); color:inherit}
-code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--code-bg); padding:1px 5px; border-radius:4px}
-pre{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; overflow-x:auto; line-height:1.6; font-size:13.5px}
+code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.88em; background:var(--accent-soft); padding:2px 5px; border-radius:4px}
+pre{background:var(--code-bg); color:var(--code-ink); border:1px solid var(--code-border); border-radius:10px; padding:16px 18px;
+     overflow-x:auto; line-height:1.65; font-size:13.5px; white-space:pre; tab-size:2}
 pre code{background:none; padding:0; font-size:inherit}
-.codehilite{background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; overflow-x:auto}
-.codehilite pre{border:0; margin:0; background:none}
+.code-shell{margin:22px 0 26px; border:1px solid var(--code-border); border-radius:12px; overflow:hidden;
+            background:var(--code-bg); box-shadow:0 8px 22px rgba(15,23,42,.12)}
+.code-toolbar{display:flex; align-items:center; gap:8px; min-height:38px; padding:0 12px;
+              background:#263646; color:#cbd8e2; font:12px/1 ui-sans-serif,system-ui,"Malgun Gothic",sans-serif}
+.code-mark{display:grid; place-items:center; width:20px; height:20px; border-radius:5px; background:#3d7188; color:#fff; font-weight:700}
+.code-label{font-weight:700; letter-spacing:.02em}
+.code-copy{margin-left:auto; border:1px solid #597081; border-radius:6px; padding:6px 9px; background:transparent; color:#dbe7ee;
+           font:inherit; cursor:pointer}
+.code-copy:hover{background:#385064}
+.codehilite{background:var(--code-bg); color:var(--code-ink); overflow-x:auto}
+.codehilite pre{border:0; border-radius:0; margin:0; background:transparent}
+.codehilite .c,.codehilite .ch,.codehilite .cm,.codehilite .c1{color:#94a3b8}
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr{color:#93c5fd}
+.codehilite .s,.codehilite .sa,.codehilite .sb,.codehilite .sc,.codehilite .dl{color:#86efac}
+.codehilite .nf,.codehilite .nc{color:#f9a8d4}
+.codehilite .m,.codehilite .mi,.codehilite .mf{color:#fcd34d}
 .tablewrap{overflow-x:auto; margin:0 0 18px}
 table{border-collapse:collapse; width:100%; font-size:14.5px; font-family:ui-sans-serif,system-ui,sans-serif}
 th,td{border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
 th{background:var(--accent-soft); font-weight:700}
+table tr:first-child td{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even) td{background:var(--side)}
+@supports (background:color-mix(in srgb, white 50%, black)){tbody tr:nth-child(even) td{background:color-mix(in srgb, var(--paper-strong) 88%, var(--accent-soft))}}
 .admonition{border:1px solid var(--rule); border-left:5px solid var(--accent); border-radius:6px; padding:12px 16px; margin:18px 0; background:var(--accent-soft)}
 .admonition-title{font-weight:700; margin:0 0 6px !important}
 .nav{display:flex; justify-content:space-between; gap:12px; margin-top:60px; padding-top:20px; border-top:1px solid var(--rule);
@@ -78,6 +101,7 @@ th{background:var(--accent-soft); font-weight:700}
 .cover{border:1px solid var(--rule); border-radius:10px; padding:26px 28px; background:var(--accent-soft); margin-bottom:34px}
 .cover h1{font-size:34px; margin:0 0 6px}
 .cover p{margin:0; color:var(--muted)}
+.chapter-head{margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--rule)}
 .toclist{list-style:none; padding:0; margin:0}
 .toclist li{margin:0 0 6px}
 .toclist .part{margin:26px 0 10px; font-size:11px; letter-spacing:.2em; color:var(--accent); font-weight:700;
@@ -91,13 +115,13 @@ th{background:var(--accent-soft); font-weight:700}
 @media (max-width:900px){
   .layout{grid-template-columns:1fr}
   aside{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule)}
-  main{padding:26px 18px 90px}
+  main{margin:0; padding:30px 20px 90px; max-width:none; border:0; border-radius:0; box-shadow:none}
 }
 @media print{
   aside,#top,.nav{display:none}
   .layout{display:block}
-  main{max-width:none; padding:0}
-  pre,table,.admonition{break-inside:avoid}
+  main{max-width:none; margin:0; padding:0; border:0; box-shadow:none}
+  pre,table,.admonition,.code-shell{break-inside:avoid}
   h2,h3{break-after:avoid}
 }
 </style>
@@ -109,7 +133,7 @@ th{background:var(--accent-soft); font-weight:700}
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
   <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="part">1부 · 네트워크</div><a class="" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="part">1부 · 네트워크</div><a class="" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="cur" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="inchap"><a class="lv3" href="#0-오늘의-큰-그림">0. 오늘의 큰 그림</a><a class="lv4" href="#오늘-반복해서-나온-공통-패턴-3가지">오늘 반복해서 나온 공통 패턴 3가지</a><a class="lv3" href="#1-free--메모리-현황-읽기">1. free — 메모리 현황 읽기</a><a class="lv4" href="#1-1-실습-출력">1-1. 실습 출력</a><a class="lv4" href="#1-2-열별-정확한-정의-man-1-free-기준">1-2. 열별 정확한 정의 (man 1 free 기준)</a><a class="lv4" href="#free가-94-mb인데-왜-메모리-부족이-아닌가">⚠️ free가 94 MB인데 왜 &quot;메모리 부족&quot;이 아닌가</a><a class="lv4" href="#1-3-실제-숫자-검산">1-3. 실제 숫자 검산</a><a class="lv4" href="#1-4-free--g가-쓸모없었던-이유-메모-수정-포인트">1-4. free -g가 쓸모없었던 이유 (메모 수정 포인트 ①)</a><a class="lv3" href="#2-sysctl--커널-파라미터-확인과-변경">2. sysctl — 커널 파라미터 확인과 변경</a><a class="lv4" href="#2-1-인자-없이-실행하면-사용법이-나온다">2-1. 인자 없이 실행하면 사용법이 나온다</a><a class="lv4" href="#2-2-sysctl의-정체--procsys의-얇은-껍데기">2-2. sysctl의 정체 — /proc/sys의 얇은 껍데기</a><a class="lv4" href="#2-3-주요-옵션-man-8-sysctl-기준">2-3. 주요 옵션 (man 8 sysctl 기준)</a><a class="lv4" href="#2-4-sysctl--a-출력을-분류해서-읽기">2-4. sysctl -a 출력을 분류해서 읽기</a><a class="lv4" href="#2-5-vm--오늘의-주인공">2-5. vm.* — 오늘의 주인공</a><a class="lv4" href="#2-6-vmswappiness-실습--변경과-그-수명">2-6. vm.swappiness 실습 — 변경과 그 수명</a><a class="lv3" href="#3-proc--커널이-노출하는-가상-파일시스템">3. /proc — 커널이 노출하는 가상 파일시스템</a><a class="lv4" href="#3-1-procmeminfo-완전-해부">3-1. /proc/meminfo 완전 해부</a><a class="lv4" href="#swappiness가-조절하는-것이-바로-이-두-축이다">swappiness가 조절하는 것이 바로 이 두 축이다</a><a class="lv4" href="#3-2-필요한-한-줄만-뽑기">3-2. 필요한 한 줄만 뽑기</a><a class="lv4" href="#3-3-procversion--커널-신원-확인">3-3. /proc/version — 커널 신원 확인</a><a class="lv4" href="#3-4-proccpuinfo--cpu-신원과-취약점-목록">3-4. /proc/cpuinfo — CPU 신원과 취약점 목록</a><a class="lv4" href="#3-5-df--디스크-사용량-그리고-이-서버의-실제-위험">3-5. df — 디스크 사용량, 그리고 이 서버의 실제 위험</a><a class="lv4" href="#96일-때의-대응-순서">/ 96%일 때의 대응 순서</a><a class="lv3" href="#4-mariadb-계정-관리--사용자는-이름이-아니라-이름호스트다">4. MariaDB 계정 관리 — 사용자는 &quot;이름&quot;이 아니라 &quot;이름@호스트&quot;다</a><a class="lv4" href="#4-1-접속과-서버-버전">4-1. 접속과 서버 버전</a><a class="lv4" href="#4-2-계정-생성--같은-이름-세-개의-다른-계정">4-2. 계정 생성 — 같은 이름, 세 개의 다른 계정</a><a class="lv4" href="#호스트를-생략하면-가-붙는다--오늘-실습의-핵심">호스트를 생략하면 &#x27;%&#x27;가 붙는다 — 오늘 실습의 핵심</a><a class="lv4" href="#4-3-mysql-데이터베이스--권한-정보가-사는-곳">4-3. mysql 데이터베이스 — 권한 정보가 사는 곳</a><a class="lv4" href="#4-4-계정-목록-조회">4-4. 계정 목록 조회</a><a class="lv4" href="#4-5--drop-user-test가-지운-것은-testlocalhost가-아니었다-메모-수정-포인트">4-5. ★ DROP USER test가 지운 것은 test@localhost가 아니었다 (메모 수정 포인트 ⑥)</a><a class="lv4" href="#실무-규칙-계정-조작에는-항상-호스트를-명시한다">실무 규칙: 계정 조작에는 항상 호스트를 명시한다</a><a class="lv4" href="#4-6-메모-보강-접속-시-어떤-계정-행이-선택되는가--정렬-규칙">4-6. (메모 보강) 접속 시 어떤 계정 행이 선택되는가 — 정렬 규칙</a><a class="lv3" href="#5-mariadb-권한-관리--grant--revoke--show-grants">5. MariaDB 권한 관리 — GRANT / REVOKE / SHOW GRANTS</a><a class="lv4" href="#5-1-권한-부여">5-1. 권한 부여</a><a class="lv4" href="#5-2-show-grants-출력-해부">5-2. SHOW GRANTS 출력 해부</a><a class="lv4" href="#grant-usage-on-가-항상-첫-줄에-나오는-이유">GRANT USAGE ON *.*가 항상 첫 줄에 나오는 이유</a><a class="lv4" href="#5-3-revoke--권한만-뺀다-계정은-남는다-메모-보강-포인트">5-3. REVOKE — 권한만 뺀다, 계정은 남는다 (메모 보강 포인트 ⑦)</a><a class="lv4" href="#5-4-오늘-만든-계정의-보안-문제-정리">5-4. 오늘 만든 계정의 보안 문제 정리</a><a class="lv3" href="#6-뷰view-실습에서-난-에러--error-1146">6. 뷰(VIEW) 실습에서 난 에러 — ERROR 1146</a><a class="lv4" href="#6-1-에러-메시지가-이미-원인을-말하고-있다">6-1. 에러 메시지가 이미 원인을 말하고 있다</a><a class="lv4" href="#6-2-세-가지가-동시에-틀렸다-메모-수정-포인트">6-2. 세 가지가 동시에 틀렸다 (메모 수정 포인트 ⑧)</a><a class="lv4" href="#6-3-drop-view-if-exists의-1-warning">6-3. DROP VIEW IF EXISTS의 &quot;1 warning&quot;</a><a class="lv3" href="#7-kali-linux-초기-설정">7. Kali Linux 초기 설정</a><a class="lv4" href="#7-1-프롬프트-색으로-계정-구분하기-메모-수정-포인트">7-1. 프롬프트 색으로 계정 구분하기 (메모 수정 포인트 ⑨)</a><a class="lv4" href="#7-2-ip-수동-설정-전-중복-확인-메모-보강-포인트">7-2. IP 수동 설정 전 중복 확인 (메모 보강 포인트 ⑩)</a><a class="lv4" href="#7-3-네트워크-인터페이스-확인">7-3. 네트워크 인터페이스 확인</a><a class="lv4" href="#7-4-패키지-갱신-순서-메모-수정-포인트">7-4. 패키지 갱신 순서 (메모 수정 포인트 ⑪)</a><a class="lv4" href="#7-5--apt-lock-문제--원인과-올바른-해결-메모-수정-포인트">7-5. ★ apt lock 문제 — 원인과 올바른 해결 (메모 수정 포인트 ⑫)</a><a class="lv4" href="#dpkg-동작-중에-잠금-파일을-지우면-패키지-db가-깨진다">⚠️ dpkg 동작 중에 잠금 파일을 지우면 패키지 DB가 깨진다</a><a class="lv4" href="#7-6-chrome-설치-메모-수정-포인트">7-6. Chrome 설치 (메모 수정 포인트 ⑬)</a><a class="lv4" href="#7-7-한글-입력과-폰트-메모-수정-포인트">7-7. 한글 입력과 폰트 (메모 수정 포인트 ⑭)</a><a class="lv4" href="#fcitx4버전는-debian에서-제거되었습니다">⚠️ fcitx(4버전)는 Debian에서 제거되었습니다</a><a class="lv4" href="#7-8-ping--출력-완전-해석">7-8. ping — 출력 완전 해석</a><a class="lv4" href="#ttl108로-홉-수-추정하기">ttl=108로 홉 수 추정하기</a><a class="lv4" href="#ping이-안-될-때-원인을-좁히는-순서">ping이 안 될 때 원인을 좁히는 순서</a><a class="lv3" href="#8-전체-실습-명령-시트">8. 전체 실습 명령 시트</a><a class="lv4" href="#8-1-메모리커널시스템-정보">8-1. 메모리·커널·시스템 정보</a><a class="lv4" href="#8-2-mariadb-계정권한">8-2. MariaDB 계정·권한</a><a class="lv4" href="#8-3-kali-초기-설정">8-3. Kali 초기 설정</a><a class="lv4" href="#8-4-장애-진단-순서-요약">8-4. 장애 진단 순서 요약</a><a class="lv4" href="#8-5-오늘-만난-에러-번호">8-5. 오늘 만난 에러 번호</a><a class="lv3" href="#9-메모-수정보강-총정리">9. 메모 수정·보강 총정리</a><a class="lv3" href="#10-출처">10. 출처</a><a class="lv4" href="#리눅스-커널--메모리--시스템">리눅스 커널 · 메모리 · 시스템</a><a class="lv4" href="#mariadb">MariaDB</a><a class="lv4" href="#debian--kali--apt">Debian / Kali / apt</a><a class="lv4" href="#검증하지-못한-항목-추측으로-채우지-않음">검증하지 못한 항목 (추측으로 채우지 않음)</a></div><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch22.html">22. 보안·모의해킹 2</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 12</div><h1>Linux 메모리·커널·MariaDB 계정·Kali</h1><blockquote>
+<main><header class="chapter-head"><div class="chapter-no">CHAPTER 12</div><h1>Linux 메모리·커널·MariaDB 계정·Kali</h1></header><blockquote>
 <p><strong>실습 환경</strong></p>
 <div class="tablewrap"><table>
 <thead>
@@ -236,11 +260,11 @@ th{background:var(--accent-soft); font-weight:700}
 <hr />
 <h3 id="1-free--메모리-현황-읽기">1. <code>free</code> — 메모리 현황 읽기</h3>
 <h4 id="1-1-실습-출력">1-1. 실습 출력</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-m
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-m
 <span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
 Mem:<span class="w">            </span><span class="m">1968</span><span class="w">        </span><span class="m">1045</span><span class="w">          </span><span class="m">94</span><span class="w">          </span><span class="m">37</span><span class="w">        </span><span class="m">1045</span><span class="w">         </span><span class="m">922</span>
 Swap:<span class="w">           </span><span class="m">1986</span><span class="w">         </span><span class="m">208</span><span class="w">        </span><span class="m">1778</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="1-2-열별-정확한-정의-man-1-free-기준">1-2. 열별 정확한 정의 (man 1 free 기준)</h4>
 <div class="tablewrap"><table>
@@ -298,11 +322,11 @@ Swap:<span class="w">           </span><span class="m">1986</span><span class="w
 <p><code>total(1968) - available(922) = 1046 ≈ used(1045)</code> — 반올림 오차 범위 안에서 정확히 맞습니다. 이 검산이 맞아떨어지는지 보는 것만으로 열의 의미를 확인할 수 있습니다.</p>
 <p>Swap 쪽 <code>used = 208 MB</code>는 "지금 메모리가 부족하다"는 뜻이 아닙니다. <strong>과거 어느 시점에 밀려나간 페이지가 아직 스왑에 남아 있는 것</strong>이며, <code>/proc/meminfo</code>의 <code>SwapCached: 13512 kB</code>가 그중 일부는 이미 RAM으로 돌아왔지만 스왑 사본도 유지 중임을 보여줍니다(다시 밀어낼 때 쓰기를 생략할 수 있어 이득).</p>
 <h4 id="1-4-free--g가-쓸모없었던-이유-메모-수정-포인트">1-4. <code>free -g</code>가 쓸모없었던 이유 (메모 수정 포인트 ①)</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-g
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>free<span class="w"> </span>-g
 <span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
 Mem:<span class="w">               </span><span class="m">1</span><span class="w">           </span><span class="m">1</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">1</span><span class="w">           </span><span class="m">0</span>
 Swap:<span class="w">              </span><span class="m">1</span><span class="w">           </span><span class="m">0</span><span class="w">           </span><span class="m">1</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p><code>available</code>이 <strong>0</strong>으로 나옵니다. 922 MB는 1 GiB 미만이라 정수 GiB 단위에서 잘려나간 것입니다. 메모리가 2 GiB인 장비에서 <code>-g</code>는 정보를 전부 파괴합니다.</p>
 <div class="tablewrap"><table>
@@ -345,25 +369,25 @@ Swap:<span class="w">              </span><span class="m">1</span><span class="w
 <hr />
 <h3 id="2-sysctl--커널-파라미터-확인과-변경">2. <code>sysctl</code> — 커널 파라미터 확인과 변경</h3>
 <h4 id="2-1-인자-없이-실행하면-사용법이-나온다">2-1. 인자 없이 실행하면 사용법이 나온다</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl
 Usage:
 <span class="w"> </span>sysctl<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>variable<span class="o">[=</span>value<span class="o">]</span><span class="w"> </span>...<span class="o">]</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>메모에는 <code>=&gt; 커널에 있는 다양한 값들 확인하는 명령어</code>라고 적혀 있습니다. <strong>절반만 맞습니다</strong> (메모 수정 포인트 ②).
 <code>sysctl</code>은 <strong>확인(read) + 변경(write)</strong> 을 모두 하는 명령입니다. <code>sysctl -w</code>가 변경이고, 오늘 실습에서도 <code>vm.swappiness</code>를 실제로 바꿨습니다.</p>
 <h4 id="2-2-sysctl의-정체--procsys의-얇은-껍데기">2-2. sysctl의 정체 — <code>/proc/sys</code>의 얇은 껍데기</h4>
 <p><code>sysctl</code>이 다루는 모든 값은 <strong><code>/proc/sys/</code> 아래의 파일</strong>입니다. 변수 이름의 점(<code>.</code>)이 디렉터리 구분자(<code>/</code>)에 대응합니다.</p>
-<div class="codehilite"><pre><span></span><code>vm.swappiness      ↔  /proc/sys/vm/swappiness
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>vm.swappiness      ↔  /proc/sys/vm/swappiness
 net.ipv4.ip_forward ↔  /proc/sys/net/ipv4/ip_forward
 kernel.hostname    ↔  /proc/sys/kernel/hostname
-</code></pre></div>
+</code></pre></div></div>
 
 <p>따라서 아래 세 줄은 <strong>완전히 같은 일</strong>을 합니다.</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span>
 <span class="nb">echo</span><span class="w"> </span><span class="m">40</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/proc/sys/vm/swappiness
 sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span><span class="w">          </span><span class="c1"># -w 없이 대입만 해도 동작</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="2-3-주요-옵션-man-8-sysctl-기준">2-3. 주요 옵션 (man 8 sysctl 기준)</h4>
 <div class="tablewrap"><table>
@@ -714,13 +738,13 @@ sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness<span cla
 </tbody>
 </table></div>
 <h4 id="2-6-vmswappiness-실습--변경과-그-수명">2-6. <code>vm.swappiness</code> 실습 — 변경과 그 수명</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap
 vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span>
 happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">40</span>
 vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span>
 happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap
 vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="swappiness">swappiness 값의 실제 의미 (커널 공식 문서)</h5>
 <p>흔히 "스왑을 얼마나 적극적으로 쓰는지의 백분율"로 설명되지만, 정확한 정의는 다릅니다.</p>
@@ -773,7 +797,7 @@ vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </
 </blockquote>
 <h5 id="_1">(메모 보강) 이 변경은 재부팅하면 사라집니다 — 영구 적용법</h5>
 <p>이 부분이 메모에서 완전히 빠져 있습니다 (메모 보강 포인트 ③). <code>sysctl -w</code>는 <code>/proc/sys</code>에 쓰는 것이고 <code>/proc</code>은 <strong>메모리 위에만 존재하는 가상 파일시스템</strong>이므로 부팅과 함께 초기화됩니다.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 1) 설정 파일로 남긴다 (파일명 숫자가 클수록 나중에 적용 = 우선)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 1) 설정 파일로 남긴다 (파일명 숫자가 클수록 나중에 적용 = 우선)</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.swappiness = 40&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/99-swappiness.conf
 
 <span class="c1"># 2) 재부팅 없이 즉시 반영</span>
@@ -783,7 +807,7 @@ sudo<span class="w"> </span>sysctl<span class="w"> </span>-p<span class="w"> </s
 
 <span class="c1"># 3) 확인</span>
 sysctl<span class="w"> </span>vm.swappiness
-</code></pre></div>
+</code></pre></div></div>
 
 <p><code>--system</code>의 <strong>읽는 순서</strong>는 man 페이지에 명시되어 있습니다.</p>
 <div class="tablewrap"><table>
@@ -832,15 +856,15 @@ sysctl<span class="w"> </span>vm.swappiness
 <li><strong>같은 이름의 파일</strong>이 여러 디렉터리에 있으면 <strong>먼저 읽힌 것만</strong> 쓰이고 이후 디렉터리의 동명 파일은 무시됩니다. 이 규칙을 이용해 <code>/etc/sysctl.d/</code>에 같은 이름의 빈 파일을 두어 패키지 설정을 <strong>무력화</strong>할 수 있습니다.</li>
 </ul>
 <h5 id="4-grep-swap">(메모 수정 포인트 ④) <code>grep swap</code>은 스왑 설정 전체가 아니다</h5>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap<span class="w">      </span><span class="c1"># → vm.swappiness 한 줄만 나옴</span>
-</code></pre></div>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swap<span class="w">      </span><span class="c1"># → vm.swappiness 한 줄만 나옴</span>
+</code></pre></div></div>
 
 <p><code>vm.page-cluster</code>(스왑 인 단위), <code>vm.vfs_cache_pressure</code>, <code>/proc/swaps</code>의 실제 스왑 장치는 이 grep에 걸리지 않습니다. 스왑 상태를 볼 때는 아래를 같이 씁니다.</p>
-<div class="codehilite"><pre><span></span><code>swapon<span class="w"> </span>--show<span class="w">          </span><span class="c1"># 활성 스왑 장치/파일, 크기, 사용량, 우선순위</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>swapon<span class="w"> </span>--show<span class="w">          </span><span class="c1"># 활성 스왑 장치/파일, 크기, 사용량, 우선순위</span>
 cat<span class="w"> </span>/proc/swaps<span class="w">        </span><span class="c1"># 같은 정보의 원본</span>
 free<span class="w"> </span>-h<span class="w">                </span><span class="c1"># 총량/사용량</span>
 sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">&#39;swap|page-cluster&#39;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>또 실습에서 <code>sudo sysctl -a | grep swap</code>을 <strong>연속 두 번</strong> 실행했는데 결과는 당연히 같습니다. 값은 다시 바꾸기 전까지 유지됩니다.</p>
 <hr />
@@ -883,11 +907,11 @@ sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span>
 </tbody>
 </table></div>
 <h4 id="3-1-procmeminfo-완전-해부">3-1. <code>/proc/meminfo</code> 완전 해부</h4>
-<div class="codehilite"><pre><span></span><code>MemTotal:        2015300 kB      SwapTotal:       2034684 kB
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>MemTotal:        2015300 kB      SwapTotal:       2034684 kB
 MemFree:          128176 kB      SwapFree:        1821492 kB
 MemAvailable:     922684 kB      SwapCached:        13512 kB
 Buffers:           58744 kB      Cached:           869432 kB
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="4">기본 4형제</h5>
 <div class="tablewrap"><table>
@@ -932,10 +956,10 @@ Buffers:           58744 kB      Cached:           869432 kB
 </tbody>
 </table></div>
 <h5 id="active-inactive-lru">Active / Inactive — LRU 두 리스트</h5>
-<div class="codehilite"><pre><span></span><code>Active:           942460 kB     Inactive:         659040 kB
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Active:           942460 kB     Inactive:         659040 kB
 Active(anon):     532748 kB     Inactive(anon):   187684 kB
 Active(file):     409712 kB     Inactive(file):   471356 kB
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1015,9 +1039,9 @@ Active(file):     409712 kB     Inactive(file):   471356 kB
 <p><code>SReclaimable</code>(90528)이 <code>buff/cache</code> 합계에 포함된다는 점이 <code>free</code>와의 연결 고리입니다.
 <code>Buffers(58744) + Cached(869432) + SReclaimable(90528) = 1018704 kB ≈ 995 MiB</code> → <code>free -m</code>의 <code>buff/cache = 1045</code>와 근사합니다(측정 시점 차이).</p>
 <h5 id="_3">오버커밋 — 이 서버에서 가장 눈에 띄는 숫자</h5>
-<div class="codehilite"><pre><span></span><code>CommitLimit:     3042332 kB
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>CommitLimit:     3042332 kB
 Committed_AS:    9054516 kB
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1099,20 +1123,20 @@ Committed_AS:    9054516 kB
 </tbody>
 </table></div>
 <h4 id="3-2-필요한-한-줄만-뽑기">3-2. 필요한 한 줄만 뽑기</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>grep<span class="w"> </span>MemTotal<span class="w"> </span>/proc/meminfo
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>grep<span class="w"> </span>MemTotal<span class="w"> </span>/proc/meminfo
 MemTotal:<span class="w">        </span><span class="m">2015300</span><span class="w"> </span>kB
-</code></pre></div>
+</code></pre></div></div>
 
 <p><code>/proc/meminfo</code>는 50줄이 넘으므로 스크립트에서는 이렇게 씁니다.</p>
-<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^(MemTotal|MemAvailable|SwapTotal|SwapFree):&#39;</span><span class="w"> </span>/proc/meminfo
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^(MemTotal|MemAvailable|SwapTotal|SwapFree):&#39;</span><span class="w"> </span>/proc/meminfo
 awk<span class="w"> </span><span class="s1">&#39;/^MemAvailable:/ {print $2/1024 &quot; MiB&quot;}&#39;</span><span class="w"> </span>/proc/meminfo
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="3-3-procversion--커널-신원-확인">3-3. <code>/proc/version</code> — 커널 신원 확인</h4>
-<div class="codehilite"><pre><span></span><code>Linux version 6.8.0-138-generic (buildd@lcy02-amd64-023)
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Linux version 6.8.0-138-generic (buildd@lcy02-amd64-023)
 (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42)
 #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1160,13 +1184,13 @@ awk<span class="w"> </span><span class="s1">&#39;/^MemAvailable:/ {print $2/1024
 <p><code>sudo</code>는 필요 없습니다(메모 수정 포인트 ①). 더 짧게는 <code>uname -a</code> 또는 <code>uname -r</code>, 배포판 정보는 <code>lsb_release -a</code> / <code>cat /etc/os-release</code> 입니다.</p>
 </blockquote>
 <h4 id="3-4-proccpuinfo--cpu-신원과-취약점-목록">3-4. <code>/proc/cpuinfo</code> — CPU 신원과 취약점 목록</h4>
-<div class="codehilite"><pre><span></span><code>processor       : 0
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>processor       : 0
 model name      : Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
 cpu MHz         : 3192.002
 cache size      : 12288 KB
 siblings        : 1
 cpu cores       : 1
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1263,14 +1287,14 @@ cpu cores       : 1
 </tbody>
 </table></div>
 <h5 id="bugs-cpu"><code>bugs</code> 줄 — 이 CPU가 가진 알려진 취약점</h5>
-<div class="codehilite"><pre><span></span><code>bugs : cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>bugs : cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds
        swapgs itlb_multihit srbds mmio_stale_data retbleed gds bhi its
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Coffee Lake 세대가 투기적 실행 취약점 계열에 광범위하게 노출되어 있음을 보여줍니다. <strong>"취약점이 있다"이지 "무방비"는 아닙니다.</strong> 실제 완화 적용 여부는 아래로 확인합니다.</p>
-<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/vulnerabilities/*
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/vulnerabilities/*
 lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iA20<span class="w"> </span>vulnerab
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p><strong>더 나은 대안:</strong> <code>/proc/cpuinfo</code>는 논리 CPU마다 30줄씩 반복되어 읽기 힘듭니다.
@@ -1279,7 +1303,7 @@ lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 - <code>lscpu -e</code> — CPU별 토폴로지 표</p>
 </blockquote>
 <h4 id="3-5-df--디스크-사용량-그리고-이-서버의-실제-위험">3-5. <code>df</code> — 디스크 사용량, 그리고 이 서버의 실제 위험</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>df
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>df
 Filesystem<span class="w">                        </span>1K-blocks<span class="w">    </span>Used<span class="w"> </span>Available<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
 tmpfs<span class="w">                                </span><span class="m">201532</span><span class="w">     </span><span class="m">892</span><span class="w">    </span><span class="m">200640</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run
 /dev/mapper/ubuntu--vg-ubuntu--lv<span class="w">  </span><span class="m">10218772</span><span class="w"> </span><span class="m">9269668</span><span class="w">    </span><span class="m">408432</span><span class="w">  </span><span class="m">96</span>%<span class="w"> </span>/
@@ -1287,7 +1311,7 @@ tmpfs<span class="w">                               </span><span class="m">10076
 tmpfs<span class="w">                                  </span><span class="m">5120</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">5120</span><span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/run/lock
 /dev/sda2<span class="w">                           </span><span class="m">1790136</span><span class="w">  </span><span class="m">105416</span><span class="w">   </span><span class="m">1575460</span><span class="w">   </span><span class="m">7</span>%<span class="w"> </span>/boot
 tmpfs<span class="w">                                </span><span class="m">201528</span><span class="w">      </span><span class="m">12</span><span class="w">    </span><span class="m">201516</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run/user/1000
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1338,10 +1362,10 @@ Ubuntu 설치 시 LVM을 고르면 기본적으로 VG 전체를 LV에 주지 않
 <hr />
 <h3 id="4-mariadb-계정-관리--사용자는-이름이-아니라-이름호스트다">4. MariaDB 계정 관리 — 사용자는 "이름"이 아니라 "이름@호스트"다</h3>
 <h4 id="4-1-접속과-서버-버전">4-1. 접속과 서버 버전</h4>
-<div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>happy@userver:~$<span class="w"> </span>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
 Enter<span class="w"> </span>password:
 Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10</span>.11.14-MariaDB-0ubuntu0.24.04.1<span class="w"> </span>Ubuntu<span class="w"> </span><span class="m">24</span>.04
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1370,11 +1394,11 @@ Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10
 <p>또 MariaDB 10.5부터 <code>mysql*</code> 명령은 전부 <code>mariadb*</code>로 개명되었고 <code>mysql</code>은 <strong>심볼릭 링크</strong>입니다. 새 스크립트는 <code>mariadb</code>, <code>mariadb-dump</code>를 쓰는 편이 안전합니다.</p>
 </blockquote>
 <h4 id="4-2-계정-생성--같은-이름-세-개의-다른-계정">4-2. 계정 생성 — 같은 이름, 세 개의 다른 계정</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w">      </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w">              </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.16.100&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>세 문장 모두 <code>Query OK, 0 rows affected</code> — <strong>셋은 완전히 별개의 계정</strong>입니다.</p>
 <div class="tablewrap"><table>
@@ -1450,9 +1474,9 @@ Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10
 <p>⚠️ <strong><code>1234</code>는 실습에서만.</strong> 평문 비밀번호는 <code>~/.mysql_history</code>와 서버의 general log에 남을 수 있습니다. 실무에서는 접속 계정에 <code>unix_socket</code>(로컬) 또는 <code>ed25519</code>(강한 해시) 플러그인을 씁니다.</p>
 </blockquote>
 <h4 id="4-3-mysql-데이터베이스--권한-정보가-사는-곳">4-3. <code>mysql</code> 데이터베이스 — 권한 정보가 사는 곳</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mysql</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mysql</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span><span class="w">   </span><span class="c1">-- 31 rows</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>31개 시스템 테이블을 성격별로 나누면 이렇습니다.</p>
 <div class="tablewrap"><table>
@@ -1539,13 +1563,13 @@ Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="n">JSON_DETAILED</span><span class="p">(</span><span class="n">Priv</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">global_priv</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">User</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="err">\</span><span class="k">G</span>
-</code></pre></div>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="n">JSON_DETAILED</span><span class="p">(</span><span class="n">Priv</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">global_priv</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">User</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div></div>
 
 <p>이렇게 보면 인증 플러그인, 해시, 리소스 제한이 JSON 하나에 들어 있는 것이 보입니다. 인증 방식이 계정마다 복수로 존재할 수 있어 <strong>관계형 컬럼으로는 표현이 불가능</strong>해진 것이 구조 변경의 이유입니다.</p>
 <p><code>mysql.user</code> 목록에 있던 <code>mariadb.sys@localhost</code>가 바로 그 뷰의 정의자 계정이며, <strong>비밀번호가 비어 있지만 로그인 불가</strong>로 잠겨 있습니다.</p>
 <h4 id="4-4-계정-목록-조회">4-4. 계정 목록 조회</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
 <span class="o">|</span><span class="w"> </span><span class="k">Host</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">User</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">Password</span><span class="w">                                  </span><span class="o">|</span>
 <span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
@@ -1557,7 +1581,7 @@ Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10
 <span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="n">test</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
 <span class="o">|</span><span class="w"> </span><span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">16</span><span class="p">.</span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">test</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">A4B6157319038724E3560894F7F932C8886EBFCF</span><span class="w"> </span><span class="o">|</span>
 <span class="o">+</span><span class="c1">----------------+-------------+-------------------------------------------+</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>이 한 장의 표에서 읽어야 할 것이 많습니다.</p>
 <div class="tablewrap"><table>
@@ -1604,15 +1628,15 @@ Server<span class="w"> </span>version:<span class="w"> </span><span class="m">10
 SELECT Host, User, plugin, authentication_string FROM mysql.user;</code></p>
 </blockquote>
 <h4 id="4-5--drop-user-test가-지운-것은-testlocalhost가-아니었다-메모-수정-포인트">4-5. ★ <code>DROP USER test</code>가 지운 것은 <code>test@localhost</code>가 아니었다 (메모 수정 포인트 ⑥)</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">                 </span><span class="c1">-- Query OK</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">                 </span><span class="c1">-- Query OK</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span>
 <span class="c1">-- → &#39;%&#39; | test 행이 사라짐. localhost·192.168.16.100은 그대로 남음</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>메모만 보면 "<code>drop user test</code>로 test를 지웠다"로 읽히지만, 실제로 지워진 것은 <strong><code>test@'%'</code> 한 개뿐</strong>입니다. 이유는 4-2절의 규칙 그대로 — <strong>호스트 생략 시 <code>'%'</code>가 기본</strong>이기 때문입니다.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="o">@</span><span class="n">localhost</span><span class="p">;</span><span class="w">       </span><span class="c1">-- 그다음 localhost 행이 사라짐</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">test</span><span class="o">@</span><span class="n">localhost</span><span class="p">;</span><span class="w">       </span><span class="c1">-- 그다음 localhost 행이 사라짐</span>
 <span class="c1">-- 남은 것: 192.168.16.100 | test</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>출력이 6행 → 5행으로 줄어드는 것이 그 증거입니다.</p>
 <blockquote>
@@ -1711,9 +1735,9 @@ SELECT USER(), CURRENT_USER();</code></p>
 <hr />
 <h3 id="5-mariadb-권한-관리--grant--revoke--show-grants">5. MariaDB 권한 관리 — GRANT / REVOKE / SHOW GRANTS</h3>
 <h4 id="5-1-권한-부여">5-1. 권한 부여</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;1234&#39;</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h5 id="on">권한 계층 — <code>ON</code> 뒤에 무엇을 쓰느냐가 범위를 정한다</h5>
 <div class="tablewrap"><table>
@@ -1754,10 +1778,10 @@ SELECT USER(), CURRENT_USER();</code></p>
 </table></div>
 <p>오늘 쓴 <code>ON test.*</code>는 데이터베이스 레벨이므로 <code>mysql.db</code>에 기록됩니다. <strong>전역 권한이 아닙니다.</strong></p>
 <h4 id="5-2-show-grants-출력-해부">5-2. <code>SHOW GRANTS</code> 출력 해부</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="p">;</span>
 <span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">root</span><span class="o">`@`</span><span class="n">localhost</span><span class="o">`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w"> </span><span class="o">|</span>
 <span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="n">PROXY</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w">                                        </span><span class="o">|</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -1785,10 +1809,10 @@ SELECT USER(), CURRENT_USER();</code></p>
 </tr>
 </tbody>
 </table></div>
-<div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
 <span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="o">|</span>
 <span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w">                     </span><span class="o">|</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <h4 id="grant-usage-on-가-항상-첫-줄에-나오는-이유"><code>GRANT USAGE ON *.*</code>가 항상 첫 줄에 나오는 이유</h4>
@@ -1824,12 +1848,12 @@ SELECT USER(), CURRENT_USER();</code></p>
 </table></div>
 <p>남의 권한을 보려면 <code>mysql</code> DB에 대한 <code>SELECT</code> 권한이 필요합니다.</p>
 <h4 id="5-3-revoke--권한만-뺀다-계정은-남는다-메모-보강-포인트">5-3. <code>REVOKE</code> — 권한만 뺀다, 계정은 남는다 (메모 보강 포인트 ⑦)</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
 
 <span class="k">SHOW</span><span class="w"> </span><span class="n">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="s1">&#39;hong&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
 <span class="o">|</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">hong</span><span class="o">`@`%`</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;*A4B6...&#39;</span><span class="w"> </span><span class="o">|</span>
 <span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>두 줄이던 것이 <strong>한 줄로 줄었고, USAGE만 남았습니다.</strong> 이 출력이 REVOKE의 성격을 정확히 보여줍니다.</p>
 <div class="tablewrap"><table>
@@ -1897,12 +1921,12 @@ SELECT USER(), CURRENT_USER();</code></p>
 </table></div>
 <hr />
 <h3 id="6-뷰view-실습에서-난-에러--error-1146">6. 뷰(VIEW) 실습에서 난 에러 — <code>ERROR 1146</code></h3>
-<div class="codehilite"><pre><span></span><code><span class="n">MariaDB</span><span class="w"> </span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ava</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">MariaDB</span><span class="w"> </span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ava</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
 <span class="n">ERROR</span><span class="w"> </span><span class="mi">1146</span><span class="w"> </span><span class="p">(</span><span class="mi">42</span><span class="n">S02</span><span class="p">):</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="s1">&#39;mysql.books&#39;</span><span class="w"> </span><span class="n">doesn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">exist</span>
 
 <span class="n">MariaDB</span><span class="w"> </span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
 <span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="n">affected</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="6-1-에러-메시지가-이미-원인을-말하고-있다">6-1. 에러 메시지가 이미 원인을 말하고 있다</h4>
 <div class="tablewrap"><table>
@@ -1957,7 +1981,7 @@ SELECT USER(), CURRENT_USER();</code></p>
 </tbody>
 </table></div>
 <p>따라서 의도한 문장은 이것입니다.</p>
-<div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
+<div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">library</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
 
 <span class="c1">-- 또는 DB를 바꾸지 않고 스키마를 명시</span>
@@ -1965,14 +1989,14 @@ SELECT USER(), CURRENT_USER();</code></p>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="err">\</span><span class="k">G</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>컬럼명 확인은 <code>DESC books;</code> 또는 <code>SHOW COLUMNS FROM books;</code> 한 줄이면 됩니다. <strong>뷰를 만들기 전에 원본 테이블 구조를 먼저 보는 것</strong>이 순서입니다.</p>
 </blockquote>
 <h4 id="6-3-drop-view-if-exists의-1-warning">6-3. <code>DROP VIEW IF EXISTS</code>의 "1 warning"</h4>
-<div class="codehilite"><pre><span></span><code>Query OK, 0 rows affected, 1 warning (0.000 sec)
-</code></pre></div>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Query OK, 0 rows affected, 1 warning (0.000 sec)
+</code></pre></div></div>
 
 <p><code>v_books</code>는 만들어진 적이 없으므로 지울 것이 없습니다. <code>IF EXISTS</code>가 있어 <strong>에러 대신 note</strong>가 발생했고, 그것이 <code>1 warning</code>으로 집계된 것입니다. 내용은 <code>SHOW WARNINGS;</code>로 볼 수 있습니다.</p>
 <div class="tablewrap"><table>
@@ -2017,9 +2041,9 @@ SELECT USER(), CURRENT_USER();</code></p>
 <li><strong>파랑 = PowerShell</strong>: <strong>틀렸습니다.</strong> 파란색은 <strong>일반 사용자(kali) 셸</strong>입니다.</li>
 </ul>
 <p>Kali는 2020.3 릴리스에서 <strong>비 root 사용자 프롬프트 색을 빨강에서 파랑으로 변경</strong>했고, 2020.4부터 <strong>기본 셸이 zsh</strong>입니다. 오늘 실습 출력의 프롬프트가 그 zsh 프롬프트입니다.</p>
-<div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
 └─$
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2104,19 +2128,19 @@ SELECT USER(), CURRENT_USER();</code></p>
 </tbody>
 </table></div>
 <p>더 확실한 확인 방법:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">192</span>.168.16.50<span class="w">   </span><span class="c1"># -D: 중복 주소 탐지(ARP 기반, ICMP 차단과 무관)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">192</span>.168.16.50<span class="w">   </span><span class="c1"># -D: 중복 주소 탐지(ARP 기반, ICMP 차단과 무관)</span>
 sudo<span class="w"> </span>nmap<span class="w"> </span>-sn<span class="w"> </span><span class="m">192</span>.168.16.0/24<span class="w">               </span><span class="c1"># 대역 전체 살아있는 호스트 스캔</span>
 ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w">                                </span><span class="c1"># ARP 캐시에 이미 보이는 이웃</span>
 arp<span class="w"> </span>-a
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <p>가장 안전한 것은 <strong>네트워크 관리자에게 할당 가능 대역을 확인</strong>하거나, 라우터의 <strong>DHCP 예약(고정 할당)</strong> 을 쓰는 것입니다. ARP는 L2에서 동작해 방화벽 정책의 영향을 거의 받지 않으므로 ping보다 신뢰도가 높습니다.</p>
 </blockquote>
 <h4 id="7-3-네트워크-인터페이스-확인">7-3. 네트워크 인터페이스 확인</h4>
-<div class="codehilite"><pre><span></span><code>ifconfig
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ifconfig
 ip<span class="w"> </span>ad<span class="w">          </span><span class="c1"># = ip addr = ip address show</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>메모: <code>eth0 &gt; 랜카드 이름</code></p>
 <div class="tablewrap"><table>
@@ -2180,16 +2204,16 @@ ip<span class="w"> </span>ad<span class="w">          </span><span class="c1"># 
 </blockquote>
 <h4 id="7-4-패키지-갱신-순서-메모-수정-포인트">7-4. 패키지 갱신 순서 (메모 수정 포인트 ⑪)</h4>
 <p>메모에는 이 순서로 적혀 있습니다.</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul<span class="w">     </span><span class="c1"># ← 먼저 install</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul<span class="w">     </span><span class="c1"># ← 먼저 install</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
-</code></pre></div>
+</code></pre></div></div>
 
 <p><strong>순서가 뒤바뀌었습니다.</strong> <code>apt update</code>로 패키지 목록을 먼저 받아야 설치가 최신 버전을 찾습니다. 특히 Kali는 <strong>롤링 릴리스</strong>라 목록이 며칠만 지나도 404를 냅니다.</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w">           </span><span class="c1"># 저장소 목록 갱신 → /var/lib/apt/lists/</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w">           </span><span class="c1"># 저장소 목록 갱신 → /var/lib/apt/lists/</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade<span class="w">     </span><span class="c1"># Kali 공식 권장. 의존성 변화까지 처리</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>&lt;패키지&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2263,7 +2287,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <h5 id="sudo-kill-apt-apt-get"><code>sudo kill apt apt-get</code>은 동작하지 않는다</h5>
 <p><code>kill</code>은 <strong>PID(숫자)</strong> 를 받습니다. 이름을 주면 <code>kill: apt: arguments must be process or job IDs</code> 에러입니다. 프로세스 이름으로 죽이려면 <code>pkill</code> 또는 <code>killall</code>입니다.</p>
 <h5 id="_7">올바른 순서 — 무작정 지우기 전에 "정말 아무도 안 쓰는지" 확인</h5>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 1) 누가 잡고 있는지 먼저 본다 (가장 중요)</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 1) 누가 잡고 있는지 먼저 본다 (가장 중요)</span>
 sudo<span class="w"> </span>lsof<span class="w"> </span>/var/lib/dpkg/lock-frontend
 sudo<span class="w"> </span>fuser<span class="w"> </span>-v<span class="w"> </span>/var/lib/dpkg/lock-frontend
 ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;apt|dpkg|unattended&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
@@ -2287,7 +2311,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>--fix-broken<span class="
 
 <span class="c1"># 6) 다시 시도</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <h4 id="dpkg-동작-중에-잠금-파일을-지우면-패키지-db가-깨진다">⚠️ dpkg 동작 <strong>중</strong>에 잠금 파일을 지우면 패키지 DB가 깨진다</h4>
@@ -2297,9 +2321,9 @@ sudo<span class="w"> </span>apt<span class="w"> </span>update
 <p>메모의 <code>sudo apt clean</code>은 <strong>잠금 해제와는 무관</strong>합니다. <code>apt clean</code>은 받아둔 .deb 캐시를 지우는 명령이며(디스크 확보에는 유용), 잠금 파일은 건드리지 않습니다. <code>sudo ls /var/lib/apt/lists</code>는 색인 파일 목록을 눈으로 확인한 것으로, 진단 단계로는 타당합니다.</p>
 <h4 id="7-6-chrome-설치-메모-수정-포인트">7-6. Chrome 설치 (메모 수정 포인트 ⑬)</h4>
 <p>메모:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google.com/linux/direct/google-chrome-stable_current_amd64.deb
-</code></pre></div>
+</code></pre></div></div>
 
 <p>두 줄 다 손볼 곳이 있습니다.</p>
 <div class="tablewrap"><table>
@@ -2324,10 +2348,10 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </tbody>
 </table></div>
 <p>올바른 절차:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/Downloads
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/Downloads
 wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google-chrome-stable_current_amd64.deb
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2357,11 +2381,11 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </blockquote>
 <h4 id="7-7-한글-입력과-폰트-메모-수정-포인트">7-7. 한글 입력과 폰트 (메모 수정 포인트 ⑭)</h4>
 <p>메모:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-hangul
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-ui-classic
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx-libs
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum*
-</code></pre></div>
+</code></pre></div></div>
 
 <blockquote>
 <h4 id="fcitx4버전는-debian에서-제거되었습니다">⚠️ <code>fcitx</code>(4버전)는 Debian에서 제거되었습니다</h4>
@@ -2369,14 +2393,14 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p>후속 프로젝트는 <strong>fcitx5</strong>입니다.</p>
 </blockquote>
 <p>현재 기준 올바른 설치:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx5<span class="w"> </span>fcitx5-hangul<span class="w"> </span>fcitx5-config-qt
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum<span class="w"> </span>fonts-nanum-coding<span class="w"> </span>fonts-noto-cjk
 
 <span class="c1"># 입력기 프레임워크를 fcitx5로 지정</span>
 im-config<span class="w"> </span>-n<span class="w"> </span>fcitx5
 <span class="c1"># 로그아웃 후 재로그인 (또는 재부팅) — 환경변수가 다시 읽혀야 적용됨</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2416,7 +2440,7 @@ im-config<span class="w"> </span>-n<span class="w"> </span>fcitx5
 <p><strong>한글이 깨져 보이는 것(폰트)과 한글을 못 치는 것(입력기)은 다른 문제</strong>입니다. 폰트만 깔면 표시는 되지만 입력은 안 되고, 입력기만 깔면 입력은 되지만 글자가 □로 보일 수 있습니다. 둘 다 필요합니다.</p>
 </blockquote>
 <h4 id="7-8-ping--출력-완전-해석">7-8. <code>ping</code> — 출력 완전 해석</h4>
-<div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>┌──(kali㉿kali-Attacker)-[~]
 └─$ ping 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=108 time=69.7 ms
@@ -2425,7 +2449,7 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 --- 8.8.8.8 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
 rtt min/avg/max/mdev = 68.620/69.005/69.740/0.450 ms
-</code></pre></div>
+</code></pre></div></div>
 
 <div class="tablewrap"><table>
 <thead>
@@ -2562,7 +2586,7 @@ rtt min/avg/max/mdev = 68.620/69.005/69.740/0.450 ms
 <hr />
 <h3 id="8-전체-실습-명령-시트">8. 전체 실습 명령 시트</h3>
 <h4 id="8-1-메모리커널시스템-정보">8-1. 메모리·커널·시스템 정보</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 메모리</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 메모리</span>
 free<span class="w"> </span>-h<span class="w">                    </span><span class="c1"># 권장 (사람 단위)</span>
 free<span class="w"> </span>-m<span class="w">                    </span><span class="c1"># MiB</span>
 free<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span><span class="m">2</span><span class="w">               </span><span class="c1"># 2초 간격 반복</span>
@@ -2591,10 +2615,10 @@ grep<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/vul
 df<span class="w"> </span>-h<span class="w"> </span><span class="p">;</span><span class="w"> </span>df<span class="w"> </span>-i<span class="w"> </span><span class="p">;</span><span class="w"> </span>df<span class="w"> </span>-T
 sudo<span class="w"> </span>du<span class="w"> </span>-xh<span class="w"> </span>/<span class="w"> </span>--max-depth<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
 sudo<span class="w"> </span>vgs<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>lvs<span class="w">        </span><span class="c1"># LVM 여유 공간</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="8-2-mariadb-계정권한">8-2. MariaDB 계정·권한</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- 접속</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1">-- 접속</span>
 <span class="n">sudo</span><span class="w"> </span><span class="n">mariadb</span><span class="w">                      </span><span class="c1">-- unix_socket (권장)</span>
 <span class="n">sudo</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="n">p</span>
 
@@ -2630,10 +2654,10 @@ sudo<span class="w"> </span>vgs<span class="w"> </span><span class="p">;</span><
 <span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">v_books</span><span class="err">\</span><span class="k">G</span>
 <span class="k">DROP</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">v_books</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">WARNINGS</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="8-3-kali-초기-설정">8-3. Kali 초기 설정</h4>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 신원·네트워크</span>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code><span class="c1"># 신원·네트워크</span>
 whoami<span class="w"> </span><span class="p">;</span><span class="w"> </span>id<span class="w"> </span>-u
 ip<span class="w"> </span>a<span class="w"> </span><span class="p">;</span><span class="w"> </span>ip<span class="w"> </span>r<span class="w"> </span><span class="p">;</span><span class="w"> </span>ip<span class="w"> </span>neigh
 sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>&lt;후보IP&gt;<span class="w">      </span><span class="c1"># IP 중복 확인</span>
@@ -2665,7 +2689,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fcitx5<span class="w"> </span>fcitx5-hangul<span class="w"> </span>fcitx5-config-qt
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fonts-nanum<span class="w"> </span>fonts-nanum-coding<span class="w"> </span>fonts-noto-cjk
 im-config<span class="w"> </span>-n<span class="w"> </span>fcitx5
-</code></pre></div>
+</code></pre></div></div>
 
 <h4 id="8-4-장애-진단-순서-요약">8-4. 장애 진단 순서 요약</h4>
 <div class="tablewrap"><table>
@@ -2931,6 +2955,22 @@ if(q){
     document.querySelectorAll('aside .part').forEach(p=>{p.style.display = v ? 'none' : '';});
   });
 }
+document.querySelectorAll('.code-copy').forEach(button=>{
+  button.addEventListener('click', async ()=>{
+    const code=button.closest('.code-shell')?.querySelector('code');
+    if(!code) return;
+    const value=code.innerText;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch(e){
+      const area=document.createElement('textarea');
+      area.value=value; document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
+    const old=button.textContent; button.textContent='복사됨';
+    setTimeout(()=>{button.textContent=old;},1200);
+  });
+});
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
