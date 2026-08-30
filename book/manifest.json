@@ -63,6 +63,13 @@
       "sources": ["notes/네트워크보안-통합Lab-결과보고서.md"]
     },
     {
+      "id": "personal-lab",
+      "title": "개인과제 전체 구축 Lab",
+      "part": "1부 · 네트워크",
+      "file": "personal-lab.html",
+      "sources": ["book/chapters/05-개인과제-전체-구축-Lab.md"]
+    },
+    {
       "id": "rocky-server",
       "title": "Rocky Linux 개인 서버",
       "part": "2부 · Linux·서버",

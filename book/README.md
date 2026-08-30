@@ -12,12 +12,12 @@ GitHub에서 원본 Markdown을 **한 권의 순서**로 읽기 위한 목차입
 | 부 | 학습 목표 | 장 |
 |---|---|---:|
 | 00. 시작하기 | 책 사용법, 전체 지도, 과정 개요 | 01–03 |
-| 1부. 네트워크·Cisco Packet Tracer | 패킷 흐름부터 IOS·Packet Tracer·라우팅·네트워크 보안까지 | 04–08 |
-| 2부. Linux·서버·Windows | Rocky Linux, 서비스 운영, 공유, 로그, Windows Server | 09–15 |
-| 3부. DB·웹 | MariaDB, 백업·복제, PHP 원격 연동 | 16–18 |
-| 4부. 운영·자동화 | 모니터링, 클라우드 기초, Python 자동화 | 19–20 |
-| 5부. 보안·모의해킹 | 네트워크·웹 보안, 도구, 취약점 검증, WAF·CTF | 21–24 |
-| 부록·자료 보관 | 상충 정리, 공식 기준, 색인, 용어, 원문 | 25–28 |
+| 1부. 네트워크·Cisco Packet Tracer | 패킷 흐름부터 IOS·Packet Tracer·라우팅·개인과제·네트워크 보안까지 | 04–09 |
+| 2부. Linux·서버·Windows | Rocky Linux, 서비스 운영, 공유, 로그, Windows Server | 10–16 |
+| 3부. DB·웹 | MariaDB, 백업·복제, PHP 원격 연동 | 17–19 |
+| 4부. 운영·자동화 | 모니터링, 클라우드 기초, Python 자동화 | 20–21 |
+| 5부. 보안·모의해킹 | 네트워크·웹 보안, 도구, 취약점 검증, WAF·CTF | 22–25 |
+| 부록·자료 보관 | 상충 정리, 공식 기준, 색인, 용어, 원문 | 26–29 |
 
 ## 00. 시작하기
 
@@ -36,8 +36,9 @@ GitHub에서 원본 Markdown을 **한 권의 순서**로 읽기 위한 목차입
 | 06 | 네트워크 핵심키워드 2 | [읽기](chapters/13-핵심키워드-네트워크-2.md) |
 | 07 | 네트워크 핵심키워드 3 | [읽기](chapters/14-핵심키워드-네트워크-3.md) |
 | 08 | 네트워크 보안 통합 Lab | [읽기](chapters/05-네트워크-보안-통합-Lab.md) |
+| 09 | 개인과제 전체 구축 Lab | [읽기](chapters/05-개인과제-전체-구축-Lab.md) |
 
-04장에는 기존 Cisco 실습 기록과 네트워크 개념 원고가 함께 연결됩니다. Packet Tracer 구성은 개념을 읽은 뒤 `show` 명령으로 상태를 확인하면서 진행합니다.
+04장에는 기존 Cisco 실습 기록과 네트워크 개념 원고가 함께 연결됩니다. 개인과제 Lab은 별도 장에서 빈 `.pkt` 파일부터 실제 명령·검증 순서로 이어집니다.
 
 > [!IMPORTANT]
 > 네트워크 장은 `주소 체계 → IOS CLI → Switching/VLAN → Routing → 서비스/보안 → 검증` 흐름입니다. 명령어를 먼저 복사하지 말고 토폴로지와 인터페이스 역할부터 확인하십시오.
@@ -46,37 +47,37 @@ GitHub에서 원본 Markdown을 **한 권의 순서**로 읽기 위한 목차입
 
 | 순서 | 장 | 장 지도 |
 |---:|---|---|
-| 09 | Rocky Linux 개인 서버 | [읽기](chapters/06-Rocky-Linux-개인-서버.md) |
-| 10 | NFS·Samba·SELinux·rsyslog·LogAnalyzer | [읽기](chapters/07-NFS-Samba-SELinux-rsyslog-LogAnalyzer.md) |
-| 11 | vi·프로토콜·Windows IIS | [읽기](chapters/08-vi-프로토콜-Windows-IIS.md) |
-| 12 | Linux 메모리·커널·MariaDB 계정·Kali | [읽기](chapters/09-Linux-메모리-커널-MariaDB-계정-Kali.md) |
-| 13 | Linux 서버 핵심키워드 1 | [읽기](chapters/15-핵심키워드-Linux-서버-1.md) |
-| 14 | Linux 서버 핵심키워드 2 | [읽기](chapters/16-핵심키워드-Linux-서버-2.md) |
-| 15 | Windows Server 핵심키워드 | [읽기](chapters/17-핵심키워드-Windows-Server.md) |
+| 10 | Rocky Linux 개인 서버 | [읽기](chapters/06-Rocky-Linux-개인-서버.md) |
+| 11 | NFS·Samba·SELinux·rsyslog·LogAnalyzer | [읽기](chapters/07-NFS-Samba-SELinux-rsyslog-LogAnalyzer.md) |
+| 12 | vi·프로토콜·Windows IIS | [읽기](chapters/08-vi-프로토콜-Windows-IIS.md) |
+| 13 | Linux 메모리·커널·MariaDB 계정·Kali | [읽기](chapters/09-Linux-메모리-커널-MariaDB-계정-Kali.md) |
+| 14 | Linux 서버 핵심키워드 1 | [읽기](chapters/15-핵심키워드-Linux-서버-1.md) |
+| 15 | Linux 서버 핵심키워드 2 | [읽기](chapters/16-핵심키워드-Linux-서버-2.md) |
+| 16 | Windows Server 핵심키워드 | [읽기](chapters/17-핵심키워드-Windows-Server.md) |
 
 ## 3부. DB·웹
 
 | 순서 | 장 | 장 지도 |
 |---:|---|---|
-| 16 | MariaDB SQL·백업·복제 | [읽기](chapters/10-MariaDB-SQL-백업-복제.md) |
-| 17 | 팀 웹·원격 MariaDB 연동 | [읽기](chapters/11-팀-웹-원격-MariaDB-연동.md) |
-| 18 | 데이터베이스 핵심키워드 | [읽기](chapters/18-핵심키워드-데이터베이스.md) |
+| 17 | MariaDB SQL·백업·복제 | [읽기](chapters/10-MariaDB-SQL-백업-복제.md) |
+| 18 | 팀 웹·원격 MariaDB 연동 | [읽기](chapters/11-팀-웹-원격-MariaDB-연동.md) |
+| 19 | 데이터베이스 핵심키워드 | [읽기](chapters/18-핵심키워드-데이터베이스.md) |
 
 ## 4부. 운영·자동화
 
 | 순서 | 장 | 장 지도 |
 |---:|---|---|
-| 19 | 모니터링·운영·클라우드 | [읽기](chapters/19-핵심키워드-모니터링-운영.md) |
-| 20 | Python·자동화 | [읽기](chapters/20-핵심키워드-Python-자동화.md) |
+| 20 | 모니터링·운영·클라우드 | [읽기](chapters/19-핵심키워드-모니터링-운영.md) |
+| 21 | Python·자동화 | [읽기](chapters/20-핵심키워드-Python-자동화.md) |
 
 ## 5부. 보안·모의해킹
 
 | 순서 | 장 | 장 지도 |
 |---:|---|---|
-| 21 | 보안·모의해킹 1 | [읽기](chapters/21-핵심키워드-보안-모의해킹-1.md) |
-| 22 | 보안·모의해킹 2 | [읽기](chapters/22-핵심키워드-보안-모의해킹-2.md) |
-| 23 | 보안·모의해킹 3 | [읽기](chapters/23-핵심키워드-보안-모의해킹-3.md) |
-| 24 | 보안·모의해킹 4 | [읽기](chapters/24-핵심키워드-보안-모의해킹-4.md) |
+| 22 | 보안·모의해킹 1 | [읽기](chapters/21-핵심키워드-보안-모의해킹-1.md) |
+| 23 | 보안·모의해킹 2 | [읽기](chapters/22-핵심키워드-보안-모의해킹-2.md) |
+| 24 | 보안·모의해킹 3 | [읽기](chapters/23-핵심키워드-보안-모의해킹-3.md) |
+| 25 | 보안·모의해킹 4 | [읽기](chapters/24-핵심키워드-보안-모의해킹-4.md) |
 
 허가된 실습 대상과 격리된 환경에서만 보안 도구를 실행합니다. 명령 실행 전 대상 범위와 원복 방법을 먼저 기록합니다.
 
@@ -87,10 +88,10 @@ GitHub에서 원본 Markdown을 **한 권의 순서**로 읽기 위한 목차입
 
 | 순서 | 자료 | 장 지도 |
 |---:|---|---|
-| 25 | 중복과 상충 정리 | [읽기](chapters/25-중복과-상충-정리.md) |
-| 26 | 공식 문서 대조 | [읽기](chapters/26-원문과-공식-문서-대조.md) |
-| 27 | 명령어 색인 | [읽기](chapters/27-명령어-색인.md) |
-| 28 | 용어집 | [읽기](chapters/28-용어집.md) |
+| 26 | 중복과 상충 정리 | [읽기](chapters/25-중복과-상충-정리.md) |
+| 27 | 공식 문서 대조 | [읽기](chapters/26-원문과-공식-문서-대조.md) |
+| 28 | 명령어 색인 | [읽기](chapters/27-명령어-색인.md) |
+| 29 | 용어집 | [읽기](chapters/28-용어집.md) |
 
 ## 원문·공식 기준
 

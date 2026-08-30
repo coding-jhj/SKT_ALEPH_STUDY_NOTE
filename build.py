@@ -66,6 +66,38 @@ AUTOLINK = re.compile(r"(?<![\"'=\w])<(https?://[^<>\s]+)>")
 NOT_HEADING = re.compile(r"←|[가-힣A-Za-z0-9)\]]\.$")
 
 
+def normalize_tilde_fences(md_text: str) -> str:
+    """물결표 fenced code를 표준 backtick fenced code로 통일합니다."""
+    out: list[str] = []
+    in_backtick = False
+    in_tilde = False
+    opening = re.compile(r"^(\s*)~{3,}([^\r\n]*)$")
+    closing = re.compile(r"^\s*~{3,}\s*$")
+    for line in md_text.split(chr(10)):
+        stripped = line.lstrip()
+        if not in_tilde and stripped.startswith("```"):
+            in_backtick = not in_backtick
+            out.append(line)
+            continue
+        if in_backtick:
+            out.append(line)
+            continue
+        if in_tilde:
+            if closing.match(line):
+                out.append("```")
+                in_tilde = False
+            else:
+                out.append(line)
+            continue
+        match = opening.match(line)
+        if match:
+            out.append(f"{match.group(1)}```{match.group(2)}")
+            in_tilde = True
+        else:
+            out.append(line)
+    return chr(10).join(out)
+
+
 def demote(md_text: str) -> tuple[str, str]:
     """장 제목(첫 h1)을 뽑아내고 나머지 제목 단계를 한 칸 내립니다.
 
@@ -73,6 +105,7 @@ def demote(md_text: str) -> tuple[str, str]:
     코드블록 밖으로 새어 나온 셸 주석(`# 설명`), C 전처리기(`#include`) 따위입니다.
     글자는 그대로 두고 마크다운이 제목으로 읽지 않게 escape 만 합니다.
     """
+    md_text = normalize_tilde_fences(md_text)
     title = ""
     out: list[str] = []
     in_fence = False
@@ -131,6 +164,7 @@ def anchor_headings(html_text: str) -> tuple[str, list[tuple[int, str, str]]]:
 
 def code_block_labels(md_text: str) -> list[str]:
     """Fenced code를 읽어 HTML/Notion에서 보여 줄 언어 라벨을 추론합니다."""
+    md_text = normalize_tilde_fences(md_text)
     blocks: list[tuple[str, str]] = []
     in_fence = False
     language = ""

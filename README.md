@@ -23,6 +23,7 @@
 |---|---|---|
 | 처음부터 시작 | [Markdown 책 목차](book/README.md) | GitHub에서 장별 Markdown을 책처럼 읽습니다 |
 | 네트워크 공부 | [네트워크·Cisco Packet Tracer](book/chapters/04-Cisco-Packet-Tracer-네트워크-심화.md) | 개념, IOS 명령, Packet Tracer, 라우팅·보안 흐름을 연결합니다 |
+| 개인과제 실습 | [개인과제 전체 구축 Lab](book/chapters/05-개인과제-전체-구축-Lab.md) | 빈 `.pkt` 파일부터 VLAN·HSRP·EIGRP·OSPF·NAT·ACL·VPN을 순서대로 구축합니다 |
 | 서버 공부 | [Rocky Linux 개인 서버](book/chapters/06-Rocky-Linux-개인-서버.md) | 설치부터 DNS·APM·공유·로그까지 실습합니다 |
 | 보안 공부 | [보안·모의해킹 1](book/chapters/21-핵심키워드-보안-모의해킹-1.md) | 네트워크 보안, 웹 취약점, 도구 실습을 단계별로 봅니다 |
 | 원문 확인 | [제공 Markdown 5개](book/chapters/originals/README.md) | 변환·편집된 장과 원래 받은 파일을 대조합니다 |
@@ -52,13 +53,14 @@
 
 ## 1부 · 네트워크 · Cisco Packet Tracer
 
-네트워크는 다음 순서로 읽습니다. 아래 04장은 기존 Cisco 실습 기록과 네트워크 개념 원고를 한 장에 이어 붙인 핵심 장입니다.
+네트워크는 다음 순서로 읽습니다. 04장에서 개념·명령을 익힌 뒤 개인과제 Lab에서 빈 `.pkt` 파일을 실제로 완성합니다.
 
 1. [네트워크·Cisco Packet Tracer](book/chapters/04-Cisco-Packet-Tracer-네트워크-심화.md) — 패킷 흐름, IPv4, 서브네팅, IOS CLI, 스위칭, 라우팅, DHCP, NAT/PAT, ACL, HSRP, VPN, IPv6
-2. [네트워크 핵심키워드 1](book/chapters/12-핵심키워드-네트워크-1.md) — TCP/UDP, 이더넷, IP 체계, 기본 장비
-3. [네트워크 핵심키워드 2](book/chapters/13-핵심키워드-네트워크-2.md) — VLAN, VTP, DHCP, OSPF, ACL·NAT·VPN
-4. [네트워크 핵심키워드 3](book/chapters/14-핵심키워드-네트워크-3.md) — IPv6, ASAv·ZFW, GNS3, Wireshark
-5. [네트워크 보안 통합 Lab](book/chapters/05-네트워크-보안-통합-Lab.md) — 구성 검증, 허용·차단 정책, 결과 기록
+2. [개인과제 전체 구축 Lab](book/chapters/05-개인과제-전체-구축-Lab.md) — 주소표부터 VLAN, HSRP, EIGRP, OSPF 재분배, DHCP, NAT, ACL, VPN까지 실제 구축
+3. [네트워크 핵심키워드 1](book/chapters/12-핵심키워드-네트워크-1.md) — TCP/UDP, 이더넷, IP 체계, 기본 장비
+4. [네트워크 핵심키워드 2](book/chapters/13-핵심키워드-네트워크-2.md) — VLAN, VTP, DHCP, OSPF, ACL·NAT·VPN
+5. [네트워크 핵심키워드 3](book/chapters/14-핵심키워드-네트워크-3.md) — IPv6, ASAv·ZFW, GNS3, Wireshark
+6. [네트워크 보안 통합 Lab](book/chapters/05-네트워크-보안-통합-Lab.md) — 구성 검증, 허용·차단 정책, 결과 기록
 
 실습 명령은 장비 이미지와 IOS 버전에 따라 달라질 수 있습니다. 반드시 `show` 명령으로 현재 상태를 확인하고, 보안 실습은 승인된 격리 환경에서만 실행합니다.
 

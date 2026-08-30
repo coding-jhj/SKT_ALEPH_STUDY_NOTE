@@ -79,54 +79,54 @@
 
 ## 2.1 Linux 셸
 
-~~~text
+```text
 [root@web ~]#
-~~~
+```
 
 이 화면에서는 운영체제 명령을 입력한다.
 
-~~~bash
+```bash
 systemctl start mariadb
 ls
 ls -l
 vi /etc/my.cnf.d/mariadb-server.cnf
 firewall-cmd --reload
 mysqldump -u root -p library > backup.sql
-~~~
+```
 
 프롬프트의 첫 root는 Linux 사용자이고 web은 Linux 호스트 이름이다.
 
 ## 2.2 MariaDB 클라이언트
 
-~~~text
+```text
 MariaDB [(none)]>
-~~~
+```
 
 이 화면에서는 SQL을 입력한다.
 
-~~~sql
+```sql
 CREATE DATABASE library;
 SHOW DATABASES;
 USE library;
 SELECT * FROM books;
-~~~
+```
 
 none은 아직 현재 데이터베이스를 선택하지 않았다는 의미다.
 
-~~~text
+```text
 MariaDB [library]>
-~~~
+```
 
 USE library를 실행하여 현재 세션의 데이터베이스가 library가 된 상태다.
 
 ## 2.3 세미콜론과 화살표 프롬프트
 
-~~~text
+```text
 MariaDB [library]> SELECT *
     -> FROM books
     -> WHERE available = TRUE
     -> ;
-~~~
+```
 
 화살표가 나오는 것은 SQL 문장이 아직 끝나지 않았다는 뜻이다. 세미콜론 또는 역슬래시 g를 입력하면 실행되고, 잘못 입력했다면 역슬래시 c로 현재 문장을 취소할 수 있다.
 
@@ -145,7 +145,7 @@ MariaDB [library]> SELECT *
 
 ## 3.2 서비스 명령
 
-~~~bash
+```bash
 # 현재 한 번 시작
 systemctl start mariadb
 
@@ -161,27 +161,27 @@ systemctl is-active mariadb
 
 # 설정 변경 후 재시작
 systemctl restart mariadb
-~~~
+```
 
 start와 enable은 다른 기능이다. start만 하면 현재 부팅에서 실행되지만 다음 부팅 때 자동 시작된다는 보장은 없다.
 
 재시작 실패 시:
 
-~~~bash
+```bash
 journalctl -u mariadb -n 100 --no-pager
-~~~
+```
 
 ## 3.3 접속 명령
 
-~~~bash
+```bash
 mariadb -u root -p
-~~~
+```
 
 수업에서 사용한 다음 이름도 Linux에서 호환 이름으로 동작할 수 있다.
 
-~~~bash
+```bash
 mysql -u root -p
-~~~
+```
 
 현재 MariaDB 공식 문서는 mariadb와 mariadb-dump를 중심으로 설명하며, mysql과 mysqldump는 기존 호환 명칭으로 남아 있다.
 
@@ -203,28 +203,28 @@ mysql -u root -p
 
 수업의 기본 명령:
 
-~~~sql
+```sql
 CREATE DATABASE library;
 SHOW DATABASES;
 USE library;
 SELECT DATABASE();
-~~~
+```
 
 한글 데이터가 들어갈 데이터베이스는 처음부터 문자셋과 콜레이션을 지정한다.
 
-~~~sql
+```sql
 CREATE DATABASE library
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 이미 존재할 수 있다면 IF NOT EXISTS를 사용한다.
 
-~~~sql
+```sql
 CREATE DATABASE IF NOT EXISTS library
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 데이터베이스의 문자셋은 새 테이블에 물려주는 기본값이다. 이미 만들어진 테이블의 문자셋까지 자동으로 바꾸지는 않는다.
 
@@ -232,7 +232,7 @@ CREATE DATABASE IF NOT EXISTS library
 
 수업에서 의도한 구조:
 
-~~~sql
+```sql
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
@@ -240,11 +240,11 @@ CREATE TABLE books (
     published_year INT,
     available BOOLEAN DEFAULT TRUE
 );
-~~~
+```
 
 한글 저장을 명시한 권장 형태:
 
-~~~sql
+```sql
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE books (
 ) ENGINE=InnoDB
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 ## 4.3 열 정의
 
@@ -275,26 +275,26 @@ AUTO_INCREMENT와 PRIMARY KEY를 함께 쓰면 사용자가 id를 매번 직접 
 
 잘못된 표현:
 
-~~~sql
+```sql
 id INT AUTO_INCREAMENT PRIMARY KEY
-~~~
+```
 
 올바른 표현:
 
-~~~sql
+```sql
 id INT AUTO_INCREMENT PRIMARY KEY
-~~~
+```
 
 AUTO_INCREAMENT는 존재하지 않는 키워드이므로 데이터 문제가 아니라 SQL 구문 오류가 발생한다.
 
 ## 4.5 구조 확인
 
-~~~sql
+```sql
 SHOW TABLES;
 DESC books;
 DESCRIBE books;
 SHOW CREATE TABLE books;
-~~~
+```
 
 DESC는 열의 큰 구조를 보여 주고, SHOW CREATE TABLE은 엔진·문자셋·콜레이션·제약조건까지 확인하기 좋다.
 
@@ -326,28 +326,28 @@ utf8mb4는 유니코드 문자를 최대 4바이트로 저장할 수 있어 한�
 
 필기의 오류:
 
-~~~text
+```text
 ERROR 1366 (22007): Incorrect string value: '\xEB\x8D\xB0\xEB\xAF\xB8...' for column library.books.title
-~~~
+```
 
 dump의 테이블 정의:
 
-~~~sql
+```sql
 ) ENGINE=InnoDB AUTO_INCREMENT=4
   DEFAULT CHARSET=latin1
   COLLATE=latin1_swedish_ci;
-~~~
+```
 
 이 기록을 보면 UTF-8로 입력된 한글을 latin1 열에 저장하려고 한 것이 주요 원인이다. 연결 문자셋 문제도 함께 확인해야 하지만, 테이블이 latin1인 것은 확실한 문제다.
 
 ## 5.4 현재 상태 확인
 
-~~~sql
+```sql
 SHOW CREATE DATABASE library;
 SHOW CREATE TABLE books;
 SHOW VARIABLES LIKE 'character_set%';
 SHOW VARIABLES LIKE 'collation%';
-~~~
+```
 
 특히 다음을 구분한다.
 
@@ -357,7 +357,7 @@ SHOW VARIABLES LIKE 'collation%';
 
 ## 5.5 새로 만드는 경우
 
-~~~sql
+```sql
 CREATE DATABASE library
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -373,39 +373,39 @@ CREATE TABLE books (
 ) ENGINE=InnoDB
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 ## 5.6 이미 만든 객체를 수정하는 경우
 
 데이터베이스 기본값:
 
-~~~sql
+```sql
 ALTER DATABASE library
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 기존 테이블:
 
-~~~sql
+```sql
 ALTER TABLE books
   CONVERT TO CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-~~~
+```
 
 ALTER DATABASE는 앞으로 새로 만드는 객체의 기본값을 바꾸고, ALTER TABLE CONVERT는 기존 테이블 열을 변환한다. 중요한 데이터가 있으면 먼저 백업한다.
 
 현재 접속 설정:
 
-~~~sql
+```sql
 SET NAMES utf8mb4;
-~~~
+```
 
 또는:
 
-~~~bash
+```bash
 mariadb --default-character-set=utf8mb4 -u root -p
-~~~
+```
 
 SET NAMES는 현재 연결의 client·connection·result 문자셋을 설정한다. latin1 테이블을 자동으로 utf8mb4로 변환하는 명령은 아니다.
 
@@ -413,9 +413,9 @@ SET NAMES는 현재 연결의 client·connection·result 문자셋을 설정한�
 
 dump에 다음 문장이 있어도:
 
-~~~sql
+```sql
 SET NAMES utf8mb4;
-~~~
+```
 
 뒤의 CREATE TABLE이 DEFAULT CHARSET=latin1이면 테이블은 latin1으로 생성될 수 있다. 복원 연결의 문자셋과 테이블 저장 문자셋은 별도로 확인해야 한다.
 
@@ -425,18 +425,18 @@ SET NAMES utf8mb4;
 
 ## 6.1 INSERT
 
-~~~sql
+```sql
 INSERT INTO books
     (title, author, published_year, available)
 VALUES
     ('demian', 'herman', 1919, TRUE);
-~~~
+```
 
 문자열은 작은따옴표, 숫자는 보통 따옴표 없이 입력한다. 열 목록을 명시하면 열 순서 변경이나 새 열 추가에 안전하다.
 
 수업 데이터:
 
-~~~sql
+```sql
 INSERT INTO books (title, author, published_year, available)
 VALUES ('demian', 'herman', 1919, TRUE);
 
@@ -445,40 +445,40 @@ VALUES ('young prince', 'juiperi', 1943, TRUE);
 
 INSERT INTO books (title, author, published_year, available)
 VALUES ('database essential', 'gil dong', 2026, FALSE);
-~~~
+```
 
 여러 행을 한 번에 입력할 수도 있다.
 
-~~~sql
+```sql
 INSERT INTO books (title, author, published_year, available)
 VALUES
   ('demian', 'herman', 1919, TRUE),
   ('young prince', 'juiperi', 1943, TRUE),
   ('database essential', 'gil dong', 2026, FALSE);
-~~~
+```
 
 id를 생략했으므로 AUTO_INCREMENT가 1, 2, 3을 자동 생성했다.
 
 ## 6.2 SELECT 기본
 
-~~~sql
+```sql
 SELECT 열1, 열2
 FROM 테이블
 WHERE 조건;
-~~~
+```
 
 모든 열:
 
-~~~sql
+```sql
 SELECT * FROM books;
-~~~
+```
 
 실제 프로그램에서는 필요한 열을 명시하면 결과 구조를 예측하기 쉽다.
 
-~~~sql
+```sql
 SELECT id, title, available
 FROM books;
-~~~
+```
 
 ## 6.3 수업 결과
 
@@ -496,20 +496,20 @@ FROM books;
 
 ## 7.1 WHERE와 비교 연산자
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE published_year >= 2000;
-~~~
+```
 
 결과는 2026년 행 하나다.
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE author = 'gil dong'
   AND available = FALSE;
-~~~
+```
 
 결과는 database essential 하나다.
 
@@ -526,12 +526,12 @@ WHERE author = 'gil dong'
 
 AND는 모든 조건이 참이어야 하고 OR는 하나라도 참이면 된다.
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE author = 'gil dong'
    OR available = TRUE;
-~~~
+```
 
 이 쿼리는 세 행 모두를 반환한다.
 
@@ -543,45 +543,45 @@ WHERE author = 'gil dong'
 
 AND가 OR보다 먼저 평가되는 우선순위에 의존하지 말고 괄호를 명시한다.
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE (author = 'gil dong' OR author = 'herman')
   AND available = TRUE;
-~~~
+```
 
 ## 7.3 BETWEEN
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE published_year BETWEEN 1900 AND 2000;
-~~~
+```
 
 BETWEEN은 양 끝값을 포함한다. 위 조건은 다음과 같은 의미다.
 
-~~~sql
+```sql
 WHERE published_year >= 1900
   AND published_year <= 2000
-~~~
+```
 
 결과는 1919와 1943년 행이다.
 
 ## 7.4 LIKE
 
-~~~sql
+```sql
 SELECT *
 FROM books
 WHERE title LIKE '%data%';
-~~~
+```
 
 퍼센트는 0개 이상의 임의 문자열, 밑줄은 정확히 한 문자를 뜻한다. 콜레이션에 따라 대소문자 구분 여부가 달라질 수 있다.
 
-~~~sql
+```sql
 SELECT * FROM books WHERE title LIKE 'data%';
 SELECT * FROM books WHERE title LIKE '%essential';
 SELECT * FROM books WHERE title LIKE 'd_ta';
-~~~
+```
 
 ## 7.5 NULL
 
@@ -589,22 +589,22 @@ NULL은 0이나 빈 문자열이 아니라 값이 없거나 알 수 없는 상�
 
 잘못된 비교:
 
-~~~sql
+```sql
 WHERE author = NULL
-~~~
+```
 
 올바른 비교:
 
-~~~sql
+```sql
 SELECT * FROM books WHERE title IS NULL;
 SELECT * FROM books WHERE title IS NOT NULL;
-~~~
+```
 
 title이 NOT NULL로 정의되어 있으므로 title IS NULL은 빈 결과가 되고, 현재 세 행은 모두 IS NOT NULL이다.
 
 ## 7.6 ORDER BY
 
-~~~sql
+```sql
 SELECT *
 FROM books
 ORDER BY published_year ASC;
@@ -612,49 +612,49 @@ ORDER BY published_year ASC;
 SELECT *
 FROM books
 ORDER BY published_year DESC;
-~~~
+```
 
 ASC는 오름차순, DESC는 내림차순이며 ASC가 기본값이다. ORDER BY가 없으면 결과 순서를 보장한다고 가정하지 않는다.
 
 ## 7.7 LIMIT
 
-~~~sql
+```sql
 SELECT *
 FROM books
 ORDER BY published_year DESC
 LIMIT 1;
-~~~
+```
 
 정렬 후 첫 행 하나를 가져오므로 가장 최신 연도의 책이 나온다. LIMIT만 쓰면 어떤 행이 선택될지 명확하지 않다.
 
 오프셋:
 
-~~~sql
+```sql
 SELECT *
 FROM books
 ORDER BY published_year DESC
 LIMIT 1 OFFSET 1;
-~~~
+```
 
 ## 7.8 오타로 인한 오류
 
 잘못된 열 이름:
 
-~~~sql
+```sql
 ORDER BY pubished_year DESC
-~~~
+```
 
 실제 열은 published_year이다.
 
-~~~text
+```text
 ERROR 1054 (42S22): Unknown column 'pubished_year' in 'order clause'
-~~~
+```
 
 DESC books 또는 SHOW CREATE TABLE books로 실제 식별자를 확인한다.
 
 ## 7.9 집계 함수
 
-~~~sql
+```sql
 SELECT COUNT(*) AS total_books
 FROM books;
 
@@ -667,7 +667,7 @@ FROM books;
 SELECT MIN(published_year) AS oldest_year,
        MAX(published_year) AS newest_year
 FROM books;
-~~~
+```
 
 수업 결과:
 
@@ -702,26 +702,26 @@ COUNT(*)는 행 전체를 세고 COUNT(author)는 author가 NULL이 아닌 행�
 
 현재 공식 명칭:
 
-~~~bash
+```bash
 mariadb-dump -u root -p library > backup.sql
-~~~
+```
 
 수업에서 사용한 호환 명칭:
 
-~~~bash
+```bash
 mysqldump -u root -p library > backup.sql
-~~~
+```
 
 u는 사용자, p는 비밀번호 입력, library는 데이터베이스다.
 
 ## 8.3 데이터베이스 하나
 
-~~~bash
+```bash
 umask 077
 mariadb-dump -u root -p library > backup.sql
 ls -l backup.sql
 chmod 600 backup.sql
-~~~
+```
 
 dump는 다음을 포함한다.
 
@@ -734,39 +734,39 @@ dump는 다음을 포함한다.
 
 ## 8.4 전체 데이터베이스
 
-~~~bash
+```bash
 mariadb-dump -u root -p --all-databases > all_backup.sql
 chmod 600 all_backup.sql
-~~~
+```
 
 복원:
 
-~~~bash
+```bash
 mariadb -u root -p < all_backup.sql
-~~~
+```
 
 전체 백업에는 시스템 데이터베이스와 모든 사용자 데이터가 포함될 수 있으므로 복원 전 대상 상태를 확인한다.
 
 ## 8.5 특정 테이블
 
-~~~bash
+```bash
 mariadb-dump -u root -p library books > table_backup.sql
 mariadb -u root -p library < table_backup.sql
-~~~
+```
 
 첫 번째 library는 데이터베이스, 두 번째 books는 테이블이다. 이 dump는 library 데이터베이스가 이미 존재해야 한다.
 
 데이터베이스 생성 문장까지 포함하려면:
 
-~~~bash
+```bash
 mariadb-dump -u root -p --databases library > library_with_create.sql
-~~~
+```
 
 ## 8.6 수업에서 한 복원의 정확한 의미
 
-~~~bash
+```bash
 mariadb -u root -p library < backup.sql
-~~~
+```
 
 이는 library에 접속하여 SQL 파일을 차례로 실행한다는 뜻이다. 같은 서버의 library에서 dump하고 같은 library로 복원했다면 dump·restore 왕복 테스트이지, 다른 서버로의 migration이나 replication 성공 증명은 아니다.
 
@@ -774,7 +774,7 @@ mariadb -u root -p library < backup.sql
 
 기존 데이터가 있는 상태에서 replica를 초기화할 때:
 
-~~~bash
+```bash
 umask 077
 mariadb-dump -u root -p \
   --default-character-set=utf8mb4 \
@@ -783,7 +783,7 @@ mariadb-dump -u root -p \
   --databases library \
   > /root/library_for_replication.sql
 chmod 600 /root/library_for_replication.sql
-~~~
+```
 
 옵션:
 
@@ -813,19 +813,19 @@ replica가 primary MariaDB에 접속하려면 모두 충족해야 한다.
 
 ## 9.2 수업 명령
 
-~~~bash
+```bash
 firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd --reload
 firewall-cmd --list-all
-~~~
+```
 
 permanent는 영구 설정을 바꾸고 reload는 그 설정을 현재 런타임에 적용한다. permanent만 입력하고 reload하지 않으면 현재 실행 중인 규칙에 바로 반영되지 않을 수 있다.
 
-~~~bash
+```bash
 firewall-cmd --list-ports
 firewall-cmd --permanent --list-ports
 firewall-cmd --get-active-zones
-~~~
+```
 
 list-all은 zone의 인터페이스·서비스·포트를 함께 보여 준다.
 
@@ -833,24 +833,24 @@ list-all은 zone의 인터페이스·서비스·포트를 함께 보여 준다.
 
 실습망에서 전체를 열 수는 있지만, 운영 환경에서는 replica IP만 허용하는 편이 안전하다.
 
-~~~bash
+```bash
 firewall-cmd --permanent --zone=public \
   --add-rich-rule='rule family="ipv4" source address="<REPLICA_IP>/32" port port="3306" protocol="tcp" accept'
 firewall-cmd --reload
-~~~
+```
 
 이미 전체 3306을 열었다면:
 
-~~~bash
+```bash
 firewall-cmd --permanent --zone=public --remove-port=3306/tcp
 firewall-cmd --reload
-~~~
+```
 
 ## 9.4 실제 수신 여부
 
-~~~bash
+```bash
 ss -lntp | grep 3306
-~~~
+```
 
 0.0.0.0:3306 또는 primary LAN IP가 보이면 외부 IPv4 수신이 가능하다. 127.0.0.1:3306만 보이면 외부에서 접속할 수 없다.
 
@@ -860,11 +860,11 @@ MariaDB가 3306을 수신하고 있는지와 firewalld가 허용하는 것은 �
 
 replica에서 복제 전에 직접 접속한다.
 
-~~~bash
+```bash
 mariadb -h <PRIMARY_IP> -P 3306 \
   -u repl -p \
   -e "SELECT 1;"
-~~~
+```
 
 이 테스트가 실패한 상태에서 CHANGE MASTER TO만 반복해도 복제는 성공하지 않는다.
 
@@ -894,12 +894,12 @@ Migration은 서비스와 데이터를 다른 시스템으로 옮기는 작업�
 
 복제 흐름:
 
-~~~mermaid
+```mermaid
 flowchart LR
     P["Primary<br/>변경 실행"] --> B["Binary log<br/>이벤트 기록"]
     B --> I["Replica I/O thread<br/>relay log 기록"]
     I --> S["Replica SQL thread<br/>변경 적용"]
-~~~
+```
 
 replica는 원본 데이터 파일을 공유하는 것이 아니라, 원본의 변경 이벤트를 받아 자기 서버에서 실행한다.
 
@@ -929,11 +929,11 @@ replica가 시작한 binary log 좌표 이후의 이벤트만 적용된다. prim
 
 binary log는 데이터 파일 복사본이 아니라 데이터·구조 변경 이벤트를 기록하는 로그다.
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'log_bin';
 SHOW BINARY LOGS;
 SHOW MASTER STATUS;
-~~~
+```
 
 SHOW MASTER STATUS는 현재 접속한 서버의 binary log 상태다. replica 설정에 사용할 파일·위치는 반드시 primary에서 확인해야 한다.
 
@@ -941,13 +941,13 @@ SHOW MASTER STATUS는 현재 접속한 서버의 binary log 상태다. replica �
 
 수업 파일:
 
-~~~bash
+```bash
 vi /etc/my.cnf.d/mariadb-server.cnf
-~~~
+```
 
 예시:
 
-~~~ini
+```ini
 [mysqld]
 server-id=1
 log_bin=/var/log/mysql/mysql-bin
@@ -955,7 +955,7 @@ binlog_format=ROW
 sync_binlog=1
 expire_logs_days=10
 max_binlog_size=100M
-~~~
+```
 
 ## 11.3 설정값
 
@@ -963,9 +963,9 @@ max_binlog_size=100M
 
 복제 토폴로지에서 서버를 구별하는 숫자다. primary와 모든 replica가 서로 달라야 한다.
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'server_id';
-~~~
+```
 
 필기의 show variable like는 잘못된 표현이며 VARIABLES 복수형을 사용한다.
 
@@ -991,53 +991,53 @@ binary log 파일 회전의 대략적인 기준이다. 하나의 큰 트랜잭�
 
 기본값은 버전과 설정에 따라 다를 수 있으므로 확인한다.
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'binlog_format';
-~~~
+```
 
 ### sync_binlog
 
 binary log를 디스크에 동기화하는 빈도와 관련된다. 0은 운영체제 flush에 의존하고 1은 커밋마다 디스크 동기화를 강화하는 방향이며, 큰 값은 성능과 내구성을 절충한다.
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'sync_binlog';
-~~~
+```
 
 ## 11.4 binary log 디렉터리 권한
 
 필기의 chmod 777:
 
-~~~bash
+```bash
 mkdir /var/log/mysql
 chmod 777 /var/log/mysql
-~~~
+```
 
 동작할 수는 있지만 누구나 읽고 쓸 수 있는 과도한 권한이다. MariaDB 프로세스가 접근하도록 최소 권한을 사용한다.
 
-~~~bash
+```bash
 install -d -o mysql -g mysql -m 750 /var/log/mysql
-~~~
+```
 
 재시작에 실패하면:
 
-~~~bash
+```bash
 systemctl status mariadb
 journalctl -u mariadb -n 100 --no-pager
 ls -ld /var/log/mysql
-~~~
+```
 
 ## 11.5 replica 설정
 
-~~~ini
+```ini
 [mysqld]
 server-id=2
-~~~
+```
 
 선택적으로 직접 쓰기를 줄이기 위해:
 
-~~~ini
+```ini
 read_only=ON
-~~~
+```
 
 read_only는 관리자와 replication thread까지 모두 막는 절대적인 보안 장치가 아니다. 단일 primary·replica에서 replica 자체가 downstream source가 되지 않는다면 replica의 log_bin은 필수는 아니다. cascading replication에는 필요할 수 있다.
 
@@ -1053,40 +1053,40 @@ read_only는 관리자와 replication thread까지 모두 막는 절대적인 �
 
 필기에는 192.168.16.131과 192.168.16.21이 모두 MASTER_HOST로 등장한다. 같은 실습에서 둘을 동시에 쓸 수 없으므로 실제 primary에서 다음을 실행하여 하나를 확정한다.
 
-~~~bash
+```bash
 hostname
 ip -br address
 hostname -I
-~~~
+```
 
 ## 12.1 primary 준비
 
-~~~bash
+```bash
 systemctl enable --now mariadb
 install -d -o mysql -g mysql -m 750 /var/log/mysql
 vi /etc/my.cnf.d/mariadb-server.cnf
 systemctl restart mariadb
-~~~
+```
 
 설정:
 
-~~~ini
+```ini
 [mysqld]
 server-id=1
 log_bin=/var/log/mysql/mysql-bin
 binlog_format=ROW
 expire_logs_days=10
 max_binlog_size=100M
-~~~
+```
 
 확인:
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'server_id';
 SHOW VARIABLES LIKE 'log_bin';
 SHOW VARIABLES LIKE 'binlog_format';
 SHOW MASTER STATUS;
-~~~
+```
 
 SHOW MASTER STATUS가 비어 있으면 binary log가 켜지지 않았거나 현재 서버가 기대한 primary가 아닐 수 있다.
 
@@ -1094,23 +1094,23 @@ SHOW MASTER STATUS가 비어 있으면 binary log가 켜지지 않았거나 현�
 
 가능하면 replica IP를 제한한다.
 
-~~~sql
+```sql
 CREATE USER 'repl'@'<REPLICA_IP>'
   IDENTIFIED BY '<REPL_PASSWORD>';
 
 GRANT REPLICATION SLAVE
   ON *.*
   TO 'repl'@'<REPLICA_IP>';
-~~~
+```
 
 수업 형태:
 
-~~~sql
+```sql
 GRANT REPLICATION SLAVE
   ON *.*
   TO 'slave_db'@'%'
   IDENTIFIED BY 'slave_password';
-~~~
+```
 
 퍼센트는 Host 부분의 와일드카드다. 외부 접속을 자동으로 여는 것은 아니지만, 네트워크와 비밀번호가 허용되면 여러 출발지에서 매칭될 수 있어 운영 환경에는 넓은 권한이다.
 
@@ -1120,17 +1120,17 @@ GRANT와 CREATE USER는 즉시 반영되므로 보통 FLUSH PRIVILEGES가 필수
 
 primary:
 
-~~~bash
+```bash
 firewall-cmd --permanent --zone=public --add-port=3306/tcp
 firewall-cmd --reload
 ss -lntp | grep 3306
-~~~
+```
 
 replica:
 
-~~~bash
+```bash
 mariadb -h <PRIMARY_IP> -P 3306 -u repl -p -e "SELECT 1;"
-~~~
+```
 
 이 직접 접속이 먼저 성공해야 한다.
 
@@ -1138,42 +1138,42 @@ mariadb -h <PRIMARY_IP> -P 3306 -u repl -p -e "SELECT 1;"
 
 ### primary에서 현재 좌표 확인
 
-~~~sql
+```sql
 SHOW MASTER STATUS;
-~~~
+```
 
 예시:
 
-~~~text
+```text
 File: mysql-bin.000001
 Position: 328
-~~~
+```
 
 이 숫자는 예시다. 실제 값으로 바꾼다.
 
 ### replica server-id 설정
 
-~~~bash
+```bash
 vi /etc/my.cnf.d/mariadb-server.cnf
 systemctl restart mariadb
-~~~
+```
 
-~~~ini
+```ini
 [mysqld]
 server-id=2
-~~~
+```
 
 확인:
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'server_id';
-~~~
+```
 
 ### replica 연결 설정
 
 수업 환경에서 사용하는 명령:
 
-~~~sql
+```sql
 CHANGE MASTER TO
   MASTER_HOST='<PRIMARY_IP>',
   MASTER_USER='repl',
@@ -1181,28 +1181,28 @@ CHANGE MASTER TO
   MASTER_PORT=3306,
   MASTER_LOG_FILE='mysql-bin.000001',
   MASTER_LOG_POS=328;
-~~~
+```
 
 파일과 위치는 primary에서 확인한 실제 값으로 바꾼다.
 
 ### replica 시작
 
-~~~sql
+```sql
 START SLAVE;
-~~~
+```
 
 중지·초기화는 별도 명령이다.
 
-~~~sql
+```sql
 STOP SLAVE;
 RESET SLAVE ALL;
-~~~
+```
 
 최신 MariaDB 문서에서는 START REPLICA·STOP REPLICA·SHOW REPLICA STATUS 명칭도 사용한다. 수업 버전에서는 START SLAVE·SHOW SLAVE STATUS를 우선 사용한다.
 
 ### primary에서만 새 변경
 
-~~~sql
+```sql
 CREATE DATABASE repl_test
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -1218,15 +1218,15 @@ CREATE TABLE users (
 
 INSERT INTO users (name) VALUES ('hong');
 INSERT INTO users (name) VALUES ('lee');
-~~~
+```
 
 ### replica에서 확인
 
-~~~sql
+```sql
 SHOW DATABASES;
 USE repl_test;
 SELECT * FROM users ORDER BY id;
-~~~
+```
 
 replica에서 직접 CREATE DATABASE나 INSERT를 실행하면 복제 검증이 아니다.
 
@@ -1236,7 +1236,7 @@ primary에 이미 library가 있고 replica에는 없을 때:
 
 ### primary에서 dump
 
-~~~bash
+```bash
 umask 077
 mariadb-dump -u root -p \
   --default-character-set=utf8mb4 \
@@ -1246,14 +1246,14 @@ mariadb-dump -u root -p \
   > /root/library_for_replication.sql
 chmod 600 /root/library_for_replication.sql
 grep -n -i "CHANGE MASTER" /root/library_for_replication.sql
-~~~
+```
 
 ### replica로 복사·복원
 
-~~~bash
+```bash
 scp /root/library_for_replication.sql root@<REPLICA_IP>:/root/
 mariadb -u root -p < /root/library_for_replication.sql
-~~~
+```
 
 실제 작업에서는 복제 연결 상태와 대상 데이터가 실습용인지 먼저 확인한다.
 
@@ -1261,15 +1261,15 @@ mariadb -u root -p < /root/library_for_replication.sql
 
 dump 안의 주석 예:
 
-~~~text
+```text
 -- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=328;
-~~~
+```
 
 필기의 mysql-bin.000002 / 342, mysql-bin.000001 / 328, mysql-bin.000001 / 1105를 서로 섞어 쓰면 안 된다. 같은 snapshot에 대응하는 파일·위치 쌍을 사용한다.
 
 ### replica에서 연결
 
-~~~sql
+```sql
 CHANGE MASTER TO
   MASTER_HOST='<PRIMARY_IP>',
   MASTER_USER='repl',
@@ -1280,7 +1280,7 @@ CHANGE MASTER TO
 
 START SLAVE;
 SHOW SLAVE STATUS;
-~~~
+```
 
 ---
 
@@ -1290,21 +1290,21 @@ SHOW SLAVE STATUS;
 
 replica에서:
 
-~~~sql
+```sql
 SHOW SLAVE STATUS;
-~~~
+```
 
 가로 출력이 길면:
 
-~~~sql
+```sql
 SHOW SLAVE STATUS\G
-~~~
+```
 
 최신 문서 명칭:
 
-~~~sql
+```sql
 SHOW REPLICA STATUS\G
-~~~
+```
 
 ## 13.2 핵심 필드
 
@@ -1337,7 +1337,7 @@ replica에서 나온 좌표를 primary 좌표로 착각하지 않는다.
 
 primary에서만:
 
-~~~sql
+```sql
 CREATE DATABASE repl_verify
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -1351,16 +1351,16 @@ CREATE TABLE users (
 
 INSERT INTO users (name) VALUES ('hong');
 INSERT INTO users (name) VALUES ('lee');
-~~~
+```
 
 replica에서:
 
-~~~sql
+```sql
 SHOW SLAVE STATUS\G
 SHOW DATABASES;
 USE repl_verify;
 SELECT * FROM users ORDER BY id;
-~~~
+```
 
 기대 행:
 
@@ -1414,41 +1414,41 @@ CHANGE MASTER TO와 START SLAVE를 입력한 것만으로 성공이 아니다. s
 
 ## 15.1 서버 확인
 
-~~~bash
+```bash
 hostname
 ip -br address
-~~~
+```
 
-~~~sql
+```sql
 SELECT @@hostname, @@server_id, DATABASE();
-~~~
+```
 
 ## 15.2 서비스 확인
 
-~~~bash
+```bash
 systemctl is-active mariadb
 systemctl status mariadb
 journalctl -u mariadb -n 100 --no-pager
-~~~
+```
 
 ## 15.3 구조 확인
 
-~~~sql
+```sql
 SHOW DATABASES;
 USE library;
 SHOW TABLES;
 DESC books;
 SHOW CREATE TABLE books;
-~~~
+```
 
 ### Unknown database
 
 DB가 없는데 USE를 먼저 실행한 경우:
 
-~~~sql
+```sql
 CREATE DATABASE replitest;
 USE replitest;
-~~~
+```
 
 단, replica 검증 중에는 primary에서 먼저 생성했는지 확인한다.
 
@@ -1456,12 +1456,12 @@ USE replitest;
 
 데이터베이스만 만들고 테이블을 만들지 않은 경우:
 
-~~~sql
+```sql
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
-~~~
+```
 
 ### Unknown column
 
@@ -1469,10 +1469,10 @@ DESC로 실제 열 이름을 확인한다. pubished_year는 오타다.
 
 ## 15.4 문자셋 확인
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'character_set%';
 SHOW CREATE TABLE books;
-~~~
+```
 
 테이블을 utf8mb4로 변환하고 새 세션에서 SET NAMES 또는 default-character-set 옵션을 적용한다.
 
@@ -1480,23 +1480,23 @@ SHOW CREATE TABLE books;
 
 primary:
 
-~~~bash
+```bash
 ss -lntp | grep 3306
 firewall-cmd --get-active-zones
 firewall-cmd --list-all
-~~~
+```
 
 replica:
 
-~~~bash
+```bash
 mariadb -h <PRIMARY_IP> -P 3306 -u repl -p -e "SELECT 1;"
-~~~
+```
 
 ## 15.6 replication 상태 확인
 
-~~~sql
+```sql
 SHOW SLAVE STATUS\G
-~~~
+```
 
 ### 상태가 빈 결과
 
@@ -1519,10 +1519,10 @@ Last_SQL_Error를 본다. 초기 dump와 replica 데이터가 불일치하거나
 
 재설정이 필요할 때:
 
-~~~sql
+```sql
 STOP SLAVE;
 RESET SLAVE ALL;
-~~~
+```
 
 RESET SLAVE ALL은 relay log와 복제 메타데이터를 초기화한다. primary의 데이터베이스를 지우는 명령은 아니지만 replica의 진행 상태를 잃으므로 실습용 대상인지 확인한다.
 
@@ -1532,7 +1532,7 @@ RESET SLAVE ALL은 relay log와 복제 메타데이터를 초기화한다. prima
 
 ## 16.1 SQL
 
-~~~sql
+```sql
 CREATE DATABASE library
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -1557,46 +1557,46 @@ SELECT * FROM books WHERE published_year BETWEEN 1900 AND 2000;
 SELECT * FROM books WHERE title LIKE '%data%';
 SELECT * FROM books WHERE title IS NOT NULL;
 SELECT * FROM books ORDER BY published_year DESC LIMIT 1;
-~~~
+```
 
 ## 16.2 백업
 
-~~~bash
+```bash
 umask 077
 mariadb-dump -u root -p library > backup.sql
 chmod 600 backup.sql
 mariadb-dump -u root -p --all-databases > all_backup.sql
 mariadb-dump -u root -p library books > table_backup.sql
 mariadb -u root -p library < backup.sql
-~~~
+```
 
 ## 16.3 primary
 
-~~~ini
+```ini
 [mysqld]
 server-id=1
 log_bin=/var/log/mysql/mysql-bin
 binlog_format=ROW
 expire_logs_days=10
 max_binlog_size=100M
-~~~
+```
 
-~~~sql
+```sql
 SHOW VARIABLES LIKE 'server_id';
 SHOW VARIABLES LIKE 'log_bin';
 SHOW MASTER STATUS;
 CREATE USER 'repl'@'<REPLICA_IP>' IDENTIFIED BY '<REPL_PASSWORD>';
 GRANT REPLICATION SLAVE ON *.* TO 'repl'@'<REPLICA_IP>';
-~~~
+```
 
 ## 16.4 replica
 
-~~~ini
+```ini
 [mysqld]
 server-id=2
-~~~
+```
 
-~~~sql
+```sql
 CHANGE MASTER TO
   MASTER_HOST='<PRIMARY_IP>',
   MASTER_USER='repl',
@@ -1607,7 +1607,7 @@ CHANGE MASTER TO
 
 START SLAVE;
 SHOW SLAVE STATUS\G
-~~~
+```
 
 ## 16.5 성공 판정
 

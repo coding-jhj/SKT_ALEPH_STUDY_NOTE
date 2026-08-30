@@ -7,7 +7,7 @@
 
 ## 이 폴더의 역할
 
-- `01`–`28`: 전체 학습 과정의 장 지도
+- `01`–`29`: 전체 학습 과정의 장 지도
 - `SOURCES.md`: 네트워크·운영체제·보안 관련 공식 문서와 표준 링크
 - `originals/`: 사용자가 제공한 Markdown 5개 원문
 
@@ -19,5 +19,6 @@
 - [전체 과정 목차](../README.md)
 - [전체 순서표](../ORDER.md)
 - [목차 manifest](../manifest.json)
+- [개인과제 전체 구축 Lab](./05-개인과제-전체-구축-Lab.md)
 - [원문 보존](./originals/README.md)
 - [공식 출처](./SOURCES.md)

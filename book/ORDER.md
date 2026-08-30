@@ -12,26 +12,27 @@
 | 06 | 네트워크 | 네트워크 핵심키워드 2 | [장 지도](chapters/13-핵심키워드-네트워크-2.md) | [열기](../docs/ch13.html) |
 | 07 | 네트워크 | 네트워크 핵심키워드 3 | [장 지도](chapters/14-핵심키워드-네트워크-3.md) | [열기](../docs/ch14.html) |
 | 08 | 네트워크 | 네트워크 보안 통합 Lab | [장 지도](chapters/05-네트워크-보안-통합-Lab.md) | [열기](../docs/ch05.html) |
-| 09 | Linux·서버 | Rocky Linux 개인 서버 | [장 지도](chapters/06-Rocky-Linux-개인-서버.md) | [열기](../docs/ch06.html) |
-| 10 | Linux·서버 | NFS·Samba·SELinux·rsyslog·LogAnalyzer | [장 지도](chapters/07-NFS-Samba-SELinux-rsyslog-LogAnalyzer.md) | [열기](../docs/ch07.html) |
-| 11 | Linux·서버 | vi·프로토콜·Windows IIS | [장 지도](chapters/08-vi-프로토콜-Windows-IIS.md) | [열기](../docs/ch08.html) |
-| 12 | Linux·서버 | Linux 메모리·커널·MariaDB 계정·Kali | [장 지도](chapters/09-Linux-메모리-커널-MariaDB-계정-Kali.md) | [열기](../docs/ch09.html) |
-| 13 | Linux·서버 | Linux 서버 핵심키워드 1 | [장 지도](chapters/15-핵심키워드-Linux-서버-1.md) | [열기](../docs/ch15.html) |
-| 14 | Linux·서버 | Linux 서버 핵심키워드 2 | [장 지도](chapters/16-핵심키워드-Linux-서버-2.md) | [열기](../docs/ch16.html) |
-| 15 | Linux·서버 | Windows Server 핵심키워드 | [장 지도](chapters/17-핵심키워드-Windows-Server.md) | [열기](../docs/ch17.html) |
-| 16 | DB·웹 | MariaDB SQL·백업·복제 | [장 지도](chapters/10-MariaDB-SQL-백업-복제.md) | [열기](../docs/ch10.html) |
-| 17 | DB·웹 | 팀 웹·원격 MariaDB 연동 | [장 지도](chapters/11-팀-웹-원격-MariaDB-연동.md) | [열기](../docs/ch11.html) |
-| 18 | DB·웹 | 데이터베이스 핵심키워드 | [장 지도](chapters/18-핵심키워드-데이터베이스.md) | [열기](../docs/ch18.html) |
-| 19 | 운영·자동화 | 모니터링·운영·클라우드 | [장 지도](chapters/19-핵심키워드-모니터링-운영.md) | [열기](../docs/ch19.html) |
-| 20 | 운영·자동화 | Python·자동화 | [장 지도](chapters/20-핵심키워드-Python-자동화.md) | [열기](../docs/ch20.html) |
-| 21 | 보안·모의해킹 | 보안·모의해킹 1 | [장 지도](chapters/21-핵심키워드-보안-모의해킹-1.md) | [열기](../docs/ch21.html) |
-| 22 | 보안·모의해킹 | 보안·모의해킹 2 | [장 지도](chapters/22-핵심키워드-보안-모의해킹-2.md) | [열기](../docs/ch22.html) |
-| 23 | 보안·모의해킹 | 보안·모의해킹 3 | [장 지도](chapters/23-핵심키워드-보안-모의해킹-3.md) | [열기](../docs/ch23.html) |
-| 24 | 보안·모의해킹 | 보안·모의해킹 4 | [장 지도](chapters/24-핵심키워드-보안-모의해킹-4.md) | [열기](../docs/ch24.html) |
-| 25 | 부록 | 중복과 상충 정리 | [장 지도](chapters/25-중복과-상충-정리.md) | [열기](../docs/ch25.html) |
-| 26 | 부록 | 공식 문서 대조 | [장 지도](chapters/26-원문과-공식-문서-대조.md) | [열기](../docs/ch26.html) |
-| 27 | 부록 | 명령어 색인 | [장 지도](chapters/27-명령어-색인.md) | [열기](../docs/ch27.html) |
-| 28 | 부록 | 용어집 | [장 지도](chapters/28-용어집.md) | [열기](../docs/ch28.html) |
+| 09 | 네트워크 | 개인과제 전체 구축 Lab | [장 지도](chapters/05-개인과제-전체-구축-Lab.md) | [열기](../docs/personal-lab.html) |
+| 10 | Linux·서버 | Rocky Linux 개인 서버 | [장 지도](chapters/06-Rocky-Linux-개인-서버.md) | [열기](../docs/ch06.html) |
+| 11 | Linux·서버 | NFS·Samba·SELinux·rsyslog·LogAnalyzer | [장 지도](chapters/07-NFS-Samba-SELinux-rsyslog-LogAnalyzer.md) | [열기](../docs/ch07.html) |
+| 12 | Linux·서버 | vi·프로토콜·Windows IIS | [장 지도](chapters/08-vi-프로토콜-Windows-IIS.md) | [열기](../docs/ch08.html) |
+| 13 | Linux·서버 | Linux 메모리·커널·MariaDB 계정·Kali | [장 지도](chapters/09-Linux-메모리-커널-MariaDB-계정-Kali.md) | [열기](../docs/ch09.html) |
+| 14 | Linux·서버 | Linux 서버 핵심키워드 1 | [장 지도](chapters/15-핵심키워드-Linux-서버-1.md) | [열기](../docs/ch15.html) |
+| 15 | Linux·서버 | Linux 서버 핵심키워드 2 | [장 지도](chapters/16-핵심키워드-Linux-서버-2.md) | [열기](../docs/ch16.html) |
+| 16 | Linux·서버 | Windows Server 핵심키워드 | [장 지도](chapters/17-핵심키워드-Windows-Server.md) | [열기](../docs/ch17.html) |
+| 17 | DB·웹 | MariaDB SQL·백업·복제 | [장 지도](chapters/10-MariaDB-SQL-백업-복제.md) | [열기](../docs/ch10.html) |
+| 18 | DB·웹 | 팀 웹·원격 MariaDB 연동 | [장 지도](chapters/11-팀-웹-원격-MariaDB-연동.md) | [열기](../docs/ch11.html) |
+| 19 | DB·웹 | 데이터베이스 핵심키워드 | [장 지도](chapters/18-핵심키워드-데이터베이스.md) | [열기](../docs/ch18.html) |
+| 20 | 운영·자동화 | 모니터링·운영·클라우드 | [장 지도](chapters/19-핵심키워드-모니터링-운영.md) | [열기](../docs/ch19.html) |
+| 21 | 운영·자동화 | Python·자동화 | [장 지도](chapters/20-핵심키워드-Python-자동화.md) | [열기](../docs/ch20.html) |
+| 22 | 보안·모의해킹 | 보안·모의해킹 1 | [장 지도](chapters/21-핵심키워드-보안-모의해킹-1.md) | [열기](../docs/ch21.html) |
+| 23 | 보안·모의해킹 | 보안·모의해킹 2 | [장 지도](chapters/22-핵심키워드-보안-모의해킹-2.md) | [열기](../docs/ch22.html) |
+| 24 | 보안·모의해킹 | 보안·모의해킹 3 | [장 지도](chapters/23-핵심키워드-보안-모의해킹-3.md) | [열기](../docs/ch23.html) |
+| 25 | 보안·모의해킹 | 보안·모의해킹 4 | [장 지도](chapters/24-핵심키워드-보안-모의해킹-4.md) | [열기](../docs/ch24.html) |
+| 26 | 부록 | 중복과 상충 정리 | [장 지도](chapters/25-중복과-상충-정리.md) | [열기](../docs/ch25.html) |
+| 27 | 부록 | 공식 문서 대조 | [장 지도](chapters/26-원문과-공식-문서-대조.md) | [열기](../docs/ch26.html) |
+| 28 | 부록 | 명령어 색인 | [장 지도](chapters/27-명령어-색인.md) | [열기](../docs/ch27.html) |
+| 29 | 부록 | 용어집 | [장 지도](chapters/28-용어집.md) | [열기](../docs/ch28.html) |
 
 ## 04장 원고 묶음
 
