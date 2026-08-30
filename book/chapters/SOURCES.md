@@ -5,6 +5,8 @@
 ## Cisco
 
 - [Packet Tracer 공식 학습 자료](https://www.netacad.com/learning-collections/cisco-packet-tracer?courseLang=en-US)
+- [Cisco IOS XE 17.x IP Routing Configuration Guide](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html)
+- [Cisco IOS XE 17 VLAN Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html)
 - [Cisco IOS XE ACL Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html)
 - [Cisco HSRP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html)
 - [Cisco Security for VPNs with IPsec](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-cfg-vpn-ipsec-0.html)
