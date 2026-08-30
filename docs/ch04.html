@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>260818 Cisco Packet Tracer 실습 정리 · SKT ALEPH 학습 노트</title>
+<title>네트워크·Cisco Packet Tracer · SKT ALEPH 학습 노트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -107,9 +107,10 @@ th{background:var(--accent-soft); font-weight:700}
   <div class="brand"><a href="index.html">SKT ALEPH 학습 노트</a></div>
   <div class="sub">IT 인프라 · 보안 과정</div>
   <input id="q" type="search" placeholder="목차 검색" aria-label="목차 검색">
-  <nav><div class="part">들어가기</div><a class="" href="ch01.html">01. 이 책의 사용법</a><a class="" href="ch02.html">02. 커리큘럼 지도</a><a class="" href="ch03.html">03. 과정 개요 (이미지 슬라이드 판독본)</a><div class="part">1부 · 네트워크</div><a class="cur" href="ch04.html">04. 260818 Cisco Packet Tracer 실습 정리</a><div class="inchap"><a class="lv3" href="#do를-붙이는-경우">do를 붙이는 경우</a><a class="lv3" href="#ospf-시작">OSPF 시작</a><a class="lv3" href="#network-등록-예">Network 등록 예</a><a class="lv3" href="#area-0">Area 0</a><a class="lv3" href="#abr">ABR</a><a class="lv3" href="#virtual-link">Virtual Link</a><a class="lv3" href="#single-area-주의">Single Area 주의</a><a class="lv3" href="#처음-r3">처음 R3</a><a class="lv3" href="#loopback-생성">Loopback 생성</a><a class="lv3" href="#직접-지정">직접 지정</a><a class="lv4" href="#clear-ip-ospf-process와-삭제-차이">clear ip ospf process와 삭제 차이</a><a class="lv3" href="#hello와-full의-관계">Hello와 FULL의 관계</a><a class="lv3" href="#serial">Serial</a><a class="lv3" href="#ethernet">Ethernet</a><a class="lv3" href="#lsdb">LSDB</a><a class="lv3" href="#lsa">LSA</a><a class="lv3" href="#standard-acl">Standard ACL</a><a class="lv3" href="#extended-acl">Extended ACL</a><a class="lv3" href="#icmp-규칙">ICMP 규칙</a><a class="lv4" href="#왜-ping은-가능한가">왜 Ping은 가능한가?</a><a class="lv4" href="#왜-out인가">왜 out인가?</a><a class="lv3" href="#show-ip-nat-translations">show ip nat translations</a><a class="lv3" href="#show-ip-nat-statistics">show ip nat statistics</a><a class="lv3" href="#routing-문제">Routing 문제</a><a class="lv3" href="#acl-문제">ACL 문제</a><a class="lv3" href="#ftp-문제">FTP 문제</a><a class="lv3" href="#nat-문제">NAT 문제</a><a class="lv3" href="#ospf">OSPF</a><a class="lv3" href="#eigrp">EIGRP</a><a class="lv3" href="#redistribution">Redistribution</a><a class="lv3" href="#standard-acl-2">Standard ACL</a><a class="lv3" href="#extended-acl-2">Extended ACL</a><a class="lv3" href="#named-acl">Named ACL</a><a class="lv3" href="#nat">NAT</a><a class="lv3" href="#nat-실습-추가--insideoutside-지정-dynamic-nat-확인-static-nat">NAT 실습 추가 — Inside/Outside 지정, Dynamic NAT 확인, Static NAT</a><a class="lv4" href="#1-nat-inside--outside-인터페이스-지정">1. NAT Inside / Outside 인터페이스 지정</a><a class="lv4" href="#2-show-ip-nat-statistics">2. show ip nat statistics</a><a class="lv4" href="#3-dynamic-nat이-실제로-동작한-결과">3. Dynamic NAT이 실제로 동작한 결과</a><a class="lv4" href="#4-nat-용어-4가지">4. NAT 용어 4가지</a><a class="lv4" href="#5-dynamic-nat-전체-설정-구조">5. Dynamic NAT 전체 설정 구조</a><a class="lv4" href="#6-static-nat-설정">6. Static NAT 설정</a><a class="lv4" href="#7-static-nat-직후-translation-table">7. Static NAT 직후 Translation Table</a><a class="lv4" href="#8-static-nat-이후-실제-ping-트래픽">8. Static NAT 이후 실제 Ping 트래픽</a><a class="lv4" href="#9-dynamic-nat과-static-nat-비교">9. Dynamic NAT과 Static NAT 비교</a><a class="lv4" href="#10-show-ip-nat-statistics와-show-ip-nat-translations-차이">10. show ip nat statistics와 show ip nat translations 차이</a><a class="lv4" href="#11-이번-nat-실습에서-확인한-전체-흐름">11. 이번 NAT 실습에서 확인한 전체 흐름</a><a class="lv4" href="#12-nat-점검-순서">12. NAT 점검 순서</a><a class="lv4" href="#13-nat에서-특히-주의할-점">13. NAT에서 특히 주의할 점</a><a class="lv4" href="#14-nat-한-문장-복습">14. NAT 한 문장 복습</a><a class="lv2" href="#gt-현재-실제로-만들어진-nat-주소-변환-테이블을-확인한다">&amp;gt; 현재 실제로 만들어진 NAT 주소 변환 테이블을 확인한다.</a><a class="lv3" href="#acl-핵심-원칙-요약">ACL 핵심 원칙 요약</a><a class="lv4" href="#분류-기준">분류 기준</a><a class="lv4" href="#acl-검사-순서">ACL 검사 순서</a><a class="lv4" href="#implicit-deny">Implicit Deny</a><a class="lv3" href="#nat-statistics-추가-확인">NAT Statistics 추가 확인</a><a class="lv4" href="#total-translations-1">Total translations: 1</a><a class="lv4" href="#왜-dynamic-nat은-0인가">왜 Dynamic NAT은 0인가?</a><a class="lv4" href="#hits-4">Hits: 4</a><a class="lv4" href="#misses-32">Misses: 32</a><a class="lv4" href="#expired-translations-24">Expired translations: 24</a><a class="lv4" href="#allocated-0-0">allocated 0 (0%)</a><a class="lv3" href="#현재-nat-상태-한눈에-보기">현재 NAT 상태 한눈에 보기</a><a class="lv3" href="#nat-statistics-읽는-순서">NAT Statistics 읽는 순서</a><a class="lv3" href="#1-vpn이란">1. VPN이란?</a><a class="lv3" href="#2-vpn의-대표적인-두-가지-형태">2. VPN의 대표적인 두 가지 형태</a><a class="lv3" href="#3-site-to-site-vpn">3. Site-to-Site VPN</a><a class="lv4" href="#주로-사용하는-상황">주로 사용하는 상황</a><a class="lv3" href="#4-remote-access-vpn">4. Remote Access VPN</a><a class="lv3" href="#5-site-to-site와-remote-access-비교">5. Site-to-Site와 Remote Access 비교</a><a class="lv3" href="#6-vpn-tunnel">6. VPN Tunnel</a><a class="lv3" href="#7-vpn에서-자주-사용하는-기술">7. VPN에서 자주 사용하는 기술</a><a class="lv4" href="#ipsec">IPsec</a><a class="lv4" href="#openvpn">OpenVPN</a><a class="lv4" href="#wireguard">WireGuard</a><a class="lv3" href="#8-pfsense">8. pfSense</a><a class="lv3" href="#9-utn-필기-확인--utm일-가능성이-높음">9. utn 필기 확인 — UTM일 가능성이 높음</a><a class="lv3" href="#10-pfsense와-utm의-관계를-이해하는-방법">10. pfSense와 UTM의 관계를 이해하는 방법</a><a class="lv3" href="#11-vpn-전체-그림">11. VPN 전체 그림</a><a class="lv3" href="#12-한-문장-복습">12. 한 문장 복습</a><a class="lv4" href="#vpn">VPN</a><a class="lv4" href="#site-to-site-vpn">Site-to-Site VPN</a><a class="lv4" href="#remote-access-vpn">Remote Access VPN</a><a class="lv4" href="#utm">UTM</a><a class="lv4" href="#pfsense">pfSense</a></div><a class="" href="ch05.html">05. 네트워크 보안 기초 통합 Lab 결과보고서</a><div class="part">2부 · 리눅스 서버</div><a class="" href="ch06.html">06. Rocky Linux 9 개인 서버랩 학습 노트</a><a class="" href="ch07.html">07. 2026-08-25 학습 노트 — NFS · Samba · SELinux · rsyslog · MariaDB · LogAnalyzer</a><a class="" href="ch08.html">08. 2026-08-27 보강 — vi 편집기 · 각종 프로토콜 · Windows IIS</a><a class="" href="ch09.html">09. 2026-08-28 학습 노트 — 리눅스 메모리·커널 파라미터(`free`/`sysctl`/`/proc`) · MariaDB 계정·권한 관리 · Kali Linux 초기 설정</a><div class="part">3부 · 데이터베이스</div><a class="" href="ch10.html">10. MariaDB 실습 학습 노트</a><a class="" href="ch11.html">11. 2026-08-28 학습 노트 — 팀 웹사이트(team-alpha)와 원격 MariaDB(kload) 연동</a><div class="part">핵심키워드 · 네트워크</div><a class="" href="ch12.html">12. 핵심키워드 · 네트워크 (1/3)</a><a class="" href="ch13.html">13. 핵심키워드 · 네트워크 (2/3)</a><a class="" href="ch14.html">14. 핵심키워드 · 네트워크 (3/3)</a><div class="part">핵심키워드 · 리눅스 서버</div><a class="" href="ch15.html">15. 핵심키워드 · 리눅스 서버 (1/2)</a><a class="" href="ch16.html">16. 핵심키워드 · 리눅스 서버 (2/2)</a><div class="part">핵심키워드 · 윈도우 서버</div><a class="" href="ch17.html">17. 핵심키워드 · 윈도우 서버</a><div class="part">핵심키워드 · 데이터베이스</div><a class="" href="ch18.html">18. 핵심키워드 · 데이터베이스</a><div class="part">핵심키워드 · 모니터링 · 운영</div><a class="" href="ch19.html">19. 핵심키워드 · 모니터링 · 운영 · 클라우드</a><div class="part">핵심키워드 · 파이썬 · 자동화</div><a class="" href="ch20.html">20. 핵심키워드 · 파이썬 · 자동화</a><div class="part">핵심키워드 · 보안 실습 · 모의해킹</div><a class="" href="ch21.html">21. 핵심키워드 · 보안 실습 · 모의해킹 (1/4)</a><a class="" href="ch22.html">22. 핵심키워드 · 보안 실습 · 모의해킹 (2/4)</a><a class="" href="ch23.html">23. 핵심키워드 · 보안 실습 · 모의해킹 (3/4)</a><a class="" href="ch24.html">24. 핵심키워드 · 보안 실습 · 모의해킹 (4/4)</a><div class="part">부록</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><a class="" href="ch26.html">26. 원문과 공식 문서가 어긋나는 곳</a><a class="" href="ch27.html">27. 명령어 색인</a><a class="" href="ch28.html">28. 용어집</a></nav>
+  <nav><div class="part">시작하기</div><a class="" href="ch01.html">01. 책 사용법</a><div class="part">시작하기</div><a class="" href="ch02.html">02. 전체 커리큘럼 지도</a><div class="part">시작하기</div><a class="" href="ch03.html">03. 과정 개요</a><div class="part">1부 · 네트워크</div><a class="cur" href="ch04.html">04. 네트워크·Cisco Packet Tracer</a><div class="inchap"><a class="lv2" href="#기존-cisco-실습-기록">기존 Cisco 실습 기록</a><a class="lv3" href="#do를-붙이는-경우">do를 붙이는 경우</a><a class="lv3" href="#ospf-시작">OSPF 시작</a><a class="lv3" href="#network-등록-예">Network 등록 예</a><a class="lv3" href="#area-0">Area 0</a><a class="lv3" href="#abr">ABR</a><a class="lv3" href="#virtual-link">Virtual Link</a><a class="lv3" href="#single-area-주의">Single Area 주의</a><a class="lv3" href="#처음-r3">처음 R3</a><a class="lv3" href="#loopback-생성">Loopback 생성</a><a class="lv3" href="#직접-지정">직접 지정</a><a class="lv4" href="#clear-ip-ospf-process와-삭제-차이">clear ip ospf process와 삭제 차이</a><a class="lv3" href="#hello와-full의-관계">Hello와 FULL의 관계</a><a class="lv3" href="#serial">Serial</a><a class="lv3" href="#ethernet">Ethernet</a><a class="lv3" href="#lsdb">LSDB</a><a class="lv3" href="#lsa">LSA</a><a class="lv3" href="#standard-acl">Standard ACL</a><a class="lv3" href="#extended-acl">Extended ACL</a><a class="lv3" href="#icmp-규칙">ICMP 규칙</a><a class="lv4" href="#왜-ping은-가능한가">왜 Ping은 가능한가?</a><a class="lv4" href="#왜-out인가">왜 out인가?</a><a class="lv3" href="#show-ip-nat-translations">show ip nat translations</a><a class="lv3" href="#show-ip-nat-statistics">show ip nat statistics</a><a class="lv3" href="#routing-문제">Routing 문제</a><a class="lv3" href="#acl-문제">ACL 문제</a><a class="lv3" href="#ftp-문제">FTP 문제</a><a class="lv3" href="#nat-문제">NAT 문제</a><a class="lv3" href="#ospf">OSPF</a><a class="lv3" href="#eigrp">EIGRP</a><a class="lv3" href="#redistribution">Redistribution</a><a class="lv3" href="#standard-acl-2">Standard ACL</a><a class="lv3" href="#extended-acl-2">Extended ACL</a><a class="lv3" href="#named-acl">Named ACL</a><a class="lv3" href="#nat">NAT</a><a class="lv3" href="#nat-실습-추가--insideoutside-지정-dynamic-nat-확인-static-nat">NAT 실습 추가 — Inside/Outside 지정, Dynamic NAT 확인, Static NAT</a><a class="lv4" href="#1-nat-inside--outside-인터페이스-지정">1. NAT Inside / Outside 인터페이스 지정</a><a class="lv4" href="#2-show-ip-nat-statistics">2. show ip nat statistics</a><a class="lv4" href="#3-dynamic-nat이-실제로-동작한-결과">3. Dynamic NAT이 실제로 동작한 결과</a><a class="lv4" href="#4-nat-용어-4가지">4. NAT 용어 4가지</a><a class="lv4" href="#5-dynamic-nat-전체-설정-구조">5. Dynamic NAT 전체 설정 구조</a><a class="lv4" href="#6-static-nat-설정">6. Static NAT 설정</a><a class="lv4" href="#7-static-nat-직후-translation-table">7. Static NAT 직후 Translation Table</a><a class="lv4" href="#8-static-nat-이후-실제-ping-트래픽">8. Static NAT 이후 실제 Ping 트래픽</a><a class="lv4" href="#9-dynamic-nat과-static-nat-비교">9. Dynamic NAT과 Static NAT 비교</a><a class="lv4" href="#10-show-ip-nat-statistics와-show-ip-nat-translations-차이">10. show ip nat statistics와 show ip nat translations 차이</a><a class="lv4" href="#11-이번-nat-실습에서-확인한-전체-흐름">11. 이번 NAT 실습에서 확인한 전체 흐름</a><a class="lv4" href="#12-nat-점검-순서">12. NAT 점검 순서</a><a class="lv4" href="#13-nat에서-특히-주의할-점">13. NAT에서 특히 주의할 점</a><a class="lv4" href="#14-nat-한-문장-복습">14. NAT 한 문장 복습</a><a class="lv2" href="#gt-현재-실제로-만들어진-nat-주소-변환-테이블을-확인한다">&amp;gt; 현재 실제로 만들어진 NAT 주소 변환 테이블을 확인한다.</a><a class="lv3" href="#acl-핵심-원칙-요약">ACL 핵심 원칙 요약</a><a class="lv4" href="#분류-기준">분류 기준</a><a class="lv4" href="#acl-검사-순서">ACL 검사 순서</a><a class="lv4" href="#implicit-deny">Implicit Deny</a><a class="lv3" href="#nat-statistics-추가-확인">NAT Statistics 추가 확인</a><a class="lv4" href="#total-translations-1">Total translations: 1</a><a class="lv4" href="#왜-dynamic-nat은-0인가">왜 Dynamic NAT은 0인가?</a><a class="lv4" href="#hits-4">Hits: 4</a><a class="lv4" href="#misses-32">Misses: 32</a><a class="lv4" href="#expired-translations-24">Expired translations: 24</a><a class="lv4" href="#allocated-0-0">allocated 0 (0%)</a><a class="lv3" href="#현재-nat-상태-한눈에-보기">현재 NAT 상태 한눈에 보기</a><a class="lv3" href="#nat-statistics-읽는-순서">NAT Statistics 읽는 순서</a><a class="lv3" href="#1-vpn이란">1. VPN이란?</a><a class="lv3" href="#2-vpn의-대표적인-두-가지-형태">2. VPN의 대표적인 두 가지 형태</a><a class="lv3" href="#3-site-to-site-vpn">3. Site-to-Site VPN</a><a class="lv4" href="#주로-사용하는-상황">주로 사용하는 상황</a><a class="lv3" href="#4-remote-access-vpn">4. Remote Access VPN</a><a class="lv3" href="#5-site-to-site와-remote-access-비교">5. Site-to-Site와 Remote Access 비교</a><a class="lv3" href="#6-vpn-tunnel">6. VPN Tunnel</a><a class="lv3" href="#7-vpn에서-자주-사용하는-기술">7. VPN에서 자주 사용하는 기술</a><a class="lv4" href="#ipsec">IPsec</a><a class="lv4" href="#openvpn">OpenVPN</a><a class="lv4" href="#wireguard">WireGuard</a><a class="lv3" href="#8-pfsense">8. pfSense</a><a class="lv3" href="#9-utn-필기-확인--utm일-가능성이-높음">9. utn 필기 확인 — UTM일 가능성이 높음</a><a class="lv3" href="#10-pfsense와-utm의-관계를-이해하는-방법">10. pfSense와 UTM의 관계를 이해하는 방법</a><a class="lv3" href="#11-vpn-전체-그림">11. VPN 전체 그림</a><a class="lv3" href="#12-한-문장-복습">12. 한 문장 복습</a><a class="lv4" href="#vpn">VPN</a><a class="lv4" href="#site-to-site-vpn">Site-to-Site VPN</a><a class="lv4" href="#remote-access-vpn">Remote Access VPN</a><a class="lv4" href="#utm">UTM</a><a class="lv4" href="#pfsense">pfSense</a><a class="lv2" href="#네트워크-개념공식-기준">네트워크 개념·공식 기준</a><a class="lv3" href="#0-이-노트-사용법">0. 이 노트 사용법</a><a class="lv3" href="#1-패킷이-움직이는-전체-그림">1. 패킷이 움직이는 전체 그림</a><a class="lv4" href="#11-캡슐화">1.1 캡슐화</a><a class="lv4" href="#12-같은-서브넷과-다른-서브넷">1.2 같은 서브넷과 다른 서브넷</a><a class="lv3" href="#2-ipv4서브네팅cidr">2. IPv4·서브네팅·CIDR</a><a class="lv4" href="#21-prefix-계산">2.1 prefix 계산</a><a class="lv4" href="#22-block-size와-and">2.2 block size와 AND</a><a class="lv4" href="#23-vlsm-설계">2.3 VLSM 설계</a><a class="lv3" href="#3-cisco-ios-cli와-packet-tracer">3. Cisco IOS CLI와 Packet Tracer</a><a class="lv4" href="#31-모드-전환과-저장">3.1 모드 전환과 저장</a><a class="lv4" href="#32-인터페이스-기본-구성">3.2 인터페이스 기본 구성</a><a class="lv3" href="#4-switching-vlantrunkstpsvi">4. Switching: VLAN·Trunk·STP·SVI</a><a class="lv4" href="#41-access와-trunk">4.1 Access와 Trunk</a><a class="lv4" href="#42-inter-vlan-routing">4.2 Inter-VLAN routing</a><a class="lv3" href="#5-routing-정적동적rip">5. Routing: 정적·동적·RIP</a><a class="lv4" href="#51-라우팅-테이블-읽기">5.1 라우팅 테이블 읽기</a><a class="lv4" href="#52-rip-v1v2">5.2 RIP v1/v2</a><a class="lv3" href="#6-eigrpospfredistribution">6. EIGRP·OSPF·Redistribution</a><a class="lv4" href="#61-eigrp-as-100">6.1 EIGRP AS 100</a><a class="lv4" href="#62-ospf-area-0">6.2 OSPF Area 0</a><a class="lv4" href="#63-redistribution-주의">6.3 Redistribution 주의</a><a class="lv3" href="#7-dhcpnatpatacl">7. DHCP·NAT·PAT·ACL</a><a class="lv4" href="#71-dhcp">7.1 DHCP</a><a class="lv4" href="#72-natpat">7.2 NAT/PAT</a><a class="lv4" href="#73-acl">7.3 ACL</a><a class="lv3" href="#8-hsrpfhrp">8. HSRP·FHRP</a><a class="lv3" href="#9-greipsec-vpn">9. GRE·IPsec VPN</a><a class="lv4" href="#91-gre">9.1 GRE</a><a class="lv4" href="#92-ipsec-구성-흐름">9.2 IPsec 구성 흐름</a><a class="lv3" href="#10-ipv6ndpslaacospfv3">10. IPv6·NDP·SLAAC·OSPFv3</a><a class="lv3" href="#11-개인과제-전체-구축-순서">11. 개인과제 전체 구축 순서</a><a class="lv3" href="#12-트러블슈팅-결정표">12. 트러블슈팅 결정표</a><a class="lv3" href="#13-최종-학습-체크">13. 최종 학습 체크</a><a class="lv3" href="#공식-출처">공식 출처</a></div><div class="part">1부 · 네트워크</div><a class="" href="ch12.html">05. 네트워크 핵심키워드 1</a><div class="part">1부 · 네트워크</div><a class="" href="ch13.html">06. 네트워크 핵심키워드 2</a><div class="part">1부 · 네트워크</div><a class="" href="ch14.html">07. 네트워크 핵심키워드 3</a><div class="part">1부 · 네트워크</div><a class="" href="ch05.html">08. 네트워크 보안 통합 Lab</a><div class="part">2부 · Linux·서버</div><a class="" href="ch06.html">09. Rocky Linux 개인 서버</a><div class="part">2부 · Linux·서버</div><a class="" href="ch07.html">10. NFS·Samba·SELinux·rsyslog·LogAnalyzer</a><div class="part">2부 · Linux·서버</div><a class="" href="ch08.html">11. vi·프로토콜·Windows IIS</a><div class="part">2부 · Linux·서버</div><a class="" href="ch09.html">12. Linux 메모리·커널·MariaDB 계정·Kali</a><div class="part">2부 · Linux·서버</div><a class="" href="ch15.html">13. Linux 서버 핵심키워드 1</a><div class="part">2부 · Linux·서버</div><a class="" href="ch16.html">14. Linux 서버 핵심키워드 2</a><div class="part">2부 · Linux·서버</div><a class="" href="ch17.html">15. Windows Server 핵심키워드</a><div class="part">3부 · DB·웹</div><a class="" href="ch10.html">16. MariaDB SQL·백업·복제</a><div class="part">3부 · DB·웹</div><a class="" href="ch11.html">17. 팀 웹·원격 MariaDB 연동</a><div class="part">3부 · DB·웹</div><a class="" href="ch18.html">18. 데이터베이스 핵심키워드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch19.html">19. 모니터링·운영·클라우드</a><div class="part">4부 · 운영·자동화</div><a class="" href="ch20.html">20. Python·자동화</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch21.html">21. 보안·모의해킹 1</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch22.html">22. 보안·모의해킹 2</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch23.html">23. 보안·모의해킹 3</a><div class="part">5부 · 보안·모의해킹</div><a class="" href="ch24.html">24. 보안·모의해킹 4</a><div class="part">부록·자료 보관</div><a class="" href="ch25.html">25. 중복과 상충 정리</a><div class="part">부록·자료 보관</div><a class="" href="ch26.html">26. 공식 문서 대조</a><div class="part">부록·자료 보관</div><a class="" href="ch27.html">27. 명령어 색인</a><div class="part">부록·자료 보관</div><a class="" href="ch28.html">28. 용어집</a><div class="part">원문 보존</div><a class="" href="archive-01.html">원문 01. 원문 01 · 260819 네트워크 수업 완전 정리</a><a class="" href="archive-02.html">원문 02. 원문 02 · Cisco Packet Tracer 개인과제 완성 가이드</a><a class="" href="archive-03.html">원문 03. 원문 03 · 서브네팅·라우팅·RIP 수업정리</a><a class="" href="archive-04.html">원문 04. 원문 04 · 운영체제와 네트워크보안 PDF 학습노트</a><a class="" href="archive-05.html">원문 05. 원문 05 · IT 인프라·운영체제·네트워크·보안 통합노트</a></nav>
 </aside>
-<main><div class="chapter-no">CHAPTER 04</div><h1>260818 Cisco Packet Tracer 실습 정리</h1><blockquote>
+<main><div class="chapter-no">CHAPTER 04</div><h1>네트워크·Cisco Packet Tracer</h1><h2 id="기존-cisco-실습-기록">기존 Cisco 실습 기록</h2>
+<blockquote>
 <p>범위: OSPF · EIGRP · Redistribution · ACL · FTP 테스트 · NAT<br />
 목적: 수업 중 실제로 입력한 명령과 출력 결과를 기준으로, 중복을 줄이고 <strong>왜 쓰는지 / 어떻게 확인하는지 / 어디서 틀리기 쉬운지</strong>까지 한 문서에 정리</p>
 </blockquote>
@@ -2392,7 +2393,545 @@ Site-to-Site VPN           Remote Access VPN
 <h4 id="pfsense">pfSense</h4>
 <blockquote>
 <p>방화벽, 라우팅, NAT, VPN 등의 네트워크 기능을 구성할 수 있는 방화벽 소프트웨어 플랫폼이다.</p>
-</blockquote><div class="nav"><a href="ch03.html"><span class="lbl">이전</span>과정 개요 (이미지 슬라이드 판독본)</a><a href="ch05.html"><span class="lbl">다음</span>네트워크 보안 기초 통합 Lab 결과보고서</a></div></main>
+</blockquote>
+<hr />
+<h2 id="네트워크-개념공식-기준">네트워크 개념·공식 기준</h2>
+<blockquote>
+<p>목적: 기존 수업 노트와 개인과제를 기반으로 네트워크를 <strong>이해 → 구성 → 검증 → 장애 분석</strong> 순서로 다시 학습합니다.</p>
+<p>표기: <code>[원문]</code> 기존 노트 내용, <code>[공식 확인]</code> 공식 문서·RFC 대조, <code>[실습 관찰]</code> Packet Tracer 또는 수업 실습에서 확인할 항목, <code>[확인 필요]</code> 장비 IOS·Packet Tracer 버전에 따라 재검증할 항목.</p>
+</blockquote>
+<h3 id="0-이-노트-사용법">0. 이 노트 사용법</h3>
+<p>각 Lab은 다음 순서로 진행합니다.</p>
+<ol>
+<li>토폴로지와 IP 주소표를 먼저 작성합니다.</li>
+<li>장비 이름·인터페이스·케이블을 고정합니다.</li>
+<li>L1/L2 상태를 확인한 뒤 L3 주소를 넣습니다.</li>
+<li>인접 장비 간 ping을 통과시킵니다.</li>
+<li>라우팅·보안 정책을 한 단계씩 추가합니다.</li>
+<li><code>show</code> 명령으로 상태를 확인하고, 마지막에 전체 통신을 시험합니다.</li>
+</ol>
+<p>Packet Tracer 명령이 실행된다는 사실은 실제 IOS XE 전체 기능을 보장하지 않습니다. 페이지마다 <strong>Packet Tracer 실습 가능 문법</strong>과 <strong>실제 IOS XE 기준</strong>을 나눠 기록합니다. <code>[확인 필요]</code>는 기억으로 채우지 않고 장비·버전으로 재검증합니다.</p>
+<h3 id="1-패킷이-움직이는-전체-그림">1. 패킷이 움직이는 전체 그림</h3>
+<h4 id="11-캡슐화">1.1 캡슐화</h4>
+<p>애플리케이션 데이터는 전송계층에서 TCP segment 또는 UDP datagram이 되고, 네트워크계층에서 IP packet, 데이터링크계층에서 Ethernet frame이 됩니다. 라우터는 L2 header를 벗기고 목적지 IP를 기준으로 다음 홉을 선택한 뒤 새 L2 header를 붙입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>계층</th>
+<th>핵심 식별자</th>
+<th>장비·프로토콜 예</th>
+<th>확인 질문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>이름·요청</td>
+<td>DNS, HTTP, SSH</td>
+<td>어떤 서비스인가?</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>port, TCP/UDP</td>
+<td>22, 53, 80, 443</td>
+<td>어느 프로세스인가?</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>source/destination IP</td>
+<td>IPv4, IPv6, ICMP</td>
+<td>어느 네트워크인가?</td>
+</tr>
+<tr>
+<td>Data Link</td>
+<td>MAC, VLAN</td>
+<td>Ethernet, 802.1Q</td>
+<td>같은 broadcast domain인가?</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>signal, cable</td>
+<td>copper, fiber, serial</td>
+<td>링크가 올라왔나?</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="12-같은-서브넷과-다른-서브넷">1.2 같은 서브넷과 다른 서브넷</h4>
+<p>같은 서브넷이면 호스트는 목적지 IP를 ARP 또는 IPv6 Neighbor Discovery로 MAC에 매핑해 직접 전송합니다. 다른 서브넷이면 기본 게이트웨이의 MAC으로 frame을 보내고, 라우터가 목적지 네트워크를 라우팅합니다.</p>
+<div class="codehilite"><pre><span></span><code>PC-A -&gt; (같은 subnet) -&gt; PC-B
+PC-A -&gt; default gateway -&gt; Router -&gt; next hop -&gt; 목적지 subnet
+</code></pre></div>
+
+<p>장애 발생 시 “ping이 안 된다”만 보지 않습니다. <code>IP 주소 → mask → ARP/MAC → gateway → routing table → ACL/NAT/VPN</code> 순서로 범위를 좁힙니다.</p>
+<h3 id="2-ipv4서브네팅cidr">2. IPv4·서브네팅·CIDR</h3>
+<h4 id="21-prefix-계산">2.1 prefix 계산</h4>
+<p><code>/n</code>은 앞에서부터 n개의 network bit가 1인 mask입니다. IPv4는 32 bit입니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Prefix</th>
+<th>Mask</th>
+<th style="text-align: right;">전체 주소</th>
+<th style="text-align: right;">일반적인 사용 가능 호스트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">/24</td>
+<td>255.255.255.0</td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">254</td>
+</tr>
+<tr>
+<td style="text-align: right;">/25</td>
+<td>255.255.255.128</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">126</td>
+</tr>
+<tr>
+<td style="text-align: right;">/26</td>
+<td>255.255.255.192</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">62</td>
+</tr>
+<tr>
+<td style="text-align: right;">/27</td>
+<td>255.255.255.224</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td style="text-align: right;">/30</td>
+<td>255.255.255.252</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">/31</td>
+<td>255.255.255.254</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">point-to-point 특례 확인</td>
+</tr>
+<tr>
+<td style="text-align: right;">/32</td>
+<td>255.255.255.255</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">단일 주소·host route</td>
+</tr>
+</tbody>
+</table></div>
+<p>일반적인 LAN 계산식은 <code>2^(32-prefix) - 2</code>입니다. <code>/31</code>, <code>/32</code>, 장비별 point-to-point 처리는 예외이므로 장비 문서와 실습 결과를 확인합니다.</p>
+<h4 id="22-block-size와-and">2.2 block size와 AND</h4>
+<p>예: <code>192.168.16.0/25</code>의 마지막 octet block size는 <code>256 - 128 = 128</code>입니다. 네트워크는 <code>0</code>, <code>128</code>에서 시작합니다.</p>
+<ul>
+<li><code>192.168.16.100/25</code> → <code>192.168.16.0/25</code></li>
+<li><code>192.168.16.200/25</code> → <code>192.168.16.128/25</code></li>
+<li>두 주소는 같은 <code>192.168.16.0/24</code> 안에 있지만 <code>/25</code> 기준 다른 subnet입니다.</li>
+</ul>
+<p>계산 절차:</p>
+<ol>
+<li>prefix를 mask로 바꿉니다.</li>
+<li>IP와 mask를 bitwise AND 합니다.</li>
+<li>host bit를 모두 0으로 만든 값이 network address입니다.</li>
+<li>host bit를 모두 1로 만든 값이 broadcast address입니다.</li>
+<li>두 호스트의 network address가 같을 때만 직접 통신으로 판단합니다.</li>
+</ol>
+<p>CIDR과 prefix aggregation의 표준 기준은 <a href="https://www.rfc-editor.org/info/rfc4632/">RFC 4632</a>입니다. 사설 주소 대역은 <a href="https://www.rfc-editor.org/info/rfc1918/">RFC 1918</a>을 기준으로 기록합니다.</p>
+<h4 id="23-vlsm-설계">2.3 VLSM 설계</h4>
+<p>부서별 요구 호스트 수를 큰 순서로 정렬합니다. 각 요구량에 맞는 최소 prefix를 배정한 뒤 다음 미사용 block으로 이동합니다. 주소표에는 반드시 <code>network / first usable / last usable / broadcast / gateway / VLAN</code>을 함께 기록합니다.</p>
+<h3 id="3-cisco-ios-cli와-packet-tracer">3. Cisco IOS CLI와 Packet Tracer</h3>
+<h4 id="31-모드-전환과-저장">3.1 모드 전환과 저장</h4>
+<div class="codehilite"><pre><span></span><code>Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# end
+R1# copy running-config startup-config
+</code></pre></div>
+
+<p>핵심 상태 확인:</p>
+<div class="codehilite"><pre><span></span><code>show running-config
+show startup-config
+show ip interface brief
+show interfaces description
+show cdp neighbors detail
+show version
+</code></pre></div>
+
+<p><code>running-config</code>는 RAM, <code>startup-config</code>는 재부팅 후 읽는 설정입니다. 실습 종료 전 저장 여부를 확인합니다.</p>
+<h4 id="32-인터페이스-기본-구성">3.2 인터페이스 기본 구성</h4>
+<div class="codehilite"><pre><span></span><code>interface gigabitEthernet0/0
+ description LAN-A
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+</code></pre></div>
+
+<p><code>administratively down</code>은 <code>shutdown</code> 상태입니다. <code>down/down</code>은 케이블·상대편·물리 링크를 먼저 확인합니다. <code>up/down</code>은 encapsulation, clocking, keepalive, 상대편 설정을 확인합니다.</p>
+<p>Serial DCE/DTE 실습에서는 DCE 쪽에 clock rate가 필요할 수 있습니다.</p>
+<div class="codehilite"><pre><span></span><code>show controllers serial 0/0/0
+interface serial0/0/0
+ clock rate 64000
+</code></pre></div>
+
+<p>장비 모델과 Packet Tracer 버전에 따라 인터페이스 이름·지원 명령이 다릅니다. 명령이 없으면 무리하게 대체하지 말고 모델을 기록합니다.</p>
+<h3 id="4-switching-vlantrunkstpsvi">4. Switching: VLAN·Trunk·STP·SVI</h3>
+<h4 id="41-access와-trunk">4.1 Access와 Trunk</h4>
+<div class="codehilite"><pre><span></span><code>vlan 10
+ name USERS
+interface fastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+exit
+
+interface gigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+</code></pre></div>
+
+<p>검증:</p>
+<div class="codehilite"><pre><span></span><code>show vlan brief
+show interfaces trunk
+show spanning-tree
+show mac address-table dynamic
+</code></pre></div>
+
+<p>Access port는 한 VLAN에 속하고, trunk는 여러 VLAN tag를 전달합니다. Native VLAN·allowed VLAN·양쪽 trunk 설정 불일치는 통신 실패 원인이 됩니다.</p>
+<h4 id="42-inter-vlan-routing">4.2 Inter-VLAN routing</h4>
+<p>Router-on-a-Stick:</p>
+<div class="codehilite"><pre><span></span><code>interface gigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+interface gigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+</code></pre></div>
+
+<p>L3 switch:</p>
+<div class="codehilite"><pre><span></span><code>ip routing
+interface gigabitEthernet1/0/1
+ no switchport
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+interface vlan 10
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+</code></pre></div>
+
+<p>SVI는 VLAN의 L3 인터페이스입니다. VLAN이 존재하지 않거나 access/trunk 경로가 없으면 SVI가 살아 있어도 호스트 통신은 되지 않습니다.</p>
+<h3 id="5-routing-정적동적rip">5. Routing: 정적·동적·RIP</h3>
+<h4 id="51-라우팅-테이블-읽기">5.1 라우팅 테이블 읽기</h4>
+<div class="codehilite"><pre><span></span><code>show ip route
+show ip route 192.168.30.0
+show ip protocols
+</code></pre></div>
+
+<p>라우터는 목적지 prefix가 가장 긴 경로를 우선 선택합니다. 같은 prefix 후보가 여러 개면 administrative distance로 출처 신뢰도를 비교하고, 같은 프로토콜 안에서는 metric으로 최적 경로를 비교합니다.</p>
+<p>정적·기본 경로:</p>
+<div class="codehilite"><pre><span></span><code>ip route 192.168.30.0 255.255.255.0 10.0.0.2
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+</code></pre></div>
+
+<h4 id="52-rip-v1v2">5.2 RIP v1/v2</h4>
+<p>RIP는 distance-vector 방식이며 hop count를 metric으로 사용합니다. RIPv2의 표준 정의는 <a href="https://www.rfc-editor.org/info/rfc2453/">RFC 2453</a>입니다.</p>
+<div class="codehilite"><pre><span></span><code>router rip
+ version 2
+ no auto-summary
+ network 10.0.0.0
+ network 192.168.10.0
+</code></pre></div>
+
+<p>확인:</p>
+<div class="codehilite"><pre><span></span><code>show ip protocols
+show ip route rip
+debug ip rip
+</code></pre></div>
+
+<p>수업 노트의 <code>send version 1</code> 같은 문법은 인터페이스별 송신 버전 설정과 관련됩니다. 전체 라우터 모드의 <code>version</code>과 구분하고, <code>show ip protocols</code> 결과로 실제 동작을 확인합니다.</p>
+<h3 id="6-eigrpospfredistribution">6. EIGRP·OSPF·Redistribution</h3>
+<h4 id="61-eigrp-as-100">6.1 EIGRP AS 100</h4>
+<div class="codehilite"><pre><span></span><code>router eigrp 100
+ network 10.0.0.0 0.0.0.3
+ network 192.168.10.0 0.0.0.255
+ no auto-summary
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show ip eigrp neighbors
+show ip eigrp topology
+show ip route eigrp
+</code></pre></div>
+
+<p>Wildcard mask는 subnet mask의 역입니다. <code>network</code> 범위를 너무 넓게 잡으면 의도하지 않은 인터페이스에서 adjacency가 형성될 수 있습니다.</p>
+<h4 id="62-ospf-area-0">6.2 OSPF Area 0</h4>
+<div class="codehilite"><pre><span></span><code>router ospf 1
+ router-id 1.1.1.1
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show ip ospf neighbor
+show ip ospf interface brief
+show ip ospf database
+show ip route ospf
+</code></pre></div>
+
+<p>OSPF는 link-state 방식입니다. 인접 관계 → LSDB → SPF 계산 순서로 이해합니다. Broadcast network에서는 DR/BDR 선출이 발생합니다. router-id 변경 후에는 프로세스 재시작이 필요할 수 있으므로 실습 전후 상태를 기록합니다.</p>
+<h4 id="63-redistribution-주의">6.3 Redistribution 주의</h4>
+<p>EIGRP와 OSPF를 재분배할 때는 양방향 재분배가 loop·suboptimal path를 만들 수 있습니다. metric 변환, route tagging, filtering을 설계하지 않은 <code>redistribute ...</code>는 실습 성공처럼 보여도 운영 구성으로 사용할 수 없습니다.</p>
+<h3 id="7-dhcpnatpatacl">7. DHCP·NAT·PAT·ACL</h3>
+<h4 id="71-dhcp">7.1 DHCP</h4>
+<div class="codehilite"><pre><span></span><code>ip dhcp excluded-address 192.168.10.1 192.168.10.20
+ip dhcp pool USERS
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show ip dhcp binding
+show ip dhcp pool
+</code></pre></div>
+
+<p>DHCP server가 다른 subnet에 있으면 <code>ip helper-address</code>를 검토합니다. 클라이언트 IP·gateway·DNS를 각각 확인합니다.</p>
+<h4 id="72-natpat">7.2 NAT/PAT</h4>
+<div class="codehilite"><pre><span></span><code>interface g0/0
+ ip nat inside
+interface g0/1
+ ip nat outside
+
+ip nat inside source static 192.168.10.10 203.0.113.10
+access-list 10 permit 192.168.10.0 0.0.0.255
+ip nat inside source list 10 interface g0/1 overload
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show ip nat translations
+show ip nat statistics
+clear ip nat translation *
+</code></pre></div>
+
+<p>NAT는 inside/outside 방향, 변환 대상 ACL, outside interface, return route를 함께 확인합니다. VPN traffic을 NAT하면 IPsec selector와 충돌할 수 있으므로 VPN exemption 또는 정책 순서를 별도 설계합니다.</p>
+<h4 id="73-acl">7.3 ACL</h4>
+<p>ACL은 위에서 아래로 first match를 적용하고, 마지막에 implicit deny가 있습니다. wildcard mask와 적용 방향을 주소표에 함께 기록합니다.</p>
+<div class="codehilite"><pre><span></span><code>ip access-list extended WEB-IN
+ permit tcp 198.51.100.0 0.0.0.255 host 192.168.10.10 eq 443
+ deny ip any any log
+interface g0/1
+ ip access-group WEB-IN in
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show access-lists
+show ip interface g0/1
+</code></pre></div>
+
+<p><code>permit ip any any</code>는 앞의 차단 규칙을 무력화할 수 있습니다. 전체 허용은 격리된 진단 Lab에서만 임시 사용하고, 최종 ACL에는 필요한 source·destination·service만 남깁니다. Cisco ACL 공식 가이드는 <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html">Cisco IOS XE ACL Configuration Guide</a>를 기준으로 합니다.</p>
+<h3 id="8-hsrpfhrp">8. HSRP·FHRP</h3>
+<div class="codehilite"><pre><span></span><code>interface g0/0
+ ip address 192.168.10.2 255.255.255.0
+ standby 10 ip 192.168.10.1
+ standby 10 priority 110
+ standby 10 preempt
+ standby 10 track g0/1 20
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show standby brief
+show standby
+</code></pre></div>
+
+<p>호스트 default gateway는 실제 라우터 주소가 아니라 virtual IP를 사용합니다. Cisco 문서에서 <code>standby ip</code>가 HSRP를 활성화하고 virtual IP가 선출에 사용됩니다. <a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html">Cisco HSRP Guide</a></p>
+<p>장애 Lab:</p>
+<ol>
+<li>R1/R2에 같은 virtual IP를 구성합니다.</li>
+<li>priority로 Active/Standby를 확인합니다.</li>
+<li>Active uplink을 shutdown합니다.</li>
+<li>tracking 감소와 재선출을 확인합니다.</li>
+<li>PC의 gateway는 바꾸지 않고 ping 지속 여부를 기록합니다.</li>
+</ol>
+<h3 id="9-greipsec-vpn">9. GRE·IPsec VPN</h3>
+<h4 id="91-gre">9.1 GRE</h4>
+<div class="codehilite"><pre><span></span><code>interface tunnel 0
+ ip address 10.255.0.1 255.255.255.252
+ tunnel source g0/1
+ tunnel destination 203.0.113.2
+</code></pre></div>
+
+<p>GRE는 라우팅 가능한 논리 터널을 만들지만 자체적으로 confidentiality·integrity·peer authentication을 제공하지 않습니다. <code>[공식 확인]</code> GRE over IPsec은 GRE를 IPsec으로 보호하는 별도 구성입니다.</p>
+<div class="codehilite"><pre><span></span><code>show interfaces tunnel 0
+show ip route
+traceroute 10.20.0.1
+</code></pre></div>
+
+<h4 id="92-ipsec-구성-흐름">9.2 IPsec 구성 흐름</h4>
+<p>일반적인 site-to-site 흐름은 다음과 같습니다.</p>
+<ol>
+<li>흥미 트래픽 ACL 정의</li>
+<li>IKE/ISAKMP policy 정의</li>
+<li>PSK 또는 인증 방식 정의</li>
+<li>IPsec transform/proposal 정의</li>
+<li>crypto map에 peer·ACL·transform 연결</li>
+<li>외부 interface에 crypto map 적용</li>
+<li>IKE/IPsec SA와 실제 통신 확인</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>crypto isakmp policy 10
+ encr aes
+ authentication pre-share
+ group 14
+crypto isakmp key &lt;LAB-PSK&gt; address 203.0.113.2
+
+access-list 110 permit ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+crypto ipsec transform-set LAB-SET esp-aes esp-sha-hmac
+crypto map LAB-MAP 10 ipsec-isakmp
+ set peer 203.0.113.2
+ set transform-set LAB-SET
+ match address 110
+interface g0/1
+ crypto map LAB-MAP
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show crypto isakmp sa
+show crypto ipsec sa
+show crypto session
+</code></pre></div>
+
+<p>실습 자료에 등장하는 <code>3des</code>, <code>md5</code> 등 legacy 알고리즘은 현재 권장 구성과 구분합니다. Packet Tracer 지원 여부는 버전별로 <code>[확인 필요]</code>입니다. Cisco IPsec 공식 문서는 <a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-cfg-vpn-ipsec-0.html">Cisco Security for VPNs with IPsec</a>를 사용합니다.</p>
+<h3 id="10-ipv6ndpslaacospfv3">10. IPv6·NDP·SLAAC·OSPFv3</h3>
+<p>IPv6 주소는 128 bit입니다. 연속 zero group 축약, 각 group의 leading zero 제거 규칙을 연습합니다. link-local <code>fe80::/10</code>은 인접 통신과 routing protocol에 사용될 수 있으며 interface scope가 필요할 수 있습니다.</p>
+<div class="codehilite"><pre><span></span><code>ipv6 unicast-routing
+interface g0/0
+ ipv6 address 2001:db8:10::1/64
+ ipv6 enable
+ no shutdown
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>show ipv6 interface brief
+show ipv6 neighbors
+show ipv6 route
+</code></pre></div>
+
+<p>IPv6는 ARP 대신 Neighbor Discovery를 사용합니다. RA를 통한 SLAAC, DHCPv6, 수동 주소 지정 차이를 구분합니다. 기준 문서는 <a href="https://www.rfc-editor.org/info/rfc8200/">RFC 8200 IPv6</a>, <a href="https://www.rfc-editor.org/rfc/rfc4861.html">RFC 4861 Neighbor Discovery</a>, <a href="https://www.rfc-editor.org/info/rfc4862/">RFC 4862 SLAAC</a>, <a href="https://www.rfc-editor.org/info/rfc5952/">RFC 5952 표현 규칙</a>입니다.</p>
+<p>OSPFv3는 구현에 따라 문법이 다릅니다.</p>
+<div class="codehilite"><pre><span></span><code>ipv6 router ospf 10
+ router-id 1.1.1.1
+interface g0/0
+ ipv6 ospf 10 area 0
+</code></pre></div>
+
+<p>IOS XE address-family 문법 예:</p>
+<div class="codehilite"><pre><span></span><code>router ospfv3 10
+ address-family ipv6 unicast
+  router-id 1.1.1.1
+interface g0/0
+ ospfv3 10 ipv6 area 0
+</code></pre></div>
+
+<p>Cisco IOS XE 공식 문서는 OSPFv3의 IPv4/IPv6 unicast address family와 IPv6 unicast routing/interface IPv6 조건을 설명합니다. <a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-route-ospfv3-xe.html">Cisco IPv6 Routing: OSPFv3</a></p>
+<h3 id="11-개인과제-전체-구축-순서">11. 개인과제 전체 구축 순서</h3>
+<p>개인과제는 한 번에 모든 기능을 넣지 않습니다.</p>
+<ol>
+<li>R1–R6, L3-SW, 각 access switch 이름 고정</li>
+<li>Serial DCE/DTE와 Ethernet 연결 확인</li>
+<li>IP 주소표·VLAN·gateway 입력</li>
+<li>HSRP virtual IP 확인</li>
+<li>VLAN/access/trunk/Router-on-a-Stick 통신 확인</li>
+<li>EIGRP AS100 구성</li>
+<li>OSPF Area 0 구성</li>
+<li>EIGRP↔OSPF redistribution은 route table 확인 후 추가</li>
+<li>DHCP 구성·lease 확인</li>
+<li>C-S server와 정적 NAT/PAT 구성</li>
+<li>ACL은 요구사항별로 한 줄씩 추가·검증</li>
+<li>R4/R6 site-to-site VPN 구성</li>
+<li>VPN과 NAT selector 충돌 확인</li>
+<li>전체 ping·traceroute·서비스 접근 표 작성</li>
+<li><code>.pkt</code> 저장 후 최종 검증표와 함께 보관</li>
+</ol>
+<h3 id="12-트러블슈팅-결정표">12. 트러블슈팅 결정표</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>증상</th>
+<th>먼저 볼 것</th>
+<th>명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>인터페이스 down</td>
+<td>cable, shutdown, 상대 포트</td>
+<td><code>show ip interface brief</code></td>
+</tr>
+<tr>
+<td>같은 VLAN ping 실패</td>
+<td>VLAN/access/MAC</td>
+<td><code>show vlan brief</code>, <code>show mac address-table</code></td>
+</tr>
+<tr>
+<td>다른 VLAN 실패</td>
+<td>trunk, SVI, gateway</td>
+<td><code>show interfaces trunk</code>, <code>show ip interface brief</code></td>
+</tr>
+<tr>
+<td>다른 네트워크 실패</td>
+<td>route/next hop</td>
+<td><code>show ip route</code>, <code>traceroute</code></td>
+</tr>
+<tr>
+<td>DHCP 실패</td>
+<td>pool/excluded/helper</td>
+<td><code>show ip dhcp binding</code>, <code>show run</code></td>
+</tr>
+<tr>
+<td>NAT 변환 없음</td>
+<td>inside/outside/ACL/return route</td>
+<td><code>show ip nat translations</code></td>
+</tr>
+<tr>
+<td>ACL 차단</td>
+<td>순서·방향·implicit deny</td>
+<td><code>show access-lists</code>, <code>show ip interface</code></td>
+</tr>
+<tr>
+<td>HSRP 전환 안 됨</td>
+<td>priority/preempt/track/VIP</td>
+<td><code>show standby brief</code></td>
+</tr>
+<tr>
+<td>VPN SA 없음</td>
+<td>peer, interesting ACL, IKE</td>
+<td><code>show crypto isakmp sa</code></td>
+</tr>
+<tr>
+<td>GRE tunnel down</td>
+<td>source/destination/underlay route</td>
+<td><code>show interfaces tunnel</code></td>
+</tr>
+<tr>
+<td>IPv6 route 없음</td>
+<td>unicast routing/OSPFv3 AF</td>
+<td><code>show ipv6 route</code>, <code>show ospfv3</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="13-최종-학습-체크">13. 최종 학습 체크</h3>
+<ul>
+<li>[ ] IP와 mask만 보고 두 호스트가 같은 subnet인지 계산할 수 있습니다.</li>
+<li>[ ] access/trunk/SVI/Router-on-a-Stick 차이를 설명할 수 있습니다.</li>
+<li>[ ] routing table에서 longest prefix, AD, metric을 구분합니다.</li>
+<li>[ ] RIP v1/v2, EIGRP, OSPF의 동작 차이를 설명합니다.</li>
+<li>[ ] ACL first match와 implicit deny를 적용 순서로 설명합니다.</li>
+<li>[ ] NAT/PAT와 IPsec interesting traffic 충돌을 설명합니다.</li>
+<li>[ ] HSRP Active/Standby와 tracking 결과를 검증합니다.</li>
+<li>[ ] GRE가 암호화하지 않는 이유와 IPsec 결합 이유를 설명합니다.</li>
+<li>[ ] IPv6 NDP/SLAAC/OSPFv3를 IPv4 ARP/OSPFv2와 비교합니다.</li>
+<li>[ ] ping 실패를 계층별 명령어로 좁힐 수 있습니다.</li>
+</ul>
+<h3 id="공식-출처">공식 출처</h3>
+<ul>
+<li>Cisco Packet Tracer: https://www.netacad.com/learning-collections/cisco-packet-tracer?courseLang=en-US</li>
+<li>Cisco IOS XE ACL: https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html</li>
+<li>Cisco HSRP: https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html</li>
+<li>Cisco IPsec: https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-cfg-vpn-ipsec-0.html</li>
+<li>Cisco OSPFv3: https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-route-ospfv3-xe.html</li>
+<li>RFC 1918 / 2453 / 4632 / 5340 / 8200: https://www.rfc-editor.org/</li>
+</ul>
+<p>확인일: 2026-08-30. 실제 장비·Packet Tracer 버전 차이는 <code>[확인 필요]</code>로 남깁니다.</p><div class="nav"><a href="ch03.html"><span class="lbl">이전</span>과정 개요</a><a href="ch12.html"><span class="lbl">다음</span>네트워크 핵심키워드 1</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
 <script>

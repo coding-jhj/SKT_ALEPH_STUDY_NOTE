@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import html
 import io
+import json
 import os
 import re
 import sys
@@ -29,37 +30,7 @@ except AttributeError:
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# 책의 장 순서. (파일경로, 부(部) 제목 또는 None)
-ORDER: list[tuple[str, str | None]] = [
-    ("book/00-이-책의-사용법.md", "들어가기"),
-    ("book/01-커리큘럼-지도.md", None),
-    ("slides/0-과정개요-이미지슬라이드.md", None),
-    ("notes/2026-08-18_라우팅-ACL-NAT-VPN.md", "1부 · 네트워크"),
-    ("notes/네트워크보안-통합Lab-결과보고서.md", None),
-    ("notes/RockyLinux9_개인서버랩.md", "2부 · 리눅스 서버"),
-    ("notes/2026-08-25_NFS-Samba-SELinux-rsyslog.md", None),
-    ("notes/2026-08-27_보강-vi-프로토콜-IIS.md", None),
-    ("notes/2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md", None),
-    ("notes/2026-08-27_MariaDB-SQL-백업-복제.md", "3부 · 데이터베이스"),
-    ("notes/2026-08-28_팀웹-원격MariaDB연동.md", None),
-    ("slides/1-네트워크-1.md", "핵심키워드 · 네트워크"),
-    ("slides/1-네트워크-2.md", None),
-    ("slides/1-네트워크-3.md", None),
-    ("slides/2-리눅스서버-1.md", "핵심키워드 · 리눅스 서버"),
-    ("slides/2-리눅스서버-2.md", None),
-    ("slides/3-윈도우서버.md", "핵심키워드 · 윈도우 서버"),
-    ("slides/4-데이터베이스.md", "핵심키워드 · 데이터베이스"),
-    ("slides/5-모니터링운영.md", "핵심키워드 · 모니터링 · 운영"),
-    ("slides/6-파이썬자동화.md", "핵심키워드 · 파이썬 · 자동화"),
-    ("slides/7-보안모의해킹-1.md", "핵심키워드 · 보안 실습 · 모의해킹"),
-    ("slides/7-보안모의해킹-2.md", None),
-    ("slides/7-보안모의해킹-3.md", None),
-    ("slides/7-보안모의해킹-4.md", None),
-    ("book/90-중복과-상충-정리.md", "부록"),
-    ("book/92-공식문서-보강.md", None),
-    ("book/91-명령어-색인.md", None),
-    ("book/99-용어집.md", None),
-]
+MANIFEST = os.path.join(ROOT, "book", "manifest.json")
 
 MD_EXT = ["extra", "sane_lists", "admonition", "codehilite", "toc"]
 MD_CFG = {
@@ -79,6 +50,11 @@ def slug(text: str) -> str:
 def read(path: str) -> str:
     with io.open(os.path.join(ROOT, path), encoding="utf-8") as f:
         return f.read()
+
+
+def read_manifest() -> dict:
+    with io.open(MANIFEST, encoding="utf-8") as f:
+        return json.load(f)
 
 
 # 노트 본문의 태그는 전부 글자입니다. 실행되면 노트 자체가 취약점이 됩니다(XSS 실습 페이로드 수록).
@@ -299,31 +275,45 @@ def page(title: str, sidebar: str, body: str) -> str:
 
 
 def main() -> int:
+    manifest = read_manifest()
     make_index.generate(ROOT, read)
 
     md = markdown.Markdown(extensions=MD_EXT, extension_configs=MD_CFG)
     chapters: list[dict] = []
 
-    for path, part in ORDER:
-        if not os.path.exists(os.path.join(ROOT, path)):
-            print(f"  건너뜀 (없음): {path}", file=sys.stderr)
+    for entry in manifest["chapters"]:
+        sources = entry["sources"]
+        missing = [path for path in sources if not os.path.exists(os.path.join(ROOT, path))]
+        if missing:
+            for path in missing:
+                print(f"  건너뜀 (없음): {path}", file=sys.stderr)
             continue
-        raw = read(path)
-        title, demoted = demote(raw)
+        parts: list[str] = []
+        total_chars = 0
+        labels = entry.get("source_labels", [])
+        for index, path in enumerate(sources):
+            raw = read(path)
+            total_chars += len(raw)
+            source_title, demoted = demote(raw)
+            if len(sources) > 1:
+                label = labels[index] if index < len(labels) else source_title or os.path.basename(path)
+                demoted = f"## {label}\n\n{demoted}"
+            parts.append(demoted)
+        combined = "\n\n---\n\n".join(parts)
         md.reset()
-        rendered = md.convert(demoted)
+        rendered = md.convert(combined)
         rendered, items = anchor_headings(rendered)
         rendered = rendered.replace("<table>", '<div class="tablewrap"><table>')
         rendered = rendered.replace("</table>", "</table></div>")
         no = len(chapters) + 1
         chapters.append({
             "no": no,
-            "file": f"ch{no:02d}.html",
-            "title": title or os.path.basename(path),
-            "part": part,
+            "file": entry.get("file", f"ch{no:02d}.html"),
+            "title": entry["title"],
+            "part": entry.get("part"),
             "html": rendered,
             "items": items,
-            "chars": len(raw),
+            "chars": total_chars,
         })
 
     def chapter_list(current: int | None) -> str:
@@ -343,6 +333,37 @@ def main() -> int:
                 out.append(f'<div class="inchap">{inner}</div>')
         return "".join(out)
 
+    archives: list[dict] = []
+    for index, entry in enumerate(manifest.get("archives", []), start=1):
+        path = entry["source"]
+        if not os.path.exists(os.path.join(ROOT, path)):
+            print(f"  원문 건너뜀 (없음): {path}", file=sys.stderr)
+            continue
+        raw = read(path)
+        _, demoted = demote(raw)
+        md.reset()
+        rendered = md.convert(demoted)
+        rendered, items = anchor_headings(rendered)
+        rendered = rendered.replace("<table>", '<div class="tablewrap"><table>')
+        rendered = rendered.replace("</table>", "</table></div>")
+        archives.append({
+            "no": index,
+            "file": entry.get("file", f"archive-{index:02d}.html"),
+            "title": entry["title"],
+            "html": rendered,
+            "items": items,
+            "chars": len(raw),
+        })
+
+    def archive_list(current: int | None) -> str:
+        if not archives:
+            return ""
+        out: list[str] = ['<div class="part">원문 보존</div>']
+        for a in archives:
+            cls = "cur" if a["no"] == current else ""
+            out.append(f'<a class="{cls}" href="{a["file"]}">원문 {a["no"]:02d}. {html.escape(a["title"])}</a>')
+        return "".join(out)
+
     site = os.path.join(ROOT, "docs")
     os.makedirs(site, exist_ok=True)
 
@@ -359,8 +380,14 @@ def main() -> int:
             f'<li><a href="{c["file"]}"><span class="t">{c["no"]:02d}. {html.escape(c["title"])}</span></a></li>'
         )
     toc.append("</ul>")
+    if archives:
+        toc.append('<li class="part">원문 보존</li>')
+        for a in archives:
+            toc.append(
+                f'<li><a href="{a["file"]}"><span class="t">원문 {a["no"]:02d}. {html.escape(a["title"])}</span></a></li>'
+            )
     with io.open(os.path.join(site, "index.html"), "w", encoding="utf-8", newline="\n") as f:
-        f.write(page("목차", chapter_list(None), "".join(toc)))
+        f.write(page("목차", chapter_list(None) + archive_list(None), "".join(toc)))
 
     # 장별 페이지
     for i, c in enumerate(chapters):
@@ -379,11 +406,32 @@ def main() -> int:
             f'<h1>{html.escape(c["title"])}</h1>{c["html"]}{"".join(nav)}'
         )
         with io.open(os.path.join(site, c["file"]), "w", encoding="utf-8", newline="\n") as f:
-            f.write(page(c["title"], chapter_list(c["no"]), body))
+            f.write(page(c["title"], chapter_list(c["no"]) + archive_list(None), body))
 
-    total = sum(c["chars"] for c in chapters)
-    biggest = max(os.path.getsize(os.path.join(site, c["file"])) for c in chapters)
-    print(f"빌드 완료: index.html + 장 {len(chapters)}개 (가장 큰 장 {biggest // 1024} KB)")
+    for i, a in enumerate(archives):
+        nav: list[str] = ['<div class="nav">']
+        if i > 0:
+            previous = archives[i - 1]
+            nav.append(f'<a href="{previous["file"]}"><span class="lbl">이전 원문</span>{html.escape(previous["title"])}</a>')
+        else:
+            nav.append("<span></span>")
+        if i < len(archives) - 1:
+            following = archives[i + 1]
+            nav.append(f'<a href="{following["file"]}"><span class="lbl">다음 원문</span>{html.escape(following["title"])}</a>')
+        else:
+            nav.append('<a href="index.html"><span class="lbl">목차</span>전체 목차</a>')
+        nav.append("</div>")
+        body = (
+            f'<div class="chapter-no">ORIGINAL {a["no"]:02d}</div>'
+            f'<h1>{html.escape(a["title"])}</h1>{a["html"]}{"".join(nav)}'
+        )
+        with io.open(os.path.join(site, a["file"]), "w", encoding="utf-8", newline="\n") as f:
+            f.write(page(a["title"], chapter_list(None) + archive_list(a["no"]), body))
+
+    total = sum(c["chars"] for c in chapters) + sum(a["chars"] for a in archives)
+    output_files = [c["file"] for c in chapters] + [a["file"] for a in archives]
+    biggest = max(os.path.getsize(os.path.join(site, path)) for path in output_files)
+    print(f"빌드 완료: index.html + 장 {len(chapters)}개 + 원문 {len(archives)}개 (가장 큰 파일 {biggest // 1024} KB)")
     for c in chapters:
         print(f"  {c['no']:>2}. {c['title'][:50]:<52} 소제목 {len(c['items']):>3}개 · {c['chars']:>7,}자")
     print(f"  합계 {total:,}자")
