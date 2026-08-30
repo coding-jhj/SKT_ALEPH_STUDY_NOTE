@@ -173,3 +173,14 @@ PDF에는 무엇이 제목이고 무엇이 코드인지 표시가 없습니다. 
 - **강의 번호가 건너뜁니다** — 주제별로 묶은 탓. 001~188강 전부 들어 있습니다
 
 </details>
+
+
+---
+
+## Markdown 책 목차
+
+- [전체 과정 Markdown 책 열기](book/README.md)
+- [전체 과정 ORDER](book/ORDER.md)
+- [네트워크·Cisco Packet Tracer 공식 보강](notes/2026-08-30_네트워크-Cisco-심화-공식보강.md)
+
+GitHub Pages HTML은 `docs/`에서 계속 제공합니다. Markdown 책은 원본 파일과 상대 링크로 읽습니다.

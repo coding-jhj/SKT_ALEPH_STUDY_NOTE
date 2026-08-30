@@ -22,6 +22,11 @@ import markdown
 
 import make_index
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # 책의 장 순서. (파일경로, 부(部) 제목 또는 None)
