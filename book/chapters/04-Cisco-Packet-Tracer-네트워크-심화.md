@@ -15,9 +15,23 @@
 9. IPv6, NDP, SLAAC, OSPFv3
 10. 구성 검증, 장애 추적, 통합 Lab
 
+> [!TIP]
+> 빈 `.pkt` 파일에서 R1–R6·L3-SW·VLAN·HSRP·EIGRP·OSPF·DHCP·NAT·ACL·VPN을 완성하는 실행형 Lab은 [09장 개인과제 전체 구축 Lab](05-개인과제-전체-구축-Lab.md)에서 이어집니다. 04장은 개념·수업 원문·Packet Tracer 실습 기록을, 09장은 전체 구축 순서를 담당합니다.
+
 ## 연결 원고
 
-### 기존 Cisco 실습 기록
+### 04장에 실제로 포함되는 원고 순서
+
+04장 HTML은 아래 네 원고를 이 순서로 합쳐서 보여줍니다. 원문 파일은 별도로 보존하고, 이 장에서는 주소 계산 → 네트워크 수업 전체 → Packet Tracer 실습 → 공식 기준 순서로 연결합니다.
+
+1. [서브네팅·라우팅·RIP 수업 원문](originals/03-260813_서브네팅_라우팅_RIP_수업정리.md)
+2. [네트워크 수업 완전 정리 원문](originals/01-260819_네트워크_수업_완전정리_정환주.md)
+3. [Cisco Packet Tracer 실습 기록](../../notes/2026-08-18_라우팅-ACL-NAT-VPN.md)
+4. [네트워크 개념·공식 기준](../../notes/2026-08-30_네트워크-Cisco-심화-공식보강.md)
+
+각 묶음 제목은 HTML·Notion 목차에서 구분되며, 원문 문장은 수정하지 않습니다.
+
+### Cisco Packet Tracer 실습 기록
 
 - [라우팅·ACL·NAT·VPN 실습 원고](../../notes/2026-08-18_라우팅-ACL-NAT-VPN.md)
 

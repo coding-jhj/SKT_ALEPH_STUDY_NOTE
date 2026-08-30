@@ -29,10 +29,17 @@
       "part": "1부 · 네트워크",
       "file": "ch04.html",
       "sources": [
+        "book/chapters/originals/03-260813_서브네팅_라우팅_RIP_수업정리.md",
+        "book/chapters/originals/01-260819_네트워크_수업_완전정리_정환주.md",
         "notes/2026-08-18_라우팅-ACL-NAT-VPN.md",
         "notes/2026-08-30_네트워크-Cisco-심화-공식보강.md"
       ],
-      "source_labels": ["기존 Cisco 실습 기록", "네트워크 개념·공식 기준"]
+      "source_labels": [
+        "서브네팅·라우팅·RIP 수업 원문",
+        "네트워크 수업 완전 정리 원문",
+        "Cisco Packet Tracer 실습 기록",
+        "네트워크 개념·공식 기준"
+      ]
     },
     {
       "id": "network-keywords-1",

@@ -20,5 +20,6 @@
 - [전체 순서표](../ORDER.md)
 - [목차 manifest](../manifest.json)
 - [개인과제 전체 구축 Lab](./05-개인과제-전체-구축-Lab.md)
+- [네트워크·Cisco Packet Tracer 04장 지도](./04-Cisco-Packet-Tracer-네트워크-심화.md)
 - [원문 보존](./originals/README.md)
 - [공식 출처](./SOURCES.md)

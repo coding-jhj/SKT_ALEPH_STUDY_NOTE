@@ -20,7 +20,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:16px}
+html{scroll-behavior:auto; scroll-padding-top:24px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -49,6 +49,7 @@ aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--
 main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
      border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h2[id],h3[id],h4[id]{scroll-margin-top:24px}
 h1{font-size:32px; margin:0 0 8px}
 h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
 h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
@@ -139,7 +140,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <strong>주의:</strong> 이미지에서 명시되지 않은 일부 라우터의 내부 IP는 토폴로지가 성립하도록 합리적으로 정한 값이다. 아래 표의 주소를 그대로 사용하면 된다. 인터페이스 번호는 이미지 기준이며, 실제 장비에서 다르면 <code>show ip interface brief</code>로 확인해서 해당 케이블이 꽂힌 인터페이스에 적용한다.</p>
 </blockquote>
 <hr />
-<p># 0. 과제에서 요구하는 것</p>
+<h2 id="0-과제에서-요구하는-것">0. 과제에서 요구하는 것</h2>
 <p>이미지에 적힌 요구사항은 다음과 같다.</p>
 <h3 id="전체-요구사항">전체 요구사항</h3>
 <ol>
@@ -164,7 +165,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <li>최종적으로 전체 통신 및 ACL/VPN/NAT 동작 확인</li>
 </ol>
 <hr />
-<p># 1. 장비 이름을 먼저 정하자</p>
+<h2 id="1-장비-이름을-먼저-정하자">1. 장비 이름을 먼저 정하자</h2>
 <p>설명을 쉽게 하기 위해 라우터를 왼쪽부터 다음처럼 부른다.</p>
 <div class="tablewrap"><table>
 <thead>
@@ -233,7 +234,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </tbody>
 </table></div>
 <hr />
-<p># 2. 전체 IP 주소 계획</p>
+<h2 id="2-전체-ip-주소-계획">2. 전체 IP 주소 계획</h2>
 <h3 id="2-1-왼쪽-lan">2-1. 왼쪽 LAN</h3>
 <h4 id="g">G</h4>
 <ul>
@@ -298,7 +299,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <li>G0/0: <code>172.30.100.1/24</code></li>
 </ul>
 <hr />
-<p># 3. SKT 본사 VLAN 주소 계획</p>
+<h2 id="3-skt-본사-vlan-주소-계획">3. SKT 본사 VLAN 주소 계획</h2>
 <p>원래 네트워크:</p>
 <p><code>192.168.200.0/24</code></p>
 <p>과제 이미지에는 <code>/26</code>으로 나누라고 되어 있다.</p>
@@ -375,7 +376,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <li>Gateway: <code>192.168.200.129</code></li>
 </ul>
 <hr />
-<p># 4. SKT 지사 주소</p>
+<h2 id="4-skt-지사-주소">4. SKT 지사 주소</h2>
 <h3 id="r6">R6</h3>
 <p>G0/0:</p>
 <ul>
@@ -397,7 +398,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </ul>
 <p>C-S는 FTP/WEB 서버이므로 <strong>Static IP</strong>로 둔다.</p>
 <hr />
-<p># 5. 작업 순서</p>
+<h2 id="5-작업-순서">5. 작업 순서</h2>
 <p>이 과제는 아래 순서로 해야 덜 꼬인다.</p>
 <ol>
 <li>PC/Server IP</li>
@@ -420,7 +421,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </ol>
 <p><strong>중요:</strong> ACL과 VPN은 기본 통신이 완전히 된 후 가장 마지막에 한다.</p>
 <hr />
-<p># 6. Serial에서 꼭 알아야 할 것</p>
+<h2 id="6-serial에서-꼭-알아야-할-것">6. Serial에서 꼭 알아야 할 것</h2>
 <p>Serial 연결의 한쪽은 DCE이고 다른 쪽은 DTE이다.</p>
 <p>DCE 쪽에서만 다음 명령이 필요하다.</p>
 <div class="code-shell" data-language="Cisco"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>clock rate 64000
@@ -433,7 +434,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <p>출력에 <code>DCE</code>가 있는 라우터에서만 <code>clock rate 64000</code>을 입력한다.</p>
 <p>이미지와 실제 Packet Tracer 장비의 DCE 방향이 다를 수 있으므로 무조건 양쪽에 넣지 말고 확인한다.</p>
 <hr />
-<p># 7. R1 설정</p>
+<h2 id="7-r1-설정">7. R1 설정</h2>
 <p>R1을 클릭 → CLI.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
@@ -473,7 +474,7 @@ show ip interface brief
 </code></pre></div></div>
 
 <hr />
-<p># 8. R2 설정</p>
+<h2 id="8-r2-설정">8. R2 설정</h2>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
 hostname R2
@@ -504,7 +505,7 @@ show ip interface brief
 </code></pre></div></div>
 
 <hr />
-<p># 9. L3-SW 설정</p>
+<h2 id="9-l3-sw-설정">9. L3-SW 설정</h2>
 <p>이 장비가 G의 Gateway <code>192.168.50.1</code> 역할을 한다.</p>
 <h3 id="ip-routing-활성화">IP Routing 활성화</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
@@ -535,7 +536,7 @@ show ip interface brief
 
 <p>G와 연결된 L2 access switch는 특별한 설정 없이 기본 VLAN 1로 사용해도 된다.</p>
 <hr />
-<p># 10. HSRP 설정</p>
+<h2 id="10-hsrp-설정">10. HSRP 설정</h2>
 <p>A와 A-S의 Gateway는 <code>192.168.100.1</code>이다.</p>
 <p>그런데 실제 R1은 <code>.2</code>, R2는 <code>.3</code>을 사용한다.</p>
 <p><code>192.168.100.1</code>은 두 라우터가 공유하는 <strong>가상 게이트웨이</strong>가 된다.</p>
@@ -574,7 +575,7 @@ end
 </code></pre></div></div>
 
 <hr />
-<p># 11. R3 설정</p>
+<h2 id="11-r3-설정">11. R3 설정</h2>
 <p>R3는 가장 중요한 <strong>경계 라우터</strong>이다.</p>
 <p>왼쪽에서는 EIGRP를 사용하고 오른쪽에서는 OSPF를 사용한다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
@@ -613,7 +614,7 @@ show ip interface brief
 </code></pre></div></div>
 
 <hr />
-<p># 12. R4 — SKT 본사 라우터 기본 설정</p>
+<h2 id="12-r4--skt-본사-라우터-기본-설정">12. R4 — SKT 본사 라우터 기본 설정</h2>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
 hostname R4-HQ
@@ -642,7 +643,7 @@ exit
 </code></pre></div></div>
 
 <hr />
-<p># 13. R5 설정</p>
+<h2 id="13-r5-설정">13. R5 설정</h2>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
 hostname R5
@@ -667,7 +668,7 @@ exit
 </code></pre></div></div>
 
 <hr />
-<p># 14. R6 — SKT 지사 기본 설정</p>
+<h2 id="14-r6--skt-지사-기본-설정">14. R6 — SKT 지사 기본 설정</h2>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
 hostname R6-BRANCH
@@ -688,7 +689,7 @@ exit
 </code></pre></div></div>
 
 <hr />
-<p># 15. SKT 본사 VLAN 생성</p>
+<h2 id="15-skt-본사-vlan-생성">15. SKT 본사 VLAN 생성</h2>
 <p>두 스위치 모두 VLAN 10, 20, 30을 만든다.</p>
 <h3 id="hq-sw1">HQ-SW1</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
@@ -732,7 +733,7 @@ exit
 </code></pre></div></div>
 
 <hr />
-<p># 16. HQ-SW1 포트 VLAN 설정</p>
+<h2 id="16-hq-sw1-포트-vlan-설정">16. HQ-SW1 포트 VLAN 설정</h2>
 <p>이미지 기준:</p>
 <ul>
 <li>Fa0/2 → B → VLAN 20</li>
@@ -769,7 +770,7 @@ exit
 </code></pre></div></div>
 
 <hr />
-<p># 17. HQ-SW2 포트 VLAN 설정</p>
+<h2 id="17-hq-sw2-포트-vlan-설정">17. HQ-SW2 포트 VLAN 설정</h2>
 <p>이미지 기준:</p>
 <ul>
 <li>Fa0/2 → E → VLAN 30</li>
@@ -806,7 +807,7 @@ show interfaces trunk
 </code></pre></div></div>
 
 <hr />
-<p># 18. Router-on-a-Stick 설정</p>
+<h2 id="18-router-on-a-stick-설정">18. Router-on-a-Stick 설정</h2>
 <p>R4에서 VLAN별 Gateway를 만든다.</p>
 <h3 id="중요">중요</h3>
 <p>G0/0 물리 interface에는 IP를 넣지 않는다.</p>
@@ -853,7 +854,7 @@ GigabitEthernet0/0.30     192.168.200.129     up   up
 </code></pre></div></div>
 
 <hr />
-<p># 19. VLAN 내부 통신 먼저 확인</p>
+<h2 id="19-vlan-내부-통신-먼저-확인">19. VLAN 내부 통신 먼저 확인</h2>
 <p>아직 라우팅 프로토콜을 넣기 전이라도 R4에 직접 연결된 VLAN끼리는 통신 가능해야 한다.</p>
 <p>C에서:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping 192.168.200.65
@@ -876,7 +877,7 @@ show ip interface brief
 </code></pre></div></div>
 
 <hr />
-<p># 20. EIGRP AS 100</p>
+<h2 id="20-eigrp-as-100">20. EIGRP AS 100</h2>
 <p>EIGRP 영역:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.50.0/24
 6.6.6.0/24
@@ -934,7 +935,7 @@ show ip protocols
 
 <p>정상적인 EIGRP 경로는 <code>D</code>로 표시된다.</p>
 <hr />
-<p># 21. OSPF Area 0</p>
+<h2 id="21-ospf-area-0">21. OSPF Area 0</h2>
 <p>OSPF 영역:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>3.3.3.0/24
 4.4.4.0/24
@@ -994,7 +995,7 @@ show ip protocols
 </code></pre></div></div>
 
 <hr />
-<p># 22. EIGRP와 OSPF 재분배</p>
+<h2 id="22-eigrp와-ospf-재분배">22. EIGRP와 OSPF 재분배</h2>
 <p>여기가 매우 중요하다.</p>
 <p>R3에서는:</p>
 <ul>
@@ -1039,7 +1040,7 @@ end
 
 <p>로 나타난다.</p>
 <hr />
-<p># 23. 이 시점에서 전체 Ping 테스트</p>
+<h2 id="23-이-시점에서-전체-ping-테스트">23. 이 시점에서 전체 Ping 테스트</h2>
 <p><strong>아직 ACL, NAT, VPN을 넣지 않는다.</strong></p>
 <p>기본 네트워크부터 확인한다.</p>
 <h3 id="a에서">A에서</h3>
@@ -1069,7 +1070,7 @@ ping 192.168.100.10
 <p><strong>이 단계에서는 전부 성공해야 한다.</strong></p>
 <p>안 되면 ACL/VPN으로 넘어가지 않는다.</p>
 <hr />
-<p># 24. SKT 지사 DHCP</p>
+<h2 id="24-skt-지사-dhcp">24. SKT 지사 DHCP</h2>
 <p>이미지에서 R6에 <code>DHCP / NAT</code>가 표시되어 있다.</p>
 <p>C-S는 서버이므로 <code>.12</code>를 Static으로 유지하고, F를 DHCP로 받을 수 있게 만든다.</p>
 <p>먼저 예약 주소 제외:</p>
@@ -1101,7 +1102,7 @@ show ip dhcp pool
 </code></pre></div></div>
 
 <hr />
-<p># 25. C-S 서버 설정</p>
+<h2 id="25-c-s-서버-설정">25. C-S 서버 설정</h2>
 <p>C-S:</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>IP Address:      172.30.100.12
 Subnet Mask:     255.255.255.0
@@ -1129,7 +1130,7 @@ Password: cisco
 
 <p>권한은 필요하면 Read / Write 등을 체크한다.</p>
 <hr />
-<p># 26. Static NAT — C-S를 5.5.5.5로 Mapping</p>
+<h2 id="26-static-nat--c-s를-5555로-mapping">26. Static NAT — C-S를 5.5.5.5로 Mapping</h2>
 <p>과제 이미지:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>C-S → 5.5.5.5 Mapping
 → Static NAT 설정
@@ -1174,7 +1175,7 @@ Inside local   172.30.100.12
 </code></pre></div></div>
 
 <hr />
-<p># 27. PAT도 요구되는 경우</p>
+<h2 id="27-pat도-요구되는-경우">27. PAT도 요구되는 경우</h2>
 <p>이미지의 <code>DHCP / NAT</code>가 단순 Static NAT뿐만 아니라 지사 일반 PC의 NAT까지 요구하는 것으로 해석될 수 있다.</p>
 <p>그 경우 R6에서 PAT를 추가한다.</p>
 <p>VPN을 고려하여 VPN 대상 트래픽은 NAT에서 제외한다.</p>
@@ -1193,7 +1194,7 @@ end
 </code></pre></div></div>
 
 <hr />
-<p># 28. NAT 먼저 테스트</p>
+<h2 id="28-nat-먼저-테스트">28. NAT 먼저 테스트</h2>
 <p>A 또는 다른 외부 PC에서:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ping 5.5.5.5
 </code></pre></div></div>
@@ -1210,7 +1211,7 @@ end
 
 <p>ACL을 넣기 전에는 정상 접속되는 것이 좋다.</p>
 <hr />
-<p># 29. ACL 요구사항 정확히 정리</p>
+<h2 id="29-acl-요구사항-정확히-정리">29. ACL 요구사항 정확히 정리</h2>
 <p>이미지의 ACL 규칙:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>A → C-S : FTP 접속 불가능
 그 외 다른 노드는 C-S FTP 접속 가능
@@ -1258,7 +1259,7 @@ D → F : Ping 불가능
 </tbody>
 </table></div>
 <hr />
-<p># 30. ACL 구현 방법</p>
+<h2 id="30-acl-구현-방법">30. ACL 구현 방법</h2>
 <p>이 과제에서는 R6로 들어오는 트래픽을 한곳에서 제어하면 관리하기 쉽다.</p>
 <p>외부 사용자가 C-S에 접근할 때 Static NAT 주소 <code>5.5.5.5</code>를 사용한다고 가정하고 R6 Serial 입구에서 필터링한다.</p>
 <h3 id="r6-extended-acl">R6 Extended ACL</h3>
@@ -1285,7 +1286,7 @@ show ip interface serial0/3/0
 </code></pre></div></div>
 
 <hr />
-<p># 31. 만약 교수님이 C-S의 내부 IP로 ACL을 검사한다면</p>
+<h2 id="31-만약-교수님이-c-s의-내부-ip로-acl을-검사한다면">31. 만약 교수님이 C-S의 내부 IP로 ACL을 검사한다면</h2>
 <p>Packet Tracer 실습에서 C-S 접근 주소를 <code>172.30.100.12</code>로 검사하도록 되어 있다면 위 두 줄의 목적지 주소만 바꾼다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>deny tcp host 192.168.100.10 host 172.30.100.12 eq 21
 deny tcp host 192.168.50.10 host 172.30.100.12 eq 80
@@ -1294,7 +1295,7 @@ deny tcp host 192.168.50.10 host 172.30.100.12 eq 80
 <p>즉 두 방식 중 <strong>실제 과제 채점 시 사용하는 C-S 주소 기준</strong>으로 선택한다.</p>
 <p>이미지에 Static NAT <code>5.5.5.5 Mapping</code>이 명시되어 있으므로 우선은 <code>5.5.5.5</code> 접근을 기준으로 검사하는 것이 자연스럽다.</p>
 <hr />
-<p># 32. ACL 테스트</p>
+<h2 id="32-acl-테스트">32. ACL 테스트</h2>
 <h3 id="a--c-s-ftp">A → C-S FTP</h3>
 <p>A:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ftp 5.5.5.5
@@ -1336,7 +1337,7 @@ deny tcp host 192.168.50.10 host 172.30.100.12 eq 80
 
 <p><strong>성공해야 정상</strong></p>
 <hr />
-<p># 33. ACL에서 <code>permit ip any any</code>가 반드시 필요한 이유</p>
+<h2 id="33-acl에서-permit-ip-any-any가-반드시-필요한-이유">33. ACL에서 <code>permit ip any any</code>가 반드시 필요한 이유</h2>
 <p>Cisco ACL에는 마지막에 보이지 않는 규칙이 있다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>deny ip any any
 </code></pre></div></div>
@@ -1352,7 +1353,7 @@ deny tcp host 192.168.50.10 host 172.30.100.12 eq 80
 
 <p>를 넣어야 한다.</p>
 <hr />
-<p># 34. Site-to-Site VPN</p>
+<h2 id="34-site-to-site-vpn">34. Site-to-Site VPN</h2>
 <p>과제:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>SKT 본사 ↔ SKT 지사 Site-to-Site VPN
 </code></pre></div></div>
@@ -1369,7 +1370,7 @@ R6 외부 주소: 5.5.5.2
 
 <p>R5는 단순 중계 라우터이며 VPN 종료점이 아니다.</p>
 <hr />
-<p># 35. R4 VPN 설정</p>
+<h2 id="35-r4-vpn-설정">35. R4 VPN 설정</h2>
 <h3 id="interesting-traffic-acl">Interesting Traffic ACL</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>R4-HQ# configure terminal
 
@@ -1410,7 +1411,7 @@ end
 </code></pre></div></div>
 
 <hr />
-<p># 36. R6 VPN 설정</p>
+<h2 id="36-r6-vpn-설정">36. R6 VPN 설정</h2>
 <p>반대 방향으로 정확히 대칭이어야 한다.</p>
 <h3 id="interesting-traffic-acl-2">Interesting Traffic ACL</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>R6-BRANCH# configure terminal
@@ -1451,7 +1452,7 @@ end
 </code></pre></div></div>
 
 <hr />
-<p># 37. VPN 테스트</p>
+<h2 id="37-vpn-테스트">37. VPN 테스트</h2>
 <p>VPN은 설정만 한다고 바로 SA가 생기지 않을 수 있다.</p>
 <p><strong>Interesting Traffic를 발생시켜야 한다.</strong></p>
 <p>C에서:</p>
@@ -1479,7 +1480,7 @@ show crypto ipsec sa
 
 <p>값이 증가하는지 본다.</p>
 <hr />
-<p># 38. VPN과 NAT가 충돌할 때</p>
+<h2 id="38-vpn과-nat가-충돌할-때">38. VPN과 NAT가 충돌할 때</h2>
 <p>지사 R6에서 PAT를 설정했다면:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>172.30.100.0 → 192.168.200.0
 </code></pre></div></div>
@@ -1497,7 +1498,7 @@ access-list 120 permit ip 172.30.100.0 0.0.0.255 any
 </code></pre></div></div>
 
 <hr />
-<p># 39. 가장 중요한 최종 점검 순서</p>
+<h2 id="39-가장-중요한-최종-점검-순서">39. 가장 중요한 최종 점검 순서</h2>
 <p>한꺼번에 검사하지 말고 아래 순서로 확인한다.</p>
 <h3 id="interface">① Interface</h3>
 <p>모든 라우터:</p>
@@ -1603,7 +1604,7 @@ show crypto ipsec sa
 </code></pre></div></div>
 
 <hr />
-<p># 40. 최종 기능 시험표</p>
+<h2 id="40-최종-기능-시험표">40. 최종 기능 시험표</h2>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -1675,7 +1676,7 @@ show crypto ipsec sa
 </tbody>
 </table></div>
 <hr />
-<p># 41. Ping이 안 될 때 확인 순서</p>
+<h2 id="41-ping이-안-될-때-확인-순서">41. Ping이 안 될 때 확인 순서</h2>
 <p>다음 순서를 절대로 건너뛰지 않는다.</p>
 <h3 id="1단계--자기-gateway">1단계 — 자기 Gateway</h3>
 <p>예: C</p>
@@ -1724,7 +1725,7 @@ no ip access-group SECURITY in
 <h3 id="6단계--vpnnat">6단계 — VPN/NAT</h3>
 <p>기본 Routing이 되는 것을 확인한 후에만 NAT/VPN 문제를 본다.</p>
 <hr />
-<p># 42. 자주 발생하는 오류</p>
+<h2 id="42-자주-발생하는-오류">42. 자주 발생하는 오류</h2>
 <h3 id="overlaps-with"><code>overlaps with ...</code></h3>
 <p>예:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>% 192.168.100.0 overlaps with GigabitEthernet0/0
@@ -1774,7 +1775,7 @@ Gateway
 
 <p>다섯 가지를 본다.</p>
 <hr />
-<p># 43. 모든 설정 저장</p>
+<h2 id="43-모든-설정-저장">43. 모든 설정 저장</h2>
 <p>각 Router/Switch에서 마지막에:</p>
 <div class="code-shell" data-language="Cisco"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>copy running-config startup-config
 </code></pre></div></div>
@@ -1789,7 +1790,7 @@ Gateway
 
 <p>로 저장한다.</p>
 <hr />
-<p># 44. 과제 전체 구조를 한 번에 이해하기</p>
+<h2 id="44-과제-전체-구조를-한-번에-이해하기">44. 과제 전체 구조를 한 번에 이해하기</h2>
 <p>이 토폴로지는 크게 3부분이다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[왼쪽 사내망]
 192.168.50.0
@@ -1836,7 +1837,7 @@ A / G / D
 </code></pre></div></div>
 
 <hr />
-<p># 45. 실제 수행할 때 가장 안전한 체크포인트</p>
+<h2 id="45-실제-수행할-때-가장-안전한-체크포인트">45. 실제 수행할 때 가장 안전한 체크포인트</h2>
 <h3 id="체크포인트-a--ip만-입력한-직후">체크포인트 A — IP만 입력한 직후</h3>
 <p>바로 연결된 장비끼리 Ping.</p>
 <h3 id="체크포인트-b--vlan-완료-후">체크포인트 B — VLAN 완료 후</h3>
@@ -1855,7 +1856,7 @@ A / G / D
 <h3 id="체크포인트-h--vpn">체크포인트 H — VPN</h3>
 <p>본사 ↔ 지사 트래픽으로 VPN SA 생성 확인.</p>
 <hr />
-<p># 46. 최종 명령어 요약</p>
+<h2 id="46-최종-명령어-요약">46. 최종 명령어 요약</h2>
 <h3 id="기본">기본</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>enable
 configure terminal
@@ -1944,7 +1945,7 @@ crypto map ...
 </code></pre></div></div>
 
 <hr />
-<p># 47. 완료 기준</p>
+<h2 id="47-완료-기준">47. 완료 기준</h2>
 <p>이 과제는 단순히 초록불이 들어오는 것으로 끝난 것이 아니다.</p>
 <p>다음이 모두 만족되어야 완료다.</p>
 <ul>
@@ -2002,13 +2003,28 @@ document.querySelectorAll('.code-copy').forEach(button=>{
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  let activeId='';
+  const setActive=id=>{
+    if(!id || id===activeId) return;
+    if(activeId && byId[activeId]) byId[activeId].classList.remove('on');
+    activeId=id;
+    const a=byId[id];
+    if(!a) return;
+    a.classList.add('on');
+    const aside=a.closest('aside');
+    if(!aside) return;
+    const linkBox=a.getBoundingClientRect();
+    const sideBox=aside.getBoundingClientRect();
+    if(linkBox.top<sideBox.top || linkBox.bottom>sideBox.bottom){
+      a.scrollIntoView({block:'nearest'});
+    }
+  };
   const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(!e.isIntersecting) return;
-      inchap.forEach(a=>a.classList.remove('on'));
-      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
-    });
-  },{rootMargin:'0px 0px -80% 0px'});
-  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+    const visible=es.filter(e=>e.isIntersecting)
+      .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(visible) setActive(visible.target.id);
+  },{rootMargin:'-12% 0px -72% 0px',threshold:0});
+  document.querySelectorAll('main h2[id],main h3[id],main h4[id]').forEach(t=>obs.observe(t));
 }
 </script>
 </body></html>

@@ -20,7 +20,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:16px}
+html{scroll-behavior:auto; scroll-padding-top:24px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -49,6 +49,7 @@ aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--
 main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
      border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h2[id],h3[id],h4[id]{scroll-margin-top:24px}
 h1{font-size:32px; margin:0 0 8px}
 h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
 h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
@@ -138,7 +139,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <p>이 문서는 수업 시간 메모를 바탕으로, 복습하기 쉽게 개념 → 계산 → 예제 → 라우팅 순서로 다시 정리한 공부용 노트입니다.</p>
 </blockquote>
 <hr />
-<p># 1. 서브네팅(Subnetting)이란?</p>
+<h2 id="1-서브네팅subnetting이란">1. 서브네팅(Subnetting)이란?</h2>
 <p><strong>서브네팅(Subnetting)</strong>은 하나의 큰 네트워크를 여러 개의 작은 네트워크로 나누는 기술이다.</p>
 <p>예를 들어 회사에 다음과 같은 부서가 있다고 하자.</p>
 <ul>
@@ -169,7 +170,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <li>브로드캐스트 도메인도 작아진다.</li>
 </ul>
 <hr />
-<p># 2. IPv4와 2진수</p>
+<h2 id="2-ipv4와-2진수">2. IPv4와 2진수</h2>
 <p>IPv4 주소는 총 <strong>32비트</strong>이고, 8비트씩 4부분으로 나뉜다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.16.100
 </code></pre></div></div>
@@ -213,7 +214,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </code></pre></div></div>
 
 <hr />
-<p># 3. 서브넷 마스크와 Prefix</p>
+<h2 id="3-서브넷-마스크와-prefix">3. 서브넷 마스크와 Prefix</h2>
 <p>예:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.16.100/24
 </code></pre></div></div>
@@ -237,7 +238,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </code></pre></div></div>
 
 <hr />
-<p># 4. 서브넷 마스크의 중요한 규칙</p>
+<h2 id="4-서브넷-마스크의-중요한-규칙">4. 서브넷 마스크의 중요한 규칙</h2>
 <p>서브넷 마스크는 반드시:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>1이 연속해서 나오고 → 그 뒤에 0이 연속해서 나와야 한다.
 </code></pre></div></div>
@@ -252,7 +253,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 
 <p>즉 중간에 <code>1 → 0 → 1</code>처럼 섞일 수 없다.</p>
 <hr />
-<p># 5. 비트를 빌린다는 의미</p>
+<h2 id="5-비트를-빌린다는-의미">5. 비트를 빌린다는 의미</h2>
 <p>기본 <code>/24</code>는 마지막 8비트가 모두 호스트 비트이다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>/24
 
@@ -293,7 +294,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </code></pre></div></div>
 
 <hr />
-<p># 6. 서브넷 개수 계산</p>
+<h2 id="6-서브넷-개수-계산">6. 서브넷 개수 계산</h2>
 <p>빌린 비트 수를 <code>n</code>이라고 하면:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>서브넷 개수 = 2^n
 </code></pre></div></div>
@@ -307,7 +308,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </code></pre></div></div>
 
 <hr />
-<p># 7. 호스트 수 계산</p>
+<h2 id="7-호스트-수-계산">7. 호스트 수 계산</h2>
 <p>서브네팅 후 <strong>남은 호스트 비트의 개수</strong>를 <code>h</code>라고 하면:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>사용 가능한 호스트 수 = 2^h - 2
 </code></pre></div></div>
@@ -319,7 +320,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <li><strong>마지막 주소 = 브로드캐스트 주소</strong></li>
 </ol>
 <hr />
-<p># 8. /25 예제</p>
+<h2 id="8-25-예제">8. /25 예제</h2>
 <p>원래 네트워크:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.16.0/24
 </code></pre></div></div>
@@ -353,7 +354,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 
 <p>각 서브넷마다 실제 호스트 <strong>126개</strong>를 사용할 수 있다.</p>
 <hr />
-<p># 9. 왜 192.168.16.100과 192.168.16.200이 /25에서 직접 통신하지 못하는가?</p>
+<h2 id="9-왜-19216816100과-19216816200이-25에서-직접-통신하지-못하는가">9. 왜 192.168.16.100과 192.168.16.200이 /25에서 직접 통신하지 못하는가?</h2>
 <p>주소:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.16.100/25
 192.168.16.200/25
@@ -377,7 +378,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 
 <p>따라서 두 장비가 직접 통신하려면 안 되고, <strong>라우터를 거쳐야 한다.</strong></p>
 <hr />
-<p># 10. AND 연산</p>
+<h2 id="10-and-연산">10. AND 연산</h2>
 <p>네트워크 주소를 계산할 때 사용하는 핵심 연산이다.</p>
 <h3 id="and-규칙">AND 규칙</h3>
 <p>두 비트가 모두 <code>1</code>일 때만 결과가 <code>1</code>이다.</p>
@@ -416,7 +417,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <p>수업 메모의 <code>end 연산</code>은 <strong>AND 연산</strong>이 정확한 표현이다.</p>
 </blockquote>
 <hr />
-<p># 11. OR 연산</p>
+<h2 id="11-or-연산">11. OR 연산</h2>
 <p>두 비트 중 <strong>하나라도 1이면 결과가 1</strong>이다.</p>
 <div class="tablewrap"><table>
 <thead>
@@ -450,7 +451,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 </tbody>
 </table></div>
 <hr />
-<p># 12. AND 연산으로 네트워크 주소 구하기</p>
+<h2 id="12-and-연산으로-네트워크-주소-구하기">12. AND 연산으로 네트워크 주소 구하기</h2>
 <p>예:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>IP 주소     : 192.168.16.200
 Subnet Mask : 255.255.255.128 (/25)
@@ -474,7 +475,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </code></pre></div></div>
 
 <hr />
-<p># 13. 서브넷 간격(Block Size) 계산</p>
+<h2 id="13-서브넷-간격block-size-계산">13. 서브넷 간격(Block Size) 계산</h2>
 <p>가장 쉬운 방법:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>서브넷 간격 = 256 - 서브넷 마스크의 해당 옥텟 값
 </code></pre></div></div>
@@ -505,7 +506,7 @@ Subnet Mask : 255.255.255.128 (/25)
 서브넷 간격은 <code>2^5 = 32</code>이다.</p>
 </blockquote>
 <hr />
-<p># 14. 부서를 최소 3개로 나누는 예제</p>
+<h2 id="14-부서를-최소-3개로-나누는-예제">14. 부서를 최소 3개로 나누는 예제</h2>
 <p>원래:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.100.0/24
 </code></pre></div></div>
@@ -573,7 +574,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </code></pre></div></div>
 
 <hr />
-<p># 15. 문제: 기업에 7개의 부서가 있는 경우</p>
+<h2 id="15-문제-기업에-7개의-부서가-있는-경우">15. 문제: 기업에 7개의 부서가 있는 경우</h2>
 <h3 id="문제">문제</h3>
 <blockquote>
 <p>어느 기업에 7개의 부서가 있는데 7개의 서브넷으로 분할하여 주소를 할당하려고 한다.<br />
@@ -700,7 +701,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </code></pre></div></div>
 
 <hr />
-<p># 16. 서브네팅 계산 공식 암기</p>
+<h2 id="16-서브네팅-계산-공식-암기">16. 서브네팅 계산 공식 암기</h2>
 <h3 id="서브넷-수">서브넷 수</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>2^(빌린 비트 수)
 </code></pre></div></div>
@@ -718,7 +719,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </code></pre></div></div>
 
 <hr />
-<p># 17. 자주 사용하는 Prefix 표</p>
+<h2 id="17-자주-사용하는-prefix-표">17. 자주 사용하는 Prefix 표</h2>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -783,7 +784,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </table></div>
 <p>이 표는 Packet Tracer 실습에서 매우 자주 사용한다.</p>
 <hr />
-<p># 18. 서브네팅 문제 푸는 순서</p>
+<h2 id="18-서브네팅-문제-푸는-순서">18. 서브네팅 문제 푸는 순서</h2>
 <p>시험이나 실습에서 다음 순서만 기억하면 된다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>① 몇 개의 서브넷이 필요한가?
         ↓
@@ -817,7 +818,7 @@ Subnet Mask : 255.255.255.128 (/25)
 </code></pre></div></div>
 
 <hr />
-<p># 19. 라우팅(Routing)이란?</p>
+<h2 id="19-라우팅routing이란">19. 라우팅(Routing)이란?</h2>
 <p>라우팅은 <strong>서로 다른 네트워크 사이에서 패킷이 목적지까지 갈 경로를 결정하는 것</strong>이다.</p>
 <p>예:</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PC A
@@ -832,7 +833,7 @@ PC B
 <p>PC A와 PC B가 서로 다른 네트워크에 있다면 라우터가 경로를 알아야 한다.</p>
 <p>라우팅 방식은 크게 두 가지이다.</p>
 <hr />
-<p># 20. Static Routing과 Dynamic Routing</p>
+<h2 id="20-static-routing과-dynamic-routing">20. Static Routing과 Dynamic Routing</h2>
 <h3 id="static-routing--정적-라우팅">Static Routing — 정적 라우팅</h3>
 <p>관리자가 직접 목적지 네트워크와 다음 경로를 설정한다.</p>
 <p>특징:</p>
@@ -864,7 +865,7 @@ PC B
 <p>관리자는 어떤 라우팅 프로토콜을 사용할지 설정하고,
 그 이후 경로 학습과 변경 대응은 프로토콜이 수행한다.</p>
 <hr />
-<p># 21. Routing Table</p>
+<h2 id="21-routing-table">21. Routing Table</h2>
 <p>라우터는 <strong>Routing Table</strong>을 보고 패킷을 어디로 보낼지 결정한다.</p>
 <p>Cisco에서 확인:</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip route
@@ -884,7 +885,7 @@ PC B
 </code></pre></div></div>
 
 <hr />
-<p># 22. AD와 Metric</p>
+<h2 id="22-ad와-metric">22. AD와 Metric</h2>
 <h3 id="ad--administrative-distance">AD — Administrative Distance</h3>
 <p>여러 라우팅 방식에서 같은 목적지 경로를 배웠을 때:</p>
 <p><strong>어떤 출처의 라우팅 정보를 더 믿을 것인지 나타내는 값</strong></p>
@@ -937,7 +938,7 @@ Metric = 그 프로토콜 내부에서 어떤 경로가 좋은지
 
 <p>라고 이해하면 쉽다.</p>
 <hr />
-<p># 23. DCE / DTE와 Serial 연결</p>
+<h2 id="23-dce--dte와-serial-연결">23. DCE / DTE와 Serial 연결</h2>
 <p>라우터 사이에서 Serial 케이블을 사용할 경우:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>DCE ↔ DTE
 </code></pre></div></div>
@@ -955,7 +956,7 @@ Metric = 그 프로토콜 내부에서 어떤 경로가 좋은지
 </code></pre></div></div>
 
 <hr />
-<p># 24. HWIC-2T</p>
+<h2 id="24-hwic-2t">24. HWIC-2T</h2>
 <p><code>HWIC-2T</code>는 Cisco Packet Tracer에서 라우터에 추가할 수 있는 <strong>Serial 인터페이스 모듈</strong>이다.</p>
 <p>모듈을 장착하면 예를 들어:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Serial0/3/0
@@ -964,7 +965,7 @@ Serial0/3/1
 
 <p>같은 인터페이스를 사용할 수 있다.</p>
 <hr />
-<p># 25. 인터페이스 IP 삭제</p>
+<h2 id="25-인터페이스-ip-삭제">25. 인터페이스 IP 삭제</h2>
 <p>Cisco IOS에서 인터페이스의 IP 주소를 지울 때:</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>no ip address
 </code></pre></div></div>
@@ -975,7 +976,7 @@ Router(config-if)# no ip address
 </code></pre></div></div>
 
 <hr />
-<p># 26. RIP — Routing Information Protocol</p>
+<h2 id="26-rip--routing-information-protocol">26. RIP — Routing Information Protocol</h2>
 <p>RIP는 대표적인 <strong>Distance Vector Routing Protocol</strong>이다.</p>
 <p>경로 선택 기준:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Hop Count
@@ -983,7 +984,7 @@ Router(config-if)# no ip address
 
 <p>즉 목적지까지 몇 개의 라우터를 거쳐야 하는지를 기준으로 경로를 선택한다.</p>
 <hr />
-<p># 27. RIP Hop Count 제한</p>
+<h2 id="27-rip-hop-count-제한">27. RIP Hop Count 제한</h2>
 <p>RIP에서:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>최대 정상 Hop Count = 15
 </code></pre></div></div>
@@ -998,7 +999,7 @@ Router(config-if)# no ip address
 
 <p>16 hop이 되면 도달할 수 없는 네트워크로 판단한다.</p>
 <hr />
-<p># 28. RIP의 단점</p>
+<h2 id="28-rip의-단점">28. RIP의 단점</h2>
 <p>RIP의 대표적인 단점:</p>
 <ul>
 <li>Hop Count만 보고 경로를 판단</li>
@@ -1015,7 +1016,7 @@ Router(config-if)# no ip address
 
 <p>RIP는 단순히 hop 수만 보면 A를 선택할 수 있다.</p>
 <hr />
-<p># 29. RIP 업데이트 주기</p>
+<h2 id="29-rip-업데이트-주기">29. RIP 업데이트 주기</h2>
 <p>RIP는 기본적으로 약:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>30초마다
 </code></pre></div></div>
@@ -1031,7 +1032,7 @@ Router(config-if)# no ip address
 
 <p>라고 이해하는 것이 좋다.</p>
 <hr />
-<p># 30. RIP 주요 Timer</p>
+<h2 id="30-rip-주요-timer">30. RIP 주요 Timer</h2>
 <p>Cisco RIP의 대표적인 기본 타이머:</p>
 <div class="tablewrap"><table>
 <thead>
@@ -1072,7 +1073,7 @@ Router(config-if)# no ip address
 
 <p>라고 먼저 기억하면 된다.</p>
 <hr />
-<p># 31. RIPv1과 RIPv2</p>
+<h2 id="31-ripv1과-ripv2">31. RIPv1과 RIPv2</h2>
 <h3 id="ripv1">RIPv1</h3>
 <ul>
 <li>Classful Routing Protocol</li>
@@ -1089,7 +1090,7 @@ Router(config-if)# no ip address
 </ul>
 <p>실습에서는 보통 RIPv2를 사용하는 것이 더 일반적이다.</p>
 <hr />
-<p># 32. Cisco에서 RIP 기본 설정 예</p>
+<h2 id="32-cisco에서-rip-기본-설정-예">32. Cisco에서 RIP 기본 설정 예</h2>
 <p>예를 들어:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.10.0/24
 10.0.0.0/30
@@ -1124,14 +1125,14 @@ Router(config-router)# end
 </code></pre></div></div>
 
 <hr />
-<p># 33. <code>show ip protocols</code></p>
+<h2 id="33-show-ip-protocols">33. <code>show ip protocols</code></h2>
 <p>라우터에서 현재 어떤 라우팅 프로토콜을 사용하고 있는지 확인:</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip protocols
 </code></pre></div></div>
 
 <p>RIP 설정 상태, 업데이트 정보, network 명령 등을 확인할 수 있다.</p>
 <hr />
-<p># 34. <code>send version 1</code>의 의미</p>
+<h2 id="34-send-version-1의-의미">34. <code>send version 1</code>의 의미</h2>
 <p><code>show ip protocols</code> 등의 출력에서 RIP 버전과 관련해 다음 정보가 보일 수 있다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Sending updates every 30 seconds
 Default version control: send version 1, receive any version
@@ -1144,7 +1145,7 @@ Default version control: send version 1, receive any version
 
 <p>를 지정하면 RIPv2로 동작하도록 명확하게 설정할 수 있다.</p>
 <hr />
-<p># 35. Redistribute의 의미</p>
+<h2 id="35-redistribute의-의미">35. Redistribute의 의미</h2>
 <p>수업 메모의:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>redistributing = 재부팅
 </code></pre></div></div>
@@ -1170,7 +1171,7 @@ OSPF에 재분배
 
 <p>이다.</p>
 <hr />
-<p># 36. 이중화(Redundancy)</p>
+<h2 id="36-이중화redundancy">36. 이중화(Redundancy)</h2>
 <p>중요한 네트워크 장비나 회선은 하나만 두지 않고 여러 개를 준비하는 경우가 많다.</p>
 <p>이것을 <strong>이중화</strong>라고 한다.</p>
 <p>예:</p>
@@ -1187,7 +1188,7 @@ OSPF에 재분배
 <li>가용성 향상</li>
 </ul>
 <hr />
-<p># 37. 오늘 수업의 핵심 흐름</p>
+<h2 id="37-오늘-수업의-핵심-흐름">37. 오늘 수업의 핵심 흐름</h2>
 <p>오늘 배운 내용을 하나의 흐름으로 연결하면 다음과 같다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>IP 주소
   ↓
@@ -1211,7 +1212,7 @@ Dynamic Routing 예: RIP
 </code></pre></div></div>
 
 <hr />
-<p># 38. 시험 직전 암기 포인트</p>
+<h2 id="38-시험-직전-암기-포인트">38. 시험 직전 암기 포인트</h2>
 <h3 id="서브네팅">서브네팅</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>서브넷 개수 = 2^(빌린 비트)
 </code></pre></div></div>
@@ -1245,7 +1246,7 @@ Flush = 240초
 </code></pre></div></div>
 
 <hr />
-<p># 39. 서브네팅 빠른 연습</p>
+<h2 id="39-서브네팅-빠른-연습">39. 서브네팅 빠른 연습</h2>
 <h3 id="문제-1">문제 1</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>192.168.1.0/24를 4개 서브넷으로 나누시오.
 </code></pre></div></div>
@@ -1309,7 +1310,7 @@ Flush = 240초
 </code></pre></div></div>
 
 <hr />
-<p># 40. 꼭 바로잡아 둘 부분</p>
+<h2 id="40-꼭-바로잡아-둘-부분">40. 꼭 바로잡아 둘 부분</h2>
 <p>수업 메모에서 헷갈릴 수 있는 부분을 정리하면:</p>
 <div class="tablewrap"><table>
 <thead>
@@ -1346,7 +1347,7 @@ Flush = 240초
 </tbody>
 </table></div>
 <hr />
-<p># 41. 한 장 요약</p>
+<h2 id="41-한-장-요약">41. 한 장 요약</h2>
 <div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[Subnetting]
 
 /24
@@ -1436,13 +1437,28 @@ document.querySelectorAll('.code-copy').forEach(button=>{
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  let activeId='';
+  const setActive=id=>{
+    if(!id || id===activeId) return;
+    if(activeId && byId[activeId]) byId[activeId].classList.remove('on');
+    activeId=id;
+    const a=byId[id];
+    if(!a) return;
+    a.classList.add('on');
+    const aside=a.closest('aside');
+    if(!aside) return;
+    const linkBox=a.getBoundingClientRect();
+    const sideBox=aside.getBoundingClientRect();
+    if(linkBox.top<sideBox.top || linkBox.bottom>sideBox.bottom){
+      a.scrollIntoView({block:'nearest'});
+    }
+  };
   const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(!e.isIntersecting) return;
-      inchap.forEach(a=>a.classList.remove('on'));
-      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
-    });
-  },{rootMargin:'0px 0px -80% 0px'});
-  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+    const visible=es.filter(e=>e.isIntersecting)
+      .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(visible) setActive(visible.target.id);
+  },{rootMargin:'-12% 0px -72% 0px',threshold:0});
+  document.querySelectorAll('main h2[id],main h3[id],main h4[id]').forEach(t=>obs.observe(t));
 }
 </script>
 </body></html>

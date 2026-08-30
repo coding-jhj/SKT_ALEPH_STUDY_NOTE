@@ -20,7 +20,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:16px}
+html{scroll-behavior:auto; scroll-padding-top:24px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -49,6 +49,7 @@ aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--
 main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
      border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h2[id],h3[id],h4[id]{scroll-margin-top:24px}
 h1{font-size:32px; margin:0 0 8px}
 h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
 h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
@@ -142,7 +143,7 @@ tbody tr:nth-child(even) td{background:var(--side)}
 <h3 id="전체-흐름">전체 흐름</h3>
 <p><code>Windows 핵심 프로세스 → 분석 도구 → Registry/UAC → Linux/systemd/Cron → OSI/TCP-IP → 보안 장비 → 암호학 → SSH</code></p>
 <hr />
-<p># 1. Windows 핵심 프로세스와 서비스</p>
+<h2 id="1-windows-핵심-프로세스와-서비스">1. Windows 핵심 프로세스와 서비스</h2>
 <h3 id="11-프로세스-계층">1.1 프로세스 계층</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>SYSTEM
   ↓
@@ -212,7 +213,7 @@ Parameter로 DcomLaunch, RPCSS, netsvcs 같은 Service Group을 지정할 수
 <p>PDF는 User 권한 악성 Program 실행, 자동 시작, Memory 삽입 등의 위협
 가능성을 언급합니다.</p>
 <hr />
-<p># 2. Windows 프로세스·서비스 분석 실습</p>
+<h2 id="2-windows-프로세스서비스-분석-실습">2. Windows 프로세스·서비스 분석 실습</h2>
 <h3 id="21-도구-지도">2.1 도구 지도</h3>
 <p>질문                  도구</p>
 <hr />
@@ -286,7 +287,7 @@ Parameter로 DcomLaunch, RPCSS, netsvcs 같은 Service Group을 지정할 수
 <p>보안에서는 자동 실행 여부, 담당 Process, 실행 Account, Path가
 일반적인지를 봅니다.</p>
 <hr />
-<p># 3. Registry · UAC · Privilege · Integrity Level</p>
+<h2 id="3-registry--uac--privilege--integrity-level">3. Registry · UAC · Privilege · Integrity Level</h2>
 <h3 id="31-registry">3.1 Registry</h3>
 <p>주요 도구:</p>
 <p>Tool              File               특징</p>
@@ -347,7 +348,7 @@ reg load    Hive Load
 <p>PDF의 svchost 실습은 Process Explorer Properties에서 실제 Privilege와
 Integrity Level을 확인하는 흐름으로 이어집니다.</p>
 <hr />
-<p># 4. Linux 프로세스와 서비스</p>
+<h2 id="4-linux-프로세스와-서비스">4. Linux 프로세스와 서비스</h2>
 <h3 id="41-init과-pid-1">4.1 init과 PID 1</h3>
 <p>PDF는 Kernel 실행 후 첫 User Space Process인 init이 PID 1을 가지며
 Boot와 Service 초기화를 담당한다고 설명합니다.</p>
@@ -398,7 +399,7 @@ Boot와 Service 초기화를 담당한다고 설명합니다.</p>
     <code>cups-browsed</code></li>
 </ul>
 <hr />
-<p># 5. Cron과 지속성</p>
+<h2 id="5-cron과-지속성">5. Cron과 지속성</h2>
 <p>Cron은 반복적이고 자동화된 작업을 실행하는 Scheduling Service입니다.</p>
 <p>활용: Maintenance, Backup, Log 정리, Monitoring.</p>
 <h3 id="51-crontab-위치">5.1 Crontab 위치</h3>
@@ -442,7 +443,7 @@ crontab<span class="w"> </span>-u<span class="w"> </span>사용자명<span class
 <li><code>anacron</code>: System이 꺼져 있던 경우에도 예약 작업 처리</li>
 </ul>
 <hr />
-<p># 6. OSI 7계층과 TCP/IP</p>
+<h2 id="6-osi-7계층과-tcpip">6. OSI 7계층과 TCP/IP</h2>
 <h3 id="61-osi-7-layer">6.1 OSI 7 Layer</h3>
 <p>Layer            핵심 역할</p>
 <hr />
@@ -465,7 +466,7 @@ Protocol Suite 기반으로 동작한다고 설명합니다.</p>
 <p>TCP/IP는 단일 Protocol이 아니라 여러 Protocol이 함께 동작하는 <strong>Protocol
 Suite</strong>입니다.</p>
 <hr />
-<p># 7. 전통적인 Network Security Solution</p>
+<h2 id="7-전통적인-network-security-solution">7. 전통적인 Network Security Solution</h2>
 <p>PDF의 대표 Solution:</p>
 <ul>
 <li>Firewall</li>
@@ -497,7 +498,7 @@ TCP/IP의 Internet/Transport 영역과 연결해 설명합니다.</p>
 <p>이 표는 PDF가 제시한 교육용 비교입니다. 핵심 학습 포인트는 <strong>계층별
 방어를 조합한다</strong>는 것입니다.</p>
 <hr />
-<p># 8. 암호학 기초</p>
+<h2 id="8-암호학-기초">8. 암호학 기초</h2>
 <h3 id="81-기본-용어">8.1 기본 용어</h3>
 <ul>
 <li>Plaintext: 암호화 전 Message</li>
@@ -535,7 +536,7 @@ Symmetric Encryption으로 실제 Data 통신
 </code></pre></div></div>
 
 <hr />
-<p># 9. SSH</p>
+<h2 id="9-ssh">9. SSH</h2>
 <h3 id="91-ssh-version">9.1 SSH Version</h3>
 <p>PDF는 SSH-1과 SSH-2를 비교하며 SSH-2 사용을 권장합니다.</p>
 <p>항목           SSH-1                  SSH-2</p>
@@ -576,7 +577,7 @@ Symmetric Encryption으로 실제 Data 통신
 <p>따라서 <strong>암호화된 Traffic이라는 사실만으로 그 Traffic의 목적까지
 안전하다고 판단할 수는 없습니다.</strong></p>
 <hr />
-<p># 10. PDF 전체를 한 번에 연결하기</p>
+<h2 id="10-pdf-전체를-한-번에-연결하기">10. PDF 전체를 한 번에 연결하기</h2>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Windows Boot
  → SMSS / Session
  → Service / User Process
@@ -643,13 +644,28 @@ document.querySelectorAll('.code-copy').forEach(button=>{
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  let activeId='';
+  const setActive=id=>{
+    if(!id || id===activeId) return;
+    if(activeId && byId[activeId]) byId[activeId].classList.remove('on');
+    activeId=id;
+    const a=byId[id];
+    if(!a) return;
+    a.classList.add('on');
+    const aside=a.closest('aside');
+    if(!aside) return;
+    const linkBox=a.getBoundingClientRect();
+    const sideBox=aside.getBoundingClientRect();
+    if(linkBox.top<sideBox.top || linkBox.bottom>sideBox.bottom){
+      a.scrollIntoView({block:'nearest'});
+    }
+  };
   const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(!e.isIntersecting) return;
-      inchap.forEach(a=>a.classList.remove('on'));
-      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
-    });
-  },{rootMargin:'0px 0px -80% 0px'});
-  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+    const visible=es.filter(e=>e.isIntersecting)
+      .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(visible) setActive(visible.target.id);
+  },{rootMargin:'-12% 0px -72% 0px',threshold:0});
+  document.querySelectorAll('main h2[id],main h3[id],main h4[id]').forEach(t=>obs.observe(t));
 }
 </script>
 </body></html>

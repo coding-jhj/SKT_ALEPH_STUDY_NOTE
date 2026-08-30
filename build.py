@@ -64,6 +64,7 @@ LT = re.compile(r"<(?!/?br\s*/?>)", re.I)
 AUTOLINK = re.compile(r"(?<![\"'=\w])<(https?://[^<>\s]+)>")
 # 본문 목록이 번호 제목으로 잘못 승격된 것들. 화살표 설명이나 문장 끝맺음이 있으면 제목이 아닙니다.
 NOT_HEADING = re.compile(r"←|[가-힣A-Za-z0-9)\]]\.$")
+LEGACY_SECTION_HEADING = re.compile(r"^\d+(?:[.)]|$)")
 
 
 def normalize_tilde_fences(md_text: str) -> str:
@@ -134,6 +135,9 @@ def demote(md_text: str) -> tuple[str, str]:
             continue
         if level == 1 and spaced and not title and not quote.strip():
             title = text
+            continue
+        if level == 1 and spaced and LEGACY_SECTION_HEADING.match(text):
+            out.append(quote + "## " + text)
             continue
         if level == 1 or not spaced:
             out.append(quote + "\\" + line[len(quote):].lstrip())
@@ -251,7 +255,7 @@ CSS = """
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:16px}
+html{scroll-behavior:auto; scroll-padding-top:24px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -280,6 +284,7 @@ aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--
 main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
      border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h2[id],h3[id],h4[id]{scroll-margin-top:24px}
 h1{font-size:32px; margin:0 0 8px}
 h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
 h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
@@ -386,13 +391,28 @@ document.querySelectorAll('.code-copy').forEach(button=>{
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  let activeId='';
+  const setActive=id=>{
+    if(!id || id===activeId) return;
+    if(activeId && byId[activeId]) byId[activeId].classList.remove('on');
+    activeId=id;
+    const a=byId[id];
+    if(!a) return;
+    a.classList.add('on');
+    const aside=a.closest('aside');
+    if(!aside) return;
+    const linkBox=a.getBoundingClientRect();
+    const sideBox=aside.getBoundingClientRect();
+    if(linkBox.top<sideBox.top || linkBox.bottom>sideBox.bottom){
+      a.scrollIntoView({block:'nearest'});
+    }
+  };
   const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(!e.isIntersecting) return;
-      inchap.forEach(a=>a.classList.remove('on'));
-      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
-    });
-  },{rootMargin:'0px 0px -80% 0px'});
-  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+    const visible=es.filter(e=>e.isIntersecting)
+      .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(visible) setActive(visible.target.id);
+  },{rootMargin:'-12% 0px -72% 0px',threshold:0});
+  document.querySelectorAll('main h2[id],main h3[id],main h4[id]').forEach(t=>obs.observe(t));
 }
 """
 

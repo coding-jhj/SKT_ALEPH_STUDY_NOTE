@@ -20,7 +20,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:16px}
+html{scroll-behavior:auto; scroll-padding-top:24px}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -49,6 +49,7 @@ aside .inchap{margin:6px 0 10px; padding:8px 0 4px; border-top:1px dashed var(--
 main{margin:32px 40px 120px; padding:42px 50px 100px; max-width:920px; background:var(--paper-strong);
      border:1px solid var(--rule); border-radius:16px; box-shadow:var(--shadow)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,"Malgun Gothic",sans-serif; line-height:1.35; letter-spacing:-.02em}
+h2[id],h3[id],h4[id]{scroll-margin-top:24px}
 h1{font-size:32px; margin:0 0 8px}
 h2{font-size:23px; margin:52px 0 14px; padding:12px 0 10px 15px; border-bottom:1px solid var(--rule); position:relative}
 h2::before{content:""; position:absolute; left:0; top:11px; bottom:10px; width:4px; border-radius:4px; background:var(--accent)}
@@ -248,7 +249,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
   PaaS   애플리케이션, 데이터        개발 편의성이 높음
   SaaS   주로 사용자 설정과 데이터   바로 사용 가능</p>
 <hr />
-<p># 3. 정보보안의 3요소 --- CIA Triad</p>
+<h2 id="3-정보보안의-3요소-----cia-triad">3. 정보보안의 3요소 --- CIA Triad</h2>
 <p>정보보안에서 가장 기본적인 세 가지 목표는 <strong>기밀성, 무결성,
 가용성</strong>이다.</p>
 <h3 id="31-기밀성-confidentiality">3.1 기밀성 Confidentiality</h3>
@@ -289,7 +290,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
 <p>서버가 공격이나 장애 때문에 계속 다운된다면 기밀성과 무결성이
 유지되더라도 서비스는 정상적으로 사용할 수 없다.</p>
 <hr />
-<p># 4. 보안의 주요 영역</p>
+<h2 id="4-보안의-주요-영역">4. 보안의 주요 영역</h2>
 <h3 id="41-네트워크-보안">4.1 네트워크 보안</h3>
 <p>네트워크를 통해 들어오고 나가는 통신을 통제하고 감시한다.</p>
 <p>대표 기술:</p>
@@ -355,7 +356,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
 </ul>
 <p>웹 보안 학습에서는 OWASP Top 10을 자주 참고한다.</p>
 <hr />
-<p># 5. OSI 7계층</p>
+<h2 id="5-osi-7계층">5. OSI 7계층</h2>
 <p>OSI(Open Systems Interconnection) 모델은 네트워크 통신 기능을 7개의
 계층으로 구분한 참조 모델이다.</p>
 <p>ISO가 표준화하였다.</p>
@@ -381,7 +382,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
 중심으로 동작하지만, 네트워크 개념을 학습하고 장애 위치를 구분할 때 OSI
 모델이 많이 사용된다.</p>
 <hr />
-<p># 6. UTP 케이블과 RJ-45</p>
+<h2 id="6-utp-케이블과-rj-45">6. UTP 케이블과 RJ-45</h2>
 <h3 id="utp">UTP</h3>
 <p>UTP(Unshielded Twisted Pair)는 이더넷 LAN에서 널리 사용되는 구리선
 케이블이다.</p>
@@ -391,7 +392,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
 <p>네트워크 기초에서는 UTP 케이블과 RJ-45 계열 커넥터를 1계층의 물리적인
 연결 요소로 이해하면 된다.</p>
 <hr />
-<p># 7. MAC 주소, IP 주소, Port 번호</p>
+<h2 id="7-mac-주소-ip-주소-port-번호">7. MAC 주소, IP 주소, Port 번호</h2>
 <p>이 세 개는 서로 다른 목적을 가진다.</p>
 <h3 id="71-mac-address">7.1 MAC Address</h3>
 <p>MAC 주소는 네트워크 인터페이스에 사용되는 데이터링크 계층 주소이다.</p>
@@ -425,7 +426,7 @@ Cisco Packet Tracer 실습과 정보보안/네트워크 기초 공부를 함께 
 <p>IP 주소가 호스트를 구분한다면 포트 번호는 해당 호스트 내부의 통신
 종단점을 구분한다고 이해할 수 있다.</p>
 <hr />
-<p># 8. TCP와 UDP</p>
+<h2 id="8-tcp와-udp">8. TCP와 UDP</h2>
 <p>TCP와 UDP는 전송 계층의 대표적인 프로토콜이다.</p>
 <h3 id="81-tcp">8.1 TCP</h3>
 <p>TCP는 연결 지향적이고 신뢰성 있는 전송을 제공한다.</p>
@@ -475,7 +476,7 @@ Client  → Server : ACK
 신뢰성 기능을 제공하고 UDP는 최소한의 기능만 제공한다</strong>고 이해하는 편이
 정확하다.</p>
 <hr />
-<p># 9. IP 통신 방식</p>
+<h2 id="9-ip-통신-방식">9. IP 통신 방식</h2>
 <h3 id="91-unicast">9.1 Unicast</h3>
 <p>하나의 송신자가 하나의 수신자에게 데이터를 보내는 방식이다.</p>
 <p>일반적인 웹 접속은 대부분 유니캐스트 통신이다.</p>
@@ -495,7 +496,7 @@ Client  → Server : ACK
 거리보다 라우팅 정책과 경로 비용</strong>에 따라 대상이 선택된다고 보는 것이
 정확하다.</p>
 <hr />
-<p># 10. 특수 IP 주소와 Loopback</p>
+<h2 id="10-특수-ip-주소와-loopback">10. 특수 IP 주소와 Loopback</h2>
 <h3 id="101-127001">10.1 127.0.0.1</h3>
 <p>IPv4에서 <code>127.0.0.1</code>은 대표적인 loopback 주소이다.</p>
 <p>자기 자신의 TCP/IP 네트워크 스택을 대상으로 통신할 때 사용한다.</p>
@@ -516,7 +517,7 @@ Client  → Server : ACK
 <p>이렇게 테스트하면 TCP/IP 스택, LAN, 라우팅, DNS 문제를 어느 정도 분리할
 수 있다.</p>
 <hr />
-<p># 11. 서브넷팅과 CIDR</p>
+<h2 id="11-서브넷팅과-cidr">11. 서브넷팅과 CIDR</h2>
 <h3 id="111-subnetting">11.1 Subnetting</h3>
 <p>서브넷팅은 하나의 IP 네트워크를 더 작은 여러 네트워크로 나누는 기술이다.</p>
 <p>목적:</p>
@@ -556,7 +557,7 @@ Client  → Server : ACK
 
 <p>라우팅 테이블 항목 수를 줄이는 데 도움이 된다.</p>
 <hr />
-<p># 12. 서브넷 마스크와 Prefix</p>
+<h2 id="12-서브넷-마스크와-prefix">12. 서브넷 마스크와 Prefix</h2>
 <p>IPv4에서는 네트워크 부분과 호스트 부분을 구분해야 한다.</p>
 <p>예:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>IP: 192.168.16.10
@@ -584,7 +585,7 @@ Mask: 255.255.255.0
 <code>/31</code>, <code>/32</code>는 특수한 용도로 다르게 사용되므로 모든 경우에 단순히 2개를
 빼는 공식이 적용되는 것은 아니다.</p>
 <hr />
-<p># 13. 사설 IP, 공인 IP, NAT와 PAT</p>
+<h2 id="13-사설-ip-공인-ip-nat와-pat">13. 사설 IP, 공인 IP, NAT와 PAT</h2>
 <h3 id="131-private-ip">13.1 Private IP</h3>
 <p>IPv4 사설 주소 범위는 다음과 같다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>10.0.0.0/8
@@ -613,7 +614,7 @@ Mask: 255.255.255.0
 내부 주소가 직접 보이지 않는 효과는 있지만, 보안 정책은 Firewall 같은
 별도 통제 기능이 담당한다.</p>
 <hr />
-<p># 14. ARP</p>
+<h2 id="14-arp">14. ARP</h2>
 <p>ARP(Address Resolution Protocol)는 IPv4 LAN에서 <strong>목적지 IPv4 주소에
 대응하는 MAC 주소를 알아내기 위해</strong> 사용한다.</p>
 <p>예를 들어 PC A가 같은 LAN에 있는 <code>192.168.1.20</code>으로 Ethernet 프레임을
@@ -629,7 +630,7 @@ Reply로 알려준다.</p>
 찾는 것이 아니라, 일반적으로 <strong>기본 게이트웨이의 MAC 주소</strong>를 알아내어
 프레임을 전송한다.</p>
 <hr />
-<p># 15. 기본 네트워크 명령어</p>
+<h2 id="15-기본-네트워크-명령어">15. 기본 네트워크 명령어</h2>
 <h3 id="151-ipconfig-all">15.1 ipconfig /all</h3>
 <p>Windows에서 상세 네트워크 설정을 확인한다.</p>
 <div class="code-shell" data-language="Cmd"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cmd</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>ipconfig /all
@@ -670,7 +671,7 @@ Reply로 알려준다.</p>
 <p>예를 들어 웹 서버는 ICMP를 막아도 TCP 443 포트의 HTTPS 서비스는
 정상적으로 제공할 수 있다.</p>
 <hr />
-<p># 16. 네트워크 토폴로지</p>
+<h2 id="16-네트워크-토폴로지">16. 네트워크 토폴로지</h2>
 <p>Topology는 네트워크 장비와 링크가 어떤 구조로 연결되어 있는지를
 나타낸다.</p>
 <h3 id="161-physical-topology">16.1 Physical Topology</h3>
@@ -691,7 +692,7 @@ Reply로 알려준다.</p>
 나타낸다.</p>
 <p>따라서 물리 토폴로지와 논리 토폴로지는 항상 일치하지 않는다.</p>
 <hr />
-<p># 17. UTP 케이블 결선 --- Straight와 Crossover</p>
+<h2 id="17-utp-케이블-결선-----straight와-crossover">17. UTP 케이블 결선 --- Straight와 Crossover</h2>
 <p>과거 Ethernet 장비에서는 송신(Tx)과 수신(Rx)에 사용하는 핀의 역할이 장비
 유형에 따라 달랐다.</p>
 <h3 id="171-straight-through-cable">17.1 Straight-Through Cable</h3>
@@ -718,7 +719,7 @@ Router ↔ Router의 Ethernet 직접 연결
 <p>다만 Packet Tracer의 특정 실습이나 자격증 문제에서는 전통적인 케이블
 연결 규칙을 묻기도 한다.</p>
 <hr />
-<p># 18. 스위치 포트 상태와 STP</p>
+<h2 id="18-스위치-포트-상태와-stp">18. 스위치 포트 상태와 STP</h2>
 <p>Packet Tracer에서 링크의 상태가 색상으로 표시될 수 있다.</p>
 <p>색상의 정확한 의미는 장비와 시뮬레이션 상태에 따라 달라질 수 있으므로
 색상 자체보다 <strong>인터페이스 상태와 STP 상태를 명령어로 확인하는 습관</strong>이
@@ -742,7 +743,7 @@ show spanning-tree
 <p>따라서 "주황색은 무조건 30초"라고 외우기보다는 STP 수렴 과정 때문에
 일시적으로 Forwarding이 아닌 상태일 수 있다고 이해하는 편이 좋다.</p>
 <hr />
-<p># 19. Cisco IOS CLI 기본 구조</p>
+<h2 id="19-cisco-ios-cli-기본-구조">19. Cisco IOS CLI 기본 구조</h2>
 <p>Cisco 장비는 모드에 따라 입력 가능한 명령어가 달라진다.</p>
 <h3 id="191-user-exec-mode">19.1 User EXEC Mode</h3>
 <p>프롬프트:</p>
@@ -785,7 +786,7 @@ show spanning-tree
 
 <p>처럼 프롬프트가 바뀐다.</p>
 <hr />
-<p># 20. Cisco CLI에서 자주 쓰는 이동 명령어</p>
+<h2 id="20-cisco-cli에서-자주-쓰는-이동-명령어">20. Cisco CLI에서 자주 쓰는 이동 명령어</h2>
 <h3 id="exit">exit</h3>
 <p>현재 모드에서 한 단계 위로 이동한다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config-if)# exit
@@ -807,7 +808,7 @@ Router#
 <p>가능한 하위 명령을 확인할 수 있다.</p>
 <p>명령어 일부를 입력하고 <code>?</code>를 붙여 후보를 확인할 수도 있다.</p>
 <hr />
-<p># 21. DNS Lookup 때문에 CLI가 멈춘 것처럼 보이는 현상</p>
+<h2 id="21-dns-lookup-때문에-cli가-멈춘-것처럼-보이는-현상">21. DNS Lookup 때문에 CLI가 멈춘 것처럼 보이는 현상</h2>
 <p>Cisco IOS에서 존재하지 않는 명령어를 입력하면 장비가 이를 호스트
 이름으로 판단해 DNS 조회를 시도하는 경우가 있다.</p>
 <p>예:</p>
@@ -826,7 +827,7 @@ Translating &quot;shwo&quot;...domain server
 
 <p>이 설정을 하면 오타를 입력했을 때 불필요한 DNS 조회를 방지할 수 있다.</p>
 <hr />
-<p># 22. Cisco 장비 이름 설정</p>
+<h2 id="22-cisco-장비-이름-설정">22. Cisco 장비 이름 설정</h2>
 <p>Global Configuration Mode에서 다음과 같이 설정한다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# hostname R1
 R1(config)#
@@ -834,7 +835,7 @@ R1(config)#
 
 <p>장비 이름을 변경하면 CLI 프롬프트도 함께 바뀐다.</p>
 <hr />
-<p># 23. Cisco Enable Password와 Enable Secret</p>
+<h2 id="23-cisco-enable-password와-enable-secret">23. Cisco Enable Password와 Enable Secret</h2>
 <p>Privileged EXEC Mode로 진입할 때 사용할 비밀번호를 설정할 수 있다.</p>
 <h3 id="enable-password">enable password</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# enable password 12345
@@ -851,7 +852,7 @@ R1(config)#
 된다. 장비 버전과 설정에 따라 저장 방식이 달라질 수 있으며, 비밀번호
 자체도 충분히 강하게 설정해야 한다.</p>
 <hr />
-<p># 24. Console과 VTY 접속</p>
+<h2 id="24-console과-vty-접속">24. Console과 VTY 접속</h2>
 <h3 id="241-console-line">24.1 Console Line</h3>
 <p>물리적으로 장비의 콘솔 포트에 연결하여 관리할 때 사용하는 라인이다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router(config)# line console 0
@@ -870,7 +871,7 @@ Router(config-line)# login
 때문에 현재는 <strong>SSH 사용이 권장된다.</strong></p>
 <p>Packet Tracer에서도 가능하면 SSH 설정 실습까지 진행하는 것이 좋다.</p>
 <hr />
-<p># 25. Running-config와 Startup-config</p>
+<h2 id="25-running-config와-startup-config">25. Running-config와 Startup-config</h2>
 <p>Cisco 장비는 현재 실행 중인 설정과 부팅 시 사용할 설정을 구분한다.</p>
 <h3 id="running-config">running-config</h3>
 <p>현재 장비에서 사용 중인 설정이다.</p>
@@ -905,7 +906,7 @@ Router(config-line)# login
 <p>자격증과 공식 문서 관점에서는 <code>copy running-config startup-config</code>의
 의미를 정확히 이해하는 것이 중요하다.</p>
 <hr />
-<p># 26. MAC Address Table</p>
+<h2 id="26-mac-address-table">26. MAC Address Table</h2>
 <p>스위치는 수신한 Ethernet 프레임의 <strong>Source MAC Address</strong>를 보고 해당 MAC
 주소가 어느 포트에 연결되어 있는지 학습한다.</p>
 <p>확인 명령어 예:</p>
@@ -935,7 +936,7 @@ Router(config-line)# login
 </code></pre></div></div>
 
 <hr />
-<p># 27. TTL --- Time To Live</p>
+<h2 id="27-ttl-----time-to-live">27. TTL --- Time To Live</h2>
 <p>IPv4 Header에는 TTL 필드가 존재한다.</p>
 <p>라우터가 패킷을 하나의 Layer 3 Hop만큼 전달할 때마다 TTL 값을
 감소시킨다.</p>
@@ -970,7 +971,7 @@ Router(config-line)# login
 통과했다"고 확정할 수도 없다. 초기 TTL이 실제로 64였다는 전제가 먼저
 필요하다.</p>
 <hr />
-<p># 28. IP 주소가 모든 장비에 필요한가</p>
+<h2 id="28-ip-주소가-모든-장비에-필요한가">28. IP 주소가 모든 장비에 필요한가</h2>
 <p>"모든 네트워크 장비에는 반드시 IP가 있어야 한다"는 표현은 너무 넓다.</p>
 <h3 id="ip가-필요한-경우">IP가 필요한 경우</h3>
 <p>Layer 3 통신에 참여하거나 IP 기반 관리가 필요한 장비에는 IP 주소가
@@ -989,7 +990,7 @@ Router(config-line)# login
 <p>즉, IP 주소는 <strong>IP 통신을 수행하는 인터페이스 또는 IP 기반 관리 기능에
 필요하다</strong>고 이해하는 것이 정확하다.</p>
 <hr />
-<p># 29. 같은 네트워크와 Default Gateway</p>
+<h2 id="29-같은-네트워크와-default-gateway">29. 같은 네트워크와 Default Gateway</h2>
 <p>호스트는 목적지 IP가 자신과 같은 서브넷인지 먼저 판단한다.</p>
 <p>예를 들어 PC의 설정이 다음과 같다고 하자.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>IP Address      : 192.168.10.20
@@ -1014,7 +1015,7 @@ Default Gateway : 192.168.10.1
 <code>8.8.8.8</code>이다.</p>
 <p>이 차이는 Layer 2와 Layer 3를 이해하는 데 매우 중요하다.</p>
 <hr />
-<p># 30. Cisco Router Interface 설정</p>
+<h2 id="30-cisco-router-interface-설정">30. Cisco Router Interface 설정</h2>
 <p>라우터 인터페이스에 IPv4 주소를 설정하는 기본 과정이다.</p>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Router&gt; enable
 Router# configure terminal
@@ -1050,7 +1051,7 @@ GigabitEthernet0/0      192.168.16.1    YES manual up                    up
 있음을 의미한다.</p>
 <p><code>administratively down</code>은 관리자가 <code>shutdown</code> 상태로 둔 경우를 의미한다.</p>
 <hr />
-<p># 31. Static IP와 DHCP</p>
+<h2 id="31-static-ip와-dhcp">31. Static IP와 DHCP</h2>
 <h3 id="311-static-ip">31.1 Static IP</h3>
 <p>관리자가 직접 IP 주소를 고정해서 설정한다.</p>
 <p>주로 주소가 자주 변경되면 안 되는 장비에서 사용한다.</p>
@@ -1095,7 +1096,7 @@ Server → DHCP ACK
 <p>Round Robin은 오히려 Load Balancer나 DNS 기반 분산 등에서 더 대표적으로
 접할 수 있다.</p>
 <hr />
-<p># 32. DNS와 Domain</p>
+<h2 id="32-dns와-domain">32. DNS와 Domain</h2>
 <p>DNS(Domain Name System)는 도메인 이름과 IP 주소 등 여러 DNS 정보를
 관리하는 분산 시스템이다.</p>
 <p>예:</p>
@@ -1119,7 +1120,7 @@ Server → DHCP ACK
 </ol>
 <p>따라서 "IP 주소가 존재한다 = 도메인으로 접속 가능"은 성립하지 않는다.</p>
 <hr />
-<p># 33. 웹 서버의 80번과 443번 포트</p>
+<h2 id="33-웹-서버의-80번과-443번-포트">33. 웹 서버의 80번과 443번 포트</h2>
 <p>전통적으로 다음 포트를 사용한다.</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>HTTP  : TCP 80
 HTTPS : TCP 443
@@ -1139,7 +1140,7 @@ LISTEN 0 511 0.0.0.0:443
 
 <p>이것은 해당 포트에서 프로세스가 연결을 기다리고 있음을 의미한다.</p>
 <hr />
-<p># 34. TFTP</p>
+<h2 id="34-tftp">34. TFTP</h2>
 <p>TFTP(Trivial File Transfer Protocol)는 단순한 파일 전송 프로토콜이다.</p>
 <p>일반적으로 UDP 69번 포트를 사용한다.</p>
 <p>특징:</p>
@@ -1158,7 +1159,7 @@ copy tftp: running-config
 
 <p>보안상 공개 인터넷에서 중요한 파일을 TFTP로 전송하는 것은 적합하지 않다.</p>
 <hr />
-<p># 35. 네트워크 문제를 점검하는 기본 순서</p>
+<h2 id="35-네트워크-문제를-점검하는-기본-순서">35. 네트워크 문제를 점검하는 기본 순서</h2>
 <p>네트워크가 안 될 때는 한 번에 모든 것을 의심하기보다 계층적으로 점검하는
 것이 좋다.</p>
 <h3 id="1단계-----로컬-설정-확인">1단계 --- 로컬 설정 확인</h3>
@@ -1209,7 +1210,7 @@ copy tftp: running-config
 <p>웹 서비스 장애를 확인할 때는 ICMP ping만 보는 것보다 실제 TCP 포트 접근
 여부를 함께 확인하는 것이 더 정확하다.</p>
 <hr />
-<p># 36. Packet Tracer에서 가장 먼저 익힐 명령어</p>
+<h2 id="36-packet-tracer에서-가장-먼저-익힐-명령어">36. Packet Tracer에서 가장 먼저 익힐 명령어</h2>
 <h3 id="장비-상태">장비 상태</h3>
 <div class="code-shell" data-language="Cisco IOS"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Cisco IOS</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>show ip interface brief
 </code></pre></div></div>
@@ -1253,7 +1254,7 @@ copy tftp: running-config
 </code></pre></div></div>
 
 <hr />
-<p># 37. 반드시 구분해야 할 네트워크 개념</p>
+<h2 id="37-반드시-구분해야-할-네트워크-개념">37. 반드시 구분해야 할 네트워크 개념</h2>
 <h3 id="mac-address-vs-ip-address">MAC Address vs IP Address</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>MAC → 같은 링크/LAN 안에서 Ethernet 프레임을 전달할 때 사용
 IP  → 서로 다른 네트워크를 포함한 Layer 3 경로에서 목적지를 식별
@@ -1286,7 +1287,7 @@ TCP → 양 끝 호스트 사이의 신뢰성 있는 데이터 전송을 제공
 </code></pre></div></div>
 
 <hr />
-<p># 38. 현재 단계에서 외워야 할 핵심 포트</p>
+<h2 id="38-현재-단계에서-외워야-할-핵심-포트">38. 현재 단계에서 외워야 할 핵심 포트</h2>
 <p>네트워크와 보안을 공부하면서 다음 정도는 자연스럽게 익혀두는 것이 좋다.</p>
 <p>Protocol        Port Transport   용도</p>
 <hr />
@@ -1308,7 +1309,7 @@ TCP → 양 끝 호스트 사이의 신뢰성 있는 데이터 전송을 제공
 <p>포트 번호는 무조건 암기하기보다 Packet Tracer, Linux, 보안 실습에서
 반복해서 보면서 익히는 것이 좋다.</p>
 <hr />
-<p># 39. 네트워크에서 데이터가 전달되는 흐름</p>
+<h2 id="39-네트워크에서-데이터가-전달되는-흐름">39. 네트워크에서 데이터가 전달되는 흐름</h2>
 <p>PC A가 다른 네트워크의 웹 서버에 접속한다고 가정한다.</p>
 <p>예:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>PC A
@@ -1359,7 +1360,7 @@ Destination Port = 443
 <p>이 전체 흐름을 이해하면 MAC, IP, Port, ARP, Gateway, Router가 각각 왜
 필요한지 자연스럽게 연결된다.</p>
 <hr />
-<p># 40. 학습할 때 자주 발생하는 잘못된 이해</p>
+<h2 id="40-학습할-때-자주-발생하는-잘못된-이해">40. 학습할 때 자주 발생하는 잘못된 이해</h2>
 <h3 id="mac-주소는-절대-변하지-않는다">"MAC 주소는 절대 변하지 않는다"</h3>
 <p>아니다. MAC 주소는 변경하거나 위조할 수 있다.</p>
 <h3 id="사설-ip는-가짜-ip다">"사설 IP는 가짜 IP다"</h3>
@@ -1382,7 +1383,7 @@ Destination Port = 443
 <h3 id="ttl-값만-보고-os를-확정할-수-있다">"TTL 값만 보고 OS를 확정할 수 있다"</h3>
 <p>아니다. 초기 TTL 추정은 OS Fingerprinting의 한 단서일 뿐이다.</p>
 <hr />
-<p># 41. Packet Tracer 초급 실습 체크리스트</p>
+<h2 id="41-packet-tracer-초급-실습-체크리스트">41. Packet Tracer 초급 실습 체크리스트</h2>
 <p>다음 실습을 직접 할 수 있다면 지금까지의 기초 개념을 상당 부분 이해한
 것이다.</p>
 <h4 id="실습-1-----pc-2대와-switch">실습 1 --- PC 2대와 Switch</h4>
@@ -1451,7 +1452,7 @@ Router(config-if)# no shutdown
 <li>ARP</li>
 </ul>
 <hr />
-<p># 42. 전체 개념 연결도</p>
+<h2 id="42-전체-개념-연결도">42. 전체 개념 연결도</h2>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>[Application]
     │
     │ HTTP / HTTPS / DNS / SSH
@@ -1490,7 +1491,7 @@ IP 주소
 
 <p>이 흐름을 이해하는 것이 네트워크 기초에서 가장 중요하다.</p>
 <hr />
-<p># 43. 지금 단계에서 우선순위</p>
+<h2 id="43-지금-단계에서-우선순위">43. 지금 단계에서 우선순위</h2>
 <p>현재 Cisco Packet Tracer와 보안/인프라 기초를 함께 공부한다면 다음
 순서로 이해하면 좋다.</p>
 <ol>
@@ -1517,7 +1518,7 @@ traceroute              → Router 경로 확인
 </code></pre></div></div>
 
 <hr />
-<p># 44. 핵심 요약</p>
+<h2 id="44-핵심-요약">44. 핵심 요약</h2>
 <ul>
 <li>IT 인프라는 서버, 네트워크, 저장소, 운영체제, 클라우드, 보안 시스템
     전체를 포함한다.</li>
@@ -2523,7 +2524,7 @@ Cable/Wi-Fi
 <p>따라서 실무에서는 "이 IP는 무조건 C 클래스니까 /24"라고 판단하면 안
 된다.</p>
 <hr />
-<p># 127.0.0.0/8 - Loopback</p>
+<h2 id="1270008---loopback">127.0.0.0/8 - Loopback</h2>
 <p>슬라이드에는 127.0.0.0/8이 Loopback으로 표시되어 있다.</p>
 <p>가장 유명한 주소:</p>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>127.0.0.1
@@ -2535,7 +2536,7 @@ Cable/Wi-Fi
 
 <p>은 자신의 TCP/IP 동작 여부를 확인하는 기본 테스트 중 하나다.</p>
 <hr />
-<p># 169.254.0.0/16 - Link Local</p>
+<h2 id="1692540016---link-local">169.254.0.0/16 - Link Local</h2>
 <p>IPv4 Link-Local 주소 범위이다.</p>
 <p>DHCP를 통해 정상적인 주소를 받지 못했을 때 운영체제가 이 범위의 주소를
 자동 구성하는 상황을 볼 수 있다.</p>
@@ -4092,7 +4093,7 @@ Service를 이해하고, 보안 장비·암호학·SSH까지 연결합니다.</p
 <h3 id="전체-흐름">전체 흐름</h3>
 <p><code>Windows 핵심 프로세스 → 분석 도구 → Registry/UAC → Linux/systemd/Cron → OSI/TCP-IP → 보안 장비 → 암호학 → SSH</code></p>
 <hr />
-<p># 1. Windows 핵심 프로세스와 서비스</p>
+<h2 id="1-windows-핵심-프로세스와-서비스">1. Windows 핵심 프로세스와 서비스</h2>
 <h3 id="11-프로세스-계층">1.1 프로세스 계층</h3>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>SYSTEM
   ↓
@@ -4162,7 +4163,7 @@ Parameter로 DcomLaunch, RPCSS, netsvcs 같은 Service Group을 지정할 수
 <p>PDF는 User 권한 악성 Program 실행, 자동 시작, Memory 삽입 등의 위협
 가능성을 언급합니다.</p>
 <hr />
-<p># 2. Windows 프로세스·서비스 분석 실습</p>
+<h2 id="2-windows-프로세스서비스-분석-실습">2. Windows 프로세스·서비스 분석 실습</h2>
 <h3 id="21-도구-지도">2.1 도구 지도</h3>
 <p>질문                  도구</p>
 <hr />
@@ -4236,7 +4237,7 @@ Parameter로 DcomLaunch, RPCSS, netsvcs 같은 Service Group을 지정할 수
 <p>보안에서는 자동 실행 여부, 담당 Process, 실행 Account, Path가
 일반적인지를 봅니다.</p>
 <hr />
-<p># 3. Registry · UAC · Privilege · Integrity Level</p>
+<h2 id="3-registry--uac--privilege--integrity-level">3. Registry · UAC · Privilege · Integrity Level</h2>
 <h3 id="31-registry">3.1 Registry</h3>
 <p>주요 도구:</p>
 <p>Tool              File               특징</p>
@@ -4297,7 +4298,7 @@ reg load    Hive Load
 <p>PDF의 svchost 실습은 Process Explorer Properties에서 실제 Privilege와
 Integrity Level을 확인하는 흐름으로 이어집니다.</p>
 <hr />
-<p># 4. Linux 프로세스와 서비스</p>
+<h2 id="4-linux-프로세스와-서비스">4. Linux 프로세스와 서비스</h2>
 <h3 id="41-init과-pid-1">4.1 init과 PID 1</h3>
 <p>PDF는 Kernel 실행 후 첫 User Space Process인 init이 PID 1을 가지며
 Boot와 Service 초기화를 담당한다고 설명합니다.</p>
@@ -4348,7 +4349,7 @@ Boot와 Service 초기화를 담당한다고 설명합니다.</p>
     <code>cups-browsed</code></li>
 </ul>
 <hr />
-<p># 5. Cron과 지속성</p>
+<h2 id="5-cron과-지속성">5. Cron과 지속성</h2>
 <p>Cron은 반복적이고 자동화된 작업을 실행하는 Scheduling Service입니다.</p>
 <p>활용: Maintenance, Backup, Log 정리, Monitoring.</p>
 <h3 id="51-crontab-위치">5.1 Crontab 위치</h3>
@@ -4392,7 +4393,7 @@ crontab<span class="w"> </span>-u<span class="w"> </span>사용자명<span class
 <li><code>anacron</code>: System이 꺼져 있던 경우에도 예약 작업 처리</li>
 </ul>
 <hr />
-<p># 6. OSI 7계층과 TCP/IP</p>
+<h2 id="6-osi-7계층과-tcpip">6. OSI 7계층과 TCP/IP</h2>
 <h3 id="61-osi-7-layer">6.1 OSI 7 Layer</h3>
 <p>Layer            핵심 역할</p>
 <hr />
@@ -4415,7 +4416,7 @@ Protocol Suite 기반으로 동작한다고 설명합니다.</p>
 <p>TCP/IP는 단일 Protocol이 아니라 여러 Protocol이 함께 동작하는 <strong>Protocol
 Suite</strong>입니다.</p>
 <hr />
-<p># 7. 전통적인 Network Security Solution</p>
+<h2 id="7-전통적인-network-security-solution">7. 전통적인 Network Security Solution</h2>
 <p>PDF의 대표 Solution:</p>
 <ul>
 <li>Firewall</li>
@@ -4447,7 +4448,7 @@ TCP/IP의 Internet/Transport 영역과 연결해 설명합니다.</p>
 <p>이 표는 PDF가 제시한 교육용 비교입니다. 핵심 학습 포인트는 <strong>계층별
 방어를 조합한다</strong>는 것입니다.</p>
 <hr />
-<p># 8. 암호학 기초</p>
+<h2 id="8-암호학-기초">8. 암호학 기초</h2>
 <h3 id="81-기본-용어">8.1 기본 용어</h3>
 <ul>
 <li>Plaintext: 암호화 전 Message</li>
@@ -4485,7 +4486,7 @@ Symmetric Encryption으로 실제 Data 통신
 </code></pre></div></div>
 
 <hr />
-<p># 9. SSH</p>
+<h2 id="9-ssh">9. SSH</h2>
 <h3 id="91-ssh-version">9.1 SSH Version</h3>
 <p>PDF는 SSH-1과 SSH-2를 비교하며 SSH-2 사용을 권장합니다.</p>
 <p>항목           SSH-1                  SSH-2</p>
@@ -4526,7 +4527,7 @@ Symmetric Encryption으로 실제 Data 통신
 <p>따라서 <strong>암호화된 Traffic이라는 사실만으로 그 Traffic의 목적까지
 안전하다고 판단할 수는 없습니다.</strong></p>
 <hr />
-<p># 10. PDF 전체를 한 번에 연결하기</p>
+<h2 id="10-pdf-전체를-한-번에-연결하기">10. PDF 전체를 한 번에 연결하기</h2>
 <div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>Windows Boot
  → SMSS / Session
  → Service / User Process
@@ -4593,13 +4594,28 @@ document.querySelectorAll('.code-copy').forEach(button=>{
 const inchap=[...document.querySelectorAll('aside .inchap a')];
 if(inchap.length){
   const byId=Object.fromEntries(inchap.map(a=>[a.hash.slice(1),a]));
+  let activeId='';
+  const setActive=id=>{
+    if(!id || id===activeId) return;
+    if(activeId && byId[activeId]) byId[activeId].classList.remove('on');
+    activeId=id;
+    const a=byId[id];
+    if(!a) return;
+    a.classList.add('on');
+    const aside=a.closest('aside');
+    if(!aside) return;
+    const linkBox=a.getBoundingClientRect();
+    const sideBox=aside.getBoundingClientRect();
+    if(linkBox.top<sideBox.top || linkBox.bottom>sideBox.bottom){
+      a.scrollIntoView({block:'nearest'});
+    }
+  };
   const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(!e.isIntersecting) return;
-      inchap.forEach(a=>a.classList.remove('on'));
-      const a=byId[e.target.id]; if(a){a.classList.add('on'); a.scrollIntoView({block:'nearest'});}
-    });
-  },{rootMargin:'0px 0px -80% 0px'});
-  document.querySelectorAll('main h2[id],main h3[id]').forEach(t=>obs.observe(t));
+    const visible=es.filter(e=>e.isIntersecting)
+      .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(visible) setActive(visible.target.id);
+  },{rootMargin:'-12% 0px -72% 0px',threshold:0});
+  document.querySelectorAll('main h2[id],main h3[id],main h4[id]').forEach(t=>obs.observe(t));
 }
 </script>
 </body></html>
