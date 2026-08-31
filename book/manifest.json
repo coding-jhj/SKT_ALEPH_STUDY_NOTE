@@ -7,21 +7,27 @@
       "title": "책 사용법",
       "part": "시작하기",
       "file": "ch01.html",
-      "sources": ["book/00-이-책의-사용법.md"]
+      "sources": [
+        "book/00-이-책의-사용법.md"
+      ]
     },
     {
       "id": "curriculum",
       "title": "전체 커리큘럼 지도",
       "part": "시작하기",
       "file": "ch02.html",
-      "sources": ["book/01-커리큘럼-지도.md"]
+      "sources": [
+        "book/01-커리큘럼-지도.md"
+      ]
     },
     {
       "id": "course-overview",
       "title": "과정 개요",
       "part": "시작하기",
       "file": "ch03.html",
-      "sources": ["slides/0-과정개요-이미지슬라이드.md"]
+      "sources": [
+        "slides/0-과정개요-이미지슬라이드.md"
+      ]
     },
     {
       "id": "network-main",
@@ -46,175 +52,235 @@
       "title": "네트워크 핵심키워드 1",
       "part": "1부 · 네트워크",
       "file": "ch12.html",
-      "sources": ["slides/1-네트워크-1.md"]
+      "sources": [
+        "slides/1-네트워크-1.md"
+      ]
     },
     {
       "id": "network-keywords-2",
       "title": "네트워크 핵심키워드 2",
       "part": "1부 · 네트워크",
       "file": "ch13.html",
-      "sources": ["slides/1-네트워크-2.md"]
+      "sources": [
+        "slides/1-네트워크-2.md",
+        "notes/2026-08-31_GNS3-라우터-ACL-실습-공식보강.md"
+      ],
+      "source_labels": [
+        "기존 네트워크 핵심키워드 2·GNS3 실습",
+        "2026-08-31 GNS3 라우터 ACL 수업 공식 보강"
+      ]
     },
     {
       "id": "network-keywords-3",
       "title": "네트워크 핵심키워드 3",
       "part": "1부 · 네트워크",
       "file": "ch14.html",
-      "sources": ["slides/1-네트워크-3.md"]
+      "sources": [
+        "slides/1-네트워크-3.md"
+      ]
     },
     {
       "id": "network-security-lab",
       "title": "네트워크 보안 통합 Lab",
       "part": "1부 · 네트워크",
       "file": "ch05.html",
-      "sources": ["notes/네트워크보안-통합Lab-결과보고서.md"]
+      "sources": [
+        "notes/네트워크보안-통합Lab-결과보고서.md"
+      ]
     },
     {
       "id": "personal-lab",
       "title": "개인과제 전체 구축 Lab",
       "part": "1부 · 네트워크",
       "file": "personal-lab.html",
-      "sources": ["book/chapters/05-개인과제-전체-구축-Lab.md"]
+      "sources": [
+        "book/chapters/05-개인과제-전체-구축-Lab.md"
+      ]
     },
     {
       "id": "rocky-server",
       "title": "Rocky Linux 개인 서버",
       "part": "2부 · Linux·서버",
       "file": "ch06.html",
-      "sources": ["notes/RockyLinux9_개인서버랩.md"]
+      "sources": [
+        "notes/RockyLinux9_개인서버랩.md"
+      ]
     },
     {
       "id": "linux-services",
       "title": "NFS·Samba·SELinux·rsyslog·LogAnalyzer",
       "part": "2부 · Linux·서버",
       "file": "ch07.html",
-      "sources": ["notes/2026-08-25_NFS-Samba-SELinux-rsyslog.md"]
+      "sources": [
+        "notes/2026-08-25_NFS-Samba-SELinux-rsyslog.md"
+      ]
     },
     {
       "id": "vi-protocol-iis",
       "title": "vi·프로토콜·Windows IIS",
       "part": "2부 · Linux·서버",
       "file": "ch08.html",
-      "sources": ["notes/2026-08-27_보강-vi-프로토콜-IIS.md"]
+      "sources": [
+        "notes/2026-08-27_보강-vi-프로토콜-IIS.md"
+      ]
     },
     {
       "id": "linux-kernel-kali",
       "title": "Linux 메모리·커널·MariaDB 계정·Kali",
       "part": "2부 · Linux·서버",
       "file": "ch09.html",
-      "sources": ["notes/2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md"]
+      "sources": [
+        "notes/2026-08-28_리눅스메모리-커널-MariaDB계정-Kali.md"
+      ]
     },
     {
       "id": "linux-keywords-1",
       "title": "Linux 서버 핵심키워드 1",
       "part": "2부 · Linux·서버",
       "file": "ch15.html",
-      "sources": ["slides/2-리눅스서버-1.md"]
+      "sources": [
+        "slides/2-리눅스서버-1.md"
+      ]
     },
     {
       "id": "linux-keywords-2",
       "title": "Linux 서버 핵심키워드 2",
       "part": "2부 · Linux·서버",
       "file": "ch16.html",
-      "sources": ["slides/2-리눅스서버-2.md"]
+      "sources": [
+        "slides/2-리눅스서버-2.md"
+      ]
     },
     {
       "id": "windows-keywords",
       "title": "Windows Server 핵심키워드",
       "part": "2부 · Linux·서버",
       "file": "ch17.html",
-      "sources": ["slides/3-윈도우서버.md"]
+      "sources": [
+        "slides/3-윈도우서버.md"
+      ]
     },
     {
       "id": "mariadb-sql",
       "title": "MariaDB SQL·백업·복제",
       "part": "3부 · DB·웹",
       "file": "ch10.html",
-      "sources": ["notes/2026-08-27_MariaDB-SQL-백업-복제.md"]
+      "sources": [
+        "notes/2026-08-27_MariaDB-SQL-백업-복제.md"
+      ]
     },
     {
       "id": "team-web-db",
       "title": "팀 웹·원격 MariaDB 연동",
       "part": "3부 · DB·웹",
       "file": "ch11.html",
-      "sources": ["notes/2026-08-28_팀웹-원격MariaDB연동.md"]
+      "sources": [
+        "notes/2026-08-28_팀웹-원격MariaDB연동.md"
+      ]
     },
     {
       "id": "database-keywords",
       "title": "데이터베이스 핵심키워드",
       "part": "3부 · DB·웹",
       "file": "ch18.html",
-      "sources": ["slides/4-데이터베이스.md"]
+      "sources": [
+        "slides/4-데이터베이스.md"
+      ]
     },
     {
       "id": "operations",
       "title": "모니터링·운영·클라우드",
       "part": "4부 · 운영·자동화",
       "file": "ch19.html",
-      "sources": ["slides/5-모니터링운영.md"]
+      "sources": [
+        "slides/5-모니터링운영.md",
+        "notes/2026-08-31_Docker-Zabbix-공식보강.md"
+      ],
+      "source_labels": [
+        "기존 모니터링·운영 핵심키워드",
+        "2026-08-31 Docker·Zabbix 수업 공식 보강"
+      ]
     },
     {
       "id": "python-automation",
       "title": "Python·자동화",
       "part": "4부 · 운영·자동화",
       "file": "ch20.html",
-      "sources": ["slides/6-파이썬자동화.md"]
+      "sources": [
+        "slides/6-파이썬자동화.md"
+      ]
     },
     {
       "id": "security-1",
       "title": "보안·모의해킹 1",
       "part": "5부 · 보안·모의해킹",
       "file": "ch21.html",
-      "sources": ["slides/7-보안모의해킹-1.md"]
+      "sources": [
+        "slides/7-보안모의해킹-1.md"
+      ]
     },
     {
       "id": "security-2",
       "title": "보안·모의해킹 2",
       "part": "5부 · 보안·모의해킹",
       "file": "ch22.html",
-      "sources": ["slides/7-보안모의해킹-2.md"]
+      "sources": [
+        "slides/7-보안모의해킹-2.md"
+      ]
     },
     {
       "id": "security-3",
       "title": "보안·모의해킹 3",
       "part": "5부 · 보안·모의해킹",
       "file": "ch23.html",
-      "sources": ["slides/7-보안모의해킹-3.md"]
+      "sources": [
+        "slides/7-보안모의해킹-3.md"
+      ]
     },
     {
       "id": "security-4",
       "title": "보안·모의해킹 4",
       "part": "5부 · 보안·모의해킹",
       "file": "ch24.html",
-      "sources": ["slides/7-보안모의해킹-4.md"]
+      "sources": [
+        "slides/7-보안모의해킹-4.md"
+      ]
     },
     {
       "id": "conflicts",
       "title": "중복과 상충 정리",
       "part": "부록·자료 보관",
       "file": "ch25.html",
-      "sources": ["book/90-중복과-상충-정리.md"]
+      "sources": [
+        "book/90-중복과-상충-정리.md"
+      ]
     },
     {
       "id": "official-review",
       "title": "공식 문서 대조",
       "part": "부록·자료 보관",
       "file": "ch26.html",
-      "sources": ["book/92-공식문서-보강.md"]
+      "sources": [
+        "book/92-공식문서-보강.md"
+      ]
     },
     {
       "id": "command-index",
       "title": "명령어 색인",
       "part": "부록·자료 보관",
       "file": "ch27.html",
-      "sources": ["book/91-명령어-색인.md"]
+      "sources": [
+        "book/91-명령어-색인.md"
+      ]
     },
     {
       "id": "glossary",
       "title": "용어집",
       "part": "부록·자료 보관",
       "file": "ch28.html",
-      "sources": ["book/99-용어집.md"]
+      "sources": [
+        "book/99-용어집.md"
+      ]
     }
   ],
   "archives": [
