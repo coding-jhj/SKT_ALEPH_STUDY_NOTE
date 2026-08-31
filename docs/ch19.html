@@ -2409,7 +2409,7 @@ sudo apt install -y \
   php-mysql</code></pre></div></div>
 <p>실제 패키지명과 PHP 확장 패키지는 선택한 Zabbix 7.0 패키지 저장소의 설치 안내와 설치 화면의 Required 항목을 기준으로 확인한다. 패키지 설치 후에는 서비스가 자동 시작되었는지 따로 확인한다.</p>
 <h4 id="3-3-데이터베이스-생성">3-3. 데이터베이스 생성</h4>
-<p>실습 비밀번호 <strong>123456</strong>은 예시로만 남기고, 실제 시스템에서는 충분히 긴 비밀번호를 사용한다. 명령행에 비밀번호를 직접 쓰면 셸 history나 프로세스 목록에 노출될 수 있으므로 <strong>-p 뒤를 비워 대화형으로 입력</strong>한다.</p>
+<p>필기에 적힌 단순 비밀번호는 예시로만 남기고, 실제 시스템에서는 충분히 긴 비밀번호를 사용한다. 명령행에 비밀번호를 직접 쓰면 셸 history나 프로세스 목록에 노출될 수 있으므로 <strong>-p 뒤를 비워 대화형으로 입력</strong>한다.</p>
 <div class="code-shell" data-language="SQL"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">SQL</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>CREATE DATABASE my_zabbix_db
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_bin;
