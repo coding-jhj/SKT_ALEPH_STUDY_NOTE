@@ -3536,6 +3536,115 @@ no ip access-list extended [정책이름]
 <h4 id="7-기본-토폴로지-구성-요건">7. 기본 토폴로지 구성 요건</h4>
 <p>RACL, DACL, Zone-Based FW 등 보안 정책 실습을 진행하기 위한 사전 조건으로, GNS3 토폴로지에서 R1부터 R4까지 모든 구간에 통신이 가능해야 한다. 통신이 가능한 상태를 만들기 위해서는 IP 주소 설정과 라우팅(OSPF) 설정이 선행되어야 한다.</p>
 <p>라우팅이 완료되지 않으면 이후 보안 정책 실습을 정상적으로 진행할 수 없다.</p>
+<section id="official-supplement-2026-08-31-gns3-acl"><h2 id="official-supplement-2026-08-31-gns3-acl-title">2026-08-31 GNS3 라우터 ACL 수업 공식 보강</h2><blockquote><p>이 문서는 “Cisco ACL 일반론”을 별도 장비 운영 문서처럼 정리한 것이 아니다. 수업에서 <strong>GNS3 프로젝트 안에 R1·R2·R4 라우터를 배치하고, R2의 인터페이스에 IOS 계열 ACL을 적용해 패킷 흐름을 확인한 실습</strong>을 정리한 것이다.
+
+GNS3는 실습 환경이고, 콘솔에 입력한 명령은 선택한 Cisco IOS 이미지와 플랫폼의 지원 범위에 따라 달라진다. 따라서 아래의 IP와 인터페이스는 필기의 토폴로지를 재현할 때만 사용하고, 다른 토폴로지에서는 실제 연결·주소·OSPF peer를 먼저 확인한다.</p></blockquote>
+<h3 id="1-gns3-실습-범위와-사전-조건">1. GNS3 실습 범위와 사전 조건</h3>
+<h4 id="1-1-gns3와-ios-이미지의-관계">1-1. GNS3와 IOS 이미지의 관계</h4>
+<p>GNS3에서 사용하는 Cisco 라우터 노드는 선택한 IOS 이미지와 템플릿에 따라 생성된다. GNS3 공식 문서도 Dynamips 템플릿에서 사용자가 IOS 이미지를 제공하고 플랫폼·메모리·인터페이스를 설정하도록 안내한다. 따라서 Packet Tracer에서 항상 같은 명령이 동작한다고 가정하거나, GNS3의 모든 이미지가 같은 기능을 지원한다고 가정하면 안 된다.</p>
+<p>이번 필기의 핵심 실습 흐름은 다음과 같다.</p>
+<ol><li>GNS3 프로젝트의 R1·R2·R4 노드를 시작한다.</li><li>각 링크의 인터페이스가 실제로 연결되어 있고 no shutdown 상태인지 확인한다.</li><li>IP 주소와 OSPF 라우팅을 먼저 완성한다.</li><li>경계 라우터 R2의 특정 인터페이스(필기에서는 f0/1)에 ACL을 적용한다.</li><li>R1·R4에서 ping, TCP 80 연결, Telnet 인증을 발생시킨다.</li><li>R2에서 ACL match counter와 동적 항목을 확인한다.</li></ol>
+<h4 id="1-2-acl-실습-전-확인">1-2. ACL 실습 전 확인</h4>
+<p>필기 속 10.10.20.3, 10.10.30.4, f0/1은 해당 GNS3 토폴로지의 값이다. 모든 환경에 그대로 복사하지 말고 다음을 먼저 실행한다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>show ip interface brief
+show ip route
+show ip ospf neighbor
+show running-config interface f0/1
+show access-lists</code></pre></div></div>
+<p>필요하면 R1·R2·R4 사이에서 먼저 양방향 ping을 실행한다. 라우팅과 인터페이스가 완성되지 않은 상태에서는 ACL 결과와 경로 장애를 구분할 수 없다.</p>
+<h3 id="2-ios-acl의-공통-규칙">2. IOS ACL의 공통 규칙</h3>
+<ul><li>ACL은 위에서 아래로 평가하고 <strong>처음 일치한 줄에서 처리</strong>한다.</li><li>명시적인 일치 항목이 없으면 마지막의 암묵적 deny가 적용된다.</li><li>ip access-group NAME in은 패킷이 해당 인터페이스로 들어올 때, out은 라우팅 후 그 인터페이스로 나가기 직전에 검사한다.</li><li>in/out은 토폴로지에서 “내부/외부”라는 이름이 아니라 <strong>그 인터페이스를 기준으로 한 방향</strong>이다.</li><li>ACL을 인터페이스에 적용한 뒤에는 show access-lists와 show ip interface f0/1로 실제 적용 위치를 확인한다.</li></ul>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>show access-lists
+show ip interface f0/1</code></pre></div></div>
+<h3 id="3-tcp-established-실습">3. TCP established 실습</h3>
+<h4 id="3-1-정확한-의미">3-1. 정확한 의미</h4>
+<p>다음 항목은 TCP 세그먼트의 ACK 또는 RST 비트가 설정된 패킷을 매칭하는 오래된 ACL 옵션이다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>permit tcp any any established</code></pre></div></div>
+<p>이 명령은 라우터가 TCP 연결 상태표를 유지하는 현대적 stateful firewall 기능이 아니다. 따라서 “3-way handshake가 완료된 세션만 허용한다”라고 정의하면 부정확하다. TCP에만 적용되고 UDP·ICMP에는 적용되지 않는다.</p>
+<p>실습 보고서에는 다음처럼 적는다.</p>
+<div class="tablewrap"><table><thead><tr><th>관찰</th><th>해석</th></tr></thead><tbody><tr><td>내부에서 시작한 TCP 흐름의 응답이 허용됨</td><td>응답에 ACK 비트가 있어 established 항목에 맞을 수 있음</td></tr><tr><td>외부에서 처음 보낸 TCP SYN이 거부됨</td><td>SYN에는 ACK가 없으므로 해당 항목에 맞지 않음</td></tr><tr><td>UDP·ICMP가 자동으로 보호됨</td><td>아니다. 별도 ACL 항목 또는 stateful 방화벽이 필요</td></tr></tbody></table></div>
+<h4 id="3-2-gns3에서의-관찰-방법">3-2. GNS3에서의 관찰 방법</h4>
+<ol><li>먼저 R2 f0/1의 ACL 방향과 연결된 링크를 그림에서 확인한다.</li><li>ACL을 한 줄씩 적용하면서 R1→R4, R4→R1 테스트를 구분한다.</li><li>각 테스트 전후에 show access-lists의 match counter를 기록한다.</li><li>ping은 ICMP, Telnet/HTTP는 TCP이므로 결과를 같은 의미로 해석하지 않는다.</li></ol>
+<h3 id="4-gns3-실습-reflexive-acl">4. GNS3 실습: Reflexive ACL</h3>
+<p>필기의 “RACL”은 일반적으로 다른 의미로도 쓰일 수 있으므로 이 문서에서는 Cisco 공식 용어인 <strong>Reflexive ACL</strong>이라고 쓰고, 괄호로 수업의 RACL 명칭을 병기한다.</p>
+<h4 id="4-1-동작-원리">4-1. 동작 원리</h4>
+<ul><li>외부로 나가는 트래픽의 일부를 reflect 이름으로 기록한다.</li><li>반대 방향의 inbound ACL에서 evaluate로 그 임시 항목을 참조한다.</li><li>내부에서 먼저 시작한 흐름의 반환 트래픽만 임시 항목에 맞도록 설계한다.</li><li>ip reflexive-list timeout으로 임시 항목의 유효 시간을 조정할 수 있다.</li><li>OSPF처럼 ACL이 보호하려는 데이터 흐름과 별개인 라우팅 제어 트래픽은 토폴로지에 맞게 명시적으로 허용한다.</li></ul>
+<h4 id="4-2-토폴로지에-맞춰-바꿔-입력할-예시">4-2. 토폴로지에 맞춰 바꿔 입력할 예시</h4>
+<p>아래의 [OSPF-peer-IP]는 필기의 10.10.20.3이 될 수 있지만, 실제로 R2 인터페이스에 도착하는 OSPF source 주소인지 show ip ospf neighbor로 확인해야 한다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>ip reflexive-list timeout 120
+
+ip access-list extended GNS3-REFLEX-OUT
+ permit ospf host [OSPF-peer-IP] any
+ permit tcp any any reflect GNS3-SESSIONS
+ permit udp any any reflect GNS3-SESSIONS
+ permit icmp any any reflect GNS3-SESSIONS
+
+ip access-list extended GNS3-REFLEX-IN
+ permit ospf host [OSPF-peer-IP] any
+ evaluate GNS3-SESSIONS
+
+interface f0/1
+ ip access-group GNS3-REFLEX-IN in
+ ip access-group GNS3-REFLEX-OUT out</code></pre></div></div>
+<p>실제 IOS 이미지에서는 ACL 이름·인터페이스·OSPF 허용 위치가 토폴로지에 따라 달라진다. ACL 끝의 암묵적 deny 때문에 위 예시는 반사 목록에 없는 inbound 트래픽을 차단한다. 필요한 정적 허용 항목이 있다면 evaluate보다 앞에 목적을 명확히 적는다.</p>
+<h4 id="4-3-실습-결과-해석">4-3. 실습 결과 해석</h4>
+<ul><li>R1에서 외부 방향으로 ping을 시작한 뒤 응답이 돌아오면 ICMP reflexive 항목이 생성·매칭된 것이다.</li><li>R1에서 TCP 80 연결을 시작한 뒤 응답이 돌아오면 TCP 항목이 매칭된 것이다.</li><li>R4가 먼저 R1 쪽으로 ping/TCP 연결을 시작하면, 그 흐름은 내부에서 먼저 만들어진 반사 항목이 없으므로 차단될 수 있다.</li><li>show access-lists에 임시 항목이 보이는 시점과 표시는 IOS 이미지·트래픽·타임아웃에 따라 다를 수 있다.</li></ul>
+<h3 id="5-gns3-실습-dynamic-acldacl-lock-and-key">5. GNS3 실습: Dynamic ACL(DACL, lock-and-key)</h3>
+<h4 id="5-1-동작-원리">5-1. 동작 원리</h4>
+<p>Dynamic ACL은 인증 성공 뒤에 임시 접근 항목을 만들도록 구성하는 lock-and-key 방식이다.</p>
+<ol><li>외부 사용자가 보호된 네트워크에 접근한다.</li><li>기본 ACL은 접근을 허용하지 않고, 라우터의 VTY 인증 경로를 사용하게 만든다.</li><li>인증에 성공하면 제한된 시간 동안 동적 ACL 항목이 생성된다.</li><li>만료되거나 idle timeout이 지나면 동적 항목이 사라지고 다시 차단된다.</li></ol>
+<p>이 방식은 수업용 GNS3 실습에서 ACL과 인증의 연결을 관찰하기 좋지만, Telnet은 평문 관리 프로토콜이다. 실제 장비 관리에는 SSH·AAA·stateful firewall 등 현대적인 통제를 우선한다.</p>
+<h4 id="5-2-필기-명령의-순서를-바로잡은-예시">5-2. 필기 명령의 순서를 바로잡은 예시</h4>
+<p>Cisco IOS의 dynamic ACL 문법에서 dynamic 키워드는 permit/deny 앞에 온다. 따라서 필기의 다음 표현은 순서를 고쳐야 한다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>permit ip any any dynamic DACL</code></pre></div></div>
+<p>정확한 형태의 예시는 다음과 같다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>username whoti privilege 1 secret [강한-실습-비밀번호]
+
+line vty 0 4
+ login local
+ autocommand access-enable host timeout 10
+
+ip access-list extended GNS3-DACL
+ permit ospf host [OSPF-peer-IP] any
+ permit tcp any host [R2의-관리-주소] eq telnet
+ dynamic DACL permit ip any any
+
+interface f0/1
+ ip access-group GNS3-DACL in</code></pre></div></div>
+<p>IOS 이미지에 따라 autocommand 지원 여부나 VTY·AAA 설정 방식이 다를 수 있다. 명령이 거부되면 물음표 도움말과 해당 이미지의 보안 기능을 확인한다. enable password는 실습에서 동작 확인용으로만 남기고, 가능한 경우 enable secret과 SSH를 사용한다.</p>
+<h4 id="5-3-vty-로그인-오류의-의미">5-3. VTY 로그인 오류의 의미</h4>
+<p>필기에서 login 입력 직후 “password is set”이 없어 Login disabled 메시지가 나온 것은 VTY line에 로그인 방식과 비밀번호가 완성되지 않았기 때문이다.</p>
+<ul><li>line password를 사용할 때는 password와 login을 함께 설정한다.</li><li>로컬 사용자 데이터베이스를 사용할 때는 username ... secret ..., login local을 사용한다.</li><li>login과 login local은 같은 의미가 아니다.</li></ul>
+<p>GNS3 R4에서 R1으로 Telnet한 뒤 enable을 실행한 것은 DACL 인증 흐름과 별개로, R1의 privilege/enable 인증을 확인한 과정이다. 어느 라우터의 VTY에 접속했고 어느 라우터의 ACL을 통과했는지 콘솔 프롬프트와 토폴로지에서 구분해 기록한다.</p>
+<h3 id="6-필기의-pinghttptelnet-결과를-정확히-읽기">6. 필기의 ping·HTTP·Telnet 결과를 정확히 읽기</h3>
+<p>필기에서 다음과 같은 결과가 관찰되었다.</p>
+<ul><li>R1에서 R4의 80번 포트로 Telnet했을 때 <strong>HTTP/1.1 400 Bad Request</strong></li><li>R1에서 R4로 ping 성공</li><li>R4에서 R1의 80번 포트 또는 ping이 차단·unreachable</li></ul>
+<p>해석은 다음과 같다.</p>
+<div class="tablewrap"><table><thead><tr><th>결과</th><th>의미</th></tr></thead><tbody><tr><td>HTTP/1.1 400 Bad Request</td><td>TCP 80 연결과 HTTP listener까지 도달했지만, Telnet이 보낸 내용이 정상 HTTP 요청이 아니어서 웹 서버가 400을 반환했을 가능성이 크다. ACL이 실패했다는 뜻이 아니다</td></tr><tr><td>ping 100% 성공</td><td>ICMP echo와 echo reply 경로가 모두 허용되고 라우팅도 동작했다는 뜻</td></tr><tr><td>ping 차단, TCP 80 허용</td><td>ICMP와 TCP ACL 항목이 달라서 가능한 결과</td></tr><tr><td>Telnet unreachable</td><td>실제 ACL deny, 라우팅/인터페이스 문제, 대상 포트 미수신을 show access-lists, show ip route, show ip interface로 분리해야 한다</td></tr></tbody></table></div>
+<p>HTTP를 테스트하려면 가능하면 Linux/VPCS에서 정상 요청을 보낸다.</p>
+<div class="code-shell" data-language="Shell"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Shell</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>curl -i http://10.10.30.4/</code></pre></div></div>
+<p>Cisco 라우터의 telnet HOST 80은 TCP 포트가 열렸는지 보는 간단한 실습 수단으로는 쓸 수 있지만, HTTP 응답 코드가 정상인지 검증하는 도구는 아니다.</p>
+<h3 id="7-acl-변경삭제와-카운터-확인">7. ACL 변경·삭제와 카운터 확인</h3>
+<p>정책을 바꾸기 전에 인터페이스에 적용된 ACL을 확인한다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>show ip interface f0/1
+show access-lists
+show running-config interface f0/1</code></pre></div></div>
+<p>정책을 삭제할 때는 먼저 인터페이스 적용을 제거한다.</p>
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><code>interface f0/1
+ no ip access-group GNS3-DACL in
+ no ip access-group GNS3-REFLEX-IN in
+ no ip access-group GNS3-REFLEX-OUT out
+exit
+no ip access-list extended GNS3-DACL
+no ip access-list extended GNS3-REFLEX-IN
+no ip access-list extended GNS3-REFLEX-OUT</code></pre></div></div>
+<p>필기의 inf f0/1은 int f0/1 또는 interface f0/1의 오타다. 운영 중인 ACL을 한 번에 지우기 전에 저장된 설정과 현재 연결 방향을 확인한다.</p>
+<h3 id="8-gns3-프로젝트-관리-메모">8. GNS3 프로젝트 관리 메모</h3>
+<ul><li>GNS3의 프로젝트 서버가 준비됐는지 확인한다.</li><li>토폴로지 링크가 연결되어 있어도 라우터 인터페이스가 administratively down일 수 있으므로 show ip interface brief와 no shutdown을 확인한다.</li><li>IOS 이미지·플랫폼·인터페이스 번호가 다르면 같은 명령이 동작하지 않을 수 있다.</li><li>디버깅 후에는 반드시 undebug all 또는 u all로 끈다.</li><li>각 라우터의 설정은 write memory 또는 copy running-config startup-config로 저장한다.</li><li>ACL 실험 전후의 show access-lists counter, show ip route, show ip ospf neighbor를 캡처하면 원인 분석이 쉬워진다.</li></ul>
+<h3 id="9-이번-gns3-필기에서-수정보강한-점">9. 이번 GNS3 필기에서 수정·보강한 점</h3>
+<ul><li>주제를 “Cisco ACL 일반 설명”이 아니라 <strong>GNS3에서 실행한 R1/R2/R4 라우터 ACL 실습</strong>으로 재분류했다.</li><li>established를 연결 상태 추적 기능이 아니라 ACK/RST 비트 매칭 옵션으로 정정했다.</li><li>RACL이라는 수업 표기를 공식 용어인 Reflexive ACL과 연결하고 reflect/evaluate 방향을 분리했다.</li><li>DACL의 문법을 dynamic DACL permit ip any any 순서로 수정했다.</li><li>OSPF peer 주소와 f0/1을 모든 실습에 복사하는 값이 아니라 해당 토폴로지의 조건으로 표시했다.</li><li>HTTP 400을 ACL 실패로 해석하지 않도록 TCP 연결·HTTP 요청·ICMP 테스트를 분리했다.</li><li>Telnet·ip http server·enable password는 GNS3 관찰용 설정으로 두고 실제 운영에서는 SSH·AAA·HTTPS 등 안전한 관리 방식을 사용하도록 경고했다.</li></ul>
+<h3 id="공식-자료">공식 자료</h3>
+<ul><li><a href="https://docs.gns3.com/docs-3.1-en/web-ui/template-preferences-dynamips">GNS3 Dynamips template and IOS image configuration</a></li><li><a href="https://docs.gns3.com/docs-3.1-en/web-ui/template-qemu">GNS3 QEMU IOSv template example</a></li><li><a href="https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html">Cisco IP access list configuration guide</a></li><li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-mt/sec-data-acl-15-mt-book/sec-cfg-ip-filter.html">Cisco reflexive access lists</a></li><li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/12-4t/sec-data-acl-12-4t-book/sec-lock-key-secrty.html">Cisco lock-and-key security</a></li><li><a href="https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html">Cisco IOS device hardening</a></li><li><a href="https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html">Cisco SSH configuration</a></li></ul></section>
 <hr /><div class="nav"><a href="ch12.html"><span class="lbl">이전</span>네트워크 핵심키워드 1</a><a href="ch14.html"><span class="lbl">다음</span>네트워크 핵심키워드 3</a></div></main>
 </div>
 <a id="top" href="#">▲ 맨 위</a>
