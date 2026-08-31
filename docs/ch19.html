@@ -278,10 +278,10 @@ docker push myimage        ← 나의 이미지를 Docker Hub에 업로드
 <p>push 작업은 기본적으로 Docker Hub에 로그인이 되어 있어야 한다.</p>
 <h5 id="3-2">3-2. 이미지 태그</h5>
 <p>이미지 이름과 태그는 콜론( : )으로 구분한다</p>
-<p>태그를 지정하지 않으면 기본값은 latest (최신 버전)</p>
+<p>태그를 지정하지 않으면 기본 태그는 latest가 된다. latest가 실제로 가장 최신 빌드라는 보장은 없으므로 버전 태그나 digest를 고정한다.</p>
 <p>특정 버전을 받으려면 콜론 뒤에 태그를 명시한다</p>
-<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>docker pull ubuntu             ← 태그 미지정 → latest(최신 버
-전) 다운로드
+<div class="code-shell" data-language="Text"><div class="code-toolbar"><span class="code-mark">⌘</span><span class="code-label">Text</span><button class="code-copy" type="button">복사</button></div><div class="codehilite"><pre><span></span><code>docker pull ubuntu             ← 태그 미지정 → 기본 태그 latest 사용
+                              (최신 빌드라는 보장은 없음)
 docker pull ubuntu:noble       ← ubuntu 24.04 (코드네임: nob
 le) 버전 다운로드
 docker pull rockylinux:9       ← Rocky Linux 9 버전 다운로드
@@ -350,14 +350,14 @@ docker pull rockylinux:9       ← Rocky Linux 9 버전 다운로드
 </thead>
 <tbody>
 <tr>
-<td>Ubuntu (현재 버<br>전)</td>
-<td>/etc/apt/sources.list.d/ 디렉토리<br>내 파일</td>
-<td>기본 파일명: ubuntu.sources</td>
+<td>Ubuntu (deb822 예시)</td>
+<td>/etc/apt/sources.list.d/ubuntu.sources 등</td>
+<td>배포판 버전·설치 방식에 따라 파일명이 다를 수 있음</td>
 </tr>
 <tr>
-<td>Ubuntu (이전 버<br>전)</td>
+<td>Ubuntu (기존 형식 포함)</td>
 <td>/etc/apt/sources.list</td>
-<td>현재 버전에서는 .d 디렉토리로 이<br>동됨</td>
+<td>실제 활성 설정을 apt-config dump 등으로 확인</td>
 </tr>
 <tr>
 <td>Rocky / RHEL 계<br>열</td>
@@ -366,8 +366,7 @@ docker pull rockylinux:9       ← Rocky Linux 9 버전 다운로드
 </tr>
 </tbody>
 </table></div>
-<p>Ubuntu 현재 버전에서 /etc/apt/sources.list  파일을 조회하면,</p>
-<p>/etc/apt/sources.list.d/ubuntu.sources 로 이동되었다는 메시지가 표시된다.</p>
+<p>Ubuntu 24.04에서는 deb822 형식의 ubuntu.sources가 사용될 수 있지만 설치 방식과 기존 설정에 따라 경로가 다를 수 있다. /etc/apt/sources.list와 /etc/apt/sources.list.d/를 실제로 확인하고 apt-config dump로 활성 설정을 검증한다.</p>
 <h5 id="6-3">6-3. 저장소 파일 형식</h5>
 <p>Ubuntu 저장소 파일은 데비안(Debian) 계열이므로 Types: deb  형식을 사용한다. 파일 안에는 패키지를 다운로드할 수 있는 URL 경로와 키(key) 값이 포함되어 있다.</p>
 <p>Rocky/RHEL 계열 저장소 파일도 URL 경로와 키 값이 포함되는 점은 동일하다</p>
@@ -414,15 +413,15 @@ docker pull rockylinux:9       ← Rocky Linux 9 버전 다운로드
 <tbody>
 <tr>
 <td>기본 저장소에 패키지 없음</td>
-<td>EPEL 저장소 설치 후 재시도</td>
+<td>Ubuntu 공식 저장소·공급자 공식 저장소·검증된 deb 등 배포판에 맞는 경로 확인</td>
 </tr>
 <tr>
-<td>EPEL에도 없음</td>
-<td>wget 또는 curl 명령어로 소스를 직접 다운로드하여 설치</td>
+<td>공식 저장소에도 없음</td>
+<td>서명·출처·지원 버전을 확인한 뒤 deb 또는 소스 설치를 검토</td>
 </tr>
 </tbody>
 </table></div>
-<p>EPEL (Extra Packages for Enterprise Linux): 기본 저장소에서 설치되지 않는 패키지 대부분을 지원하는 대표적인 외부 저장소이다. EPEL을 설치하면 거의 대부분의 패키지를 설치할 수 있다.</p>
+<p>EPEL(Extra Packages for Enterprise Linux)은 Enterprise Linux 계열에서 사용하는 추가 저장소다. Ubuntu에 EPEL을 설치하는 방식으로 문제를 해결하지 않으며, 배포판과 공급자에 맞는 공식 저장소를 선택해야 한다.</p>
 <h4 id="7-sudo-명령어">7. sudo 명령어</h4>
 <p>sudo : 관리자 권한으로 뒤에 오는 명령어를 실행하는 명령</p>
 <p>Ubuntu: 일반 사용자 계정으로 로그인 시 관리자 권한이 필요한 명령어에 반드시 sudo</p>
@@ -509,8 +508,8 @@ apt update          ← Permission denied (권한 거부) 오류 발생
 <p>Zabbix: 대표적인 NMS 솔루션 (zabbix.com 제공)</p>
 <p>지원 범위: 클라우드, 네트워크, 서비스, IoT 등 다양한 환경 모니터링</p>
 <p>웹 대시보드를 통해 정보를 표시한다</p>
-<h4 id="4-zabbix-서버-구성-요소-apm">4. Zabbix 서버 구성 요소 (APM)</h4>
-<p>Zabbix는 웹 대시보드를 제공하므로 서버에 APM 구성이 필요하다.</p>
+<h4 id="4-zabbix-서버-구성-요소-웹db-스택">4. Zabbix 서버 구성 요소 (웹·DB 스택)</h4>
+<p>Zabbix 프론트엔드를 제공하려면 웹 서버와 PHP가 필요하고, 수집 데이터는 MySQL/MariaDB 또는 PostgreSQL 등의 데이터베이스에 저장한다. 이를 이 노트에서는 웹·DB 스택으로 부른다.</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -537,7 +536,7 @@ apt update          ← Permission denied (권한 거부) 오류 발생
 </tr>
 </tbody>
 </table></div>
-<p>PHP 8.3 버전 이상에서는 PHP-FPM이 추가로 필요하다.</p>
+<p>PHP-FPM 사용 여부는 PHP 버전만으로 결정되지 않고 Apache/Nginx 연동 방식과 배포판 패키지 구성에 따라 확인한다.</p>
 <h4 id="5-zabbix-관련-패키지">5. Zabbix 관련 패키지</h4>
 <div class="tablewrap"><table>
 <thead>
@@ -753,7 +752,7 @@ apt update          ← Permission denied (권한 거부) 오류 발생
 </tr>
 <tr>
 <td>Server Name</td>
-<td>환경설정 파일의 Hostname 값과 동일하게 입력</td>
+<td>웹 화면에 표시할 Zabbix server의 이름. agent Hostname과는 별도 개념</td>
 </tr>
 <tr>
 <td>Timezone</td>
@@ -776,7 +775,7 @@ apt update          ← Permission denied (권한 거부) 오류 발생
 <tbody>
 <tr>
 <td>로그 파일 경로</td>
-<td>/var/log/zabbix/zabbix server.log<br>_</td>
+<td>패키지 설정의 로그 파일과 systemd journal을 함께 확인</td>
 </tr>
 <tr>
 <td>DB 이름 (DBName)</td>
@@ -865,8 +864,8 @@ apt update          ← Permission denied (권한 거부) 오류 발생
 <td>최대 입력 변수 수</td>
 </tr>
 <tr>
-<td>always populate raw post data<br>_ _ _ _</td>
-<td>전송 데이터 설정</td>
+<td>always populate raw post data</td>
+<td>현대 PHP에서는 사용하지 않는 오래된 설정. 새 구성에 추가하지 않음</td>
 </tr>
 <tr>
 <td>date.timezone</td>
