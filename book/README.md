@@ -97,6 +97,7 @@ GitHub에서 원본 Markdown을 **한 권의 순서**로 읽기 위한 목차입
 
 - [제공받은 Markdown 5개 원문](chapters/originals/README.md)
 - [공식 출처 목록](chapters/SOURCES.md)
+- [2026-09-08 DDoS·Snort·Suricata·ASA·pfSense·Wireshark 공식 보강](../notes/2026-09-08_DDoS-Snort-Suricata-ASA-Failover-pfSense-Wireshark-공식보강.md)
 - [목차의 단일 기준 manifest](manifest.json)
 
 원문은 별도 보관 영역에 두었습니다. 장 지도는 학습 순서를 위한 안내이고, 원문은 내용 대조와 출처 확인을 위한 자료입니다.
