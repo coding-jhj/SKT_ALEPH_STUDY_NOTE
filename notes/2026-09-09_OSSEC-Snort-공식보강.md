@@ -433,10 +433,10 @@ sudo ip link set dev enp0s8 promisc off
 
 - [Ubuntu Noble snort package — 2.9.20 계열](https://packages.ubuntu.com/noble/arm64/net/snort)
 - [Snort 공식 다운로드](https://www.snort.org/downloads)
-- [Snort DAQ README](https://www.snort.org/documents/readme-daq)
+- [Snort DAQ README](https://www.snort.org/document/readme-daq)
 - [Snort IPS using DAQ AFPacket](https://www.snort.org/documents/snort-ips-using-daq-afpacket)
-- [Snort active response/drop](https://www.snort.org/documents/readme-active)
-- [Snort 2 variables: ipvar와 부정 변수](https://www.snort.org/documents/readme-variables)
+- [Snort active response/drop](https://www.snort.org/document/readme-active)
+- [Snort 2 variables: ipvar와 부정 변수](https://www.snort.org/document/readme-variables)
 - [Snort 3 공식 시작 문서](https://docs.snort.org/start/)
 - [Snort 3 공식 rule 문서](https://docs.snort.org/rules/)
 - [Snort 공식 EOL 공지](https://blog.snort.org/2026/01/end-of-life-announcement-for-versions.html)
