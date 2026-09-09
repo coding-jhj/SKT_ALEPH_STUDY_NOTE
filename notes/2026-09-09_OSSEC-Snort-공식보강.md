@@ -431,7 +431,7 @@ sudo ip link set dev enp0s8 promisc off
 
 ### Snort 공식·Ubuntu 패키지
 
-- [Ubuntu Noble snort package — 2.9.20 계열](https://packages.ubuntu.com/noble/arm64/net/snort)
+- [Ubuntu Noble snort package — 2.9.20 계열](https://packages.ubuntu.com/noble/snort)
 - [Snort 공식 다운로드](https://www.snort.org/downloads)
 - [Snort DAQ README](https://www.snort.org/document/readme-daq)
 - [Snort IPS using DAQ AFPacket](https://www.snort.org/documents/snort-ips-using-daq-afpacket)
