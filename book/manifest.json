@@ -216,7 +216,12 @@
       "part": "5부 · 보안·모의해킹",
       "file": "ch21.html",
       "sources": [
-        "slides/7-보안모의해킹-1.md"
+        "slides/7-보안모의해킹-1.md",
+        "notes/2026-09-09_OSSEC-Snort-공식보강.md"
+      ],
+      "source_labels": [
+        "기존 보안·모의해킹 1 원문",
+        "2026-09-09 OSSEC·Snort 2.9.20 공식 보강"
       ]
     },
     {
